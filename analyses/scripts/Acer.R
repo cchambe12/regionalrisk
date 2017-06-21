@@ -21,8 +21,9 @@ library(grid)
 library(rworldmap)
 library(gridExtra)
 
+
 # Set Working Directory
-setwd("~/Documents/git/regionalrisk/PEP")
+setwd("~/Documents/git/regionalrisk/data/PEP")
 austria<-read.csv("PEP725_AT/PEP725_AT_Acer.csv", header=TRUE)
 aust.station<-read.csv("PEP725_AT/PEP725_AT_stations.csv", header=TRUE)
 switz<-read.csv("PEP725_CH/PEP725_CH_Acer.csv", header=TRUE)
@@ -79,6 +80,8 @@ uk<-na.omit(uk)
 
 d<-bind_rows(d, uk)
 d<-na.omit(d)
+d$species<-"ACEPSU"
+#write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/bbch_region.csv", row.names = FALSE)
 
 at$mean<-ave(at$DAY, at$PEP_ID)
 at.high<-at%>%group_by(PEP_ID)%>%summarise(high=max(DAY))%>%ungroup(at)
@@ -101,8 +104,13 @@ qplot(as.factor(LON), DAY, data = rounded,
       geom = "boxplot", color=PEP_ID) + 
   xlab("Site")+ylab("Budburst to Leafout")
 
-mod<-glm(DAY~YEAR + LAT*LON, data=d)
+mod<-glm(DAY~YEAR + LAT*LON + ALT, data=thirty)
 display(mod)
+
+mod1<-glm(DAY~., data=thirty)
+summary(mod1)
+hist(thirty$LAT)
+ggplot((thirty), aes(x=LAT, y=DAY)) + geom_point(aes(color=LON))
 
 at$average<-ave(at$DAY, at$LON)
 at$maybe<-ave(at$average, at$LAT)
@@ -132,9 +140,13 @@ europeCoords <- do.call("rbind", europeCoords)
 eur <- ggplot(europeCoords) + geom_polygon(data = europeCoords, aes(x = long, y = lat, group=region), 
                                            color="grey", fill="white") + coord_map(xlim = c(-13, 35),  ylim = c(32, 71))
 
-
+thirty<-d%>%filter(YEAR>=1986)
 eur.map <- eur + 
-  geom_point(aes(LON, LAT, color=DAY),position="jitter", data=d) + scale_color_gradient(low = "blue", high="red")
+  geom_point(aes(LON, LAT, color=DAY),position="jitter", data=d) + scale_color_gradient(low = "blue", high="red", breaks=c(30,60,90,120,150,180,210))
 plot(eur.map)
+
+
+
+
 
 
