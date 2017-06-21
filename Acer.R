@@ -90,7 +90,7 @@ qplot(as.factor(PEP_ID), DAY, data = at,
       geom = "boxplot", color=PEP_ID) + 
   xlab("Site")+ylab("Budburst to Leafout")
 
-rounded<-at
+rounded<-d
 rounded$LAT<-round(rounded$LAT)
 qplot(as.factor(LAT), DAY, data = rounded, 
       geom = "boxplot", color=PEP_ID) + 
@@ -101,7 +101,7 @@ qplot(as.factor(LON), DAY, data = rounded,
       geom = "boxplot", color=PEP_ID) + 
   xlab("Site")+ylab("Budburst to Leafout")
 
-mod<-glm(DAY~LON + LAT, data=at)
+mod<-glm(DAY~YEAR + LAT*LON, data=d)
 display(mod)
 
 at$average<-ave(at$DAY, at$LON)
@@ -132,6 +132,9 @@ europeCoords <- do.call("rbind", europeCoords)
 eur <- ggplot(europeCoords) + geom_polygon(data = europeCoords, aes(x = long, y = lat, group=region), 
                                            color="grey", fill="white") + coord_map(xlim = c(-13, 35),  ylim = c(32, 71))
 
-eur.map <- eur + geom_point(data = d, aes(LON, LAT, color=DAY), size =2) + scale_fill_distiller()
+
+eur.map <- eur + 
+  geom_point(aes(LON, LAT, color=DAY),position="jitter", data=d) + scale_color_gradient(low = "blue", high="red")
 plot(eur.map)
+
 
