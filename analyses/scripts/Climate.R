@@ -21,47 +21,44 @@ setwd("~/Documents/git/regionalrisk/analyses/output")
 d<-read.csv("bbch_region.csv", header=TRUE)
 eur.tempmn <- nc_open(file.path("~/Documents/git/regionalrisk/analyses/input/tn_0.25deg_reg_v15.0.nc"))
 
-
-ten<-d%>%filter(YEAR>=2012)
-ten$date<-ifelse(ten$YEAR==2012, as.Date(ten$DAY, origin ="2012-01-01"), ten$DAY)
-ten[which(ten$YEAR==2012),]$date<-as.Date(ten$DAY, origin = "2012-01-01")
-ten$date<-as.Date(ten$DAY, origin = "2012-01-01")
+all<-d%>%filter(YEAR>=1950)
+x<-paste(all$YEAR, all$DAY)
+all$date<-strptime(x, format="%Y %j")
 
 ################## CLIMATE DATA?! ##############################
 tempval <- list() 
-for(i in 1:nrow(ten)){ # i = 1
+for(i in 1:nrow(all)){ # i = 1
   # find this location
-  lo <- ten[i,"LON"]
-  la <- ten[i,"LAT"]
+  lo <- all[i,"LON"]
+  la <- all[i,"LAT"]
   
   ndiff.long.cell <- abs(eur.tempmn$dim$longitude$vals-as.numeric(lo))
   ndiff.lat.cell <- abs(eur.tempmn$dim$latitude$vals-as.numeric(la))
   nlong.cell <- which(ndiff.long.cell==min(ndiff.long.cell))[1] 
   nlat.cell <- which(ndiff.lat.cell==min(ndiff.lat.cell))[1]
   
-  yr <- as.numeric(ten[i,"YEAR"])#
+  yr <- as.numeric(all[i,"YEAR"])#
   
-  # start and end days of the climate data we need for the lat/long. This is in days since baseline date (sept 1) Set to GMT to avoid daylight savings insanity
-  stday <- strptime(paste(yr, "01-02", sep="-"),"%Y-%m-%d", tz="GMT")#start day for chilling is september 1
+  # start and end days of the climate data we need for the lat/long
+  stday <- strptime(paste(yr, "01-02", sep="-"),"%Y-%m-%d", tz="GMT")#start day 
   
   # using fieldsample.date2, which is the same as fieldsampledate, but formatted as  "%Y-%m-%d"
   #field sample date2 is the end day for chilling calculations
-  endday <- strptime(ten[i,"date"],"%Y-%m-%d", tz = "GMT")
+  endday <- strptime(all[i,"date"],"%Y-%m-%d", tz = "GMT")
   
-  st <- as.numeric(as.character(stday - strptime("2012-01-01", "%Y-%m-%d", tz = "GMT")))
-  en <- as.numeric(as.character(endday - strptime("2012-01-01", "%Y-%m-%d", tz = "GMT")))
+  st <- as.numeric(as.character(stday - strptime("1950-01-01", "%Y-%m-%d", tz = "GMT")))
+  en <- as.numeric(as.character(endday - strptime("1950-01-01", "%Y-%m-%d", tz = "GMT")))
   if(en<st){en=st}
   if(endday<stday){endday=stday}
   # get temperature values for this date range.
   # check the dim of the netcdf file, str(netcdf), and see what the order of the different dimensions are. In this case, it goes long, lat, time. So when we are moving through the file, we give it the long and lat and date of start, then move through the files by going 'up' the cube of data to the end date
-  mins <- ncvar_get(eur.tempmn,'tn',start=c(nlong.cell,nlat.cell,st)
-                    , count=c(1,1,en-st+1) # this is where we move through the 'cube' to get the one vector of Temp mins
-  ) 
-  
-  tempval[[as.character(ten[i,"date"])]] <- data.frame(Lat = la,Long = lo, Date = seq(stday, endday, by = "day"),
+  mins <- ncvar_get(eur.tempmn, 'tn',
+                    start=c(nlong.cell,nlat.cell,st),
+                    count=c(1, 1,en-st+1) )# this is where we move through the 'cube' to get the one vector of Temp mins
+
+  tempval[[as.character(all[i,"date"])]] <- data.frame(Lat = la,Long = lo, Date = seq(stday, endday, by="day"),
                                                          Tmin = mins)
 }
-
 
 ###################### NEXT STEPS! ########################################
 
