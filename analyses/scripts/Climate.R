@@ -21,6 +21,7 @@ setwd("~/Documents/git/regionalrisk/analyses/output")
 d<-read.csv("bbch_region.csv", header=TRUE)
 eur.tempmn <- nc_open(file.path("~/Documents/git/regionalrisk/analyses/input/tn_0.25deg_reg_v15.0.nc"))
 
+
 ten<-d%>%filter(YEAR>=2012)
 ten$date<-ifelse(ten$YEAR==2012, as.Date(ten$DAY, origin ="2012-01-01"), ten$DAY)
 ten[which(ten$YEAR==2012),]$date<-as.Date(ten$DAY, origin = "2012-01-01")
