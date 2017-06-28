@@ -23,7 +23,7 @@ library(gridExtra)
 
 
 # Set Working Directory
-setwd("~/Documents/git/regionalrisk/data/PEP")
+setwd("~/Documents/git/regionalrisk/data/acer")
 austria<-read.csv("PEP725_AT/PEP725_AT_Acer.csv", header=TRUE)
 aust.station<-read.csv("PEP725_AT/PEP725_AT_stations.csv", header=TRUE)
 switz<-read.csv("PEP725_CH/PEP725_CH_Acer.csv", header=TRUE)
