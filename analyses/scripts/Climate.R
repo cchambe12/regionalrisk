@@ -15,10 +15,18 @@ library(lubridate)
 library(ncdf4)
 library(Interpol.T)
 library(chillR)
+library(ggmap)
+library(maps)
+library(mapdata)
+library(mapproj)
+library(grid)
+library(rworldmap)
+library(gridExtra)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/output")
-d<-read.csv("bbch_region.csv", header=TRUE)
+d<-read.csv("bbch_region_betula.csv", header=TRUE)
+#df<-read.csv("bbch_region.csv", header=TRUE)
 eur.tempmn <- nc_open(file.path("~/Documents/git/regionalrisk/analyses/input/tn_0.25deg_reg_v15.0.nc"))
 
 all<-d%>%filter(YEAR>=1950)
@@ -84,7 +92,33 @@ for(i in names(tempval)){
 
 #save the field chilling calculations in a separate file
 ##### WAIT TO SAVE ONCE I HAVE ALL PARTS SETTLED! ######################
-#write.csv(freezes, "~/Documents/git/regionalrisk/analyses/output/climate_acer.csv", row.names=FALSE, eol="\r\n")
+write.csv(freezes, "~/Documents/git/regionalrisk/analyses/output/climate_betula.csv", row.names=FALSE, eol="\r\n")
+
+worldMap <- getMap()
+
+# European Countries
+europeanUnion <- c("Austria","Belgium","Bulgaria","Croatia","Cyprus",
+                   "Czech Rep.","Denmark","Estonia","Finland","France",
+                   "Germany","Greece","Hungary","Ireland","Italy","Latvia",
+                   "Lithuania","Luxembourg","Malta","Netherlands","Norway","Poland",
+                   "Portugal","Romania","Slovakia","Slovenia","Spain",
+                   "Sweden","Switzerland", "United Kingdom")
+indEU <- which(worldMap$NAME%in%europeanUnion)
+europeCoords <- lapply(indEU, function(i){
+  df <- data.frame(worldMap@polygons[[i]]@Polygons[[1]]@coords)
+  df$region =as.character(worldMap$NAME[i])
+  colnames(df) <- list("long", "lat", "region")
+  return(df)
+})
+
+europeCoords <- do.call("rbind", europeCoords)
+
+eur <- ggplot(europeCoords) + geom_polygon(data = europeCoords, aes(x = long, y = lat, group=region), 
+                                           color="grey", fill="white") + coord_map(xlim = c(-13, 35),  ylim = c(32, 71))
+
+eur.map <- eur + 
+  geom_point(aes(long, lat, color=Tmin),position="jitter", data=freezes) + scale_color_gradient(low = "blue", high="red", breaks=c(30,60,90,120,150,180,210))
+plot(eur.map)
 
 
 
