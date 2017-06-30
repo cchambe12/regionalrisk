@@ -29,85 +29,110 @@ bb<-bb%>%dplyr::select(-National_ID, -YEAR)
 bb$lat<-round(bb$lat, digits=2)
 bb$long<-round(bb$long, digits=2)
 
-b.attempt<-bb%>%
-  group_by(year, PEP_ID, DAY)%>%
-  arrange(PEP_ID) %>%
-  filter(row_number()==1 | row_number()==n())
-
 clim$lat<-round(clim$lat, digits=2)
 clim$long<-round(clim$long, digits=2)
 
 d<-full_join(clim, bb)
 d<-filter(d, year>=1950)
-d<-d[!(is.na(d$Tmin) & is.na(d$PEP_ID)),]
-#write.csv(d, "~/Documents/git/regionalrisk/analyses/output/acer_combined.csv", row.names=FALSE)
-
-#tt<-d
-#tt$lat<-round(d$lat, digits=2)
-#tt$LAT<-round(d$LAT, digits=2)
-#tt$long<-round(d$long, digits=2)
-#tt$LON<-round(d$LON, digits=2)
 
 how_many<-d[which(is.na(d$Tmin)),]
-unique(how_many$year)
-peps<-as.data.frame(table(unique(how_many$PEP_ID)))
-peps<-peps%>%rename("PEP_ID" = Var1)%>% rename("peps"=Freq)
-df<-as.data.frame(table(d$PEP_ID))
-df<-df%>%rename("PEP_ID" = Var1)%>%rename("df"=Freq)
-hmmm<-cbind(peps, df)
+d<-d[!(is.na(d$Tmin) & is.na(d$PEP_ID)),]
 
-d<-d%>%filter(!PEP_ID %in% peps)
-unique(d$year)
-xx<-d%>%
-  group_by(year, PEP_ID, DAY)%>%
-  arrange(PEP_ID) %>%
-  filter(row_number()==1 | row_number()==n())
+df<-d%>%dplyr::select(year, PEP_ID, BBCH)
+df$BBCH<-ifelse(df$BBCH>=7, df$BBCH, NA)
+df<-df%>%group_by(year,PEP_ID)%>%arrange(year)
+df<-na.omit(df)
+df <- within(df, { count <- ave(BBCH,PEP_ID, year, FUN=function(x) length(unique(x)))})
+df$count<-ifelse(df$count>=2,df$count, NA)
+xx<-na.omit(df)
+unique(xx$year) ## 1997-2015
 
-#write.csv(d, "~/Desktop/join.csv", row.names=FALSE)
-twelve<-d%>%
-  filter(year==2001)
-twelve$BBCH<-ifelse(twelve$BBCH>0, TRUE, FALSE)
+peps<-unique(xx$PEP_ID)
+years<-c(1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015)
 
-xx<-twelve%>%
-  filter(!is.na(Tmin))
+frz<-d%>%filter(year%in%years)%>%filter(PEP_ID %in% peps)
+many<-frz[which(is.na(frz$Tmin)),]
+frz<-frz[!(is.na(frz$Tmin)),]
 
-ids<-as.data.frame(table(xx$PEP_ID))
+frz$lat.long<-paste(frz$lat,frz$long, sep=",")
+
+##### Now find climate data ######
+d$lat.long<-paste(d$lat, d$long, sep=",")
+lats<-unique(frz$lat.long)
+dx<-filter(d, lat.long%in%lats)
+dx<-dx[!(is.na(dx$Tmin)),]
+dx$grow<-ifelse(is.na(dx$BBCH), NA, TRUE)
+dx$count <- ave(
+  dx$grow, dx$PEP_ID, dx$year,
+  FUN=function(x) cumsum(c(1, head(x, -1)))
+)
+dx$frz<- ifelse((dx$Tmin<=-2.2), 1, 0)
+
+try<-dx%>%filter(year==1997)
+try$total<-paste(try$year, try$PEP_ID)
+printvalues <- function(y) {
+  repeat {
+    try$count==1;
+    print(TRUE)
+    if (! (try$count==2) ) {break}   # Negation is crucial here!
+  }
+}
+
+
+try$freezes <- ave(
+  try$frz, try$total,between(try$count, 1, 2),
+  FUN=function(x) cumsum(c(0, head(x, -1)))
+)
+
+
+dx<-dx %>%
+  group_by(PEP_ID, year, grow) %>%
+  arrange(PEP_ID)%>%
+  filter(between(row_number(), 1, n()))%>%
+  ungroup()
+dx<-arrange(dx, date)
+
+
+
+
+dx$BBCH<-ifelse(is.na(dx$BBCH), NA, TRUE)
+dx<-data.frame(dx,first=!duplicated(dx),last=rev(!duplicated(rev(dx))))
+
+#write.csv(d, "~/Documents/git/regionalrisk/analyses/output/acer_combined.csv", row.names=FALSE)
+
 
 
 ########################## Lame Attempts to keep for now #########################
-twel<-twelve%>%
-  group_by(lat, long, PEP_ID)%>%
-  arrange(BBCH) %>%
-  filter(row_number()==1 | row_number()==n())
 
-
-subby<-na.omit(twelve)  
-substart<-subby%>%
-  group_by(year, PEP_ID, BBCH)%>%
+dxx<-dx%>%dplyr::select(PEP_ID, BBCH, lat.long, year, date)
+dxx<-dxx%>%
+  group_by(year, PEP_ID,BBCH)%>%
   arrange(PEP_ID)%>%
-  filter(row_number()==1)
-substart$start<-"First"
-subend<-subby%>%
-  group_by(year, PEP_ID, BBCH)%>%
+  filter(between(row_number(), 1, n()))
+dxx<-na.omit(dxx)
+dxx<-dplyr::select(dxx, -date)
+dxx$BBCH<-ifelse(is.na(dxx$BBCH), NA, TRUE)
+dxx<-data.frame(dxx,first=!duplicated(dxx),last=rev(!duplicated(rev(dxx))))
+dxx$one<-ifelse(dxx$first==TRUE & dxx$last==TRUE, FALSE, dxx$first)
+dxx$two<-ifelse(dxx$first==TRUE & dxx$last==TRUE, FALSE, dxx$last)
+dxx<-dxx%>%dplyr::select(-first, -last)
+dxx$BBCH<-ifelse(is.na(dxx$BBCH), NA, TRUE)
+dxx<-data.frame(dxx,first=!duplicated(dxx),last=rev(!duplicated(rev(dxx))))
+
+dx$obs<-ifelse(dx$BBCH<=14, start, dx$BBCH)
+dx$obs<-ifelse(dx$BBCH==15, end, dx$BBCH)
+
+
+dx<-dx%>%
+  group_by(year, PEP_ID,BBCH)%>%
   arrange(PEP_ID)%>%
-  filter(row_number()==n())
-subend$end<-"Last"
-full_join
+  filter(between(row_number(), 1, n()))
+dx<-ungroup(dx)
+dx<-dx%>%group_by(date, lat.long)%>%arrange(date)
+dx$frz<- ifelse((dx$Tmin<=-2.2), 1, 0)
+dx$count <- ave(
+  dx$frz, dx$lat.long, dx$year,
+  FUN=function(x) cumsum(c(0, head(x, -1)))
+)
 
 
-try<-d %>%
-  filter(year>=1950)%>%
-  group_by(year, lat, long, DAY)%>%
-  arrange(year) %>%
-  filter(row_number()==1 | row_number()==n())
-
-
-
-
-frz<-d%>%
-  group_by(year, lat, long, DAY)%>%
-  filter(row_number()==1)
-ungroup(frz)
-check<-frz%>%
-  group_by(date, lat, long)%>%
-  arrange(PEP_ID)
