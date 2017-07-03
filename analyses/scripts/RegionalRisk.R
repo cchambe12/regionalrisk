@@ -13,6 +13,9 @@ library(tidyr)
 library(ggplot2)
 library(lubridate)
 library(arm)
+library(stringr)
+library(tidyverse)
+
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
 bb<-read.csv("bbch_region_betula.csv", header=TRUE)
@@ -70,20 +73,15 @@ dx$frz<- ifelse((dx$Tmin<=-2.2), 1, 0)
 
 try<-dx%>%filter(year==1997)
 try$total<-paste(try$year, try$PEP_ID)
-printvalues <- function(y) {
-  repeat {
-    try$count==1;
-    print(TRUE)
-    if (! (try$count==2) ) {break}   # Negation is crucial here!
-  }
-}
 
+try=try[(try$total)[1]:(try$total)[2],]
 
 try$freezes <- ave(
   try$frz, try$total,between(try$count, 1, 2),
   FUN=function(x) cumsum(c(0, head(x, -1)))
 )
 
+try$PEP_ID<-ifelse(!is.na(try$PEP_ID),try$PEP_ID, as.Date(try$date))
 
 dx<-dx %>%
   group_by(PEP_ID, year, grow) %>%
