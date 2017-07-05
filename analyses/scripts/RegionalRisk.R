@@ -71,20 +71,29 @@ dx$count <- ave(
 dx$frz<- ifelse((dx$Tmin<=-2.2), 1, 0)
 
 
-
+climate<-clim%>%filter(year==1997)
 plz<- dx%>% filter(year==1997)
 plz<-na.omit(plz)
-plz$date<-as.Date(plz$date)
-starts<-paste(plz$count, plz$year, plz$PEP_ID, sep="_")
+#plz$starts<-paste(plz$count, plz$year, plz$PEP_ID, sep="_")
+peps<-unique(plz$PEP_ID)
+please<-list()
+stday<- plz$date[which(plz$count==1)])
+enday<- plz$date[which(plz$count==2)])
 
-for(i in c(1:nrow(plz))){
-  start<-unique(plz$date[which(plz$count==1),])
-  end<- unique(plz$date[which(plz$count==2),])
-  plz$daters[i] <- paste(seq(as.Date(start)[i],as.Date(end)[i]), by="day")
+
+
+for(i in 1:length(stday)){
+  
+  df<- data.frame(date = daters)
+  please<-left_join(data.frame(df), climate)
 } 
 
 
-
+for(i in c(1:length(peps))) {
+  stday[i]<- plz$date[which(plz$count==1)]
+  enday[i]<- plz$date[which(plz$count==2[i])]
+}
+daters <- apply(function(x)seq(x[stday],x[enday], by="day"))
 
 
 
