@@ -77,9 +77,9 @@ plz<-na.omit(plz)
 #plz$starts<-paste(plz$count, plz$year, plz$PEP_ID, sep="_")
 peps<-unique(plz$PEP_ID)
 please<-list()
-stday<- plz$date[which(plz$count==1)])
-enday<- plz$date[which(plz$count==2)])
-
+stday<- plz$date[which(plz$count==1)]
+enday<- plz$date[which(plz$count==2)]
+df<-data.frame(st = stday, en = enday)
 
 
 for(i in 1:length(stday)){
