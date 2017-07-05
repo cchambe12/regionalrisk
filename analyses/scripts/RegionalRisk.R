@@ -14,7 +14,6 @@ library(ggplot2)
 library(lubridate)
 library(arm)
 library(stringr)
-library(tidyverse)
 
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
@@ -71,16 +70,35 @@ dx$count <- ave(
 )
 dx$frz<- ifelse((dx$Tmin<=-2.2), 1, 0)
 
+
+
+plz<- dx%>% filter(year==1997)
+plz<-na.omit(plz)
+plz$date<-as.Date(plz$date)
+starts<-paste(plz$count, plz$year, plz$PEP_ID, sep="_")
+
+for(i in c(1:nrow(plz))){
+  start<-unique(plz$date[which(plz$count==1),])
+  end<- unique(plz$date[which(plz$count==2),])
+  plz$daters[i] <- paste(seq(as.Date(start)[i],as.Date(end)[i]), by="day")
+} 
+
+
+
+
+
+
 try<-dx%>%filter(year==1997)
 try$total<-paste(try$year, try$PEP_ID)
 
-try=try[(try$total)[1]:(try$total)[2],]
+trytry[(try$count)[1]:(try$count)[2],]
 
 try$freezes <- ave(
   try$frz, try$total,between(try$count, 1, 2),
   FUN=function(x) cumsum(c(0, head(x, -1)))
 )
 
+try$PEP_ID<-as.factor(try$PEP_ID)
 try$PEP_ID<-ifelse(!is.na(try$PEP_ID),try$PEP_ID, as.Date(try$date))
 
 dx<-dx %>%
