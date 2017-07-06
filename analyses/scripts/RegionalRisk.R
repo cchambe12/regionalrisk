@@ -14,7 +14,8 @@ library(ggplot2)
 library(lubridate)
 library(arm)
 library(stringr)
-
+library(plyr)
+library(data.table)
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
 bb<-read.csv("bbch_region_betula.csv", header=TRUE)
@@ -68,60 +69,41 @@ dx$count <- ave(
   dx$grow, dx$PEP_ID, dx$year,
   FUN=function(x) cumsum(c(1, head(x, -1)))
 )
+
 dx$frz<- ifelse((dx$Tmin<=-2.2), 1, 0)
 
 
 climate<-clim%>%filter(year==1997)
 plz<- dx%>% filter(year==1997)
 plz<-na.omit(plz)
-#plz$starts<-paste(plz$count, plz$year, plz$PEP_ID, sep="_")
-peps<-unique(plz$PEP_ID)
-please<-list()
-stday<- plz$date[which(plz$count==1)]
-enday<- plz$date[which(plz$count==2)]
-df<-data.frame(st = stday, en = enday)
+peps<-unique(plz$PEP_ID[which(plz$count==2)])
+plz<-plz%>%filter(PEP_ID %in% peps)
+plz$count<-ifelse(plz$count==1, "start", plz$count)
+plz$count<-ifelse(plz$count==2, "end", plz$count)
+plz$count<-ifelse(plz$count==3, NA, plz$count)
+plz<-na.omit(plz)
 
-
-for(i in 1:length(stday)){
+plz$start<-ifelse(plz$count=="start", plz$date, NA)
+class(plz$start)<-"Date"
+plz$end<-ifelse(plz$count=="end", plz$date, NA)
+class(plz$end)<-"Date"
   
-  df<- data.frame(date = daters)
-  please<-left_join(data.frame(df), climate)
-} 
+plzers<-plz%>%dplyr::select(year, PEP_ID, start, end, lat, long)
+plzers<-setDT(plzers)[, lapply(.SD, na.omit), by = PEP_ID]
+plzers<-plzers[!duplicated(plzers), ]
 
+please<-plzers %>%
+  arrange(PEP_ID)%>%
+  rowwise()%>%
+  do(data.frame(PEP_ID = .$PEP_ID, lat= .$lat, long=.$long, date = seq(.$start, .$end, by = "days")))
 
-for(i in c(1:length(peps))) {
-  stday[i]<- plz$date[which(plz$count==1)]
-  enday[i]<- plz$date[which(plz$count==2[i])]
-}
-daters <- apply(function(x)seq(x[stday],x[enday], by="day"))
+freeze<-full_join(please,climate)
 
-
-
-try<-dx%>%filter(year==1997)
-try$total<-paste(try$year, try$PEP_ID)
-
-trytry[(try$count)[1]:(try$count)[2],]
-
-try$freezes <- ave(
-  try$frz, try$total,between(try$count, 1, 2),
+freeze$frz<-ifelse(freeze$Tmin<=-2.2, 1, 0)
+freeze$count <- ave(
+  freeze$frz, freeze$PEP_ID, freeze$year,
   FUN=function(x) cumsum(c(0, head(x, -1)))
 )
-
-try$PEP_ID<-as.factor(try$PEP_ID)
-try$PEP_ID<-ifelse(!is.na(try$PEP_ID),try$PEP_ID, as.Date(try$date))
-
-dx<-dx %>%
-  group_by(PEP_ID, year, grow) %>%
-  arrange(PEP_ID)%>%
-  filter(between(row_number(), 1, n()))%>%
-  ungroup()
-dx<-arrange(dx, date)
-
-
-
-
-dx$BBCH<-ifelse(is.na(dx$BBCH), NA, TRUE)
-dx<-data.frame(dx,first=!duplicated(dx),last=rev(!duplicated(rev(dx))))
 
 #write.csv(d, "~/Documents/git/regionalrisk/analyses/output/acer_combined.csv", row.names=FALSE)
 
