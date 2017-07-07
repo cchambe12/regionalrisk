@@ -13,9 +13,8 @@ library(tidyr)
 library(ggplot2)
 library(lubridate)
 library(arm)
-library(stringr)
-library(plyr)
 library(data.table)
+
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
 bb<-read.csv("bbch_region_betula.csv", header=TRUE)
@@ -97,13 +96,20 @@ please<-plzers %>%
   rowwise()%>%
   do(data.frame(PEP_ID = .$PEP_ID, lat= .$lat, long=.$long, date = seq(.$start, .$end, by = "days")))
 
-freeze<-full_join(please,climate)
+freeze<-left_join(please,climate)
 
 freeze$frz<-ifelse(freeze$Tmin<=-2.2, 1, 0)
 freeze$count <- ave(
   freeze$frz, freeze$PEP_ID, freeze$year,
   FUN=function(x) cumsum(c(0, head(x, -1)))
 )
+
+freeze<-ungroup(freeze)
+test<- freeze %>% group_by(PEP_ID, lat, long, year) %>% summarise(count = max(count))
+
+mod<-lm(lat~count+long, data=test)
+display(mod)
+
 
 #write.csv(d, "~/Documents/git/regionalrisk/analyses/output/acer_combined.csv", row.names=FALSE)
 
