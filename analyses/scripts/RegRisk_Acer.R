@@ -19,7 +19,7 @@ library(lme4)
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
 bb<-read.csv("bbch_region.csv", header=TRUE)
-clim<-read.csv("climate_acer.csv", header=TRUE)
+clim<-read.csv("climate_master.csv", header=TRUE)
 clim$date<-as.Date(paste(clim$year, clim$month, clim$day, sep="-"))
 
 bb<-bb%>%dplyr::rename("lat" = LAT)%>%dplyr::rename("long"=LON)
@@ -95,9 +95,9 @@ plz<-dat.clean
 #plz<-na.omit(plz)
 
 #plz$pepyear<-paste(plz$PEP_ID, plz$year, sep=",")
-ends<- unique(plz$pepyear[which(plz$count=="end")])
+#ends<- unique(plz$pepyear[which(plz$count=="end")])
 
-plz<-filter(plz, pepyear %in% ends)
+#plz<-filter(plz, pepyear %in% ends)
 plz$start<-ifelse(plz$count=="start", plz$date, NA)
 class(plz$start)<-"Date"
 plz$end<-ifelse(plz$count=="end", plz$date, NA)
@@ -106,9 +106,11 @@ class(plz$end)<-"Date"
 plzers<-plz%>%dplyr::select(year, PEP_ID, start, end, lat, long, pepyear)
 
 plzers<-setDT(plzers)[, lapply(.SD, na.omit), by = pepyear]
-plzers<-plzers[!(plzers$start==plzers$end),]
-plzers<-plzers[!duplicated(plzers), ]
-
+#plzers<-plzers[!(plzers$start==plzers$end),]
+#plzers<-plzers[!duplicated(plzers), ]
+plzers<-plzers[!(is.na(plzers$PEP_ID))]
+plzers$end<-ifelse(is.na(plzers$end), plzers$start, plzers$end)
+class(plzers$end)<-"Date"
 
 please<-plzers %>%
   arrange(PEP_ID)%>%
@@ -160,5 +162,5 @@ display(mod)
 
 #ggplot((freeze), aes(x=long, y=lat)) + geom_point(aes(col=count))
 
-#write.csv(freeze, "~/Documents/git/regionalrisk/analyses/output/lastobs.csv", row.names=FALSE)
+#write.csv(freeze, "~/Documents/git/regionalrisk/analyses/output/acer_events.csv", row.names=FALSE)
 

@@ -94,31 +94,22 @@ for(i in names(tempval)){
 ##### WAIT TO SAVE ONCE I HAVE ALL PARTS SETTLED! ######################
 #write.csv(freezes, "~/Documents/git/regionalrisk/analyses/output/climate_betula.csv", row.names=FALSE, eol="\r\n")
 
-worldMap <- getMap()
 
-# European Countries
-europeanUnion <- c("Austria","Belgium","Bulgaria","Croatia","Cyprus",
-                   "Czech Rep.","Denmark","Estonia","Finland","France",
-                   "Germany","Greece","Hungary","Ireland","Italy","Latvia",
-                   "Lithuania","Luxembourg","Malta","Netherlands","Norway","Poland",
-                   "Portugal","Romania","Slovakia","Slovenia","Spain",
-                   "Sweden","Switzerland", "United Kingdom")
-indEU <- which(worldMap$NAME%in%europeanUnion)
-europeCoords <- lapply(indEU, function(i){
-  df <- data.frame(worldMap@polygons[[i]]@Polygons[[1]]@coords)
-  df$region =as.character(worldMap$NAME[i])
-  colnames(df) <- list("long", "lat", "region")
-  return(df)
-})
+### Possible to combine climate data?? ####
+rm(list=ls()) # remove everything currently held in the R memory
+options(stringsAsFactors=FALSE)
+graphics.off()
 
-europeCoords <- do.call("rbind", europeCoords)
+# Load libraries
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 
-eur <- ggplot(europeCoords) + geom_polygon(data = europeCoords, aes(x = long, y = lat, group=region), 
-                                           color="grey", fill="white") + coord_map(xlim = c(-13, 35),  ylim = c(32, 71))
+setwd("~/Documents/git/regionalrisk/analyses/output")
+bb.clim<-read.csv("climate_betula.csv", header=TRUE)
+clim<-read.csv("climate_acer.csv", header=TRUE)
 
-eur.map <- eur + 
-  geom_point(aes(long, lat, color=Tmin),position="jitter", data=clim) + scale_color_gradient(low = "blue", high="red", breaks=c(30,60,90,120,150,180,210))
-plot(eur.map)
+d<-full_join(bb.clim, clim)
+d<-d[!(duplicated(d)),]
 
-
-
+#write.csv(d, "~/Documents/git/regionalrisk/analyses/output/climate_master.csv", row.names =FALSE)

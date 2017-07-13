@@ -173,7 +173,7 @@ si<-na.omit(si)
 d<-bind_rows(d, si)
 
 sk<-vakia%>%filter(BBCH<=19)
-sk<-full_join(si, vakia.station)
+sk<-full_join(sk, vakia.station)
 sk<-dplyr::select(sk, -NAME)
 sk<-na.omit(sk)
 

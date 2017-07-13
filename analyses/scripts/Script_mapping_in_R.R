@@ -71,6 +71,8 @@ setwd("~/Documents/git/regionalrisk/analyses")
 land<-readShapeSpatial("input/natural_earth_vector/50m_physical/ne_50m_land.shp") ## 
 boundars<-readShapeSpatial("input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
 betula<-read.csv("output/betula_events.csv", header=TRUE)
+fagus<-read.csv("output/fagus_events.csv", header=TRUE)
+acer<-read.csv("output/acer_events.csv")
 bet.clim<-read.csv("output/climate_betula.csv", header=TRUE)
 bet.bb<-read.csv("output/bbch_region_betula.csv", header=TRUE)
 plot(land,col="grey",lty=0,ylim=c(30,60),xlim=c(-5,35))
@@ -79,8 +81,9 @@ plot(land,col="grey",lty=0,ylim=c(30,60),xlim=c(-5,35))
 plot(boundars,col="grey",border="lightgrey",ylim=c(30,70),xlim=c(-5,35))
 colors<-colorRampPalette(c("red", "blue"))
 betula$events<-as.numeric(as.character(betula$events))
-betula$Col <- colors(10)[as.numeric(cut(betula$events,breaks = 1))]
-points(betula$long, betula$lat, col = colors(10), cex = .6)
+fagus$freq<-as.numeric(as.character(fagus$freq))
+fagus$Col <- colors(10)[as.numeric(cut(fagus$freq,breaks = 0.1))]
+points(fagus$long, fagus$lat, col = colors(10), cex = .6)
 
 ## adding bathimetry to the plot ## can take a while
 BATHYMET<-getNOAA.bathy(lon1=-15,lon2=40,lat1=30,lat2=70, resolution=30)
