@@ -107,9 +107,11 @@ library(ggplot2)
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
 bb.clim<-read.csv("climate_betula.csv", header=TRUE)
-clim<-read.csv("climate_acer.csv", header=TRUE)
+clim<-read.csv("climate_all.csv", header=TRUE)
+bb<-read.csv("climate_betula.csv", header=TRUE)
 
 d<-full_join(bb.clim, clim)
+d<-full_join(bb, d)
 d<-d[!(duplicated(d)),]
 
-#write.csv(d, "~/Documents/git/regionalrisk/analyses/output/climate_master.csv", row.names =FALSE)
+write.csv(d, "~/Documents/git/regionalrisk/analyses/output/climate_master.csv", row.names =FALSE)

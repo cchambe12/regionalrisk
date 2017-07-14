@@ -53,7 +53,7 @@ d$frz<- ifelse((d$Tmin<=-2.2), 1, 0)
 
 plz<- d#%>% filter(year==1997)
 plz<-plz[!(is.na(plz$count) & is.na(plz$Tmin)),]
-plz<- plz[ave(plz$year, plz$PEP_ID, FUN = length) > 1, ]
+#plz<- plz[ave(plz$year, plz$PEP_ID, FUN = length) > 1, ]
 plz$count<-ifelse(plz$count==1, "start", plz$count)
 
 ############# WORK ON LAST OBSERVATION! ######################
@@ -62,10 +62,12 @@ plz$pepBB<-paste(plz$pepyear, plz$BBCH, sep=",")
 test<-plz
 #test<- within(test, count[test$count==2]<-2)
 tt<-test%>%
-  filter(count==2) %>%
+  filter(count!="start") %>%
   group_by(pepBB) %>%
   filter(date==max(date))
-tt<-tt[!duplicated(tt), ] 
+tt$count<-as.numeric(as.character(tt$count))
+tt<-tt[!duplicated(tt), ]
+tt$count<-ifelse(tt$count=="start", "start", 2)
 tt<-within(tt, count[tt$count==2]<-"end")
 dat <- merge(plz, tt, by = "pepBB", all.x = TRUE)
 dat$count.x[which(dat$count.x==2 & dat$count.y=="end")]<-"end"
@@ -147,9 +149,9 @@ dxx$events<-ifelse(is.na(dxx$events), 0, dxx$events)
 dxx$freq<-dxx$events/dxx$total
 
 #ggplot((dxx), aes(x=long, y=lat)) + geom_point(aes(color=as.factor(freq)))
-model1<-lm(freq~lat*long, data=dxx)
+model1<-lm(freq~ growth+lat*long, data=dxx)
 display(model1)
-mod<-lm(events~lat*long, data=dxx)
+mod<-lm(events~growth + lat*long, data=dxx)
 display(mod)
 
 mod<-glmer(fs~lat + (1|year), data=dxx, family=binomial(link="logit"))
@@ -162,5 +164,5 @@ display(mod)
 
 #ggplot((freeze), aes(x=long, y=lat)) + geom_point(aes(col=count))
 
-#write.csv(freeze, "~/Documents/git/regionalrisk/analyses/output/acer_events.csv", row.names=FALSE)
+#write.csv(dxx, "~/Documents/git/regionalrisk/analyses/output/acer_events.csv", row.names=FALSE)
 

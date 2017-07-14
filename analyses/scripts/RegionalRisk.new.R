@@ -19,7 +19,7 @@ library(lme4)
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
 bb<-read.csv("bbch_region_betula.csv", header=TRUE)
-clim<-read.csv("climate_betula.csv", header=TRUE)
+clim<-read.csv("climate_master.csv", header=TRUE)
 clim$date<-as.Date(paste(clim$year, clim$month, clim$day, sep="-"))
 
 bb<-bb%>%dplyr::rename("lat" = LAT)%>%dplyr::rename("long"=LON)
