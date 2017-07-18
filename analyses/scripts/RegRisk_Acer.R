@@ -149,10 +149,13 @@ dxx$events<-ifelse(is.na(dxx$events), 0, dxx$events)
 dxx$freq<-dxx$events/dxx$total
 
 #ggplot((dxx), aes(x=long, y=lat)) + geom_point(aes(color=as.factor(freq)))
+dxx<-read.csv("acer_events.csv", header=TRUE)
 model1<-lm(freq~ growth+lat*long, data=dxx)
 display(model1)
 mod<-lm(events~growth + lat*long, data=dxx)
 display(mod)
+model3<-lm(freq~lat:long, data=dxx)
+display(model3)
 
 mod<-glmer(fs~lat + (1|year), data=dxx, family=binomial(link="logit"))
 display(mod)

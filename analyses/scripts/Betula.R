@@ -1,6 +1,6 @@
 ## 28 June 2017 - Cat
 ## Cleaning up PEP data for Regional Risk paper
-# Betula
+# Betula pendula
 
 
 # Clear workspace

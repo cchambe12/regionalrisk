@@ -53,7 +53,7 @@ d$frz<- ifelse((d$Tmin<=-2.2), 1, 0)
 
 plz<- d#%>% filter(year==1997)
 plz<-plz[!(is.na(plz$count) & is.na(plz$Tmin)),]
-plz<- plz[ave(plz$year, plz$PEP_ID, FUN = length) > 1, ]
+#plz<- plz[ave(plz$year, plz$PEP_ID, FUN = length) > 1, ]
 plz$count<-ifelse(plz$count==1, "start", plz$count)
 
 ############# WORK ON LAST OBSERVATION! ######################
@@ -62,14 +62,17 @@ plz$pepBB<-paste(plz$pepyear, plz$BBCH, sep=",")
 test<-plz
 #test<- within(test, count[test$count==2]<-2)
 tt<-test%>%
-  filter(count==2) %>%
+  filter(count!="start") %>%
   group_by(pepBB) %>%
   filter(date==max(date))
-tt<-tt[!duplicated(tt), ] 
+tt$count<-as.numeric(as.character(tt$count))
+tt<-tt[!duplicated(tt), ]
+tt$count<-ifelse(tt$count=="start", "start", 2)
 tt<-within(tt, count[tt$count==2]<-"end")
 dat <- merge(plz, tt, by = "pepBB", all.x = TRUE)
 dat$count.x[which(dat$count.x==2 & dat$count.y=="end")]<-"end"
 dat$count.x[which(dat$count.x=="start" & dat$count.y=="end")]<-"start"
+
 
 dat.clean<-dat%>%
   dplyr::select(pepBB, year.x, Tmin.x, lat.x, long.x, date.x, PEP_ID.x, BBCH.x, DAY.x, species.x, count.x, frz.x, pepyear.x)%>%
@@ -115,7 +118,7 @@ class(plzers$end)<-"Date"
 please<-plzers %>%
   arrange(PEP_ID)%>%
   rowwise()%>%
-  do(data.frame(PEP_ID=.$PEP_ID, year=.$year, pepyear=.$pepyear, lat= .$lat, long=.$long, date = seq.Date(.$start, .$end, by=1)))
+  do(data.frame(PEP_ID=.$PEP_ID, year=.$year, pepyear=.$pepyear, lat= .$lat, long=.$long, date = seq.Date(.$start, .$end, by="days")))
 
 freeze<-left_join(please,clim)
 freeze<-freeze[!(is.na(freeze$Tmin)),]

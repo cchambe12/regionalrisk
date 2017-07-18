@@ -1,6 +1,6 @@
 ## 13 July 2017 - Cat
 ## Cleaning up PEP data for Regional Risk paper
-# Tillia
+# Tilia cordata
 
 
 # Clear workspace
