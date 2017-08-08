@@ -13,14 +13,6 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(lubridate)
-library(arm)
-library(ggmap)
-library(maps)
-library(mapdata)
-library(mapproj)
-library(grid)
-library(rworldmap)
-library(gridExtra)
 
 
 # Set Working Directory

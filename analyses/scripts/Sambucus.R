@@ -1,3 +1,7 @@
+## 13 July 2017 - Cat
+## Cleaning up PEP data for Regional Risk paper
+# Sambucus nigra
+
 rm(list=ls()) # remove everything currently held in the R memory
 options(stringsAsFactors=FALSE)
 graphics.off()
@@ -22,7 +26,7 @@ setwd("~/Documents/git/regionalrisk/data/sambucus")
 austria<-read.csv("PEP725_AT/PEP725_AT_Sambucus.csv", header=TRUE)
 aust.station<-read.csv("PEP725_AT/PEP725_AT_stations.csv", header=TRUE)
 bos<-read.csv("PEP725_BA/PEP725_BA_Sambucus.csv", header=TRUE)
-bos.station<-read.csv("PEP725_BA/PEP725_stations.csv", header=TRUE)
+bos.station<-read.csv("PEP725_BA/PEP725_BA_stations.csv", header=TRUE)
 switz<-read.csv("PEP725_CH/PEP725_CH_Sambucus.csv", header=TRUE)
 switz.station<-read.csv("PEP725_CH/PEP725_CH_stations.csv", header=TRUE)
 czech<-read.csv("PEP725_CZ/PEP725_CZ_Sambucus.csv", header=TRUE)
@@ -35,14 +39,14 @@ croatia<-read.csv("PEP725_HR/PEP725_HR_Sambucus.csv", header=TRUE)
 croa.station<-read.csv("PEP725_HR/PEP725_HR_stations.csv", header=TRUE) 
 ireland<-read.csv("PEP725_IE/PEP725_IE_Sambucus.csv", header=TRUE)
 ire.station<-read.csv("PEP725_IE/PEP725_IE_stations.csv", header=TRUE) 
-german2<-read.csv("PEP725_IP/PEP725_IE_Sambucus.csv", header=TRUE) ### ADDED!
+german2<-read.csv("PEP725_IP/PEP725_IP_Sambucus.csv", header=TRUE) ### ADDED!
 german2.station<-read.csv("PEP725_IP/PEP725_IP_stations.csv", header=TRUE) ### ADDED!
 italy<-read.csv("PEP725_IT/PEP725_IT_Sambucus.csv", header=TRUE) ### ADDED!
 italy.station<-read.csv("PEP725_IT/PEP725_IT_stations.csv", header=TRUE) #ADDED!
 mont<-read.csv("PEP725_ME/PEP725_ME_Sambucus.csv", header=TRUE) # ADDED!
 mont.station<-read.csv("PEP725_ME/PEP725_ME_stations.csv", header=TRUE) # ADDED!
-mace<-read.csv("PEP725/PEP725_MK_Sambucus.csv", header=TRUE) # ADDED!
-mace.station<-read.csv("PEP725/PEP725_MK_stations.csv", header=TRUE) # ADDED!
+mace<-read.csv("PEP725_MK/PEP725_MK_Sambucus.csv", header=TRUE) # ADDED!
+mace.station<-read.csv("PEP725_MK/PEP725_MK_stations.csv", header=TRUE) # ADDED!
 neth<-read.csv("PEP725_NL/PEP725_NL_Sambucus.csv", header=TRUE)
 neth.station<-read.csv("PEP725_NL/PEP725_NL_stations.csv", header=TRUE)
 slov<-read.csv("PEP725_SI/PEP725_SI_Sambucus.csv", header=TRUE) # ADDED!
@@ -99,12 +103,10 @@ ie<-na.omit(ie)
 
 d<-bind_rows(d, ie)
 
-lv<-latv%>%filter(BBCH<=19)
-lv<-full_join(lv, latv.station)
-lv<-dplyr::select(lv, -NAME)
-lv<-na.omit(lv)
-
-d<-bind_rows(d, lv)
+it<-italy%>%filter(BBCH<=19)
+it<-full_join(it, italy.station)
+it<-dplyr::select(it, -NAME)
+it<-na.omit(it)
 
 nl<-neth%>%filter(BBCH<=19)
 nl<-full_join(nl, neth.station)
@@ -113,12 +115,30 @@ nl<-na.omit(nl)
 
 d<-bind_rows(d, nl)
 
+mk<-mace%>%filter(BBCH<=19)
+mk<-full_join(mk, mace.station)
+mk<-dplyr::select(mk, -NAME)
+mk<-na.omit(mk)
+
+d<-bind_rows(d, mk)
+
+es<-spain%>%filter(BBCH<=19)
+es<-full_join(es, spain.station)
+es<-dplyr::select(es, -NAME)
+es<-na.omit(es)
+
+d<-bind_rows(d, es)
+
 uk<-engl%>%filter(BBCH<=19)
 uk<-full_join(uk, engl.station)
 uk<-dplyr::select(uk, -NAME)
 uk<-na.omit(uk)
 
 d<-bind_rows(d, uk)
+d<-dplyr::select(d, -X, -X.1)
 d<-na.omit(d)
-d$species<-"ACEPSU"
-#write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/bbch_region.csv", row.names = FALSE)
+d$species<-"SAMNIG"
+
+write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/bbch_region_sambucus.csv", row.names = FALSE)
+
+

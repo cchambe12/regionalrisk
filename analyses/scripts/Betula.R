@@ -13,14 +13,6 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(lubridate)
-library(arm)
-library(ggmap)
-library(maps)
-library(mapdata)
-library(mapproj)
-library(grid)
-library(rworldmap)
-library(gridExtra)
 
 
 # Set Working Directory
@@ -159,7 +151,7 @@ nl<-na.omit(nl)
 d<-bind_rows(d, nl)
 
 se<-swed%>%filter(BBCH<=19)
-se<-full_join(si, swed.station)
+se<-full_join(se, swed.station)
 se<-dplyr::select(se, -NAME)
 se<-na.omit(se)
 
@@ -189,35 +181,4 @@ d<-dplyr::select(d, -X, -X.1)
 #d<-na.omit(d)
 d$species<-"BETPEN"
 #write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/bbch_region_betula.csv", row.names = FALSE)
-
-
-################ Attempt to make a map #############################
-# Europe Map
-# Get the world map
-worldMap <- getMap()
-
-# European Countries
-europeanUnion <- c("Austria","Belgium","Bulgaria","Croatia","Cyprus",
-                   "Czech Rep.","Denmark","Estonia","Finland","France",
-                   "Germany","Greece","Hungary","Ireland","Italy","Latvia",
-                   "Lithuania","Luxembourg","Malta","Netherlands","Norway","Poland",
-                   "Portugal","Romania","Slovakia","Slovenia","Spain",
-                   "Sweden","Switzerland", "United Kingdom")
-indEU <- which(worldMap$NAME%in%europeanUnion)
-europeCoords <- lapply(indEU, function(i){
-  df <- data.frame(worldMap@polygons[[i]]@Polygons[[1]]@coords)
-  df$region =as.character(worldMap$NAME[i])
-  colnames(df) <- list("long", "lat", "region")
-  return(df)
-})
-
-europeCoords <- do.call("rbind", europeCoords)
-
-eur <- ggplot(europeCoords) + geom_polygon(data = europeCoords, aes(x = long, y = lat, group=region), 
-                                           color="grey", fill="white") + coord_map(xlim = c(-13, 35),  ylim = c(32, 71))
-
-thirty<-d%>%filter(YEAR>=1986)
-eur.map <- eur + 
-  geom_point(aes(LON, LAT, color=DAY),position="jitter", data=d) + scale_color_gradient(low = "blue", high="red", breaks=c(30,60,90,120,150,180,210))
-plot(eur.map)
 
