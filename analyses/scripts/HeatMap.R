@@ -1,3 +1,10 @@
+## 16 August 2017
+## Heat map with Nacho
+# Investigating the number of False spring events (-2.2 degC) that occur before climate change
+# here defined as before 1984, and after climate change between Feb 15 to June 30.
+# Next step is to find how many years each location has a false spring event and what the frequency of
+# FSs are. 
+
 # Clear workspace
 rm(list=ls()) # remove everything currently held in the R memory
 options(stringsAsFactors=FALSE)
@@ -57,7 +64,7 @@ leap.years<-leap.years[!duplicated(leaps(1)),]
 
 #year<-1950:2016
 num.false.spring.year<-list()
-for(i in 1950:1952){#i=1952
+for(i in 1951:1983){#i=1952
   print(i)
   year.i<-i
   is.leap<-ifelse(year.i%in%leap.years,TRUE,FALSE)
@@ -98,7 +105,51 @@ for(i in 1950:1952){#i=1952
   
 }
 
-final.raster<-stack(unlist(num.false.spring.year))
-summed.false.springs<-calc(final.raster,sum) 
-plot(summed.false.springs)
+final.raster.preCC<-stack(unlist(num.false.spring.year))
+summed.false.springs.preCC<-calc(final.raster.preCC,sum) 
+plot(summed.false.springs.preCC)
 
+for(i in 1984:2016){#i=1952
+  print(i)
+  year.i<-i
+  is.leap<-ifelse(year.i%in%leap.years,TRUE,FALSE)
+  
+  sequence.years<-which(year==year.i)
+  #length(sequence.years)
+  raster.sub<-subset(raster1,sequence.years)
+  #numnonas<-sum(!is.na(values(raster.sub[[1]])))
+  
+  rast.array<-array(0,dim=c(ncell(raster.sub),181))
+  
+  if(is.leap){
+    for(j in 45:181){ ## you need to change
+      print(paste(year.i,j))
+      rast.array[,j]<-values(raster.sub[[j]])
+      
+    }
+  }
+  
+  if(!is.leap){
+    for(j in 45:180){ ## you need to change
+      print(paste(year.i,j))
+      rast.array[,j]<-values(raster.sub[[j]])
+      
+    }
+  }
+  
+  num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(x<=-2.2,1,0))}) ##issue is here - all NAs
+  non.nas.ids<-which(!is.na(num.false.spring))
+  values(empty.raster)<- NA
+  #plot(raster1[[1]])
+  values(empty.raster)[non.nas.ids]<- num.false.spring[!is.na(num.false.spring)]
+  #values(empty.raster)[num.false.spring]<- num.false.spring[!is.na(num.false.spring)]
+  #plot(empty.raster)
+  
+  
+  num.false.spring.year[[i]]<-empty.raster
+  
+}
+
+final.raster.postCC<-stack(unlist(num.false.spring.year))
+summed.false.springs.postCC<-calc(final.raster.postCC,sum) 
+plot(summed.false.springs.postCC)
