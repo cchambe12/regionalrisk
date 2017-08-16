@@ -92,7 +92,7 @@ for(i in 1951:1983){#i=1952
     }
   }
   
-  num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(x<=-2.2,1,0))}) ##issue is here - all NAs
+  num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(x<=-2.2,1,0))})
   non.nas.ids<-which(!is.na(num.false.spring))
   values(empty.raster)<- NA
   #plot(raster1[[1]])
@@ -109,22 +109,25 @@ final.raster.preCC<-stack(unlist(num.false.spring.year))
 summed.false.springs.preCC<-calc(final.raster.preCC,sum) 
 plot(summed.false.springs.preCC)
 
+#write.csv(num.false.spring.year, file=("~Documents/git/regionalrisk/output/falsespring.preCC.csv"), row.names=FALSE)
+
+num.false.spring.year.post<-list()
 for(i in 1984:2016){#i=1952
   print(i)
   year.i<-i
   is.leap<-ifelse(year.i%in%leap.years,TRUE,FALSE)
   
-  sequence.years<-which(year==year.i)
+  sequence.years.post<-which(year==year.i)
   #length(sequence.years)
-  raster.sub<-subset(raster1,sequence.years)
+  raster.sub.post<-subset(raster1,sequence.years.post)
   #numnonas<-sum(!is.na(values(raster.sub[[1]])))
   
-  rast.array<-array(0,dim=c(ncell(raster.sub),181))
+  rast.array.post<-array(0,dim=c(ncell(raster.sub.post),181))
   
   if(is.leap){
     for(j in 45:181){ ## you need to change
       print(paste(year.i,j))
-      rast.array[,j]<-values(raster.sub[[j]])
+      rast.array.post[,j]<-values(raster.sub.post[[j]])
       
     }
   }
@@ -132,24 +135,24 @@ for(i in 1984:2016){#i=1952
   if(!is.leap){
     for(j in 45:180){ ## you need to change
       print(paste(year.i,j))
-      rast.array[,j]<-values(raster.sub[[j]])
+      rast.array.post[,j]<-values(raster.sub.post[[j]])
       
     }
   }
   
-  num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(x<=-2.2,1,0))}) ##issue is here - all NAs
-  non.nas.ids<-which(!is.na(num.false.spring))
+  num.false.spring.post<-apply(rast.array.post,1,function(x){sum(ifelse(x<=-2.2,1,0))})
+  non.nas.ids.post<-which(!is.na(num.false.spring.post))
   values(empty.raster)<- NA
   #plot(raster1[[1]])
-  values(empty.raster)[non.nas.ids]<- num.false.spring[!is.na(num.false.spring)]
+  values(empty.raster)[non.nas.ids.post]<- num.false.spring.post[!is.na(num.false.spring.post)]
   #values(empty.raster)[num.false.spring]<- num.false.spring[!is.na(num.false.spring)]
   #plot(empty.raster)
   
   
-  num.false.spring.year[[i]]<-empty.raster
+  num.false.spring.year.post[[i]]<-empty.raster
   
 }
 
-final.raster.postCC<-stack(unlist(num.false.spring.year))
+final.raster.postCC<-stack(unlist(num.false.spring.year.post))
 summed.false.springs.postCC<-calc(final.raster.postCC,sum) 
 plot(summed.false.springs.postCC)
