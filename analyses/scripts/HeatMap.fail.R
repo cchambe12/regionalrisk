@@ -203,3 +203,84 @@ summed.false.springs<-calc(final.raster,sum)
 ?writeRaster
 plot(summed.false.springs)
 plot(final.raster)
+
+
+
+
+
+
+############### Poor attempt #45 ########################
+empty.raster<-raster1[[1]]
+values(empty.raster)<-NA
+nlayers1<-nlayers(raster1)
+
+years<-1950:1952
+num.false.spring.year<-list()
+for(i in years){#i=1952
+  print(i)
+  year.i<-i
+  is.leap<-ifelse(year.i%in%leap.years,TRUE,FALSE)
+  sequence.years<-array()
+  if(is.leap){
+    for(j in 45:180){ ## you need to change
+      print(paste(year.i,j))
+      sequence.years<-seq(nlayers1[j],nlayers1[j],366)
+      raster.sub[,j]<-values(sequence.years[[j]])
+      
+    }
+  }
+  
+  if(!is.leap){
+    for(j in 45:180){ ## you need to change
+      print(paste(year.i,j))
+      sequence.years<-seq(nlayers1[j],nlayers1[j],365)
+      raster.sub[,j]<-values(sequence.years[[j]])
+      
+    }
+  }
+  
+  #raster.sub<-subset(raster1, sequence.years)
+  #sequence.years<-which(year==year.i)
+  
+  #length(sequence.years)
+  #raster.sub<-subset(raster1,sequence.years)
+  #numnonas<-sum(!is.na(values(raster.sub[[1]])))
+  raster.sub<-array(NA,dim=c(ncell(raster.sub),181))
+  
+  num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(min<=-2.2,1,0))})
+  non.nas.ids<-which(!is.na(num.false.spring))
+  #values(empty.raster)<- NA
+  #plot(raster1[[1]])
+  #values(empty.raster)[non.nas.ids]<- num.false.spring[!is.na(num.false.spring)]
+  values(empty.raster)[non.nas.ids]<- num.false.spring[which(!is.na(num.false.spring))]
+  #plot(empty.raster)
+  
+  
+  num.false.spring.year[[i]]<-empty.raster
+  
+}
+
+
+plot(stack(unlist(num.false.spring.year)))
+rast.array<-array(NA,dim=c(ncell(raster.sub),181))
+
+
+
+
+if(is.leap){
+  for(j in 45:180){ ## you need to change
+    print(paste(year.i,j))
+    sequence.years<-seq(nlayers1[45],nlayers1[180],366)
+    rast.array[,j]<-values(raster.sub[[j]])
+    
+  }
+}
+
+if(!is.leap){
+  for(j in 45:180){ ## you need to change
+    print(paste(year.i,j))
+    sequence.years<-seq(nlayers1[45],nlayers1[180],365)
+    rast.array[,j]<-values(raster.sub[[j]])
+    
+  }
+}

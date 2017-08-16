@@ -12,7 +12,6 @@ library(ncdf4)
 library(Interpol.T)
 library(chillR)
 library(raster)
-library(seas)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/input")
@@ -21,9 +20,11 @@ raster1<-brick("tn_0.25deg_reg_v15.0.nc", varname="tn", sep="")
 eur.temp<-nc_open("tn_0.25deg_reg_v15.0.nc")
 raster1<-brick("//WeldShare/Wolkovich Lab/Budburst Review - Ospree/Climate Data/tn_0.25deg_reg_v15.0.nc", varname="tn", sep="")
 eur.temp <- nc_open("//128.103.155.31/WeldShare/Wolkovich Lab/Budburst Review - Ospree/Climate Data/tn_0.25deg_reg_v15.0.nc")
-plot(raster1[[1]])
+plot(raster1[[45]])
 
-length(doy)/365
+raster1 <- setMinMax(raster1)
+
+#length(doy)/365
 doy<-ncvar_get(eur.temp, "time")
 doy<-as.Date(doy, origin="1950-01-01")
 day<-substr(doy, 9,10)
@@ -32,6 +33,7 @@ month<-as.numeric(substr(doy, 6, 7))
 timevec<-paste(year, month, day, sep="-")
 years.vec<-as.character(timevec, format="Y-%m-%d")
 year<-as.numeric(substr(years.vec, 1, 4))
+
 #doy.vec<-as.POSIXlt(names(raster1), format="X%j")
 
 dates<-as.Date(years.vec)
@@ -55,7 +57,7 @@ leap.years<-leap.years[!duplicated(leaps(1)),]
 
 #year<-1950:2016
 num.false.spring.year<-list()
-for(i in 1950:2016){#i=1952
+for(i in 1950:1952){#i=1952
   print(i)
   year.i<-i
   is.leap<-ifelse(year.i%in%leap.years,TRUE,FALSE)
@@ -69,11 +71,11 @@ for(i in 1950:2016){#i=1952
   rast.array<-array(NA,dim=c(ncell(raster.sub),181))
   
   if(is.leap){
-  for(j in 45:181){ ## you need to change
-    print(paste(year.i,j))
-    rast.array[,j]<-values(raster.sub[[j]])
-    
-  }
+    for(j in 45:181){ ## you need to change
+      print(paste(year.i,j))
+      rast.array[,j]<-values(raster.sub[[j]])
+      
+    }
   }
   
   if(!is.leap){
@@ -84,11 +86,12 @@ for(i in 1950:2016){#i=1952
     }
   }
   
-  num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(x<-2.2,1,0))})
+  num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(x<=-2.2,1,0))}) ##issue is here - all NAs
   non.nas.ids<-which(!is.na(num.false.spring))
   values(empty.raster)<- NA
   #plot(raster1[[1]])
   values(empty.raster)[non.nas.ids]<- num.false.spring[!is.na(num.false.spring)]
+  #values(empty.raster)[num.false.spring]<- num.false.spring[!is.na(num.false.spring)]
   #plot(empty.raster)
   
   
@@ -97,3 +100,6 @@ for(i in 1950:2016){#i=1952
 }
 
 final.raster<-stack(unlist(num.false.spring.year))
+summed.false.springs<-calc(final.raster,sum) 
+plot(summed.false.springs)
+
