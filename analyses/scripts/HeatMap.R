@@ -22,7 +22,7 @@ raster1<-brick("//WeldShare/Wolkovich Lab/Budburst Review - Ospree/Climate Data/
 eur.temp <- nc_open("//128.103.155.31/WeldShare/Wolkovich Lab/Budburst Review - Ospree/Climate Data/tn_0.25deg_reg_v15.0.nc")
 plot(raster1[[45]])
 
-raster1 <- setMinMax(raster1)
+#raster1 <- setMinMax(raster1)
 
 #length(doy)/365
 doy<-ncvar_get(eur.temp, "time")
@@ -67,8 +67,7 @@ for(i in 1950:1952){#i=1952
   raster.sub<-subset(raster1,sequence.years)
   #numnonas<-sum(!is.na(values(raster.sub[[1]])))
   
-  
-  rast.array<-array(NA,dim=c(ncell(raster.sub),181))
+  rast.array<-array(0,dim=c(ncell(raster.sub),181))
   
   if(is.leap){
     for(j in 45:181){ ## you need to change
