@@ -19,6 +19,9 @@ library(ncdf4)
 library(Interpol.T)
 library(chillR)
 library(raster)
+library(maptools)
+library(rgeos)
+library(rgdal)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/input")
@@ -77,7 +80,7 @@ for(i in 1951:1983){#i=1952
   rast.array<-array(0,dim=c(ncell(raster.sub),181))
   
   if(is.leap){
-    for(j in 45:181){ ## you need to change
+    for(j in 75:181){ ## you need to change
       print(paste(year.i,j))
       rast.array[,j]<-values(raster.sub[[j]])
       
@@ -85,7 +88,7 @@ for(i in 1951:1983){#i=1952
   }
   
   if(!is.leap){
-    for(j in 45:180){ ## you need to change
+    for(j in 75:180){ ## you need to change
       print(paste(year.i,j))
       rast.array[,j]<-values(raster.sub[[j]])
       
@@ -126,7 +129,7 @@ for(i in 1984:2016){#i=1952
   rast.array.post<-array(0,dim=c(ncell(raster.sub.post),181))
   
   if(is.leap){
-    for(j in 45:181){ ## you need to change
+    for(j in 75:181){ ## you need to change
       print(paste(year.i,j))
       rast.array.post[,j]<-values(raster.sub.post[[j]])
       
@@ -134,7 +137,7 @@ for(i in 1984:2016){#i=1952
   }
   
   if(!is.leap){
-    for(j in 45:180){ ## you need to change
+    for(j in 75:180){ ## you need to change
       print(paste(year.i,j))
       rast.array.post[,j]<-values(raster.sub.post[[j]])
       
@@ -157,6 +160,9 @@ for(i in 1984:2016){#i=1952
 final.raster.postCC<-stack(unlist(num.false.spring.year.post))
 summed.false.springs.postCC<-calc(final.raster.postCC,sum) 
 plot(summed.false.springs.postCC)
+
+fs.years.post<-calc(final.raster.postCC, function(x) {sum(ifelse(x>=1,1,0))})
+plot(fs.years.post)
 
 
 ############################# Bad code, just to save for now #######################
@@ -199,4 +205,20 @@ summed.final.fs.pre<-calc(final.fs.pre, sum)
 plot(summed.final.fs.pre)
 
 
-##############################
+############################## MAKE BETTER MAPS!! #######################################
+setwd("~/Documents/git/regionalrisk/analyses")
+land<-readShapeSpatial("input/natural_earth_vector/50m_physical/ne_50m_land.shp") ## 
+boundars<-readShapeSpatial("input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
+
+
+plot(fs.years.pre,ylim=c(30,70),xlim=c(-15,35))
+plot(fs.years.post,ylim=c(30,70),xlim=c(-15,35))
+
+
+
+
+
+
+
+
+
