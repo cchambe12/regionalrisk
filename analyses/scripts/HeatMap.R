@@ -130,6 +130,22 @@ plot(summed.final.fs.pre)
 # parsed down the names to "X1950-02-15" through "X1950-06-30"? And not sure how on earth I managed to add
 # the other characters in the name!
 
+# Another failed attempt... #
+for(i in 1951:1983){
+  print(i)
+  fs.attempt<-as.array(as.numeric(final.raster.preCC[i]))
+  final.attempt<-apply(fs.attempt,1,function(x){sum(ifelse(x>=1,1,0))})
+  no.nas<-which(!is.na(final.attempt))
+  values(emp.rast.pre)<-NA
+  values(emp.rast.pre)[no.nas]<-final.attempt[!is.na(final.attempt)]
+  fs.comb.pre[[i]]<-emp.rast.pre
+}
+
+final.fs.pre<-stack(unlist(fs.comb.pre))
+summed.final.fs.pre<-calc(final.fs.pre, sum)
+plot(summed.final.fs.pre)
+##############################
+
 #write.csv(num.false.spring.year, file=("~Documents/git/regionalrisk/output/falsespring.preCC.csv"), row.names=FALSE)
 
 num.false.spring.year.post<-list()
