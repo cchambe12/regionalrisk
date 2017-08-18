@@ -100,7 +100,6 @@ for(i in 1951:1983){#i=1952
   #values(empty.raster)[num.false.spring]<- num.false.spring[!is.na(num.false.spring)]
   #plot(empty.raster)
   
-  
   num.false.spring.year[[i]]<-empty.raster
   
 }
@@ -108,6 +107,28 @@ for(i in 1951:1983){#i=1952
 final.raster.preCC<-stack(unlist(num.false.spring.year))
 summed.false.springs.preCC<-calc(final.raster.preCC,sum) 
 plot(summed.false.springs.preCC)
+
+#### Attempt to look at total number of years that had a false spring...####
+pre<-1951:1983
+fs.comb.pre<- list()
+emp.rast.pre<-final.raster.preCC[[1]]
+for(i in 1951:1983){
+  print(i)
+  fs.array<-array(NA, dim=c(ncell(final.raster.preCC),33))
+  fs.combined<-apply(fs.array, 1, function(x) {sum(ifelse(x>0, 1, 0))})
+  no.nas<-which(!is.na(fs.combined))
+  values(emp.rast.pre)<-NA
+  values(emp.rast.pre)[no.nas]<-fs.combined[!is.na(fs.combined)]
+  fs.comb.pre[[i]]<-emp.rast.pre
+}
+
+final.fs.pre<-stack(unlist(fs.comb.pre))
+summed.final.fs.pre<-calc(final.fs.pre, sum)
+plot(summed.final.fs.pre)
+
+######## For some reason, my new raster names are "X1950.01.01.1.1" - which shouldn't the first loop
+# parsed down the names to "X1950-02-15" through "X1950-06-30"? And not sure how on earth I managed to add
+# the other characters in the name!
 
 #write.csv(num.false.spring.year, file=("~Documents/git/regionalrisk/output/falsespring.preCC.csv"), row.names=FALSE)
 
