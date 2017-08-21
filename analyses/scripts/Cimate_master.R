@@ -28,7 +28,7 @@ d<-full_join(df, da)
 d<-full_join(d, dt)
 d<-dplyr::select(d, -X, -X.1)
 
-all<-df%>%filter(YEAR>=1950)
+all<-bb%>%filter(YEAR>=1950)
 x<-paste(all$YEAR, all$DAY)
 all$date<-as.Date(strptime(x, format="%Y %j"))
 
@@ -88,7 +88,7 @@ for(i in names(tempval)){
   freezes <- rbind(freezes, data.frame(acer))
 }
 
-
+ggplot(freezes, aes(x=long, y=lat)) + geom_point
 #save the field chilling calculations in a separate file
 ##### WAIT TO SAVE ONCE I HAVE ALL PARTS SETTLED! ######################
 write.csv(freezes, "~/Documents/git/regionalrisk/analyses/output/climate_all.csv", row.names=FALSE, eol="\r\n")
