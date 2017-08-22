@@ -58,14 +58,14 @@ bb$year<-as.numeric(substr(bb$date, 0,4))
 bb$month<-as.numeric(substr(bb$date, 6, 7))
 bb$day<-as.numeric(substr(bb$date, 9,10))
 bb<-bb%>%dplyr::select(-National_ID, -YEAR)
-bb$lat<-round(bb$lat, digits=2)
-bb$long<-round(bb$long, digits=2)
+#bb$lat<-round(bb$lat, digits=2)
+#bb$long<-round(bb$long, digits=2)
 
 
-clim$lat<-round(clim$lat, digits=2)
-clim$long<-round(clim$long, digits=2)
-
-d<-full_join(clim, bb)
+#clim$lat<-round(clim$lat, digits=2)
+#clim$long<-round(clim$long, digits=2)
+prov<-c(lat, long)
+d<-full_join(clim, bb, by=prov)
 d<-filter(d, year>=1950)
 d<-d[!duplicated(d),]
 

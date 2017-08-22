@@ -28,7 +28,7 @@ d<-full_join(df, da)
 d<-full_join(d, dt)
 d<-dplyr::select(d, -X, -X.1)
 
-all<-bb%>%filter(YEAR>=1950)
+all<-bb%>%filter(YEAR>=1950)%>%filter(DAY>1)
 x<-paste(all$YEAR, all$DAY)
 all$date<-as.Date(strptime(x, format="%Y %j"))
 
@@ -87,6 +87,12 @@ for(i in names(tempval)){
   
   freezes <- rbind(freezes, data.frame(acer))
 }
+
+
+plot(boundars,col="grey",border="lightgrey",ylim=c(30,70),xlim=c(-5,35))
+colors<-colorRampPalette(c("red", "blue"))
+points(freezes$long, freezes$lat, col=colors(10), cex = .6)
+
 
 ggplot(freezes, aes(x=long, y=lat)) + geom_point(aes(color=Tmin))
 #save the field chilling calculations in a separate file
