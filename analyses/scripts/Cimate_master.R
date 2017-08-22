@@ -88,7 +88,8 @@ for(i in names(tempval)){
   freezes <- rbind(freezes, data.frame(acer))
 }
 
-ggplot(freezes, aes(x=long, y=lat)) + geom_point
+ggplot(freezes, aes(x=long, y=lat)) + geom_point(aes(color=Tmin))
 #save the field chilling calculations in a separate file
 ##### WAIT TO SAVE ONCE I HAVE ALL PARTS SETTLED! ######################
 write.csv(freezes, "~/Documents/git/regionalrisk/analyses/output/climate_all.csv", row.names=FALSE, eol="\r\n")
+write.csv(freezes, "~/Documents/git/regionalrisk/analyses/output/climate_new.csv", row.names=FALSE, eol="\r\n")
