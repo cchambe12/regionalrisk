@@ -111,19 +111,16 @@ d.16.melt$start<-ifelse(d.16.melt$start==d.16.melt$date, "start", NA)
 d.16.melt$start<-ifelse(d.16.melt$end==d.16.melt$date, "end", d.16.melt$start)
 #class(d.16.melt$start)<- "Date"
 d.16.melt <- d.16.melt[order(d.16.melt$prov, d.16.melt$date), ]
-for(i in c(1:nrow(d.16.melt))){
-  d.16.melt$count[i]<-ifelse((d.16.melt$start[i]=="start")<=d.16.melt$date[i]<= (d.16$start.melt[i]=="end"), TRUE, NA)
+d.bud<-d.16.melt%>%filter(!is.na(start))
+peps<-unique(d.16.melt$PEP_ID)
+d.16.melt$BBCH[is.na(d.16.melt$BBCH)] <- d.bud$start[match(d.16.melt$BBCH[!is.na(d.16.melt$BBCH)],d.pep$BBCH)]
+
+pb <- txtProgressBar(min = 1, max = nrow(d.16.melt), style = 3)
+for(i in c(1:nrow(d.16.melt))) {
+  for(j in c(1:nrow(d.bud)))
+    d.16.melt$count[i]<-ifelse(d.16.melt$date[i] >= d.bud$date[which(d.bud$start[j]=="start")][j] & d.16.melt$prov[i]==d.bud$prov[j] &
+       d.16.melt$date[i]<=d.bud$date[which(d.bud$start[j]=="end")][j], TRUE, NA)
+  setTxtProgressBar(pb, i)
 }
-
-
-yrs<-unique(d$year)
-prov<-unique(paste(d$lat, d$long))
-for(i in prov){
-  for(j in yrs)
-    d$bud[i]<-tapply(d$date,list(d$BBCH),min)
-  #clim$leaf[i]<-tapply(clim$date[j],list(clim$bbch),max)
-  print(paste(i,j))
-}
-
-
-d$bud<-tapply(d$prov, list(d$BBCH), min)
+## Should divide these loops by provenance location instead of by year maybe? ##
+# Loop for one year takes a long time - probably an hour #
