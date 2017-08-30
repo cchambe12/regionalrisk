@@ -94,9 +94,25 @@ bud<-dplyr::select(bud, year, date, prov, start)
 d.test<-full_join(d.test, bud)
 dxx<-full_join(bud, leaf)
 
+dxx<-read.csv("~/Desktop/aesculus.csv", header=TRUE)
+dxx$check<-ifelse(dxx$start==dxx$end, TRUE, FALSE)
+d.16<-dxx%>%filter(year==2016)
+d.16$start<-as.Date(d.16$start)
+d.16$end<-as.Date(d.16$end)
+d.16$date<-as.Date(d.16$date)
+
 d.test$count<-ifelse(d.test$start==d.test$end, TRUE, FALSE)
-for(i in c(1:nrow(d.test))){
-  d.test$count[i]<-ifelse(d.test$date[i]>=d.test$bud & d.test$date[i]<=d.test$leaf, TRUE, d.test[i]$count)
+for(i in c(1:nrow(d.16))){
+  d.16$count[i]<-ifelse(d.16$date[i]>=d.16$start && d.16$date[i]<=d.16$end, TRUE, NA)
+}
+
+d.16.melt<-d.16
+d.16.melt$start<-ifelse(d.16.melt$start==d.16.melt$date, "start", NA)
+d.16.melt$start<-ifelse(d.16.melt$end==d.16.melt$date, "end", d.16.melt$start)
+#class(d.16.melt$start)<- "Date"
+d.16.melt <- d.16.melt[order(d.16.melt$prov, d.16.melt$date), ]
+for(i in c(1:nrow(d.16.melt))){
+  d.16.melt$count[i]<-ifelse((d.16.melt$start[i]=="start")<=d.16.melt$date[i]<= (d.16$start.melt[i]=="end"), TRUE, NA)
 }
 
 
