@@ -16,7 +16,7 @@ library(Interpol.T)
 library(chillR)
 library(raster)
 library(reshape2)
-
+library(data.table)
 
 setwd("~/Documents/git/regionalrisk/analyses")
 eur.tempmn <- nc_open("tn_0.25deg_reg_v15.0.nc")
@@ -96,31 +96,48 @@ dxx<-full_join(bud, leaf)
 
 dxx<-read.csv("~/Desktop/aesculus.csv", header=TRUE)
 dxx$check<-ifelse(dxx$start==dxx$end, TRUE, FALSE)
-d.16<-dxx%>%filter(year==2016)
-d.16$start<-as.Date(d.16$start)
-d.16$end<-as.Date(d.16$end)
-d.16$date<-as.Date(d.16$date)
 
-d.test$count<-ifelse(d.test$start==d.test$end, TRUE, FALSE)
-for(i in c(1:nrow(d.16))){
-  d.16$count[i]<-ifelse(d.16$date[i]>=d.16$start && d.16$date[i]<=d.16$end, TRUE, NA)
-}
+pep<-dxx%>%dplyr::select(lat, long, prov, start, end)
+pep<-pep[(!is.na(pep$start) & !is.na(pep$end)),]
+pep$start<-as.Date(pep$start)
+pep$end<-as.Date(pep$end)
+pep<-pep[!duplicated(pep),]
+pep$risk<-(pep$end-pep$start) + 1
+pep.expand <- pep[rep(row.names(pep), pep$risk), ]
+pep.expand<-data.frame(pep.expand,date=pep.expand$start+(sequence(pep$risk)-1))
+pep.expand$date<-as.Date(pep.expand$date)
+pep.expand$start<-as.Date(pep.expand$start)
+pep.expand$end<-as.Date(pep.expand$end)
+dxx$start<-as.Date(dxx$start)
+dxx$end<-as.Date(dxx$end)
+dxx$date<-as.Date(dxx$date)
+dxx<-dplyr::select(dxx, prov, date, Tmin)
 
-d.16.melt<-d.16
-d.16.melt$start<-ifelse(d.16.melt$start==d.16.melt$date, "start", NA)
-d.16.melt$start<-ifelse(d.16.melt$end==d.16.melt$date, "end", d.16.melt$start)
-#class(d.16.melt$start)<- "Date"
-d.16.melt <- d.16.melt[order(d.16.melt$prov, d.16.melt$date), ]
-d.bud<-d.16.melt%>%filter(!is.na(start))
-peps<-unique(d.16.melt$PEP_ID)
-d.16.melt$BBCH[is.na(d.16.melt$BBCH)] <- d.bud$start[match(d.16.melt$BBCH[!is.na(d.16.melt$BBCH)],d.pep$BBCH)]
+df <- merge(pep.expand, dxx, by=c('prov', 'date'), sort = FALSE)
+d.aes<-df
+d.aes$year<-substr(d.aes$date, 0,4)
+d.aes$frz<-ifelse(d.aes$Tmin<=-2.2, 1, 0)
+d.aes$freezes <- ave(
+  d.aes$frz, d.aes$prov, d.aes$year,
+  FUN=function(x) cumsum(c(0, head(x, -1)))
+)
+d.total<-d.aes%>%dplyr::select(prov, year)
+d.total<-d.total[!duplicated(d.total),]
+d.total$num.years<-ave(d.total$year, d.total[,("prov")], FUN=length)
+d.aes <- merge(d.total, d.aes, by=c('prov', 'year'), sort = FALSE)
+d.aes$num.years<-as.numeric(d.aes$num.years)
+fs<-d.aes%>%dplyr::select(prov, year, freezes)
+fs<-fs[!duplicated(fs),]
+fs$freezes<-ifelse(fs$freezes>0,1,NA)
+fs<-na.omit(fs)
+fs<-fs[!duplicated(fs),]
+fs$frz.years<-ave(fs$freezes, fs[,("prov")], FUN=length)
+fs<-dplyr::select(fs,-freezes)
+d.aes <- merge(fs, d.aes, by=c('prov', 'year'), sort = FALSE)
+d.aes$frequency<-as.numeric(d.aes$frz.years/d.aes$num.years)
+#tmin<-dxx[!is.na(dxx$Tmin),]
+#whynas<-d.aes[is.na(d.aes$Tmin),]
+#provs<-unique(whynas$prov)
+#list<-provs[!provs %in% (unique(tmin$prov))]
 
-pb <- txtProgressBar(min = 1, max = nrow(d.16.melt), style = 3)
-for(i in c(1:nrow(d.16.melt))) {
-  for(j in c(1:nrow(d.bud)))
-    d.16.melt$count[i]<-ifelse(d.16.melt$date[i] >= d.bud$date[which(d.bud$start[j]=="start")][j] & d.16.melt$prov[i]==d.bud$prov[j] &
-       d.16.melt$date[i]<=d.bud$date[which(d.bud$start[j]=="end")][j], TRUE, NA)
-  setTxtProgressBar(pb, i)
-}
-## Should divide these loops by provenance location instead of by year maybe? ##
-# Loop for one year takes a long time - probably an hour #
+
