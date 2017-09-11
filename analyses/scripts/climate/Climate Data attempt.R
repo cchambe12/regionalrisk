@@ -17,6 +17,7 @@ library(chillR)
 library(raster)
 library(reshape2)
 library(data.table)
+library(arm)
 
 setwd("~/Documents/git/regionalrisk/analyses")
 eur.tempmn <- nc_open("tn_0.25deg_reg_v15.0.nc")
@@ -121,23 +122,39 @@ d.aes$freezes <- ave(
   d.aes$frz, d.aes$prov, d.aes$year,
   FUN=function(x) cumsum(c(0, head(x, -1)))
 )
-d.total<-d.aes%>%dplyr::select(prov, year)
-d.total<-d.total[!duplicated(d.total),]
-d.total$num.years<-ave(d.total$year, d.total[,("prov")], FUN=length)
-d.aes <- merge(d.total, d.aes, by=c('prov', 'year'), sort = FALSE)
+d.aes$freezes<-as.numeric(d.aes$freezes)
+
+d.fs<-d.aes%>%dplyr::select(prov, year, freezes)
+d.fs$prov.year<-paste(d.fs$prov, d.fs$year)
+d.fs$freezes<-ifelse(d.fs$freezes>=1, 1, NA)
+d.fs<-na.omit(d.fs)
+d.fs<-d.fs[!duplicated(d.fs),]
+d.fs$num.frz<-ave(d.fs$year, d.fs[,("prov")], FUN=length)
+d.fs<-dplyr::select(d.fs, prov, year, num.frz)
+
+d.aes<-full_join(d.fs, d.aes)
+d.aes$num.frz<-as.numeric(d.aes$num.frz)
+total<-d.aes%>%dplyr::select(prov, year)
+total<-total[!duplicated(total),]
+total$years<-ifelse(total$year>=1, 1, NA)
+total<-na.omit(total)
+total$num.years<-ave(total$years, total[,("prov")], FUN=length)
+total<-dplyr::select(total, -years)
+d.aes <- full_join(total, d.aes)
 d.aes$num.years<-as.numeric(d.aes$num.years)
-fs<-d.aes%>%dplyr::select(prov, year, freezes)
-fs<-fs[!duplicated(fs),]
-fs$freezes<-ifelse(fs$freezes>0,1,NA)
-fs<-na.omit(fs)
-fs<-fs[!duplicated(fs),]
-fs$frz.years<-ave(fs$freezes, fs[,("prov")], FUN=length)
-fs<-dplyr::select(fs,-freezes)
-d.aes <- merge(fs, d.aes, by=c('prov', 'year'), sort = FALSE)
-d.aes$frequency<-as.numeric(d.aes$frz.years/d.aes$num.years)
+d.aes$frequency<-as.numeric(d.aes$num.frz/d.aes$num.years)
 #tmin<-dxx[!is.na(dxx$Tmin),]
 #whynas<-d.aes[is.na(d.aes$Tmin),]
 #provs<-unique(whynas$prov)
 #list<-provs[!provs %in% (unique(tmin$prov))]
+
+#write.csv(d.aes, file="~/Documents/git/regionalrisk/analyses/output/RegRisk_aesculus.csv", row.names = FALSE)
+
+d.aes$long<-as.numeric(d.aes$long)
+mod<-lm(frequency~lat*long, data=d.aes)
+display(mod)
+summary(mod)
+
+unique(sort(d.aes$frequency))
 
 
