@@ -77,10 +77,10 @@ for(i in 1951:1983){#i=1952
   raster.sub<-subset(raster1,sequence.years)
   #numnonas<-sum(!is.na(values(raster.sub[[1]])))
   
-  rast.array<-array(0,dim=c(ncell(raster.sub),181))
+  rast.array<-array(60,dim=c(ncell(raster.sub),181))
   
   if(is.leap){
-    for(j in 75:181){ ## you need to change
+    for(j in 60:181){ ## you need to change
       print(paste(year.i,j))
       rast.array[,j]<-values(raster.sub[[j]])
       
@@ -88,13 +88,14 @@ for(i in 1951:1983){#i=1952
   }
   
   if(!is.leap){
-    for(j in 75:180){ ## you need to change
+    for(j in 60:181){ ## you need to change
       print(paste(year.i,j))
       rast.array[,j]<-values(raster.sub[[j]])
       
     }
   }
   
+  #new.freeze<-apply(rast.array, 1, function(x){mean(x)})
   num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(x<=-2.2,1,0))})
   non.nas.ids<-which(!is.na(num.false.spring))
   values(empty.raster)<- NA
@@ -112,7 +113,10 @@ summed.false.springs.preCC<-calc(final.raster.preCC,sum)
 plot(summed.false.springs.preCC)
 
 fs.years.pre<-calc(final.raster.preCC, function(x) {sum(ifelse(x>=1,1,0))})
-plot(fs.years.pre)
+plot(fs.years.pre, xlim=c(-10,45), ylim=c(20,70))
+
+writeRaster(fs.years.pre,"~/Documents/git/regionalrisk/analyses/output/fs.30.pre", bylayer=TRUE,format="GTiff")
+
 
 #### Post Climate Change #####
 num.false.spring.year.post<-list()
