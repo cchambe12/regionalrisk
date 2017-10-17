@@ -21,7 +21,7 @@ library(arm)
 
 setwd("~/Documents/git/regionalrisk/analyses")
 eur.tempmn <- nc_open("tn_0.25deg_reg_v15.0.nc")
-r<-brick("input/tn_0.25deg_reg_v15.0.nc", varname="tn", sep="")
+r<-brick("tn_0.25deg_reg_v15.0.nc", varname="tn", sep="")
 bx<-read.csv("output/bbch_region_aesculus.csv", header=TRUE)
 
 
@@ -83,7 +83,11 @@ d$count <- ave(
 d$count<-as.numeric(as.character(d$count))
 leaf<-d%>%group_by(prov, year, count)
 leaf$prov.year<-paste(leaf$prov, leaf$year)
-leaf$end<-leaf[max(count,prov.year),]
+leaf$end<-NA
+for(i in length(unique(leaf$prov.year))){
+  leaf$end[i]<-leaf[max(leaf$count,leaf$prov.year[i]),]  
+}
+
 leaf$end<-leaf$date
 leaf<-ungroup(leaf)
 leaf<-dplyr::select(leaf, year, date, prov, end)

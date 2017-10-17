@@ -66,7 +66,9 @@ leap.years<-as.data.frame(leaps(1))
 leap.years<-leap.years[!duplicated(leaps(1)),]
 
 #year<-1950:2016
+empty.raster<-raster1[[1]]
 num.false.spring.year<-list()
+#dates.false.spring<-list()
 for(i in 1951:1983){#i=1952
   print(i)
   year.i<-i
@@ -77,10 +79,10 @@ for(i in 1951:1983){#i=1952
   raster.sub<-subset(raster1,sequence.years)
   #numnonas<-sum(!is.na(values(raster.sub[[1]])))
   
-  rast.array<-array(60,dim=c(ncell(raster.sub),181))
+  rast.array<-array(75,dim=c(ncell(raster.sub),181))
   
   if(is.leap){
-    for(j in 60:181){ ## you need to change
+    for(j in 75:181){ ## you need to change
       print(paste(year.i,j))
       rast.array[,j]<-values(raster.sub[[j]])
       
@@ -88,35 +90,59 @@ for(i in 1951:1983){#i=1952
   }
   
   if(!is.leap){
-    for(j in 60:181){ ## you need to change
+    for(j in 75:181){ ## you need to change
       print(paste(year.i,j))
       rast.array[,j]<-values(raster.sub[[j]])
       
     }
   }
   
-  #new.freeze<-apply(rast.array, 1, function(x){mean(x)})
+  #dates.fs<-apply(rast.array, 1, function(x){ifelse(x<=-2.2, x, 0)})
   num.false.spring<-apply(rast.array,1,function(x){sum(ifelse(x<=-2.2,1,0))})
+  
   non.nas.ids<-which(!is.na(num.false.spring))
+  #values(emp.rast)<-NA
   values(empty.raster)<- NA
+  #non.nas.dates<-which(!is.na(dates.fs))
   #plot(raster1[[1]])
   values(empty.raster)[non.nas.ids]<- num.false.spring[!is.na(num.false.spring)]
-  #values(empty.raster)[num.false.spring]<- num.false.spring[!is.na(num.false.spring)]
+  #values(empty.raster)[non.nas.dates]<- dates.fs[!is.na(dates.fs)]
   #plot(empty.raster)
-  
+  #dates.false.spring[[i]]<- empty.raster
   num.false.spring.year[[i]]<-empty.raster
   
 }
 
+length(num.false.spring.year)
 final.raster.preCC<-stack(unlist(num.false.spring.year))
+#final.dates<-unlist(dates.false.spring)
+names(final.raster.preCC)<-as.character(seq(1951,1983,1))
+freezedays_pre<-rasterToPoints(final.raster.preCC)
+freezies <- as.data.frame(freezedays_pre)
+try<-melt(freezies, id.vars=c("x","y"))
+
+try<-try%>%
+  rename(long=x)%>%
+  rename(lat=y)%>%
+  rename(date=variable)%>%
+  rename(freezes=value)
+try$date<-seq(1951,1983,1)
+try$year<-as.numeric(substr(try$date, 0,4))
+mod<-lm(freezes~year+lat+long, data=try)
+display(mod)
+
 summed.false.springs.preCC<-calc(final.raster.preCC,sum) 
+mean.false.springs.preCC<-calc(final.raster.preCC,mean)
 plot(summed.false.springs.preCC)
+plot(mean.false.springs.preCC)
+plot(final.raster.preCC)
 
 fs.years.pre<-calc(final.raster.preCC, function(x) {sum(ifelse(x>=1,1,0))})
 plot(fs.years.pre, xlim=c(-10,45), ylim=c(20,70))
 
 writeRaster(fs.years.pre,"~/Documents/git/regionalrisk/analyses/output/fs.30.pre", bylayer=TRUE,format="GTiff")
-
+writeRaster(summed.false.springs.preCC,"~/Documents/git/regionalrisk/analyses/output/total_pre", bylayer=TRUE,format="GTiff")
+writeRaster(mean.false.springs.preCC,"~/Documents/git/regionalrisk/analyses/output/meanperyear_pre", bylayer=TRUE,format="GTiff")
 
 #### Post Climate Change #####
 num.false.spring.year.post<-list()
@@ -141,7 +167,7 @@ for(i in 1984:2016){#i=1952
   }
   
   if(!is.leap){
-    for(j in 75:180){ ## you need to change
+    for(j in 75:181){ ## you need to change
       print(paste(year.i,j))
       rast.array.post[,j]<-values(raster.sub.post[[j]])
       
@@ -162,11 +188,39 @@ for(i in 1984:2016){#i=1952
 }
 
 final.raster.postCC<-stack(unlist(num.false.spring.year.post))
-summed.false.springs.postCC<-calc(final.raster.postCC,sum) 
+
+names(final.raster.postCC)<-seq(1984,2016,1)
+
+summed.false.springs.postCC<-calc(final.raster.postCC,sum)
+mean.false.springs.postCC<-calc(final.raster.postCC,mean)
 plot(summed.false.springs.postCC)
+plot(mean.false.springs.postCC)
 
 fs.years.post<-calc(final.raster.postCC, function(x) {sum(ifelse(x>=1,1,0))})
+fs.years.post<-calc(final.raster.postCC, function(x) {sum(ifelse(x>=1,1,0))})
 plot(fs.years.post)
+
+plot(fs.years.post, xlim=c(-10,45), ylim=c(20,70))
+
+writeRaster(fs.years.post,"~/Documents/git/regionalrisk/analyses/output/fs.postCC", bylayer=TRUE,format="GTiff")
+writeRaster(summed.false.springs.postCC,"~/Documents/git/regionalrisk/analyses/output/total_post", bylayer=TRUE,format="GTiff")
+writeRaster(mean.false.springs.postCC,"~/Documents/git/regionalrisk/analyses/output/meanperyear_post", bylayer=TRUE,format="GTiff")
+
+names(final.raster.postCC)<-as.character(seq(1951,1983,1))
+freezedays_post<-rasterToPoints(final.raster.postCC)
+fre.pos <- as.data.frame(freezedays_post)
+try.post<-melt(fre.pos, id.vars=c("x","y"))
+
+try.post<-try.post%>%
+  rename(long=x)%>%
+  rename(lat=y)%>%
+  rename(date=variable)%>%
+  rename(freezes=value)
+try.post$date<-seq(1951,1983,1)
+try.post$year<-as.numeric(substr(try.post$date, 0,4))
+mod.post<-lm(freezes~year+lat+long, data=try.post)
+display(mod.post);display(mod)
+
 
 
 ############################# Bad code, just to save for now #######################
