@@ -66,7 +66,10 @@ bx$date<-as.Date(strptime(x, format="%Y %j"))
 bx$year<-as.numeric(substr(bx$date, 0,4))
 bx$month<-as.numeric(substr(bx$date, 6, 7))
 bx$day<-as.numeric(substr(bx$date, 9,10))
-bx<-bx%>%dplyr::select(lat, long, date, BBCH, PEP_ID)
+bx<-filter(bx, year>=1950)
+bx<-bx%>%dplyr::select(lat, long, date, BBCH, PEP_ID, year)
+
+
 dx$date<-as.Date(dx$date)
 
 d<-left_join(dx, bx)

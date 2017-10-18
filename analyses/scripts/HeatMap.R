@@ -130,6 +130,15 @@ try$date<-seq(1951,1983,1)
 try$year<-as.numeric(substr(try$date, 0,4))
 mod<-lm(freezes~year+lat+long, data=try)
 display(mod)
+#lm(formula = freezes ~ year + lat + long, data = try)
+#             coef.est coef.se
+#(Intercept) -61.51     2.43 
+#year          0.00     0.00 
+#lat           1.42     0.00 
+#long          0.22     0.00 
+#---
+#  n = 996274, k = 4
+#residual sd = 11.75, R-Squared = 0.67
 
 summed.false.springs.preCC<-calc(final.raster.preCC,sum) 
 mean.false.springs.preCC<-calc(final.raster.preCC,mean)
@@ -220,6 +229,14 @@ try.post$date<-seq(1951,1983,1)
 try.post$year<-as.numeric(substr(try.post$date, 0,4))
 mod.post<-lm(freezes~year+lat+long, data=try.post)
 display(mod.post);display(mod)
+
+
+
+
+
+
+
+
 
 
 
