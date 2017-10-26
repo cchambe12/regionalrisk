@@ -45,6 +45,84 @@ dxx <- data.frame(PEP_ID=df$PEP_ID, lat=df$lat, long=df$long,
   doy = do.call(c, days.btw))
 dxx$year<-substr(df$pep.year, 1, 4)
 dxx<-dplyr::select(dxx, -pep.year)
+x<-paste(dxx$year, dxx$doy)
+dxx$date<-as.Date(strptime(x, format="%Y %j"))
+
+
+eur.tempmn <- nc_open("~/Desktop/tn_0.25deg_reg_v16.0.nc")
+
+pb<-txtProgressBar(min=1, max=nrow(dxx), style=3)
+
+tempval <- list() 
+for(i in 1:nrow(dxx)){ # i = 1
+  # find this location
+  lo <- dxx[i,"long"]
+  la <- dxx[i,"lat"]
+  
+  ndiff.long.cell <- abs(eur.tempmn$dim$longitude$vals-as.numeric(lo))
+  ndiff.lat.cell <- abs(eur.tempmn$dim$latitude$vals-as.numeric(la))
+  nlong.cell <- which(ndiff.long.cell==min(ndiff.long.cell))[1] 
+  nlat.cell <- which(ndiff.lat.cell==min(ndiff.lat.cell))[1]
+  
+  yr <- as.numeric(dxx[i,"year"])#
+  
+  # start and end days of the climate data we need for the lat/long
+  stday <- strptime(dxx[i,"date"],"%Y-%m-%d", tz="GMT")#start day 
+  
+  st <- as.numeric(as.character(stday - strptime("1950-01-01", "%Y-%m-%d", tz = "GMT")))
+  
+  mins <- ncvar_get(eur.tempmn, 'tn',
+                    start=c(nlong.cell,nlat.cell,st),
+                    count=c(1, 1,-1) )# this is where we move through the 'cube' to get the one vector of Temp mins
+  
+  tempval[[as.character(dxx[i,"date"])]] <- data.frame(Lat = la,Long = lo, Date = stday,
+                                                       Tmin = mins)
+  
+  setTxtProgressBar(pb,i)
+}
+
+freezes <- vector()
+
+for(i in names(tempval)){ 
+  
+  xx <- tempval[[i]]
+  xx$Date<-strptime(xx$Date,"%Y-%m-%d", tz="GMT")
+  
+  year = as.numeric(format(xx$Date, "%Y"))
+  month = as.numeric(format(xx$Date, "%m"))
+  day = as.numeric(format(xx$Date, "%d"))
+  
+  lat = xx$Lat
+  long = xx$Long
+  
+  dclim = data.frame(year, month, day, Tmin = xx$Tmin, lat = xx$Lat, long = xx$Long)
+  
+  freezes <- rbind(freezes, data.frame(dclim))
+  
+  setTxtProgressBar(pb,i)
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Okay, now for the climate data...
 eur.tempmn <- nc_open("tn_0.25deg_reg_v15.0.nc")
