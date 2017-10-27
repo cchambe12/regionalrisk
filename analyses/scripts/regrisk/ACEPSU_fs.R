@@ -43,7 +43,7 @@ days.btw <- Map(seq, df$bb, df$lo, by = 1)
 dxx <- data.frame(PEP_ID=df$PEP_ID, lat=df$lat, long=df$long,
                   pep.year = rep.int(df$pep.year, vapply(days.btw, length, 1L)), 
                   doy = do.call(c, days.btw))
-dxx$year<-substr(df$pep.year, 1, 4)
+dxx$year<-substr(dxx$pep.year, 1, 4)
 dxx<-dplyr::select(dxx, -pep.year)
 x<-paste(dxx$year, dxx$doy)
 dxx$date<-as.Date(strptime(x, format="%Y %j"))
