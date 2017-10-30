@@ -78,4 +78,4 @@ dx<-dplyr::select(dx, -date)
 
 tilcor<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 
-#write.csv(tilcor, file="~/Documents/git/regionalrisk/analyses/output/tilcor_date.csv", row.names=FALSE)
+write.csv(tilcor, file="~/Documents/git/regionalrisk/analyses/output/tilcor_date.csv", row.names=FALSE)
