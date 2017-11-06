@@ -26,8 +26,8 @@ library(rgdal)
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/input")
 
-raster1<-brick("tn_0.25deg_reg_v15.0.nc", varname="tn", sep="")
-eur.temp<-nc_open("tn_0.25deg_reg_v15.0.nc")
+raster1<-brick("~/Desktop/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
+eur.temp<-nc_open("~/Desktop/tn_0.25deg_reg_v16.0.nc")
 raster1<-brick("//WeldShare/Wolkovich Lab/Budburst Review - Ospree/Climate Data/tn_0.25deg_reg_v15.0.nc", varname="tn", sep="")
 eur.temp <- nc_open("//128.103.155.31/WeldShare/Wolkovich Lab/Budburst Review - Ospree/Climate Data/tn_0.25deg_reg_v15.0.nc")
 plot(raster1[[45]])
@@ -69,7 +69,7 @@ leap.years<-leap.years[!duplicated(leaps(1)),]
 empty.raster<-raster1[[1]]
 num.false.spring.year<-list()
 #dates.false.spring<-list()
-for(i in 1951:1983){#i=1952
+for(i in 1950:1983){#i=1952
   print(i)
   year.i<-i
   is.leap<-ifelse(year.i%in%leap.years,TRUE,FALSE)
@@ -149,9 +149,9 @@ plot(final.raster.preCC)
 fs.years.pre<-calc(final.raster.preCC, function(x) {sum(ifelse(x>=1,1,0))})
 plot(fs.years.pre, xlim=c(-10,45), ylim=c(20,70))
 
-writeRaster(fs.years.pre,"~/Documents/git/regionalrisk/analyses/output/fs.30.pre", bylayer=TRUE,format="GTiff")
+writeRaster(fs.years.pre,"~/Documents/git/regionalrisk/analyses/output/fs.30.pre", bylayer=TRUE,format="GTiff", overwrite=TRUE)
 writeRaster(summed.false.springs.preCC,"~/Documents/git/regionalrisk/analyses/output/total_pre", bylayer=TRUE,format="GTiff")
-writeRaster(mean.false.springs.preCC,"~/Documents/git/regionalrisk/analyses/output/meanperyear_pre", bylayer=TRUE,format="GTiff")
+writeRaster(mean.false.springs.preCC,"~/Documents/git/regionalrisk/analyses/output/meanperyear_pre", bylayer=TRUE,format="GTiff", overwrite=TRUE)
 
 #### Post Climate Change #####
 num.false.spring.year.post<-list()
@@ -211,9 +211,9 @@ plot(fs.years.post)
 
 plot(fs.years.post, xlim=c(-10,45), ylim=c(20,70))
 
-writeRaster(fs.years.post,"~/Documents/git/regionalrisk/analyses/output/fs.postCC", bylayer=TRUE,format="GTiff")
+writeRaster(fs.years.post,"~/Documents/git/regionalrisk/analyses/output/fs.postCC", bylayer=TRUE,format="GTiff", overwrite=TRUE)
 writeRaster(summed.false.springs.postCC,"~/Documents/git/regionalrisk/analyses/output/total_post", bylayer=TRUE,format="GTiff")
-writeRaster(mean.false.springs.postCC,"~/Documents/git/regionalrisk/analyses/output/meanperyear_post", bylayer=TRUE,format="GTiff")
+writeRaster(mean.false.springs.postCC,"~/Documents/git/regionalrisk/analyses/output/meanperyear_post", bylayer=TRUE,format="GTiff", overwrite=TRUE)
 
 names(final.raster.postCC)<-as.character(seq(1951,1983,1))
 freezedays_post<-rasterToPoints(final.raster.postCC)
