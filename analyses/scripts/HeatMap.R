@@ -116,6 +116,7 @@ for(i in 1950:1983){#i=1952
 length(num.false.spring.year)
 final.raster.preCC<-stack(unlist(num.false.spring.year))
 #final.dates<-unlist(dates.false.spring)
+if(FALSE){
 names(final.raster.preCC)<-as.character(seq(1951,1983,1))
 freezedays_pre<-rasterToPoints(final.raster.preCC)
 freezies <- as.data.frame(freezedays_pre)
@@ -139,6 +140,7 @@ display(mod)
 #---
 #  n = 996274, k = 4
 #residual sd = 11.75, R-Squared = 0.67
+}
 
 summed.false.springs.preCC<-calc(final.raster.preCC,sum) 
 mean.false.springs.preCC<-calc(final.raster.preCC,mean)
@@ -206,8 +208,24 @@ plot(summed.false.springs.postCC)
 plot(mean.false.springs.postCC)
 
 fs.years.post<-calc(final.raster.postCC, function(x) {sum(ifelse(x>=1,1,0))})
-fs.years.post<-calc(final.raster.postCC, function(x) {sum(ifelse(x>=1,1,0))})
 plot(fs.years.post)
+fs_diff<- fs.years.pre - fs.years.post
+plot(fs_diff, xlim=c(-10,45), ylim=c(20,70))
+
+diff_overlay_cc<- overlay(fs.years.post,
+                      fs.years.pre,
+                      fun=function(r1, r2){return(r1-r2)})
+plot(diff_overlay_cc)
+writeRaster(diff_overlay_cc,"~/Documents/git/regionalrisk/analyses/output/diff_cc", bylayer=TRUE,format="GTiff")
+
+
+fs_diff_overlay<- overlay(fs.years.pre,
+                          fs.years.post,
+                          fun=function(r1, r2){return(r1-r2)})
+plot(fs_diff_overlay)
+writeRaster(fs_diff_overlay,"~/Documents/git/regionalrisk/analyses/output/diff_overlay", bylayer=TRUE,format="GTiff")
+
+
 
 plot(fs.years.post, xlim=c(-10,45), ylim=c(20,70))
 
@@ -233,8 +251,9 @@ display(mod.post);display(mod)
 
 
 
-
-
+################## Subtract one from the other ###################
+fs.diff<- fs.years.pre - fs.years.post
+writeRaster(fs.diff,"~/Documents/git/regionalrisk/analyses/output/fs_diff", bylayer=TRUE,format="GTiff", overwrite=TRUE)
 
 
 
