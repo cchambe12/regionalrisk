@@ -23,22 +23,27 @@ setwd("~/Documents/git/regionalrisk/analyses/output")
 d<-read.csv("fs_yearsitespp.csv", header=TRUE)
 
 ## Start running the models
-d$PEP_ID<-as.numeric(as.factor(d$PEP_ID))
+#d$PEP_ID<-as.numeric(as.factor(d$PEP_ID))
 d$year<-as.numeric(d$year)
 #d$species<-as.numeric(as.factor(d$species))
 d$fs<-as.numeric(d$fs)
 
 ## test model
 df<-d[sample(nrow(d), 5000), ]
+mod<-stan_glm(fs~year+species+lat*long, data=df, family = gaussian(link = 'log'))
 ##
 
 ## Hmmm.. how to subset down to one decade vs another?
 d$decade<-substr(d$year, 3, 3)
 years<-c(7, 0)
 dd<-d%>% filter(decade%in%years)
-dd$fs.num<-ave(dd$fs, dd$decade, dd$PEP_ID, dd$species, FUN=count)
-fit<-stan_glm(fs.num~decade + species, data=dd)
+dd$decade<-as.character(dd$decade)
+dd$PEP_ID<-as.character(dd$PEP_ID)
+dd$fs.num<-ave(dd$fs, dd$decade, dd$PEP_ID, dd$species, FUN=sum)
+ddf<-dd[sample(nrow(dd), 12000), ]
 
-mod<-stan_glm(fs~year+species+lat*long, data=df, family = gaussian(link = 'log'))
+fit<-stan_glmer(fs.num~decade + (1|species) + lat*long, data=ddf, family=gaussian)
+
+
 
 ### Should try subsetting by species to create maps next!
