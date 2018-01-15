@@ -153,7 +153,8 @@ dx<-dplyr::select(dx, -date)
 d$PEP_ID<-as.numeric(as.factor(d$PEP_ID))
 d$year<-as.numeric(d$year)
 d$species<-as.numeric(as.factor(d$species))
+df<-d[sample(nrow(d), 50000), ]
 
-mod<-stan_glmer(fs~year+(1|species)+lat*long, data=d, family=gaussian)
+mod<-stan_glmer(fs~year+(1|species)+lat*long, data=df, family=gaussian)
 
 
