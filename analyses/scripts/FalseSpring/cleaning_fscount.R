@@ -12,10 +12,6 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(lubridate)
-library(rstan)
-library(rstanarm)
-library(shinystan)
-library(bayesplot)
 
 ### Load data
 setwd("~/Documents/git/regionalrisk/analyses/output")
@@ -34,7 +30,7 @@ betpen<-betpen[!duplicated(betpen),]
 betpen<-na.omit(betpen)
 betpen$species<-"BETPEN"
 betpen$fs<-ifelse(betpen$fs.count>=1, 1, 0)
-betpen<-dplyr::select(betpen, -fs.count)
+#betpen<-dplyr::select(betpen, -fs.count)
 
 ah$fs<- ifelse(ah$Tmin<=-2.2, 1, 0)
 ah$fs.count<- ave(ah$fs, ah$PEP_ID, ah$year, FUN=sum)
@@ -43,7 +39,7 @@ aeship<-aeship[!duplicated(aeship),]
 aeship<-na.omit(aeship)
 aeship$species<-"AESHIP"
 aeship$fs<-ifelse(aeship$fs.count>=1, 1, 0)
-aeship<-dplyr::select(aeship, -fs.count)
+#aeship<-dplyr::select(aeship, -fs.count)
 
 d<-full_join(betpen, aeship)
 
@@ -54,7 +50,7 @@ alnglu<-alnglu[!duplicated(alnglu),]
 alnglu<-na.omit(alnglu)
 alnglu$species<-"ALNGLU"
 alnglu$fs<-ifelse(alnglu$fs.count>=1, 1, 0)
-alnglu<-dplyr::select(alnglu, -fs.count)
+#alnglu<-dplyr::select(alnglu, -fs.count)
 
 d<-full_join(d, alnglu)
 
@@ -65,7 +61,7 @@ fraexc<-fraexc[!duplicated(fraexc),]
 fraexc<-na.omit(fraexc)
 fraexc$species<-"FRAEXC"
 fraexc$fs<-ifelse(fraexc$fs.count>=1, 1, 0)
-fraexc<-dplyr::select(fraexc, -fs.count)
+#fraexc<-dplyr::select(fraexc, -fs.count)
 
 d<-full_join(d, fraexc)
 
@@ -76,7 +72,7 @@ fagsyl<-fagsyl[!duplicated(fagsyl),]
 fagsyl<-na.omit(fagsyl)
 fagsyl$species<-"FAGSYL"
 fagsyl$fs<-ifelse(fagsyl$fs.count>=1, 1, 0)
-fagsyl<-dplyr::select(fagsyl, -fs.count)
+#fagsyl<-dplyr::select(fagsyl, -fs.count)
 
 d<-full_join(d, fagsyl)
 
@@ -87,7 +83,7 @@ querob<-querob[!duplicated(querob),]
 querob<-na.omit(querob)
 querob$species<-"QUEROB"
 querob$fs<-ifelse(querob$fs.count>=1, 1, 0)
-querob<-dplyr::select(querob, -fs.count)
+#querob<-dplyr::select(querob, -fs.count)
 
 d<-full_join(d, querob)
 

@@ -35,15 +35,26 @@ mod<-stan_glm(fs~year+species+lat*long, data=df, family = gaussian(link = 'log')
 
 ## Hmmm.. how to subset down to one decade vs another?
 d$decade<-substr(d$year, 3, 3)
-years<-c(7, 0)
-dd<-d%>% filter(decade%in%years)
-dd$decade<-as.character(dd$decade)
-dd$PEP_ID<-as.character(dd$PEP_ID)
-dd$fs.num<-ave(dd$fs, dd$decade, dd$PEP_ID, dd$species, FUN=sum)
-ddf<-dd[sample(nrow(dd), 12000), ]
+#years<-c(7, 0)
+#dd<-d%>% filter(decade%in%years)
+dd<-d
+#dd$fs.num<-ave(dd$fs, dd$decade, dd$PEP_ID, dd$species, FUN=sum)
+dd<-dd%>%filter(year>1950)
+dd$cc<-ifelse(dd$year<=1983, 0, 1)
+dd$fs.cc<-ave(dd$fs.count, dd$cc, dd$PEP_ID, dd$species, FUN=sum)
+dd$fs.dec<-ave(dd$fs.count, dd$decade, dd$PEP_ID, dd$species, FUN=sum)
+ddf<-dd[sample(nrow(dd), 30000), ]
 
 fit<-stan_glmer(fs.num~decade + (1|species) + lat*long, data=ddf, family=gaussian)
+fit1<-stan_glm(fs.count~species + lat*long, data=ddf, family=gaussian)
 
+## Both sort of interesting...
+# should have a random effect on species
+fit2<-stan_glm(fs.cc~species+cc+lat*long, data=ddf, family=gaussian)
+## should add 1950 back in and then order decades based of 1950 and have a random effect on species
+fit3<-stan_glm(fs.dec~species+decade+lat*long, data=ddf, family=gaussian)
 
+### Do the species vary by year? Are they adapting? 
 
+launch_shinystan(fit3)
 ### Should try subsetting by species to create maps next!
