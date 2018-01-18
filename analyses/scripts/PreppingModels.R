@@ -62,10 +62,31 @@ dx<-dplyr::select(dx, -date)
 
 #write.csv(dx, file="~/Documents/git/regionalrisk/analyses/output/mat.csv", row.names=FALSE)
 
-dx$year<- substr(dx$Date, 7, 10)
+dx$year<- substr(dx$Date, 0, 4)
+dx$lat.long<-paste(dx$lat, dx$long)
+
 dx$mat<-ave(dx$Tavg, dx$year, dx$lat, dx$long)
 dx<-dplyr::select(dx, -Tavg)
-dx<-dx
+dxx<-dx[!duplicated(dx),]
+
+one<-dx%>%filter(year<=1969)
+one$mat<-ave(one$Tavg, one$year, one$lat.long)
+one<-dplyr::select(one, -Tavg)
+done<-one[!duplicated(one),]
+
+two<-dx%>%filter(year<=1989) %>% filter(year>=1970)
+two$mat<-ave(two$Tavg, two$year, two$lat.long)
+two<-dplyr::select(two, -Tavg)
+dtwo<-two[!duplicated(two),]
+
+d<-full_join(done, dtwo)
+
+th<-dx%>%filter(year<=2008) %>% filter(year>=1990)
+th$mat<-ave(th$Tavg, th$year, th$lat.long)
+th<-dplyr::select(th, -Tavg)
+dth<-th[!duplicated(th),]
+
+d<-full_join(d, dth)
 
 ## Start running models...
 d$PEP_ID<-as.numeric(as.factor(d$PEP_ID))
