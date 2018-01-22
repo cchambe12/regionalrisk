@@ -35,21 +35,21 @@ bb<-read.csv("output/fake_mat.csv", header=TRUE)
 mat.prepdata <- subset(bb, select=c("fs", "mat", "sp", "site", "cc")) # removed "sp" when doing just one species
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
 
-
+x = 5
 fs = mat.stan$fs
 mat = mat.stan$mat
 sp = mat.stan$sp
 site = mat.stan$site
 cc = mat.stan$cc
-N = length(mat.stan)
+N = length(mat.stan$fs)
 
 
 # making a list out of the processed data. It will be input for the model
-datalist.td <- list(fs=fs,mat=mat,sp=sp,site=site,cc=cc,N=N)
+datalist.td <- list(x=x,fs=fs,mat=mat,sp=sp,site=site,cc=cc,N=N)
 
 #### Now using rstan model
 mat<-stan_glm(fs~mat+sp+site+cc, data=mat.stan)
-mat.td4 = stan('scripts/fs_matsimple.stan', data = datalist.td,
+mat.td4 = stan('scripts/gp_fsmat.stan', data = datalist.td,
               iter = 2000, warmup=1500, control=list(adapt_delta=0.99)) 
 betas <- as.matrix(mat.td4, pars = c("mu_mat", "mu_sp", "mu_site", "mu_cc"))
 mcmc_intervals(betas)
