@@ -25,6 +25,7 @@ library(chillR)
 library(raster)
 library(reshape2)
 library(data.table)
+library(velox)
 
 ### Load data
 setwd("~/Documents/git/regionalrisk/analyses/output")

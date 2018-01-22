@@ -21,6 +21,7 @@ library(shinystan)
 ### Load data
 setwd("~/Documents/git/regionalrisk/analyses/output")
 d<-read.csv("fs_yearsitespp.csv", header=TRUE)
+dx<-read.csv("mat_compressed.csv", header=TRUE)
 
 ## Start running the models
 #d$PEP_ID<-as.numeric(as.factor(d$PEP_ID))
@@ -58,3 +59,24 @@ fit3<-stan_glm(fs.dec~species+decade+lat*long, data=ddf, family=gaussian)
 
 launch_shinystan(fit3)
 ### Should try subsetting by species to create maps next!
+
+
+mat<-full_join(dx, d)
+mat<-mat[!duplicated(mat),]
+mat<-mat[!is.na(mat$PEP_ID),]
+mat$cc<-ifelse(mat$year>=1984, 1, 0)
+df<-mat[sample(nrow(mat), 50000), ]
+
+#write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/fs_matspsite.csv", row.names = FALSE)
+
+## 2) FS # ~ species + site + MAT
+mm<-stan_glm(fs.count~species + mat, data=df, family=gaussian)
+
+mm2<-stan_glm(fs.count~mat + lat + long + species + cc, data=df, family=gaussian)
+mm2
+plot(mm2, pars="beta")
+
+
+mod1<-stan_glm(fs~mat+sp+site+cc, data=fake, family=gaussian)
+plot(mod1, pars="beta")
+pp_check(mod1)
