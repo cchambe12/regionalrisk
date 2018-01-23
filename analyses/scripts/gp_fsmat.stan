@@ -3,17 +3,16 @@
 
 data {
   int<lower=1> N;
-  real x[N];
   
+  real sp[N];
   real<lower=0> mat;
-  real<lower=0> sp;
   real<lower=0> site;
   real<lower=0> cc;
   
 }
 
 transformed data {
-  matrix[N, N] cov =   cov_exp_quad(x, mat, site)
+  matrix[N, N] cov =   cov_exp_quad(sp, site, mat)
                      + diag_matrix(rep_vector(1e-10, N));
   matrix[N, N] L_cov = cholesky_decompose(cov);
 }

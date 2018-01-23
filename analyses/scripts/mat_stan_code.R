@@ -9,7 +9,7 @@
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
 
-dostan = TRUE
+#dostan = TRUE
 
 library(rstan)
 #install.packages("rstan", repos = "https://cloud.r-project.org/", dependencies=TRUE)
@@ -17,7 +17,6 @@ library(ggplot2)
 library(shinystan)
 library(bayesplot)
 library(rstanarm)
-library(betareg)
 
 # Setting working directory. Add in your own path in an if statement for your file structure
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -31,25 +30,30 @@ options(mc.cores = parallel::detectCores())
 #### get the data
 bb<-read.csv("output/fake_mat.csv", header=TRUE)
 
+bb$fs<-as.numeric(bb$fs)
+bb$sp<-as.numeric(bb$sp)
+bb$mat<-as.numeric(bb$mat)
+bb$site<-as.numeric(bb$site)
+bb$cc<-as.numeric(bb$cc)
+
 ## subsetting data, preparing genus variable, removing NAs
 mat.prepdata <- subset(bb, select=c("fs", "mat", "sp", "site", "cc")) # removed "sp" when doing just one species
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
 
-x = 5
 fs = mat.stan$fs
 mat = mat.stan$mat
 sp = mat.stan$sp
 site = mat.stan$site
 cc = mat.stan$cc
-N = length(mat.stan$fs)
+N = length(fs)
 
 
 # making a list out of the processed data. It will be input for the model
-datalist.td <- list(x=x,fs=fs,mat=mat,sp=sp,site=site,cc=cc,N=N)
+datalist.td <- list(fs=fs,mat=mat,sp=sp,site=site,cc=cc,N=N)
 
 #### Now using rstan model
 mat<-stan_glm(fs~mat+sp+site+cc, data=mat.stan)
-mat.td4 = stan('scripts/gp_fsmat.stan', data = datalist.td,
+mat.td4 = stan('scripts/gpmix_fsmat.stan', data = datalist.td,
               iter = 2000, warmup=1500, control=list(adapt_delta=0.99)) 
 betas <- as.matrix(mat.td4, pars = c("mu_mat", "mu_sp", "mu_site", "mu_cc"))
 mcmc_intervals(betas)
