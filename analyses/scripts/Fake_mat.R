@@ -12,9 +12,9 @@ library(rstanarm)
 # <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <>
 # Set up: 6 species, 30 years, 1000 lats and longs, two outcomes
 # <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <>
-nmat = 30
+nmat = 12
 nsp = 6
-nsite = 1000
+nsite = 16
 ncc = 2
 reps = 1
 (ntot = nmat*nsp*nsite*ncc*reps)
@@ -53,6 +53,6 @@ fake$site<-as.numeric(fake$site)
 
 summary(lm(fs ~ mat+sp+site+cc, data = fake)) # sanity check 
 
-#write.csv(fake, file="~/Documents/git/regionalrisk/analyses/output/fake_mat.csv", row.names = FALSE)
+#write.csv(fake, file="~/Documents/git/regionalrisk/analyses/output/smfake_mat.csv", row.names = FALSE)
 
 

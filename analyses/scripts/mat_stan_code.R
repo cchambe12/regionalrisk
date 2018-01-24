@@ -20,7 +20,7 @@ library(rstanarm)
 
 # Setting working directory. Add in your own path in an if statement for your file structure
 setwd("~/Documents/git/regionalrisk/analyses/")
-source('scripts/savestan.R')
+#source('scripts/savestan.R')
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
@@ -28,7 +28,7 @@ options(mc.cores = parallel::detectCores())
 
 ########################
 #### get the data
-bb<-read.csv("output/fake_mat.csv", header=TRUE)
+bb<-read.csv("output/smfake_mat.csv", header=TRUE)
 
 bb$fs<-as.numeric(bb$fs)
 bb$sp<-as.numeric(bb$sp)
@@ -39,6 +39,8 @@ bb$cc<-as.numeric(bb$cc)
 ## subsetting data, preparing genus variable, removing NAs
 mat.prepdata <- subset(bb, select=c("fs", "mat", "sp", "site", "cc")) # removed "sp" when doing just one species
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
+
+#mat.stan<-mat.stan[sample(nrow(mat.stan), 5000), ]
 
 fs = mat.stan$fs
 mat = mat.stan$mat
@@ -53,7 +55,7 @@ datalist.td <- list(fs=fs,mat=mat,sp=sp,site=site,cc=cc,N=N)
 
 #### Now using rstan model
 mat<-stan_glm(fs~mat+sp+site+cc, data=mat.stan)
-mat.td4 = stan('scripts/gpmix_fsmat.stan', data = datalist.td,
+mat.td4 = stan('scripts/fs_matspsite.stan', data = datalist.td,
               iter = 2000, warmup=1500, control=list(adapt_delta=0.99)) 
 betas <- as.matrix(mat.td4, pars = c("mu_mat", "mu_sp", "mu_site", "mu_cc"))
 mcmc_intervals(betas)
