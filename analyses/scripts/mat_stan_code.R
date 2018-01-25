@@ -55,13 +55,13 @@ datalist.td <- list(fs=fs,mat=mat,sp=sp,site=site,cc=cc,N=N)
 
 #### Now using rstan model
 mat<-stan_glm(fs~mat+sp+site+cc, data=mat.stan)
-mat.td4 = stan('scripts/fs_matspsite.stan', data = datalist.td,
+mat.td4 = stan('scripts/gp_start.stan', data = datalist.td,
               iter = 2000, warmup=1500, control=list(adapt_delta=0.99)) 
 betas <- as.matrix(mat.td4, pars = c("mu_mat", "mu_sp", "mu_site", "mu_cc"))
 mcmc_intervals(betas)
 
 mat.td4
-plot(mat.td4, pars=c("mu_mat", "mu_sp", "mu_site", "mu_cc"))
+plot(mat.td4, pars=c("mu_b_sp", "mu_b_mat", "mu_b_site", "mu_b_cc"))
 
 ##############################
 ###### real data rstanarm first
