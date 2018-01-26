@@ -17,6 +17,7 @@ library(ggplot2)
 library(shinystan)
 library(bayesplot)
 library(rstanarm)
+library(dplyr)
 
 # Setting working directory. Add in your own path in an if statement for your file structure
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -29,33 +30,50 @@ options(mc.cores = parallel::detectCores())
 ########################
 #### get the data
 bb<-read.csv("output/smfake_mat.csv", header=TRUE)
+bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
 
-bb$fs<-as.numeric(bb$fs)
-bb$sp<-as.numeric(bb$sp)
-bb$mat<-as.numeric(bb$mat)
-bb$site<-as.numeric(bb$site)
-bb$cc<-as.numeric(bb$cc)
+## # yrs FS ~ MAT + SP + SITE prep data
+
+#bb$fs<-ifelse(bb$fs.count>=1, 1, 0)
+bb$fs<-ave(bb$fs, bb$lat.long, bb$species, FUN=sum)
+bb$sp<-as.numeric(as.factor(bb$species))
+bb$mat<-ave(bb$mat, bb$lat.long)
+#bb$site<-as.numeric(bb$site)
+#bb$cc<-as.numeric(bb$cc)
+bb$lat<-as.numeric(bb$lat)
+bb$long<-as.numeric(bb$long)
+
+bb<-bb%>%dplyr::select(lat.long, lat, long, mat, sp, fs)
+bx<-bb[!duplicated(bb),]
+#bb<-bb%>%rename(fs=fs.num)
 
 ## subsetting data, preparing genus variable, removing NAs
-mat.prepdata <- subset(bb, select=c("fs", "mat", "sp", "site", "cc")) # removed "sp" when doing just one species
+mat.prepdata <- subset(bx, select=c("fs", "mat", "sp", "lat", "long")) 
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
 
 #mat.stan<-mat.stan[sample(nrow(mat.stan), 5000), ]
 
+#mat$fs = mat.stan$fs.num
 fs = mat.stan$fs
 mat = mat.stan$mat
 sp = mat.stan$sp
-site = mat.stan$site
-cc = mat.stan$cc
+#site = mat.stan$site
+lat = mat.stan$lat
+lon = mat.stan$long
+#cc = mat.stan$cc
 N = length(fs)
 
 
 # making a list out of the processed data. It will be input for the model
-datalist.td <- list(fs=fs,mat=mat,sp=sp,site=site,cc=cc,N=N)
+datalist.td <- list(fs=fs,mat=mat,sp=sp,lat=lat, lon=lon,N=N)
 
 #### Now using rstan model
 mat<-stan_glm(fs~mat+sp+site+cc, data=mat.stan)
-mat.td4 = stan('scripts/gp_start.stan', data = datalist.td,
+mat.gp<-stan_glm(fs~mat+sp+lat*long, data=mat.stan, family=poisson, prior=normal(0,1))
+### Yay this works!!! I should now make a poisson rstan model!
+
+
+mat.td4 = stan('scripts/fs_matsimple.stan', data = datalist.td,
               iter = 2000, warmup=1500, control=list(adapt_delta=0.99)) 
 betas <- as.matrix(mat.td4, pars = c("mu_mat", "mu_sp", "mu_site", "mu_cc"))
 mcmc_intervals(betas)
