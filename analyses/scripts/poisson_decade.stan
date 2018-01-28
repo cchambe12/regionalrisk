@@ -6,7 +6,7 @@ data {
   int<lower=0> N; // Number of observations
   int<lower=0> fs[N];
   
-  real mat[N];
+  real decade[N];
   real sp[N];
   real lat[N];
   real lon[N];
@@ -16,7 +16,7 @@ data {
 parameters {
   real a;
   real b_sp;
-  real b_mat;
+  real b_decade;
   real b_lat;
   real b_lon;
   
@@ -29,7 +29,7 @@ transformed parameters {
   for(i in 1:N){
     lp[i] = a + 
     b_sp*sp[i] +
-    b_mat*mat[i] +
+    b_decade*decade[i] +
     b_lat*lat[i] +
     b_lon*lon[i]
     ;

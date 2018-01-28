@@ -18,6 +18,7 @@ library(shinystan)
 library(bayesplot)
 library(rstanarm)
 library(dplyr)
+library(tidyr)
 
 # Setting working directory. Add in your own path in an if statement for your file structure
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -29,7 +30,7 @@ options(mc.cores = parallel::detectCores())
 
 ########################
 #### get the data
-bb<-read.csv("output/smfake_mat.csv", header=TRUE)
+bb<-read.csv("output/fake_poisson.csv", header=TRUE)
 bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
 
 ## # yrs FS ~ MAT + SP + SITE prep data
@@ -51,35 +52,38 @@ bx<-bb[!duplicated(bb),]
 mat.prepdata <- subset(bx, select=c("fs", "mat", "sp", "lat", "long")) 
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
 
+mat.prepdata <-subset(bb, select=c("fs", "mat", "sp", "site"))
+mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
+
 #mat.stan<-mat.stan[sample(nrow(mat.stan), 5000), ]
 
 #mat$fs = mat.stan$fs.num
 fs = mat.stan$fs
-mat = mat.stan$mat
-sp = mat.stan$sp
-#site = mat.stan$site
-lat = mat.stan$lat
-lon = mat.stan$long
+mat = log(mat.stan$mat+10)
+sp = log(mat.stan$sp+10)
+#site = log(mat.stan$site)
+lat = log(mat.stan$lat+10)
+lon = log(mat.stan$long+10)
 #cc = mat.stan$cc
 N = length(fs)
 
 
 # making a list out of the processed data. It will be input for the model
 datalist.td <- list(fs=fs,mat=mat,sp=sp,lat=lat, lon=lon,N=N)
-
+datalist.td <- list(fs=fs,mat=mat,sp=sp,site=site,N=N)
 #### Now using rstan model
 mat<-stan_glm(fs~mat+sp+site+cc, data=mat.stan)
 mat.gp<-stan_glm(fs~mat+sp+lat*long, data=mat.stan, family=poisson, prior=normal(0,1))
 ### Yay this works!!! I should now make a poisson rstan model!
 
+### learn how to build a poisson model in rstan - normal distribution model did not work
 
-mat.td4 = stan('scripts/fs_matsimple.stan', data = datalist.td,
+mat.td4 = stan('scripts/space_fspoisson_nointer.stan', data = datalist.td,
               iter = 2000, warmup=1500, control=list(adapt_delta=0.99)) 
-betas <- as.matrix(mat.td4, pars = c("mu_mat", "mu_sp", "mu_site", "mu_cc"))
+betas <- as.matrix(mat.td4, pars = c("b_mat", "b_sp", "b_lat", "b_lon"))
 mcmc_intervals(betas)
 
 mat.td4
-plot(mat.td4, pars=c("mu_b_sp", "mu_b_mat", "mu_b_site", "mu_b_cc"))
 
 ##############################
 ###### real data rstanarm first
