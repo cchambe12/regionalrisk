@@ -36,20 +36,22 @@ bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
 ## # yrs FS ~ MAT + SP + SITE prep data
 
 #bb$fs<-ifelse(bb$fs.count>=1, 1, 0)
-bb$fs<-ave(bb$fs, bb$PEP_ID, bb$species, FUN=sum)
+bb$cc<-NA
+bb$cc<-ifelse(bb$year>1950 & bb$year<1983, 0, 1)
+bb$fs<-ave(bb$fs, bb$species, bb$cc, FUN=sum)
 bb$sp<-as.numeric(as.factor(bb$species))
-bb$mat<-ave(bb$mat, bb$lat.long)
-bb$site<-as.numeric(as.factor(bb$PEP_ID))
-#bb$cc<-as.numeric(bb$cc)
-bb$lat<-as.numeric(bb$lat)
-bb$long<-as.numeric(bb$long)
+bb$mat<-ave(bb$mat, bb$PEP_ID)
+#bb$site<-as.numeric(as.factor(bb$PEP_ID))
+bb$cc<-as.numeric(bb$cc)
+#bb$lat<-as.numeric(bb$lat)
+#bb$long<-as.numeric(bb$long)
 
-bb<-bb%>%dplyr::select(site, mat, sp, fs)
+bb<-bb%>%dplyr::select(cc, mat, sp, fs)
 bx<-bb[!duplicated(bb),]
 #bb<-bb%>%rename(fs=fs.num)
 
 ## subsetting data, preparing genus variable, removing NAs
-mat.prepdata <- subset(bx, select=c("fs", "mat", "sp", "site")) 
+mat.prepdata <- subset(bx, select=c("fs", "mat", "sp", "cc")) 
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
 
 mat.prepdata <-subset(bb, select=c("fs", "mat", "sp", "site"))
@@ -77,6 +79,9 @@ mat.long<-stan_glm(fs~mat*sp*lat*long, data=mat.stan, family=poisson)
 mat.glmer<-stan_glmer(fs~mat+(1|sp/site), data=mat.stan, family=poisson)
 mat.gp<-stan_glm(fs~mat+sp+lat*long, data=mat.stan, family=poisson, prior=normal(0,1))
 ### Yay this works!!! I should now make a poisson rstan model!
+
+cc<-stan_glm(fs~mat*cc+sp, data=mat.stan, family=poisson)
+cc.glmer<-stan_glmer(fs~mat*cc+(1|sp), data=mat.stan, family=poisson)
 
 ### learn how to build a poisson model in rstan - normal distribution model did not work
 
