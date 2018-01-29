@@ -36,20 +36,20 @@ bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
 ## # yrs FS ~ MAT + SP + SITE prep data
 
 #bb$fs<-ifelse(bb$fs.count>=1, 1, 0)
-bb$fs<-ave(bb$fs, bb$lat.long, bb$species, FUN=sum)
+bb$fs<-ave(bb$fs, bb$PEP_ID, bb$species, FUN=sum)
 bb$sp<-as.numeric(as.factor(bb$species))
 bb$mat<-ave(bb$mat, bb$lat.long)
-#bb$site<-as.numeric(bb$site)
+bb$site<-as.numeric(as.factor(bb$PEP_ID))
 #bb$cc<-as.numeric(bb$cc)
 bb$lat<-as.numeric(bb$lat)
 bb$long<-as.numeric(bb$long)
 
-bb<-bb%>%dplyr::select(lat.long, lat, long, mat, sp, fs)
+bb<-bb%>%dplyr::select(site, mat, sp, fs)
 bx<-bb[!duplicated(bb),]
 #bb<-bb%>%rename(fs=fs.num)
 
 ## subsetting data, preparing genus variable, removing NAs
-mat.prepdata <- subset(bx, select=c("fs", "mat", "sp", "lat", "long")) 
+mat.prepdata <- subset(bx, select=c("fs", "mat", "sp", "site")) 
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
 
 mat.prepdata <-subset(bb, select=c("fs", "mat", "sp", "site"))
@@ -73,6 +73,8 @@ datalist.td <- list(fs=fs,mat=mat,sp=sp,lat=lat, lon=lon,N=N)
 datalist.td <- list(fs=fs,mat=mat,sp=sp,site=site,N=N)
 #### Now using rstan model
 mat<-stan_glm(fs~mat+sp+site+cc, data=mat.stan)
+mat.long<-stan_glm(fs~mat*sp*lat*long, data=mat.stan, family=poisson)
+mat.glmer<-stan_glmer(fs~mat+(1|sp/site), data=mat.stan, family=poisson)
 mat.gp<-stan_glm(fs~mat+sp+lat*long, data=mat.stan, family=poisson, prior=normal(0,1))
 ### Yay this works!!! I should now make a poisson rstan model!
 
@@ -100,4 +102,47 @@ all.equal(ncol(yrep), nobs(fit1)) # TRUE
 nd <- data.frame(perc = mean(pp.stan$perc), tx, sp)
 ytilde <- posterior_predict(fit1, newdata = nd)
 all.equal(ncol(ytilde), nrow(nd)) # TRUE
+
+
+## FS(Y/N) ~ year + (1|sp) + site prep data
+bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
+#bb$fs<-ifelse(bb$fs.count>=1, 1, 0)
+bb$fs<-as.numeric(bb$fs)
+bb$sp<-as.numeric(as.factor(bb$species))
+bb$year<-as.numeric(bb$year)
+#bb$mat<-ave(bb$mat, bb$lat.long)
+#bb$site<-as.numeric(as.factor(bb$PEP_ID))
+bb$lat<-as.numeric(bb$lat)
+bb$lon<-as.numeric(bb$long)
+
+bb<-bb%>%dplyr::select(year, lat, lon, sp, fs)
+bx<-bb[!duplicated(bb),]
+#bb<-bb%>%rename(fs=fs.num)
+
+## subsetting data, preparing genus variable, removing NAs
+mat.prepdata <- subset(bx, select=c("fs", "year", "sp", "lat", "lon")) 
+mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
+
+#mat.stan<-mat.stan[sample(nrow(mat.stan), 5000), ]
+
+#mat$fs = mat.stan$fs.num
+fs = mat.stan$fs
+mat = log(mat.stan$mat+10)
+sp = log(mat.stan$sp+10)
+#site = log(mat.stan$site)
+lat = log(mat.stan$lat+10)
+lon = log(mat.stan$long+10)
+#cc = mat.stan$cc
+N = length(fs)
+
+
+# making a list out of the processed data. It will be input for the model
+datalist.td <- list(fs=fs,mat=mat,sp=sp,lat=lat, lon=lon,N=N)
+#### Now using rstan model
+time<-stan_glm(fs~year+sp+lat+lon, data=mat.stan, family=binomial)
+
+
+
+
+
 
