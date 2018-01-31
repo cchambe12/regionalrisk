@@ -18,27 +18,38 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 ## Get Data
 bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
-bcoords<-bb%>%dplyr::select(lat, long)
-bcoords<-bcoords[!duplicated(bcoords),]
+bb$lat.long<-paste(bb$lat, bb$long)
+bprep<-bb%>%dplyr::select(fs, lat.long)
+bprep$y<-ave(bprep$fs, bprep$lat.long, FUN=sum)
+bprep<-dplyr::select(bprep, lat.long, y)
+bprep<-bprep[!duplicated(bprep),]
+bcoord<-bprep%>%dplyr::select(lat.long)
+bcoords<-as.data.frame(bcoord[!duplicated(bcoord),])
+bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
+bcoords$lat<-as.numeric(bcoords$lat)
+bcoords$long<-as.numeric(bcoords$long)
 
-### Will this work...? ###
-xymat<-as.matrix(bcoords)
-nbgab <- graph2nb(gabrielneigh(xymat), sym = TRUE)
-distgab <- nbdists(nbgab, xymat)
-fdist <- lapply(distgab, function(x) 1-x/max(dist(xymat)))
-listwgab <- nb2listw(nbgab, glist = fdist, style = "B")
-print(listw2mat(listwgab),digits=3)
-mem.gab<-mem(listwgab)
 
 ## Based on Bauman et al... ##
 xymat<-as.matrix(bcoords)
 nbgab <- graph2nb(gabrielneigh(xymat), sym = TRUE)
 distgab <- nbdists(nbgab, xymat)
 MEM_model <-"positive"
-nb<-graph2nb(gabrielneigh(as.matrix(bcoords), nmult=5), sym=TRUE)
+nb<-graph2nb(gabrielneigh(as.matrix(bcoords)), sym=TRUE)
 listw<-nb2listw(nb, style ="B")
-MEM<-scores.listw(listw, MEM.autocor = MEM_model)
+#MEM<-scores.listw(listw, MEM.autocor = MEM_model)
 
-## MIR approach - fewer predictors, second most accurate
+
+y<-as.vector(bprep$y)
 source("scripts/MEM.moransel.R")
-moransel<-MEM.moransel(bb, bcoords, listw, MEM.autocor=MEM_model, nperm=999, alpha=0.05)
+moransel<-MEM.moransel(y, listw, MEM.autocor=MEM_model, nperm=999, alpha=0.05)
+
+d<-as.data.frame(moransel[["MEM.select"]][["MEM151"]])
+d<-d%>%rename(site=`moransel[["MEM.select"]][["MEM151"]]`)
+d$row<-1:11684
+bcoord$row<-1:11684
+df<-inner_join(d, bcoord)
+df<-dplyr::select(-row)
+bx<-full_join(bb, df)
+
+#write.csv(bx, file="~/Documents/git/regionalrisk/analyses/output/mat_site.csv", row.names = FALSE)
