@@ -32,26 +32,29 @@ options(mc.cores = parallel::detectCores())
 #### get the data
 bb<-read.csv("output/fake_poisson.csv", header=TRUE)
 bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
+bb<-read.csv("output/mat_site.csv", header=TRUE)
 
 ## # yrs FS ~ MAT + SP + SITE prep data
 
 #bb$fs<-ifelse(bb$fs.count>=1, 1, 0)
 bb$cc<-NA
 bb$cc<-ifelse(bb$year>1950 & bb$year<1983, 0, 1)
-bb$fs<-ave(bb$fs, bb$species, bb$cc, FUN=sum)
+bb$site<-as.numeric(bb$site)
+bb$fs<-as.numeric(bb$fs)
+bb$fs<-ave(bb$fs, bb$PEP_ID, FUN=sum)
 bb$sp<-as.numeric(as.factor(bb$species))
-bb$mat<-ave(bb$mat, bb$PEP_ID)
+bb$mat<-as.numeric(bb$mat)
 #bb$site<-as.numeric(as.factor(bb$PEP_ID))
 bb$cc<-as.numeric(bb$cc)
 #bb$lat<-as.numeric(bb$lat)
 #bb$long<-as.numeric(bb$long)
 
-bb<-bb%>%dplyr::select(cc, mat, sp, fs)
+bb<-bb%>%dplyr::select(site, mat, sp, fs, cc)
 bx<-bb[!duplicated(bb),]
 #bb<-bb%>%rename(fs=fs.num)
 
 ## subsetting data, preparing genus variable, removing NAs
-mat.prepdata <- subset(bx, select=c("fs", "mat", "sp", "cc")) 
+mat.prepdata <- subset(bx, select=c("fs", "mat", "sp", "site", "cc")) 
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
 
 mat.prepdata <-subset(bb, select=c("fs", "mat", "sp", "site"))
@@ -74,11 +77,12 @@ N = length(fs)
 datalist.td <- list(fs=fs,mat=mat,sp=sp,lat=lat, lon=lon,N=N)
 datalist.td <- list(fs=fs,mat=mat,sp=sp,site=site,N=N)
 #### Now using rstan model
-mat<-stan_glm(fs~mat+sp+site+cc, data=mat.stan)
+mat<-stan_glm(fs~mat+sp+site, data=mat.stan, family=poisson)
 mat.long<-stan_glm(fs~mat*sp*lat*long, data=mat.stan, family=poisson)
 mat.glmer<-stan_glmer(fs~mat+(1|sp/site), data=mat.stan, family=poisson)
 mat.gp<-stan_glm(fs~mat+sp+lat*long, data=mat.stan, family=poisson, prior=normal(0,1))
 ### Yay this works!!! I should now make a poisson rstan model!
+beta.cc<-stan_glmer(fs~mat+cc+site+(1|sp), data=mat.stan, family=binomial)
 
 cc<-stan_glm(fs~mat*cc+sp, data=mat.stan, family=poisson)
 cc.glmer<-stan_glmer(fs~mat*cc+(1|sp), data=mat.stan, family=poisson)
@@ -127,6 +131,7 @@ bx<-bb[!duplicated(bb),]
 ## subsetting data, preparing genus variable, removing NAs
 mat.prepdata <- subset(bx, select=c("fs", "year", "sp", "lat", "lon")) 
 mat.stan <- mat.prepdata[complete.cases(mat.prepdata),]
+mat.stan$site<-round(mat.stan$site, digits=2)
 
 #mat.stan<-mat.stan[sample(nrow(mat.stan), 5000), ]
 

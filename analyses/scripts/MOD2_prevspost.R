@@ -78,6 +78,7 @@ mat.td4 = stan('scripts/fs_matsimple.stan', data = datalist.td,
 
 ######### Plotting time! ##########
 df<-pre.mat.stan
+df<-bb
 df$fs.num<-ave(df$fs, df$sp)
 df$fs.sd<-ave(df$fs, df$sp, FUN=sd)
 df$sp<-ifelse(df$sp==1, "A.hippocastanum", df$sp)
@@ -88,7 +89,7 @@ df$sp<-ifelse(df$sp==5, "F.excelsior", df$sp)
 df$sp<-ifelse(df$sp==6, "Q.robar", df$sp)
 dx<-df%>%dplyr::select(-fs, -mat, -lat, -long)
 dx<-dx[!duplicated(dx),]
-diff<-ggplot(dx, aes(x=as.factor(sp), y=fs.num)) + geom_point() + 
+diff<-ggplot(dx, aes(x=as.factor(sp), y=fs.num)) + geom_point(col=dx$sp) + 
   geom_linerange(aes(ymin=fs.num-fs.sd, ymax=fs.num+fs.sd), alpha=0.3) + 
   ylab(expression("Years with False Springs")) +
   theme(panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.x=element_blank(),
@@ -100,7 +101,7 @@ df$fs.mat<-ave(df$fs, df$mat)
 dm<-df%>%dplyr::select(fs.mat, mat, sp )
 dm<-dm[!duplicated(dm),]
 dm$matr<-as.numeric(dm$matr)
-mat.spp<-ggplot(dm, aes(mat, fs.mat)) + xlab("Mean Annual Temperature") +
+mat.spp<-ggplot(dm, aes(mat, fs.mat)) + xlab("Mean Annual Temperature") + geom_point(aes(col=as.factor(sp))) +
   ylab("Number of False Springs")  + geom_smooth(aes(col=as.factor(sp)),method="lm", se=FALSE) + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
@@ -112,8 +113,8 @@ df$fs.lat<-ave(df$fs, df$latr)
 dl<-df%>%dplyr::select(fs.lat, latr, sp )
 dl<-dl[!duplicated(dl),]
 dl$latr<-as.numeric(dl$latr)
-lat.spp<-ggplot(dl, aes(latr, fs.lat)) + xlab("Latitude") +
-  ylab("Number of False Springs")  + geom_smooth(aes(col=as.factor(sp)),method="loess", se=FALSE) + 
+lat.spp<-ggplot(dl, aes(latr, fs.lat)) + xlab("Latitude") + geom_point(aes(col=as.factor(sp))) +
+  ylab("Number of False Springs")  + geom_smooth(aes(col=as.factor(sp)),method="lm", se=FALSE) + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         legend.key=element_blank())
