@@ -19,6 +19,7 @@ library(bayesplot)
 library(rstanarm)
 library(dplyr)
 library(tidyr)
+library(brms)
 
 # Setting working directory. Add in your own path in an if statement for your file structure
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -37,17 +38,17 @@ bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
 
 bb$year<-as.numeric(bb$year)
 bb$decade<-NA
-bb$decade<-ifelse(bb$year>=1950 & bb$year<1960, "50s", bb$decade)
-bb$decade<-ifelse(bb$year>=1960 & bb$year<1970, "60s", bb$decade)
-bb$decade<-ifelse(bb$year>=1970 & bb$year<1980, "70s", bb$decade)
-bb$decade<-ifelse(bb$year>=1980 & bb$year<1990, "80s", bb$decade)
-bb$decade<-ifelse(bb$year>=1990 & bb$year<2000, "90s", bb$decade)
-bb$decade<-ifelse(bb$year>=2000 & bb$year<2010, "00s", bb$decade)
+bb$decade<-ifelse(bb$year>=1950 & bb$year<1960, 1, bb$decade)
+bb$decade<-ifelse(bb$year>=1960 & bb$year<1970, 2, bb$decade)
+bb$decade<-ifelse(bb$year>=1970 & bb$year<1980, 3, bb$decade)
+bb$decade<-ifelse(bb$year>=1980 & bb$year<1990, 4, bb$decade)
+bb$decade<-ifelse(bb$year>=1990 & bb$year<2000, 5, bb$decade)
+bb$decade<-ifelse(bb$year>=2000 & bb$year<2010, 6, bb$decade)
 bb<-bb[!is.na(bb$decade),]
 bb$fs<-ave(bb$fs,bb$PEP_ID, bb$decade,bb$species, FUN=sum)
 bb$mat<-ave(bb$mat, bb$PEP_ID, bb$decade)
 bb$sp<-as.numeric(as.factor(bb$species))
-#bb$decade<-as.character(bb$decade)
+#bb$decade<-as.numeric(as.factor(bb$decade))
 bb$lat<-as.numeric(bb$lat)
 bb$lon<-as.numeric(bb$long)
 
@@ -73,6 +74,9 @@ datalist.td <- list(fs=fs,decade=decade,sp=sp,mat=mat,N=N)
 #### Now using rstan model
 dec<-stan_glm(fs~mat*decade+sp, data=mat.stan, family=poisson)
 dec.site<-stan_glm(fs~mat+decade+sp+lat+lon, data=mat.stan, family=poisson)
+time<-brm(fs~mat+decade+(1|sp)+(mat-1|sp)+
+            (decade-1|sp), data=mat.stan, family=poisson)
+time.short<-brm(fs~1+mat+decade+sp+mat*sp, data=mat.stan, family=poisson)
 
 ### learn how to build a poisson model in rstan - normal distribution model did not work
 
