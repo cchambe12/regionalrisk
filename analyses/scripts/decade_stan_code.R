@@ -76,7 +76,8 @@ dec<-stan_glm(fs~mat*decade+sp, data=mat.stan, family=poisson)
 dec.site<-stan_glm(fs~mat+decade+sp+lat+lon, data=mat.stan, family=poisson)
 time<-brm(fs~mat+decade+(1|sp)+(mat-1|sp)+
             (decade-1|sp), data=mat.stan, family=poisson)
-time.short<-brm(fs~1+mat+decade+sp+mat*sp, data=mat.stan, family=poisson)
+time.short<-brm(fs~mat+decade+mat:decade+(1|sp)+(mat-1|sp)+(decade-1|sp)+
+                  (mat:decade-1|sp), data=mat.stan, family=poisson)
 
 ### learn how to build a poisson model in rstan - normal distribution model did not work
 

@@ -42,9 +42,9 @@ listw<-nb2listw(nb, style ="B")
 
 y<-as.vector(bprep$y)
 source("scripts/MEM.moransel.R")
-moransel<-MEM.moransel(y, listw, MEM.autocor=MEM_model, nperm=999, alpha=0.05)
+moransel<-MEM.moransel(y, listw, MEM.autocor=MEM_model, nperm=999, alpha=0.001)
 
-d<-as.data.frame(moransel[["MEM.select"]][["MEM151"]])
+d<-as.data.frame(moransel[["MEM.select"]])
 d<-d%>%rename(site=`moransel[["MEM.select"]][["MEM151"]]`)
 d$row<-1:11684
 bcoord$row<-1:11684

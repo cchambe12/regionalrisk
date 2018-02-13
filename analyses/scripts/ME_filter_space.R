@@ -44,7 +44,7 @@ MEM_model <-"positive"
 nb<-graph2nb(gabrielneigh(as.matrix(bcoords)), sym=TRUE)
 listw<-nb2listw(nb, style ="B")
 select <- ME(Y ~., data = as.data.frame(X), listw = listw, family = gaussian, nsim = 99,
-             alpha = 0.05)
+             alpha = 0.01)
 MEM.select <- select$vectors
 
 
