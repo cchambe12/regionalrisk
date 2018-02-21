@@ -53,3 +53,24 @@ df<-dplyr::select(-row)
 bx<-full_join(bb, df)
 
 #write.csv(bx, file="~/Documents/git/regionalrisk/analyses/output/mat_site.csv", row.names = FALSE)
+
+library(gstat)
+library(fields)
+
+sub_data<-bb%>%dplyr::select(fs, lat, long, lat.long)
+sub_data$fs<-ave(sub_data$fs, sub_data$lat.long, FUN=sum)
+sub_data<-dplyr::select(sub_data, -lat.long)
+sub_data<-sub_data[!duplicated(sub_data),]
+
+fitTps <- Tps(sub_data[c("lat", "long")], sub_data[,"fs"])
+our.p <- predictSurface(fitTps)
+spatially_corrected_y <- fitTps$residuals
+surface(our.p,type="C",xlab="lat",ylab="long")
+
+fitTps <- Tps(sub_data[c("Row", "Col")], sub_data[,trait_columns[i]])
+our.p <- predictSurface(fitTps)
+spatially_corrected_y <- fitTps$residuals
+surface(our.p,type="C",xlab="Row",ylab="Col")
+
+
+
