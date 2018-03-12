@@ -12,6 +12,7 @@ library(tidyr)
 library(adespatial)
 library(ade4)
 library(spdep)
+library(rstanarm)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -44,13 +45,17 @@ y<-as.vector(bprep$y)
 source("scripts/MEM.moransel.R")
 moransel<-MEM.moransel(y, listw, MEM.autocor=MEM_model, nperm=999, alpha=0.001)
 
-d<-as.data.frame(moransel[["MEM.select"]])
-d<-d%>%rename(site=`moransel[["MEM.select"]][["MEM151"]]`)
-d$row<-1:11684
-bcoord$row<-1:11684
-df<-inner_join(d, bcoord)
-df<-dplyr::select(-row)
-bx<-full_join(bb, df)
+dselect<-as.data.frame(moransel[["MEM.select"]])
+dx<-cbind(bprep, dselect)
+rex<-dx%>%dplyr::select(-lat.long)
+rex.mod<-lm(y~ ., data=rex)
+space<-residuals(rex.mod)
+
+b_space<-cbind(bprep, space)
+prep_space<-full_join(bb, b_space, by="lat.long")
+#write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_matspspace.csv", row.names=FALSE)
+
+##### Stuff to remove later is below... #####
 
 #write.csv(bx, file="~/Documents/git/regionalrisk/analyses/output/mat_site.csv", row.names = FALSE)
 
