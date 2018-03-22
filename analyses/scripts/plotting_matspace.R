@@ -25,14 +25,23 @@ bb<-read.csv("output/fs_matspspace.csv", header=TRUE)
 
 prep_cc<-bb
 prep_cc$fs.num<-ave(prep_cc$fs, prep_cc$lat.long, prep_cc$cc,prep_cc$species, FUN=sum)
-prep_cc$mat.cc<-ave(prep_cc$mat, prep_cc$lat.long)
+prep_cc$mat.cc<-ave(prep_cc$mat, prep_cc$lat.long, prep_cc$species)
 fs.cc<-dplyr::select(prep_cc, fs.num, mat.cc, cc, space, species)
-fs.cc$species<-as.numeric(as.factor(fs.cc$species))
+#fs.cc$species<-as.numeric(as.factor(fs.cc$species))
 fs.cc<-fs.cc[!duplicated(fs.cc),]
 
+ggplot(fs.cc, aes(x=mat.cc, y=fs.num, col=species)) + geom_smooth(aes(x=mat.cc, y=fs.num, col=species), 
+                                                                  method="lm", se=FALSE) + ylim(0,8) +
+  xlim(0,12)
+
+fs.cc$cc<-ifelse(fs.cc$cc==0, "pre 1983", "post 1983")
+ggplot(fs.cc, aes(x=mat.cc, y=fs.num, col=cc)) + geom_smooth(aes(x=mat.cc, y=fs.num, col=cc), 
+                                                                  method="lm", se=FALSE)
+
+ggplot(prep_cc, aes(x=year, y=fs.num))+ geom_point(aes(col=species))
+
+
 dxx<-bb
-
-
 dxx$fs.yr<-ave(dxx$fs, dxx$year, FUN=sum)
 dxx$fs.yrspp<-ave(dxx$fs, dxx$species, dxx$year, FUN=sum)
 ### Sites per species -

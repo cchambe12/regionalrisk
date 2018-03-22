@@ -1,6 +1,6 @@
 # Let's try again... Betula pendula
-## The purpose of this script is to find the points of PEP data that look at BBCH stage 11 for budburst
-# then we will add 12 days for leaf out date to find a general idea for number of false springs across a range
+## The purpose of this script is to find the points of PEP data that look at BBCH stage 11 for leafout
+# then we will subtract 12 days (Donnelly2017) for budburst date to find a general idea for number of false springs across a range
 ## A GWR will likely be necessary since the distribution of points is smaller than desired
 # 25 October 2017 - Cat
 
@@ -28,10 +28,10 @@ df<-d%>%
   filter(YEAR>=1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
-  rename(bb=DAY)%>%
+  rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$lo<-df$bb+12
+df$bb<-df$lo-12
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<- df[order(df$PEP_ID, df$year), ]
 df$pep.year<-paste(df$year, df$PEP_ID)

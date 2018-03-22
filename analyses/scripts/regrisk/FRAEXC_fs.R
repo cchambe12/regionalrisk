@@ -1,6 +1,6 @@
 # Let's try again... Fraxinus excelsior
-## The purpose of this script is to find the points of PEP data that look at BBCH stage 11 for budburst
-# then we will add 12 days for leaf out date to find a general idea for number of false springs across a range
+## The purpose of this script is to find the points of PEP data that look at BBCH stage 11 for leafout
+# then we will subtract 12 days (Donnelly2017) for budburst date to find a general idea for number of false springs across a range
 ## A GWR will likely be necessary since the distribution of points is smaller than desired
 # 25 October 2017 - Cat
 
