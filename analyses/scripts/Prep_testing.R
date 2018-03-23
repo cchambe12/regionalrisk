@@ -21,7 +21,8 @@ library(shinystan)
 ### Load data
 setwd("~/Documents/git/regionalrisk/analyses/output")
 d<-read.csv("fs_yearsitespp.csv", header=TRUE)
-dx<-read.csv("mat_compressed.csv", header=TRUE)
+#dx<-read.csv("mat_compressed.csv", header=TRUE)
+dx<-read.csv("mat_spring.csv", header=TRUE)
 
 ## Start running the models
 #d$PEP_ID<-as.numeric(as.factor(d$PEP_ID))
@@ -64,10 +65,10 @@ launch_shinystan(fit3)
 mat<-full_join(dx, d)
 mat<-mat[!duplicated(mat),]
 mat<-mat[!is.na(mat$PEP_ID),]
-mat$cc<-ifelse(mat$year>=1984, 1, 0)
-df<-mat[sample(nrow(mat), 50000), ]
+#mat$cc<-ifelse(mat$year>=1984, 1, 0)
+#df<-mat[sample(nrow(mat), 50000), ]
 
-#write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/fs_matspsite.csv", row.names = FALSE)
+write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/fs_matspring.csv", row.names = FALSE)
 
 ## 2) FS # ~ species + site + MAT
 mm<-stan_glm(fs.count~species + mat, data=df, family=gaussian)

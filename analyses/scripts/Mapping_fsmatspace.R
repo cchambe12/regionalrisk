@@ -37,7 +37,7 @@ map("world", fill=TRUE
 
 #Using GGPLOT, plot the Base World Map
 mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
-site<-prep_cc%>%dplyr::select(lat, long, space)
+site<-d%>%dplyr::select(lat, long, space)
 site<-site[!duplicated(site),]
 mp <- ggplot(site, aes(x=long, y=lat, color=space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
@@ -45,6 +45,50 @@ mp + theme(panel.border = element_blank(),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank()) + geom_point(aes(color=space)) + geom_jitter()
 
+#Using GGPLOT, plot the Base World Map
+mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
+site<-d%>%dplyr::select(LAT, LON, bb.space, species)
+site<-site[!duplicated(site),]
+a.site<-filter(site, species=="AESHIP")
+aes <- ggplot(a.site, aes(x=LAT, y=LON, color=bb.space)) +   mapWorld +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+aes<- aes + theme(panel.border = element_blank(),
+           panel.grid.major = element_blank(),
+           panel.grid.minor = element_blank()) + geom_point(aes(color=bb.space)) 
+ag.site<-filter(site, species=="ALNGLU")
+aln<- ggplot(ag.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+aln<- aln + theme(panel.border = element_blank(),
+                  panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+b.site<-filter(site, species=="BETPEN")
+bet<- ggplot(b.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+bet<- bet + theme(panel.border = element_blank(),
+                  panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+f.site<-filter(site, species=="FAGSYL")
+syl<- ggplot(f.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+syl<- syl + theme(panel.border = element_blank(),
+                  panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+fe.site<-filter(site, species=="FRAEXC")
+fra<- ggplot(fe.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+fra<- fra + theme(panel.border = element_blank(),
+                  panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+q.site<-filter(site, species=="QUEROB")
+que<- ggplot(q.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+que<- que + theme(panel.border = element_blank(),
+                  panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+
+
+quartz()
+ggarrange(aes, aln, bet, syl, fra, que, ncol=3, nrow=2)
 
 ## mapping with rworldmap
 mapDevice() #create world map shaped window

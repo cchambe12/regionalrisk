@@ -49,7 +49,7 @@ values<-extract(r, points)
 setwd("~/Desktop/")
 r<-brick("~/Desktop/tg_0.25deg_reg_v16.0.nc", varname="tg", sep="")
 
-
+df<-d
 df$lat.long<-paste(df$lat, d$flong, sep=",")
 df<-df[!duplicated(df$lat.long),]
 lats<-df$lat
@@ -76,15 +76,16 @@ dx<-dplyr::select(dx, -date)
 dx$year<-substr(dx$Date, 0,4)
 dx$lat.long<-paste(dx$lat, dx$long)
 dx$mat<-ave(dx$Tavg, dx$year, dx$lat.long)
-xdd<-dx%>%dplyr::select(-Tavg, -Date)
+dx$doy<-yday(dx$Date)
+dx$spring<-ifelse(dx$doy>=1 & dx$doy<=90, "spring", 0)
+ddx<-dx[(dx$spring=="spring"),]
+ddx$pre.bb<-ave(ddx$Tavg, ddx$year, ddx$lat.long)
+xdd<-dx%>%dplyr::select(-Tavg, -Date, -spring, -doy)
 xdd<-xdd[!duplicated(xdd),]
 
+spring<-ddx%>%dplyr::select(-Tavg, -Date, -spring, -doy)
+spring<-spring[!duplicated(spring),]
 
-dd<-dx%>%dplyr::select(-Tavg, -Date)
-dd<-dd[!duplicated(dd),]
 
-
-bb<-full_join(dd, xdd)
-bb<-bb[!duplicated(bb),]
-
-write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/mat_compressed.csv", row.names=FALSE)
+write.csv(xdd, file="~/Documents/git/regionalrisk/analyses/output/mat_compressed.csv", row.names=FALSE)
+write.csv(spring, file="~/Documents/git/regionalrisk/analyses/output/mat_spring.csv", row.names=FALSE)
