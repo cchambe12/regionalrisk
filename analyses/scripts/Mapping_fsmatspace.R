@@ -13,6 +13,10 @@ library(rworldmap)
 library(maps)
 library(mapdata)
 library(marmap)
+library(dplyr)
+library(tidyr)
+library(egg)
+library(RColorBrewer)
 
 
 ##Simple approach
@@ -45,6 +49,7 @@ mp + theme(panel.border = element_blank(),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank()) + geom_point(aes(color=space)) + geom_jitter()
 
+setwd("~/Documents/git/regionalrisk/analyses")
 d<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
 d<-d[(d$bb>=0),]
 
@@ -52,42 +57,60 @@ d<-d[(d$bb>=0),]
 mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
 site<-d%>%dplyr::select(LAT, LON, bb.space, species)
 site<-site[!duplicated(site),]
+myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
+sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(30, 168))
 a.site<-filter(site, species=="AESHIP")
-aes <- ggplot(a.site, aes(x=LAT, y=LON, color=bb.space)) +   mapWorld +
-  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+aes <- ggplot(a.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35)) 
 aes<- aes + theme(panel.border = element_blank(),
            panel.grid.major = element_blank(),
-           panel.grid.minor = element_blank()) + geom_point() 
+           panel.grid.minor = element_blank(),
+           legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter() +
+  annotate("text",label= "Aesculus hippocastanum", col="firebrick3", x=0, y=70, fontface="italic", size=2) + sc +
+  xlab("Longitude") + ylab("Latitude")
 ag.site<-filter(site, species=="ALNGLU")
-aln<- ggplot(ag.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+aln<- ggplot(ag.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
 aln<- aln + theme(panel.border = element_blank(),
                   panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+                  panel.grid.minor = element_blank(),
+                  legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter() + 
+  annotate("text",label= "Alnus glutinosa ", col="orangered1", x=0, y=70, fontface="italic", size=2) + sc +
+  xlab("Longitude") + ylab("Latitude")
 b.site<-filter(site, species=="BETPEN")
-bet<- ggplot(b.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+bet<- ggplot(b.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
 bet<- bet + theme(panel.border = element_blank(),
                   panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+                  panel.grid.minor = element_blank()) + geom_point(aes(col=bb.space)) + geom_jitter() + 
+  annotate("text",label= "Betula pendula", col="orange3", x=0, y=70, fontface="italic", size=2) + sc + labs(color="Day of Budburst")+
+  xlab("Longitude") + ylab("Latitude")
 f.site<-filter(site, species=="FAGSYL")
-syl<- ggplot(f.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+syl<- ggplot(f.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
 syl<- syl + theme(panel.border = element_blank(),
                   panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+                  panel.grid.minor = element_blank(),
+                  legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter()+ 
+  annotate("text",label= "Fagus sylvatica", col="sienna2", x=0, y=70, fontface="italic", size=2) + sc +
+  xlab("Longitude") + ylab("Latitude")
 fe.site<-filter(site, species=="FRAEXC")
-fra<- ggplot(fe.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+fra<- ggplot(fe.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
 fra<- fra + theme(panel.border = element_blank(),
                   panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+                  panel.grid.minor = element_blank(),
+                  legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter()+ 
+  annotate("text",label= "Fraxinus excelsior", col="green4", x=0, y=70, fontface="italic", size=2) + sc +
+  xlab("Longitude") + ylab("Latitude")
 q.site<-filter(site, species=="QUEROB")
-que<- ggplot(q.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
+que<- ggplot(q.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
 que<- que + theme(panel.border = element_blank(),
                   panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank()) + geom_point(aes(fill=bb.space)) + geom_jitter()
+                  panel.grid.minor = element_blank()) + geom_point(aes(col=bb.space)) + geom_jitter() + 
+  annotate("text",label= "Quercus robur", col="purple2", x=0, y=70,fontface="italic", size=2) + sc + labs(color="Day of Budburst")+
+  xlab("Longitude") + ylab("Latitude")
 
 
 quartz()
