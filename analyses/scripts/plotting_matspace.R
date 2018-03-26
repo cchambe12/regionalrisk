@@ -13,7 +13,6 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(egg)
-library(car)
 library(brms)
 
 
@@ -119,9 +118,9 @@ bb.qr<-read.csv("output/bbch_region_quercus.csv", header=TRUE)
 # AESHIP
 bb.aes<-bb.aes%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.aes$leafout<-ave(bb.aes$DAY) ## 111.24
-bb.aes$budburst<-bb.aes$leafout-12
+bb.aes$bb<-bb.aes$DAY-12
 bb.aes$cc<-ifelse(bb.aes$YEAR<=1983, 0, 1)
-bb.aes$bb.cc<-ave(bb.aes$DAY, bb.aes$cc) ## 0 = 114.27 & 1 = 107.28
+bb.aes$bb.cc<-ave(bb.aes$bb, bb.aes$cc) ## 0 = 114.27 & 1 = 107.28
 bb.aes$decade<-substr(bb.aes$YEAR,3,3)
 bb.aes$bb.decade<-NA
 bb.aes$bb.decade<-ifelse(bb.aes$decade==5, 1, bb.aes$bb.dec)
@@ -131,20 +130,20 @@ bb.aes$bb.decade<-ifelse(bb.aes$decade==8, 4, bb.aes$bb.dec)
 bb.aes$bb.decade<-ifelse(bb.aes$decade==9, 5, bb.aes$bb.dec)
 bb.aes$bb.decade<-ifelse(bb.aes$decade==0, 6, bb.aes$bb.dec)
 bb.aes$bb.decade<-ifelse(bb.aes$decade==1, 7, bb.aes$bb.dec)
-bb.aes$bb.dec<-ave(bb.aes$DAY, bb.aes$bb.decade)
+bb.aes$bb.dec<-ave(bb.aes$bb, bb.aes$bb.decade)
 ## 50s=114.76; 60s=114.28; 70s=115.11; 80s=112.93; 90s=107.01; 00s=103.41; 10s=103.98
-bb.aes$bb.yr<-ave(bb.aes$DAY, bb.aes$YEAR)
-bb.aes$bb.space<-ave(bb.aes$DAY, bb.aes$PEP_ID)
+bb.aes$bb.yr<-ave(bb.aes$bb, bb.aes$YEAR)
+bb.aes$bb.space<-ave(bb.aes$bb, bb.aes$PEP_ID)
 bb.aes<-rename(bb.aes, year=YEAR)
-bb.aes<-dplyr::select(bb.aes, species, year, budburst, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON)
+bb.aes<-dplyr::select(bb.aes, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.aes<-bb.aes[!duplicated(bb.aes),]
 
 # ALNGLU
 bb.ag<-bb.ag%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.ag$leafout<-ave(bb.ag$DAY) 
-bb.ag$budburst<-bb.ag$leafout-12
+bb.ag$bb<-bb.ag$DAY-12
 bb.ag$cc<-ifelse(bb.ag$YEAR<=1983, 0, 1)
-bb.ag$bb.cc<-ave(bb.ag$DAY, bb.ag$cc) ## 0 = 114.88 & 1 = 106.93
+bb.ag$bb.cc<-ave(bb.ag$bb, bb.ag$cc) ## 0 = 114.88 & 1 = 106.93
 bb.ag$decade<-substr(bb.ag$YEAR,3,3)
 bb.ag$bb.decade<-NA
 bb.ag$bb.decade<-ifelse(bb.ag$decade==5, 1, bb.ag$bb.dec)
@@ -154,20 +153,20 @@ bb.ag$bb.decade<-ifelse(bb.ag$decade==8, 4, bb.ag$bb.dec)
 bb.ag$bb.decade<-ifelse(bb.ag$decade==9, 5, bb.ag$bb.dec)
 bb.ag$bb.decade<-ifelse(bb.ag$decade==0, 6, bb.ag$bb.dec)
 bb.ag$bb.decade<-ifelse(bb.ag$decade==1, 7, bb.ag$bb.dec)
-bb.ag$bb.dec<-ave(bb.ag$DAY, bb.ag$bb.decade)
+bb.ag$bb.dec<-ave(bb.ag$bb, bb.ag$bb.decade)
 ## 50s=118.65; 60s=116.06; 70s=114.20; 80s=112.30; 90s=104.96; 00s=105.98; 10s=104.74
-bb.ag$bb.yr<-ave(bb.ag$DAY, bb.ag$YEAR)
-bb.ag$bb.space<-ave(bb.ag$DAY, bb.ag$PEP_ID)
+bb.ag$bb.yr<-ave(bb.ag$bb, bb.ag$YEAR)
+bb.ag$bb.space<-ave(bb.ag$bb, bb.ag$PEP_ID)
 bb.ag<-rename(bb.ag, year=YEAR)
-bb.ag<-dplyr::select(bb.ag, species, year, budburst, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON)
+bb.ag<-dplyr::select(bb.ag, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.ag<-bb.ag[!duplicated(bb.ag),]
 
 # BETPEN
 bb.bp<-bb.bp%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.bp$leafout<-ave(bb.bp$DAY) 
-bb.bp$budburst<-bb.bp$leafout-12
+bb.bp$bb<-bb.bp$DAY-12
 bb.bp$cc<-ifelse(bb.bp$YEAR<=1983, 0, 1)
-bb.bp$bb.cc<-ave(bb.bp$DAY, bb.bp$cc) ## 0 = 113.38 & 1 = 107.46
+bb.bp$bb.cc<-ave(bb.bp$bb, bb.bp$cc) ## 0 = 113.38 & 1 = 107.46
 bb.bp$decade<-substr(bb.bp$YEAR,3,3)
 bb.bp$bb.decade<-NA
 bb.bp$bb.decade<-ifelse(bb.bp$decade==5, 1, bb.bp$bb.dec)
@@ -177,20 +176,20 @@ bb.bp$bb.decade<-ifelse(bb.bp$decade==8, 4, bb.bp$bb.dec)
 bb.bp$bb.decade<-ifelse(bb.bp$decade==9, 5, bb.bp$bb.dec)
 bb.bp$bb.decade<-ifelse(bb.bp$decade==0, 6, bb.bp$bb.dec)
 bb.bp$bb.decade<-ifelse(bb.bp$decade==1, 7, bb.bp$bb.dec)
-bb.bp$bb.dec<-ave(bb.bp$DAY, bb.bp$bb.decade)
+bb.bp$bb.dec<-ave(bb.bp$bb, bb.bp$bb.decade)
 ## 50s=114.31; 60s=113.13; 70s=113.73; 80s=112.75; 90s=105.77; 00s=105.59; 10s=103.90
-bb.bp$bb.yr<-ave(bb.bp$DAY, bb.bp$YEAR)
-bb.bp$bb.space<-ave(bb.bp$DAY, bb.bp$PEP_ID)
+bb.bp$bb.yr<-ave(bb.bp$bb, bb.bp$YEAR)
+bb.bp$bb.space<-ave(bb.bp$bb, bb.bp$PEP_ID)
 bb.bp<-rename(bb.bp, year=YEAR)
-bb.bp<-dplyr::select(bb.bp, species, year, budburst, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON)
+bb.bp<-dplyr::select(bb.bp, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.bp<-bb.bp[!duplicated(bb.bp),]
 
 # FAGSYL
 bb.fsyl<-bb.fsyl%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.fsyl$leafout<-ave(bb.fsyl$DAY)
-bb.fsyl$budburst<-bb.fsyl$leafout-12
+bb.fsyl$bb<-bb.fsyl$DAY-12
 bb.fsyl$cc<-ifelse(bb.fsyl$YEAR<=1983, 0, 1)
-bb.fsyl$bb.cc<-ave(bb.fsyl$DAY, bb.fsyl$cc) ## 0 = 121.11 & 1 = 115.74
+bb.fsyl$bb.cc<-ave(bb.fsyl$bb, bb.fsyl$cc) ## 0 = 121.11 & 1 = 115.74
 bb.fsyl$decade<-substr(bb.fsyl$YEAR,3,3)
 bb.fsyl$bb.decade<-NA
 bb.fsyl$bb.decade<-ifelse(bb.fsyl$decade==5, 1, bb.fsyl$bb.dec)
@@ -200,20 +199,20 @@ bb.fsyl$bb.decade<-ifelse(bb.fsyl$decade==8, 4, bb.fsyl$bb.dec)
 bb.fsyl$bb.decade<-ifelse(bb.fsyl$decade==9, 5, bb.fsyl$bb.dec)
 bb.fsyl$bb.decade<-ifelse(bb.fsyl$decade==0, 6, bb.fsyl$bb.dec)
 bb.fsyl$bb.decade<-ifelse(bb.fsyl$decade==1, 7, bb.fsyl$bb.dec)
-bb.fsyl$bb.dec<-ave(bb.fsyl$DAY, bb.fsyl$bb.decade)
+bb.fsyl$bb.dec<-ave(bb.fsyl$bb, bb.fsyl$bb.decade)
 ## 50s=120.11; 60s=120.27; 70s=122.27; 80s=120.94; 90s=115.74; 00s=114.00; 10s=111.63
-bb.fsyl$bb.yr<-ave(bb.fsyl$DAY, bb.fsyl$YEAR)
-bb.fsyl$bb.space<-ave(bb.fsyl$DAY, bb.fsyl$PEP_ID)
+bb.fsyl$bb.yr<-ave(bb.fsyl$bb, bb.fsyl$YEAR)
+bb.fsyl$bb.space<-ave(bb.fsyl$bb, bb.fsyl$PEP_ID)
 bb.fsyl<-rename(bb.fsyl, year=YEAR)
-bb.fsyl<-dplyr::select(bb.fsyl, species, year, budburst, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON)
+bb.fsyl<-dplyr::select(bb.fsyl, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.fsyl<-bb.fsyl[!duplicated(bb.fsyl),]
 
 # FRAEXC
 bb.fex<-bb.fex%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.fex$leafout<-ave(bb.fex$DAY)
-bb.fex$budburst<-bb.fex$leafout-12
+bb.fex$bb<-bb.fex$DAY-12
 bb.fex$cc<-ifelse(bb.fex$YEAR<=1983, 0, 1)
-bb.fex$bb.cc<-ave(bb.fex$DAY, bb.fex$cc) ## 0 = 131.43 & 1 = 125.52
+bb.fex$bb.cc<-ave(bb.fex$bb, bb.fex$cc) ## 0 = 131.43 & 1 = 125.52
 bb.fex$decade<-substr(bb.fex$YEAR,3,3)
 bb.fex$bb.decade<-NA
 bb.fex$bb.decade<-ifelse(bb.fex$decade==5, 1, bb.fex$bb.dec)
@@ -223,20 +222,20 @@ bb.fex$bb.decade<-ifelse(bb.fex$decade==8, 4, bb.fex$bb.dec)
 bb.fex$bb.decade<-ifelse(bb.fex$decade==9, 5, bb.fex$bb.dec)
 bb.fex$bb.decade<-ifelse(bb.fex$decade==0, 6, bb.fex$bb.dec)
 bb.fex$bb.decade<-ifelse(bb.fex$decade==1, 7, bb.fex$bb.dec)
-bb.fex$bb.dec<-ave(bb.fex$DAY, bb.fex$bb.decade)
+bb.fex$bb.dec<-ave(bb.fex$bb, bb.fex$bb.decade)
 ## 50s=131.69; 60s=129.84; 70s=132.31; 80s=132.16; 90s=125.35; 00s=123.19; 10s=121.47
-bb.fex$bb.yr<-ave(bb.fex$DAY, bb.fex$YEAR)
-bb.fex$bb.space<-ave(bb.fex$DAY, bb.fex$PEP_ID)
+bb.fex$bb.yr<-ave(bb.fex$bb, bb.fex$YEAR)
+bb.fex$bb.space<-ave(bb.fex$bb, bb.fex$PEP_ID)
 bb.fex<-rename(bb.fex, year=YEAR)
-bb.fex<-dplyr::select(bb.fex, species, year, budburst, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON)
+bb.fex<-dplyr::select(bb.fex, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.fex<-bb.fex[!duplicated(bb.fex),]
 
 # QUEROB
 bb.qr<-bb.qr%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.qr$leafout<-ave(bb.qr$DAY)
-bb.qr$budburst<-bb.qr$leafout-12
+bb.qr$bb<-bb.qr$DAY-12
 bb.qr$cc<-ifelse(bb.qr$YEAR<=1983, 0, 1)
-bb.qr$bb.cc<-ave(bb.qr$DAY, bb.qr$cc) ## 0 = 127.93.59 & 1 = 121.62.31
+bb.qr$bb.cc<-ave(bb.qr$bb, bb.qr$cc) ## 0 = 127.93.59 & 1 = 121.62.31
 bb.qr$decade<-substr(bb.qr$YEAR,3,3)
 bb.qr$bb.decade<-NA
 bb.qr$bb.decade<-ifelse(bb.qr$decade==5, 1, bb.qr$bb.dec)
@@ -246,12 +245,12 @@ bb.qr$bb.decade<-ifelse(bb.qr$decade==8, 4, bb.qr$bb.dec)
 bb.qr$bb.decade<-ifelse(bb.qr$decade==9, 5, bb.qr$bb.dec)
 bb.qr$bb.decade<-ifelse(bb.qr$decade==0, 6, bb.qr$bb.dec)
 bb.qr$bb.decade<-ifelse(bb.qr$decade==1, 7, bb.qr$bb.dec)
-bb.qr$bb.dec<-ave(bb.qr$DAY, bb.qr$bb.decade)
+bb.qr$bb.dec<-ave(bb.qr$bb, bb.qr$bb.decade)
 ## 50s=127.14; 60s=126.64; 70s=129.52; 80s=127.58; 90s=122.1; 00s=118.37; 10s=116.33
-bb.qr$bb.yr<-ave(bb.qr$DAY, bb.qr$YEAR)
-bb.qr$bb.space<-ave(bb.qr$DAY, bb.qr$PEP_ID)
+bb.qr$bb.yr<-ave(bb.qr$bb, bb.qr$YEAR)
+bb.qr$bb.space<-ave(bb.qr$bb, bb.qr$PEP_ID)
 bb.qr<-rename(bb.qr, year=YEAR)
-bb.qr<-dplyr::select(bb.qr, species, year, budburst, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON)
+bb.qr<-dplyr::select(bb.qr, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.qr<-bb.qr[!duplicated(bb.qr),]
 
 d<-full_join(bb.aes, bb.ag)

@@ -45,6 +45,9 @@ mp + theme(panel.border = element_blank(),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank()) + geom_point(aes(color=space)) + geom_jitter()
 
+d<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
+d<-d[(d$bb>=0),]
+
 #Using GGPLOT, plot the Base World Map
 mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
 site<-d%>%dplyr::select(LAT, LON, bb.space, species)
@@ -54,7 +57,7 @@ aes <- ggplot(a.site, aes(x=LAT, y=LON, color=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
 aes<- aes + theme(panel.border = element_blank(),
            panel.grid.major = element_blank(),
-           panel.grid.minor = element_blank()) + geom_point(aes(color=bb.space)) 
+           panel.grid.minor = element_blank()) + geom_point() 
 ag.site<-filter(site, species=="ALNGLU")
 aln<- ggplot(ag.site, aes(x=LAT, y=LON, fill=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))

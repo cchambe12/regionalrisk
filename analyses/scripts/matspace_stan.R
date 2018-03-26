@@ -25,8 +25,22 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 ########################
 #### get the data
-bb<-read.csv("output/fs_matspspace.csv", header=TRUE)
+#bb<-read.csv("output/fs_matspspace.csv", header=TRUE)
+bb<-read.csv("output/fs_matspring.csv", header=TRUE)
+mat<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
 
+#### Get elevation information
+bb<-bb%>%rename(sp.temp=pre.bb)
+mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
+d<-full_join(bb, mat)
+
+d$cc<-ifelse(d$year<=1983&d$year>=1950, 0, 1)
+d$fs.num<-ave(d$fs, d$PEP_ID, d$species, d$cc, FUN=sum)
+fs.cc<-dplyr::select(d, fs.num, sp.temp, elev, cc, species)
+fs.cc$species<-as.numeric(as.factor(fs.cc$species))
+fs.cc<-fs.cc[!duplicated(fs.cc),]
+
+fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=poisson, chains=2)
 
 ## Using 1983 as split point
 prep_cc<-bb
