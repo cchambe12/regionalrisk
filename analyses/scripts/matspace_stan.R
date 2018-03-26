@@ -31,13 +31,18 @@ mat<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
 
 #### Get elevation information
 bb<-bb%>%rename(sp.temp=pre.bb)
+bb<-dplyr::select(bb, -fs.count, -PEP_ID)
+bb<-bb[!duplicated(bb),]
 mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
-d<-full_join(bb, mat)
+mat<-dplyr::select(mat, species, lat, long, elev)
+mat<-mat[!duplicated(mat),]
+d<-inner_join(bb, mat)
 
 d$cc<-ifelse(d$year<=1983&d$year>=1950, 0, 1)
-d$fs.num<-ave(d$fs, d$PEP_ID, d$species, d$cc, FUN=sum)
+d$fs.num<-ave(d$fs, d$lat.long, d$species, d$cc, FUN=sum)
 fs.cc<-dplyr::select(d, fs.num, sp.temp, elev, cc, species)
 fs.cc$species<-as.numeric(as.factor(fs.cc$species))
+fs.cc<-fs[!is.na(fs.cc),]
 fs.cc<-fs.cc[!duplicated(fs.cc),]
 
 fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=poisson, chains=2)
