@@ -1,0 +1,129 @@
+<html>
+<head>
+<!-- beheerder: Geert Jan van Oldenborgh -->
+<link rel="stylesheet" href="styles/rccstyle.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script language="javascript" src="library/javascript/hidden_info_switch.js"></script>
+<script language="javascript" src="library/javascript/pop_page.js"></script> 
+
+<meta name="robots" content="i">
+<link rel="shortcut icon" href="/favicon.ico"> 
+<title>Climate Explorer: Download netcdf time series</title>
+<style type="text/css">
+a { text-decoration: none }
+</style>
+</head>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#000099">
+<tr>
+<td width=10%>&nbsp;</td><td align=left>&nbsp;</td>
+</tr><tr>
+<td width=10%>&nbsp;</td>
+<td align=left><img src="https://climexp.knmi.nl/rcc/logo_climexp.png" alt=logo></td>
+</tr><tr>
+<td width=10%>&nbsp;</td>
+<td align=left>
+<table width=85.25% border="0" cellspacing="0" cellpadding="0" bgcolor="#000099">
+<tr>
+<td><a href="https://climexp.knmi.nl/start.cgi?id=someone@somewhere"><font color="#FFFFFF">Climate Explorer</font></a>
+</td><td>
+<a href="http://www.ecad.eu"><font color="#FFFFFF">European Climate Assessment &amp; Data</font></a>
+</td><td>
+<a href="http://www.knmi.nl"><font color="#FFFFFF">KNMI</font></a>
+</td><td align=right>
+<form name="zoek" method=POST action="/htsearch.cgi" style="margin:0px">
+<!-- Search ht://Dig -->
+<input type="hidden" name="method" value="and">
+<input type="hidden" name="format" value="builtin-long">
+<input type="hidden" name="sort" value="score">
+<input type="hidden" name="config" value="htdig_www_eng">
+<input type="hidden" name="restrict" value="">
+<input type="hidden" name="exclude" value="">
+<input type="hidden" name="EMAIL" value="id=someone@somewhere">
+<input type="search" name="words" size=20 maxlength=255 bgcolor="#D3E3E3" style="background-color: #ffffff; width: 200px" placeholder="search in the Climate Explorer">
+</td><td>
+<input type=image alt="zoek!" title="Zoek!" img src="https://climexp.knmi.nl/vinklude/images/zoekglas.png" border=0 align=left valign="middle">
+<!-- Search ht://Dig -->
+</form>
+</td></tr>
+</table>
+</td></tr>
+<tr><td width=10%>&nbsp;</td><td align=left>&nbsp;</td></tr>
+<tr bgcolor="#9999CC">
+<style>a:visited {color: #000099;}</style>
+<td width=10%>&nbsp;</td>
+<td align=left>
+<table width=90% border="0" cellspacing="0" cellpadding="0">
+<tr height=20px>
+<style>a:visited {color: "#000000"}</style>
+<td width=6%><a href="/help.cgi?id=someone@somewhere">Help</a></td>
+<td width=6%><a href="/news.cgi?id=someone@somewhere">News</a></td>
+<td width=6%><a href="/about.cgi?id=someone@somewhere">About</a></td>
+<td width=9%><a href="/contact.cgi?id=someone@somewhere">Contact</a></td>
+<td width=16%><a href="/monthly_overview_world_weather/index.cgi?id=someone@somewhere">World weather</a></td>
+<td width=19%><a href="/effects.cgi?id=someone@somewhere">Effects of El Ni&ntilde;o</a></td>
+<td width=19%><a href="/forecast_verification.cgi?id=someone@somewhere">Seasonal forecasts</a></td>
+<td width=19%><a href="/plot_atlas_form.py?id=someone@somewhere">Climate Change Atlas</a></td>
+</tr></table>
+</td></tr>
+</table>
+<table border="0" width="95.25%" cellspacing="0" cellpadding="0">
+   <tr>
+      <td width="10%">&nbsp;</td>
+      <td width="56.375%" valign=top>
+         <div id="printable" name="printable">
+         <!-- div -->
+<!-- Voeg hieronder de inhoud van de pagina in -->
+<br>
+         <div class="hoofdkop">Download netcdf time series</div>
+         <div class="subkop">CPC_NAO</div>
+<div class="kalelink">
+Generating  file.  Just a moment.<p>
+<a href="data/icpc_nao.nc">Download netcdf file</a>
+
+         </div>
+         </div>
+<!-- Insert the body of the page above this line -->
+      </td>
+      <td width="1%">&nbsp;</td>
+      <td width="27.5%" valign=top>
+<!-- Voeg hieronder de lijst met links in -->
+<div class="menukopje">Select a time series</div>
+<div class="menulink"><a href="selectdailyseries.cgi?id=someone@somewhere">Daily station data</a></div>
+<div class="menulink"><a href="selectdailyindex.cgi?id=someone@somewhere">Daily climate indices</a></div>
+<div class="menulink"><a href="selectstation.cgi?id=someone@somewhere">Monthly station data</a></div>
+<div class="menulink"><a href="selectindex.cgi?id=someone@somewhere">Monthly climate indices</a></div>
+<div class="menulink"><a href="selectannualindex.cgi?id=someone@somewhere">Annual climate indices</a></div>
+
+<div class="menulink"><a href="userseries.cgi?id=someone@somewhere">View, upload your time series</a></div>
+<div class="menukopje">Select a field</div>
+<div class="menulink"><a href="selectdailyfield2.cgi?id=someone@somewhere">Daily fields</a></div>
+<div class="menulink"><a href="selectfield_obs2.cgi?id=someone@somewhere">Monthly observations</a></div>
+<div class="menulink"><a href="selectfield_rea.cgi?id=someone@somewhere">Monthly reanalysis fields</a></div>
+<div class="menulink"><a href="selectfield_rapid.cgi?id=someone@somewhere">Monthly and seasonal historical reconstructions</a></div>
+<div class="menulink"><a href="selectfield_sea.cgi?id=someone@somewhere">Monthly seasonal hindcasts</a></div>
+<div class="menulink"><a href="selectfield_dec.cgi?id=someone@somewhere">Monthly decadal hindcasts</a></div>
+<div class="menulink"><a href="selectfield_co2.cgi?id=someone@somewhere">Monthly CMIP3+ scenario runs</a></div>
+<div class="menulink"><a href="selectfield_cmip5.cgi?id=someone@somewhere">Monthly CMIP5 scenario runs</a></div>
+<div class="menulink"><a href="selectfield_cmip5_annual.cgi?id=someone@somewhere">Annual CMIP5 extremes</a></div>
+<div class="menulink"><a href="selectfield_cordex.cgi?id=someone@somewhere">Monthly CORDEX scenario runs</a></div>
+<div class="menulink"><a href="selectfield_att.cgi?id=someone@somewhere">Attribution runs</a></div>
+<div class="menulink"><a href="selectfield_external.cgi?id=someone@somewhere">External data (ensembles, ncep, enact, soda, ecmwf, ...)</a></div>
+<div class="menulink"><a href="selectfield_use.cgi?id=someone@somewhere">View, upload your field</a></div></div>
+      </td>
+   </tr>
+</table>
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr>
+<td width="10%"><div style="float:right; padding-right:11px;"><img src="https://climexp.knmi.nl/vinklude/images/bolletjes.gif" border=0 align=right></div></td>
+<td>
+<div align=left style="width: 94.875%; height 1px; margin-top: 14px; border-top: solid 1px #999999; color: #999999;">
+&#169; KNMI
+</div>
+</td>
+</tr>
+</table>
+<p><br>
+
+</body>
+</html>
