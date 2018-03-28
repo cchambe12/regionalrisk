@@ -69,10 +69,14 @@ fs.cc<-fs.cc[!duplicated(fs.cc),]
 fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=poisson, chains=2)
 ## nothing with elevation... spatial autocorrelation issues?
 
+ele.brm<-brm(fs.num~sp.temp+elev+cc+(1|species)+(sp.temp-1|species) + (elev-1|species) +
+               (cc-1|species), data=fs.cc, family=poisson)
+
 
 ####### Try NAO model... ########
 nao.mod<-dplyr::select(d, fs, sp.temp, elev, species, m.index)
 nao.mod<-nao.mod[!duplicated(nao.mod),]
 nao.mod<-nao.mod[!is.na(nao.mod$sp.temp),]
 nao.mod<-nao.mod[]
+
 
