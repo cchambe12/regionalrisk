@@ -79,6 +79,7 @@ dx$mat<-ave(dx$Tavg, dx$year, dx$lat.long)
 dx$doy<-yday(dx$Date)
 dx$spring<-ifelse(dx$doy>=1 & dx$doy<=90, "spring", 0)
 ddx<-dx[(dx$spring=="spring"),]
+ddx<-ddx[!is.na(ddx$Tavg),]
 ddx$pre.bb<-ave(ddx$Tavg, ddx$year, ddx$lat.long)
 xdd<-dx%>%dplyr::select(-Tavg, -Date, -spring, -doy)
 xdd<-xdd[!duplicated(xdd),]

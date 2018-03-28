@@ -48,6 +48,7 @@ mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 mat<-dplyr::select(mat, species, lat, long, elev)
 mat<-mat[!duplicated(mat),]
 d<-inner_join(bb, mat)
+d<-inner_join(d, nx)
 
 #d$cc<-NA
 #d$cc<-ifelse(d$year<=1970&d$year>=1950, 0, d$cc)
@@ -67,3 +68,11 @@ fs.cc<-fs.cc[!duplicated(fs.cc),]
 
 fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=poisson, chains=2)
 ## nothing with elevation... spatial autocorrelation issues?
+
+
+####### Try NAO model... ########
+nao.mod<-dplyr::select(d, fs, sp.temp, elev, species, m.index)
+nao.mod<-nao.mod[!duplicated(nao.mod),]
+nao.mod<-nao.mod[!is.na(nao.mod$sp.temp),]
+nao.mod<-nao.mod[]
+

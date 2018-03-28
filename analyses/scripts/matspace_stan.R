@@ -31,21 +31,33 @@ mat<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
 
 #### Get elevation information
 bb<-bb%>%rename(sp.temp=pre.bb)
-bb<-dplyr::select(bb, -fs.count, -PEP_ID)
+bb$cc<-ifelse(bb$year<=1983&bb$year>=1950, 0, 1)
+bb$fs.num<-ave(bb$fs, bb$lat.long, bb$species, bb$cc, FUN=sum)
+bb$sp.temp<-ave(bb$sp.temp, bb$lat.long, bb$cc)
+bb<-dplyr::select(bb, -fs.count, -PEP_ID, -year, -fs, -lat.long)
 bb<-bb[!duplicated(bb),]
 mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 mat<-dplyr::select(mat, species, lat, long, elev)
 mat<-mat[!duplicated(mat),]
 d<-inner_join(bb, mat)
 
-d$cc<-ifelse(d$year<=1983&d$year>=1950, 0, 1)
-d$fs.num<-ave(d$fs, d$lat.long, d$species, d$cc, FUN=sum)
 fs.cc<-dplyr::select(d, fs.num, sp.temp, elev, cc, species)
 fs.cc$species<-as.numeric(as.factor(fs.cc$species))
-fs.cc<-fs[!is.na(fs.cc),]
+
 fs.cc<-fs.cc[!duplicated(fs.cc),]
 
 fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=poisson, chains=2)
+
+fs.cc<-fs.cc[!is.na(fs.cc$fs.num),]
+fs.cc<-fs.cc[!is.na(fs.cc$sp.temp),]
+fs.cc<-fs.cc[!is.na(fs.cc$elev),]
+fs.cc<-fs.cc[!is.na(fs.cc$cc),]
+
+ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:cc + (1|species) + (sp.temp-1|species) + (cc-1|species)
+            + (elev-1|species) + (elev:cc-1|species), data=fs.cc, family=poisson)
+
+ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:cc + (1|species) + (sp.temp-1|species) + (cc-1|species)
+             + (elev-1|species) + (elev:cc-1|species), data=fs.cc, family=zero_inflated_poisson())
 
 ## Using 1983 as split point
 prep_cc<-bb
