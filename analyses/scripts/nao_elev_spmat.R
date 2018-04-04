@@ -232,17 +232,23 @@ dxx$spp.prop<-ifelse(dxx$species=="QUEROB", dxx$fs.yrspp/dxx$spp.sites, dxx$spp.
 dxx$spp.ave<-ave(dxx$spp.prop, dxx$species, FUN=median)
 
 dxx$num.sites<-as.numeric(ave(dxx$lat.long, dxx$year, FUN=length))
-dxx$fs.prop<-dxx$fs.num/dxx$num.sites
+dxx$fs.prop<-dxx$fs.yr/dxx$num.sites
 
 
 #dxx$fs.ave<-ave(dxx$fs.prop)
-prop<-dxx%>%dplyr::select(spp.prop, species, m.index, year, fs.prop)
+prop<-dxx%>%dplyr::select(spp.prop, species, m.index, year, fs.prop, sp.temp)
 prop$cc<-ifelse(prop$year<=1983, 0, 1)
+prop$cc.20<-NA
+prop$cc.20<-ifelse(prop$year<=1970 & prop$year>=1950, 0, prop$cc.20)
+prop$cc.20<-ifelse(prop$year<=2016 & prop$year>=1996, 1, prop$cc.20)
+prop<-prop[!is.na(prop$sp.temp),]
+prop$sp.temp<-ave(prop$sp.temp, prop$year)
 prop<-prop[!duplicated(prop),]
+prop$fs.tot<-prop$fs.prop*100
 
 prop.mod<-brm(fs.prop~m.index+cc+(1|species)+(m.index-1|species)+(cc-1|species), data=prop, family=zero_inflated_beta())
 
-m<-prop.mod
+m<-sp20.mod
 m.int<-posterior_interval(m)
 sum.m<-summary(m)
 cri.f<-as.data.frame(sum.m$fixed[,c("Estimate", "l-95% CI", "u-95% CI")])
@@ -261,7 +267,7 @@ mat2<-cbind(twoDimMat, c(rep(1:6, length.out=18)), rep(c("Estimate", "2.5%", "95
 df<-as.data.frame(mat2)
 names(df)<-c(rownames(cri.f), "species", "perc")
 dftot<-rbind(fdf2, df)
-dflong<- tidyr::gather(dftot, var, value, sp.temp:m.index, factor_key=TRUE)
+dflong<- tidyr::gather(dftot, var, value, nao:`nao:cc`, factor_key=TRUE)
 
 #adding the coef estiamtes to the random effect values 
 for (i in seq(from=1,to=nrow(dflong), by=21)) {
@@ -277,7 +283,7 @@ dfwide$species<-as.factor(dfwide$species)
 
 pd <- position_dodgev(height = -0.5)
 
-estimates<-c("Mean Spring Temperature", "Elevation", "NAO Index")
+estimates<-c("NAO Index", "CC", "Nao Index x CC")
 dfwide$legend<-factor(dfwide$species,
                       labels=c("Overall Effects","Aesculus hippocastanum","Alnus glutinosa",
                                "Betula pendula","Fagus sylvatica","Fraxinus excelsior",
@@ -309,5 +315,12 @@ fig1
 
 prop.test<-ggplot(prop, aes(x=year, y=fs.prop)) + geom_line(aes(color=species)) 
 #+ 
-  geom_line(aes(y=m.index/2), col="blue") + scale_y_continuous(~.*2, sec.axis = sec_axis(name="NAO Index"))
+ # geom_line(aes(y=m.index/2), col="blue") + scale_y_continuous(~.*2, sec.axis = sec_axis(name="NAO Index"))
 
+  
+## should I take the log of m.index so it's a positive value?
+prop$nao<-prop$m.index+1.5
+#sp20.mod<-brm(fs.tot | trunc(lb = 0)~m.index+cc.20+sp.temp+m.index:cc +(1|species)+(m.index-1|species)+(cc.20-1|species)+
+ #               (sp.temp-1|species) + (m.index:cc-1|species), data=prop) ## 3986 divergent tranistions!!
+sp20.mod<-brm(fs.tot~nao+cc+nao:cc +(1|species)+(nao-1|species)+(cc-1|species) + (nao:cc-1|species), data=prop) ## 5 divergent tranistions!!
+sp20.stan<-stan_glmer(fs.tot~nao+(1|species) , data=prop)
