@@ -64,7 +64,7 @@ dxx$spp.ave<-ave(dxx$spp.prop, dxx$species, FUN=median)
 dxx$num.sites<-as.numeric(ave(dxx$lat.long, dxx$year, FUN=length))
 dxx$fs.prop<-dxx$fs.yr/dxx$num.sites
 
-dxx$fs.ave<-ave(dxx$fs.prop)
+dxx$fs.ave<-ave(dxx$fs.prop, FUN=median)
 
 
 #ggplot(dxx, aes(x=year, y=fs.yr)) + geom_point() + xlab("Year") + ylab("Number of False Springs")
