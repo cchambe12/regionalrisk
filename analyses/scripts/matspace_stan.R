@@ -9,10 +9,10 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 
 
-library(rstan)
+#library(rstan)
 library(ggplot2)
-library(shinystan)
-library(bayesplot)
+#library(shinystan)
+#library(bayesplot)
 library(rstanarm)
 library(dplyr)
 library(tidyr)
@@ -46,18 +46,28 @@ fs.cc$species<-as.numeric(as.factor(fs.cc$species))
 
 fs.cc<-fs.cc[!duplicated(fs.cc),]
 
-fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=poisson, chains=2)
+fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=neg_binomial_2, chains=2)
+fit<-stan_glm(fs.num~sp.temp+elev+cc, data=fs.cc, family=neg_binomial_2, chains=2)
+fit.inter<-stan_glmer(fs.num~sp.temp+elev+cc+sp.temp:elev+(1|species), data=fs.cc, family=poisson)
+
+fit.brm<-brm(fs.num~sp.temp+elev+cc+elev:sp.temp+(1|species), data=fs.cc,family=poisson, chains=2)
+
+stan.ele<-stan_glmer(fs.num~sp.temp+elev+cc+sp.temp:elev+(sp.temp-1|species)+
+                       (elev-1|species)+(cc-1|species)+(sp.temp:elev-1|species)+(1|species), data=fs.cc, family=poisson)
 
 fs.cc<-fs.cc[!is.na(fs.cc$fs.num),]
 fs.cc<-fs.cc[!is.na(fs.cc$sp.temp),]
 fs.cc<-fs.cc[!is.na(fs.cc$elev),]
 fs.cc<-fs.cc[!is.na(fs.cc$cc),]
 
-ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:cc + (1|species) + (sp.temp-1|species) + (cc-1|species)
-            + (elev-1|species) + (elev:cc-1|species), data=fs.cc, family=poisson)
+fs.cc$fs.num<-as.integer(fs.cc$fs.num+1)
 
-ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:cc + (1|species) + (sp.temp-1|species) + (cc-1|species)
-             + (elev-1|species) + (elev:cc-1|species), data=fs.cc, family=zero_inflated_poisson())
+ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
+            + (elev-1|species) + (elev:sp.temp-1|species), data=fs.cc, family=poisson, 
+            prior = set_prior("normal(0,10)", class="b", lb = 0))
+
+ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
+             + (elev-1|species) + (elev:sp.temp-1|species), data=fs.cc, family=negbinomial)
 
 ## Using 1983 as split point
 prep_cc<-bb
