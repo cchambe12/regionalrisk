@@ -9,10 +9,10 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 
 
-library(rstan)
+#library(rstan)
 library(ggplot2)
-library(shinystan)
-library(bayesplot)
+#library(shinystan)
+#library(bayesplot)
 library(rstanarm)
 library(dplyr)
 library(tidyr)
@@ -246,7 +246,10 @@ prop$sp.temp<-ave(prop$sp.temp, prop$year)
 prop<-prop[!duplicated(prop),]
 prop$fs.tot<-prop$fs.prop*100
 
-prop.mod<-brm(fs.prop~m.index+cc+(1|species)+(m.index-1|species)+(cc-1|species), data=prop, family=zero_inflated_beta())
+prop$spp.tot<-prop$spp.prop*100
+prop.mod<-brm(fs.prop~m.index+cc+(m.index-1|species)+(cc-1|species), data=prop)
+
+
 
 m<-sp20.mod
 m.int<-posterior_interval(m)
@@ -323,4 +326,19 @@ prop$nao<-prop$m.index+1.5
 #sp20.mod<-brm(fs.tot | trunc(lb = 0)~m.index+cc.20+sp.temp+m.index:cc +(1|species)+(m.index-1|species)+(cc.20-1|species)+
  #               (sp.temp-1|species) + (m.index:cc-1|species), data=prop) ## 3986 divergent tranistions!!
 sp20.mod<-brm(fs.tot~nao+cc+nao:cc +(1|species)+(nao-1|species)+(cc-1|species) + (nao:cc-1|species), data=prop) ## 5 divergent tranistions!!
-sp20.stan<-stan_glmer(fs.tot~nao+(1|species) , data=prop)
+sp20.stan<-stan_glmer(spp.tot~m.index+sp.temp+(1|species) , data=prop)
+
+
+
+prop_prev<-prop
+prop_prev$year<-prop_prev$year + 1
+prop_prev$nao_prev<-NA
+for(i in c(1:nrow(prop))) {
+  for(j in c(1:nrow(prop_prev))) 
+    if(prop$year[i]==prop_prev$year[j] )
+      prop_prev$nao_prev[j]<-prop$nao[i]
+    
+}
+## still not working but see if the year previous had a strong NAO then does that influence false springs?
+
+nao<-stan_glm(fs.tot~nao+sp.temp, data=prop)
