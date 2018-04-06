@@ -66,8 +66,21 @@ ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:sp.temp + (1|species) + (sp.temp
             + (elev-1|species) + (elev:sp.temp-1|species), data=fs.cc, family=poisson, 
             prior = set_prior("normal(0,10)", class="b", lb = 0))
 
-ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
-             + (elev-1|species) + (elev:sp.temp-1|species), data=fs.cc, family=negbinomial)
+
+
+ele.brm<-brm(fs.num~ sp.temp + cc + elev + sp.temp:cc + (1|species) + (sp.temp-1|species) + (cc-1|species)
+             + (elev-1|species) + (sp.temp:cc-1|species), data=fs.cc)
+
+### Try to fix elevation autocorrelation issues? Or maybe just scale it...
+fs.cc$sm.elev<-fs.cc$elev/100
+
+elev.stan<-stan_glmer(fs.num~sp.temp+cc+sm.elev+(1|species), data=fs.cc)
+
+ele2.brm<-brm(fs.num~ sp.temp + cc + sm.elev + sm.elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
+             + (sm.elev-1|species) + (sm.elev:sp.temp-1|species), data=fs.cc, family=negbinomial)
+
+ele2.brm<-brm(fs.num~ sp.temp + cc + sm.elev + sm.elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
+              + (sm.elev-1|species) + (cc:sp.temp-1|species), data=fs.cc, family=negbinomial)
 
 ## Using 1983 as split point
 prep_cc<-bb
@@ -81,7 +94,7 @@ fit<-stan_glm(fs.num~mat.cc+cc+space+species, data=fs.cc, family=poisson)
 ## maybe cool...
 cc.brm<-brm(fs.num~ mat.cc + cc + space + mat.cc:cc + (1|species) + (mat.cc-1|species) + (cc-1|species)
              + (space-1|species) + (mat.cc:cc-1|species), data=fs.cc, family=poisson)
-m<-cc.brm
+m<-ele2.brm
 m.int<-posterior_interval(m)
 sum.m<-summary(m)
 cri.f<-as.data.frame(sum.m$fixed[,c("Estimate", "l-95% CI", "u-95% CI")])
@@ -100,7 +113,7 @@ mat2<-cbind(twoDimMat, c(rep(1:6, length.out=18)), rep(c("Estimate", "2.5%", "95
 df<-as.data.frame(mat2)
 names(df)<-c(rownames(cri.f), "species", "perc")
 dftot<-rbind(fdf2, df)
-dflong<- tidyr::gather(dftot, var, value, mat.cc:`mat.cc:cc`, factor_key=TRUE)
+dflong<- tidyr::gather(dftot, var, value, sp.temp:`sp.temp:sm.elev`, factor_key=TRUE)
 
 #adding the coef estiamtes to the random effect values 
 for (i in seq(from=1,to=nrow(dflong), by=21)) {
@@ -116,7 +129,7 @@ dfwide$species<-as.factor(dfwide$species)
 
 pd <- position_dodgev(height = -0.5)
 
-estimates<-c("Mean Annual Temperature", "CC", "Space", "MAT*CC")
+estimates<-c("Mean Spring Temperature", "Before or After 1983", "Elevation", "Mean Spring Temperature x Elevation")
 dfwide$legend<-factor(dfwide$species,
                       labels=c("Overall Effects","Aesculus hippocastanum","Alnus glutinosa",
                                "Betula pendula","Fagus sylvatica","Fraxinus excelsior",
@@ -141,9 +154,12 @@ fig1 <-ggplot(dfwide, aes(x=Estimate, y=var, color=legend, size=factor(rndm), al
   guides(size=FALSE, alpha=FALSE) +  
   scale_y_discrete(limits = rev(unique(sort(dfwide$var))), labels=estimates) + ylab("") + 
   labs(col="Effects") + theme(legend.box.background = element_rect(), 
-                              legend.title=element_blank(), legend.key.size = unit(0.2, "cm"),
-                              legend.text=element_text(size=8), legend.position= c(0.2,0.1)) #+
+                              legend.title=element_blank(), legend.key=element_blank(),legend.key.size = unit(0.15, "cm"),
+                              legend.text=element_text(size=8), legend.position= c(0.78,0.88), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                              panel.background = element_blank(), 
+                              axis.line = element_line(colour = "black")) #+
   #xlab(expression(atop("Model Estimate of Change ", paste("in Duration of Vegetative Risk (days)"))))
+quartz()
 fig1
 
 
