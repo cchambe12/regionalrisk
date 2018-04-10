@@ -331,7 +331,7 @@ sp20.stan<-stan_glmer(spp.tot~m.index+sp.temp+(1|species) , data=prop)
 
 
 prop_prev<-prop
-prop_prev$year<-prop_prev$year + 1
+prop_prev$year<-prop_prev$year - 1
 prop_prev$nao_prev<-NA
 for(i in c(1:nrow(prop))) {
   for(j in c(1:nrow(prop_prev))) 
@@ -340,5 +340,5 @@ for(i in c(1:nrow(prop))) {
     
 }
 ## still not working but see if the year previous had a strong NAO then does that influence false springs?
-
-nao<-stan_glm(fs.tot~nao+sp.temp, data=prop)
+## better with previous year... see if Ben thinks this is reasonable... keep exploring
+nao<-stan_glm(fs.tot~nao_prev+sp.temp, data=prop_prev)
