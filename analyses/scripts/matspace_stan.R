@@ -68,8 +68,8 @@ ele.brm<-brm(fs.num~ sp.temp + cc + elev + elev:sp.temp + (1|species) + (sp.temp
 
 
 
-ele.brm<-brm(fs.num~ sp.temp + cc + elev + sp.temp:cc + (1|species) + (sp.temp-1|species) + (cc-1|species)
-             + (elev-1|species) + (sp.temp:cc-1|species), data=fs.cc)
+ele.brm<-brm(fs.num~ sp.temp + cc + sm.elev + sp.temp:cc + (1|species) + (sp.temp-1|species) + (cc-1|species)
+             + (sm.elev-1|species) + (sp.temp:cc-1|species), data=fs.cc)
 
 ### Try to fix elevation autocorrelation issues? Or maybe just scale it...
 fs.cc$sm.elev<-fs.cc$elev/100
@@ -79,7 +79,7 @@ elev.stan<-stan_glmer(fs.num~sp.temp+cc+sm.elev+(1|species), data=fs.cc)
 ele2.brm<-brm(fs.num~ sp.temp + cc + sm.elev + sm.elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
              + (sm.elev-1|species) + (sm.elev:sp.temp-1|species), data=fs.cc, family=negbinomial)
 
-ele2.brm<-brm(fs.num~ sp.temp + cc + sm.elev + sm.elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
+ele3.brm<-brm(fs.num~ sp.temp + cc + sm.elev + sm.elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
               + (sm.elev-1|species) + (cc:sp.temp-1|species), data=fs.cc, family=negbinomial)
 
 ## Using 1983 as split point
@@ -94,7 +94,7 @@ fit<-stan_glm(fs.num~mat.cc+cc+space+species, data=fs.cc, family=poisson)
 ## maybe cool...
 cc.brm<-brm(fs.num~ mat.cc + cc + space + mat.cc:cc + (1|species) + (mat.cc-1|species) + (cc-1|species)
              + (space-1|species) + (mat.cc:cc-1|species), data=fs.cc, family=poisson)
-m<-ele2.brm
+m<-ele3.brm
 m.int<-posterior_interval(m)
 sum.m<-summary(m)
 cri.f<-as.data.frame(sum.m$fixed[,c("Estimate", "l-95% CI", "u-95% CI")])
@@ -162,7 +162,7 @@ fig1 <-ggplot(dfwide, aes(x=Estimate, y=var, color=legend, size=factor(rndm), al
 quartz()
 fig1
 
-
+write.csv(dfwide, file="~/Documents/git/regionalrisk/analyses/output/mat_cc_output.csv", row.names=FALSE)
 
 ### Looking at each year
 prep_yr<-bb
