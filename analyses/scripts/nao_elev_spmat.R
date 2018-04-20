@@ -249,6 +249,7 @@ prop$fs.tot<-prop$fs.prop*100
 prop$spp.tot<-prop$spp.prop*100
 prop.mod<-brm(fs.prop~m.index+cc+(m.index-1|species)+(cc-1|species), data=prop)
 
+write.csv(prop, file="~/Documents/git/regionalrisk/analyses/output/nao_year_sp.csv", row.names=FALSE)
 
 
 m<-sp20.mod
@@ -342,3 +343,147 @@ for(i in c(1:nrow(prop))) {
 ## still not working but see if the year previous had a strong NAO then does that influence false springs?
 ## better with previous year... see if Ben thinks this is reasonable... keep exploring
 nao<-stan_glm(fs.tot~nao_prev+sp.temp, data=prop_prev)
+
+nao_sp<-stan_glmer(spp.tot~nao_prev+sp.temp+nao_prev:sp.temp+(1|species), data=prop_prev)
+
+nsp.nointer<-brm(spp.tot~m.index+sp.temp+(1|species)+(m.index-1|species)+
+                   (sp.temp-1|species), data=prop_prev)
+
+
+m<-nsp.nointer
+m.int<-posterior_interval(m)
+sum.m<-summary(m)
+cri.f<-as.data.frame(sum.m$fixed[,c("Estimate", "l-95% CI", "u-95% CI")])
+cri.f<-cri.f[-1,] #removing the intercept 
+fdf1<-as.data.frame(rbind(as.vector(cri.f[,1]), as.vector(cri.f[,2]), as.vector(cri.f[,3])))
+fdf2<-cbind(fdf1, c(0, 0, 0) , c("Estimate", "2.5%", "95%"))
+names(fdf2)<-c(rownames(cri.f), "species", "perc")
+
+cri.r<-(ranef(m, summary = TRUE, robust = FALSE,
+              probs = c(0.025, 0.975)))$species
+cri.r2<-cri.r[, ,-1]
+cri.r2<-cri.r2[,-2,]
+dims<-dim(cri.r2)
+twoDimMat <- matrix(cri.r2, prod(dims[1:2]), dims[3])
+mat2<-cbind(twoDimMat, c(rep(1:6, length.out=18)), rep(c("Estimate", "2.5%", "95%"), each=6))
+df<-as.data.frame(mat2)
+names(df)<-c(rownames(cri.f), "species", "perc")
+dftot<-rbind(fdf2, df)
+dflong<- tidyr::gather(dftot, var, value, m.index:sp.temp, factor_key=TRUE)
+
+#adding the coef estiamtes to the random effect values 
+for (i in seq(from=1,to=nrow(dflong), by=21)) {
+  for (j in seq(from=3, to=20, by=1)) {
+    dflong$value[i+j]<- as.numeric(dflong$value[i+j]) + as.numeric(dflong$value[i])
+  }
+}
+dflong$rndm<-ifelse(dftot$species>0, 2, 1)
+dfwide<-tidyr::spread(dflong, perc, value)
+dfwide[,4:6] <- as.data.frame(lapply(c(dfwide[,4:6]), as.numeric ))
+dfwide$species<-as.factor(dfwide$species)
+## plotting
+
+pd <- position_dodgev(height = -0.5)
+
+estimates<-c("NAO Index", "Mean Spring Temperature")
+dfwide$legend<-factor(dfwide$species,
+                      labels=c("Overall Effects","Aesculus hippocastanum","Alnus glutinosa",
+                               "Betula pendula","Fagus sylvatica","Fraxinus excelsior",
+                               "Quercus robur"))
+estimates<-rev(estimates)
+#write.csv(dfwide, file="~/Documents/git/springfreeze/output/df_modforplot.csv", row.names=FALSE)
+fig1 <-ggplot(dfwide, aes(x=Estimate, y=var, color=legend, size=factor(rndm), alpha=factor(rndm)))+
+  geom_point(position =pd)+
+  geom_errorbarh(aes(xmin=(`2.5%`), xmax=(`95%`)), position=pd, size=.5, width=0)+
+  geom_vline(xintercept=0)+
+  scale_colour_manual(values=c("blue", "firebrick3", "orangered1","orange3", "sienna2", "green4", "purple2"),
+                      labels=c("Overall Effects",
+                               "Aesculus hippocastanum" = expression(paste(italic("Aesculus hippocastanum"))),
+                               "Alnus glutinosa" = expression(paste(italic("Alnus glutinosa"))),
+                               "Betula pendula" = expression(paste(italic("Betula pendula"))),
+                               "Fagus sylvatica" = expression(paste(italic("Fagus sylvatica"))),
+                               "Fraxinus excelsior" = expression(paste(italic("Fraxinus excelsior"))),
+                               "Quercus robur" = expression(paste(italic("Quercus robur")))))+
+  scale_size_manual(values=c(3, 2, 2, 2, 2, 2, 2, 2, 2, 2)) +
+  scale_shape_manual(labels="", values=c("1"=16,"2"=16))+
+  scale_alpha_manual(values=c(1, 0.5)) +
+  guides(size=FALSE, alpha=FALSE) +  
+  scale_y_discrete(limits = rev(unique(sort(dfwide$var))), labels=estimates) + ylab("") + 
+  labs(col="Effects") + theme(legend.box.background = element_rect(), 
+                              legend.title=element_blank(), legend.key.size = unit(0.2, "cm"),
+                              legend.text=element_text(size=8), legend.position= c(0.2,0.2)) #+
+#xlab(expression(atop("Model Estimate of Change ", paste("in Duration of Vegetative Risk (days)"))))
+fig1
+
+
+############# Nao Prev ################
+prev.nointer<-brm(spp.tot~nao_prev+sp.temp+(1|species)+(nao_prev-1|species)+
+                   (sp.temp-1|species), data=prop_prev)
+
+
+m<-prev.nointer
+m.int<-posterior_interval(m)
+sum.m<-summary(m)
+cri.f<-as.data.frame(sum.m$fixed[,c("Estimate", "l-95% CI", "u-95% CI")])
+cri.f<-cri.f[-1,] #removing the intercept 
+fdf1<-as.data.frame(rbind(as.vector(cri.f[,1]), as.vector(cri.f[,2]), as.vector(cri.f[,3])))
+fdf2<-cbind(fdf1, c(0, 0, 0) , c("Estimate", "2.5%", "95%"))
+names(fdf2)<-c(rownames(cri.f), "species", "perc")
+
+cri.r<-(ranef(m, summary = TRUE, robust = FALSE,
+              probs = c(0.025, 0.975)))$species
+cri.r2<-cri.r[, ,-1]
+cri.r2<-cri.r2[,-2,]
+dims<-dim(cri.r2)
+twoDimMat <- matrix(cri.r2, prod(dims[1:2]), dims[3])
+mat2<-cbind(twoDimMat, c(rep(1:6, length.out=18)), rep(c("Estimate", "2.5%", "95%"), each=6))
+df<-as.data.frame(mat2)
+names(df)<-c(rownames(cri.f), "species", "perc")
+dftot<-rbind(fdf2, df)
+dflong<- tidyr::gather(dftot, var, value, nao_prev:sp.temp, factor_key=TRUE)
+
+#adding the coef estiamtes to the random effect values 
+for (i in seq(from=1,to=nrow(dflong), by=21)) {
+  for (j in seq(from=3, to=20, by=1)) {
+    dflong$value[i+j]<- as.numeric(dflong$value[i+j]) + as.numeric(dflong$value[i])
+  }
+}
+dflong$rndm<-ifelse(dftot$species>0, 2, 1)
+dfwide<-tidyr::spread(dflong, perc, value)
+dfwide[,4:6] <- as.data.frame(lapply(c(dfwide[,4:6]), as.numeric ))
+dfwide$species<-as.factor(dfwide$species)
+## plotting
+
+pd <- position_dodgev(height = -0.5)
+
+estimates<-c("Nao Index (Previous)", "Mean Spring Temperature")
+dfwide$legend<-factor(dfwide$species,
+                      labels=c("Overall Effects","Aesculus hippocastanum","Alnus glutinosa",
+                               "Betula pendula","Fagus sylvatica","Fraxinus excelsior",
+                               "Quercus robur"))
+estimates<-rev(estimates)
+#write.csv(dfwide, file="~/Documents/git/springfreeze/output/df_modforplot.csv", row.names=FALSE)
+fig1 <-ggplot(dfwide, aes(x=Estimate, y=var, color=legend, size=factor(rndm), alpha=factor(rndm)))+
+  geom_point(position =pd)+
+  geom_errorbarh(aes(xmin=(`2.5%`), xmax=(`95%`)), position=pd, size=.5, width=0)+
+  geom_vline(xintercept=0)+
+  scale_colour_manual(values=c("blue", "firebrick3", "orangered1","orange3", "sienna2", "green4", "purple2"),
+                      labels=c("Overall Effects",
+                               "Aesculus hippocastanum" = expression(paste(italic("Aesculus hippocastanum"))),
+                               "Alnus glutinosa" = expression(paste(italic("Alnus glutinosa"))),
+                               "Betula pendula" = expression(paste(italic("Betula pendula"))),
+                               "Fagus sylvatica" = expression(paste(italic("Fagus sylvatica"))),
+                               "Fraxinus excelsior" = expression(paste(italic("Fraxinus excelsior"))),
+                               "Quercus robur" = expression(paste(italic("Quercus robur")))))+
+  scale_size_manual(values=c(3, 2, 2, 2, 2, 2, 2, 2, 2, 2)) +
+  scale_shape_manual(labels="", values=c("1"=16,"2"=16))+
+  scale_alpha_manual(values=c(1, 0.5)) +
+  guides(size=FALSE, alpha=FALSE) +  
+  scale_y_discrete(limits = rev(unique(sort(dfwide$var))), labels=estimates) + ylab("") + 
+  labs(col="Effects") + theme(legend.box.background = element_rect(), 
+                              legend.title=element_blank(), legend.key.size = unit(0.2, "cm"),
+                              legend.text=element_text(size=8), legend.position= c(0.9,0.9)) #+
+#xlab(expression(atop("Model Estimate of Change ", paste("in Duration of Vegetative Risk (days)"))))
+fig1
+
+

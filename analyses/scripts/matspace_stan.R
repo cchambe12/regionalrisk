@@ -28,6 +28,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #bb<-read.csv("output/fs_matspspace.csv", header=TRUE)
 bb<-read.csv("output/fs_matspring.csv", header=TRUE)
 mat<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
+nao<-read.csv("output/nao_year_sp.csv", header=TRUE)
 
 #### Get elevation information
 bb<-bb%>%rename(sp.temp=pre.bb)
@@ -41,10 +42,18 @@ mat<-dplyr::select(mat, species, lat, long, elev)
 mat<-mat[!duplicated(mat),]
 d<-inner_join(bb, mat)
 
-fs.cc<-dplyr::select(d, fs.num, sp.temp, elev, cc, species)
+d$nao<-NA
+for(i in c(1:nrow(d))){
+  for(j in c(1:nrow(nao)))
+    if(d$species[i]==nao$species[j] & d$sp.temp[i]==nao$sp.temp[j])
+      d$nao[i]<-nao$m.index[j]
+}
+
+fs.cc<-dplyr::select(d, fs.num, sp.temp, elev, cc, species, nao)
 fs.cc$species<-as.numeric(as.factor(fs.cc$species))
 
 fs.cc<-fs.cc[!duplicated(fs.cc),]
+
 
 fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=neg_binomial_2, chains=2)
 fit<-stan_glm(fs.num~sp.temp+elev+cc, data=fs.cc, family=neg_binomial_2, chains=2)
@@ -59,6 +68,7 @@ fs.cc<-fs.cc[!is.na(fs.cc$fs.num),]
 fs.cc<-fs.cc[!is.na(fs.cc$sp.temp),]
 fs.cc<-fs.cc[!is.na(fs.cc$elev),]
 fs.cc<-fs.cc[!is.na(fs.cc$cc),]
+fs.cc<-fs.cc[!is.na(fs.cc$nao),]
 
 fs.cc$fs.num<-as.integer(fs.cc$fs.num+1)
 
@@ -79,7 +89,7 @@ elev.stan<-stan_glmer(fs.num~sp.temp+cc+sm.elev+(1|species), data=fs.cc)
 ele2.brm<-brm(fs.num~ sp.temp + cc + sm.elev + sm.elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
              + (sm.elev-1|species) + (sm.elev:sp.temp-1|species), data=fs.cc, family=negbinomial)
 
-ele3.brm<-brm(fs.num~ sp.temp + cc + sm.elev + sm.elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
+ele3.brm<-brm(fs.num~ sp.temp + cc + sm.elev + nao + sm.elev:sp.temp + (1|species) + (sp.temp-1|species) + (cc-1|species)
               + (sm.elev-1|species) + (cc:sp.temp-1|species), data=fs.cc, family=negbinomial)
 
 ## Using 1983 as split point
@@ -209,3 +219,122 @@ fit2<-stan_glm(fs.num~mat.dec+decade+space+species, data=fs.dec, family=poisson)
 
 #------
 #  For info on the priors used see help('prior_summary.stanreg').
+
+
+
+
+
+
+
+bb<-bb%>%rename(sp.temp=pre.bb)
+bb$nao<-NA
+pb <- txtProgressBar(min = 1, max = nrow(bb), style = 3)
+for(i in c(1:nrow(bb))){
+  for(j in c(1:nrow(nao)))
+    if(bb$species[i]==nao$species[j] & bb$year[i]==nao$year[j])
+      bb$nao[i]<-nao$m.index[j]
+    setTxtProgressBar(pb, i)
+}
+bb$fs.num<-ave(bb$fs, bb$lat.long, bb$species, bb$nao, FUN=sum)
+bb$sp.temp<-ave(bb$sp.temp, bb$lat.long, bb$year)
+bb<-dplyr::select(bb, -fs.count, -PEP_ID, -year, -fs, -lat.long)
+bb<-bb[!duplicated(bb),]
+mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
+mat<-dplyr::select(mat, species, lat, long, elev)
+mat<-mat[!duplicated(mat),]
+d<-inner_join(bb, mat)
+
+
+
+fs.cc<-dplyr::select(d, fs.num, sp.temp, elev, species, nao)
+fs.cc$species<-as.numeric(as.factor(fs.cc$species))
+
+fs.cc<-fs.cc[!duplicated(fs.cc),]
+
+fs.cc<-fs.cc[!is.na(fs.cc$fs.num),]
+fs.cc<-fs.cc[!is.na(fs.cc$sp.temp),]
+fs.cc<-fs.cc[!is.na(fs.cc$elev),]
+fs.cc<-fs.cc[!is.na(fs.cc$nao),]
+
+fs.cc$fs.num<-as.integer(fs.cc$fs.num+1)
+fs.cc$sm.elev<-fs.cc$elev/100
+
+nao.stan<-stan_glm(fs.num~sp.temp+nao+sm.elev, data=fs.cc)
+
+write.csv(fs.cc, "~/Documents/git/regionalrisk/analyses/output/mat_mod_yr.csv", row.names=FALSE)
+
+nao.brm<-brm(fs.num~ sp.temp + nao + sm.elev + nao:sp.temp + (1|species) + (sp.temp-1|species) + (nao-1|species)
+              + (sm.elev-1|species) + (nao:sp.temp-1|species), data=fs.cc, chains=2)
+
+m<-nao.brm
+m.int<-posterior_interval(m)
+sum.m<-summary(m)
+cri.f<-as.data.frame(sum.m$fixed[,c("Estimate", "l-95% CI", "u-95% CI")])
+cri.f<-cri.f[-1,] #removing the intercept 
+fdf1<-as.data.frame(rbind(as.vector(cri.f[,1]), as.vector(cri.f[,2]), as.vector(cri.f[,3])))
+fdf2<-cbind(fdf1, c(0, 0, 0) , c("Estimate", "2.5%", "95%"))
+names(fdf2)<-c(rownames(cri.f), "species", "perc")
+
+cri.r<-(ranef(m, summary = TRUE, robust = FALSE,
+              probs = c(0.025, 0.975)))$species
+cri.r2<-cri.r[, ,-1]
+cri.r2<-cri.r2[,-2,]
+dims<-dim(cri.r2)
+twoDimMat <- matrix(cri.r2, prod(dims[1:2]), dims[3])
+mat2<-cbind(twoDimMat, c(rep(1:6, length.out=18)), rep(c("Estimate", "2.5%", "95%"), each=6))
+df<-as.data.frame(mat2)
+names(df)<-c(rownames(cri.f), "species", "perc")
+dftot<-rbind(fdf2, df)
+dflong<- tidyr::gather(dftot, var, value, sp.temp:`sp.temp:nao`, factor_key=TRUE)
+
+#adding the coef estiamtes to the random effect values 
+for (i in seq(from=1,to=nrow(dflong), by=21)) {
+  for (j in seq(from=3, to=20, by=1)) {
+    dflong$value[i+j]<- as.numeric(dflong$value[i+j]) + as.numeric(dflong$value[i])
+  }
+}
+dflong$rndm<-ifelse(dftot$species>0, 2, 1)
+dfwide<-tidyr::spread(dflong, perc, value)
+dfwide[,4:6] <- as.data.frame(lapply(c(dfwide[,4:6]), as.numeric ))
+dfwide$species<-as.factor(dfwide$species)
+## plotting
+
+pd <- position_dodgev(height = -0.5)
+
+estimates<-c("Mean Spring Temperature", "NAO Index", "Elevation", "Mean Spring Temperature x NAO Index")
+dfwide$legend<-factor(dfwide$species,
+                      labels=c("Overall Effects","Aesculus hippocastanum","Alnus glutinosa",
+                               "Betula pendula","Fagus sylvatica","Fraxinus excelsior",
+                               "Quercus robur"))
+estimates<-rev(estimates)
+#write.csv(dfwide, file="~/Documents/git/springfreeze/output/df_modforplot.csv", row.names=FALSE)
+fig1 <-ggplot(dfwide, aes(x=Estimate, y=var, color=legend, size=factor(rndm), alpha=factor(rndm)))+
+  geom_point(position =pd)+
+  geom_errorbarh(aes(xmin=(`2.5%`), xmax=(`95%`)), position=pd, size=.5, width=0)+
+  geom_vline(xintercept=0)+
+  scale_colour_manual(values=c("blue", "firebrick3", "orangered1","orange3", "sienna2", "green4", "purple2"),
+                      labels=c("Overall Effects",
+                               "Aesculus hippocastanum" = expression(paste(italic("Aesculus hippocastanum"))),
+                               "Alnus glutinosa" = expression(paste(italic("Alnus glutinosa"))),
+                               "Betula pendula" = expression(paste(italic("Betula pendula"))),
+                               "Fagus sylvatica" = expression(paste(italic("Fagus sylvatica"))),
+                               "Fraxinus excelsior" = expression(paste(italic("Fraxinus excelsior"))),
+                               "Quercus robur" = expression(paste(italic("Quercus robur")))))+
+  scale_size_manual(values=c(3, 2, 2, 2, 2, 2, 2, 2, 2, 2)) +
+  scale_shape_manual(labels="", values=c("1"=16,"2"=16))+
+  scale_alpha_manual(values=c(1, 0.5)) +
+  guides(size=FALSE, alpha=FALSE) +  
+  scale_y_discrete(limits = rev(unique(sort(dfwide$var))), labels=estimates) + ylab("") + 
+  labs(col="Effects") + theme(legend.box.background = element_rect(), 
+                              legend.title=element_blank(), legend.key=element_blank(),legend.key.size = unit(0.15, "cm"),
+                              legend.text=element_text(size=8), legend.position= c(0.78,0.88), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                              panel.background = element_blank(), 
+                              axis.line = element_line(colour = "black")) #+
+#xlab(expression(atop("Model Estimate of Change ", paste("in Duration of Vegetative Risk (days)"))))
+quartz()
+fig1
+
+#### Should probaly try adding in year and yearxnao  as predictors but probably is my final model!
+## Maybe do the exact same model for predicting budburst date? And then do a quick one and see if FS ~ BB is significant
+# Finally, need to determine how to quantify anamolies in temperature...
+
