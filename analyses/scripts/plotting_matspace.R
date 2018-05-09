@@ -22,6 +22,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 #bb<-read.csv("output/fs_matspspace.csv", header=TRUE)
 bb<-read.csv("output/fs_matspring.csv", header=TRUE)
+nao<-read.csv("output/nao_year_sp.csv", header=TRUE)
 
 prep_cc<-bb
 prep_cc$fs.num<-ave(prep_cc$fs, prep_cc$lat.long, prep_cc$cc,prep_cc$species, FUN=sum)
@@ -74,33 +75,61 @@ all<-ggplot(dxx, aes(x=year, y=fs.prop)) + geom_line() + xlab("Year") + ylab("Pr
 ############### Look at each individual species now... ###################
 aeship<-subset(dxx, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=spp.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites \n with False Springs") + 
-  geom_hline(yintercept=aeship$spp.ave, linetype="dashed", color="firebrick3") + coord_cartesian(ylim=c(0,0.65)) +
-  ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + annotate("text",label= "Avg. Day of Budburst = 99.24", col="firebrick3", x=1980, y=0.65, size=2) #+
+  #geom_hline(yintercept=aeship$spp.ave, linetype="dashed", color="firebrick3") 
+  coord_cartesian(ylim=c(0,0.65)) +
+  geom_vline(xintercept=c(1968, 2012), linetype="dashed", color="darkgreen") + geom_vline(xintercept=c(1994), linetype="dashed", color="red") + 
+ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                     panel.background = element_blank(), 
+                                                                     axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank())#+ annotate("text",label= "Avg. Day of Budburst = 99.24", col="firebrick3", x=1980, y=0.65, size=2) #+
   #geom_line(aes(y=bb.yr/500), col="blue") + scale_y_continuous(sec.axis = sec_axis(~.*500, name="Avg Day of Budburst"))
 alnglu<-subset(dxx, species=="ALNGLU")
-aglu<-ggplot(alnglu, aes(x=year, y=spp.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites \n with False Springs") + 
-  geom_hline(yintercept=alnglu$spp.ave, linetype="dashed", color="orangered1") + coord_cartesian(ylim=c(0, 0.65))+
-  ggtitle(expression(paste(italic("Alnus glutinosa")))) + annotate("text",label= "Avg. Day of Budburst = 98.91", col="orangered1", x=1980, y=0.65, size=2)
+aglu<-ggplot(alnglu, aes(x=year, y=spp.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites \n with False Springs") +
+  coord_cartesian(ylim=c(0, 0.65)) +
+  geom_vline(xintercept=c(1968, 2012), linetype="dashed", color="darkgreen") + geom_vline(xintercept=c(1994), linetype="dashed", color="red") +
+  ggtitle(expression(paste(italic("Alnus glutinosa")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                panel.background = element_blank(), 
+                                                                axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank())
+#+ annotate("text",label= "Avg. Day of Budburst = 98.91", col="orangered1", x=1980, y=0.65, size=2)
 #geom_line(aes(y=bb.yr/500), col="blue") + scale_y_continuous(sec.axis = sec_axis(~.*500, name="Avg Day of Budburst"))
 betpen<-subset(dxx, species=="BETPEN")
 bpen<-ggplot(betpen, aes(x=year, y=spp.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites \n with False Springs") + 
-  geom_hline(yintercept=betpen$spp.ave, linetype="dashed", color="orange3") + coord_cartesian(ylim=c(0, 0.65)) +
-  ggtitle(expression(paste(italic("Betula pendula")))) + annotate("text",label= "Avg. Day of Budburst = 98.77", col="orange3", x=1980, y=0.65, size=2)
+  #geom_hline(yintercept=betpen$spp.ave, linetype="dashed", color="orange3") 
+  coord_cartesian(ylim=c(0, 0.65)) +
+  geom_vline(xintercept=c(1968, 2012), linetype="dashed", color="darkgreen") + geom_vline(xintercept=c(1994), linetype="dashed", color="red") +
+  ggtitle(expression(paste(italic("Betula pendula")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank())
+#+ annotate("text",label= "Avg. Day of Budburst = 98.77", col="orange3", x=1980, y=0.65, size=2)
   #geom_line(aes(y=bb.yr/500), col="blue") + scale_y_continuous(sec.axis = sec_axis(~.*500, name="Avg Day of Budburst"))
 fagsyl<-subset(dxx, species=="FAGSYL")
 fsyl<-ggplot(fagsyl, aes(x=year, y=spp.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites \n with False Springs") + 
-  geom_hline(yintercept=fagsyl$spp.ave, linetype="dashed", color="sienna2") + coord_cartesian(ylim=c(0, 0.65)) +
-  ggtitle(expression(paste(italic("Fagus sylvatica")))) + annotate("text",label= "Avg. Day of Budburst = 106.74", col="sienna2", x=1980, y=0.65, size=2)
+  #geom_hline(yintercept=fagsyl$spp.ave, linetype="dashed", color="sienna2") 
+  coord_cartesian(ylim=c(0, 0.65)) +
+  geom_vline(xintercept=c(1968, 2012), linetype="dashed", color="darkgreen") + geom_vline(xintercept=c(1994), linetype="dashed", color="red") +
+  ggtitle(expression(paste(italic("Fagus sylvatica"))))+ theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank())
+#+ annotate("text",label= "Avg. Day of Budburst = 106.74", col="sienna2", x=1980, y=0.65, size=2)
   #geom_line(aes(y=bb.yr/500), col="blue") + scale_y_continuous(sec.axis = sec_axis(~.*500, name="Avg Day of Budburst"))
 fraexc<-subset(dxx, species=="FRAEXC")
 fexc<-ggplot(fraexc, aes(x=year, y=spp.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites \n with False Springs") + 
-  geom_hline(yintercept=fraexc$spp.ave, linetype="dashed", color="green4") + coord_cartesian(ylim=c(0, 0.65)) +
-  ggtitle(expression(paste(italic("Fraxinus excelsior")))) + annotate("text",label= "Avg. Day of Budburst = 116.34", col="green4", x=1980, y=0.65, size=2)
+  #geom_hline(yintercept=fraexc$spp.ave, linetype="dashed", color="green4") 
+  coord_cartesian(ylim=c(0, 0.65)) +
+  geom_vline(xintercept=c(1968, 2012), linetype="dashed", color="darkgreen") + geom_vline(xintercept=c(1994), linetype="dashed", color="red") +
+  ggtitle(expression(paste(italic("Fraxinus excelsior")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                   panel.background = element_blank(), 
+                                                                   axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank())
+#+ annotate("text",label= "Avg. Day of Budburst = 116.34", col="green4", x=1980, y=0.65, size=2)
   #geom_line(aes(y=bb.yr/500), col="blue") + scale_y_continuous(sec.axis = sec_axis(~.*500, name="Avg Day of Budburst"))
 querob<-subset(dxx, species=="QUEROB")
 qrob<-ggplot(querob, aes(x=year, y=spp.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites \n with False Springs") + 
-  geom_hline(yintercept=querob$spp.ave, linetype="dashed", color="purple2") + coord_cartesian(ylim=c(0, 0.65)) +
-  ggtitle(expression(paste(italic("Quercus robur")))) + annotate("text",label= "Avg. Day of Budburst = 113.04", col="purple2", x=1980, y=0.65, size=2)
+  #geom_hline(yintercept=querob$spp.ave, linetype="dashed", color="purple2") 
+  coord_cartesian(ylim=c(0, 0.65)) +
+  geom_vline(xintercept=c(1968, 2012), linetype="dashed", color="darkgreen") + geom_vline(xintercept=c(1994), linetype="dashed", color="red") +
+  ggtitle(expression(paste(italic("Quercus robur")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                              panel.background = element_blank(), 
+                                                              axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank())
+#+ annotate("text",label= "Avg. Day of Budburst = 113.04", col="purple2", x=1980, y=0.65, size=2)
   #geom_line(aes(y=bb.yr/500), col="blue") + scale_y_continuous(sec.axis = sec_axis(~.*500, name="Avg Day of Budburst"))
 
 quartz()
