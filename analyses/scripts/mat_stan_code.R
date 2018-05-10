@@ -32,7 +32,7 @@ options(mc.cores = parallel::detectCores())
 #### get the data
 bb<-read.csv("output/fake_poisson.csv", header=TRUE)
 bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
-bb<-read.csv("output/mat_site.csv", header=TRUE)
+bbx<-read.csv("output/mat_site.csv", header=TRUE)
 
 ## # yrs FS ~ MAT + SP + SITE prep data
 

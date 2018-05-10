@@ -51,10 +51,11 @@ r<-brick("~/Desktop/tg_0.25deg_reg_v16.0.nc", varname="tg", sep="")
 
 df<-d
 df$lat.long<-paste(df$lat, d$flong, sep=",")
-df<-df[!duplicated(df$lat.long),]
+df<-df[!duplicated(df),]
 lats<-df$lat
 lons<-df$long
 coords<-data.frame(x=lons, y=lats)
+coords<-coords[!duplicated(coords),]
 points <- SpatialPoints(coords, proj4string = r@crs)
 
 values <- extract(r,points)

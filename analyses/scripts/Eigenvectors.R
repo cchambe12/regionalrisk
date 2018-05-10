@@ -18,10 +18,13 @@ library(rstanarm)
 setwd("~/Documents/git/regionalrisk/analyses/")
 
 ## Get Data
-bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
+bb<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 bb$lat.long<-paste(bb$lat, bb$long)
-bprep<-bb%>%dplyr::select(fs, lat.long)
-bprep$y<-ave(bprep$fs, bprep$lat.long, FUN=sum)
+bb$fs.count.num<-ave(bb$fs.count, bb$lat.long, FUN=sum)
+#bb$fs.num<-ave(bb$fs, bb$species, bb$lat.long, FUN=sum)
+
+bprep<-bb%>%dplyr::select(fs.count.num, lat.long)
+bprep$y<-bprep$fs.count.num
 bprep<-dplyr::select(bprep, lat.long, y)
 bprep<-bprep[!duplicated(bprep),]
 bcoord<-bprep%>%dplyr::select(lat.long)
@@ -53,7 +56,7 @@ space<-residuals(rex.mod)
 
 b_space<-cbind(bprep, space)
 prep_space<-full_join(bb, b_space, by="lat.long")
-#write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_matspspace.csv", row.names=FALSE)
+write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_matspspace.csv", row.names=FALSE)
 
 ##### Stuff to remove later is below... #####
 
