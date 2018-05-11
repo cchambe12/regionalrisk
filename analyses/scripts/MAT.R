@@ -32,18 +32,18 @@ library(data.table)
 setwd("~/Documents/git/regionalrisk/analyses/output")
 d<-read.csv("fs_yearsitespp.csv", header=TRUE)
 #dx<-read.csv("mat.csv", header=TRUE)
-df<-d%>%filter(year>=2008)
-xdf<-d%>%filter(year<2008)
-xdf$lat.long<-paste(xdf$lat, xdf$long)
-xdf<-xdf[!duplicated(xdf$lat.long),]
-xlat<-subset(xdf, !(xdf$lat%in%df$lat))
-xlats<-xlat$lat
-xlon<-subset(xdf, !(xdf$long%in%df$long))
-xlons<-xlon$long
-coords<-data.frame(x=lons, y=lats)
-points<-SpatialPoints(coords, proj4string = r@crs)
+#df<-d%>%filter(year>=2008)
+#xdf<-d%>%filter(year<2008)
+#xdf$lat.long<-paste(xdf$lat, xdf$long)
+#xdf<-xdf[!duplicated(xdf$lat.long),]
+#xlat<-subset(xdf, !(xdf$lat%in%df$lat))
+#xlats<-xlat$lat
+#xlon<-subset(xdf, !(xdf$long%in%df$long))
+#xlons<-xlon$long
+#coords<-data.frame(x=lons, y=lats)
+#points<-SpatialPoints(coords, proj4string = r@crs)
 
-values<-extract(r, points)
+#values<-extract(r, points)
 
 ### Clean the weather data
 setwd("~/Desktop/")
@@ -76,14 +76,15 @@ dx$Date<-gsub("[.]","-", dx$date)
 dx<-dplyr::select(dx, -date)
 dx$year<-substr(dx$Date, 0,4)
 dx$lat.long<-paste(dx$lat, dx$long)
+dx<-dx[!duplicated(dx),]
 dx$mat<-ave(dx$Tavg, dx$year, dx$lat.long)
 dx$doy<-yday(dx$Date)
 dx$spring<-ifelse(dx$doy>=1 & dx$doy<=90, "spring", 0)
 ddx<-dx[(dx$spring=="spring"),]
 ddx<-ddx[!is.na(ddx$Tavg),]
 ddx$pre.bb<-ave(ddx$Tavg, ddx$year, ddx$lat.long)
-xdd<-dx%>%dplyr::select(-Tavg, -Date, -spring, -doy)
-xdd<-xdd[!duplicated(xdd),]
+#xdd<-dx%>%dplyr::select(-Tavg, -Date, -spring, -doy)
+#xdd<-xdd[!duplicated(xdd),]
 
 spring<-ddx%>%dplyr::select(-Tavg, -Date, -spring, -doy)
 spring<-spring[!duplicated(spring),]

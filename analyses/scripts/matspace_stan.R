@@ -30,16 +30,21 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #### get the data
 dx<-read.csv("output/fs_matspspace.csv", header=TRUE)
 
-#mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
-#myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
-#sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(-250, 581))
-#site<- ggplot(dx, aes(x=long, y=lat, col=space)) +   mapWorld +
- # coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
-#site <- site + theme(panel.border = element_blank(),
- #                 panel.grid.major = element_blank(),
-  #                panel.grid.minor = element_blank()) + geom_point() + geom_jitter()+
-  #sc + labs(color="Day of Budburst")+
-  #xlab("Longitude") + ylab("Latitude")
+
+dx<-prep_space%>%dplyr::select(lat, long, space)
+dx<-dx[!duplicated(dx),]
+dxx<-dx[which(dx$space<=-100 | dx$space>=300),]
+
+mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
+myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
+sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(-450, 870))
+site<- ggplot(dxx, aes(x=long, y=lat, col=space), alpha=0.2) +   mapWorld +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+site <- site + theme(panel.border = element_blank(),
+                  panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank()) + geom_point(alpha=0.2) + geom_jitter()+
+  sc + labs(color="Day of Budburst")+
+  xlab("Longitude") + ylab("Latitude")
 
 
 x<-read.csv("output/fs_matspring.csv", header=TRUE)
