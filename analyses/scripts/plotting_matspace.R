@@ -145,6 +145,7 @@ bb.qr<-read.csv("output/bbch_region_quercus.csv", header=TRUE)
 
 ## Using BBCH 11 for analysis
 # AESHIP
+bb.aes$lat.long<-paste(bb.aes$LAT, bb.aes$LON)
 bb.aes<-bb.aes%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.aes$leafout<-ave(bb.aes$DAY) ## 111.24
 bb.aes$bb<-bb.aes$DAY-12
@@ -162,12 +163,13 @@ bb.aes$bb.decade<-ifelse(bb.aes$decade==1, 7, bb.aes$bb.dec)
 bb.aes$bb.dec<-ave(bb.aes$bb, bb.aes$bb.decade)
 ## 50s=114.76; 60s=114.28; 70s=115.11; 80s=112.93; 90s=107.01; 00s=103.41; 10s=103.98
 bb.aes$bb.yr<-ave(bb.aes$bb, bb.aes$YEAR)
-bb.aes$bb.space<-ave(bb.aes$bb, bb.aes$PEP_ID)
+bb.aes$bb.space<-ave(bb.aes$bb, bb.aes$lat.long)
 bb.aes<-rename(bb.aes, year=YEAR)
 bb.aes<-dplyr::select(bb.aes, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.aes<-bb.aes[!duplicated(bb.aes),]
 
 # ALNGLU
+bb.ag$lat.long<-paste(bb.ag$LAT, bb.ag$LON)
 bb.ag<-bb.ag%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.ag$leafout<-ave(bb.ag$DAY) 
 bb.ag$bb<-bb.ag$DAY-12
@@ -185,12 +187,13 @@ bb.ag$bb.decade<-ifelse(bb.ag$decade==1, 7, bb.ag$bb.dec)
 bb.ag$bb.dec<-ave(bb.ag$bb, bb.ag$bb.decade)
 ## 50s=118.65; 60s=116.06; 70s=114.20; 80s=112.30; 90s=104.96; 00s=105.98; 10s=104.74
 bb.ag$bb.yr<-ave(bb.ag$bb, bb.ag$YEAR)
-bb.ag$bb.space<-ave(bb.ag$bb, bb.ag$PEP_ID)
+bb.ag$bb.space<-ave(bb.ag$bb, bb.ag$lat.long)
 bb.ag<-rename(bb.ag, year=YEAR)
 bb.ag<-dplyr::select(bb.ag, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.ag<-bb.ag[!duplicated(bb.ag),]
 
 # BETPEN
+bb.bp$lat.long<-paste(bb.bp$LAT, bb.bp$LON)
 bb.bp<-bb.bp%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.bp$leafout<-ave(bb.bp$DAY) 
 bb.bp$bb<-bb.bp$DAY-12
@@ -208,12 +211,13 @@ bb.bp$bb.decade<-ifelse(bb.bp$decade==1, 7, bb.bp$bb.dec)
 bb.bp$bb.dec<-ave(bb.bp$bb, bb.bp$bb.decade)
 ## 50s=114.31; 60s=113.13; 70s=113.73; 80s=112.75; 90s=105.77; 00s=105.59; 10s=103.90
 bb.bp$bb.yr<-ave(bb.bp$bb, bb.bp$YEAR)
-bb.bp$bb.space<-ave(bb.bp$bb, bb.bp$PEP_ID)
+bb.bp$bb.space<-ave(bb.bp$bb, bb.bp$lat.long)
 bb.bp<-rename(bb.bp, year=YEAR)
 bb.bp<-dplyr::select(bb.bp, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.bp<-bb.bp[!duplicated(bb.bp),]
 
 # FAGSYL
+bb.fsyl$lat.long<-paste(bb.fsyl$LAT, bb.fsyl$LON)
 bb.fsyl<-bb.fsyl%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.fsyl$leafout<-ave(bb.fsyl$DAY)
 bb.fsyl$bb<-bb.fsyl$DAY-12
@@ -231,12 +235,13 @@ bb.fsyl$bb.decade<-ifelse(bb.fsyl$decade==1, 7, bb.fsyl$bb.dec)
 bb.fsyl$bb.dec<-ave(bb.fsyl$bb, bb.fsyl$bb.decade)
 ## 50s=120.11; 60s=120.27; 70s=122.27; 80s=120.94; 90s=115.74; 00s=114.00; 10s=111.63
 bb.fsyl$bb.yr<-ave(bb.fsyl$bb, bb.fsyl$YEAR)
-bb.fsyl$bb.space<-ave(bb.fsyl$bb, bb.fsyl$PEP_ID)
+bb.fsyl$bb.space<-ave(bb.fsyl$bb, bb.fsyl$lat.long)
 bb.fsyl<-rename(bb.fsyl, year=YEAR)
 bb.fsyl<-dplyr::select(bb.fsyl, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.fsyl<-bb.fsyl[!duplicated(bb.fsyl),]
 
 # FRAEXC
+bb.fex$lat.long<-paste(bb.fex$LAT, bb.fex$LON)
 bb.fex<-bb.fex%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.fex$leafout<-ave(bb.fex$DAY)
 bb.fex$bb<-bb.fex$DAY-12
@@ -254,12 +259,13 @@ bb.fex$bb.decade<-ifelse(bb.fex$decade==1, 7, bb.fex$bb.dec)
 bb.fex$bb.dec<-ave(bb.fex$bb, bb.fex$bb.decade)
 ## 50s=131.69; 60s=129.84; 70s=132.31; 80s=132.16; 90s=125.35; 00s=123.19; 10s=121.47
 bb.fex$bb.yr<-ave(bb.fex$bb, bb.fex$YEAR)
-bb.fex$bb.space<-ave(bb.fex$bb, bb.fex$PEP_ID)
+bb.fex$bb.space<-ave(bb.fex$bb, bb.fex$lat.long)
 bb.fex<-rename(bb.fex, year=YEAR)
 bb.fex<-dplyr::select(bb.fex, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.fex<-bb.fex[!duplicated(bb.fex),]
 
 # QUEROB
+bb.qr$lat.long<-paste(bb.qr$LAT, bb.qr$LON)
 bb.qr<-bb.qr%>%filter(BBCH==11)%>%filter(YEAR>=1950)
 bb.qr$leafout<-ave(bb.qr$DAY)
 bb.qr$bb<-bb.qr$DAY-12
@@ -277,7 +283,7 @@ bb.qr$bb.decade<-ifelse(bb.qr$decade==1, 7, bb.qr$bb.dec)
 bb.qr$bb.dec<-ave(bb.qr$bb, bb.qr$bb.decade)
 ## 50s=127.14; 60s=126.64; 70s=129.52; 80s=127.58; 90s=122.1; 00s=118.37; 10s=116.33
 bb.qr$bb.yr<-ave(bb.qr$bb, bb.qr$YEAR)
-bb.qr$bb.space<-ave(bb.qr$bb, bb.qr$PEP_ID)
+bb.qr$bb.space<-ave(bb.qr$bb, bb.qr$lat.long)
 bb.qr<-rename(bb.qr, year=YEAR)
 bb.qr<-dplyr::select(bb.qr, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
 bb.qr<-bb.qr[!duplicated(bb.qr),]
@@ -296,7 +302,7 @@ dxx<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
 prep_bb<-dxx
 #prep_bb$lat<-round(prep_bb$lat, digits=0)
 #prep_bb$long<-round(prep_bb$long, digits=0)
-bb.mod<-brm(fs~year+bb.yr+(1|species), data=prep_bb, family=bernoulli)
+bb.mod<-brm(fs~year+bb.yr+(1|species), data=d, family=bernoulli)
 
 prep_dec<-dxx
 prep_dec$bb.decade<-NA

@@ -15,12 +15,12 @@ library(dplyr)
 library(tidyr)
 library(brms)
 library(ggstance)
-library(ggmap)
-library(rworldmap)
-library(maps)
-library(mapdata)
-library(marmap)
-library(RColorBrewer)
+#library(ggmap)
+#library(rworldmap)
+#library(maps)
+#library(mapdata)
+#library(marmap)
+#library(RColorBrewer)
 
 # Setting working directory
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -30,28 +30,31 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #### get the data
 dx<-read.csv("output/fs_matspspace_old.csv", header=TRUE)
 
-
 dx<-dx%>%dplyr::select(lat, long, space)
 dx<-dx[!duplicated(dx),]
 #dxx<-dx[which(dx$space<=-100 | dx$space>=300),]
 
-mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
-myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
-sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(-51, 87))
-site<- ggplot(dx, aes(x=long, y=lat, col=space), alpha=0.2) +   mapWorld +
-  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
-site <- site + theme(panel.border = element_blank(),
-                  panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank()) + geom_point(alpha=0.2) + geom_jitter()+
-  sc + labs(color="Day of Budburst")+
-  xlab("Longitude") + ylab("Latitude")
+#mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
+#myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
+#sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(-51, 87))
+#site<- ggplot(dx, aes(x=long, y=lat, col=space), alpha=0.2) +   mapWorld +
+#  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+#site <- site + theme(panel.border = element_blank(),
+ #                 panel.grid.major = element_blank(),
+  #                panel.grid.minor = element_blank()) + geom_point(alpha=0.2) + geom_jitter()+
+  # sc + labs(color="Day of Budburst")+
+  # xlab("Longitude") + ylab("Latitude")
 
 
-x<-read.csv("output/fs_matspring.csv", header=TRUE)
+xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+df<-read.csv("output/mat_fulldata.csv", header=TRUE)
 mat<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
 nao<-read.csv("output/nao_year_sp.csv", header=TRUE)
 
 ### Clean up dataframes a bit
+dx<-full_join(df, dx)
+dx<-dx[!duplicated(dx),]
+
 mat<-dplyr::select(mat, species, year, LAT, LON, ALT)
 mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 mat<-mat[!duplicated(mat),]
@@ -61,26 +64,46 @@ bb<-full_join(mat, dx)
 #### Get elevation information
 bb<-bb%>%rename(sp.temp=pre.bb)
 bb$cc<-ifelse(bb$year<=1983&bb$year>=1950, 0, 1)
-bb$fs.num<-ave(bb$fs, bb$lat.long, bb$species,FUN=sum)
-bb$sp.temp<-ave(bb$sp.temp, bb$lat.long, bb$cc)
-bb<-dplyr::select(bb, -fs.count, -PEP_ID, -year, -fs, -lat.long)
+
+xx<-dplyr::select(xx, lat, long, species, fs)
+xx<-xx[!duplicated(xx),]
+bb<-full_join(bb, xx)
 bb<-bb[!duplicated(bb),]
-mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
-mat<-dplyr::select(mat, species, lat, long, elev)
-mat<-mat[!duplicated(mat),]
-d<-inner_join(bb, mat)
+bb<-na.omit(bb)
 
-d$nao<-NA
-for(i in c(1:nrow(d))){
-  for(j in c(1:nrow(nao)))
-    if(d$species[i]==nao$species[j] & d$sp.temp[i]==nao$sp.temp[j])
-      d$nao[i]<-nao$m.index[j]
-}
+nao<-dplyr::select(nao, species, year, m.index)
+nao<-nao[!duplicated(nao),]
 
-fs.cc<-dplyr::select(d, fs.num, sp.temp, elev, cc, species, nao)
-fs.cc$species<-as.numeric(as.factor(fs.cc$species))
+bb<-full_join(bb, nao)
 
-fs.cc<-fs.cc[!duplicated(fs.cc),]
+bb<-bb[!duplicated(bb),]
+#mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
+#mat<-dplyr::select(mat, species, lat, long, elev)
+#mat<-mat[!duplicated(mat),]
+#d<-inner_join(bb, mat)
+
+#d$nao<-NA
+#for(i in c(1:nrow(d))){
+#  for(j in c(1:nrow(nao)))
+#    if(d$species[i]==nao$species[j] & d$sp.temp[i]==nao$sp.temp[j])
+#      d$nao[i]<-nao$m.index[j]
+#}
+
+#fs.cc<-dplyr::select(d, fs.num, sp.temp, elev, cc, species, nao)
+#fs.cc$species<-as.numeric(as.factor(fs.cc$species))
+
+#fs.cc<-fs.cc[!duplicated(fs.cc),]
+
+bb$sm.elev<-bb$elev/100
+bb$nao<-bb$m.index*10
+
+bb.pre<-bb%>%filter(year<=1983)
+bb.pre<-dplyr::select(bb.pre, sp.temp, sm.elev, species, year, fs)
+bb.pre<-bb.pre[!duplicated(bb.pre),]
+
+fit.first<-stan_glmer(fs~sp.temp+sm.elev+(1|species), data=bb)
+
+fit1.nointer<-stan_glmer(fs~sp.temp+sm.elev+nao+space+cc+(1|species), data=bb)
 
 
 fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=neg_binomial_2, chains=2)
