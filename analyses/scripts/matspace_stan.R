@@ -15,12 +15,12 @@ library(dplyr)
 library(tidyr)
 library(brms)
 library(ggstance)
-#library(ggmap)
-#library(rworldmap)
-#library(maps)
-#library(mapdata)
-#library(marmap)
-#library(RColorBrewer)
+library(ggmap)
+library(rworldmap)
+library(maps)
+library(mapdata)
+library(marmap)
+library(RColorBrewer)
 
 # Setting working directory
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -28,17 +28,17 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 ########################
 #### get the data
-dx<-read.csv("output/fs_matspspace.csv", header=TRUE)
+dx<-read.csv("output/fs_matspspace_old.csv", header=TRUE)
 
 
-dx<-prep_space%>%dplyr::select(lat, long, space)
+dx<-dx%>%dplyr::select(lat, long, space)
 dx<-dx[!duplicated(dx),]
-dxx<-dx[which(dx$space<=-100 | dx$space>=300),]
+#dxx<-dx[which(dx$space<=-100 | dx$space>=300),]
 
 mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
 myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
-sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(-450, 870))
-site<- ggplot(dxx, aes(x=long, y=lat, col=space), alpha=0.2) +   mapWorld +
+sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(-51, 87))
+site<- ggplot(dx, aes(x=long, y=lat, col=space), alpha=0.2) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
 site <- site + theme(panel.border = element_blank(),
                   panel.grid.major = element_blank(),

@@ -33,6 +33,19 @@ bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
 bcoords$lat<-as.numeric(bcoords$lat)
 bcoords$long<-as.numeric(bcoords$long)
 
+## Get Data
+bb<-read.csv("output/mat_fulldata.csv", header=TRUE)
+
+bprep<-bb%>%dplyr::select(pre.bb, lat.long)
+bprep$y<-bprep$pre.bb
+bprep<-dplyr::select(bprep, lat.long, y)
+bprep<-bprep[!duplicated(bprep),]
+bcoord<-bprep%>%dplyr::select(lat.long)
+bcoords<-as.data.frame(bcoord[!duplicated(bcoord),])
+bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
+bcoords$lat<-as.numeric(bcoords$lat)
+bcoords$long<-as.numeric(bcoords$long)
+
 
 ## Based on Bauman et al... ##
 xymat<-as.matrix(bcoords)
