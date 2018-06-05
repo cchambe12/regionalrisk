@@ -65,9 +65,10 @@ bb<-full_join(mat, dx)
 bb<-bb%>%rename(sp.temp=pre.bb)
 bb$cc<-ifelse(bb$year<=1983&bb$year>=1950, 0, 1)
 
-xx<-dplyr::select(xx, lat, long, species, fs)
+xx<-dplyr::select(xx, lat, long, species, fs.count)
 xx<-xx[!duplicated(xx),]
 bb<-full_join(bb, xx)
+bb$fs.count<-ave(bb$fs.count, bb$year, bb$lat.long, bb$species, FUN=last)
 bb<-bb[!duplicated(bb),]
 bb<-na.omit(bb)
 
@@ -97,13 +98,105 @@ bb<-bb[!duplicated(bb),]
 bb$sm.elev<-bb$elev/100
 bb$nao<-bb$m.index*10
 
+columnstokeep <- c("species", "nao", "sp.temp", "cc", "space", "sm.elev", "fs.count")
+bb.stan <- subset(bb, select=columnstokeep)
+
+bb.stan$sp.temp<-round(bb.stan$sp.temp, digits=3)
+bb.stan$space<-round(bb.stan$space, digits=3)
+
+bb.stan<-bb.stan[!duplicated(bb.stan),]
+bb.stan<-na.omit(bb.stan)
+
+brm.full.nointer<-brm(fs.count~nao+sp.temp+cc+space+sm.elev+(1|species)+
+                        (nao-1|species)+(sp.temp-1|species)+(cc-1|species)+
+                        (space-1|species)+(sm.elev-1|species), data=bb.stan, chains=2, family=poisson,cores=4)
+
+m<-brm.full.nointer
+m.int<-posterior_interval(m)
+sum.m<-summary(m)
+cri.f<-as.data.frame(sum.m$fixed[,c("Estimate", "l-95% CI", "u-95% CI")])
+cri.f<-cri.f[-1,] #removing the intercept 
+fdf1<-as.data.frame(rbind(as.vector(cri.f[,1]), as.vector(cri.f[,2]), as.vector(cri.f[,3])))
+fdf2<-cbind(fdf1, c(0, 0, 0) , c("Estimate", "2.5%", "95%"))
+names(fdf2)<-c(rownames(cri.f), "species", "perc")
+
+cri.r<-(ranef(m, summary = TRUE, robust = FALSE,
+              probs = c(0.025, 0.975)))$species
+cri.r2<-cri.r[, ,-1]
+cri.r2<-cri.r2[,-2,]
+dims<-dim(cri.r2)
+twoDimMat <- matrix(cri.r2, prod(dims[1:2]), dims[3])
+mat2<-cbind(twoDimMat, c(rep(1:6, length.out=18)), rep(c("Estimate", "2.5%", "95%"), each=6))
+df<-as.data.frame(mat2)
+names(df)<-c(rownames(cri.f), "species", "perc")
+dftot<-rbind(fdf2, df)
+dflong<- tidyr::gather(dftot, var, value, nao:sm.elev, factor_key=TRUE)
+
+#adding the coef estiamtes to the random effect values 
+for (i in seq(from=1,to=nrow(dflong), by=21)) {
+  for (j in seq(from=3, to=20, by=1)) {
+    dflong$value[i+j]<- as.numeric(dflong$value[i+j]) + as.numeric(dflong$value[i])
+  }
+}
+dflong$rndm<-ifelse(dftot$species>0, 2, 1)
+dfwide<-tidyr::spread(dflong, perc, value)
+dfwide[,4:6] <- as.data.frame(lapply(c(dfwide[,4:6]), as.numeric ))
+dfwide$species<-as.factor(dfwide$species)
+## plotting
+
+pd <- position_dodgev(height = -0.5)
+
+estimates<-c("NAO", "Mean Spring Temperature", "Before or After 1983", "Space", "Elevation")
+dfwide$legend<-factor(dfwide$species,
+                      labels=c("Overall Effects","Aesculus hippocastanum","Alnus glutinosa",
+                               "Betula pendula","Fagus sylvatica","Fraxinus excelsior",
+                               "Quercus robur"))
+estimates<-rev(estimates)
+#write.csv(dfwide, file="~/Documents/git/springfreeze/output/df_modforplot.csv", row.names=FALSE)
+fig1 <-ggplot(dfwide, aes(x=Estimate, y=var, color=legend, size=factor(rndm), alpha=factor(rndm)))+
+  geom_point(position =pd)+
+  geom_errorbarh(aes(xmin=(`2.5%`), xmax=(`95%`)), position=pd, size=.5, width=0)+
+  geom_vline(xintercept=0)+
+  scale_colour_manual(values=c("blue", "firebrick3", "orangered1","orange3", "sienna2", "green4", "purple2"),
+                      labels=c("Overall Effects",
+                               "Aesculus hippocastanum" = expression(paste(italic("Aesculus hippocastanum"))),
+                               "Alnus glutinosa" = expression(paste(italic("Alnus glutinosa"))),
+                               "Betula pendula" = expression(paste(italic("Betula pendula"))),
+                               "Fagus sylvatica" = expression(paste(italic("Fagus sylvatica"))),
+                               "Fraxinus excelsior" = expression(paste(italic("Fraxinus excelsior"))),
+                               "Quercus robur" = expression(paste(italic("Quercus robur")))))+
+  scale_size_manual(values=c(3, 2, 2, 2, 2, 2, 2, 2, 2, 2)) +
+  scale_shape_manual(labels="", values=c("1"=16,"2"=16))+
+  scale_alpha_manual(values=c(1, 0.5)) +
+  guides(size=FALSE, alpha=FALSE) +  
+  scale_y_discrete(limits = rev(unique(sort(dfwide$var))), labels=estimates) + ylab("") + 
+  labs(col="Effects") + theme(legend.box.background = element_rect(), 
+                              legend.title=element_blank(), legend.key=element_blank(),legend.key.size = unit(0.15, "cm"),
+                              legend.text=element_text(size=8), legend.position= c(0.78,0.88), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                              panel.background = element_blank(), 
+                              axis.line = element_line(colour = "black")) #+
+#xlab(expression(atop("Model Estimate of Change ", paste("in Duration of Vegetative Risk (days)"))))
+quartz()
+fig1
+
+
 bb.pre<-bb%>%filter(year<=1983)
-bb.pre<-dplyr::select(bb.pre, sp.temp, sm.elev, species, year, fs)
+bb.pre<-dplyr::select(bb.pre, sp.temp, sm.elev, species, nao, fs.count, space)
 bb.pre<-bb.pre[!duplicated(bb.pre),]
 
-fit.first<-stan_glmer(fs~sp.temp+sm.elev+(1|species), data=bb)
+brm.first<-brm(fs.count~sp.temp+sm.elev+space+nao+(1|species), data=bb.pre, family=poisson, chains =2)
 
-fit1.nointer<-stan_glmer(fs~sp.temp+sm.elev+nao+space+cc+(1|species), data=bb)
+
+
+fit.first<-stan_glmer(fs~sp.temp+sm.elev+space+nao+(1|species), data=bb.pre, family=binomial, chains=1)
+
+bb.post<-bb%>%filter(year>1983)
+bb.post<-dplyr::select(bb.post, sp.temp, sm.elev, species, year, fs)
+bb.post<-bb.post[!duplicated(bb.post),]
+
+fit.last<-stan_glmer(fs~sp.temp+sm.elev)
+
+fit1.nointer<-stan_glmer(fs~sp.temp+nao+space+cc+(1|species), data=bb)
 
 
 fit<-stan_glmer(fs.num~sp.temp+elev+cc+(1|species), data=fs.cc, family=neg_binomial_2, chains=2)

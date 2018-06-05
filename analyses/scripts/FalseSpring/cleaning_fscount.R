@@ -24,6 +24,7 @@ qr<-read.csv("querob_data.csv", header=TRUE)
 
 ## Start looking at the data a bit...
 bp$fs<- ifelse(bp$Tmin<=-2.2, 1, 0)
+bp<-bp[!duplicated(bp),]
 bp$fs.count<- ave(bp$fs, bp$PEP_ID, bp$year, FUN=sum)
 betpen<-bp%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 betpen<-betpen[!duplicated(betpen),]
@@ -33,6 +34,7 @@ betpen$fs<-ifelse(betpen$fs.count>=1, 1, 0)
 #betpen<-dplyr::select(betpen, -fs.count)
 
 ah$fs<- ifelse(ah$Tmin<=-2.2, 1, 0)
+ah<-ah[!duplicated(ah),]
 ah$fs.count<- ave(ah$fs, ah$PEP_ID, ah$year, FUN=sum)
 aeship<-ah%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 aeship<-aeship[!duplicated(aeship),]
@@ -44,6 +46,7 @@ aeship$fs<-ifelse(aeship$fs.count>=1, 1, 0)
 d<-full_join(betpen, aeship)
 
 ag$fs<- ifelse(ag$Tmin<=-2.2, 1, 0)
+ag<-ag[!duplicated(ag),]
 ag$fs.count<- ave(ag$fs, ag$PEP_ID, ag$year, FUN=sum)
 alnglu<-ag%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 alnglu<-alnglu[!duplicated(alnglu),]
@@ -55,6 +58,7 @@ alnglu$fs<-ifelse(alnglu$fs.count>=1, 1, 0)
 d<-full_join(d, alnglu)
 
 fe$fs<- ifelse(fe$Tmin<=-2.2, 1, 0)
+fe<-fe[!duplicated(fe),]
 fe$fs.count<- ave(fe$fs, fe$PEP_ID, fe$year, FUN=sum)
 fraexc<-fe%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 fraexc<-fraexc[!duplicated(fraexc),]
@@ -66,6 +70,7 @@ fraexc$fs<-ifelse(fraexc$fs.count>=1, 1, 0)
 d<-full_join(d, fraexc)
 
 fs$fs<- ifelse(fs$Tmin<=-2.2, 1, 0)
+fs<-fs[!duplicated(fs),]
 fs$fs.count<- ave(fs$fs, fs$PEP_ID, fs$year, FUN=sum)
 fagsyl<-fs%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 fagsyl<-fagsyl[!duplicated(fagsyl),]
@@ -77,6 +82,7 @@ fagsyl$fs<-ifelse(fagsyl$fs.count>=1, 1, 0)
 d<-full_join(d, fagsyl)
 
 qr$fs<- ifelse(qr$Tmin<=-2.2, 1, 0)
+qr<-qr[!duplicated(qr),]
 qr$fs.count<- ave(qr$fs, qr$PEP_ID, qr$year, FUN=sum)
 querob<-qr%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 querob<-querob[!duplicated(querob),]
@@ -86,6 +92,7 @@ querob$fs<-ifelse(querob$fs.count>=1, 1, 0)
 #querob<-dplyr::select(querob, -fs.count)
 
 d<-full_join(d, querob)
+d$fs.count<-ifelse(d$fs.count>13, 13, d$fs.count)
 
 write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/fs_yearsitespp.csv", row.names = FALSE)
 
