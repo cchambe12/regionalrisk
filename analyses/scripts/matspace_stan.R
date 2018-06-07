@@ -107,9 +107,12 @@ bb.stan$space<-round(bb.stan$space, digits=3)
 bb.stan<-bb.stan[!duplicated(bb.stan),]
 bb.stan<-na.omit(bb.stan)
 
+write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb.brm.nointer.csv", row.names = FALSE)
+
 brm.full.nointer<-brm(fs.count~nao+sp.temp+cc+space+sm.elev+(1|species)+
                         (nao-1|species)+(sp.temp-1|species)+(cc-1|species)+
                         (space-1|species)+(sm.elev-1|species), data=bb.stan, chains=2, family=poisson,cores=4)
+save(brm.full.nointer, file="/n/wolkovich_lab/Lab/Cat/brm.Rdata")
 
 m<-brm.full.nointer
 m.int<-posterior_interval(m)
@@ -142,6 +145,8 @@ dflong$rndm<-ifelse(dftot$species>0, 2, 1)
 dfwide<-tidyr::spread(dflong, perc, value)
 dfwide[,4:6] <- as.data.frame(lapply(c(dfwide[,4:6]), as.numeric ))
 dfwide$species<-as.factor(dfwide$species)
+
+write.csv(dfwide, file="/n/wolkovich_lab/Lab/Cat/brm_output.csv", row.names=FALSE)
 ## plotting
 
 pd <- position_dodgev(height = -0.5)
