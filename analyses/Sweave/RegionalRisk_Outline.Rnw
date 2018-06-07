@@ -105,13 +105,6 @@ I will analyze large-scale effects across space and time to inspect the effects 
 
 There is large debate over whether or not spring freeze damage will increase \citep{Hannenin1991, Augspurger2013, Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994} with climate change. I assessed the daily gridded climate data across Europe (E-OBS) from 1950-2016. By simply using climate data, I compared the frequency of spring freeze events throughout Europe before and after anthropogenic climate change began (i.e. around 1980 \citep{Barnett2001}). A spring freeze was considered if the the daily minimum temperature fell below -2$^{\circ}$C \citep{Schwartz1993} between March 1 and June 30. A few regions experienced increased exposure to spring freeze events, whereas most other regions experienced fewer or similar numbers of years with spring freezes (Figure \ref{fig:region}). Understanding regional differences in spring freeze intensity and frequency is essential for predicting future habitat risk.
 
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/FS_Diff.pdf}
-  -\caption{Number of years with freezing events that occured before anthropogenic climate change began (1951-1983) as compared to after anthropogenic climate change began (1984-2016). If temperatures fell below -2$^{\circ}$C between March 1 and June 30, a year with a spring freeze was tallied. Some regions experienced more years with spring freezes after climate change began, whereas other years experienced the same number or even fewer years with spring freezes. Regions that had more years with spring freezes after climate change began are blue and regions that had fewer freezes are red.}\label{fig:region}
-  -\end{center}
-  -\end{figure}}
-
 
 \subsection {Predictable Regional Differences in Climate, Species Responses and False Spring Risk}
 Robust predictions must consider the full interplay of species cues and a specific location's climate. A single species may have varying cues across space: various studies that investigate latitudinal effects indicate that populations growing further north respond to a different interaction of cues than those growing further south. Thus, based on cues alone, different regions may have different durations of vegetative risk for the same species \citep {Partanen2004, Viheraaarnio2006, Caffarra2011}. Studies also show that different species within the same location can exhibit different sensitivities to the three cues \citep{Basler2012, Laube2013} thus further amplifying the myriad of climatic and phenological shifts that determine false spring risk in a region. %EMW: This sentence is about different species so I removed the end, which was a bit confusing in that regard. 
@@ -129,5 +122,22 @@ Climatic variation across regions and at different distances from the coast resu
 
 
 \bibliography{..//bib/regionalrisk.bib}
+
+\section*{Tables and Figures}
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/FS_Diff.pdf}
+  -\caption{Number of years with freezing events that occured before anthropogenic climate change began (1951-1983) as compared to after anthropogenic climate change began (1984-2016). If temperatures fell below -2$^{\circ}$C between March 1 and June 30, a year with a spring freeze was tallied. Some regions experienced more years with spring freezes after climate change began, whereas other years experienced the same number or even fewer years with spring freezes. Regions that had more years with spring freezes after climate change began are blue and regions that had fewer freezes are red.}\label{fig:region}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/space_mapped.pdf}
+  -\caption{Number of years with freezing events that occured before anthropogenic climate change began (1951-1983) as compared to after anthropogenic climate change began (1984-2016). If temperatures fell below -2$^{\circ}$C between March 1 and June 30, a year with a spring freeze was tallied. Some regions experienced more years with spring freezes after climate change began, whereas other years experienced the same number or even fewer years with spring freezes. Regions that had more years with spring freezes after climate change began are blue and regions that had fewer freezes are red.}\label{fig:region}
+  -\end{center}
+  -\end{figure}}
+
 
 \end{document}

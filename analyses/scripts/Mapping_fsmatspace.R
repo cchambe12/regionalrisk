@@ -17,6 +17,7 @@ library(dplyr)
 library(tidyr)
 library(egg)
 library(RColorBrewer)
+library(raster)
 
 
 ##Simple approach
@@ -68,6 +69,13 @@ aes<- aes + theme(panel.border = element_blank(),
            legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter() +
   annotate("text",label= "Aesculus hippocastanum", col="firebrick3", x=0, y=70, fontface="italic", size=2) + sc +
   xlab("Longitude") + ylab("Latitude")
+
+spg<-a.site
+coordinates(spg)<- ~LON+LAT
+proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+coords<-spTransform(spg, CRS("+proj=longlat"))
+shapefile(coords, "output/aeship.shp")
+
 ag.site<-filter(site, species=="ALNGLU")
 aln<- ggplot(ag.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
@@ -77,6 +85,13 @@ aln<- aln + theme(panel.border = element_blank(),
                   legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter() + 
   annotate("text",label= "Alnus glutinosa ", col="orangered1", x=0, y=70, fontface="italic", size=2) + sc +
   xlab("Longitude") + ylab("Latitude")
+
+spg<-ag.site
+coordinates(spg)<- ~LON+LAT
+proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+coords<-spTransform(spg, CRS("+proj=longlat"))
+shapefile(coords, "output/alnglu.shp")
+
 b.site<-filter(site, species=="BETPEN")
 bet<- ggplot(b.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
@@ -85,6 +100,14 @@ bet<- bet + theme(panel.border = element_blank(),
                   panel.grid.minor = element_blank()) + geom_point(aes(col=bb.space)) + geom_jitter() + 
   annotate("text",label= "Betula pendula", col="orange3", x=0, y=70, fontface="italic", size=2) + sc + labs(color="Day of Budburst")+
   xlab("Longitude") + ylab("Latitude")
+
+b.site<-na.omit(b.site)
+spg<-b.site
+coordinates(spg)<- ~LON+LAT
+proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+coords<-spTransform(spg, CRS("+proj=longlat"))
+shapefile(coords, "output/betpen.shp", overwrite=TRUE)
+
 f.site<-filter(site, species=="FAGSYL")
 syl<- ggplot(f.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
@@ -94,6 +117,13 @@ syl<- syl + theme(panel.border = element_blank(),
                   legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter()+ 
   annotate("text",label= "Fagus sylvatica", col="sienna2", x=0, y=70, fontface="italic", size=2) + sc +
   xlab("Longitude") + ylab("Latitude")
+
+spg<-f.site
+coordinates(spg)<- ~LON+LAT
+proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+coords<-spTransform(spg, CRS("+proj=longlat"))
+shapefile(coords, "output/fagsyl.shp")
+
 fe.site<-filter(site, species=="FRAEXC")
 fra<- ggplot(fe.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
@@ -103,6 +133,13 @@ fra<- fra + theme(panel.border = element_blank(),
                   legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter()+ 
   annotate("text",label= "Fraxinus excelsior", col="green4", x=0, y=70, fontface="italic", size=2) + sc +
   xlab("Longitude") + ylab("Latitude")
+
+spg<-fe.site
+coordinates(spg)<- ~LON+LAT
+proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+coords<-spTransform(spg, CRS("+proj=longlat"))
+shapefile(coords, "output/fraexc.shp")
+
 q.site<-filter(site, species=="QUEROB")
 que<- ggplot(q.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
@@ -111,6 +148,12 @@ que<- que + theme(panel.border = element_blank(),
                   panel.grid.minor = element_blank()) + geom_point(aes(col=bb.space)) + geom_jitter() + 
   annotate("text",label= "Quercus robur", col="purple2", x=0, y=70,fontface="italic", size=2) + sc + labs(color="Day of Budburst")+
   xlab("Longitude") + ylab("Latitude")
+
+spg<-q.site
+coordinates(spg)<- ~LON+LAT
+proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+coords<-spTransform(spg, CRS("+proj=longlat"))
+shapefile(coords, "output/querob.shp")
 
 
 quartz()

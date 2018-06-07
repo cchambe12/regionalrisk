@@ -21,6 +21,7 @@ library(ggstance)
 #library(mapdata)
 #library(marmap)
 #library(RColorBrewer)
+#library(raster)
 
 # Setting working directory
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -29,6 +30,8 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 ########################
 #### get the data
 dx<-read.csv("output/fs_matspspace_old.csv", header=TRUE)
+#xx<-read.csv("output/fs_matspspace.csv", header=TRUE)
+#bb.stan<-read.csv("output/bb.brm.nointer.csv", header=TRUE)
 
 dx<-dx%>%dplyr::select(lat, long, space)
 dx<-dx[!duplicated(dx),]
@@ -36,15 +39,25 @@ dx<-dx[!duplicated(dx),]
 
 #mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
 #myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
+#bb.map.mini<-bb.map
+#bb.map.mini$space<-round(bb.map$space, digits=0)
+#bb.map.mini<-bb.map.mini[!duplicated(bb.map.mini),]
 #sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(-51, 87))
-#site<- ggplot(dx, aes(x=long, y=lat, col=space), alpha=0.2) +   mapWorld +
+#site<- ggplot(bb.map.mini, aes(x=long, y=lat, col=space), alpha=0.2) +   mapWorld +
 #  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
 #site <- site + theme(panel.border = element_blank(),
  #                 panel.grid.major = element_blank(),
-  #                panel.grid.minor = element_blank()) + geom_point(alpha=0.2) + geom_jitter()+
-  # sc + labs(color="Day of Budburst")+
+  #                panel.grid.minor = element_blank()) + geom_point() + geom_jitter(alpha=0.3)+
+  # sc + labs(color="Space Parameter")+
   # xlab("Longitude") + ylab("Latitude")
+#quartz()
+#site
 
+#spg<-bb.map
+#coordinates(spg)<- ~long+lat
+#proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+#coords<-spTransform(spg, CRS("+proj=longlat"))
+#shapefile(coords, "output/bbspace.shp")
 
 xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 df<-read.csv("output/mat_fulldata.csv", header=TRUE)
@@ -99,13 +112,17 @@ bb$sm.elev<-bb$elev/100
 bb$nao<-bb$m.index*10
 
 columnstokeep <- c("species", "nao", "sp.temp", "cc", "space", "sm.elev", "fs.count")
+#columnstokeep.map <- c("space","lat", "long")
+#bb.map<-subset(bb, select=columnstokeep.map)
 bb.stan <- subset(bb, select=columnstokeep)
 
 bb.stan$sp.temp<-round(bb.stan$sp.temp, digits=3)
 bb.stan$space<-round(bb.stan$space, digits=3)
 
 bb.stan<-bb.stan[!duplicated(bb.stan),]
+#bb.map<-bb.map[!duplicated(bb.map),]
 bb.stan<-na.omit(bb.stan)
+#bb.map<-na.omit(bb.map)
 
 write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb.brm.nointer.csv", row.names = FALSE)
 
