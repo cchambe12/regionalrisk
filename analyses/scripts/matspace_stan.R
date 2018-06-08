@@ -91,6 +91,7 @@ nao<-nao[!duplicated(nao),]
 bb<-full_join(bb, nao)
 
 bb<-bb[!duplicated(bb),]
+#write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.csv", row.names = FALSE)
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)
 #mat<-mat[!duplicated(mat),]

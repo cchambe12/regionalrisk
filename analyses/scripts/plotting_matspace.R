@@ -22,7 +22,13 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 #bb<-read.csv("output/fs_matspspace.csv", header=TRUE)
 bb<-read.csv("output/fs_matspring.csv", header=TRUE)
-nao<-read.csv("output/nao_year_sp.csv", header=TRUE)
+nao<-read.csv("output/icpc_nao.csv", header=TRUE)
+nf<-nao%>%gather(month, index, -year)
+nf$m.index<-ave(nf$index, nf$year)
+nx<-dplyr::select(nf, year, m.index)
+nx<-nx[!duplicated(nx),]
+nx<-filter(nx, year<=2016)
+#write.csv(nx, file="~/Documents/git/regionalrisk/analyses/output/nao.csv", row.names = FALSE)
 
 prep_cc<-bb
 prep_cc$fs.num<-ave(prep_cc$fs, prep_cc$lat.long, prep_cc$cc,prep_cc$species, FUN=sum)
@@ -67,14 +73,20 @@ dxx$fs.prop<-dxx$fs.yr/dxx$num.sites
 
 dxx$fs.ave<-ave(dxx$fs.prop, FUN=median)
 
-xx<-inner_join(dxx, dx)
+#xx<-inner_join(dxx, dx)
+dxx<-inner_join(dxx, nx)
+impcols<-c("year", "fs.prop", "m.index", "fs.ave")
+dxx<-subset(dxx, select=impcols)
 
-xx$x<-scale(xx$bb.yr, center = FALSE, scale = TRUE)
-xx$sx<-scale((xx$bb.yr^3), center=FALSE, scale=TRUE)
+#xx$x<-scale(xx$bb.yr, center = FALSE, scale = TRUE)
+#xx$sx<-scale((xx$bb.yr^3), center=FALSE, scale=TRUE)
+dxx$nao<-(dxx$m.index+1.29)/3
 
 #ggplot(dxx, aes(x=year, y=fs.yr)) + geom_point() + xlab("Year") + ylab("Number of False Springs")
 all<-ggplot(dxx, aes(x=year, y=fs.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites with False Springs") + 
-  geom_hline(yintercept=dxx$fs.ave, linetype="dashed", color="blue")
+  coord_cartesian(ylim = c(0, 0.7)) +
+  geom_hline(yintercept=dxx$fs.ave, linetype="dashed", color="blue") + geom_line(aes(y=nao), col="blue") + 
+  scale_y_continuous(sec.axis = sec_axis(~., name="NAO index", labels=c("-1.3", "-0.70", "-0.10", "0.50"), breaks=c(0,0.2,0.4,0.6)))
 
 ############### Look at each individual species now... ###################
 aeship<-subset(xx, species=="AESHIP")
