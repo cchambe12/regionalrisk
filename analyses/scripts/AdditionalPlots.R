@@ -66,6 +66,330 @@ df$fs<-as.integer(round(df$fs, digits=0))
 
 ggplot(df, aes(x=fs.count, y=sp.temp)) + geom_bar(aes(col=as.factor(cc)), position="dodge")
 
+### Just using the cleaned bb dataset - ELEVATION
+aeship<-subset(bb, species=="AESHIP")
+ahip<-ggplot(aeship, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                       panel.background = element_blank(), 
+                                                                       axis.line = element_line(colour = "black"), legend.key=element_blank(),
+                                                                       plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                       plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(0, 1500), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+alnglu<-subset(bb, species=="ALNGLU")
+aglu<-ggplot(alnglu, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Alnus glutinosa")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                panel.background = element_blank(), 
+                                                                axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                                plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                plot.title=element_text(colour = "orangered1"),legend.position = "none") +
+  coord_cartesian(xlim=c(0, 1500), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+betpen<-subset(bb, species=="BETPEN")
+bpen<-ggplot(betpen, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Betula pendula")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                               plot.margin = unit(c(2,2,2,2), "lines"),
+                                                               plot.title=element_text(colour = "orange3")) +
+  coord_cartesian(xlim=c(0, 1500), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"))
+
+fagsyl<-subset(bb, species=="FAGSYL")
+fsyl<-ggplot(fagsyl, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Fagus sylvatica"))))+ theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                               plot.margin = unit(c(2,2,2,2), "lines"),
+                                                               plot.title=element_text(colour = "sienna2"), legend.position = "none") +
+  coord_cartesian(xlim=c(0, 1500), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+fraexc<-subset(bb, species=="FRAEXC")
+fexc<-ggplot(fraexc, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Fraxinus excelsior")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                   panel.background = element_blank(), 
+                                                                   axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                                   plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                   plot.title=element_text(colour = "green4"), legend.position = "none")+
+  coord_cartesian(xlim=c(0, 1500), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+querob<-subset(bb, species=="QUEROB")
+qrob<-ggplot(querob, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Number of False Springs") + 
+  ggtitle(expression(paste(italic("Quercus robur")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                              panel.background = element_blank(), 
+                                                              axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                              plot.margin = unit(c(2,2,2,2), "lines"),
+                                                              plot.title=element_text(colour = "purple2"))+
+  coord_cartesian(xlim=c(0, 1500), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"))
+
+
+ggarrange(ahip, aglu, bpen, fsyl, fexc, qrob, ncol=3, nrow=2)
+
+
+#### Now for Mean spring temp
+#aeship<-subset(bb, species=="AESHIP")
+ahip<-ggplot(aeship, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                       panel.background = element_blank(), 
+                                                                       axis.line = element_line(colour = "black"), legend.key=element_blank(),
+                                                                       plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                       plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#alnglu<-subset(bb, species=="ALNGLU")
+aglu<-ggplot(alnglu, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Alnus glutinosa")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                panel.background = element_blank(), 
+                                                                axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                                plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                plot.title=element_text(colour = "orangered1"), legend.position = "none") +
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#betpen<-subset(bb, species=="BETPEN")
+bpen<-ggplot(betpen, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Betula pendula")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                               plot.margin = unit(c(2,2,2,2), "lines"),
+                                                               plot.title=element_text(colour = "orange3")) +
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"))
+
+#fagsyl<-subset(bb, species=="FAGSYL")
+fsyl<-ggplot(fagsyl, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Fagus sylvatica"))))+ theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                               plot.margin = unit(c(2,2,2,2), "lines"),
+                                                               plot.title=element_text(colour = "sienna2"), legend.position = "none") +
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#fraexc<-subset(bb, species=="FRAEXC")
+fexc<-ggplot(fraexc, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Fraxinus excelsior")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                   panel.background = element_blank(), 
+                                                                   axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                                   plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                   plot.title=element_text(colour = "green4"), legend.position = "none")+
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#querob<-subset(bb, species=="QUEROB")
+qrob<-ggplot(querob, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Number of False Springs") + 
+  ggtitle(expression(paste(italic("Quercus robur")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                              panel.background = element_blank(), 
+                                                              axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                              plot.margin = unit(c(2,2,2,2), "lines"),
+                                                              plot.title=element_text(colour = "purple2"))+
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"))
+
+quartz()
+ggarrange(ahip, aglu, bpen, fsyl, fexc, qrob, ncol=3, nrow=2)
+
+
+### Now for NAO
+#aeship<-subset(bb, species=="AESHIP")
+ahip<-ggplot(aeship, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                       panel.background = element_blank(), 
+                                                                       axis.line = element_line(colour = "black"), legend.key=element_blank(),
+                                                                       plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                       plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#alnglu<-subset(bb, species=="ALNGLU")
+aglu<-ggplot(alnglu, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Alnus glutinosa")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                panel.background = element_blank(), 
+                                                                axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                                plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                plot.title=element_text(colour = "orangered1"),legend.position = "none") +
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#betpen<-subset(bb, species=="BETPEN")
+bpen<-ggplot(betpen, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Betula pendula")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                               plot.margin = unit(c(2,2,2,2), "lines"),
+                                                               plot.title=element_text(colour = "orange3")) +
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"))
+
+#fagsyl<-subset(bb, species=="FAGSYL")
+fsyl<-ggplot(fagsyl, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Fagus sylvatica"))))+ theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                               plot.margin = unit(c(2,2,2,2), "lines"),
+                                                               plot.title=element_text(colour = "sienna2"), legend.position = "none") +
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#fraexc<-subset(bb, species=="FRAEXC")
+fexc<-ggplot(fraexc, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Fraxinus excelsior")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                   panel.background = element_blank(), 
+                                                                   axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                                   plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                   plot.title=element_text(colour = "green4"), legend.position = "none")+
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#querob<-subset(bb, species=="QUEROB")
+qrob<-ggplot(querob, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Number of False Springs") + 
+  ggtitle(expression(paste(italic("Quercus robur")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                              panel.background = element_blank(), 
+                                                              axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                              plot.margin = unit(c(2,2,2,2), "lines"),
+                                                              plot.title=element_text(colour = "purple2"))+
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"))
+
+
+quartz()
+ggarrange(ahip, aglu, bpen, fsyl, fexc, qrob, ncol=3, nrow=2)
+
+## Now for Space
+#aeship<-subset(bb, species=="AESHIP")
+ahip<-ggplot(aeship, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                       panel.background = element_blank(), 
+                                                                       axis.line = element_line(colour = "black"), legend.key=element_blank(),
+                                                                       plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                       plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(-50, 90), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#alnglu<-subset(bb, species=="ALNGLU")
+aglu<-ggplot(alnglu, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Alnus glutinosa")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                panel.background = element_blank(), 
+                                                                axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                                plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                plot.title=element_text(colour = "orangered1"),legend.position = "none") +
+  coord_cartesian(xlim=c(-50, 90), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#betpen<-subset(bb, species=="BETPEN")
+bpen<-ggplot(betpen, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Betula pendula")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                               plot.margin = unit(c(2,2,2,2), "lines"),
+                                                               plot.title=element_text(colour = "orange3")) +
+  coord_cartesian(xlim=c(-50, 90), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"))
+
+#fagsyl<-subset(bb, species=="FAGSYL")
+fsyl<-ggplot(fagsyl, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Fagus sylvatica"))))+ theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                               panel.background = element_blank(), 
+                                                               axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                               plot.margin = unit(c(2,2,2,2), "lines"),
+                                                               plot.title=element_text(colour = "sienna2"), legend.position = "none") +
+  coord_cartesian(xlim=c(-50, 90), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#fraexc<-subset(bb, species=="FRAEXC")
+fexc<-ggplot(fraexc, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Number of False Springs") +
+  ggtitle(expression(paste(italic("Fraxinus excelsior")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                                   panel.background = element_blank(), 
+                                                                   axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                                   plot.margin = unit(c(2,2,2,2), "lines"),
+                                                                   plot.title=element_text(colour = "green4"), legend.position = "none")+
+  coord_cartesian(xlim=c(-50, 90), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c(0, 1))
+
+#querob<-subset(bb, species=="QUEROB")
+qrob<-ggplot(querob, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Number of False Springs") + 
+  ggtitle(expression(paste(italic("Quercus robur")))) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+                                                              panel.background = element_blank(), 
+                                                              axis.line = element_line(colour = "black"), axis.ticks.y = element_blank(), legend.key=element_blank(),
+                                                              plot.margin = unit(c(2,2,2,2), "lines"),
+                                                              plot.title=element_text(colour = "purple2"))+
+  coord_cartesian(xlim=c(-50, 90), ylim=c(0, 8)) + labs(col="Before or After 1983") + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"))
+
+
+ggarrange(ahip, aglu, bpen, fsyl, fexc, qrob, ncol=3, nrow=2)
+
+
+#### Not separated by Species
+bb$fs.el<-round(bb$elev, digits=-1)
+bb$fs.el<-ave(bb$fs.count, bb$fs.el)
+elev<-ggplot(bb, aes(x=elev, y=fs.el)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Number of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1)))
+
+#bb$fs.mat<-round(bb$sp.temp, digits=0)
+#bb$fs.mat<-ave(bb$fs.count, bb$fs.mat)
+mat<-ggplot(bb, aes(x=sp.temp, y=fs.mat)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Number of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3")) +
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1)))
+
+bb$fs.n<-round(bb$m.index, digits=2)
+bb$fs.n<-ave(bb$fs.count, bb$fs.n)
+nao<-ggplot(bb, aes(x=m.index, y=fs.n)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Number of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") + 
+geom_jitter(alpha=0.3, aes(shape=as.factor(cc))) +
+scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1)))
+
+#bb$fs.sp<-round(bb$space, digits=-1)
+#bb$fs.sp<-ave(bb$fs.count, bb$fs.sp)
+space<-ggplot(bb, aes(x=space, y=fs.sp)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Number of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3")) +
+  coord_cartesian(xlim=c(-50, 100), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1)))
+
+
+quartz()
+ggarrange(elev, mat, nao, space, ncol=2, nrow=2)
+
+
+
+#bb$fs.yr<-round(bb$space)
+
+mround <- function(x,base){ 
+  base*round(x/base) 
+} 
+
+bb$fs.yr<-mround(bb$year, 5) 
+bb$fs.yr<-ave(bb$fs.count, bb$fs.yr)
+bb$matx<-bb$sp.temp+13.61348
+year<-ggplot(bb, aes(x=year, y=fs.yr)) + ylab("Number of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3")) +
+  coord_cartesian(xlim=c(1950, 2016), ylim=c(0, 5)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") +
+  geom_line(aes(y=matx/6), col="blue", stat="smooth", alpha=0.6, method="loess") + scale_y_continuous(sec.axis = sec_axis(~.*6, name="Mean Spring Temperature")) + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1))) #+
+  #geom_line(aes(col=as.factor(cc)),stat="smooth",method="auto") + xlab("Year")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
