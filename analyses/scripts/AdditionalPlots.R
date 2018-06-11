@@ -365,16 +365,23 @@ mround <- function(x,base){
 
 bb$fs.yr<-mround(bb$year, 5) 
 bb$fs.yr<-ave(bb$fs.count, bb$fs.yr)
+#bb$yr<-mround(bb$year, 5)
 bb$matx<-bb$sp.temp+13.61348
-year<-ggplot(bb, aes(x=year, y=fs.yr)) + ylab("Number of False Springs") +
+bb$matx<-ave(bb$matx, bb$year)
+bbx<-bb%>%dplyr::select(year, fs.yr, matx, cc)
+bbx<-bbx[!duplicated(bbx),]
+prop<-subset(dxx, select=c(year, fs.prop))
+prop<-prop[!duplicated(prop),]
+bbx<-inner_join(bbx, prop)
+year<-ggplot(bbx, aes(x=year, y=fs.prop)) + ylab("Number of False Springs") + 
+  geom_point(aes(shape=as.factor(cc))) + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
         plot.margin = unit(c(2,2,2,2), "lines"),
         plot.title=element_text(colour = "firebrick3")) +
-  coord_cartesian(xlim=c(1950, 2016), ylim=c(0, 5)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") +
-  geom_line(aes(y=matx/6), col="blue", stat="smooth", alpha=0.6, method="loess") + scale_y_continuous(sec.axis = sec_axis(~.*6, name="Mean Spring Temperature")) + 
-  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  coord_cartesian(xlim=c(1950, 2016), ylim=c(0, .5)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") +
+  geom_line(aes(y=matx/60), col="blue", stat="smooth", alpha=0.6, method="loess") + scale_y_continuous(sec.axis = sec_axis(~.*60, name="Mean Spring Temperature"))  +
   scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1))) #+
   #geom_line(aes(col=as.factor(cc)),stat="smooth",method="auto") + xlab("Year")
 
