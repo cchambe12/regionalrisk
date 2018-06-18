@@ -47,6 +47,7 @@ df<-inner_join(bb, dxx)
 df<-inner_join(df, x)
 df<-df[!duplicated(df),]
 
+dsamp<-df[sample(nrow(df), 500), ]
 ### Some plots!
 ggplot(df, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)), stat="smooth", method="auto")
 
@@ -303,56 +304,60 @@ ggarrange(ahip, aglu, bpen, fsyl, fexc, qrob, ncol=3, nrow=2)
 
 
 #### Not separated by Species
+bb.samp<-bb[sample(nrow(bb), 1200, replace=FALSE),]
+
+
+
 bb$fs.el<-round(bb$elev, digits=-1)
 bb$fs.el<-ave(bb$fs.count, bb$fs.el)
-elev<-ggplot(bb, aes(x=elev, y=fs.el)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Average Number \n of False Springs") +
+elev<-ggplot(bb.samp, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
         plot.margin = unit(c(2,2,2,2), "lines"),
         plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
-  coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") + 
+  coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
-  scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-  scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_y_continuous(expand = c(0, 0))
 
 bb$fs.mat<-round(bb$sp.temp, digits=0)
 bb$fs.mat<-ave(bb$fs.count, bb$fs.mat)
-mat<-ggplot(bb, aes(x=sp.temp, y=fs.mat)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Average Number \n of False Springs") +
+mat<-ggplot(bb.samp, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
         plot.margin = unit(c(2,2,2,2), "lines"),
         plot.title=element_text(colour = "firebrick3")) +
-  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") + 
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
-  scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
   scale_y_continuous(expand = c(0, 0))
 
 bb$fs.n<-round(bb$m.index, digits=2)
 bb$fs.n<-ave(bb$fs.count, bb$fs.n)
-nao<-ggplot(bb, aes(x=m.index, y=fs.n)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Average Number \n of False Springs") +
+nao<-ggplot(bb.samp, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
         plot.margin = unit(c(2,2,2,2), "lines"),
         plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
-  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") + 
-geom_jitter(alpha=0.3, aes(shape=as.factor(cc))) +
-scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-scale_y_continuous(expand = c(0, 0))
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_y_continuous(expand = c(0, 0))
 
 bb$fs.sp<-round(bb$space, digits=-1)
 bb$fs.sp<-ave(bb$fs.count, bb$fs.sp)
-space<-ggplot(bb, aes(x=space, y=fs.sp)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Average Number \n of False Springs") +
+space<-ggplot(bb.samp, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
         plot.margin = unit(c(2,2,2,2), "lines"),
         plot.title=element_text(colour = "firebrick3")) +
-  coord_cartesian(xlim=c(-50, 100), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("before", "after"), name="Before or After 1983") + 
+  coord_cartesian(xlim=c(-50, 100), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
-  scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
   scale_y_continuous(expand = c(0, 0))
 
 
@@ -388,6 +393,77 @@ year<-ggplot(bbx, aes(x=year, y=fs.prop)) + ylab("Number of False Springs") +
   geom_line(aes(y=matx/60), col="blue", stat="smooth", alpha=0.6, method="loess") + scale_y_continuous(sec.axis = sec_axis(~.*60, name="Mean Spring Temperature"))  +
   scale_shape_manual(values=c(3, 5), labels=c("before", "after"), name="Before or After 1983") + guides(shape = guide_legend(override.aes = list(alpha=1))) #+
   #geom_line(aes(col=as.factor(cc)),stat="smooth",method="auto") + xlab("Year")
+
+
+
+#### Try with bigvis package by Hadley!
+library('bigvis')
+bb<-standardise(bb["fs.count"])
+bbe<- condense(bin(bb$fs.count, 1), z=bb$elev, summary="mean")
+bbes <- smooth(bbe, 50, var=".mean", type="robust")
+elev<-ggplot() + geom_point(data=bbe, aes(y=bb.fs.count, x=.mean)) + geom_line(data=bbes, aes(y=bb.fs.count, x=.mean, col="Smoothed")) + xlab("Elevation") + ylab("Average Number \n of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_y_continuous(expand = c(0, 0))
+
+elev<-ggplot(bb.samp, aes(x=elev, y=standardise(fs.count))) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Average Number \n of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_y_continuous(expand = c(0, 0))
+
+bb$fs.mat<-round(bb$sp.temp, digits=0)
+bb$fs.mat<-ave(bb$fs.count, bb$fs.mat)
+mat<-ggplot(bb.samp, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Average Number \n of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3")) +
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_y_continuous(expand = c(0, 0))
+
+bb$fs.n<-round(bb$m.index, digits=2)
+bb$fs.n<-ave(bb$fs.count, bb$fs.n)
+nao<-ggplot(bb.samp, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Average Number \n of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_y_continuous(expand = c(0, 0))
+
+bb$fs.sp<-round(bb$space, digits=-1)
+bb$fs.sp<-ave(bb$fs.count, bb$fs.sp)
+space<-ggplot(bb.samp, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Average Number \n of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3")) +
+  coord_cartesian(xlim=c(-50, 100), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+  geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_y_continuous(expand = c(0, 0))
+
+
+quartz()
+ggarrange(elev, mat, nao, space, ncol=2, nrow=2)
 
 
 

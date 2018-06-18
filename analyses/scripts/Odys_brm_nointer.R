@@ -12,9 +12,8 @@ library(brms)
 #### get the data
 bb.stan<-read.csv("/n/wolkovich_lab/Lab/Cat/bb.brm.nointer.csv", header=TRUE)
 
-brm.full.nointer<-brm(fs.count~nao+sp.temp+cc+space+sm.elev+(1|species)+
-                        (nao-1|species)+(sp.temp-1|species)+(cc-1|species)+
-                        (space-1|species)+(sm.elev-1|species), data=bb.stan, chains=2, family=poisson)
+brm.full.nointer<-brm(fs.count~nao+sp.temp+cc+space+sm.elev+
+                        (nao+sp.temp+cc+space+sm.elev|species), data=bb.stan, chains=2, family=poisson)
 
 save(brm.full.nointer, file="/n/wolkovich_lab/Lab/Cat/brm.Rdata")
 

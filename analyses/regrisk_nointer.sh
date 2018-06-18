@@ -2,13 +2,13 @@
 
 #SBATCH -p wolkovich
 
-#SBATCH -n 24
+#SBATCH -n 48
 
 #SBATCH -N 1
 
-#SBATCH -t 0-99:00:00
+#SBATCH -t 0-168:00:00
 
-#SBATCH --mem 90000
+#SBATCH --mem 100000
 
 #SBATCH -o hostname.out
 
