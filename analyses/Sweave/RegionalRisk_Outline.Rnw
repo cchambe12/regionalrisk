@@ -61,6 +61,12 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% 1) PIECE TOGETHER THE PUZZLE! %%%%%
+%%%%% 2) FORMULATE QUESTIONS %%%%%
+%%%%% 3) ONCE THE INTRO IS SOLID, THEN MOVE ON TO METHODS! %%%%%%
+
+
 \section{Introduction}
 \begin{enumerate}
 \item Temperate tree and shrub species are at risk of damage from late spring freezing events, also known as false springs.
@@ -76,12 +82,18 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item Trees and shrubs in temperate regions optimize growth by using three cues to initiate budburst: low winter temperatures, warm spring temperatures, and increasing spring daylengths.
 \item With climate change advancing, this interaction of cues may shift spring phenologies both across and within species. 
 \item Due to the changing climate, spring onset is advancing and many temperate tree and shrub species are initiating leafout 4-6 days earlier per $^{\circ}$C of warming \citep{Wolkovich2012, Polgar2014}.
-\item However, last spring freeze dates are not predicted to advance at the same rate as spring onset in some regions of the world \citep{Labe2016}, potentially amplifying the effects of false spring events in these regions.
+\item The North Atlantic Ossilation (NAO) index is often used to describe winter and spring circulation across Europe. 
+\item More positive NAO phases tend to result in higher than average winter and early spring temperatures, and with climate change, great NAO indices has correlated to earlier budburst dates \citep{Chmielewski2001}.
+\item However, last spring freeze dates are not predicted to advance at the same rate as spring onset in some regions of the world \citep{Inouye2008, Martin2010, Labe2016, Sgubin2018}, potentially amplifying the effects of false spring events in these regions.
 
 \item Temperate plants have evolved to minimize false spring damage through a myriad of strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize frost risk by timing budburst effectively \citep{Polgar2011, Basler2014}.
 \item Thus, there is a trade-off between growing season length and frost risk. 
 \item Individuals that initiate budburst earlier in the season are more frost resistant \citep{Korner2016}, however, as climate change advances, less frost resistant individuals may start initiating budburst before the last freeze date.
-\item The growing season is lengthening across many regions in the northern hemisphere [CITE], but false spring events still pose a threat in many of these regions \citep{Wypych2017}
+
+\item Individuals from more Northern provenances tend to be more susceptible to spring frost damage, whereas more Southern individuals are more sensitive to fall frosts \citep{Montwe2018}.
+
+
+\item The growing season is lengthening across many regions in the northern hemisphere \citep{Chen2005, Liu2006, Kukal2018}, but false spring events still pose a threat in many of these regions \citep{Wypych2016a}
 
 
 \item Plants growing in forest systems tend to exhibit staggered days of budburst.
@@ -90,39 +102,32 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item Frost tolerance greatly diminishes once individuals exit the dormancy phase (i.e. processes leading to budburst) through full leaf expansion \citep{Vitasse2014}.
 \end{enumerate}
 
-
-
+\begin{enumerate}
+\item False spring incidence has declined in many regions (i.e. across parts of North America and Asia), however the prevalence of spring frosts has increasing across Europe since 1982 \citep{Liu2018}.
  
+\item Major false spring events that impacted entire forests have been recorded in recent years \citep{Gu2008, Augspurger2009, Augspurger2013, Menzel2015}.
+\item After such false spring events, it can take 16-38 days for trees to refoliate, which can detrimentally affect processes such as photosynthesis and respiration, carbon updake, and nutrient cycling \citep{Hufkens2012, Richardson2013, Klosterman2018}.
+
+\item There is large debate over whether or not spring freeze damage will increase \citep{Hannenin1991, Augspurger2013, Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994} with climate change. 
+\item (PUT QUESTIONS AROUND HERE)
 
 
-   
-
-   
-
-
-
-\textbf{\large{Chapter Three:} Regional Differences}\\
-\\
-Numerous studies have investigated how the relationship between budburst and major phenological cues (warm temperatures, winter chilling and photoperiod) varies across space by using latitudinal gradients \citep{Partanen2004, Viheraaarnio2006, Caffarra2011, Zohner2016, Gauzere2017} however, few have integrated longitudinal variation or regional effects. The climatic implications of advancing forcing temperatures could potentially lead to earlier dates of budburst and enhance the risk of frost. These shifts in climatic regimes could vary in intensity across regions (i.e. habitats currently at risk of false spring damage could become low risk regions over time). Thus, it is crucial to gain an understanding on which climatic parameters result in false spring events and how these parameters may vary across regions. \textit{ The aim of this chapter is to assess the impact of anthropogenic climate change on false spring occurrence across a large spatial gradient. } 
-
-I will analyze large-scale effects across space and time to inspect the effects of climatic shifts on range distributions of native species. I will assess gridded climate data across Europe from 1950-2016. I will then integrate long-term phenological data for 8-12 species and determine the number of false spring events that each species experiences and if that varies by region and over time, with the intention to delineate large-scale spatial and temporal patterns in false spring risk in a changing climate. 
-
-There is large debate over whether or not spring freeze damage will increase \citep{Hannenin1991, Augspurger2013, Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994} with climate change. I assessed the daily gridded climate data across Europe (E-OBS) from 1950-2016. By simply using climate data, I compared the frequency of spring freeze events throughout Europe before and after anthropogenic climate change began (i.e. around 1980 \citep{Barnett2001}). A spring freeze was considered if the the daily minimum temperature fell below -2$^{\circ}$C \citep{Schwartz1993} between March 1 and June 30. A few regions experienced increased exposure to spring freeze events, whereas most other regions experienced fewer or similar numbers of years with spring freezes (Figure \ref{fig:region}). Understanding regional differences in spring freeze intensity and frequency is essential for predicting future habitat risk.
+\item Many studies have assessed the interplay between cue interactions and budburst dates by investigating potenital latitudinal effects \citep{Partanen2004, Viheraaarnio2006, Caffarra2011, Zohner2016, Gauzere2017}.
+\item However, recent studies have demonstrated regional effects may be more closely related to false spring risk through shifts in elevation \citep{Vitra2017} and from distance to the coast \citep{Wypych2016a}.
+\item By better understanding these regional climatic implications, we may be better able to determine which regions may be at risk currently and which regions may become more at risk over time.
 
 
-\subsection {Predictable Regional Differences in Climate, Species Responses and False Spring Risk}
-Robust predictions must consider the full interplay of species cues and a specific location's climate. A single species may have varying cues across space: various studies that investigate latitudinal effects indicate that populations growing further north respond to a different interaction of cues than those growing further south. Thus, based on cues alone, different regions may have different durations of vegetative risk for the same species \citep {Partanen2004, Viheraaarnio2006, Caffarra2011}. Studies also show that different species within the same location can exhibit different sensitivities to the three cues \citep{Basler2012, Laube2013} thus further amplifying the myriad of climatic and phenological shifts that determine false spring risk in a region. %EMW: This sentence is about different species so I removed the end, which was a bit confusing in that regard. 
 
-Numerous studies have investigated how the relationship between budburst and major phenological cues varies across space, including across populations, by using latitudinal gradients \citep{Partanen2004, Viheraaarnio2006, Caffarra2011, Zohner2016, Gauzere2017}. Few, however, have integrated distance from the coast \citep [but see][]{Myking2007, Harrington2015, Aitken2015} or regional effects. Yet climate and thus false spring risk and phenological cues vary across regions. For example, consider five different regions within a temperate climate (Figure S1). Some regions may experience harsher winters and greater temperature variability throughout the year, and these more variable regions often have a much higher risk of false spring (i.e. Maine) than others (i.e. Lyon) (Figure S1). Understanding and integrating such spatiotemporal effects and regional differences when investigating false spring risk and duration of vegetative risk would help improve predictions as climate change progresses.
-% EMW: I think you should add some of the Guy studies that consider coastal vs. inland Populus, they deal with distance to coast, right? I think some Doug Fir studies do too. You can just write:
-% Few, however, have integrated distance from the coast or regional effects (but see X, Y, Z). 
-% And/or you could cite these studies as evidence that the cues vary with distance to coast. 
+\item (METHODS) I assessed the daily gridded climate data across Europe (E-OBS) from 1950-2016. 
+\item (METHODS) By simply using climate data, I compared the frequency of spring freeze events throughout Europe before and after anthropogenic climate change began (i.e. around 1980 \citep{Barnett2001}). 
+\item (METHODS) A spring freeze was considered if the the daily minimum temperature fell below -2$^{\circ}$C \citep{Schwartz1993} between March 1 and June 30. 
 
-Accurate predictions need to carefully consider how chilling and forcing cues vary across regions. %Some studies indicate that populations further inland will initiate budburst first, whereas those closer to the coast will initiate budburst later in the season and that the distance from the coast is a stronger indicator of budburst timing than latitude . 
-Climatic variation across regions and at different distances from the coast results in varying durations of vegetative risk due to different chilling and forcing temperatures \citep{Myking2007}. It is therefore important to recognize climate regime extremes (e.g. seasonal trends, annual minima and annual maxima) across regions to better understand the interplay between duration of vegetative risk and climatic variation. The climatic implications of advancing forcing temperatures could potentially lead to earlier dates of budburst and enhance the risk of frost. These shifts in climatic regimes could vary in intensity across regions (i.e. regions currently at risk of false spring damage could become low risk regions over time). 
 
-%There are also discrepancies in defining a false spring event related to understanding the temperature threshold for damage. Some regions and species may tolerate lower temperature thresholds than others (Figure S1). %Not only is there debate on what a damaging temperature is, but it is still not well understood how the damage sustained relates to the duration of the frost \citep{Sakai1987, Augspurger2009, Vitasse2014, Vitra2017}. 
-%It is crucial to gain an understanding on which climatic parameters result in false spring events and how these parameters may vary across regions. It is anticipated that most regions will have earlier spring onsets, however, last freeze dates will not advance at the same rate \citep{Inouye2008,Martin2010,Labe2016,Sgubin2018}, rendering some regions and species to be more susceptible to false spring events in the future. 
+\item (RESULTS) A few regions experienced increased exposure to spring freeze events, whereas most other regions experienced fewer or similar numbers of years with spring freezes (Figure \ref{fig:region}). 
+
+\item (DISCUSSION) Understanding regional differences in spring freeze intensity and frequency is essential for predicting future habitat risk.
+
+\end{enumerate}
 
 
 \bibliography{..//bib/regionalrisk.bib}
@@ -136,12 +141,12 @@ Climatic variation across regions and at different distances from the coast resu
   -\end{center}
   -\end{figure}}
   
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/space_mapped.pdf}
-  -\caption{Number of years with freezing events that occured before anthropogenic climate change began (1951-1983) as compared to after anthropogenic climate change began (1984-2016). If temperatures fell below -2$^{\circ}$C between March 1 and June 30, a year with a spring freeze was tallied. Some regions experienced more years with spring freezes after climate change began, whereas other years experienced the same number or even fewer years with spring freezes. Regions that had more years with spring freezes after climate change began are blue and regions that had fewer freezes are red.}\label{fig:region}
-  -\end{center}
-  -\end{figure}}
+%{\begin{figure} [H]
+%  -\begin{center}
+%  -\includegraphics[width=12cm]{..//figures/space_mapped.pdf}
+%  -\caption{Space Parameter}\label{fig:space}
+%  -\end{center}
+%  -\end{figure}}
 
 
 \end{document}
