@@ -10,13 +10,61 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(egg)
-library(brms)
+library(purrr)
+library(broom)
+library(lme4)
 
 
 # Setting working directory
 setwd("~/Documents/git/regionalrisk/analyses/")
 
 bb<-read.csv("output/regrisk.cleaned.csv", header=TRUE)
+
+#### Let's try Hadley's Methods!
+# Maybe subset by each type of model I want to run...?
+bb.mat<-subset(bb, select=c(year, species, cc, sp.temp, fs.count))
+bb.mat<-bb.mat[!duplicated(bb.mat),]
+
+mat<-bb.mat%>%
+  group_by(cc, species)%>%
+  nest
+
+sp_mod<-function(df){
+  glm(fs.count~sp.temp, data=df, family=poisson)
+}
+
+models<-mat%>%
+  mutate(mod = map(data, sp_mod))
+
+models<-models%>%
+  mutate(tidy=map(mod, broom::tidy))
+
+mat.tidy<-unnest(models, tidy)
+#mat.df<-unnest(models, data)
+#mat.df<-inner_join(mat.df, mat.tidy)
+mat.df<-mat.tidy%>%
+  select(cc, species, term, estimate)%>%
+  spread(term, estimate)
+
+
+test<-ggplot(mat.df, aes(y=`(Intercept)`, x=sp.temp)) + geom_point(aes(col=as.factor(species), size=as.factor(cc))) +
+  geom_smooth(se=FALSE) + xlab("Mean Spring Temperature") + ylab("Number of False Springs")
+
+
+mat<-ggplot(mat.df, aes(x=`(Intercept)`, y=sp.temp)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + ylab("Mean Spring Temperature") + xlab("Number of False Springs") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),
+        plot.margin = unit(c(2,2,2,2), "lines"),
+        plot.title=element_text(colour = "firebrick3")) +
+  #coord_cartesian(xlim=c(-14, 15), ylim=c(0, 9)) + 
+  scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+  geom_jitter(aes(shape=as.factor(cc))) +
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
+  scale_y_continuous(expand = c(0, 0))
+
+
+
 dxx<-read.csv("output/fs_matspring.csv", header=TRUE)
 x<-read.csv("output/fs_bb_sitedata.csv", header = TRUE)
 
@@ -319,7 +367,7 @@ elev<-ggplot(bb.samp, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)
   coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-  scale_y_continuous(expand = c(0, 0))
+  scale_y_continuous(expand = c(0, 0)) + facet_wrap(~species)
 
 bb$fs.mat<-round(bb$sp.temp, digits=0)
 bb$fs.mat<-ave(bb$fs.count, bb$fs.mat)

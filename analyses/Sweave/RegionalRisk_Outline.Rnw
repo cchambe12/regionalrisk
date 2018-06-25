@@ -63,7 +63,8 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 \begin{enumerate}
-\item Temperate tree and shrub species are at risk of damage from late spring freezing events, however the extent of damage and the frequency and intensity of these events is still largely unknown.
+\item Temperate tree and shrub species are at risk of damage from late spring freezing events, also known as false springs.
+\item However, the extent of damage and the frequency and intensity of false spring events is still largely unknown.
 \item Individuals that initiate budburst before the last spring freeze are at risk of leaf tissue loss, damage to the xylem, and slowed canopy development \citep{Gu2008, Hufkens2012}.
 \item Temperate plants are exposed to freezing temperatures numerous times throughout the year, however, individuals are most at risk to damage from stochastic spring frosts, when frost tolerance is lowest \citep{Sakai1987}.
 \item False spring events can result in photosynthetic tissue loss, which could potentially impact multiple years of growth and, with the growing season extending, individuals could be exposed to more frosts in the future \citep{Liu2018}.
@@ -78,6 +79,9 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item However, last spring freeze dates are not predicted to advance at the same rate as spring onset in some regions of the world \citep{Labe2016}, potentially amplifying the effects of false spring events in these regions.
 
 \item Temperate plants have evolved to minimize false spring damage through a myriad of strategies, with the most effective being avoidance: plants must exhibit flexible spring phenologies in order to maximize growth and minimize frost risk by timing budburst effectively \citep{Polgar2011, Basler2014}.
+\item Thus, there is a trade-off between growing season length and frost risk. 
+\item Individuals that initiate budburst earlier in the season are more frost resistant \citep{Korner2016}, however, as climate change advances, less frost resistant individuals may start initiating budburst before the last freeze date.
+\item The growing season is lengthening across many regions in the northern hemisphere [CITE], but false spring events still pose a threat in many of these regions \citep{Wypych2017}
 
 
 \item Plants growing in forest systems tend to exhibit staggered days of budburst.
