@@ -1,4 +1,4 @@
-\begin{thebibliography}{37}
+\begin{thebibliography}{41}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Augspurger(2009)}]{Augspurger2009}
@@ -10,10 +10,6 @@ Augspurger, C.K. (2009) Spring 2007 warmth and frost: phenology, damage and
 Augspurger, C.K. (2013) {Reconstructing patterns of temperature, phenology, and
   frost damage over 124 years: Spring damage risk is increasing}.
   \emph{Ecology} \textbf{94}, 41--50.
-
-\bibitem[{Barnett \emph{et~al.}(2001)Barnett, Pierce \& Schnur}]{Barnett2001}
-Barnett, T., Pierce, D. \& Schnur, R. (2001) {Detection of anthropogenic
-  climate change in the world's oceans}. \emph{Science} \textbf{292}, 270--274.
 
 \bibitem[{Basler \& Korner(2014)}]{Basler2014}
 Basler, D. \& Korner, C. (2014) Photoperiod and temperature responses of bud
@@ -34,6 +30,25 @@ Chen, X., Hu, B. \& Yu, R. (2005) Spatial and temporal variation of
 Chmielewski, F.M. \& R{\"o}tzer, T. (2001) Response of tree phenology to
   climate change across europe. \emph{Agricultural and Forest Meteorology}
   \textbf{108}, 101 -- 112.
+
+\bibitem[{Cleland \emph{et~al.}(2007)Cleland, Chuine, Menzel, Mooney \&
+  Schwartz}]{Cleland2007}
+Cleland, E.E., Chuine, I., Menzel, A., Mooney, H.A. \& Schwartz, M.D. (2007)
+  {Shifting plant phenology in response to global change}. \emph{Trends in
+  Ecology and Evolution} \textbf{22}, 357--365.
+
+\bibitem[{David \emph{et~al.}(2017)David, Thomas, St{\'e}phane \&
+  Jason}]{Baumen2017}
+David, B., Thomas, D., St{\'e}phane, D. \& Jason, V. (2017) Disentangling good
+  from bad practices in the selection of spatial or phylogenetic eigenvectors.
+  \emph{Ecography} \textbf{0}.
+
+\bibitem[{Donnelly \emph{et~al.}(2017)Donnelly, Yu, Caffarra, Hanes, Liang,
+  Desai, Liu \& Schwartz}]{Donnelly2017}
+Donnelly, A., Yu, R., Caffarra, A., Hanes, J.M., Liang, L., Desai, A.R., Liu,
+  L. \& Schwartz, M.D. (2017) Interspecific and interannual variation in the
+  duration of spring phenophases in a northern mixed forest. \emph{Agricultural
+  and Forest Meteorology} \textbf{243}, 55--67.
 
 \bibitem[{Gauzere \emph{et~al.}(2017)Gauzere, Delzon, Davi, Bonhomme, Garcia~de
   Cortazar-Atauri \& Chuine}]{Gauzere2017}
@@ -64,6 +79,17 @@ Hufkens, K., Friedl, M.A., Keenan, T.F., Sonnentag, O., Bailey, A., O'Keefe, J.
 Inouye, D.W. (2008) Effects of climate change on phenology, frost damage, and
   floral abundance of montane wildflowers. \emph{Ecology} \textbf{89},
   353--362.
+
+\bibitem[{IPCC(2015)}]{IPCC2014}
+IPCC (2015) \emph{Climate change 2014: mitigation of climate change}, vol.~3.
+  Cambridge University Press.
+
+\bibitem[{Kharouba \emph{et~al.}(2018)Kharouba, Ehrl{\'e}n, Gelman, Bolmgren,
+  Allen, Travers \& Wolkovich}]{Kharouba2018}
+Kharouba, H.M., Ehrl{\'e}n, J., Gelman, A., Bolmgren, K., Allen, J.M., Travers,
+  S.E. \& Wolkovich, E.M. (2018) Global shifts in the phenological synchrony of
+  species interactions over recent decades. \emph{Proceedings of the National
+  Academy of Sciences} \textbf{115}, 5211--5216.
 
 \bibitem[{Klosterman \emph{et~al.}(2018)Klosterman, Hufkens \&
   Richardson}]{Klosterman2018}
@@ -99,6 +125,12 @@ Labe, Z., Ault, T. \& Zurita-Milla, R. (2016) Identifying anomalously early
   spring onsets in the cesm large ensemble project. \emph{Climate Dynamics}
   \textbf{48}, 3949--3966.
 
+\bibitem[{Lenz \emph{et~al.}(2016)Lenz, Hoch, K{\"{o}}rner \&
+  Vitasse}]{Lenz2016}
+Lenz, A., Hoch, G., K{\"{o}}rner, C. \& Vitasse, Y. (2016) {Convergence of
+  leaf-out towards minimum risk of freezing damage in temperate trees}.
+  \emph{Functional Ecology} \textbf{30}, 1--11.
+
 \bibitem[{Liu \emph{et~al.}(2018)Liu, Piao, Janssens, Fu, Peng, Lian, Ciais,
   Myneni, Pe{\~n}uelas \& Wang}]{Liu2018}
 Liu, Q., Piao, S., Janssens, I.A., Fu, Y., Peng, S., Lian, X., Ciais, P.,
@@ -125,21 +157,10 @@ Menzel, A., Helm, R. \& Zang, C. (2015) Patterns of late spring frost leaf
   south-eastern germany based on repeated digital photographs. \emph{Frontiers
   in Plant Science} \textbf{6}, 110.
 
-\bibitem[{Montw{\'e} \emph{et~al.}(2018)Montw{\'e}, Isaac-Renton, Hamann \&
-  Spiecker}]{Montwe2018}
-Montw{\'e}, D., Isaac-Renton, M., Hamann, A. \& Spiecker, H. (2018) Cold
-  adaptation recorded in tree rings highlights risks associated with climate
-  change and assisted migration. \emph{Nature Communications} \textbf{9}.
-
 \bibitem[{Partanen(2004)}]{Partanen2004}
 Partanen, J. (2004) Dependence of photoperiodic response of growth cessation on
   the stage of development in picea abies and betula pendula seedlings.
   \emph{Forest Ecology and Management} \textbf{188}, 137--148.
-
-\bibitem[{Polgar \emph{et~al.}(2014)Polgar, Gallinat \& Primack}]{Polgar2014}
-Polgar, C., Gallinat, A. \& Primack, R.B. (2014) {Drivers of leaf-out phenology
-  and their implications for species invasions: Insights from Thoreau's
-  Concord}. \emph{New Phytologist} \textbf{202}, 106--115.
 
 \bibitem[{Polgar \& Primack(2011)}]{Polgar2011}
 Polgar, C.A. \& Primack, R.B. (2011) {Leaf-out phenology of temperate woody
@@ -173,6 +194,13 @@ Sgubin, G., Swingedouw, D., Dayon, G., de~Cort{\'a}zar-Atauri, I.G., Ollat, N.,
   Pag{\'e}, C. \& van Leeuwen, C. (2018) The risk of tardive frost damage in
   french vineyards in a changing climate. \emph{Agricultural and Forest
   Meteorology} \textbf{250-251}, 226 -- 242.
+
+\bibitem[{Stocker \emph{et~al.}(2013)Stocker, Qin, Plattner, Tignor, Allen,
+  Boschung, Nauels, Xia, Bex \& Midgley}]{Stocker2013}
+Stocker, T.F., Qin, D., Plattner, G.K., Tignor, M., Allen, S.K., Boschung, J.,
+  Nauels, A., Xia, Y., Bex, V. \& Midgley, P.M. (2013) Climate change 2013: The
+  physical science basis. contribution of working group i to the fifth
+  assessment report of the intergovernmental panel on climate change, 1535 pp.
 
 \bibitem[{Vihera-aarnio \emph{et~al.}(2006)Vihera-aarnio, Hakkinen \&
   Junttila}]{Viheraaarnio2006}

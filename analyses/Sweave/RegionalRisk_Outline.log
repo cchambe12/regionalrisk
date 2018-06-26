@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  25 JUN 2018 16:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  26 JUN 2018 15:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -873,48 +873,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 92--102
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2]
-Overfull \hbox (4.15327pt too wide) in paragraph at lines 157--158
+Overfull \hbox (4.15327pt too wide) in paragraph at lines 155--156
 []\T1/aer/m/n/10 There is large de-bate over whether or not spring freeze dam-a
 ge will in-crease (Hän-ni-nen, 1991; Augspurger,
  []
 
-(./RegionalRisk_Outline.bbl [3] [4] [5]) [6]
-<..//figures/FS_Diff.pdf, id=30, 845.1575pt x 597.23125pt>
+[3] [4] (./RegionalRisk_Outline.bbl [5] [6] [7])
+<..//figures/FS_Diff.pdf, id=35, 845.1575pt x 597.23125pt>
 File: ..//figures/FS_Diff.pdf Graphic file (type pdf)
 
 <use ..//figures/FS_Diff.pdf>
-Package pdftex.def Info: ..//figures/FS_Diff.pdf used on input line 185.
+Package pdftex.def Info: ..//figures/FS_Diff.pdf used on input line 217.
 (pdftex.def)             Requested size: 341.43306pt x 241.27586pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 186.
+(Font)              <9> on input line 218.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 186.
- [7 <..//figures/FS_Diff.pdf>]
-(./RegionalRisk_Outline.aux) ) 
+(Font)              <6> on input line 218.
+ [8]
+<..//figures/BB_gis.pdf, id=39, 845.1575pt x 597.23125pt>
+File: ..//figures/BB_gis.pdf Graphic file (type pdf)
+
+<use ..//figures/BB_gis.pdf>
+Package pdftex.def Info: ..//figures/BB_gis.pdf used on input line 224.
+(pdftex.def)             Requested size: 398.33858pt x 281.49155pt.
+ [9 <..//figures/FS_Diff.pdf>]
+<..//figures/PropSitesbyYrwBB.png, id=50, 673.5564pt x 343.7643pt>
+File: ..//figures/PropSitesbyYrwBB.png Graphic file (type png)
+
+<use ..//figures/PropSitesbyYrwBB.png>
+Package pdftex.def Info: ..//figures/PropSitesbyYrwBB.png used on input line 23
+1.
+(pdftex.def)             Requested size: 398.33858pt x 203.30699pt.
+ [10 <..//figures/BB_gis.pdf>] [11 <..//figures/PropSitesbyYrwBB.png>] (./Regio
+nalRisk_Outline.aux) ) 
 Here is how much of TeX's memory you used:
- 15740 strings out of 493014
- 312174 string characters out of 6133351
- 342743 words of memory out of 5000000
- 19088 multiletter control sequences out of 15000+600000
- 26965 words of font info for 58 fonts, out of 8000000 for 9000
+ 15775 strings out of 493014
+ 312788 string characters out of 6133351
+ 343108 words of memory out of 5000000
+ 19112 multiletter control sequences out of 15000+600000
+ 34091 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,6n,42p,10392b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mti10.pfb>
-Output written on RegionalRisk_Outline.pdf (7 pages, 1827340 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+s8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.
+pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on RegionalRisk_Outline.pdf (11 pages, 3851337 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
+ 107 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

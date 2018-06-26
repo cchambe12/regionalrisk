@@ -96,12 +96,13 @@ df<-inner_join(df, x)
 df<-df[!duplicated(df),]
 
 ### Let's look at NAO and bb
-cols<-c("bb", "cc", "m.index", "species")
+cols<-c("bb", "cc", "m.index", "species", "elev")
 bb.nao<-subset(df, select=cols)
 bb.nao<-bb.nao[!duplicated(bb.nao),]
 
+bb.nao$sm.elev<-bb.nao$elev/100
 #bb.nao$species<-as.numeric(as.factor(bb.nao$species))
-bbnao.mod<-brm(bb~cc+m.index+cc:m.index+(cc+m.index+cc:m.index|species), data=bb.nao, chains=2, cores=4, family=poisson)
+bbnao.mod<-brm(bb~cc+m.index+sm.elev+cc:m.index+(cc+m.index+sm.elev+cc:m.index|species), data=bb.nao, chains=2, cores=4)
 
 m<-bbnao.mod
 m.int<-posterior_interval(m)
