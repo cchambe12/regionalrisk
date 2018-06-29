@@ -9,7 +9,7 @@ options(stringsAsFactors = FALSE)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
-#library(egg)
+library(egg)
 #library(purrr)
 #library(broom)
 library(brms)
@@ -432,12 +432,12 @@ ggarrange(ahip, aglu, bpen, fsyl, fexc, qrob, ncol=3, nrow=2)
 
 
 #### Not separated by Species
-bb.samp<-bb[sample(nrow(bb), 1200, replace=FALSE),]
+bb.samp<-bb[sample(nrow(bb), 7600, replace=FALSE),]
 
 
 
-bb$fs.el<-round(bb$elev, digits=-1)
-bb$fs.el<-ave(bb$fs.count, bb$fs.el)
+#bb$fs.el<-round(bb$elev, digits=-1)
+#bb$fs.el<-ave(bb$fs.count, bb$fs.el)
 elev<-ggplot(bb.samp, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
@@ -447,10 +447,10 @@ elev<-ggplot(bb.samp, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)
   coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-  scale_y_continuous(expand = c(0, 0)) + facet_wrap(~species)
+  scale_y_continuous(expand = c(0, 0))
 
-bb$fs.mat<-round(bb$sp.temp, digits=0)
-bb$fs.mat<-ave(bb$fs.count, bb$fs.mat)
+#bb$fs.mat<-round(bb$sp.temp, digits=0)
+#bb$fs.mat<-ave(bb$fs.count, bb$fs.mat)
 mat<-ggplot(bb.samp, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
@@ -462,8 +462,8 @@ mat<-ggplot(bb.samp, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(c
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
   scale_y_continuous(expand = c(0, 0))
 
-bb$fs.n<-round(bb$m.index, digits=2)
-bb$fs.n<-ave(bb$fs.count, bb$fs.n)
+#bb$fs.n<-round(bb$m.index, digits=2)
+#bb$fs.n<-ave(bb$fs.count, bb$fs.n)
 nao<-ggplot(bb.samp, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
@@ -475,8 +475,8 @@ nao<-ggplot(bb.samp, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(c
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
   scale_y_continuous(expand = c(0, 0))
 
-bb$fs.sp<-round(bb$space, digits=-1)
-bb$fs.sp<-ave(bb$fs.count, bb$fs.sp)
+#bb$fs.sp<-round(bb$space, digits=-1)
+#bb$fs.sp<-ave(bb$fs.count, bb$fs.sp)
 space<-ggplot(bb.samp, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 

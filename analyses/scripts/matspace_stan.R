@@ -113,23 +113,26 @@ bb<-bb[!duplicated(bb),]
 
 #fs.cc<-fs.cc[!duplicated(fs.cc),]
 
-bb$sm.elev<-bb$elev/100
-bb$nao<-bb$m.index*10
+##### Another starting point!!! #####
+bb<-read.csv("output/regrisk.cleaned.csv", header=TRUE)
 
-columnstokeep <- c("species", "nao", "sp.temp", "cc", "space", "sm.elev", "fs.count")
+bb$sm.elev<-bb$elev/100
+#bb$nao<-bb$m.index*10
+
+columnstokeep <- c("species", "m.index", "sp.temp", "cc", "space", "sm.elev", "fs.count")
 #columnstokeep.map <- c("space","lat", "long")
 #bb.map<-subset(bb, select=columnstokeep.map)
 bb.stan <- subset(bb, select=columnstokeep)
 
-bb.stan$sp.temp<-round(bb.stan$sp.temp, digits=3)
-bb.stan$space<-round(bb.stan$space, digits=3)
+#bb.stan$sp.temp<-round(bb.stan$sp.temp, digits=3)
+#bb.stan$space<-round(bb.stan$space, digits=3)
 
 bb.stan<-bb.stan[!duplicated(bb.stan),]
 #bb.map<-bb.map[!duplicated(bb.map),]
 bb.stan<-na.omit(bb.stan)
 #bb.map<-na.omit(bb.map)
 
-bb.stan<-bb
+#bb.stan<-bb
 write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb.brm.nointer.csv", row.names = FALSE)
 
 bb$space<-round(bb$space, digits=2)
