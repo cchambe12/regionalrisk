@@ -8,6 +8,10 @@ options(stringsAsFactors = FALSE)
 
 ## Libraries
 library(brms)
+library(rstan)
+
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
 
 #### get the data
 bb.stan<-read.csv("/n/wolkovich_lab/Lab/Cat/bb.brm.nointer.csv", header=TRUE)

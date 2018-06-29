@@ -118,7 +118,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item Temperate tree and shrub species are at risk of damage from late spring freezing events, also known as false springs.
 \begin{enumerate}
 \item However, the extent of damage and the frequency and intensity of false spring events is still largely unknown.
-\item Individuals that initiate budburst before the last spring freeze are at risk of leaf tissue loss, damage to the xylem, and slowed canopy development \citep{Gu2008, Hufkens2012}.
+\item Individuals that initiate budburst and have not fully leafed out before the last spring freeze are at risk of leaf tissue loss, damage to the xylem, and slowed canopy development \citep{Gu2008, Hufkens2012}.
 \item Temperate plants are exposed to freezing temperatures numerous times throughout the year, however, individuals are most at risk to damage from stochastic spring frosts, when frost tolerance is lowest \citep{Sakai1987}.
 \item The growing season is lengthening across many regions in the northern hemisphere \citep{Chen2005, Liu2006, Kukal2018}, but last spring frosts still pose a threat in many of these regions \citep{Wypych2016a}.
 \item False spring events can result in photosynthetic tissue loss, which could potentially impact multiple years of growth and, with the growing season extending, individuals could be exposed to more frosts in the future \citep{Liu2018}.
@@ -132,6 +132,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item With climate change advancing, this interaction of cues may shift spring phenologies both across and within species. 
 \item Due to the changing climate, spring onset is advancing and many temperate tree and shrub species are initiating leafout 4-6 days earlier per $^{\circ}$C of warming \citep{Wolkovich2012, IPCC2014}.
 \item However, last spring freeze dates are not predicted to advance at the same rate as spring onset in some regions of the world \citep{Inouye2008, Martin2010, Labe2016, Sgubin2018}, potentially amplifying the effects of false spring events in these regions.
+\item (Too redundant??) In Germany, for example, the last freeze date has advanced by 2.6 days per decade since 1955 \citep{Zohner2016}.
 \item Major false spring events have been recorded in recent years and have found it can take 16-38 days for trees to refoliate \citep{Gu2008, Augspurger2009, Augspurger2013, Menzel2015}, which can detrimentally affect crucial processes such as carbon updake and nutrient cycling \citep{Hufkens2012, Richardson2013, Klosterman2018}.
 \end{enumerate}
 
@@ -156,12 +157,12 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \begin{enumerate}
 \item Some research suggests false spring incidence has declined in many regions (i.e. across parts of North America and Asia), however the prevalence of spring frosts has consistently increased across Europe since 1982 \citep{Liu2018}.
 \item The North Atlantic Ossilation (NAO) index is often used to describe winter and spring circulation across Europe. 
-\item More positive NAO phases tend to result in higher than average winter and early spring temperatures, and with climate change, higher NAO phases has correlated to even earlier budburst dates \citep{Chmielewski2001}, however it is unclear if more positive NAO phases also translates to more false springs.
+\item More positive NAO phases tend to result in higher than average winter and early spring temperatures, and with climate change, higher NAO phases has correlated to even earlier budburst dates in some regions \citep{Chmielewski2001}, however it is unclear if more positive NAO phases also translates to more false springs.
 \item By improving and identifying budburst and climate trends in recent years, we could potentially amplify our predictability of future projections in false springs.
 \item A false spring, in this study, was recorded when temperatures fell below -2$^{\circ}$ \citep{Schwartz1993} between budburst and leafout (CITE Rethinking here?)
 \item For this purpose, we assessed the number of false springs that occured across 11,684 sites around Europe, spanning altitudinal and coastal gradients, using observed phenological data (857,004 observations) for six temperate, deciduous trees and combined that with daily gridded climate data for each site that extended from 1950-2016. %% Do we want a table here with a breakdown of sites, species, and years? Probably in the supplement? 
 \item Since the primary aim is to predict false spring incidence in a changing climate, we split our data at 1983 to capture reported temporal shifts in temperature trends \citep{Stocker2013, Kharouba2018}.
-\item We predicted that: (1) Budburst timing would be earlier for all six species after the early to mid 1980s, (2) species that initiate budburst earlier would experience more false springs, and (3) there would be different regional effects on false spring incidence, especially coupled with climate change.
+\item We predicted that: (1) Earlier budburst species would experience more false springs, especially after 1983 and (2) there would be different regional effects on false spring incidence, especially coupled with the effects of climate change.
 \end{enumerate}
 \end{enumerate}
 %% WHERE DOES THIS GO? \item By using only gridded climate data from March 1st until June 30th, we compared the first half of our data (1950-1983) to the latter half (1984-2016) and found that some regions experienced increased exposure to false spring conditions, whereas many regions experienced fewer or similar conditions (Figure \ref{fig:region}). %% supplement?
@@ -169,17 +170,11 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \section*{Methods}
 \subsection*{Phenological Data}
 \begin{enumerate}
-\item PEP725
-\item Species are \textit{Aesculus hippocastanum L.}, \textit{Alnus glutinosa} (L.) Gaertn., \textit{Betula pendula} Roth., \textit{Fagus sylvatica} Ehrh., \textit{Fraxinus excelsior} L., \textit{Quercus robur} L.
-\item Narrowed down to 6 species based on the following criteria:
-\begin{itemize}
-\item Needed to be temperate, deciduous species that were not cultivars or used for crops
-\item Needed at least 100,000 useable observations per species - useable being BBCH 11
-\item Needed to span over half of all the sites used in the study
-\item Needed observations for every year in the study
-\end{itemize}
-\item Used BBCH 11 as leafout
-\item Then subtracted 12 days to determine budburst and subsequently the timeframe we will use to establish false spring conditions. \citep{Donnelly2017}
+\item Phenological data was obtained from the Pan European Phenology network (PEP725, www.pep725.edu), which provides open access phenology records across Europe \citep{Templ2018}.
+\item Since plants are most susceptible to damage from frost between budburst and full leafout, we selected only leafout data \citep[i.e., in][BBCH 11, which is defined as the point of leaf unfolding and the first visible leaf stalk]{Meier2001} from the PEP725 dataset.
+\item The species used in the study were \textit{Aesculus hippocastanum L.}, \textit{Alnus glutinosa} (L.) Gaertn., \textit{Betula pendula} Roth., \textit{Fagus sylvatica} Ehrh., \textit{Fraxinus excelsior} L., \textit{Quercus robur} L.
+\item Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used for crops, (2) there were at least 100,000 observations of BBCH 11, (3) to represent over half of the total number of sites available (11,684), and (4) there were observations for each year used in the study (1950-2016).
+\item We then subtracted 12 days from the leafout date to determine day of budburst \citep{Donnelly2017}.
 \end{enumerate}
 \subsection*{Climate Data}
 \begin{enumerate}

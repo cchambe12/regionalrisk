@@ -1,4 +1,4 @@
-\begin{thebibliography}{41}
+\begin{thebibliography}{43}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Augspurger(2009)}]{Augspurger2009}
@@ -151,6 +151,12 @@ Martin, M., Gavazov, K., K{\"{o}}rner, C., Hattenschwiler, S. \& Rixen, C.
   plants under elevated atmospheric {$CO_2$}}. \emph{Global Change Biology}
   \textbf{16}, 1057--1070.
 
+\bibitem[{Meier(2001)}]{Meier2001}
+Meier, U. (2001) {Growth stages of mono-and dicotyledonous plants BBCH
+  Monograph Edited by Uwe Meier Federal Biological Research Centre for
+  Agriculture and Forestry}. \emph{Agriculture} \textbf{12}, 141----147 ST ----
+  Geochemical study of the organic mat.
+
 \bibitem[{Menzel \emph{et~al.}(2015)Menzel, Helm \& Zang}]{Menzel2015}
 Menzel, A., Helm, R. \& Zang, C. (2015) Patterns of late spring frost leaf
   damage and recovery in a european beech (fagus sylvatica l.) stand in
@@ -201,6 +207,17 @@ Stocker, T.F., Qin, D., Plattner, G.K., Tignor, M., Allen, S.K., Boschung, J.,
   Nauels, A., Xia, Y., Bex, V. \& Midgley, P.M. (2013) Climate change 2013: The
   physical science basis. contribution of working group i to the fifth
   assessment report of the intergovernmental panel on climate change, 1535 pp.
+
+\bibitem[{Templ \emph{et~al.}(2018)Templ, Koch, Bolmgren, Ungersb{\"o}ck, Paul,
+  Scheifinger, Rutishauser, Busto, Chmielewski, H{\'a}jkov{\'a}, Hodzi{\'{c}},
+  Kaspar, Pietragalla, Romero-Fresneda, Tolvanen, Vu{\v{c}}eti{\v{c}},
+  Zimmermann \& Zust}]{Templ2018}
+Templ, B., Koch, E., Bolmgren, K., Ungersb{\"o}ck, M., Paul, A., Scheifinger,
+  H., Rutishauser, T., Busto, M., Chmielewski, F.M., H{\'a}jkov{\'a}, L.,
+  Hodzi{\'{c}}, S., Kaspar, F., Pietragalla, B., Romero-Fresneda, R., Tolvanen,
+  A., Vu{\v{c}}eti{\v{c}}, V., Zimmermann, K. \& Zust, A. (2018) Pan european
+  phenological database (pep725): a single point of access for european data.
+  \emph{International Journal of Biometeorology} \textbf{62}, 1109--1113.
 
 \bibitem[{Vihera-aarnio \emph{et~al.}(2006)Vihera-aarnio, Hakkinen \&
   Junttila}]{Viheraaarnio2006}
