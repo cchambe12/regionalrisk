@@ -91,6 +91,10 @@ nao<-nao[!duplicated(nao),]
 bb<-full_join(bb, nao)
 
 bb<-bb[!duplicated(bb),]
+
+#### Space parameter? ####
+# summary(lm(space~elev+lat+long, data=bb))
+
 #write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.csv", row.names = FALSE)
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)
@@ -125,7 +129,16 @@ bb.stan<-bb.stan[!duplicated(bb.stan),]
 bb.stan<-na.omit(bb.stan)
 #bb.map<-na.omit(bb.map)
 
+bb.stan<-bb
 write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb.brm.nointer.csv", row.names = FALSE)
+
+bb$space<-round(bb$space, digits=2)
+bb<-bb[!duplicated(bb),]
+bb$elev<-ave(bb$elev, bb$lat.long)
+bb<-bb[!duplicated(bb),]
+
+check<-bb[duplicated(bb[1:4]) | duplicated(bb[1:4], fromLast= TRUE),]
+
 
 brm.full.nointer<-brm(fs.count~nao+sp.temp+cc+space+sm.elev+(1|species)+
                         (nao-1|species)+(sp.temp-1|species)+(cc-1|species)+

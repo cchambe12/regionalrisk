@@ -102,7 +102,7 @@ bb.nao<-bb.nao[!duplicated(bb.nao),]
 
 bb.nao$sm.elev<-bb.nao$elev/100
 #bb.nao$species<-as.numeric(as.factor(bb.nao$species))
-bbnao.mod<-brm(bb~cc+m.index+sm.elev+cc:m.index+(cc+m.index+sm.elev+cc:m.index|species), data=bb.nao, chains=2, cores=4)
+bbnao.mod<-brm(bb~cc+m.index+sm.elev+cc:sm.elev+cc:m.index+(cc+m.index+sm.elev+cc:sm.elev+cc:m.index|species), data=bb.nao, chains=2, cores=4)
 
 m<-bbnao.mod
 m.int<-posterior_interval(m)
@@ -136,12 +136,12 @@ dfwide<-tidyr::spread(dflong, perc, value)
 dfwide[,4:6] <- as.data.frame(lapply(c(dfwide[,4:6]), as.numeric ))
 dfwide$species<-as.factor(dfwide$species)
 
-write.csv(dfwide, file="/n/wolkovich_lab/Lab/Cat/brm_output.csv", row.names=FALSE)
+#write.csv(dfwide, file="/n/wolkovich_lab/Lab/Cat/brm_output.csv", row.names=FALSE)
 ## plotting
 
 pd <- position_dodgev(height = -0.5)
 
-estimates<-c("Before or After 1983", "NAO", "CC x NAO")
+estimates<-c("Before or After 1983", "NAO", "Elevation", "CC x Elevation",  "CC x NAO")
 dfwide$legend<-factor(dfwide$species,
                       labels=c("Overall Effects","Aesculus hippocastanum","Alnus glutinosa",
                                "Betula pendula","Fagus sylvatica","Fraxinus excelsior",
