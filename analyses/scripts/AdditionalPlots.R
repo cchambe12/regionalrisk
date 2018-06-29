@@ -10,15 +10,38 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(egg)
-#library(purrr)
-#library(broom)
+library(purrr)
+library(broom)
 library(brms)
+library(tabplot)
 
 
 # Setting working directory
 setwd("~/Documents/git/regionalrisk/analyses/")
 
 bb<-read.csv("output/regrisk.cleaned.csv", header=TRUE)
+
+### Try tableplot
+commoncols<-c("sp.temp", "elev", "space", "m.index", "fs.count", "cc", "species")
+bb<-subset(bb, select=commoncols)
+bb<-bb[!duplicated(bb),]
+bb<-na.omit(bb)
+#tableplot(bb.stan)
+bb$cc<-ifelse(bb$cc==1, "After 1983", "Before 1983")
+tableplot(bb, select = c(elev, cc, species, fs.count), sortCol = cc)
+
+pre <- bb[sample(1:nrow(bb[which(bb$cc==0),]), replace=TRUE),]
+post <- bb[sample(1:nrow(bb[which(bb$cc==1),]), replace=TRUE),]
+
+tp1 <- tableplot(exp.diamonds, plot=FALSE)
+tp2 <- tableplot(chp.diamonds, plot=FALSE)
+
+plot(tp2 - tp1)
+
+tp1<-tableplot(pre, select=c(sp.temp, elev, space, m.index, fs.count))
+tp2<-tableplot(post, select=c(sp.temp, elev, space, m.index, fs.count))
+
+plot(tp2-tp1)
 
 #### Let's try Hadley's Methods!
 # Maybe subset by each type of model I want to run...?
@@ -57,11 +80,12 @@ mat<-ggplot(mat.df, aes(x=`(Intercept)`, y=sp.temp)) + geom_line(aes(col=as.fact
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
         plot.margin = unit(c(2,2,2,2), "lines"),
         plot.title=element_text(colour = "firebrick3")) +
-  #coord_cartesian(xlim=c(-14, 15), ylim=c(0, 9)) + 
+  coord_cartesian(ylim=c(-0.2, -0.06), xlim=c(0, 2)) + 
   scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
-  geom_jitter(aes(shape=as.factor(cc))) +
-  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-  scale_y_continuous(expand = c(0, 0))
+  #geom_point(aes(shape=as.factor(cc))) + 
+  geom_text(aes(label=species, col=as.factor(cc)),hjust=0, vjust=0)
+  scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") #+
+  #scale_y_continuous(expand = c(0, 0))
 
 
 
@@ -434,11 +458,12 @@ ggarrange(ahip, aglu, bpen, fsyl, fexc, qrob, ncol=3, nrow=2)
 #### Not separated by Species
 bb.samp<-bb[sample(nrow(bb), 7600, replace=FALSE),]
 
+elev.df<-bb%>%
+  group_by(lat.long, cc)%>%
+  summarise(count=n(), elev=mean(elev), fs=mean(fs.count)) %>%
+  collect
 
-
-#bb$fs.el<-round(bb$elev, digits=-1)
-#bb$fs.el<-ave(bb$fs.count, bb$fs.el)
-elev<-ggplot(bb.samp, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Average Number \n of False Springs") +
+elev<-ggplot(elev.df, aes(x=elev, y=fs)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
@@ -449,9 +474,11 @@ elev<-ggplot(bb.samp, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
   scale_y_continuous(expand = c(0, 0))
 
-#bb$fs.mat<-round(bb$sp.temp, digits=0)
-#bb$fs.mat<-ave(bb$fs.count, bb$fs.mat)
-mat<-ggplot(bb.samp, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Average Number \n of False Springs") +
+mat.df<-bb%>%
+  group_by(lat.long, cc)%>%
+  summarise(count=n(), mat=mean(sp.temp), fs=mean(fs.count)) %>%
+  collect
+mat<-ggplot(mat.df, aes(x=mat, y=fs)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
@@ -462,9 +489,11 @@ mat<-ggplot(bb.samp, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(c
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
   scale_y_continuous(expand = c(0, 0))
 
-#bb$fs.n<-round(bb$m.index, digits=2)
-#bb$fs.n<-ave(bb$fs.count, bb$fs.n)
-nao<-ggplot(bb.samp, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Average Number \n of False Springs") +
+nao.df<-bb%>%
+  group_by(lat.long, cc)%>%
+  summarise(count=n(), nao=mean(m.index), fs=mean(fs.count)) %>%
+  collect
+nao<-ggplot(nao.df, aes(x=nao, y=fs)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
@@ -475,9 +504,11 @@ nao<-ggplot(bb.samp, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(c
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
   scale_y_continuous(expand = c(0, 0))
 
-#bb$fs.sp<-round(bb$space, digits=-1)
-#bb$fs.sp<-ave(bb$fs.count, bb$fs.sp)
-space<-ggplot(bb.samp, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Average Number \n of False Springs") +
+space.df<-bb%>%
+  group_by(lat.long, cc)%>%
+  summarise(count=n(), space=mean(space), fs=mean(fs.count)) %>%
+  collect
+space<-ggplot(space.df, aes(x=space, y=fs)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
