@@ -1,4 +1,4 @@
-\begin{thebibliography}{43}
+\begin{thebibliography}{48}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Augspurger(2009)}]{Augspurger2009}
@@ -11,10 +11,20 @@ Augspurger, C.K. (2013) {Reconstructing patterns of temperature, phenology, and
   frost damage over 124 years: Spring damage risk is increasing}.
   \emph{Ecology} \textbf{94}, 41--50.
 
+\bibitem[{Basler \& K{\"{o}}rner(2012)}]{Basler2012}
+Basler, D. \& K{\"{o}}rner, C. (2012) {Photoperiod sensitivity of bud burst in
+  14 temperate forest tree species}. \emph{Agricultural and Forest Meteorology}
+  \textbf{165}, 73--81.
+
 \bibitem[{Basler \& Korner(2014)}]{Basler2014}
 Basler, D. \& Korner, C. (2014) Photoperiod and temperature responses of bud
   swelling and bud burst in four temperate forest tree species. \emph{Tree
   Physiology} \textbf{34}, 377--388.
+
+\bibitem[{{B{\"u}rkner, Paul-Christian }(2017)}]{brms}
+{B{\"u}rkner, Paul-Christian } (2017) {{brms}: An {R} Package for {Bayesia}
+  Multilevel Models}. \emph{{Journal of Statistical Software}} \textbf{80},
+  1--28.
 
 \bibitem[{Caffarra \& Donnelly(2011)}]{Caffarra2011}
 Caffarra, A. \& Donnelly, A. (2011) {The ecological significance of phenology
@@ -57,6 +67,10 @@ Gauzere, J., Delzon, S., Davi, H., Bonhomme, M., Garcia~de Cortazar-Atauri, I.
   photoperiod in phenological process-based models. A case study with two
   European tree species: \textit{Fagus sylvatica} and \textit{Quercus
   petraea}}. \emph{Agricultural and Forest Meteorology} pp. 9--20.
+
+\bibitem[{Gelman \& Hill(2006)}]{Gelman2006}
+Gelman, A. \& Hill, J. (2006) \emph{Data analysis using regression and
+  multilevel/hierarchical models}. Cambridge university press.
 
 \bibitem[{Gu \emph{et~al.}(2008)Gu, Hanson, Post, Kaiser, Yang, Nemani,
   Pallardy \& Meyers}]{Gu2008}
@@ -173,6 +187,10 @@ Polgar, C.A. \& Primack, R.B. (2011) {Leaf-out phenology of temperate woody
   plants: From trees to ecosystems}. \emph{New Phytologist} \textbf{191},
   926--941.
 
+\bibitem[{{R Development Core Team}(2017)}]{R}
+{R Development Core Team} (2017) R: A language and environment for statistical
+  computing. \emph{R Foundation for Statistical Computing, Vienna, Austria} .
+
 \bibitem[{Richardson \emph{et~al.}(2013)Richardson, Keenan, Migliavacca, Ryu,
   Sonnentag \& Toomey}]{Richardson2013}
 Richardson, A.D., Keenan, T.F., Migliavacca, M., Ryu, Y., Sonnentag, O. \&
@@ -218,6 +236,12 @@ Templ, B., Koch, E., Bolmgren, K., Ungersb{\"o}ck, M., Paul, A., Scheifinger,
   A., Vu{\v{c}}eti{\v{c}}, V., Zimmermann, K. \& Zust, A. (2018) Pan european
   phenological database (pep725): a single point of access for european data.
   \emph{International Journal of Biometeorology} \textbf{62}, 1109--1113.
+
+\bibitem[{Trouet \emph{et~al.}(2009)Trouet, Esper, Graham, Baker, Scourse \&
+  Frank}]{NAO}
+Trouet, V., Esper, J., Graham, N., Baker, A., Scourse, J. \& Frank, D. (2009)
+  Persistent positive north atlantic oscillation mode dominated the medieval
+  climate anomaly. \emph{Science} .
 
 \bibitem[{Vihera-aarnio \emph{et~al.}(2006)Vihera-aarnio, Hakkinen \&
   Junttila}]{Viheraaarnio2006}
