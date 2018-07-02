@@ -18,7 +18,8 @@ bb.stan<-read.csv("/n/wolkovich_lab/Lab/Cat/bb.brm.nointer.csv", header=TRUE)
 
 brm.full.nointer<-brm(fs.count~m.index+sp.temp+cc+space+sm.elev+
                         (m.index+sp.temp+cc+space+sm.elev|species), data=bb.stan, chains=2, 
-                      control = list(max_treedepth = 12,adapt_delta = 0.99), family=poisson, cores=64)
+                      warmup=2500,iter=4000,
+                      control = list(max_treedepth = 12,adapt_delta = 0.99), cores=64)
 
 save(brm.full.nointer, file="/n/wolkovich_lab/Lab/Cat/brm.Rdata")
 
