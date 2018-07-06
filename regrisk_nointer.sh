@@ -2,11 +2,11 @@
 
 #SBATCH -p wolkovich
 
-#SBATCH -n 64
+#SBATCH -n 128
 
-#SBATCH -N 1
+#SBATCH -N 2
 
-#SBATCH -t 0-30:00:00
+#SBATCH -t 0-100:00:00
 
 #SBATCH --mem 100000
 

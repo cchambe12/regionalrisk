@@ -30,6 +30,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 ########################
 #### get the data
 dx<-read.csv("output/fs_matspspace_old.csv", header=TRUE)
+dx<-subset(dx, year>1950)
 #xx<-read.csv("output/fs_matspspace.csv", header=TRUE)
 #bb.stan<-read.csv("output/bb.brm.nointer.csv", header=TRUE)
 
@@ -60,28 +61,35 @@ dx<-dx[!duplicated(dx),]
 #shapefile(coords, "output/bbspace.shp")
 
 xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+xx<-subset(xx, year>1950)
 df<-read.csv("output/mat_fulldata.csv", header=TRUE)
+df<-subset(df, year>1950)
 mat<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
+mat<-subset(mat, year>1950)
 nao<-read.csv("output/nao_year_sp.csv", header=TRUE)
+nao<-subset(nao, year>1950)
 
 ### Clean up dataframes a bit
 dx<-full_join(df, dx)
 dx<-dx[!duplicated(dx),]
 
-mat<-dplyr::select(mat, species, year, LAT, LON, ALT)
+mat<-dplyr::select(mat, species, LAT, LON, ALT)
 mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
+mat$lat.long<-paste(mat$lat, mat$long)
 mat<-mat[!duplicated(mat),]
 bb<-full_join(mat, dx)
 
 
 #### Get elevation information
 bb<-bb%>%rename(sp.temp=pre.bb)
-bb$cc<-ifelse(bb$year<=1983&bb$year>=1950, 0, 1)
+bb$cc<-ifelse(bb$year<=1983&bb$year>1950, 0, 1)
 
-xx<-dplyr::select(xx, lat, long, species, fs.count)
+xx<-dplyr::select(xx, lat, long, species, fs.count, year)
 xx<-xx[!duplicated(xx),]
 bb<-full_join(bb, xx)
+bb<-bb[!duplicated(bb),]
 bb$fs.count<-ave(bb$fs.count, bb$year, bb$lat.long, bb$species, FUN=last)
+bb$elev<-ave(bb$elev, bb$lat.long)
 bb<-bb[!duplicated(bb),]
 bb<-na.omit(bb)
 
@@ -90,12 +98,19 @@ nao<-nao[!duplicated(nao),]
 
 bb<-full_join(bb, nao)
 
-bb<-bb[!duplicated(bb),]
-
 #### Space parameter? ####
 # summary(lm(space~elev+lat+long, data=bb))
 
-#write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.csv", row.names = FALSE)
+tar.var<-c("species", "year", "lat.long")
+resp.var<-c("fs.count")
+
+bb.sub<-bb[,c(tar.var, resp.var)]
+bb.sub.nodup<-bb[!duplicated(bb.sub),]
+dd<-bb.sub.nodup
+dd$space<-round(dd$space, digits=3)
+dd<-dd[!duplicated(dd),]
+
+write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.csv", row.names = FALSE)
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)
 #mat<-mat[!duplicated(mat),]
@@ -114,15 +129,15 @@ bb<-bb[!duplicated(bb),]
 #fs.cc<-fs.cc[!duplicated(fs.cc),]
 
 ##### Another starting point!!! #####
-bb<-read.csv("output/regrisk.cleaned.csv", header=TRUE)
+#bb<-read.csv("output/regrisk.cleaned.csv", header=TRUE)
 
-bb$sm.elev<-bb$elev/100
+dd$sm.elev<-dd$elev/100
 #bb$nao<-bb$m.index*10
 
 columnstokeep <- c("species", "m.index", "sp.temp", "cc", "space", "sm.elev", "fs.count")
 #columnstokeep.map <- c("space","lat", "long")
 #bb.map<-subset(bb, select=columnstokeep.map)
-bb.stan <- subset(bb, select=columnstokeep)
+bb.stan <- subset(dd, select=columnstokeep)
 
 #bb.stan$sp.temp<-round(bb.stan$sp.temp, digits=3)
 #bb.stan$space<-round(bb.stan$space, digits=3)
@@ -135,10 +150,6 @@ bb.stan<-na.omit(bb.stan)
 #bb.stan<-bb
 write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb.brm.nointer.csv", row.names = FALSE)
 
-bb$space<-round(bb$space, digits=2)
-bb<-bb[!duplicated(bb),]
-bb$elev<-ave(bb$elev, bb$lat.long)
-bb<-bb[!duplicated(bb),]
 
 check<-bb[duplicated(bb[1:4]) | duplicated(bb[1:4], fromLast= TRUE),]
 
@@ -147,6 +158,37 @@ brm.full.nointer<-brm(fs.count~nao+sp.temp+cc+space+sm.elev+(1|species)+
                         (nao-1|species)+(sp.temp-1|species)+(cc-1|species)+
                         (space-1|species)+(sm.elev-1|species), data=bb.stan, chains=2, family=poisson,cores=4)
 save(brm.full.nointer, file="/n/wolkovich_lab/Lab/Cat/brm.Rdata")
+
+
+spp <- unique(bb.stan$complex)
+for (sp in c(1:length(spp))){
+  par(mfrow=c(1,3))
+  subby <- subset(bb.stan, complex==spp[sp])
+  # chilling
+  plot(resp~chill, data=subby, main=subby$complex.wname[1]) 
+  intercepthere <- whichmodel[grep("a_sp", rownames(whichmodel)),1][spp[sp]+2]
+  slopehere <- whichmodel[grep("b_chill", rownames(whichmodel)),1][spp[sp]+2]
+  abline(intercepthere, slopehere)
+  intercepthere <- othermodel[grep("a_sp", rownames(othermodel)),1][spp[sp]+2]
+  slopehere <- othermodel[grep("b_chill", rownames(othermodel)),1][spp[sp]+2]
+  abline(intercepthere, slopehere, col="blue")
+  # forcing 
+  plot(resp~force, data=subby) # should add color coding by datasetID
+  intercepthere <- whichmodel[grep("a_sp", rownames(whichmodel)),1][spp[sp]+2]
+  slopehere <- whichmodel[grep("b_force", rownames(whichmodel)),1][spp[sp]+2]
+  abline(intercepthere, slopehere)
+  intercepthere <- othermodel[grep("a_sp", rownames(othermodel)),1][spp[sp]+2]
+  slopehere <- othermodel[grep("b_force", rownames(othermodel)),1][spp[sp]+2]
+  abline(intercepthere, slopehere, col="blue")
+  # photo
+  plot(resp~photo, data=subby) # should add color coding by datasetID
+  intercepthere <- whichmodel[grep("a_sp", rownames(whichmodel)),1][spp[sp]+2]
+  slopehere <- whichmodel[grep("b_photo", rownames(whichmodel)),1][spp[sp]+2]
+  abline(intercepthere, slopehere)
+  intercepthere <- othermodel[grep("a_sp", rownames(othermodel)),1][spp[sp]+2]
+  slopehere <- othermodel[grep("b_photo", rownames(othermodel)),1][spp[sp]+2]
+  abline(intercepthere, slopehere, col="blue")
+}
 
 m<-brm.full.nointer
 m.int<-posterior_interval(m)

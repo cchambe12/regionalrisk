@@ -114,43 +114,48 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item The North Atlantic Ossilation (NAO) index is often used to describe winter and spring circulation across Europe. 
 \item More positive NAO phases tend to result in higher than average winter and early spring temperatures, and with climate change, higher NAO phases has correlated to even earlier budburst dates in some regions \citep{Chmielewski2001}, however it is unclear if more positive NAO phases also translates to more false springs.
 \item By improving and identifying budburst and climate trends in recent years, we could potentially amplify our predictability of future projections in false springs.
-\item For this purpose, we assessed the number of false springs that occured across 11,684 sites around Europe, spanning altitudinal and coastal gradients, using observed phenological data (857,004 observations) for six temperate, deciduous trees and combined that with daily gridded climate data for each site that extended from 1950-2016. %% Do we want a table here with a breakdown of sites, species, and years? Probably in the supplement? 
+\item For this purpose, we assessed the number of false springs that occured across 11,684 sites around Europe, spanning altitudinal and coastal gradients, using observed phenological data (857,004 observations) for six temperate, deciduous trees and combined that with daily gridded climate data for each site that extended from 1951-2016. %% Do we want a table here with a breakdown of sites, species, and years? Probably in the supplement? 
 \item In this study, a false spring was tallied when temperatures fell below -2.2$^{\circ}$ \citep{Schwartz1993} between budburst and leafout (CITE Rethinking here?)
 \item We predicted that: (1) Earlier budburst species would experience more false springs, especially after 1983 and (2) there would be different regional effects on false spring incidence and those trends would shift when coupled with the effects of climate change.
 \end{enumerate}
 \end{enumerate}
-%% WHERE DOES THIS GO? \item By using only gridded climate data from March 1st until June 30th, we compared the first half of our data (1950-1983) to the latter half (1984-2016) and found that some regions experienced increased exposure to false spring conditions, whereas many regions experienced fewer or similar conditions (Figure \ref{fig:region}). %% supplement?
+%% WHERE DOES THIS GO? \item By using only gridded climate data from March 1st until June 30th, we compared the first half of our data (1951-1983) to the latter half (1984-2016) and found that some regions experienced increased exposure to false spring conditions, whereas many regions experienced fewer or similar conditions (Figure \ref{fig:region}). %% supplement?
 
 \section*{Methods}
 \subsection*{Phenological Data}
 \begin{enumerate}
 \item Phenological data was obtained from the Pan European Phenology network (PEP725, www.pep725.edu), which provides open access phenology records across Europe \citep{Templ2018}.
 \item Since plants are most susceptible to damage from frost between budburst and full leafout, we selected only leafout data \citep[i.e., in][BBCH 11, which is defined as the point of leaf unfolding and the first visible leaf stalk]{Meier2001} from the PEP725 dataset.
-\item We then subtracted 12 days from the leafout date to determine day of budburst \citep{Donnelly2017}. 
+\item We then subtracted 12 days from the leafout date to establish a rough estimate for day of budburst \citep{Donnelly2017}. 
 \item The species used in the study were \textit{Aesculus hippocastanum L.}, \textit{Alnus glutinosa} (L.) Gaertn., \textit{Betula pendula} Roth., \textit{Fagus sylvatica} Ehrh., \textit{Fraxinus excelsior} L., \textit{Quercus robur} L.
-\item Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used for crops, (2) there were at least 100,000 observations of BBCH 11, (3) to represent over half of the total number of sites available (11,684), and (4) there were observations for each year used in the study (1950-2016).
+\item Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used for crops, (2) there were at least 140,000 observations of BBCH 11, (3) to represent over half of the total number of sites available (11,684), (4) there were observations for at least 65 out of the 66 years of the study (1951-2016). % Do we want a table here with a breakdown of data for the supplement?
 \end{enumerate}
 \subsection*{Climate Data}
 \begin{enumerate}
 \item We collected daily gridded climate data from the European Climate Assessment \& Dataset (ECA\&D) and used the E-OBS 0.25 degree regular latitude-longitude grid from version 16. 
-\item We used the daily minimum temperature dataset to determine if a false spring occurred, which was defined as -2.2$^{\circ}$C \citep{Schwartz1993}
+\item We used the daily minimum temperature dataset to determine if a false spring occurred.
+\item False springs in this study were defined as temperatures at or below -2.2$^{\circ}$C \citep{Schwartz1993}.
 \item In order to capture regional climatic effects we calculated the mean spring temperature by using the daily mean temperature from February 1 through April 30.
-\item Mean spring temperature was calculated -- after chilling was accummulated -- to incorporate spring forcing temperatures in our Bayesian hierarchichal model and to compare differences in spring across sites \citep{Basler2012}.
+\item Mean spring temperature was calculated -- likely after chilling was accummulated -- in an attempt to incorporate a the general effects of spring forcing temperatures in our Bayesian hierarchichal model and to compare differences in spring across sites \citep{Basler2012, Korner2016}.
 \item We collected NAO-index data from the KNMI Climate Explorer annual NAO time series \citep{NAO}.
 \item Since the primary aim of the study is to predict false spring incidence in a changing climate, we split our data to before and after 1983 to capture reported temporal shifts in temperature trends \citep{Stocker2013, Kharouba2018}.
 \end{enumerate}
 \subsection*{Data Analysis}
 \begin{enumerate}
 \item We used a Bayesian hierarchical model approach to analyze our data to best estimate the number of false springs across-species levels. 
-\item A false spring was determined if temperatures fell  below -2.2$^{\circ}$C at least once between budburst and leafout.
-\item We fit a mixed-effects model using mean spring temperature, NAO, elevation, space, and climate change as predictors (fixed effects) and species as modeled groups (random effects).
+\item A false spring was determined if temperatures fell below -2.2$^{\circ}$C at least once between budburst and leafout.
+\item We fit a mixed-effects model using mean spring temperature, NAO, elevation, space, and climate change as predictors and all two-way interactions (fixed effects) and species as modeled groups on the main effects (random effects).
 \item We scaled the elevation predictor by dividing it by 100 to be consistent with the other predictors in the model.
-\item We used a space parameter rather than a more traditional latitude parameter to adjust for spatial autocorrelation issues using a minimization of Moran's \textit{I} of the residuals \citep{Baumen2017} (Figure S1).
+\item We used a space parameter, rather than a more traditional latitude parameter, to adjust for spatial autocorrelation issues using a minimization of Moran's \textit{I} of the residuals \citep{Baumen2017} (Figure S1).
 \item We then took the calculated eigenvectors determined from the MIR approach and regressed these against the number of false springs for each datapoint to establish a spatial parameter (space). % get citation from Nacho regarding regression
-\item The Bayesian hierarchical model was fit using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows:
-\begin{equation} \label{eq:1}
-y_i \thicksim N(\alpha_(i) + \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp_{(i)}}} + \beta_{elevation_{sp_{(i)}}} + \beta_{space_{sp_{(i)}}} \beta_{ClimateChange_{sp_{(i)}}} \sigma_{sp_{(i)}} 
-\end{equation}
+\item (Although, we may find that space and elevation are collinear and may decide to take space out and use elevation instead - unless space is picking up more of the distance from the coast then we'll use the space parameter instead of elevation)
+\item The Bayesian hierarchical model was fit using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows: (subject to change as per above, this is just the ideal model)
+\begin{align*} \label{eq:1} %% potentially...
+y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp_{(i)}}} + \beta_{elevation_{sp_{(i)}}}
++ \beta_{space_{sp_{(i)}}} + \beta_{ClimateChange_{sp_{(i)}}} \\
++& \beta_{MeanSpringTemp \times Climate Change_{(i)}} + \beta_{NAO \times Climate Change_{(i)}} \\
++& \beta_{elevation \times Climate Change_{(i)}} + \beta_{space \times Climate Change_{(i)}} + \sigma_{sp_{(i)}} 
+\end{align*}
 \item The $\beta$ coefficients and $\alpha$ were modeled at the species level:
 \begin{align*}
 1.& \; \beta_{MeanSpringTemp_{sp}} \thicksim N(\mu_{MeanSpringTemp}, \sigma{^2}_{MeanSpringTemp}) \\
@@ -163,22 +168,33 @@ y_i \thicksim N(\alpha_(i) + \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp_
 \end{enumerate}
 
 \section*{Results}
+\subsection*{Species variation in budburst and false spring incidence}
+\begin{enumerate}
+\item There is variation in day of budburst across the six species and across space - BB maps Fig (should I include a small model here to demonstrate this? (i.e. fs ~ cc + (cc|species)))
+\begin{enumerate}
+\item Earlier budbursting species experienced more false spring conditions - proportion of sites Fig
+\item Our data supports evidence that day of budburst is advancing earlier over time, especially after the early 1980s
+\end{enumerate}
+\end{enumerate}
 
+\subsection*{The effects of climatic regional variation on false spring incidence}
+\begin{enumerate}
+\item The relationship between the main effects and false spring as compared before and after 1983 (Fig. Main effects)
+\begin{enumerate}
+\item As elevation increases, plants are exposed to more frequent false spring conditions and the rate of increase is greater under climate change.
+\item As mean spring temperature increases, there are fewer false springs and the rate of decrease is greater after 1983.
+\item NAO-index does not seem to be a strong predictor of false spring, ( discussion: which may mean that even though budburst is earlier, late spring freezes are less likely to occur in high NAO years.)
+\item As the space parameter increases (which captures distance from the coast and shifts in elevation), false spring incidence increased. 
+\end{enumerate}
+\end{enumerate}
 
 \section*{Discussion \& Conclusion}
 
 
 \bibliography{..//bib/regionalrisk.bib}
 
-\section*{Tables and Figures}
+\section*{Tables and Figures} %% I will also have a figure showing model output
 
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/FS_Diff.pdf}
-  -\caption{Number of years with freezing events that occured before temperature shifts related to climate change began (1951-1983) as compared to after reported climate shifts (1984-2016). If temperatures fell below -2$^{\circ}$C between March 1 and June 30, a year with a spring freeze was tallied. Some regions experienced more years with spring freezes after climate change began, whereas other years experienced the same number or even fewer years with spring freezes. Regions that had more years with spring freezes after climate change began are blue and green and regions that had fewer freezes are depicted in red.}\label{fig:region}
-  -\end{center}
-  -\end{figure}}
-  
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=14cm]{..//figures/BB_gis.pdf}
@@ -188,17 +204,51 @@ y_i \thicksim N(\alpha_(i) + \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp_
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=14cm]{..//figures/PropSitesbyYrwBB.png}
+  -\includegraphics[width=16cm]{..//figures/PropSitesbyYrwBB.png}
   -\caption{The black line indicates the proportion of sites that had false spring conditions for each year across all species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}.}\label{fig:fsprop}
   -\end{center}
   -\end{figure}}
   
-%{\begin{figure} [H]
-%  -\begin{center}
-%  -\includegraphics[width=12cm]{..//figures/space_mapped.pdf}
-%  -\caption{Space Parameter}\label{fig:space}
-%  -\end{center}
-%  -\end{figure}}
-
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//figures/Main_sampleofdata.pdf}
+  -\caption{Series of plots showing the main effects in the model for a subset of the data. (A) As elevation increases, the number of false springs tends to increase and the rate of increase is greater after 1983. (B) As mean spring temperature increases, the number of false springs decreases and the rate of decrease is great after 1983. (C) There is no strong relationship between NAO-index and number of false springs. (D) As the space parameter increases (i.e. distance from the coast or the elevation changes) the number of false springs increases and the rate of increase is slightly greater after 1983.}\label{fig:maineffects}
+  -\end{center}
+  -\end{figure}}
+  
+\section*{Supplement: Tables and Figures}
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/FS_Diff.pdf}
+  -\caption{Number of years with freezing events that occured before temperature shifts related to climate change began (1951-1983) as compared to after reported climate shifts (1984-2016). If temperatures fell below -2$^{\circ}$C between March 1 and June 30, a year with a spring freeze was tallied. Some regions experienced more years with spring freezes after climate change began, whereas other years experienced the same number or even fewer years with spring freezes. Regions that had more years with spring freezes after climate change began are blue and green and regions that had fewer freezes are depicted in red.}\label{fig:region}
+  -\end{center}
+  -\end{figure}}
+  
+\begin{center}
+\captionof{table}{Data points collected for each species} \label{tab:spp} 
+\begin{tabular}{c c c c}
+\hline
+\textbf{Species} & \textbf{Num. of Observations} & \textbf{Num. of Sites} & \textbf{Num. of Years} \\
+\hline
+\textit{Aesculus hippocastanum} & 232279 & 10158 & 66  \\
+\hline
+\textit{Alnus glutinosa} & 148295 & 6775 & 66 \\
+\hline
+\textit{Betula pendula} & 232042 & 10139 & 66 \\
+\hline
+\textit{Fagus sylvatica} & 199848 & 7327 & 66 \\
+\hline
+\textit{Fraxinus excelsior} & 154370 & 9099 & 65 \\
+\hline
+\textit{Quercus robur} & 198600  & 8811 & 66 \\
+\end{tabular}
+\end{center}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/space_param.png}
+  -\caption{Space parameter values are mapped for each location to elucidate patterns in the parameter values.}\label{fig:space}
+  -\end{center}
+  -\end{figure}}
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  2 JUL 2018 11:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  5 JUL 2018 17:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -886,57 +886,73 @@ Overfull \hbox (1.42587pt too wide) in paragraph at lines 173--174
 l-ogy net-work (PEP725, www.pep725.edu),
  []
 
-[4] [5] (./RegionalRisk_Outline.bbl [6] [7] [8]) [9]
-<..//figures/FS_Diff.pdf, id=43, 845.1575pt x 597.23125pt>
-File: ..//figures/FS_Diff.pdf Graphic file (type pdf)
-
-<use ..//figures/FS_Diff.pdf>
-Package pdftex.def Info: ..//figures/FS_Diff.pdf used on input line 223.
-(pdftex.def)             Requested size: 341.43306pt x 241.27586pt.
-
+[4] [5] [6] (./RegionalRisk_Outline.bbl [7] [8] [9])
 <..//figures/BB_gis.pdf, id=44, 845.1575pt x 597.23125pt>
 File: ..//figures/BB_gis.pdf Graphic file (type pdf)
 
 <use ..//figures/BB_gis.pdf>
-Package pdftex.def Info: ..//figures/BB_gis.pdf used on input line 230.
+Package pdftex.def Info: ..//figures/BB_gis.pdf used on input line 246.
 (pdftex.def)             Requested size: 398.33858pt x 281.49155pt.
- [10 <..//figures/FS_Diff.pdf>]
-<..//figures/PropSitesbyYrwBB.png, id=55, 673.5564pt x 343.7643pt>
+ [10]
+<..//figures/PropSitesbyYrwBB.png, id=48, 673.5564pt x 343.7643pt>
 File: ..//figures/PropSitesbyYrwBB.png Graphic file (type png)
 
 <use ..//figures/PropSitesbyYrwBB.png>
-Package pdftex.def Info: ..//figures/PropSitesbyYrwBB.png used on input line 23
-7.
-(pdftex.def)             Requested size: 398.33858pt x 203.30699pt.
- [11 <..//figures/BB_gis.pdf>] [12 <..//figures/PropSitesbyYrwBB.png>] (./Regio
-nalRisk_Outline.aux) ) 
+Package pdftex.def Info: ..//figures/PropSitesbyYrwBB.png used on input line 25
+3.
+(pdftex.def)             Requested size: 455.24408pt x 232.35085pt.
+ [11 <..//figures/BB_gis.pdf>]
+<..//figures/Main_sampleofdata.pdf, id=60, 516.39622pt x 380.1339pt>
+File: ..//figures/Main_sampleofdata.pdf Graphic file (type pdf)
+
+<use ..//figures/Main_sampleofdata.pdf>
+Package pdftex.def Info: ..//figures/Main_sampleofdata.pdf used on input line 2
+60.
+(pdftex.def)             Requested size: 455.24408pt x 335.1279pt.
+ [12 <..//figures/PropSitesbyYrwBB.png>] <..//figures/FS_Diff.pdf, id=65, 845.1
+575pt x 597.23125pt>
+File: ..//figures/FS_Diff.pdf Graphic file (type pdf)
+
+<use ..//figures/FS_Diff.pdf>
+Package pdftex.def Info: ..//figures/FS_Diff.pdf used on input line 268.
+(pdftex.def)             Requested size: 341.43306pt x 241.27586pt.
+ [13 <..//figures/Main_sampleofdata.pdf>]
+<..//figures/space_param.png, id=289, 844.8363pt x 597.432pt>
+File: ..//figures/space_param.png Graphic file (type png)
+
+<use ..//figures/space_param.png>
+Package pdftex.def Info: ..//figures/space_param.png used on input line 295.
+(pdftex.def)             Requested size: 341.43306pt x 241.44814pt.
+ [14 <..//figures/FS_Diff.pdf>] [15 <..//figures/space_param.png>] (./RegionalR
+isk_Outline.aux) ) 
 Here is how much of TeX's memory you used:
- 16134 strings out of 493014
- 314820 string characters out of 6133351
- 338361 words of memory out of 5000000
- 19458 multiletter control sequences out of 15000+600000
+ 16148 strings out of 493014
+ 315188 string characters out of 6133351
+ 338380 words of memory out of 5000000
+ 19470 multiletter control sequences out of 15000+600000
  37069 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,9n,42p,10410b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pf
-b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on RegionalRisk_Outline.pdf (12 pages, 3874734 bytes).
+ 37i,10n,42p,10410b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on RegionalRisk_Outline.pdf (15 pages, 10478190 bytes).
 PDF statistics:
- 118 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
+ 355 PDF objects out of 1000 (max. 8388607)
+ 257 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

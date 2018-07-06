@@ -13,7 +13,7 @@ library(egg)
 library(purrr)
 library(broom)
 library(brms)
-library(tabplot)
+#library(tabplot)
 
 
 # Setting working directory
@@ -456,72 +456,75 @@ ggarrange(ahip, aglu, bpen, fsyl, fexc, qrob, ncol=3, nrow=2)
 
 
 #### Not separated by Species
-bb.samp<-bb[sample(nrow(bb), 7600, replace=FALSE),]
+bb.samp<-dd[sample(nrow(dd), 3500, replace=FALSE),]
 
-elev.df<-bb%>%
-  group_by(lat.long, cc)%>%
-  summarise(count=n(), elev=mean(elev), fs=mean(fs.count)) %>%
-  collect
+#elev.df<-bb%>%
+#  group_by(lat.long, cc)%>%
+#  summarise(count=n(), elev=mean(elev), fs=mean(fs.count)) %>%
+#  collect
 
-elev<-ggplot(elev.df, aes(x=elev, y=fs)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Average Number \n of False Springs") +
+elev.p<-ggplot(bb.samp, aes(x=elev, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Elevation") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        plot.margin = unit(c(2,2,2,2), "lines"),
-        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
-  coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+        plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"), legend.position = "none") +
+  coord_cartesian(xlim=c(0, 1800), ylim=c(0, 9)) + 
+  scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-  scale_y_continuous(expand = c(0, 0))
+  scale_y_continuous(expand = c(0, 0)) + ggtitle("A")
 
-mat.df<-bb%>%
-  group_by(lat.long, cc)%>%
-  summarise(count=n(), mat=mean(sp.temp), fs=mean(fs.count)) %>%
-  collect
-mat<-ggplot(mat.df, aes(x=mat, y=fs)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Average Number \n of False Springs") +
+#mat.df<-bb%>%
+#  group_by(lat.long, cc)%>%
+#  summarise(count=n(), mat=mean(sp.temp), fs=mean(fs.count)) %>%
+#  collect
+
+mat.p<-ggplot(bb.samp, aes(x=sp.temp, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Mean Spring Temperature") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        plot.margin = unit(c(2,2,2,2), "lines"),
-        plot.title=element_text(colour = "firebrick3")) +
-  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+        plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines")) +
+  coord_cartesian(xlim=c(-14, 15), ylim=c(0, 9)) + 
+  scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-  scale_y_continuous(expand = c(0, 0))
+  scale_y_continuous(expand = c(0, 0)) + ggtitle("B")
 
-nao.df<-bb%>%
-  group_by(lat.long, cc)%>%
-  summarise(count=n(), nao=mean(m.index), fs=mean(fs.count)) %>%
-  collect
-nao<-ggplot(nao.df, aes(x=nao, y=fs)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Average Number \n of False Springs") +
+#nao.df<-bb%>%
+#  group_by(lat.long, cc)%>%
+#  summarise(count=n(), nao=mean(m.index), fs=mean(fs.count)) %>%
+#  collect
+
+nao.p<-ggplot(bb.samp, aes(x=m.index, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("NAO Index") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        plot.margin = unit(c(2,2,2,2), "lines"),
-        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
-  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+        plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"), legend.position = "none") +
+  coord_cartesian(xlim=c(-1.5, 0.75), ylim=c(0, 9)) + 
+  scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-  scale_y_continuous(expand = c(0, 0))
+  scale_y_continuous(expand = c(0, 0)) +ggtitle("C")
 
-space.df<-bb%>%
-  group_by(lat.long, cc)%>%
-  summarise(count=n(), space=mean(space), fs=mean(fs.count)) %>%
-  collect
-space<-ggplot(space.df, aes(x=space, y=fs)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Average Number \n of False Springs") +
+#space.df<-bb%>%
+#  group_by(lat.long, cc)%>%
+#  summarise(count=n(), space=mean(space), fs=mean(fs.count)) %>%
+#  collect
+
+space.p<-ggplot(bb.samp, aes(x=space, y=fs.count)) + geom_line(aes(col=as.factor(cc)),stat="smooth",method="lm") + xlab("Space") + ylab("Average Number \n of False Springs") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        plot.margin = unit(c(2,2,2,2), "lines"),
-        plot.title=element_text(colour = "firebrick3")) +
-  coord_cartesian(xlim=c(-50, 100), ylim=c(0, 9)) + scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
+        plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines")) +
+  coord_cartesian(xlim=c(-50, 100), ylim=c(0, 9)) + 
+  scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   geom_jitter(alpha=0.1, aes(shape=as.factor(cc))) +
   scale_shape_manual(values=c(3, 5), labels=c("Before 1983", "After 1983"), name="") + guides(shape = guide_legend(override.aes = list(alpha=1))) +
-  scale_y_continuous(expand = c(0, 0))
+  scale_y_continuous(expand = c(0, 0)) +ggtitle("D")
 
 
 quartz()
-ggarrange(elev, mat, nao, space, ncol=2, nrow=2)
+ggarrange(elev.p, mat.p, nao.p, space.p, ncol=2, nrow=2)
 
 
 
