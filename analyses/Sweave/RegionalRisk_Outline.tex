@@ -239,8 +239,8 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
 \item Some regions are more susceptible to false spring risk than others and, with climate change, some regions that are low risk now, may become more at risk.
 \begin{enumerate}
 \item The rate false spring risk is increasing at higher elevations but decreasing in regions with warmer mean spring temperatures. 
-\item Regions that are less at risk to false spring conditions with climate change may be more at risk to drought. 
-\item Thus, plants must exhibit even more flexible spring phenologies in order to keep up with the rate of change. 
+\item Regions that are less at risk to false spring conditions may be more at risk to drought as climate change advances. 
+\item Thus, plants must exhibit even more flexible spring phenologies in order to keep up with the rate of change and the different types of potential risks. 
 \end{enumerate}
 \item Individuals from more Northern provenances tend to be more susceptible to spring frost damage, whereas more Southern individuals are more sensitive to fall frosts \citep{Montwe2018}.
 \begin{enumerate}
@@ -263,6 +263,13 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
   -\begin{center}
   -\includegraphics[width=16cm]{..//figures/PropSitesbyYrwBB.png}
   -\caption{The black line indicates the proportion of sites that had false spring conditions for each year across all species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}.}\label{fig:fsprop}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/Hadley_brms.pdf}
+  -\caption{Model output graphed with intercept on the x-axis and the slope of the main effect on the y-axis. Data was first pooled by species and before and after 1983. (A) Shows the effects of mean spring temperature. As temperature increases, the number of false springs decreases and, before 1983, that rate of decline was more rapid. (B) As elevation increases, there are more false springs, but after 1983, the rate of increase is less. (C) There is no strong relationship between NAO-index and number of false springs, with very little change in slope with number of false springs.}\label{fig:hadbrms}
   -\end{center}
   -\end{figure}}
   
@@ -307,5 +314,6 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
   -\caption{Space parameter values are mapped for each location to elucidate patterns in the parameter values.}\label{fig:space}
   -\end{center}
   -\end{figure}}
+  
 
 \end{document}

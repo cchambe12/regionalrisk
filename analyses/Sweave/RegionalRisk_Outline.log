@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  6 JUL 2018 11:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  6 JUL 2018 11:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -902,34 +902,41 @@ Package pdftex.def Info: ..//figures/PropSitesbyYrwBB.png used on input line 26
 4.
 (pdftex.def)             Requested size: 455.24408pt x 232.35085pt.
  [12 <..//figures/BB_gis.pdf>]
-<..//figures/Main_sampleofdata.pdf, id=63, 516.39622pt x 380.1339pt>
+<..//figures/Hadley_brms.pdf, id=63, 623.90892pt x 544.34557pt>
+File: ..//figures/Hadley_brms.pdf Graphic file (type pdf)
+
+<use ..//figures/Hadley_brms.pdf>
+Package pdftex.def Info: ..//figures/Hadley_brms.pdf used on input line 271.
+(pdftex.def)             Requested size: 341.43306pt x 297.88759pt.
+ [13 <..//figures/PropSitesbyYrwBB.png>]
+<..//figures/Main_sampleofdata.pdf, id=69, 516.39622pt x 380.1339pt>
 File: ..//figures/Main_sampleofdata.pdf Graphic file (type pdf)
 
 <use ..//figures/Main_sampleofdata.pdf>
 Package pdftex.def Info: ..//figures/Main_sampleofdata.pdf used on input line 2
-71.
+78.
 (pdftex.def)             Requested size: 455.24408pt x 335.1279pt.
- [13 <..//figures/PropSitesbyYrwBB.png>] <..//figures/FS_Diff.pdf, id=69, 845.1
-575pt x 597.23125pt>
+ [14 <..//figures/Hadley_brms.pdf>]
+<..//figures/FS_Diff.pdf, id=397, 845.1575pt x 597.23125pt>
 File: ..//figures/FS_Diff.pdf Graphic file (type pdf)
 
 <use ..//figures/FS_Diff.pdf>
-Package pdftex.def Info: ..//figures/FS_Diff.pdf used on input line 279.
+Package pdftex.def Info: ..//figures/FS_Diff.pdf used on input line 286.
 (pdftex.def)             Requested size: 341.43306pt x 241.27586pt.
- [14 <..//figures/Main_sampleofdata.pdf>]
-<..//figures/space_param.png, id=292, 844.8363pt x 597.432pt>
+ [15 <..//figures/Main_sampleofdata.pdf>]
+<..//figures/space_param.png, id=621, 844.8363pt x 597.432pt>
 File: ..//figures/space_param.png Graphic file (type png)
 
 <use ..//figures/space_param.png>
-Package pdftex.def Info: ..//figures/space_param.png used on input line 306.
+Package pdftex.def Info: ..//figures/space_param.png used on input line 313.
 (pdftex.def)             Requested size: 341.43306pt x 241.44814pt.
- [15 <..//figures/FS_Diff.pdf>] [16 <..//figures/space_param.png>] (./RegionalR
+ [16 <..//figures/FS_Diff.pdf>] [17 <..//figures/space_param.png>] (./RegionalR
 isk_Outline.aux) ) 
 Here is how much of TeX's memory you used:
- 16151 strings out of 493014
- 315242 string characters out of 6133351
- 338461 words of memory out of 5000000
- 19473 multiletter control sequences out of 15000+600000
+ 16157 strings out of 493014
+ 315397 string characters out of 6133351
+ 338470 words of memory out of 5000000
+ 19478 multiletter control sequences out of 15000+600000
  37069 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,10n,42p,10410b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -949,10 +956,10 @@ sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
 ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/lo
 cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/loca
 l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on RegionalRisk_Outline.pdf (16 pages, 10480833 bytes).
+Output written on RegionalRisk_Outline.pdf (17 pages, 10973620 bytes).
 PDF statistics:
- 358 PDF objects out of 1000 (max. 8388607)
- 259 compressed objects within 3 object streams
+ 687 PDF objects out of 1000 (max. 8388607)
+ 504 compressed objects within 6 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

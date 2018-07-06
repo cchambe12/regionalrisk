@@ -222,6 +222,13 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
   
 {\begin{figure} [H]
   -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/Hadley_brms.pdf}
+  -\caption{Model output graphed with intercept on the x-axis and the slope of the main effect on the y-axis. Data was first pooled by species and before and after 1983. (A) Shows the effects of mean spring temperature. As temperature increases, the number of false springs decreases and, before 1983, that rate of decline was more rapid. (B) As elevation increases, there are more false springs, but after 1983, the rate of increase is less. (C) There is no strong relationship between NAO-index and number of false springs, with very little change in slope with number of false springs.}\label{fig:hadbrms}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
   -\includegraphics[width=16cm]{..//figures/Main_sampleofdata.pdf}
   -\caption{Series of plots showing the main effects in the model for a subset of the data. (A) As elevation increases, the number of false springs tends to increase and the rate of increase is greater after 1983. (B) As mean spring temperature increases, the number of false springs decreases and the rate of decrease is great after 1983. (C) There is no strong relationship between NAO-index and number of false springs. (D) As the space parameter increases (i.e. distance from the coast or the elevation changes) the number of false springs increases and the rate of increase is slightly greater after 1983.}\label{fig:maineffects}
   -\end{center}
@@ -261,5 +268,6 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
   -\caption{Space parameter values are mapped for each location to elucidate patterns in the parameter values.}\label{fig:space}
   -\end{center}
   -\end{figure}}
+  
 
 \end{document}

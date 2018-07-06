@@ -52,8 +52,8 @@ mat<-ggplot(mat.df, aes(x=b_Intercept, y=b_sp.temp)) + geom_line(aes(col=as.fact
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        plot.margin = unit(c(2,2,2,2), "lines"),
-        plot.title=element_text(colour = "firebrick3")) +
+        plot.margin = unit(c(1,1,1,1), "lines"),
+        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
   coord_cartesian(xlim=c(0, 2)) + 
   scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   #geom_point(aes(shape=as.factor(cc))) + 
@@ -89,9 +89,9 @@ ele<-ggplot(ele.df, aes(x=b_Intercept, y=b_elev)) + geom_line(aes(col=as.factor(
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        #plot.margin = unit(c(1.5,1.5,1.5,2.5), "lines"),
-        plot.title=element_text(colour = "firebrick3")) +
-  coord_cartesian(xlim=c(1, 4)) + 
+        plot.margin = unit(c(1,1,1,1), "lines"),
+        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+  coord_cartesian(xlim=c(0, 1.5)) + 
   scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   #geom_point(aes(shape=as.factor(cc))) + 
   geom_text(aes(label=species, col=as.factor(cc)),hjust=0, vjust=0, show.legend = FALSE, size=2)
@@ -114,7 +114,7 @@ nao.models<-nao%>%
 nao.model<-nao.models%>%
   mutate(tidy=map(mod, broom::tidy))
 
-nao.tidy<-unnest(models, tidy)
+nao.tidy<-unnest(nao.model, tidy)
 #mat.df<-unnest(models, data)
 #mat.df<-inner_join(mat.df, mat.tidy)
 nao.df<-nao.tidy%>%
@@ -125,15 +125,16 @@ nao<-ggplot(nao.df, aes(x=b_Intercept, y=b_m.index)) + geom_line(aes(col=as.fact
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        #plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
-  coord_cartesian(xlim=c(4, 7)) + 
+        plot.margin = unit(c(1,1,1,1), "lines"),
+        plot.title=element_text(colour = "firebrick3")) +
+  coord_cartesian(xlim=c(2, 6.5)) + 
   scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   #geom_point(aes(shape=as.factor(cc))) + 
   geom_text(aes(label=species, col=as.factor(cc)),hjust=0, vjust=0, show.legend = FALSE, size=2)
 #scale_y_continuous(expand = c(0, 0))
 
-bb.space<-subset(bb, select=c(year, species, cc, space, fs.count))
+bb.space<-subset(bb, select=c(species, cc, space, fs.count))
+bb.space$space<-round(bb.space$space, digits=3)
 bb.space<-bb.space[!duplicated(bb.space),]
 
 space<-bb.space%>%
@@ -170,7 +171,7 @@ space<-ggplot(space.df, aes(x=b_Intercept, y=b_space)) + geom_line(aes(col=as.fa
 #scale_y_continuous(expand = c(0, 0))
 
 quartz()
-ggarrange(mat, ele, nao, space, ncol=2, nrow=2)
+ggarrange(ele, mat, nao, ncol=2, nrow=2)
 
 
 ########### Just linear models below!!! #################
@@ -239,7 +240,7 @@ ele<-ggplot(ele.df, aes(x=`(Intercept)`, y=elev)) + geom_line(aes(col=as.factor(
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
         #plot.margin = unit(c(1.5,1.5,1.5,2.5), "lines"),
-        plot.title=element_text(colour = "firebrick3")) +
+        plot.title=element_text(colour = "firebrick3"), legend.position="none") +
   coord_cartesian(xlim=c(1, 4)) + 
   scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   #geom_point(aes(shape=as.factor(cc))) + 
@@ -275,7 +276,7 @@ nao<-ggplot(nao.df, aes(x=`(Intercept)`, y=m.index)) + geom_line(aes(col=as.fact
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
         #plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "firebrick3"), legend.position = "none") +
+        plot.title=element_text(colour = "firebrick3")) +
   coord_cartesian(xlim=c(4, 7)) + 
   scale_color_manual(values=c("red4", "blue3"), labels=c("Before 1983", "After 1983"), name="") + 
   #geom_point(aes(shape=as.factor(cc))) + 
@@ -319,7 +320,7 @@ space<-ggplot(space.df, aes(x=`(Intercept)`, y=space)) + geom_line(aes(col=as.fa
 #scale_y_continuous(expand = c(0, 0))
 
 quartz()
-ggarrange(mat, ele, nao, space, ncol=2, nrow=2)
+ggarrange(mat, ele, nao, ncol=2, nrow=2)
 
 
 
