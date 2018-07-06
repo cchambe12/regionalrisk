@@ -106,7 +106,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item However, recent studies have demonstrated regional effects may be more closely related to false spring risk: whether via altitudinal variation \citep{Vitra2017} or distance from the coast \citep{Wypych2016a}.
 \item By better understanding these regional climatic implications, we may be able to determine which regions may be at risk currently and which regions may become more at risk in the future.
 \end{enumerate}
-%\item Individuals from more Northern provenances tend to be more susceptible to spring frost damage, whereas more Southern individuals are more sensitive to fall frosts \citep{Montwe2018}.
+
 
 \item There is large debate over whether or not spring freeze damage will increase \citep{Hannenin1991, Augspurger2013, Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994} with climate change.
 \begin{enumerate}
@@ -188,8 +188,19 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
 \end{enumerate}
 \end{enumerate}
 
-\section*{Discussion \& Conclusion}
-
+\section*{Discussion \& Conclusion - jumbles of thoughts right now...}
+\begin{enumerate}
+\item Some regions are more susceptible to false spring risk than others and, with climate change, some regions that are low risk now, may become more at risk.
+\begin{enumerate}
+\item The rate false spring risk is increasing at higher elevations but decreasing in regions with warmer mean spring temperatures. 
+\item Regions that are less at risk to false spring conditions with climate change may be more at risk to drought. 
+\item Thus, plants must exhibit even more flexible spring phenologies in order to keep up with the rate of change. 
+\end{enumerate}
+\item Individuals from more Northern provenances tend to be more susceptible to spring frost damage, whereas more Southern individuals are more sensitive to fall frosts \citep{Montwe2018}.
+\begin{enumerate}
+\item With regional shifts in climate, will fall frosts become more damaging than spring frosts?
+\end{enumerate}
+\end{enumerate}
 
 \bibliography{..//bib/regionalrisk.bib}
 
