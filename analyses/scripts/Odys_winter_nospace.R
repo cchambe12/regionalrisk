@@ -17,7 +17,7 @@ options(mc.cores = parallel::detectCores())
 bb.stan<-read.csv("/n/wolkovich_lab/Lab/Cat/bb.brm.nointer.csv", header=TRUE)
 
 brm.full.nointer<-brm(fs.count~m.index+sp.temp+cc+sm.elev+m.index:cc + sp.temp:cc +sm.elev:cc +
-                        (m.index+sp.temp+cc+sm.elev|species), data=bb.stan, chains=2,cores=128)
+                        (m.index+sp.temp+cc+sm.elev|species), data=bb.stan, chains=2,cores=128, family=poisson)
 
 save(brm.full.nointer, file="/n/wolkovich_lab/Lab/Cat/brm_inter.Rdata")
 
