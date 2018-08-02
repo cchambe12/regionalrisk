@@ -1,4 +1,4 @@
-\begin{thebibliography}{49}
+\begin{thebibliography}{43}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Augspurger(2009)}]{Augspurger2009}
@@ -16,20 +16,10 @@ Basler, D. \& K{\"{o}}rner, C. (2012) {Photoperiod sensitivity of bud burst in
   14 temperate forest tree species}. \emph{Agricultural and Forest Meteorology}
   \textbf{165}, 73--81.
 
-\bibitem[{Basler \& Korner(2014)}]{Basler2014}
-Basler, D. \& Korner, C. (2014) Photoperiod and temperature responses of bud
-  swelling and bud burst in four temperate forest tree species. \emph{Tree
-  Physiology} \textbf{34}, 377--388.
-
 \bibitem[{{B{\"u}rkner, Paul-Christian }(2017)}]{brms}
 {B{\"u}rkner, Paul-Christian } (2017) {{brms}: An {R} Package for {Bayesia}
   Multilevel Models}. \emph{{Journal of Statistical Software}} \textbf{80},
   1--28.
-
-\bibitem[{Caffarra \& Donnelly(2011)}]{Caffarra2011}
-Caffarra, A. \& Donnelly, A. (2011) {The ecological significance of phenology
-  in four different tree species: Effects of light and temperature on bud
-  burst}. \emph{International Journal of Biometeorology} \textbf{55}, 711--721.
 
 \bibitem[{Chen \emph{et~al.}(2005)Chen, Hu \& Yu}]{Chen2005}
 Chen, X., Hu, B. \& Yu, R. (2005) Spatial and temporal variation of
@@ -59,14 +49,6 @@ Donnelly, A., Yu, R., Caffarra, A., Hanes, J.M., Liang, L., Desai, A.R., Liu,
   L. \& Schwartz, M.D. (2017) Interspecific and interannual variation in the
   duration of spring phenophases in a northern mixed forest. \emph{Agricultural
   and Forest Meteorology} \textbf{243}, 55--67.
-
-\bibitem[{Gauzere \emph{et~al.}(2017)Gauzere, Delzon, Davi, Bonhomme, Garcia~de
-  Cortazar-Atauri \& Chuine}]{Gauzere2017}
-Gauzere, J., Delzon, S., Davi, H., Bonhomme, M., Garcia~de Cortazar-Atauri, I.
-  \& Chuine, I. (2017) {Integrating interactive effects of chilling and
-  photoperiod in phenological process-based models. A case study with two
-  European tree species: \textit{Fagus sylvatica} and \textit{Quercus
-  petraea}}. \emph{Agricultural and Forest Meteorology} pp. 9--20.
 
 \bibitem[{Gelman \& Hill(2006)}]{Gelman2006}
 Gelman, A. \& Hill, J. (2006) \emph{Data analysis using regression and
@@ -183,16 +165,6 @@ Montw{\'e}, D., Isaac-Renton, M., Hamann, A. \& Spiecker, H. (2018) Cold
   adaptation recorded in tree rings highlights risks associated with climate
   change and assisted migration. \emph{Nature Communications} \textbf{9}.
 
-\bibitem[{Partanen(2004)}]{Partanen2004}
-Partanen, J. (2004) Dependence of photoperiodic response of growth cessation on
-  the stage of development in picea abies and betula pendula seedlings.
-  \emph{Forest Ecology and Management} \textbf{188}, 137--148.
-
-\bibitem[{Polgar \& Primack(2011)}]{Polgar2011}
-Polgar, C.A. \& Primack, R.B. (2011) {Leaf-out phenology of temperate woody
-  plants: From trees to ecosystems}. \emph{New Phytologist} \textbf{191},
-  926--941.
-
 \bibitem[{{R Development Core Team}(2017)}]{R}
 {R Development Core Team} (2017) R: A language and environment for statistical
   computing. \emph{R Foundation for Statistical Computing, Vienna, Austria} .
@@ -248,12 +220,6 @@ Templ, B., Koch, E., Bolmgren, K., Ungersb{\"o}ck, M., Paul, A., Scheifinger,
 Trouet, V., Esper, J., Graham, N., Baker, A., Scourse, J. \& Frank, D. (2009)
   Persistent positive north atlantic oscillation mode dominated the medieval
   climate anomaly. \emph{Science} .
-
-\bibitem[{Vihera-aarnio \emph{et~al.}(2006)Vihera-aarnio, Hakkinen \&
-  Junttila}]{Viheraaarnio2006}
-Vihera-aarnio, A., Hakkinen, R. \& Junttila, O. (2006) {Critical night length
-  for bud set and its variation in two photoperiodic ecotypes of \textit{Betula
-  pendula}}. \emph{Tree Physiology} \textbf{26}, 1013--1018.
 
 \bibitem[{Vitasse \emph{et~al.}(2014)Vitasse, Lenz \&
   K{\~A}¶rner}]{Vitasse2014}
