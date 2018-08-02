@@ -15,9 +15,12 @@ options(mc.cores = parallel::detectCores())
 
 #### get the data
 bb.stan<-read.csv("/n/wolkovich_lab/Lab/Cat/bb.brm.nointer.csv", header=TRUE)
+bb.stan<-subset(bb.stan, select=c("fs.count", "m.index", "sp.temp", "cc", "sm.elev", "species"))
+bb.stan<-bb.stan[!duplicated(bb.stan),]
+bb.stan<-na.omit(bb.stan)
 
 brm.full.nointer<-brm(fs.count~m.index+sp.temp+cc+sm.elev+m.index:cc + sp.temp:cc +sm.elev:cc +
-                        (m.index+sp.temp+cc+sm.elev|species), data=bb.stan, chains=2,cores=128, family=poisson)
+                        (m.index+sp.temp+cc+sm.elev|species), data=bb.stan, chains=2,cores=256)
 
 save(brm.full.nointer, file="/n/wolkovich_lab/Lab/Cat/brm_inter.Rdata")
 
