@@ -15,6 +15,7 @@ library(dplyr)
 library(tidyr)
 library(brms)
 library(ggstance)
+library(jtools)
 #library(ggmap)
 #library(rworldmap)
 #library(maps)
@@ -149,15 +150,22 @@ bb.stan<-na.omit(bb.stan)
 
 #bb.stan<-bb
 write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb.brm.nointer.csv", row.names = FALSE)
+bb.stan<-read.csv("output/bb.brm.nointer.csv", header=TRUE)
+
+#bb<-bb.stan[sample(nrow(bb.stan), 500), ]
+
+#fit<-brm(fs.count~m.index+sm.elev+cc+m.index:cc+sm.elev:cc + 
+ #          (m.index+sm.elev+cc+m.index:cc+sm.elev:cc|species), data=bb)
+
+nao<-interact_plot(model = fit, pred = m.index, modx = cc)
+elev<-interact_plot(model = fit, pred = sm.elev, modx = cc)
+
+#check<-bb[duplicated(bb[1:4]) | duplicated(bb[1:4], fromLast= TRUE),]
 
 
-check<-bb[duplicated(bb[1:4]) | duplicated(bb[1:4], fromLast= TRUE),]
 
 
-brm.full.nointer<-brm(fs.count~nao+sp.temp+cc+space+sm.elev+(1|species)+
-                        (nao-1|species)+(sp.temp-1|species)+(cc-1|species)+
-                        (space-1|species)+(sm.elev-1|species), data=bb.stan, chains=2, family=poisson,cores=4)
-save(brm.full.nointer, file="/n/wolkovich_lab/Lab/Cat/brm.Rdata")
+############# Probably can delete below later #################
 
 
 spp <- unique(bb.stan$complex)
