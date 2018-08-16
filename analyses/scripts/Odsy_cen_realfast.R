@@ -26,7 +26,7 @@ bprior1 <- prior(normal(0,1), class="b") + prior(student_t(1,0,2), group="specie
 
 cent.fast<-brm(fs.count~nao.z+mat.z+cc.z+elev.z+space.z+nao.z:cc.z + mat.z:cc.z + elev.z:cc.z +
                  space.z:cc.z + (0+nao.z||species) + (0+mat.z||species) + (0+cc.z||species), 
-               data=bb.stan, prior=bprior1,future=TRUE)
+               data=bb.stan, prior=bprior1,future=TRUE, chains=2)
 
 save(cent.fast, file="/n/wolkovich_lab/Lab/Cat/cen_realfast.Rdata")
 

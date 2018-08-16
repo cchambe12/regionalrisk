@@ -2,9 +2,9 @@
 
 #SBATCH -p wolkovich
 
-#SBATCH -n 140
+#SBATCH -n 85
 
-#SBATCH -N 3
+#SBATCH -N 2
 
 #SBATCH -t 0-100:00:00
 

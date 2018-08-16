@@ -8,11 +8,14 @@ options(stringsAsFactors = FALSE)
 
 ## Libraries
 library(brms)
-library(future)
-plan(multiprocess)
+library(rstan)
+
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
 
 #### get the data
 bb.stan<-read.csv("/n/wolkovich_lab/Lab/Cat/bb.brm.nointer.csv", header=TRUE)
+bb.stan<-bb.stan[sample(nrow(bb.stan), 11000),]
 bb.stan<-subset(bb.stan, select=c("fs.count", "m.index", "sp.temp", "cc", "sm.elev","space", "species"))
 bb.stan<-bb.stan[!duplicated(bb.stan),]
 bb.stan<-na.omit(bb.stan)
@@ -24,9 +27,8 @@ bb.stan$space.z <- (bb.stan$space-mean(bb.stan$space,na.rm=TRUE))/sd(bb.stan$spa
 
 bprior1 <- prior(normal(0,1), class="b") + prior(student_t(1,0,2), group="species", class="sd")
 
-cent.intfast<-brm(fs.count~nao.z+mat.z+cc.z+elev.z+space.z+nao.z:cc.z + mat.z:cc.z + elev.z:cc.z +
-                 space.z:cc.z + (1|species), 
-               data=bb.stan, prior=bprior1,future=TRUE, chains=2)
+gaus<-brm(fs.count~nao.z+mat.z+cc.z+elev.z+space.z+nao.z:cc.z + mat.z:cc.z + elev.z:cc.z +
+            space.z:cc.z + (1|species), 
+          data=bb.stan, prior=bprior1,cores=4)
 
-save(cent.intfast, file="/n/wolkovich_lab/Lab/Cat/cen_intrealfast.Rdata")
-
+save(gaus, file="/n/wolkovich_lab/Lab/Cat/test_gaussian.Rdata")

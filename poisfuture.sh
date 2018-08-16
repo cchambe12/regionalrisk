@@ -2,11 +2,11 @@
 
 #SBATCH -p wolkovich
 
-#SBATCH -n 85
+#SBATCH -n 12
 
-#SBATCH -N 2
+#SBATCH -N 1
 
-#SBATCH -t 0-120:00:00
+#SBATCH -t 0-20:00:00
 
 #SBATCH --mem 30000
 
@@ -23,4 +23,4 @@ module load R/3.4.2-fasrc01
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/Int_cen_realfast.R rndslopes
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/Poisson_Future.R rndslopes

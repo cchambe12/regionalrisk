@@ -157,8 +157,8 @@ bb.stan<-read.csv("output/bb.brm.nointer.csv", header=TRUE)
 #fit<-brm(fs.count~m.index+sm.elev+cc+m.index:cc+sm.elev:cc + 
  #          (m.index+sm.elev+cc+m.index:cc+sm.elev:cc|species), data=bb)
 
-nao<-interact_plot(model = fit, pred = m.index, modx = cc)
-elev<-interact_plot(model = fit, pred = sm.elev, modx = cc)
+nao<-interact_plot(model = fit2, pred = m.index, modx = cc)
+elev<-interact_plot(model = fit2, pred = sm.elev, modx = cc)
 
 #check<-bb[duplicated(bb[1:4]) | duplicated(bb[1:4], fromLast= TRUE),]
 
