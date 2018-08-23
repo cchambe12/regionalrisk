@@ -96,8 +96,9 @@ elev<-ggplot(d, aes(x=elev, y=space)) + geom_point(aes(col=as.factor(species))) 
 mat<-ggplot(d, aes(x=sp.temp, y=space)) + geom_point(aes(col=as.factor(species))) + 
   facet_wrap(~species) + theme(legend.position = "none")
 
-space<-ggplot(d[(d$space>=30 | d$space<=-30),], aes(x=long, y=lat)) + geom_point(aes(col=space), alpha=0.3) + 
-  facet_wrap(~species) 
+sp<-subset(d, select=c("space", "long", "lat"))
+sp<-sp[!duplicated(sp),]
+space<-ggplot(sp, aes(x=long, y=lat)) + geom_point(aes(col=space))
 
 
 space2<-ggplot(d[(d$space<=10 & d$space>=-10),], aes(x=long, y=lat)) + geom_point(aes(col=space), alpha=0.3) + 
