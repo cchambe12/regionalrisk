@@ -68,6 +68,13 @@ z5<-brm(fs.count~nao.z+mat.z+cc.z+elev.z+space.z+nao.z:cc.z + mat.z:cc.z +elev.z
 get_prior(fs.count~nao.z+mat.z+cc.z+elev.z+space.z+nao.z:cc.z + mat.z:cc.z +elev.z:cc.z +
             space.z:cc.z + (0+nao.z||species) + (0+mat.z||species) + (0+cc.z||species), data=bb)
 
+d<-read.csv("~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.csv", header=TRUE)
+
+library(ggmap)
+map<-get_map(location="Europe", zoom=4)
+mapPoints<-ggmap(map) + geom_point(x=d$long, y=d$lat, aes(col=d$space), data=d) + facet_wrap(~species) +
+  theme(legend.position = "none")
+mapPoints
 
 spp.nao<-unique(ave(bb$m.index, bb$species))
 spp.mat<-unique(ave(bb$sp.temp, bb$species))
@@ -76,9 +83,30 @@ bb$nao.cc<-bb$m.index*bb$cc
 bb$mat.cc<-bb$sp.temp*bb$cc
 bb$elev.cc<-bb$sm.elev*bb$cc
 bb$space.cc<-bb$space*bb$cc
+bb$space.elev<-bb$space*bb$sm.elev
+
+quartz()
+bbs<-bb[sample(nrow(bb), 60000),]
+lat<-ggplot(d, aes(x=lat, y=space)) + geom_point(aes(col=as.factor(species))) + 
+  facet_wrap(~species) + theme(legend.position = "none")
+long<-ggplot(d, aes(x=long, y=space)) + geom_point(aes(col=as.factor(species))) + 
+  facet_wrap(~species) + theme(legend.position = "none")
+elev<-ggplot(d, aes(x=elev, y=space)) + geom_point(aes(col=as.factor(species))) + 
+  facet_wrap(~species) + theme(legend.position = "none")
+mat<-ggplot(d, aes(x=sp.temp, y=space)) + geom_point(aes(col=as.factor(species))) + 
+  facet_wrap(~species) + theme(legend.position = "none")
+
+space<-ggplot(d[(d$space>=30 | d$space<=-30),], aes(x=long, y=lat)) + geom_point(aes(col=space), alpha=0.3) + 
+  facet_wrap(~species) 
+
+
+space2<-ggplot(d[(d$space<=10 & d$space>=-10),], aes(x=long, y=lat)) + geom_point(aes(col=space), alpha=0.3) + 
+  facet_wrap(~species) 
+
+box<-ggplot(d, aes(x=species, y=space)) + geom_boxplot()
 
 ben<-lm(fs.count~m.index*species+sp.temp*species+cc*species+sm.elev+space+m.index:cc + sp.temp:cc +sm.elev:cc +
-          space:cc, data=bb)             # not necessary in this case
+          space:cc + space:sm.elev, data=bb)             # not necessary in this case
 
 b <- coef(ben)[-1]
 R <- qr.R(ben$qr)[-1,-1]
@@ -98,16 +126,16 @@ xbar <- c(as.numeric(mean(bb$m.index)), as.numeric(as.factor("ALNGLU")), as.nume
           as.numeric(mean(bb$cc[bb$species=="BETPEN"])), as.numeric(mean(bb$cc[bb$species=="FAGSYL"])), 
           as.numeric(mean(bb$cc[bb$species=="FRAEXC"])), as.numeric(mean(bb$cc[bb$species=="QUEROB"])), 
           as.numeric(mean(bb$m.index*bb$cc)), as.numeric(mean(bb$sp.temp*bb$cc)), as.numeric(mean(bb$sm.elev*bb$cc)), 
-          as.numeric(mean(bb$space*bb$cc)))
+          as.numeric(mean(bb$space*bb$cc)), as.numeric(mean(bb$space*bb$sm.elev)))
 xbarnames<-colnames(R)
 names(xbar)<-xbarnames
 
 y <- bb$fs.count[not_NA]
 ybar <- mean(y)
 s_y <- sd(y)
-post <- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
+post.inter <- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
                        # the next line is only to make the example go fast
-                       chains = 4, iter = 2000, seed = 12345)
+                       chains = 4, iter = 2000)
 cbind(lm = b, stan_lm = rstan::get_posterior_mean(post)[27:29,]) # shrunk
 # }
 
