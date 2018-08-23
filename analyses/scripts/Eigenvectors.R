@@ -21,7 +21,7 @@ library(rstanarm)
 #bb<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 #bb$lat.long<-paste(bb$lat, bb$long)
 #bb$fs.count.num<-ave(bb$fs.count, bb$lat.long, FUN=sum)
-#bb$fs.num<-ave(bb$fs, bb$species, bb$lat.long, FUN=sum)
+
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/")
@@ -32,24 +32,26 @@ bb<-read.csv("output/mat_fulldata.csv", header=TRUE)
 bb<-inner_join(bb, xx, by=c("lat", "long", "year"))
 bb<-subset(bb, select=c("long", "lat", "year", "fs.count", "lat.long"))
 bb<-bb[!duplicated(bb),]
+bb$fs.num<-ave(bb$fs.count, bb$lat.long)
 
-bprep<-bb
-bprep$y<-bprep$fs.count
-#bprep<-dplyr::select(bprep, lat.long, y)
-#bprep<-bprep[!duplicated(bprep),]
-#bcoord<-bprep%>%dplyr::select(lat.long)
-#bcoords<-as.data.frame(bcoord[!duplicated(bcoord),])
-#bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
-bcoords<-bprep%>%dplyr::select(lat, long)
-bcoords<-bcoords[!duplicated(bcoords),]
+bprep<-bb%>%dplyr::select(fs.num, lat.long)
+bprep<-bprep[!duplicated(bprep),]
+bprep$y<-bprep$fs.num
+#bprep$y<-bprep$fs.count
+bprep<-dplyr::select(bprep, lat.long, y)
+bprep<-bprep[!duplicated(bprep),]
+bcoord<-bprep%>%dplyr::select(lat.long)
+bcoords<-as.data.frame(bcoord[!duplicated(bcoord),])
+bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
+#bcoords<-bprep%>%dplyr::select(lat, long)
+#bcoords<-bcoords[!duplicated(bcoords),]
 bcoords$lat<-as.numeric(bcoords$lat)
 bcoords$long<-as.numeric(bcoords$long)
 
 ## Get Data
 #bb<-read.csv("output/mat_fulldata.csv", header=TRUE)
 
-#bprep<-bb%>%dplyr::select(pre.bb, lat.long)
-#bprep$y<-bprep$pre.bb
+
 #bprep<-dplyr::select(bprep, lat.long, y)
 #bprep<-bprep[!duplicated(bprep),]
 #bcoord<-bprep%>%dplyr::select(lat.long)
