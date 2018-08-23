@@ -15,36 +15,48 @@ library(spdep)
 library(rstanarm)
 
 # Set Working Directory
-setwd("~/Documents/git/regionalrisk/analyses/")
+#setwd("~/Documents/git/regionalrisk/analyses/")
 
 ## Get Data
-bb<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
-bb$lat.long<-paste(bb$lat, bb$long)
-bb$fs.count.num<-ave(bb$fs.count, bb$lat.long, FUN=sum)
+#bb<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+#bb$lat.long<-paste(bb$lat, bb$long)
+#bb$fs.count.num<-ave(bb$fs.count, bb$lat.long, FUN=sum)
 #bb$fs.num<-ave(bb$fs, bb$species, bb$lat.long, FUN=sum)
 
-bprep<-bb%>%dplyr::select(fs.count.num, lat.long)
-bprep$y<-bprep$fs.count.num
-bprep<-dplyr::select(bprep, lat.long, y)
-bprep<-bprep[!duplicated(bprep),]
-bcoord<-bprep%>%dplyr::select(lat.long)
-bcoords<-as.data.frame(bcoord[!duplicated(bcoord),])
-bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
+# Set Working Directory
+setwd("~/Documents/git/regionalrisk/analyses/")
+#bb<-read.csv("output/fs_matspsite.csv", header=TRUE)
+xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+xx<-subset(xx, year>1950)
+bb<-read.csv("output/mat_fulldata.csv", header=TRUE)
+bb<-inner_join(bb, xx, by=c("lat", "long", "year"))
+bb<-subset(bb, select=c("long", "lat", "year", "fs.count", "lat.long"))
+bb<-bb[!duplicated(bb),]
+
+bprep<-bb
+bprep$y<-bprep$fs.count
+#bprep<-dplyr::select(bprep, lat.long, y)
+#bprep<-bprep[!duplicated(bprep),]
+#bcoord<-bprep%>%dplyr::select(lat.long)
+#bcoords<-as.data.frame(bcoord[!duplicated(bcoord),])
+#bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
+bcoords<-bprep%>%dplyr::select(lat, long)
+bcoords<-bcoords[!duplicated(bcoords),]
 bcoords$lat<-as.numeric(bcoords$lat)
 bcoords$long<-as.numeric(bcoords$long)
 
 ## Get Data
-bb<-read.csv("output/mat_fulldata.csv", header=TRUE)
+#bb<-read.csv("output/mat_fulldata.csv", header=TRUE)
 
-bprep<-bb%>%dplyr::select(pre.bb, lat.long)
-bprep$y<-bprep$pre.bb
-bprep<-dplyr::select(bprep, lat.long, y)
-bprep<-bprep[!duplicated(bprep),]
-bcoord<-bprep%>%dplyr::select(lat.long)
-bcoords<-as.data.frame(bcoord[!duplicated(bcoord),])
-bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
-bcoords$lat<-as.numeric(bcoords$lat)
-bcoords$long<-as.numeric(bcoords$long)
+#bprep<-bb%>%dplyr::select(pre.bb, lat.long)
+#bprep$y<-bprep$pre.bb
+#bprep<-dplyr::select(bprep, lat.long, y)
+#bprep<-bprep[!duplicated(bprep),]
+#bcoord<-bprep%>%dplyr::select(lat.long)
+#bcoords<-as.data.frame(bcoord[!duplicated(bcoord),])
+#bcoords<-separate(data = bcoords, col = 1, into = c("lat", "long"), sep = "\\ ")
+#bcoords$lat<-as.numeric(bcoords$lat)
+#bcoords$long<-as.numeric(bcoords$long)
 
 
 ## Based on Bauman et al... ##
