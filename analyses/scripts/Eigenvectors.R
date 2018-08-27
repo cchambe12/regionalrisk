@@ -83,7 +83,7 @@ space<-residuals(rex.mod)
 
 b_space<-cbind(bprep, space)
 prep_space<-full_join(bb, b_space, by="lat.long")
-write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_matspspace.csv", row.names=FALSE)
+write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_matspspace_times2.csv", row.names=FALSE)
 
 ##### Stuff to remove later is below... #####
 
