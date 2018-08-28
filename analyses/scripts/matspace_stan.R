@@ -31,6 +31,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 ########################
 #### get the data
 dx<-read.csv("output/fs_matspspace_old.csv", header=TRUE)
+dx<-read.csv("output/fs_matspspace_times2.csv", header=TRUE)
 dx<-subset(dx, year>1950)
 #xx<-read.csv("output/fs_matspspace.csv", header=TRUE)
 #bb.stan<-read.csv("output/bb.brm.nointer.csv", header=TRUE)
@@ -99,6 +100,7 @@ nao<-nao[!duplicated(nao),]
 
 bb<-full_join(bb, nao)
 
+
 #### Space parameter? ####
 # summary(lm(space~elev+lat+long, data=bb))
 
@@ -111,7 +113,7 @@ dd<-bb.sub.nodup
 dd$space<-round(dd$space, digits=3)
 dd<-dd[!duplicated(dd),]
 
-write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.csv", row.names = FALSE)
+write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.2.csv", row.names = FALSE)
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)
 #mat<-mat[!duplicated(mat),]

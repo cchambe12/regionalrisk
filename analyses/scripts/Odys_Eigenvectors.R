@@ -12,13 +12,12 @@ library(tidyr)
 library(adespatial)
 library(ade4)
 library(spdep)
-library(rstanarm)
 
 # Set Working Directory
 xx<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_yearsitespp.csv", header=TRUE)
 xx<-subset(xx, year>1950)
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/mat_fulldata.csv", header=TRUE)
-bb<-dplyr::inner_join(bb, xx, by=c("lat", "long", "year"))
+bb<-inner_join(bb, xx, by=c("lat", "long", "year"))
 bb<-subset(bb, select=c("long", "lat", "year", "fs.count", "lat.long"))
 bb<-bb[!duplicated(bb),]
 bb$fs.num<-ave(bb$fs.count, bb$lat.long)
