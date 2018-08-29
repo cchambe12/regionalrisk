@@ -12,6 +12,7 @@ library(rstanarm)
 library(sjPlot)
 library(sjmisc)
 library(RColorBrewer)
+library(dplyr)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/output")
@@ -348,43 +349,43 @@ simple<-simple[2:40,]
 #simple<-simple[!(simple$var=="speciesALNGLU"|simple$var=="speciesBETPEN"|simple$var=="speciesFAGSYL"|
  #simple$var=="speciesFRAEXC"|simple$var=="speciesQUEROB"),]
 simple<-subset(simple, select=c("var", "mean", "2.5%", "97.5%"))
-simple$species<-c(0,0,0,0,0,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,0,0,0,0)
+simple$species<-c(1,1,1,1,1,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,0,0,0,0)
 simple$Jvar<-NA
 simple$Jvar<-ifelse(simple$var=="(Intercept)", 10, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index", 9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesALNGLU", 8.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesBETPEN", 8.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesFAGSYL", 8.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesFRAEXC", 8.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesQUEROB", 8.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index", 8.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesALNGLU", 8.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesBETPEN", 8.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesFAGSYL", 8.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesFRAEXC", 8.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesQUEROB", 8.4, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="sp.temp", 8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesALNGLU", 7.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesBETPEN", 7.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFAGSYL", 7.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFRAEXC", 7.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesQUEROB", 7.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp", 7.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesALNGLU", 7.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesBETPEN", 7.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFAGSYL", 7.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFRAEXC", 7.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesQUEROB", 7.4, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="sm.elev", 7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesALNGLU", 6.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesBETPEN", 6.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFAGSYL", 6.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFRAEXC", 6.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesQUEROB", 6.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev", 6.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesALNGLU", 6.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesBETPEN", 6.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFAGSYL", 6.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFRAEXC", 6.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesQUEROB", 6.4, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="space", 6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesALNGLU", 5.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesBETPEN", 5.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesFAGSYL", 5.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesFRAEXC", 5.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesQUEROB", 5.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space", 5.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesALNGLU", 5.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesBETPEN", 5.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesFAGSYL", 5.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesFRAEXC", 5.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesQUEROB", 5.4, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="cc", 5, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesALNGLU", 4.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesBETPEN", 4.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesFAGSYL", 4.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesFRAEXC", 4.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesQUEROB", 4.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc", 4.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesALNGLU", 4.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesBETPEN", 4.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesFAGSYL", 4.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesFRAEXC", 4.5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesQUEROB", 4.4, simple$Jvar)
 
 simple$Jvar<-ifelse(simple$var=="m.index:cc", 4, simple$Jvar)
 simple$Jvar<-ifelse(simple$var=="sp.temp:cc", 3, simple$Jvar)
@@ -395,26 +396,56 @@ species<-unique(simple$species)
 simple$est<-simple$mean
 simple$var2<-gsub("(species).*","\\1",simple$var)
 for(i in c(1:length(species))) {
-  simple$est<-ifelse(simple$species==species[i] & simple$var2=="m.index:species", simple$mean[simple$var=="m.index" & simple$species==0] +
-                        simple$mean[simple$var2=="species" & simple$species==species[i]]+
+  simple$est<-ifelse(simple$species==species[i] & simple$var2=="m.index:species", simple$mean[simple$var=="m.index" & simple$species==1] +
                         simple$mean[simple$var2=="m.index:species" & simple$species==species[i]], simple$est)
-  simple$est<-ifelse(simple$species==species[i] & simple$var2=="sp.temp:species", simple$mean[simple$var=="sp.temp" & simple$species==0] +
-                      simple$mean[simple$var2=="species" & simple$species==species[i]]+ 
+  simple$est<-ifelse(simple$species==species[i] & simple$var2=="sp.temp:species", simple$mean[simple$var=="sp.temp" & simple$species==1] +
                         simple$mean[simple$var2=="sp.temp:species" & simple$species==species[i]], simple$est)
-  simple$est<-ifelse(simple$species==species[i] & simple$var2=="sm.elev:species", simple$mean[simple$var=="sm.elev" & simple$species==0] +
-                       simple$mean[simple$var2=="species" & simple$species==species[i]]+ 
+  simple$est<-ifelse(simple$species==species[i] & simple$var2=="sm.elev:species", simple$mean[simple$var=="sm.elev" & simple$species==1] +
                        simple$mean[simple$var2=="sm.elev:species" & simple$species==species[i]], simple$est)
-  simple$est<-ifelse(simple$species==species[i] & simple$var2=="space:species", simple$mean[simple$var=="space"& simple$species==0] +
-                       simple$mean[simple$var2=="species" & simple$species==species[i]]+ 
+  simple$est<-ifelse(simple$species==species[i] & simple$var2=="space:species", simple$mean[simple$var=="space"& simple$species==1] +
                        simple$mean[simple$var2=="space:species" & simple$species==species[i]], simple$est)
-  simple$est<-ifelse(simple$species==species[i] & simple$var2=="cc:species", simple$mean[simple$var=="cc"& simple$species==0] +
-                       simple$mean[simple$var2=="species" & simple$species==species[i]]+ 
+  simple$est<-ifelse(simple$species==species[i] & simple$var2=="cc:species", simple$mean[simple$var=="cc"& simple$species==1] +
                        simple$mean[simple$var2=="cc:species" & simple$species==species[i]], simple$est)
   
 }
 
+for(i in c(1:length(species))) {
+  simple$`2.5%`<-ifelse(simple$species==species[i] & simple$var2=="m.index:species", simple$mean[simple$var=="m.index" & simple$species==1] +
+                       simple$mean[simple$var2=="m.index:species" & simple$species==species[i]], simple$`2.5%`)
+  simple$`2.5%`<-ifelse(simple$species==species[i] & simple$var2=="sp.temp:species", simple$mean[simple$var=="sp.temp" & simple$species==1] +
+                       simple$mean[simple$var2=="sp.temp:species" & simple$species==species[i]], simple$`2.5%`)
+  simple$`2.5%`<-ifelse(simple$species==species[i] & simple$var2=="sm.elev:species", simple$mean[simple$var=="sm.elev" & simple$species==1] +
+                       simple$mean[simple$var2=="sm.elev:species" & simple$species==species[i]], simple$`2.5%`)
+  simple$`2.5%`<-ifelse(simple$species==species[i] & simple$var2=="space:species", simple$mean[simple$var=="space"& simple$species==1] +
+                       simple$mean[simple$var2=="space:species" & simple$species==species[i]], simple$`2.5%`)
+  simple$`2.5%`<-ifelse(simple$species==species[i] & simple$var2=="cc:species", simple$mean[simple$var=="cc"& simple$species==1] +
+                       simple$mean[simple$var2=="cc:species" & simple$species==species[i]], simple$`2.5%`)
+  
+}
+
+for(i in c(1:length(species))) {
+  simple$`97.5%`<-ifelse(simple$species==species[i] & simple$var2=="m.index:species", simple$mean[simple$var=="m.index" & simple$species==1] +
+                          simple$mean[simple$var2=="m.index:species" & simple$species==species[i]], simple$`97.5%`)
+  simple$`97.5%`<-ifelse(simple$species==species[i] & simple$var2=="sp.temp:species", simple$mean[simple$var=="sp.temp" & simple$species==1] +
+                          simple$mean[simple$var2=="sp.temp:species" & simple$species==species[i]], simple$`97.5%`)
+  simple$`97.5%`<-ifelse(simple$species==species[i] & simple$var2=="sm.elev:species", simple$mean[simple$var=="sm.elev" & simple$species==1] +
+                          simple$mean[simple$var2=="sm.elev:species" & simple$species==species[i]], simple$`97.5%`)
+  simple$`97.5%`<-ifelse(simple$species==species[i] & simple$var2=="space:species", simple$mean[simple$var=="space"& simple$species==1] +
+                          simple$mean[simple$var2=="space:species" & simple$species==species[i]], simple$`97.5%`)
+  simple$`97.5%`<-ifelse(simple$species==species[i] & simple$var2=="cc:species", simple$mean[simple$var=="cc"& simple$species==1] +
+                          simple$mean[simple$var2=="cc:species" & simple$species==species[i]], simple$`97.5%`)
+  
+}
+
+
 simple<-simple[!(simple$var=="speciesALNGLU"|simple$var=="speciesBETPEN"|simple$var=="speciesFAGSYL"|
                    simple$var=="speciesFRAEXC"|simple$var=="speciesQUEROB"),]
+
+main<-data.frame(var=c("nao","mat","elev","spacep","ccx"), mean=c(-0.10, -0.03, 0.07, 0.68, 0.09),
+                 `2.5%`=c(-0.11,-0.04,0.07,0.67,0.08), `95.7%`=c(-0.10,-0.03,0.07,0.68,0.09),
+                 species=c(0,0,0,0,0), Jvar=c(9,8,7,6,5), est=c(-0.10, -0.03, 0.07, 0.68, 0.09), 
+                 var2=c("nao","mat","elev","spacep","ccx"))
+simple<-full_join(simple, main)
 
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
 estimates<-c("Intercept (AESHIP)", "NAO Index", "Mean Spring Temperature", "Elevation", "Space Parameter", "Climate Change",
@@ -422,7 +453,7 @@ estimates<-c("Intercept (AESHIP)", "NAO Index", "Mean Spring Temperature", "Elev
              "Elevation x \nClimate Chnage", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
 regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar, col=as.factor(species))) +
-  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=est, y=Jvar, col=as.factor(species))) +
+  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=est, y=Jvar, col=as.factor(species), size=as.factor(species))) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
                                "2"=expression(paste(italic("Alnus glutinosa"))),
@@ -430,7 +461,7 @@ regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar, col=as.fa
                                "4"=expression(paste(italic("Fagus sylvatica"))),
                                "5"=expression(paste(italic("Fraxinus excelsior"))),
                                "6"=expression(paste(italic("Quercus robur"))),
-                               "0"="Overall Effect"))+
+                               "0"="Overall Effects"))+
   geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
   scale_y_discrete(limits = sort(unique(simple$var)), labels=estimates) +
   xlab("Change in Number of False Springs") + ylab("") +
@@ -438,9 +469,33 @@ regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar, col=as.fa
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = c(0.85,0.25),
-        legend.text.align = 0) #+ coord_cartesian(ylim=c(1,5), xlim=c(-20, 10))
+        legend.text.align = 0) + #+ coord_cartesian(ylim=c(1,5), xlim=c(-20, 10))
+  scale_size_manual(values=c(2, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
+                  labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
+                           "2"=expression(paste(italic("Alnus glutinosa"))),
+                           "3"=expression(paste(italic("Betula lenta"))),
+                           "4"=expression(paste(italic("Fagus sylvatica"))),
+                           "5"=expression(paste(italic("Fraxinus excelsior"))),
+                           "6"=expression(paste(italic("Quercus robur"))),
+                           "0"="Overall Effects"))
 quartz()
 regrisk
 
+test<-lm(fs.count~m.index+sp.temp+sm.elev+space+cc, data=bb)
+b <- coef(test)[-1]
+R <- qr.R(test$qr)[-1,-1]
+SSR <- crossprod(test$residuals)[1]
+not_NA <- !is.na(fitted(test))
+N <- sum(not_NA)
+xbar <- c(as.numeric(mean(bb$m.index)),  as.numeric(mean(bb$sp.temp)), as.numeric(mean(bb$sm.elev)), as.numeric(mean(bb$space)), 
+          as.numeric(mean(bb$cc)))
+xbarnames<-colnames(R)
+names(xbar)<-xbarnames
 
+y <- bb$fs.count[not_NA]
+ybar <- mean(y)
+s_y <- sd(y)
+test.big<- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
+                             # the next line is only to make the example go fast
+                             chains = 4, iter = 2000)
 
