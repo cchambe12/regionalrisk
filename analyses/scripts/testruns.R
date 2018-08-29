@@ -6,8 +6,8 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 
 ## Libraries
-#library(brms)
-#library(rstan)
+library(brms)
+library(rstan)
 library(rstanarm)
 library(sjPlot)
 library(sjmisc)
@@ -119,8 +119,8 @@ box<-ggplot(d, aes(x=species, y=space)) + geom_boxplot()
 
 bb<-na.omit(bb)
 #bb$species<-as.numeric(as.factor(bb$species))
-fit<-lm(fs.count~m.index + m.index:species + sp.temp + sp.temp:species + sm.elev + sm.elev:species + 
-          space + space:species + cc  + cc:species + species  + m.index:cc + sp.temp:cc +sm.elev:cc +
+fit<-lm(fs.count~ m.index + ( m.index:species) + sp.temp + (sp.temp:species) + sm.elev + (sm.elev:species) + 
+          space + (space:species) + cc  + (cc:species) + species + m.index:cc + sp.temp:cc +sm.elev:cc +
           space:cc, data=bb)             # not necessary in this case
 
 b <- coef(fit)[-1]
@@ -160,6 +160,7 @@ post.inter <- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
                        chains = 4, iter = 2000)
 cbind(lm = b, stan_lm = rstan::get_posterior_mean(post.inter)[1:26,]) # shrunk
 # }
+
 
 plotting <- as.data.frame(summary(post.inter)$summary)
 simple<-plotting
