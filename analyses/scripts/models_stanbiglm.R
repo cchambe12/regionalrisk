@@ -13,14 +13,16 @@ library(sjPlot)
 library(sjmisc)
 library(RColorBrewer)
 library(dplyr)
+library(broom)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/output")
 
-bb<-read.csv("regrisk.cleaned.2.csv", header=TRUE)
+bb<-read.csv("regrisk.cleaned.csv", header=TRUE)
 
 bb$sm.elev<-bb$elev/100
 bb<-na.omit(bb)
+#write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/bb.brm2.csv", row.names = FALSE)
 #bb$species<-as.numeric(as.factor(bb$species))
 
 ### Lines 27-67 are following Ben's example on the stan_biglm documentation
@@ -338,6 +340,47 @@ cbind(lm = b, stan_lm = rstan::get_posterior_mean(post.inter)[1:26,]) # shrunk
 #For each parameter, n_eff is a crude measure of effective sample size,
 #and Rhat is the potential scale reduction factor on split chains (at convergence, Rhat=1).
 
+### Now prep like an rstan model ####
+
+bb$sp<-as.numeric(as.factor(bb$species))
+fit.sp<-lm(fs.count~ m.index + m.index:sp + sp.temp + sp.temp:sp + sm.elev + sm.elev:sp + 
+          space + space:sp + cc  + cc:sp + sp + m.index:cc + sp.temp:cc +sm.elev:cc +
+          space:cc, data=bb)             # not necessary in this case
+
+b <- coef(fit.sp)[-1]
+R <- qr.R(fit.sp$qr)[-1,-1]
+SSR <- crossprod(fit.sp$residuals)[1]
+not_NA <- !is.na(fitted(fit.sp))
+N <- sum(not_NA)
+spp.nao<-unique(ave(bb$m.index, bb$sp))
+spp.mat<-unique(ave(bb$sp.temp, bb$sp))
+spp.cc<-unique(ave(bb$cc, bb$sp))
+spp.elev<-unique(ave(bb$sm.elev, bb$sp))
+spp.space<-unique(ave(bb$space, bb$sp))
+xbar <- c(as.numeric(mean(bb$m.index)),  as.numeric(mean(bb$sp.temp)), as.numeric(mean(bb$sm.elev)), as.numeric(mean(bb$space)), 
+          as.numeric(mean(bb$cc)),  
+          
+          as.numeric(as.factor("AESHIP")),
+          as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
+          as.numeric(as.factor("FAGSYL")), as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")),
+          
+          spp.nao, spp.mat, spp.cc, spp.elev, spp.space,
+          
+          as.numeric(mean(bb$m.index*bb$cc)), as.numeric(mean(bb$sp.temp*bb$cc)), as.numeric(mean(bb$sm.elev*bb$cc)), 
+          as.numeric(mean(bb$space*bb$cc)))
+xbarnames<-colnames(R)
+names(xbar)<-xbarnames
+
+y <- bb$fs.count[not_NA]
+ybar <- mean(y)
+s_y <- sd(y)
+post.inter <- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
+                             # the next line is only to make the example go fast
+                             chains = 4, iter = 2000)
+cbind(lm = b, stan_lm = rstan::get_posterior_mean(post.inter)[1:26,]) # shrunk
+# }
+
+
 
 
 ##### Ugly but workable code for plotting ####
@@ -441,9 +484,9 @@ for(i in c(1:length(species))) {
 simple<-simple[!(simple$var=="speciesALNGLU"|simple$var=="speciesBETPEN"|simple$var=="speciesFAGSYL"|
                    simple$var=="speciesFRAEXC"|simple$var=="speciesQUEROB"),]
 
-main<-data.frame(var=c("nao","mat","elev","spacep","ccx"), mean=c(-0.10, -0.03, 0.07, 0.68, 0.09),
-                 `2.5%`=c(-0.11,-0.04,0.07,0.67,0.08), `95.7%`=c(-0.10,-0.03,0.07,0.68,0.09),
-                 species=c(0,0,0,0,0), Jvar=c(9,8,7,6,5), est=c(-0.10, -0.03, 0.07, 0.68, 0.09), 
+main<-data.frame(var=c("nao","mat","elev","spacep","ccx"), mean=c(-0.15, -0.03, 0.08, 0.69, 0.18),
+                 `2.5%`=c(-0.16,-0.03,0.08,0.68,0.17), `95.7%`=c(-0.15,-0.03,0.08,0.69,0.19),
+                 species=c(0,0,0,0,0), Jvar=c(9,8,7,6,5), est=c(-0.15, -0.03, 0.08, 0.69, 0.18), 
                  var2=c("nao","mat","elev","spacep","ccx"))
 simple<-full_join(simple, main)
 
@@ -464,13 +507,13 @@ regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar, col=as.fa
                                "0"="Overall Effects"))+
   geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
   scale_y_discrete(limits = sort(unique(simple$var)), labels=estimates) +
-  xlab("Change in Number of False Springs") + ylab("") +
+  xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=5), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = c(0.85,0.25),
         legend.text.align = 0) + #+ coord_cartesian(ylim=c(1,5), xlim=c(-20, 10))
-  scale_size_manual(values=c(2, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
+  scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
                   labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
                            "2"=expression(paste(italic("Alnus glutinosa"))),
                            "3"=expression(paste(italic("Betula lenta"))),
@@ -481,14 +524,116 @@ regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar, col=as.fa
 quartz()
 regrisk
 
-test<-lm(fs.count~m.index+sp.temp+sm.elev+space+cc, data=bb)
+brms<-as.data.frame(tidy(slopes.fast,robust = TRUE))
+brms<-brms[2:46,]
+brms$term<-gsub(".*b_","",brms$term)
+brms$term<-gsub(".*r_species","",brms$term)
+brms<-brms[!(brms$term=="sd_species__m.index" | brms$term=="sd_species__sp.temp" | brms$term=="sd_species__sm.elev"
+           | brms$term=="sd_species__space" | brms$term=="sd_species__cc" | brms$term=="sigma"),]
+
+brms$species<-c(0,0,0,0,0,0,0,0,0, 1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6)
+brms$Jvar<-NA
+brms$Jvar<-ifelse(brms$term=="m.index", 9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[AESHIP,m.index]", 8.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[ALNGLU,m.index]", 8.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[BETPEN,m.index]", 8.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FAGSYL,m.index]", 8.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FRAEXC,m.index]", 8.5, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[QUEROB,m.index]", 8.4, brms$Jvar)
+
+brms$Jvar<-ifelse(brms$term=="sp.temp", 8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[AESHIP,sp.temp]", 7.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[ALNGLU,sp.temp]", 7.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[BETPEN,sp.temp]", 7.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FAGSYL,sp.temp]", 7.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FRAEXC,sp.temp]", 7.5, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[QUEROB,sp.temp]", 7.4, brms$Jvar)
+
+brms$Jvar<-ifelse(brms$term=="sm.elev", 7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[AESHIP,sm.elev]", 6.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[ALNGLU,sm.elev]", 6.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[BETPEN,sm.elev]", 6.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FAGSYL,sm.elev]", 6.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FRAEXC,sm.elev]", 6.5, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[QUEROB,sm.elev]", 6.4, brms$Jvar)
+
+brms$Jvar<-ifelse(brms$term=="space", 6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[AESHIP,space]", 5.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[ALNGLU,space]", 5.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[BETPEN,space]", 5.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FAGSYL,space]", 5.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FRAEXC,space]", 5.5, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[QUEROB,space]", 5.4, brms$Jvar)
+
+brms$Jvar<-ifelse(brms$term=="cc", 5, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[AESHIP,cc]", 4.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[ALNGLU,cc]", 4.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[BETPEN,cc]", 4.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FAGSYL,cc]", 4.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[FRAEXC,cc]", 4.5, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="[QUEROB,cc]", 4.4, brms$Jvar)
+
+brms$Jvar<-ifelse(brms$term=="m.index:cc", 4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="sp.temp:cc", 3, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="cc:sm.elev", 2, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="cc:space", 1, brms$Jvar)
+
+cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
+estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Space Parameter", "Climate Change",
+             "NAO Index x \nClimate Change", "Mean Spring Temperature \nx Climate Change",
+             "Elevation x \nClimate Chnage", "Space Parameter \nx Climate Change")
+estimates<-rev(estimates)
+regrisk<-ggplot(brms, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(species))) +
+  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar, col=as.factor(species), size=as.factor(species))) +
+  scale_colour_manual(name="Species", values=cols,
+                      labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
+                               "2"=expression(paste(italic("Alnus glutinosa"))),
+                               "3"=expression(paste(italic("Betula lenta"))),
+                               "4"=expression(paste(italic("Fagus sylvatica"))),
+                               "5"=expression(paste(italic("Fraxinus excelsior"))),
+                               "6"=expression(paste(italic("Quercus robur"))),
+                               "0"="Overall Effects"))+
+  geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
+  scale_y_discrete(limits = sort(unique(brms$term)), labels=estimates) +
+  xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
+  theme(legend.text=element_text(size=5), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), axis.line = element_line(colour = "black"), 
+        text=element_text(family="sans"), legend.position = c(0.85,0.25),
+        legend.text.align = 0) + #+ coord_cartesian(ylim=c(1,5), xlim=c(-20, 10))
+  scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
+                    labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
+                             "2"=expression(paste(italic("Alnus glutinosa"))),
+                             "3"=expression(paste(italic("Betula lenta"))),
+                             "4"=expression(paste(italic("Fagus sylvatica"))),
+                             "5"=expression(paste(italic("Fraxinus excelsior"))),
+                             "6"=expression(paste(italic("Quercus robur"))),
+                             "0"="Overall Effects"))
+quartz()
+regrisk
+
+nao<-interact_plot(model = slopes.fast, pred = m.index, modx = cc) + xlab("NAO Index") + ylab("Num. False Springs") + theme(legend.position = "none")
+elev<-interact_plot(model = slopes.fast, pred = sm.elev, modx = cc) + xlab("Elevation") + ylab("Num. False Springs") + theme(legend.position = "none")
+mat<-interact_plot(model = slopes.fast, pred = sp.temp, modx = cc) + xlab("Mean Spring Temperature") + ylab("Num. False Springs") 
+spa<-interact_plot(model = slopes.fast, pred = space, modx = cc) + xlab("Space") + ylab("Num. False Springs")
+
+ggarrange(nao, mat, elev, spa, ncol=2, nrow=2)
+
+test<-lm(fs.count~m.index+sp.temp+sm.elev+space+cc+species+m.index:cc+
+           sp.temp:cc+sm.elev:cc+space:cc, data=bb)
 b <- coef(test)[-1]
 R <- qr.R(test$qr)[-1,-1]
 SSR <- crossprod(test$residuals)[1]
 not_NA <- !is.na(fitted(test))
 N <- sum(not_NA)
 xbar <- c(as.numeric(mean(bb$m.index)),  as.numeric(mean(bb$sp.temp)), as.numeric(mean(bb$sm.elev)), as.numeric(mean(bb$space)), 
-          as.numeric(mean(bb$cc)))
+          as.numeric(mean(bb$cc)),
+          
+          as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
+          as.numeric(as.factor("FAGSYL")), as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")),
+          
+          as.numeric(mean(bb$m.index*bb$cc)), as.numeric(mean(bb$sp.temp*bb$cc)), as.numeric(mean(bb$sm.elev*bb$cc)), 
+          as.numeric(mean(bb$space*bb$cc)))
 xbarnames<-colnames(R)
 names(xbar)<-xbarnames
 

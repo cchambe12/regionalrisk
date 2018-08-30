@@ -14,7 +14,7 @@ rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 #### get the data
-bb.stan<-read.csv("/n/wolkovich_lab/Lab/Cat/bb.brm.nointer.csv", header=TRUE)
+bb.stan<-read.csv("/n/wolkovich_lab/Lab/Cat/bb.brm2.csv", header=TRUE)
 bb.stan<-subset(bb.stan, select=c("fs.count", "m.index", "sp.temp", "cc", "sm.elev","space", "species"))
 bb.stan<-bb.stan[!duplicated(bb.stan),]
 bb.stan<-na.omit(bb.stan)
@@ -23,6 +23,7 @@ bb.stan$mat.z <- (bb.stan$sp.temp-mean(bb.stan$sp.temp,na.rm=TRUE))/sd(bb.stan$s
 bb.stan$cc.z <- (bb.stan$cc-mean(bb.stan$cc,na.rm=TRUE))/sd(bb.stan$cc,na.rm=TRUE)
 bb.stan$elev.z <- (bb.stan$sm.elev-mean(bb.stan$sm.elev,na.rm=TRUE))/sd(bb.stan$sm.elev,na.rm=TRUE)
 bb.stan$space.z <- (bb.stan$space-mean(bb.stan$space,na.rm=TRUE))/sd(bb.stan$space,na.rm=TRUE)
+bb.stan<-bb.stan[sample(nrow(bb.stan), 10000, replace=FALSE),]
 
 brm.full.nointer<-brm(fs.count~nao.z+mat.z+cc.z+elev.z+space.z+nao.z:cc.z + mat.z:cc.z + elev.z:cc.z +
                         space.z:cc.z +
