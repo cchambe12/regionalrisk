@@ -14,11 +14,12 @@ library(sjmisc)
 library(RColorBrewer)
 library(dplyr)
 library(broom)
+library(ggplot2)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/output")
 
-bb<-read.csv("regrisk.cleaned.csv", header=TRUE)
+bb<-read.csv("regrisk.cleaned.2.csv", header=TRUE)
 
 bb$sm.elev<-bb$elev/100
 bb<-na.omit(bb)
@@ -394,41 +395,41 @@ simple<-simple[2:40,]
 simple<-subset(simple, select=c("var", "mean", "2.5%", "97.5%"))
 simple$species<-c(1,1,1,1,1,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,0,0,0,0)
 simple$Jvar<-NA
-simple$Jvar<-ifelse(simple$var=="(Intercept)", 10, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index", 8.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesALNGLU", 8.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesBETPEN", 8.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesFAGSYL", 8.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesFRAEXC", 8.5, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesQUEROB", 8.4, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="(Intercept)", 10, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index", 9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesALNGLU", 8.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesBETPEN", 8.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesFAGSYL", 8.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesFRAEXC", 8.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="m.index:speciesQUEROB", 8.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="sp.temp", 7.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesALNGLU", 7.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesBETPEN", 7.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFAGSYL", 7.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFRAEXC", 7.5, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesQUEROB", 7.4, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp", 8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesALNGLU", 7.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesBETPEN", 7.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFAGSYL", 7.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFRAEXC", 7.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sp.temp:speciesQUEROB", 7.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="sm.elev", 6.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesALNGLU", 6.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesBETPEN", 6.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFAGSYL", 6.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFRAEXC", 6.5, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesQUEROB", 6.4, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev", 7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesALNGLU", 6.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesBETPEN", 6.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFAGSYL", 6.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFRAEXC", 6.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="sm.elev:speciesQUEROB", 6.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="space", 5.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesALNGLU", 5.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesBETPEN", 5.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesFAGSYL", 5.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesFRAEXC", 5.5, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesQUEROB", 5.4, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space", 6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesALNGLU", 5.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesBETPEN", 5.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesFAGSYL", 5.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesFRAEXC", 5.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="space:speciesQUEROB", 5.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="cc", 4.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesALNGLU", 4.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesBETPEN", 4.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesFAGSYL", 4.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesFRAEXC", 4.5, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesQUEROB", 4.4, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc", 5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesALNGLU", 4.9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesBETPEN", 4.8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesFAGSYL", 4.7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesFRAEXC", 4.6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc:speciesQUEROB", 4.5, simple$Jvar)
 
 simple$Jvar<-ifelse(simple$var=="m.index:cc", 4, simple$Jvar)
 simple$Jvar<-ifelse(simple$var=="sp.temp:cc", 3, simple$Jvar)
@@ -484,11 +485,6 @@ for(i in c(1:length(species))) {
 simple<-simple[!(simple$var=="speciesALNGLU"|simple$var=="speciesBETPEN"|simple$var=="speciesFAGSYL"|
                    simple$var=="speciesFRAEXC"|simple$var=="speciesQUEROB"),]
 
-main<-data.frame(var=c("nao","mat","elev","spacep","ccx"), mean=c(-0.15, -0.03, 0.08, 0.69, 0.18),
-                 `2.5%`=c(-0.16,-0.03,0.08,0.68,0.17), `95.7%`=c(-0.15,-0.03,0.08,0.69,0.19),
-                 species=c(0,0,0,0,0), Jvar=c(9,8,7,6,5), est=c(-0.15, -0.03, 0.08, 0.69, 0.18), 
-                 var2=c("nao","mat","elev","spacep","ccx"))
-simple<-full_join(simple, main)
 
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
 estimates<-c("Intercept (AESHIP)", "NAO Index", "Mean Spring Temperature", "Elevation", "Space Parameter", "Climate Change",
@@ -504,23 +500,23 @@ regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar, col=as.fa
                                "4"=expression(paste(italic("Fagus sylvatica"))),
                                "5"=expression(paste(italic("Fraxinus excelsior"))),
                                "6"=expression(paste(italic("Quercus robur"))),
-                               "0"="Overall Effects"))+
+                               "0"="Interactive Effects"))+
   geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
   scale_y_discrete(limits = sort(unique(simple$var)), labels=estimates) +
-  xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
-  theme(legend.text=element_text(size=5), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
+  xlab("Model Estimate Change in \nNumber of False Springs") + ylab("") + theme_linedraw() +
+  theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
-        text=element_text(family="sans"), legend.position = c(0.85,0.25),
+        text=element_text(family="sans"), legend.position = c(0.8,0.25),
         legend.text.align = 0) + #+ coord_cartesian(ylim=c(1,5), xlim=c(-20, 10))
-  scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
+  scale_size_manual(values=c(3, 2, 2, 2, 2, 2, 2, 2, 2, 2), name="Species",
                   labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
                            "2"=expression(paste(italic("Alnus glutinosa"))),
                            "3"=expression(paste(italic("Betula lenta"))),
                            "4"=expression(paste(italic("Fagus sylvatica"))),
                            "5"=expression(paste(italic("Fraxinus excelsior"))),
                            "6"=expression(paste(italic("Quercus robur"))),
-                           "0"="Overall Effects"))
+                           "0"="Interactive Effects"))
 quartz()
 regrisk
 
