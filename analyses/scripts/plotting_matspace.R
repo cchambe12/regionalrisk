@@ -206,7 +206,7 @@ bb.aes$bb.dec<-ave(bb.aes$bb, bb.aes$bb.decade)
 bb.aes$bb.yr<-ave(bb.aes$bb, bb.aes$YEAR)
 bb.aes$bb.space<-ave(bb.aes$bb, bb.aes$lat.long)
 bb.aes<-rename(bb.aes, year=YEAR)
-bb.aes<-dplyr::select(bb.aes, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
+bb.aes<-dplyr::select(bb.aes, species, year, bb, LAT, LON, ALT)
 bb.aes<-bb.aes[!duplicated(bb.aes),]
 
 # ALNGLU
@@ -230,7 +230,7 @@ bb.ag$bb.dec<-ave(bb.ag$bb, bb.ag$bb.decade)
 bb.ag$bb.yr<-ave(bb.ag$bb, bb.ag$YEAR)
 bb.ag$bb.space<-ave(bb.ag$bb, bb.ag$lat.long)
 bb.ag<-rename(bb.ag, year=YEAR)
-bb.ag<-dplyr::select(bb.ag, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
+bb.ag<-dplyr::select(bb.ag, species, year, bb, LAT, LON, ALT)
 bb.ag<-bb.ag[!duplicated(bb.ag),]
 
 # BETPEN
@@ -254,7 +254,7 @@ bb.bp$bb.dec<-ave(bb.bp$bb, bb.bp$bb.decade)
 bb.bp$bb.yr<-ave(bb.bp$bb, bb.bp$YEAR)
 bb.bp$bb.space<-ave(bb.bp$bb, bb.bp$lat.long)
 bb.bp<-rename(bb.bp, year=YEAR)
-bb.bp<-dplyr::select(bb.bp, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
+bb.bp<-dplyr::select(bb.bp, species, year, bb, LAT, LON, ALT)
 bb.bp<-bb.bp[!duplicated(bb.bp),]
 
 # FAGSYL
@@ -278,7 +278,7 @@ bb.fsyl$bb.dec<-ave(bb.fsyl$bb, bb.fsyl$bb.decade)
 bb.fsyl$bb.yr<-ave(bb.fsyl$bb, bb.fsyl$YEAR)
 bb.fsyl$bb.space<-ave(bb.fsyl$bb, bb.fsyl$lat.long)
 bb.fsyl<-rename(bb.fsyl, year=YEAR)
-bb.fsyl<-dplyr::select(bb.fsyl, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
+bb.fsyl<-dplyr::select(bb.fsyl, species, year, bb, LAT, LON, ALT)
 bb.fsyl<-bb.fsyl[!duplicated(bb.fsyl),]
 
 # FRAEXC
@@ -302,7 +302,7 @@ bb.fex$bb.dec<-ave(bb.fex$bb, bb.fex$bb.decade)
 bb.fex$bb.yr<-ave(bb.fex$bb, bb.fex$YEAR)
 bb.fex$bb.space<-ave(bb.fex$bb, bb.fex$lat.long)
 bb.fex<-rename(bb.fex, year=YEAR)
-bb.fex<-dplyr::select(bb.fex, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
+bb.fex<-dplyr::select(bb.fex, species, year, bb, LAT, LON, ALT)
 bb.fex<-bb.fex[!duplicated(bb.fex),]
 
 # QUEROB
@@ -326,7 +326,7 @@ bb.qr$bb.dec<-ave(bb.qr$bb, bb.qr$bb.decade)
 bb.qr$bb.yr<-ave(bb.qr$bb, bb.qr$YEAR)
 bb.qr$bb.space<-ave(bb.qr$bb, bb.qr$lat.long)
 bb.qr<-rename(bb.qr, year=YEAR)
-bb.qr<-dplyr::select(bb.qr, species, year, bb, cc, bb.cc, decade, bb.dec, bb.yr, bb.space, LAT, LON, ALT)
+bb.qr<-dplyr::select(bb.qr, species, year, bb, LAT, LON, ALT)
 bb.qr<-bb.qr[!duplicated(bb.qr),]
 
 d<-full_join(bb.aes, bb.ag)
@@ -335,10 +335,12 @@ d<-full_join(d, bb.fsyl)
 d<-full_join(d, bb.fex)
 d<-full_join(d, bb.qr)
 
-d<-rename(d, year=YEAR)
-colstokeep<-c("bb", "species", "year", "bb.yr")
+#d<-rename(d, year=YEAR)
+colstokeep<-c("bb", "species", "year", "LAT", "LON")
 bx<-subset(d, select=colstokeep)
 bx<-bx[!duplicated(bx),]
+
+write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/BBdata.csv", row.names = FALSE)
 
 bb.check<-inner_join(dxx, bx)
 write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/fs_bb_sitedata.csv", row.names = FALSE)

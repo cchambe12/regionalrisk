@@ -39,25 +39,28 @@ R <- qr.R(fit$qr)[-1,-1]
 SSR <- crossprod(fit$residuals)[1]
 not_NA <- !is.na(fitted(fit))
 N <- sum(not_NA)
-xbar <- c(as.numeric(mean(bb$m.index)),  as.numeric(mean(bb$m.index[bb$species=="ALNGLU"])), as.numeric(mean(bb$m.index[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$m.index[bb$species=="FAGSYL"])), as.numeric(mean(bb$m.index[bb$species=="FRAEXC"])),
+xbar <- c(as.numeric(mean(bb$m.index)),  as.numeric(mean(bb$m.index[bb$species=="AESHIP"])), as.numeric(mean(bb$m.index[bb$species=="ALNGLU"])), as.numeric(mean(bb$m.index[bb$species=="BETPEN"])),
+          as.numeric(mean(bb$m.index[bb$species=="FRAEXC"])),
           as.numeric(mean(bb$m.index[bb$species=="QUEROB"])), as.numeric(mean(bb$sp.temp)), as.numeric(mean(bb$sp.temp[bb$species=="ALNGLU"])), as.numeric(mean(bb$sp.temp[bb$species=="BETPEN"])),
           as.numeric(mean(bb$sp.temp[bb$species=="FAGSYL"])), as.numeric(mean(bb$sp.temp[bb$species=="FRAEXC"])), 
           as.numeric(mean(bb$sp.temp[bb$species=="QUEROB"])),
           as.numeric(mean(bb$sm.elev)),  
+          as.numeric(mean(bb$sm.elev[bb$species=="AESHIP"])),
           as.numeric(mean(bb$sm.elev[bb$species=="ALNGLU"])), as.numeric(mean(bb$sm.elev[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$sm.elev[bb$species=="FAGSYL"])), as.numeric(mean(bb$sm.elev[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$sm.elev[bb$species=="FRAEXC"])),
           as.numeric(mean(bb$sm.elev[bb$species=="QUEROB"])), 
           as.numeric(mean(bb$space)), 
+          as.numeric(mean(bb$space[bb$species=="AESHIP"])),
           as.numeric(mean(bb$space[bb$species=="ALNGLU"])), as.numeric(mean(bb$space[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$space[bb$species=="FAGSYL"])), as.numeric(mean(bb$space[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$space[bb$species=="FRAEXC"])),
           as.numeric(mean(bb$space[bb$species=="QUEROB"])),
           as.numeric(mean(bb$cc)),  
+          as.numeric(mean(bb$cc[bb$species=="AESHIP"])), 
           as.numeric(mean(bb$cc[bb$species=="ALNGLU"])), 
-          as.numeric(mean(bb$cc[bb$species=="BETPEN"])), as.numeric(mean(bb$cc[bb$species=="FAGSYL"])), 
+          as.numeric(mean(bb$cc[bb$species=="BETPEN"])),
           as.numeric(mean(bb$cc[bb$species=="FRAEXC"])), as.numeric(mean(bb$cc[bb$species=="QUEROB"])),
-          as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
-          as.numeric(as.factor("FAGSYL")), as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")), 
+          as.numeric(as.factor("AESHIP")), as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
+          as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")), 
           as.numeric(mean(bb$m.index*bb$cc)), as.numeric(mean(bb$sp.temp*bb$cc)), as.numeric(mean(bb$sm.elev*bb$cc)), 
           as.numeric(mean(bb$space*bb$cc)))
 xbarnames<-colnames(R)
@@ -187,14 +190,19 @@ cc<- plot_model(fit, type = "pred", terms = c("cc", "species")) + xlab("Climate 
 quartz()
 ggarrange(nao, mat, cc, space, elev, ncol=3, nrow=2)
 
-### Now a no-intercept model ####
+### A cleaner version! ####
 
-fit<-lm(fs.count~ -1 + m.index + m.index:species + sp.temp + sp.temp:species + sm.elev + sm.elev:species + 
+### Going to make Fagus sylvatica the baseline because it is the most phenologically in the middle
+# Avg budburst overall for the entire dataset is 104.8766 and Fagus is 106.7, Betula (the next closest) is 99.24
+
+bb$species<-ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species)
+
+fit<-lm(fs.count~m.index + m.index:species + sp.temp + sp.temp:species + sm.elev + sm.elev:species + 
           space + space:species + cc  + cc:species + species + m.index:cc + sp.temp:cc +sm.elev:cc +
           space:cc, data=bb)             # not necessary in this case
 
-b <- coef(fit)
-R <- qr.R(fit$qr)
+b <- coef(fit)[-1]
+R <- qr.R(fit$qr)[-1,-1]
 SSR <- crossprod(fit$residuals)[1]
 not_NA <- !is.na(fitted(fit))
 N <- sum(not_NA)
@@ -203,26 +211,31 @@ xbar <- c(as.numeric(mean(bb$m.index)),  as.numeric(mean(bb$sp.temp)), as.numeri
           
           as.numeric(as.factor("AESHIP")),
           as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
-          as.numeric(as.factor("FAGSYL")), as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")),
+          as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")),
     
+          as.numeric(mean(bb$m.index[bb$species=="AESHIP"])),
           as.numeric(mean(bb$m.index[bb$species=="ALNGLU"])), as.numeric(mean(bb$m.index[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$m.index[bb$species=="FAGSYL"])), as.numeric(mean(bb$m.index[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$m.index[bb$species=="FRAEXC"])),
           as.numeric(mean(bb$m.index[bb$species=="QUEROB"])), 
+          as.numeric(mean(bb$sp.temp[bb$species=="AESHIP"])),
           as.numeric(mean(bb$sp.temp[bb$species=="ALNGLU"])), as.numeric(mean(bb$sp.temp[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$sp.temp[bb$species=="FAGSYL"])), as.numeric(mean(bb$sp.temp[bb$species=="FRAEXC"])), 
+          as.numeric(mean(bb$sp.temp[bb$species=="FRAEXC"])), 
           as.numeric(mean(bb$sp.temp[bb$species=="QUEROB"])),
           
+          as.numeric(mean(bb$sm.elev[bb$species=="AESHIP"])), 
           as.numeric(mean(bb$sm.elev[bb$species=="ALNGLU"])), as.numeric(mean(bb$sm.elev[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$sm.elev[bb$species=="FAGSYL"])), as.numeric(mean(bb$sm.elev[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$sm.elev[bb$species=="FRAEXC"])),
           as.numeric(mean(bb$sm.elev[bb$species=="QUEROB"])), 
           
+          as.numeric(mean(bb$space[bb$species=="AESHIP"])),
           as.numeric(mean(bb$space[bb$species=="ALNGLU"])), as.numeric(mean(bb$space[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$space[bb$species=="FAGSYL"])), as.numeric(mean(bb$space[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$space[bb$species=="FRAEXC"])),
           as.numeric(mean(bb$space[bb$species=="QUEROB"])),
           
           
+          as.numeric(mean(bb$cc[bb$species=="AESHIP"])),
           as.numeric(mean(bb$cc[bb$species=="ALNGLU"])), 
-          as.numeric(mean(bb$cc[bb$species=="BETPEN"])), as.numeric(mean(bb$cc[bb$species=="FAGSYL"])), 
+          as.numeric(mean(bb$cc[bb$species=="BETPEN"])), 
           as.numeric(mean(bb$cc[bb$species=="FRAEXC"])), as.numeric(mean(bb$cc[bb$species=="QUEROB"])),
            
           as.numeric(mean(bb$m.index*bb$cc)), as.numeric(mean(bb$sp.temp*bb$cc)), as.numeric(mean(bb$sm.elev*bb$cc)), 
@@ -397,39 +410,39 @@ simple$species<-c(1,1,1,1,1,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,
 simple$Jvar<-NA
 #simple$Jvar<-ifelse(simple$var=="(Intercept)", 10, simple$Jvar)
 simple$Jvar<-ifelse(simple$var=="m.index", 9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesALNGLU", 8.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesBETPEN", 8.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesFAGSYL", 8.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesFRAEXC", 8.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index:speciesQUEROB", 8.5, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="m.index:speciesALNGLU", 8.9, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="m.index:speciesBETPEN", 8.8, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="m.index:speciesFAGSYL", 8.7, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="m.index:speciesFRAEXC", 8.6, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="m.index:speciesQUEROB", 8.5, simple$Jvar)
 
 simple$Jvar<-ifelse(simple$var=="sp.temp", 8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesALNGLU", 7.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesBETPEN", 7.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFAGSYL", 7.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFRAEXC", 7.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:speciesQUEROB", 7.5, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sp.temp:speciesALNGLU", 7.9, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sp.temp:speciesBETPEN", 7.8, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFAGSYL", 7.7, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFRAEXC", 7.6, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sp.temp:speciesQUEROB", 7.5, simple$Jvar)
 
 simple$Jvar<-ifelse(simple$var=="sm.elev", 7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesALNGLU", 6.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesBETPEN", 6.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFAGSYL", 6.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFRAEXC", 6.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:speciesQUEROB", 6.5, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sm.elev:speciesALNGLU", 6.9, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sm.elev:speciesBETPEN", 6.8, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFAGSYL", 6.7, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFRAEXC", 6.6, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="sm.elev:speciesQUEROB", 6.5, simple$Jvar)
 
 simple$Jvar<-ifelse(simple$var=="space", 6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesALNGLU", 5.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesBETPEN", 5.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesFAGSYL", 5.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesFRAEXC", 5.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:speciesQUEROB", 5.5, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="space:speciesALNGLU", 5.9, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="space:speciesBETPEN", 5.8, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="space:speciesFAGSYL", 5.7, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="space:speciesFRAEXC", 5.6, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="space:speciesQUEROB", 5.5, simple$Jvar)
 
 simple$Jvar<-ifelse(simple$var=="cc", 5, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesALNGLU", 4.9, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesBETPEN", 4.8, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesFAGSYL", 4.7, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesFRAEXC", 4.6, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="cc:speciesQUEROB", 4.5, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="cc:speciesALNGLU", 4.9, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="cc:speciesBETPEN", 4.8, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="cc:speciesFAGSYL", 4.7, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="cc:speciesFRAEXC", 4.6, simple$Jvar)
+#simple$Jvar<-ifelse(simple$var=="cc:speciesQUEROB", 4.5, simple$Jvar)
 
 simple$Jvar<-ifelse(simple$var=="m.index:cc", 4, simple$Jvar)
 simple$Jvar<-ifelse(simple$var=="sp.temp:cc", 3, simple$Jvar)
@@ -487,36 +500,20 @@ simple<-simple[!(simple$var=="speciesALNGLU"|simple$var=="speciesBETPEN"|simple$
 
 
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
-estimates<-c("Intercept (AESHIP)", "NAO Index", "Mean Spring Temperature", "Elevation", "Space Parameter", "Climate Change",
+estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Space Parameter", "Climate Change",
              "NAO Index x \nClimate Change", "Mean Spring Temperature \nx Climate Change",
              "Elevation x \nClimate Chnage", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
-regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar, col=as.factor(species))) +
-  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=est, y=Jvar, col=as.factor(species), size=as.factor(species))) +
-  scale_colour_manual(name="Species", values=cols,
-                      labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
-                               "2"=expression(paste(italic("Alnus glutinosa"))),
-                               "3"=expression(paste(italic("Betula lenta"))),
-                               "4"=expression(paste(italic("Fagus sylvatica"))),
-                               "5"=expression(paste(italic("Fraxinus excelsior"))),
-                               "6"=expression(paste(italic("Quercus robur"))),
-                               "0"="Interactive Effects"))+
-  geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
+regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar)) +
+  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=mean, y=Jvar), col="blue3") +
+  geom_segment(arrow = arrow(length = unit(0.00, "npc")), col="blue3") +
   scale_y_discrete(limits = sort(unique(simple$var)), labels=estimates) +
   xlab("Model Estimate Change in \nNumber of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
-        text=element_text(family="sans"), legend.position = c(0.8,0.25),
-        legend.text.align = 0) + #+ coord_cartesian(ylim=c(1,5), xlim=c(-20, 10))
-  scale_size_manual(values=c(3, 2, 2, 2, 2, 2, 2, 2, 2, 2), name="Species",
-                  labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
-                           "2"=expression(paste(italic("Alnus glutinosa"))),
-                           "3"=expression(paste(italic("Betula lenta"))),
-                           "4"=expression(paste(italic("Fagus sylvatica"))),
-                           "5"=expression(paste(italic("Fraxinus excelsior"))),
-                           "6"=expression(paste(italic("Quercus robur"))),
-                           "0"="Interactive Effects"))
+        text=element_text(family="sans"), legend.position = "none",
+        legend.text.align = 0)  #+ coord_cartesian(ylim=c(1,5), xlim=c(-20, 10))
 quartz()
 regrisk
 
