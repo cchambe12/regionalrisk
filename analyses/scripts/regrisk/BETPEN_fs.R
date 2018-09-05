@@ -32,6 +32,8 @@ df<-d%>%
   rename(lat=LAT)%>%
   rename(long=LON)
 df$bb<-df$lo-12
+df$bb<-ave(df$bb, df$lat, df$long, df$year, FUN=min)
+
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<- df[order(df$PEP_ID, df$year), ]
 df$pep.year<-paste(df$year, df$PEP_ID)
