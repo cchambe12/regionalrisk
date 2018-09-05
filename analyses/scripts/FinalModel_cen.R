@@ -21,57 +21,61 @@ setwd("~/Documents/git/regionalrisk/analyses/output")
 
 bb<-read.csv("regrisk.cleaned.2.csv", header=TRUE)
 
-bb.stan$nao.z <- (bb.stan$m.index-mean(bb.stan$m.index,na.rm=TRUE))/sd(bb.stan$m.index,na.rm=TRUE)
-bb.stan$mat.z <- (bb.stan$sp.temp-mean(bb.stan$sp.temp,na.rm=TRUE))/sd(bb.stan$sp.temp,na.rm=TRUE)
-bb.stan$cc.z <- (bb.stan$cc-mean(bb.stan$cc,na.rm=TRUE))/sd(bb.stan$cc,na.rm=TRUE)
-bb.stan$elev.z <- (bb.stan$sm.elev-mean(bb.stan$sm.elev,na.rm=TRUE))/sd(bb.stan$sm.elev,na.rm=TRUE)
-bb.stan$space.z <- (bb.stan$space-mean(bb.stan$space,na.rm=TRUE))/sd(bb.stan$space,na.rm=TRUE)
+bb$nao.z <- (bb$m.index-mean(bb$m.index,na.rm=TRUE))/(2*sd(bb$m.index,na.rm=TRUE))
+bb$mat.z <- (bb$sp.temp-mean(bb$sp.temp,na.rm=TRUE))/(2*sd(bb$sp.temp,na.rm=TRUE))
+bb$cc.z <- (bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE))
+bb$elev.z <- (bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE))
+bb$space.z <- (bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE))
 
-fit<-lm(fs.count~ m.index + sp.temp + sm.elev  + 
-          space + cc + species + m.index:species + 
-          sp.temp:species + sm.elev:species + space:species + cc:species + 
-          m.index:cc + sp.temp:cc + sm.elev:cc +
-          space:cc, data=bb)             # not necessary in this case
+bb<-bb[!duplicated(bb),]
+bb<-na.omit(bb)
+bb$species<-ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species)
+
+fit<-lm(fs.count~ nao.z + mat.z + elev.z  + 
+          space.z + cc.z + species + nao.z:species + 
+          mat.z:species + elev.z:species + space.z:species + cc.z:species + 
+          nao.z:cc + mat.z:cc + elev.z:cc +
+          space.z:cc, data=bb)             # not necessary in this case
 
 b <- coef(fit)[-1]
 R <- qr.R(fit$qr)[-1,-1]
 SSR <- crossprod(fit$residuals)[1]
 not_NA <- !is.na(fitted(fit))
 N <- sum(not_NA)
-xbar <- c(as.numeric(mean(bb$m.index)),  as.numeric(mean(bb$sp.temp)), as.numeric(mean(bb$sm.elev)), as.numeric(mean(bb$space)), 
-          as.numeric(mean(bb$cc)),  
+xbar <- c(as.numeric(mean(bb$nao.z)),  as.numeric(mean(bb$mat.z)), as.numeric(mean(bb$elev.z)), as.numeric(mean(bb$space.z)), 
+          as.numeric(mean(bb$cc.z)),  
           
           as.numeric(as.factor("AESHIP")),
           as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
           as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")),
           
-          as.numeric(mean(bb$m.index[bb$species=="AESHIP"])),
-          as.numeric(mean(bb$m.index[bb$species=="ALNGLU"])), as.numeric(mean(bb$m.index[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$m.index[bb$species=="FRAEXC"])),
-          as.numeric(mean(bb$m.index[bb$species=="QUEROB"])), 
-          as.numeric(mean(bb$sp.temp[bb$species=="AESHIP"])),
-          as.numeric(mean(bb$sp.temp[bb$species=="ALNGLU"])), as.numeric(mean(bb$sp.temp[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$sp.temp[bb$species=="FRAEXC"])), 
-          as.numeric(mean(bb$sp.temp[bb$species=="QUEROB"])),
+          as.numeric(mean(bb$nao.z[bb$species=="AESHIP"])),
+          as.numeric(mean(bb$nao.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$nao.z[bb$species=="BETPEN"])),
+          as.numeric(mean(bb$nao.z[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$nao.z[bb$species=="QUEROB"])), 
+          as.numeric(mean(bb$mat.z[bb$species=="AESHIP"])),
+          as.numeric(mean(bb$mat.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$mat.z[bb$species=="BETPEN"])),
+          as.numeric(mean(bb$mat.z[bb$species=="FRAEXC"])), 
+          as.numeric(mean(bb$mat.z[bb$species=="QUEROB"])),
           
-          as.numeric(mean(bb$sm.elev[bb$species=="AESHIP"])), 
-          as.numeric(mean(bb$sm.elev[bb$species=="ALNGLU"])), as.numeric(mean(bb$sm.elev[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$sm.elev[bb$species=="FRAEXC"])),
-          as.numeric(mean(bb$sm.elev[bb$species=="QUEROB"])), 
+          as.numeric(mean(bb$elev.z[bb$species=="AESHIP"])), 
+          as.numeric(mean(bb$elev.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$elev.z[bb$species=="BETPEN"])),
+          as.numeric(mean(bb$elev.z[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$elev.z[bb$species=="QUEROB"])), 
           
-          as.numeric(mean(bb$space[bb$species=="AESHIP"])),
-          as.numeric(mean(bb$space[bb$species=="ALNGLU"])), as.numeric(mean(bb$space[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$space[bb$species=="FRAEXC"])),
-          as.numeric(mean(bb$space[bb$species=="QUEROB"])),
+          as.numeric(mean(bb$space.z[bb$species=="AESHIP"])),
+          as.numeric(mean(bb$space.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$space.z[bb$species=="BETPEN"])),
+          as.numeric(mean(bb$space.z[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$space.z[bb$species=="QUEROB"])),
           
           
-          as.numeric(mean(bb$cc[bb$species=="AESHIP"])),
-          as.numeric(mean(bb$cc[bb$species=="ALNGLU"])), 
-          as.numeric(mean(bb$cc[bb$species=="BETPEN"])), 
-          as.numeric(mean(bb$cc[bb$species=="FRAEXC"])), as.numeric(mean(bb$cc[bb$species=="QUEROB"])),
+          as.numeric(mean(bb$cc.z[bb$species=="AESHIP"])),
+          as.numeric(mean(bb$cc.z[bb$species=="ALNGLU"])), 
+          as.numeric(mean(bb$cc.z[bb$species=="BETPEN"])), 
+          as.numeric(mean(bb$cc.z[bb$species=="FRAEXC"])), as.numeric(mean(bb$cc.z[bb$species=="QUEROB"])),
           
-          as.numeric(mean(bb$m.index*bb$cc)), as.numeric(mean(bb$sp.temp*bb$cc)), as.numeric(mean(bb$sm.elev*bb$cc)), 
-          as.numeric(mean(bb$space*bb$cc)))
+          as.numeric(mean(bb$nao.z*bb$cc.z)), as.numeric(mean(bb$mat.z*bb$cc.z)), as.numeric(mean(bb$elev.z*bb$cc.z)), 
+          as.numeric(mean(bb$space.z*bb$cc.z)))
 xbarnames<-colnames(R)
 names(xbar)<-xbarnames
 
