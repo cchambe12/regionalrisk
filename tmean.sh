@@ -8,7 +8,7 @@
 
 #SBATCH -t 0-40:00:00
 
-#SBATCH --mem 10000
+#SBATCH --mem 50000
 
 #SBATCH -o hostname.out
 
@@ -23,4 +23,4 @@ module load R/3.4.2-fasrc01
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/Tmean.R tmean
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/Tmax.R tmax

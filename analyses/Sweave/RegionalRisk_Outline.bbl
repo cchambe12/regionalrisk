@@ -1,4 +1,4 @@
-\begin{thebibliography}{43}
+\begin{thebibliography}{42}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Augspurger(2009)}]{Augspurger2009}
@@ -158,12 +158,6 @@ Menzel, A., Helm, R. \& Zang, C. (2015) Patterns of late spring frost leaf
   damage and recovery in a european beech (fagus sylvatica l.) stand in
   south-eastern germany based on repeated digital photographs. \emph{Frontiers
   in Plant Science} \textbf{6}, 110.
-
-\bibitem[{Montw{\'e} \emph{et~al.}(2018)Montw{\'e}, Isaac-Renton, Hamann \&
-  Spiecker}]{Montwe2018}
-Montw{\'e}, D., Isaac-Renton, M., Hamann, A. \& Spiecker, H. (2018) Cold
-  adaptation recorded in tree rings highlights risks associated with climate
-  change and assisted migration. \emph{Nature Communications} \textbf{9}.
 
 \bibitem[{{R Development Core Team}(2017)}]{R}
 {R Development Core Team} (2017) R: A language and environment for statistical

@@ -179,40 +179,40 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
 \end{enumerate}
 \end{enumerate}
 
-\section*{Results}
-\subsection*{Species variation in budburst and false spring incidence}
-\begin{enumerate}
-\item There is variation in day of budburst across the six species and across space - BB maps Fig (should I include a small model here to demonstrate this? (i.e. fs ~ cc + (cc|species)))
-\begin{enumerate}
-\item Earlier budbursting species experienced more false spring conditions - proportion of sites Fig
-\item Our data supports evidence that day of budburst is advancing earlier over time, especially after the early 1980s
-\end{enumerate}
-\end{enumerate}
+%\section*{Results}
+%\subsection*{Species variation in budburst and false spring incidence}
+%\begin{enumerate}
+%\item There is variation in day of budburst across the six species and across space - BB maps Fig (should I include a small model here to demonstrate this? (i.e. fs ~ cc + (cc|species)))
+%\begin{enumerate}
+%\item Earlier budbursting species experienced more false spring conditions - proportion of sites Fig
+%\item Our data supports evidence that day of budburst is advancing earlier over time, especially after the early 1980s
+%\end{enumerate}
+%\end{enumerate}
 
-\subsection*{The effects of climatic regional variation on false spring incidence - potentially! still waiting on final model results!}
-\begin{enumerate}
-\item The relationship between the main effects and false spring as compared before and after 1983 (Fig. Main effects)
-\begin{enumerate}
-\item As elevation increases, plants are exposed to more frequent false spring conditions and the rate of increase is greater under climate change.
-\item As mean spring temperature increases, there are fewer false springs and the rate of decrease is greater after 1983.
-\item NAO-index does not seem to be a strong predictor of false spring, ( discussion: which may mean that even though budburst is earlier, late spring freezes are less likely to occur in high NAO years.)
-\item As the space parameter increases (which captures distance from the coast and shifts in elevation), false spring incidence increased. 
-\end{enumerate}
-\end{enumerate}
+%\subsection*{The effects of climatic regional variation on false spring incidence - potentially! still waiting on final model results!}
+%\begin{enumerate}
+%\item The relationship between the main effects and false spring as compared before and after 1983 (Fig. Main effects)
+%\begin{enumerate}
+%\item As elevation increases, plants are exposed to more frequent false spring conditions and the rate of increase is greater under climate change.
+%\item As mean spring temperature increases, there are fewer false springs and the rate of decrease is greater after 1983.
+%\item NAO-index does not seem to be a strong predictor of false spring, ( discussion: which may mean that even though budburst is earlier, late spring freezes are less likely to occur in high NAO years.)
+%\item As the space parameter increases (which captures distance from the coast and shifts in elevation), false spring incidence increased. 
+%\end{enumerate}
+%\end{enumerate}
 
-\section*{Discussion \& Conclusion - jumbles of thoughts right now...}
-\begin{enumerate}
-\item Some regions are more susceptible to false spring risk than others and, with climate change, some regions that are low risk now, may become more at risk.
-\begin{enumerate}
-\item The rate false spring risk is increasing at higher elevations but decreasing in regions with warmer mean spring temperatures. 
-\item Regions that are less at risk to false spring conditions may be more at risk to drought as climate change advances. 
-\item Thus, plants must exhibit even more flexible spring phenologies in order to keep up with the rate of change and the different types of potential risks. 
-\end{enumerate}
-\item Individuals from more Northern provenances tend to be more susceptible to spring frost damage, whereas more Southern individuals are more sensitive to fall frosts \citep{Montwe2018}.
-\begin{enumerate}
-\item With regional shifts in climate, will fall frosts become more damaging than spring frosts?
-\end{enumerate}
-\end{enumerate}
+%\section*{Discussion \& Conclusion - jumbles of thoughts right now...}
+%\begin{enumerate}
+%\item Some regions are more susceptible to false spring risk than others and, with climate change, some regions that are low risk now, may become more at risk.
+%\begin{enumerate}
+%\item The rate false spring risk is increasing at higher elevations but decreasing in regions with warmer mean spring temperatures. 
+%\item Regions that are less at risk to false spring conditions may be more at risk to drought as climate change advances. 
+%\item Thus, plants must exhibit even more flexible spring phenologies in order to keep up with the rate of change and the different types of potential risks. 
+%\end{enumerate}
+%\item Individuals from more Northern provenances tend to be more susceptible to spring frost damage, whereas more Southern individuals are more sensitive to fall frosts \citep{Montwe2018}.
+%\begin{enumerate}
+%\item With regional shifts in climate, will fall frosts become more damaging than spring frosts?
+%\end{enumerate}
+%\end{enumerate}
 
 \bibliography{..//bib/regionalrisk.bib}
 
@@ -234,15 +234,15 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/Hadley_brms.pdf}
-  -\caption{Model output graphed with intercept on the x-axis and the slope of the main effect on the y-axis. Data was first pooled by species and before and after 1983. (A) Shows the effects of mean spring temperature. As temperature increases, the number of false springs decreases and, before 1983, that rate of decline was more rapid. (B) As elevation increases, there are more false springs, but after 1983, the rate of increase is less. (C) There is no strong relationship between NAO-index and number of false springs, with very little change in slope with number of false springs.}\label{fig:hadbrms}
+  -\includegraphics[width=12cm]{..//figures/InteractionPlots/InteractionPlots.pdf}
+  -\caption{}\label{fig:hadbrms}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/Main_sampleofdata.pdf}
-  -\caption{Series of plots showing the main effects in the model for a subset of the data. (A) As elevation increases, the number of false springs tends to increase and the rate of increase is greater after 1983. (B) As mean spring temperature increases, the number of false springs decreases and the rate of decrease is great after 1983. (C) There is no strong relationship between NAO-index and number of false springs. (D) As the space parameter increases (i.e. distance from the coast or the elevation changes) the number of false springs increases and the rate of increase is slightly greater after 1983.}\label{fig:maineffects}
+  -\includegraphics[width=16cm]{..//figures/InteractionPlots/SpeciesIntrxnPlots.pdf}
+  -\caption{}\label{fig:maineffects}
   -\end{center}
   -\end{figure}}
   
@@ -276,7 +276,7 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/space_param.png}
+  -\includegraphics[width=12cm]{..//figures/space_extremes.pdf}
   -\caption{Space parameter values are mapped for each location to elucidate patterns in the parameter values.}\label{fig:space}
   -\end{center}
   -\end{figure}}

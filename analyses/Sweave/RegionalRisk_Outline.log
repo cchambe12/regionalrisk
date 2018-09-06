@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  2 AUG 2018 12:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  6 SEP 2018 17:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -879,80 +879,83 @@ Overfull \hbox (4.15327pt too wide) in paragraph at lines 156--157
 ge will in-crease (Hän-ni-nen, 1991; Augspurger,
  []
 
-[2] [3] [4] [5] (./RegionalRisk_Outline.bbl [6] [7] [8] [9])
-<..//figures/BB_gis.pdf, id=44, 845.1575pt x 597.23125pt>
+[2] [3] [4] (./RegionalRisk_Outline.bbl [5] [6] [7] [8])
+<..//figures/BB_gis.pdf, id=40, 845.1575pt x 597.23125pt>
 File: ..//figures/BB_gis.pdf Graphic file (type pdf)
 
 <use ..//figures/BB_gis.pdf>
 Package pdftex.def Info: ..//figures/BB_gis.pdf used on input line 269.
 (pdftex.def)             Requested size: 398.33858pt x 281.49155pt.
- [10]
-<..//figures/PropSitesbyYrwBB.png, id=48, 673.5564pt x 343.7643pt>
+
+<..//figures/PropSitesbyYrwBB.png, id=41, 673.5564pt x 343.7643pt>
 File: ..//figures/PropSitesbyYrwBB.png Graphic file (type png)
 
 <use ..//figures/PropSitesbyYrwBB.png>
 Package pdftex.def Info: ..//figures/PropSitesbyYrwBB.png used on input line 27
 6.
 (pdftex.def)             Requested size: 455.24408pt x 232.35085pt.
- [11 <..//figures/BB_gis.pdf>]
-<..//figures/Hadley_brms.pdf, id=60, 623.90892pt x 544.34557pt>
-File: ..//figures/Hadley_brms.pdf Graphic file (type pdf)
+ [9 <..//figures/BB_gis.pdf>]
+<..//figures/InteractionPlots/InteractionPlots.pdf, id=53, 454.6324pt x 370.582
+7pt>
+File: ..//figures/InteractionPlots/InteractionPlots.pdf Graphic file (type pdf)
 
-<use ..//figures/Hadley_brms.pdf>
-Package pdftex.def Info: ..//figures/Hadley_brms.pdf used on input line 283.
-(pdftex.def)             Requested size: 341.43306pt x 297.88759pt.
- [12 <..//figures/PropSitesbyYrwBB.png>]
-<..//figures/Main_sampleofdata.pdf, id=65, 516.39622pt x 380.1339pt>
-File: ..//figures/Main_sampleofdata.pdf Graphic file (type pdf)
-
-<use ..//figures/Main_sampleofdata.pdf>
-Package pdftex.def Info: ..//figures/Main_sampleofdata.pdf used on input line 2
-90.
-(pdftex.def)             Requested size: 455.24408pt x 335.1279pt.
- [13 <..//figures/Hadley_brms.pdf>]
-<..//figures/FS_Diff.pdf, id=394, 845.1575pt x 597.23125pt>
+ <use ..//figures/InteractionPlots/InteractionPlots.pdf>
+Package pdftex.def Info: ..//figures/InteractionPlots/InteractionPlots.pdf used
+ on input line 283.
+(pdftex.def)             Requested size: 341.43306pt x 278.30954pt.
+ [10 <..//figures/PropSitesbyYrwBB.png>]
+<..//figures/InteractionPlots/SpeciesIntrxnPlots.pdf, id=58, 714.42236pt x 399.
+87274pt>
+File: ..//figures/InteractionPlots/SpeciesIntrxnPlots.pdf Graphic file (type pd
+f)
+ <use ..//figures/InteractionPlots/SpeciesIntrxnPlots.pdf>
+Package pdftex.def Info: ..//figures/InteractionPlots/SpeciesIntrxnPlots.pdf us
+ed on input line 290.
+(pdftex.def)             Requested size: 455.24408pt x 254.80719pt.
+ [11 <..//figures/InteractionPlots/InteractionPlots.pdf>]
+<..//figures/FS_Diff.pdf, id=307, 845.1575pt x 597.23125pt>
 File: ..//figures/FS_Diff.pdf Graphic file (type pdf)
 
 <use ..//figures/FS_Diff.pdf>
 Package pdftex.def Info: ..//figures/FS_Diff.pdf used on input line 298.
 (pdftex.def)             Requested size: 341.43306pt x 241.27586pt.
- [14 <..//figures/Main_sampleofdata.pdf>]
-<..//figures/space_param.png, id=618, 844.8363pt x 597.432pt>
-File: ..//figures/space_param.png Graphic file (type png)
+ [12 <..//figures/InteractionPlots/SpeciesIntrxnPlots.pdf>] <..//figures/space_
+extremes.pdf, id=596, 845.1575pt x 597.23125pt>
+File: ..//figures/space_extremes.pdf Graphic file (type pdf)
 
-<use ..//figures/space_param.png>
-Package pdftex.def Info: ..//figures/space_param.png used on input line 325.
-(pdftex.def)             Requested size: 341.43306pt x 241.44814pt.
- [15 <..//figures/FS_Diff.pdf>] [16 <..//figures/space_param.png>] (./RegionalR
-isk_Outline.aux) ) 
+<use ..//figures/space_extremes.pdf>
+Package pdftex.def Info: ..//figures/space_extremes.pdf used on input line 325.
+
+(pdftex.def)             Requested size: 341.43306pt x 241.27586pt.
+ [13 <..//figures/FS_Diff.pdf>] [14 <..//figures/space_extremes.pdf>] (./Region
+alRisk_Outline.aux) ) 
 Here is how much of TeX's memory you used:
- 16139 strings out of 493014
- 315040 string characters out of 6133351
- 339151 words of memory out of 5000000
- 19460 multiletter control sequences out of 15000+600000
+ 16137 strings out of 493014
+ 315196 string characters out of 6133351
+ 338069 words of memory out of 5000000
+ 19457 multiletter control sequences out of 15000+600000
  37069 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,10n,42p,10410b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
-fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on RegionalRisk_Outline.pdf (16 pages, 10970448 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on RegionalRisk_Outline.pdf (14 pages, 5745478 bytes).
 PDF statistics:
- 684 PDF objects out of 1000 (max. 8388607)
- 502 compressed objects within 6 object streams
+ 663 PDF objects out of 1000 (max. 8388607)
+ 489 compressed objects within 5 object streams
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
