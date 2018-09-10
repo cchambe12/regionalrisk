@@ -25,8 +25,6 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 mat<-read.csv("output/BBdata.csv", header=TRUE)
 
-#### 5 September 2018 - not lining up for some reason... need to fix ###
-
 mat$cc<-ifelse(mat$year<1984, 0, 1)
 mat$species<-ifelse(mat$species=="BETPEN", "aaBETPEN", mat$species)
 mat$species<-ifelse(mat$species=="FRAEXC", "zFRAEXC", mat$species)
