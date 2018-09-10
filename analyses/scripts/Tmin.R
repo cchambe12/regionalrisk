@@ -11,7 +11,7 @@ library(dplyr)
 library(raster)
 library(reshape2)
 
-d<-read.csv("~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.2.csv", header=TRUE)
+d<-read.csv("/n/wolkovich_lab/Lab/Cat/regrisk.cleaned.2.csv", header=TRUE)
 
 d<-d[!duplicated(d$lat.long),]
 lats<-d$lat

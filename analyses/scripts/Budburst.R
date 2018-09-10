@@ -24,7 +24,7 @@ qr<-read.csv("output/bbch_region_quercus.csv", header=TRUE)
 
 aes<-aes%>%
   filter(BBCH==11)%>%
-  filter(YEAR>=1950)%>%
+  filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
   rename(lo=DAY)%>%
@@ -35,7 +35,7 @@ aes$species<-"AESHIP"
 
 ag<-ag%>%
   filter(BBCH==11)%>%
-  filter(YEAR>=1950)%>%
+  filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
   rename(lo=DAY)%>%
@@ -48,7 +48,7 @@ d<-full_join(aes, ag)
 
 bp<-bp%>%
   filter(BBCH==11)%>%
-  filter(YEAR>=1950)%>%
+  filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
   rename(lo=DAY)%>%
@@ -61,7 +61,7 @@ d<-full_join(d, bp)
 
 fsyl<-fsyl%>%
   filter(BBCH==11)%>%
-  filter(YEAR>=1950)%>%
+  filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
   rename(lo=DAY)%>%
@@ -74,7 +74,7 @@ d<-full_join(d, fsyl)
 
 fex<-fex%>%
   filter(BBCH==11)%>%
-  filter(YEAR>=1950)%>%
+  filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
   rename(lo=DAY)%>%
@@ -87,7 +87,7 @@ d<-full_join(d, fex)
 
 qr<-qr%>%
   filter(BBCH==11)%>%
-  filter(YEAR>=1950)%>%
+  filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
   rename(lo=DAY)%>%
@@ -98,7 +98,7 @@ qr$species<-"QUEROB"
 
 d<-full_join(d, qr)
 
-d<-dplyr::select(d, lat, long, year, species, bb)
+d<-dplyr::select(d, lat, long, year, PEP_ID, species, bb)
 d<-d[!duplicated(d),]
 
 write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/BBdata.csv", row.names=FALSE)

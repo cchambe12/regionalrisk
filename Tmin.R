@@ -19,7 +19,7 @@ lons<-d$long
 coords<-data.frame(x=lons, y=lats)
 coords<-coords[!duplicated(coords),]
 
-r<-brick("/n/wolkovich_lab/Lab/Cat/tx_0.25deg_reg_v17.0.nc", varname="tx", sep="")
+r<-brick("/n/wolkovich_lab/Lab/Cat/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 points <- SpatialPoints(coords, proj4string = r@crs)
 
 values <- extract(r,points)
@@ -28,11 +28,13 @@ dclim <- cbind.data.frame(coordinates(points),values)
 
 dx<-melt(dclim, id.vars=c("x","y"))
 
+write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/tmin.csv", row.names = FALSE)
+
 dx<-dx%>%
   rename(long=x)%>%
   rename(lat=y)%>%
   rename(date=variable)%>%
-  rename(Tavg=value)
+  rename(Tmin=value)
 
 dx$date<-substr(dx$date, 2,11)
 dx$Date<-gsub("[.]","-", dx$date)
@@ -42,6 +44,6 @@ dx$year<-substr(dx$Date, 0,4)
 dx$month<-substr(dx$Date, 6, 7)
 dx$month<-as.numeric(dx$month)
 
-write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/tmax.csv", row.names = FALSE)
+write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/tminfinal.csv", row.names = FALSE)
 
 

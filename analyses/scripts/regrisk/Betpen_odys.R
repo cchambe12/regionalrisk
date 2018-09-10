@@ -1,4 +1,4 @@
-# Let's try again... Aesculus hippocastanum
+# Let's try again... Betula pendula
 ## The purpose of this script is to find the points of PEP data that look at BBCH stage 11 for leafout
 # then we will subtract 12 days (Donnelly2017) for budburst date to find a general idea for number of false springs across a range
 ## A GWR will likely be necessary since the distribution of points is smaller than desired
@@ -12,15 +12,11 @@ graphics.off()
 # Load libraries
 library(dplyr)
 library(tidyr)
-library(ggplot2)
-library(lubridate)
-library(ncdf4)
 library(raster)
 library(reshape2)
 library(data.table)
 
-setwd("~/Documents/git/regionalrisk/analyses")
-d<-read.csv("output/bbch_region_aesculus.csv", header=TRUE)
+d<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_betula.csv", header=TRUE)
 
 ### Let's just start with the PEP data and do some cleaning
 df<-d%>%
@@ -41,8 +37,8 @@ days.btw<-array()
 for(i in length(df$pep.year)){
   days.btw[i] <- Map(seq, df$bb[i], df$lo[i], by = 1)
   dxx <- data.frame(PEP_ID=df$PEP_ID, year=df$year, lat=df$lat, long=df$long,
-    pep.year = rep.int(df$pep.year, vapply(days.btw[i], length, 1L)), 
-                  doy = do.call(c, days.btw[i]))
+                    pep.year = rep.int(df$pep.year, vapply(days.btw[i], length, 1L)), 
+                    doy = do.call(c, days.btw[i]))
 }
 
 dxx<-dxx[!duplicated(dxx),]
@@ -51,8 +47,7 @@ x<-paste(dxx$year, dxx$doy)
 dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 
-## Climate Data time...
-r<-brick("~/Desktop/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
+r<-brick("/n/wolkovich_lab/Lab/Cat/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 
 bb<-dxx
 bb$lat.long<-paste(bb$lat, bb$long, sep=",")
@@ -61,6 +56,8 @@ lats <- bb$lat
 lons <- bb$long
 
 coords <- data.frame(x=lons,y=lats)
+
+coords<- na.omit(coords)
 
 points <- SpatialPoints(coords, proj4string = r@crs)
 
@@ -77,13 +74,12 @@ dx<-dx%>%
   rename(Tmin=value)
 
 dx$date<-substr(dx$date, 2,11)
-dx$Date<-gsub("[.]","-", dx$date)
-#write.csv(dx, file="~/Desktop/tmin_aeship.csv", row.names=FALSE)
+dx$Date<- gsub("[.]", "-", dx$date)
 
 dxx<-dplyr::select(dxx, -date)
 dx<-dplyr::select(dx, -date)
 
-aeship<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
-any.nas<-aeship[is.na(aeship$Tmin),]
+betpen<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
+any.nas<-betpen[is.na(betpen$Tmin),]
 
-write.csv(good, file="~/Documents/git/regionalrisk/analyses/output/aeship_data.csv", row.names=FALSE)
+write.csv(betpen, file="/n/wolkovich_lab/Lab/Cat/betpen_data.csv", row.names=FALSE)
