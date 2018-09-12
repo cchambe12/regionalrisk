@@ -23,4 +23,4 @@ module load R/3.4.2-fasrc01
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/Tmax.R tmax
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/MAT_Odys.R MAM

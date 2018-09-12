@@ -14,7 +14,6 @@ library(rstanarm)
 library(dplyr)
 library(tidyr)
 library(brms)
-library(ggstance)
 library(jtools)
 #library(ggmap)
 #library(rworldmap)
@@ -90,7 +89,7 @@ xx<-dplyr::select(xx, lat, long, species, fs.count, year)
 xx<-xx[!duplicated(xx),]
 bb<-full_join(bb, xx)
 bb<-bb[!duplicated(bb),]
-bb$fs.count<-ave(bb$fs.count, bb$year, bb$lat.long, bb$species, FUN=last)
+#bb$fs.count<-ave(bb$fs.count, bb$year, bb$lat.long, bb$species, FUN=last)
 bb$elev<-ave(bb$elev, bb$lat.long)
 bb<-bb[!duplicated(bb),]
 bb<-na.omit(bb)
@@ -110,10 +109,10 @@ resp.var<-c("fs.count")
 bb.sub<-bb[,c(tar.var, resp.var)]
 bb.sub.nodup<-bb[!duplicated(bb.sub),]
 dd<-bb.sub.nodup
-dd$space<-round(dd$space, digits=3)
-dd<-dd[!duplicated(dd),]
+#dd$space<-round(dd$space, digits=3)
+#dd<-dd[!duplicated(dd),]
 
-write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.cleaned.2.csv", row.names = FALSE)
+write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.fixed.csv", row.names = FALSE)
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)
 #mat<-mat[!duplicated(mat),]

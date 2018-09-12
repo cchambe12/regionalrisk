@@ -14,13 +14,14 @@ library(ggplot2)
 library(lubridate)
 
 ### Load data
-setwd("~/Documents/git/regionalrisk/analyses/output")
+setwd("~/Documents/git/regionalrisk/")
 bp<-read.csv("betpen_data.csv", header=TRUE)
-ah<-read.csv("aeship_data.csv", header=TRUE)
-ag<-read.csv("alnglu_data.csv", header=TRUE)
 fs<-read.csv("fagsyl_data.csv", header=TRUE)
 fe<-read.csv("fraexc_data.csv", header=TRUE)
 qr<-read.csv("querob_data.csv", header=TRUE)
+setwd("~/Documents/git/regionalrisk/analyses/output")
+ah<-read.csv("aeship_data.csv", header=TRUE)
+ag<-read.csv("alnglu_data.csv", header=TRUE)
 
 ## Start looking at the data a bit...
 bp$fs<- ifelse(bp$Tmin<=-2.2, 1, 0)
@@ -30,7 +31,7 @@ betpen<-bp%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 betpen<-betpen[!duplicated(betpen),]
 betpen<-na.omit(betpen)
 betpen$species<-"BETPEN"
-betpen$fs<-ifelse(betpen$fs.count>=1, 1, 0)
+betpen$fs<-ifelse(betpen$fs.count>=1, 1, 0) # 155251
 #betpen<-dplyr::select(betpen, -fs.count)
 
 ah$fs<- ifelse(ah$Tmin<=-2.2, 1, 0)
@@ -41,7 +42,7 @@ aeship<-aeship[!duplicated(aeship),]
 aeship<-na.omit(aeship)
 aeship$species<-"AESHIP"
 aeship$fs<-ifelse(aeship$fs.count>=1, 1, 0)
-#aeship<-dplyr::select(aeship, -fs.count)
+#aeship<-dplyr::select(aeship, -fs.count) #156836
 
 d<-full_join(betpen, aeship)
 
@@ -53,7 +54,7 @@ alnglu<-alnglu[!duplicated(alnglu),]
 alnglu<-na.omit(alnglu)
 alnglu$species<-"ALNGLU"
 alnglu$fs<-ifelse(alnglu$fs.count>=1, 1, 0)
-#alnglu<-dplyr::select(alnglu, -fs.count)
+#alnglu<-dplyr::select(alnglu, -fs.count) #91182
 
 d<-full_join(d, alnglu)
 
@@ -65,7 +66,7 @@ fraexc<-fraexc[!duplicated(fraexc),]
 fraexc<-na.omit(fraexc)
 fraexc$species<-"FRAEXC"
 fraexc$fs<-ifelse(fraexc$fs.count>=1, 1, 0)
-#fraexc<-dplyr::select(fraexc, -fs.count)
+#fraexc<-dplyr::select(fraexc, -fs.count) #92665
 
 d<-full_join(d, fraexc)
 
@@ -77,7 +78,7 @@ fagsyl<-fagsyl[!duplicated(fagsyl),]
 fagsyl<-na.omit(fagsyl)
 fagsyl$species<-"FAGSYL"
 fagsyl$fs<-ifelse(fagsyl$fs.count>=1, 1, 0)
-#fagsyl<-dplyr::select(fagsyl, -fs.count)
+#fagsyl<-dplyr::select(fagsyl, -fs.count) #129133
 
 d<-full_join(d, fagsyl)
 
@@ -89,10 +90,9 @@ querob<-querob[!duplicated(querob),]
 querob<-na.omit(querob)
 querob$species<-"QUEROB"
 querob$fs<-ifelse(querob$fs.count>=1, 1, 0)
-#querob<-dplyr::select(querob, -fs.count)
+#querob<-dplyr::select(querob, -fs.count) # 131635
 
 d<-full_join(d, querob)
-d$fs.count<-ifelse(d$fs.count>13, 13, d$fs.count)
 
 write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/fs_yearsitespp.csv", row.names = FALSE)
 
