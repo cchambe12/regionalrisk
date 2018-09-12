@@ -14,12 +14,11 @@ library(ggplot2)
 library(lubridate)
 
 ### Load data
-setwd("~/Documents/git/regionalrisk/")
+setwd("~/Documents/git/regionalrisk/analyses/output")
 bp<-read.csv("betpen_data.csv", header=TRUE)
 fs<-read.csv("fagsyl_data.csv", header=TRUE)
 fe<-read.csv("fraexc_data.csv", header=TRUE)
 qr<-read.csv("querob_data.csv", header=TRUE)
-setwd("~/Documents/git/regionalrisk/analyses/output")
 ah<-read.csv("aeship_data.csv", header=TRUE)
 ag<-read.csv("alnglu_data.csv", header=TRUE)
 
