@@ -29,14 +29,14 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 ########################
 #### get the data
-dx<-read.csv("output/fs_matspspace_old.csv", header=TRUE)
-dx<-read.csv("output/fs_matspspace_times2.csv", header=TRUE)
-dx<-subset(dx, year>1950)
+#dx<-read.csv("output/fs_matspspace_old.csv", header=TRUE)
+#dx<-read.csv("output/fs_matspspace_times2.csv", header=TRUE)
+#dx<-subset(dx, year>1950)
 #xx<-read.csv("output/fs_matspspace.csv", header=TRUE)
 #bb.stan<-read.csv("output/bb.brm.nointer.csv", header=TRUE)
 
-dx<-dx%>%dplyr::select(lat, long, space)
-dx<-dx[!duplicated(dx),]
+#dx<-dx%>%dplyr::select(lat, long, space)
+#dx<-dx[!duplicated(dx),]
 #dxx<-dx[which(dx$space<=-100 | dx$space>=300),]
 
 #mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
@@ -63,7 +63,7 @@ dx<-dx[!duplicated(dx),]
 
 xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 xx<-subset(xx, year>1950)
-df<-read.csv("output/mat_fulldata.csv", header=TRUE)
+df<-read.csv("output/mat_MAM.csv", header=TRUE)
 df<-subset(df, year>1950)
 mat<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
 mat<-subset(mat, year>1950)
@@ -71,25 +71,25 @@ nao<-read.csv("output/nao_year_sp.csv", header=TRUE)
 nao<-subset(nao, year>1950)
 
 ### Clean up dataframes a bit
-dx<-full_join(df, dx)
-dx<-dx[!duplicated(dx),]
+#dx<-full_join(df, dx)
+df<-df[!duplicated(df),]
 
 mat<-dplyr::select(mat, species, LAT, LON, ALT)
 mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 mat$lat.long<-paste(mat$lat, mat$long)
 mat<-mat[!duplicated(mat),]
-bb<-full_join(mat, dx)
+bb<-full_join(mat, df)
 
 
 #### Get elevation information
-bb<-bb%>%rename(sp.temp=pre.bb)
+#bb<-bb%>%rename(sp.temp=pre.bb)
 bb$cc<-ifelse(bb$year<=1983&bb$year>1950, 0, 1)
 
 xx<-dplyr::select(xx, lat, long, species, fs.count, year)
 xx<-xx[!duplicated(xx),]
 bb<-full_join(bb, xx)
 bb<-bb[!duplicated(bb),]
-#bb$fs.count<-ave(bb$fs.count, bb$year, bb$lat.long, bb$species, FUN=last)
+
 bb$elev<-ave(bb$elev, bb$lat.long)
 bb<-bb[!duplicated(bb),]
 bb<-na.omit(bb)
@@ -97,7 +97,13 @@ bb<-na.omit(bb)
 nao<-dplyr::select(nao, species, year, m.index)
 nao<-nao[!duplicated(nao),]
 
+
 bb<-full_join(bb, nao)
+
+dist<-read.csv("output/distances.csv", header=TRUE)
+dist<-dist%>%rename(long=lon)
+
+bb<-full_join(bb, dist)
 
 
 #### Space parameter? ####
@@ -136,7 +142,7 @@ write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.fixed.c
 dd$sm.elev<-dd$elev/100
 #bb$nao<-bb$m.index*10
 
-columnstokeep <- c("species", "m.index", "sp.temp", "cc", "space", "sm.elev", "fs.count")
+columnstokeep <- c("species", "m.index", "mst", "cc", "lat", "elev", "fs.count")
 #columnstokeep.map <- c("space","lat", "long")
 #bb.map<-subset(bb, select=columnstokeep.map)
 bb.stan <- subset(dd, select=columnstokeep)
@@ -150,7 +156,7 @@ bb.stan<-na.omit(bb.stan)
 #bb.map<-na.omit(bb.map)
 
 #bb.stan<-bb
-write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb.brm.nointer.csv", row.names = FALSE)
+write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb_latprep.csv", row.names = FALSE)
 bb.stan<-read.csv("output/bb.brm.nointer.csv", header=TRUE)
 
 #bb<-bb.stan[sample(nrow(bb.stan), 500), ]

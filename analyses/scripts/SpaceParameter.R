@@ -16,7 +16,7 @@ bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_yearsitespp.csv", header=TRUE)
 bb$lat.long<-paste(bb$lat, bb$long)
 bb<-subset(bb, select=c("long", "lat", "year", "fs.count", "lat.long"))
 bb<-bb[!duplicated(bb),]
-bb$fs.num<-ave(bb$fs.count, bb$lat.long, FUN=sum)
+bb$fs.num<-ave(bb$fs.count, bb$lat.long)
 
 bprep<-subset(bb, select=c("fs.num", "lat.long"))
 bprep<-bprep[!duplicated(bprep),]
@@ -165,7 +165,6 @@ nb2listw <- function(neighbours, glist=NULL, style="W", zero.policy=FALSE)
 }
 
 listw<-nb2listw(nb, style ="B")
-
 
 y<-as.vector(bprep$y)
 
