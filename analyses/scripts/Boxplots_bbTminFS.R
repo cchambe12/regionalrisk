@@ -154,17 +154,31 @@ ggarrange(pret.plot, postt.plot, ncol=2)
 ### And finally... False springs!
 f<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 
-f$cc<-ifelse(f$year<1984, 0, 1)
+f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs.count),]
+
+f$decades<-NA
+f$decades<-ifelse(f$year>=1950 & f$year<1960, 1, f$decades)
+f$decades<-ifelse(f$year>=1960 & f$year<1970, 2, f$decades)
+f$decades<-ifelse(f$year>=1970 & f$year<1980, 3, f$decades)
+f$decades<-ifelse(f$year>=1980 & f$year<1990, 4, f$decades)
+f$decades<-ifelse(f$year>=1990 & f$year<2000, 5, f$decades)
+f$decades<-ifelse(f$year>=2000 & f$year<2010, 6, f$decades)
+f$decades<-ifelse(f$year>=2010 & f$year<2020, 7, f$decades)
+
+f$lat.long<-paste(f$lat, f$long)
+
+f$fs.dec<-ave(f$fs.count, f$decade, f$lat.long, FUN=sum)
+
 pref<-subset(f, f$cc==0)
 postf<-subset(f, f$cc==1)
 
 
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-pref.plot<- ggplot(pref, aes(x=species, y=fs.count)) + geom_boxplot(aes(col=as.factor(species))) +
+pref.plot<- ggplot(pref, aes(x=species, y=fs.dec)) + geom_boxplot(aes(col=as.factor(species))) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                                "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -184,11 +198,11 @@ pref.plot<- ggplot(pref, aes(x=species, y=fs.count)) + geom_boxplot(aes(col=as.f
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Number of False Springs") + coord_cartesian(ylim=c(0,13)) + 
-  geom_hline(yintercept=0.04, linetype="dotted", col="black") +
-  annotate("text", x = 5.75, y = 12.5, label = "Before 1984", family="Helvetica", size=3, fontface="bold")
+  ylab("Number of False Springs \nper Decade") + coord_cartesian(ylim=c(0,165)) + 
+  geom_hline(yintercept=1.327, linetype="dotted", col="black") +
+  annotate("text", x = 5.75, y = 160, label = "Before 1984", family="Helvetica", size=3, fontface="bold")
 
-postf.plot<- ggplot(postf, aes(x=species, y=fs.count)) + geom_boxplot(aes(col=as.factor(species))) +
+postf.plot<- ggplot(postf, aes(x=species, y=fs.dec)) + geom_boxplot(aes(col=as.factor(species))) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                                "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -209,9 +223,9 @@ postf.plot<- ggplot(postf, aes(x=species, y=fs.count)) + geom_boxplot(aes(col=as
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  coord_cartesian(ylim=c(0,13)) + 
-  geom_hline(yintercept=0.01, linetype="dotted", col="black") +
-  annotate("text", x = 5.75, y = 12.5, label = "After 1984", family="Helvetica", size=3, fontface="bold")
+  coord_cartesian(ylim=c(0,165)) + 
+  geom_hline(yintercept=0.327, linetype="dotted", col="black") +
+  annotate("text", x = 5.75, y = 160, label = "After 1984", family="Helvetica", size=3, fontface="bold")
 
 quartz()
 ggarrange(pref.plot, postf.plot, ncol=2)
