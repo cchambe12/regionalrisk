@@ -16,10 +16,8 @@ library(rstanarm)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/")
-xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
-xx<-subset(xx, year>1950)
-bb<-read.csv("output/mat_fulldata.csv", header=TRUE)
-bb<-inner_join(bb, xx, by=c("lat", "long", "year"))
+bb<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+bb$lat.long<-paste(bb$lat, bb$long)
 bb<-subset(bb, select=c("long", "lat", "year", "fs.count", "lat.long"))
 bb<-bb[!duplicated(bb),]
 bb$fs.num<-ave(bb$fs.count, bb$lat.long)
@@ -56,7 +54,7 @@ space<-residuals(rex.mod)
 
 b_space<-cbind(bprep, space)
 prep_space<-full_join(bb, b_space, by="lat.long")
-write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_matspspace_times2.csv", row.names=FALSE)
+write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/space_updated.csv", row.names=FALSE)
 
 
 
