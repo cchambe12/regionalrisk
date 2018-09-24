@@ -100,8 +100,8 @@ nao<-nao[!duplicated(nao),]
 
 bb<-full_join(bb, nao)
 
-dist<-read.csv("output/distances.csv", header=TRUE)
-dist<-dist%>%rename(long=lon)
+dist<-read.csv("output/dist_utm.csv", header=TRUE)
+dist<-dist%>%rename(long=LONG)%>%rename(lat=LAT)
 
 bb<-full_join(bb, dist)
 
@@ -142,7 +142,7 @@ write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.fixed.c
 dd$sm.elev<-dd$elev/100
 #bb$nao<-bb$m.index*10
 
-columnstokeep <- c("species", "m.index", "mst", "cc", "lat", "elev", "fs.count")
+columnstokeep <- c("species", "m.index", "mst", "cc", "lat", "elev", "fs.count", "distkm")
 #columnstokeep.map <- c("space","lat", "long")
 #bb.map<-subset(bb, select=columnstokeep.map)
 bb.stan <- subset(dd, select=columnstokeep)

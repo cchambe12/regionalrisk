@@ -35,21 +35,21 @@ bb$mat.z <- (bb$mst-mean(bb$mst,na.rm=TRUE))/(2*sd(bb$mst,na.rm=TRUE))
 bb$cc.z <- (bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE))
 bb$elev.z <- (bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE))
 bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
-bb$dist.z <-(bb$distance-mean(bb$distance,na.rm=TRUE))/(2*sd(bb$distance,na.rm=TRUE))
+bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 
 bb$species<-ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species)
 
-fit<-lm(fs.count~ nao.z + mat.z + elev.z  + lat.z + dist.z +
+fit<-lm(fs.count~ nao.z + mat.z + elev.z + dist.z +
           cc.z + species + nao.z:species + 
-          mat.z:species + elev.z:species + lat.z:species + dist.z:species + cc.z:species + 
-          nao.z:cc + mat.z:cc + elev.z:cc + lat.z:cc.z + dist.z:cc.z, data=bb)             # not necessary in this case
+          mat.z:species + elev.z:species + dist.z:species + cc.z:species + 
+          nao.z:cc + mat.z:cc + elev.z:cc + dist.z:cc.z, data=bb)             # not necessary in this case
 
 b <- coef(fit)[-1]
 R <- qr.R(fit$qr)[-1,-1]
 SSR <- crossprod(fit$residuals)[1]
 not_NA <- !is.na(fitted(fit))
 N <- sum(not_NA)
-xbar <- c(as.numeric(mean(bb$nao.z)), as.numeric(mean(bb$mat.z)),  as.numeric(mean(bb$elev.z)),  as.numeric(mean(bb$lat.z)), as.numeric(mean(bb$cc.z)),  
+xbar <- c(as.numeric(mean(bb$nao.z)), as.numeric(mean(bb$mat.z)),  as.numeric(mean(bb$elev.z)), as.numeric(mean(bb$dist.z)), as.numeric(mean(bb$cc.z)),  
           
           as.numeric(as.factor("AESHIP")), as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
           as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")), 
@@ -67,17 +67,22 @@ xbar <- c(as.numeric(mean(bb$nao.z)), as.numeric(mean(bb$mat.z)),  as.numeric(me
           as.numeric(mean(bb$elev.z[bb$species=="FRAEXC"])),
           as.numeric(mean(bb$elev.z[bb$species=="QUEROB"])), 
           
-          as.numeric(mean(bb$lat.z[bb$species=="AESHIP"])),
-          as.numeric(mean(bb$lat.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$lat.z[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$lat.z[bb$species=="FRAEXC"])),
-          as.numeric(mean(bb$lat.z[bb$species=="QUEROB"])),
+          #as.numeric(mean(bb$lat.z[bb$species=="AESHIP"])),
+          #as.numeric(mean(bb$lat.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$lat.z[bb$species=="BETPEN"])),
+          #as.numeric(mean(bb$lat.z[bb$species=="FRAEXC"])),
+          #as.numeric(mean(bb$lat.z[bb$species=="QUEROB"])),
+          
+          as.numeric(mean(bb$dist.z[bb$species=="AESHIP"])),
+          as.numeric(mean(bb$dist.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$dist.z[bb$species=="BETPEN"])),
+          as.numeric(mean(bb$dist.z[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$dist.z[bb$species=="QUEROB"])),
           
           as.numeric(mean(bb$cc.z[bb$species=="AESHIP"])), 
           as.numeric(mean(bb$cc.z[bb$species=="ALNGLU"])), 
           as.numeric(mean(bb$cc.z[bb$species=="BETPEN"])),
           as.numeric(mean(bb$cc.z[bb$species=="FRAEXC"])), as.numeric(mean(bb$cc.z[bb$species=="QUEROB"])),
           as.numeric(mean(bb$nao.z*bb$cc.z)), as.numeric(mean(bb$mat.z*bb$cc.z)), as.numeric(mean(bb$elev.z*bb$cc.z)), 
-          as.numeric(mean(bb$lat.z*bb$cc.z)))
+          as.numeric(mean(bb$dist.z*bb$cc.z)))
 xbarnames<-colnames(R)
 names(xbar)<-xbarnames
 
@@ -89,6 +94,27 @@ post.inter <- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
                              chains = 4, iter = 2000)
 cbind(lm = b, stan_lm = rstan::get_posterior_mean(post.inter)[1:26,]) # shrunk
 # }
+
+
+mod<-stan_glm(mst~m.index*cc, data=bb)
+
+#lm(formula = mst ~ m.index * cc, data = bb)
+#coef.est coef.se
+#(Intercept)  7.68     0.00  
+#m.index      0.59     0.01  
+#cc           0.85     0.00  
+#m.index:cc  -0.01     0.01  
+#---
+#  n = 754786, k = 4
+#residual sd = 1.47, R-Squared = 0.11
+
+
+
+
+
+
+
+
 
 
 #######    OUTPUT... missing all speciesAESHIP - and not sure how to calculate 
