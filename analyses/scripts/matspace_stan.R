@@ -61,6 +61,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #coords<-spTransform(spg, CRS("+proj=longlat"))
 #shapefile(coords, "output/bbspace.shp")
 
+dx<-read.csv("output/space_updated.csv", header=TRUE)
 xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 xx<-subset(xx, year>1950)
 df<-read.csv("output/mat_MAM.csv", header=TRUE)
@@ -71,27 +72,29 @@ nao<-read.csv("output/nao_year_sp.csv", header=TRUE)
 nao<-subset(nao, year>1950)
 
 ### Clean up dataframes a bit
-#dx<-full_join(df, dx)
+dx<-dx%>%dplyr::select(lat, long, space)
+dx<-dx[!duplicated(dx),]
+dx<-full_join(df, dx)
 df<-df[!duplicated(df),]
 
 mat<-dplyr::select(mat, species, LAT, LON, ALT)
 mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 mat$lat.long<-paste(mat$lat, mat$long)
 mat<-mat[!duplicated(mat),]
-bb<-full_join(mat, df)
+bb<-full_join(mat, dx)
 
 
 #### Get elevation information
 #bb<-bb%>%rename(sp.temp=pre.bb)
 bb$cc<-ifelse(bb$year<=1983&bb$year>1950, 0, 1)
 
-xx<-dplyr::select(xx, lat, long, species, fs.count, year)
+xx<-dplyr::select(xx, lat, long, species, fs.count, year, space)
 xx<-xx[!duplicated(xx),]
 bb<-full_join(bb, xx)
 bb<-bb[!duplicated(bb),]
 
-bb$elev<-ave(bb$elev, bb$lat.long)
-bb<-bb[!duplicated(bb),]
+#bb$elev<-ave(bb$elev, bb$lat.long)
+#bb<-bb[!duplicated(bb),]
 bb<-na.omit(bb)
 
 nao<-dplyr::select(nao, species, year, m.index)
@@ -142,7 +145,7 @@ write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.fixed.c
 dd$sm.elev<-dd$elev/100
 #bb$nao<-bb$m.index*10
 
-columnstokeep <- c("species", "m.index", "mst", "cc", "lat", "elev", "fs.count", "distkm")
+columnstokeep <- c("species", "m.index", "mst", "cc", "lat", "elev", "fs.count", "distkm", "space")
 #columnstokeep.map <- c("space","lat", "long")
 #bb.map<-subset(bb, select=columnstokeep.map)
 bb.stan <- subset(dd, select=columnstokeep)

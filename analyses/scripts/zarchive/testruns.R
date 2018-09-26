@@ -90,13 +90,14 @@ bb$space.elev<-bb$space*bb$sm.elev
 
 quartz()
 bbs<-bb[sample(nrow(bb), 60000),]
-lat<-ggplot(d, aes(x=lat, y=space)) + geom_point(aes(col=as.factor(species))) + 
+d<-bb
+dist<-ggplot(d, aes(x=distkm, y=space)) + geom_point(aes(col=as.factor(species))) + 
   facet_wrap(~species) + theme(legend.position = "none")
-long<-ggplot(d, aes(x=long, y=space)) + geom_point(aes(col=as.factor(species))) + 
+lat<-ggplot(d, aes(x=distkm, y=lat)) + geom_point(aes(col=as.factor(species))) + 
   facet_wrap(~species) + theme(legend.position = "none")
-elev<-ggplot(d, aes(x=elev, y=space)) + geom_point(aes(col=as.factor(species))) + 
+elev<-ggplot(d, aes(x=lat, y=elev)) + geom_point(aes(col=as.factor(species))) + 
   facet_wrap(~species) + theme(legend.position = "none")
-mat<-ggplot(d, aes(x=sp.temp, y=space)) + geom_point(aes(col=as.factor(species))) + 
+mat<-ggplot(d, aes(x=lat, y=mst)) + geom_point(aes(col=as.factor(species))) + 
   facet_wrap(~species) + theme(legend.position = "none")
 
 sp<-subset(d, select=c("space", "long", "lat"))
@@ -266,7 +267,7 @@ plot(nao~cc, data=allspp.cues)
 
 
 nao<- plot_model(ben, type = "pred", terms = c("m.index", "cc")) + xlab("NAO") + ylab("Number of False Springs") + ggtitle("") + guides(name="Before or After 1983")
-elev<- plot_model(ben, type = "pred", terms = c("sm.elev", "cc")) + xlab("(Small) Elevation") + ylab("Number of False Springs") + ggtitle("") + guides(name="Before or After 1983")
+elev<- plot_model(ben, type = "pred", terms = c("sm.elev", "cc")) + xlab("Elevation") + ylab("Number of False Springs") + ggtitle("") + guides(name="Before or After 1983")
 mat<- plot_model(ben, type = "pred", terms = c("sp.temp", "cc")) + xlab("Mean Spring Temperature") + ylab("Number of False Springs") + ggtitle("") + guides(name="Before or After 1983")
 space<- plot_model(ben, type = "pred", terms = c("space", "cc")) + xlab("Space Parameter") + ylab("Number of False Springs") + ggtitle("") + guides(name="Before or After 1983")
 

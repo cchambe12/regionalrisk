@@ -1,0 +1,55 @@
+Inference for Stan model: lm.
+4 chains, each with iter=2000; warmup=1000; thin=1; 
+post-warmup draws per chain=1000, total post-warmup draws=4000.
+
+                          mean se_mean   sd      2.5%       25%       50%       75%     97.5% n_eff Rhat
+(Intercept)              -0.07    0.00 0.00     -0.08     -0.08     -0.07     -0.07     -0.07  2481    1
+nao.z                     0.01    0.00 0.00      0.01      0.01      0.01      0.01      0.01  4000    1
+mat.z                    -0.10    0.00 0.00     -0.11     -0.10     -0.10     -0.10     -0.10  4000    1
+elev.z                   -0.01    0.00 0.00     -0.02     -0.01     -0.01     -0.01     -0.01  4000    1
+lat.z                    -0.03    0.00 0.00     -0.03     -0.03     -0.03     -0.03     -0.02  4000    1
+cc.z                      0.02    0.00 0.00      0.01      0.02      0.02      0.02      0.02  4000    1
+speciesAESHIP             0.06    0.00 0.00      0.05      0.06      0.06      0.06      0.06  2918    1
+speciesALNGLU             0.00    0.00 0.00     -0.01      0.00      0.00      0.00      0.00  4000    1
+speciesBETPEN             0.04    0.00 0.00      0.04      0.04      0.04      0.04      0.04  2946    1
+speciesFRAEXC            -0.01    0.00 0.00     -0.01     -0.01     -0.01     -0.01      0.00  2901    1
+speciesQUEROB             0.00    0.00 0.00      0.00      0.00      0.00      0.00      0.00  2680    1
+nao.z:speciesAESHIP       0.04    0.00 0.00      0.03      0.04      0.04      0.04      0.04  4000    1
+nao.z:speciesALNGLU       0.00    0.00 0.00     -0.01      0.00      0.00      0.00      0.00  4000    1
+nao.z:speciesBETPEN       0.04    0.00 0.00      0.03      0.04      0.04      0.04      0.04  4000    1
+nao.z:speciesFRAEXC       0.00    0.00 0.00      0.00      0.00      0.00      0.00      0.01  4000    1
+nao.z:speciesQUEROB       0.00    0.00 0.00      0.00      0.00      0.00      0.01      0.01  4000    1
+mat.z:speciesAESHIP      -0.11    0.00 0.00     -0.12     -0.11     -0.11     -0.11     -0.11  4000    1
+mat.z:speciesALNGLU       0.05    0.00 0.00      0.04      0.05      0.05      0.05      0.06  4000    1
+mat.z:speciesBETPEN      -0.11    0.00 0.00     -0.12     -0.12     -0.11     -0.11     -0.11  4000    1
+mat.z:speciesFRAEXC       0.06    0.00 0.00      0.05      0.06      0.06      0.06      0.06  4000    1
+mat.z:speciesQUEROB       0.01    0.00 0.00      0.01      0.01      0.01      0.01      0.02  4000    1
+elev.z:speciesAESHIP      0.07    0.00 0.00      0.07      0.07      0.07      0.08      0.08  4000    1
+elev.z:speciesALNGLU      0.01    0.00 0.00      0.00      0.01      0.01      0.01      0.02  4000    1
+elev.z:speciesBETPEN      0.10    0.00 0.00      0.09      0.10      0.10      0.10      0.11  4000    1
+elev.z:speciesFRAEXC      0.01    0.00 0.00      0.00      0.01      0.01      0.01      0.02  4000    1
+elev.z:speciesQUEROB      0.01    0.00 0.00      0.00      0.01      0.01      0.01      0.01  4000    1
+lat.z:speciesAESHIP      -0.03    0.00 0.00     -0.03     -0.03     -0.03     -0.02     -0.02  4000    1
+lat.z:speciesALNGLU       0.02    0.00 0.00      0.01      0.02      0.02      0.02      0.03  4000    1
+lat.z:speciesBETPEN       0.06    0.00 0.00      0.05      0.05      0.06      0.06      0.06  4000    1
+lat.z:speciesFRAEXC       0.02    0.00 0.00      0.01      0.02      0.02      0.02      0.03  4000    1
+lat.z:speciesQUEROB       0.02    0.00 0.00      0.01      0.01      0.02      0.02      0.02  4000    1
+cc.z:speciesAESHIP       -0.04    0.00 0.00     -0.05     -0.04     -0.04     -0.04     -0.04  4000    1
+cc.z:speciesALNGLU       -0.02    0.00 0.00     -0.02     -0.02     -0.02     -0.02     -0.01  4000    1
+cc.z:speciesBETPEN       -0.02    0.00 0.00     -0.03     -0.02     -0.02     -0.02     -0.02  4000    1
+cc.z:speciesFRAEXC       -0.02    0.00 0.00     -0.02     -0.02     -0.02     -0.02     -0.01  4000    1
+cc.z:speciesQUEROB       -0.01    0.00 0.00     -0.01     -0.01     -0.01      0.00      0.00  4000    1
+nao.z:cc                 -0.02    0.00 0.00     -0.02     -0.02     -0.02     -0.02     -0.02  4000    1
+mat.z:cc                  0.07    0.00 0.00      0.07      0.07      0.07      0.07      0.08  4000    1
+elev.z:cc.z              -0.01    0.00 0.00     -0.01     -0.01     -0.01     -0.01      0.00  3837    1
+lat.z:cc.z                0.05    0.00 0.00      0.05      0.05      0.05      0.05      0.05  4000    1
+sigma                     0.26    0.00 0.00      0.25      0.25      0.26      0.26      0.26  4000    1
+log-fit_ratio             0.00    0.00 0.00      0.00      0.00      0.00      0.00      0.00  4000    1
+R2                        0.10    0.00 0.00      0.10      0.10      0.10      0.10      0.10  4000    1
+mean_PPD                  0.03    0.00 0.00      0.03      0.03      0.03      0.03      0.03  3855    1
+log-posterior        -39907.07    0.35 6.39 -39921.05 -39910.83 -39906.54 -39902.77 -39895.60   335    1
+
+Samples were drawn using NUTS(diag_e) at Tue Sep 25 16:43:58 2018.
+For each parameter, n_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).

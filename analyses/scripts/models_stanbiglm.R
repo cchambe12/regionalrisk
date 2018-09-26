@@ -15,11 +15,12 @@ library(RColorBrewer)
 library(dplyr)
 library(broom)
 library(ggplot2)
+library(egg)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/output")
 
-bb<-read.csv("regrisk.fixed.csv", header=TRUE)
+#bb<-read.csv("regrisk.fixed.csv", header=TRUE)
 bb<-read.csv("bb_latprep.csv", header=TRUE)
 
 #bb$sm.elev<-bb$elev/100
@@ -36,20 +37,21 @@ bb$cc.z <- (bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE))
 bb$elev.z <- (bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE))
 bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
+bb$space.z <-(bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE))
 
 bb$species<-ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species)
 
-fit<-lm(fs.count~ nao.z + mat.z + elev.z + dist.z +
+fit<-lm(fs.count~ nao.z + mat.z + elev.z + space.z +
           cc.z + species + nao.z:species + 
-          mat.z:species + elev.z:species + dist.z:species + cc.z:species + 
-          nao.z:cc + mat.z:cc + elev.z:cc + dist.z:cc.z, data=bb)             # not necessary in this case
+          mat.z:species + elev.z:species + space.z:species + cc.z:species + 
+          nao.z:cc + mat.z:cc + elev.z:cc.z + space.z:cc.z, data=bb)             # not necessary in this case
 
 b <- coef(fit)[-1]
 R <- qr.R(fit$qr)[-1,-1]
 SSR <- crossprod(fit$residuals)[1]
 not_NA <- !is.na(fitted(fit))
 N <- sum(not_NA)
-xbar <- c(as.numeric(mean(bb$nao.z)), as.numeric(mean(bb$mat.z)),  as.numeric(mean(bb$elev.z)), as.numeric(mean(bb$dist.z)), as.numeric(mean(bb$cc.z)),  
+xbar <- c(as.numeric(mean(bb$nao.z)), as.numeric(mean(bb$mat.z)), as.numeric(mean(bb$elev.z)),  as.numeric(mean(bb$dist.z)), as.numeric(mean(bb$cc.z)),  
           
           as.numeric(as.factor("AESHIP")), as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
           as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")), 
@@ -72,17 +74,17 @@ xbar <- c(as.numeric(mean(bb$nao.z)), as.numeric(mean(bb$mat.z)),  as.numeric(me
           #as.numeric(mean(bb$lat.z[bb$species=="FRAEXC"])),
           #as.numeric(mean(bb$lat.z[bb$species=="QUEROB"])),
           
-          as.numeric(mean(bb$dist.z[bb$species=="AESHIP"])),
-          as.numeric(mean(bb$dist.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$dist.z[bb$species=="BETPEN"])),
-          as.numeric(mean(bb$dist.z[bb$species=="FRAEXC"])),
-          as.numeric(mean(bb$dist.z[bb$species=="QUEROB"])),
+          as.numeric(mean(bb$space.z[bb$species=="AESHIP"])),
+          as.numeric(mean(bb$space.z[bb$species=="ALNGLU"])), as.numeric(mean(bb$space.z[bb$species=="BETPEN"])),
+          as.numeric(mean(bb$space.z[bb$species=="FRAEXC"])),
+          as.numeric(mean(bb$space.z[bb$species=="QUEROB"])),
           
           as.numeric(mean(bb$cc.z[bb$species=="AESHIP"])), 
           as.numeric(mean(bb$cc.z[bb$species=="ALNGLU"])), 
           as.numeric(mean(bb$cc.z[bb$species=="BETPEN"])),
           as.numeric(mean(bb$cc.z[bb$species=="FRAEXC"])), as.numeric(mean(bb$cc.z[bb$species=="QUEROB"])),
-          as.numeric(mean(bb$nao.z*bb$cc.z)), as.numeric(mean(bb$mat.z*bb$cc.z)), as.numeric(mean(bb$elev.z*bb$cc.z)), 
-          as.numeric(mean(bb$dist.z*bb$cc.z)))
+          as.numeric(mean(bb$nao.z*bb$cc.z)), as.numeric(mean(bb$mat.z*bb$cc.z)), 
+          as.numeric(mean(bb$elev.z*bb$cc.z)), as.numeric(mean(bb$space.z*bb$cc.z)))
 xbarnames<-colnames(R)
 names(xbar)<-xbarnames
 
@@ -107,8 +109,6 @@ mod<-stan_glm(mst~m.index*cc, data=bb)
 #---
 #  n = 754786, k = 4
 #residual sd = 1.47, R-Squared = 0.11
-
-
 
 
 
@@ -222,14 +222,14 @@ mod<-stan_glm(mst~m.index*cc, data=bb)
 
 
 ##### Interaction Plots code
-nao<- plot_model(fit, type = "pred", terms = c("m.index", "species")) + xlab("NAO") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none")
-elev<- plot_model(fit, type = "pred", terms = c("sm.elev", "species")) + xlab("(Small) Elevation") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none")
-mat<- plot_model(fit, type = "pred", terms = c("sp.temp", "species")) + xlab("Mean Spring Temperature") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none")
-space<- plot_model(fit, type = "pred", terms = c("space", "species")) + xlab("Space Parameter") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none")
-cc<- plot_model(fit, type = "pred", terms = c("cc", "species")) + xlab("Climate Change") + ylab("Number of False Springs") + ggtitle("")
+nao<- plot_model(fit, type = "pred", terms = c("nao.z", "cc")) + xlab("NAO") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
+elev<- plot_model(fit, type = "pred", terms = c("elev.z", "cc")) + xlab("Elevation") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
+mat<- plot_model(fit, type = "pred", terms = c("mat.z", "cc")) + xlab("Mean Spring Temperature") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
+space<- plot_model(fit, type = "pred", terms = c("space.z", "cc")) + xlab("Space") + ylab("Number of False Springs") + ggtitle("") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
+cc<- plot_model(fit, type = "pred", terms = c("cc.z", "species")) + xlab("Climate Change") + ylab("Number of False Springs") + ggtitle("") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
 
 quartz()
-ggarrange(nao, mat, cc, space, elev, ncol=3, nrow=2)
+ggarrange(nao, mat, elev, space, ncol=2, nrow=2)
 
 ### A cleaner version! ####
 
