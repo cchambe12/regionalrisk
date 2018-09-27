@@ -16,12 +16,13 @@ library(dplyr)
 library(broom)
 library(ggplot2)
 library(egg)
+library(cowplot)
 
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/output")
 
-#bb<-read.csv("regrisk.fixed.csv", header=TRUE)
-bb<-read.csv("bb_latprep.csv", header=TRUE)
+#bs<-read.csv("regrisk.fixed.csv", header=TRUE)
+bb<-read.csv("bb_latprep_nov.csv", header=TRUE)
 
 #bb$sm.elev<-bb$elev/100
 #bb<-na.omit(bb)
@@ -31,7 +32,7 @@ bb<-read.csv("bb_latprep.csv", header=TRUE)
 ### Lines 27-67 are following Ben's example on the stan_biglm documentation
 ## Need a coastal parameter!
 
-bb$nao.z <- (bb$m.index-mean(bb$m.index,na.rm=TRUE))/(2*sd(bb$m.index,na.rm=TRUE))
+bb$nao.z <- (bb$nao-mean(bb$nao,na.rm=TRUE))/(2*sd(bb$nao,na.rm=TRUE))
 bb$mat.z <- (bb$mst-mean(bb$mst,na.rm=TRUE))/(2*sd(bb$mst,na.rm=TRUE))
 bb$cc.z <- (bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE))
 bb$elev.z <- (bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE))
@@ -41,10 +42,10 @@ bb$space.z <-(bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE))
 
 bb$species<-ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species)
 
-fit<-lm(fs.count~ nao.z + mat.z + elev.z + space.z +
+fit<-lm(fs.count~ nao.z + mat.z + elev.z + dist.z +
           cc.z + species + nao.z:species + 
-          mat.z:species + elev.z:species + space.z:species + cc.z:species + 
-          nao.z:cc + mat.z:cc + elev.z:cc.z + space.z:cc.z, data=bb)             # not necessary in this case
+          mat.z:species + elev.z:species + dist.z:species + cc.z:species + 
+          nao.z:cc.z + mat.z:cc.z + elev.z:cc.z + dist.z:cc.z, data=bb)             # not necessary in this case
 
 b <- coef(fit)[-1]
 R <- qr.R(fit$qr)[-1,-1]
@@ -110,126 +111,98 @@ mod<-stan_glm(mst~m.index*cc, data=bb)
 #  n = 754786, k = 4
 #residual sd = 1.47, R-Squared = 0.11
 
+mod<-lm(~m.index*cc, data=bb)
 
 
-
-
-
-
-
-#######    OUTPUT... missing all speciesAESHIP - and not sure how to calculate 
-## the rest of the species interactions. Is it like force x photo example? 
-## So for m.index:species, would I do...
-## (m.index + speciesALNGLU + m.index:speciesALNGLU) to find the species level effect of m.index?
-# But then what do I do for AESHIP?
-
-#                             mean se_mean   sd        2.5%         25%         50%         75%       97.5%
-#(Intercept)                  2.31    0.00 0.18        1.96        2.19        2.31        2.43        2.67
-#m.index                     -0.22    0.00 0.01       -0.23       -0.22       -0.22       -0.22       -0.21
-#sp.temp                     -0.03    0.00 0.00       -0.04       -0.04       -0.03       -0.03       -0.03
-#sm.elev                      0.11    0.00 0.00        0.11        0.11        0.11        0.11        0.11
-#space                        0.90    0.00 0.01        0.89        0.90        0.90        0.90        0.91
-#cc                           0.26    0.00 0.01        0.24        0.25        0.26        0.26        0.27
-#speciesALNGLU               -0.02    0.00 0.01       -0.04       -0.03       -0.02       -0.01        0.00
-#speciesBETPEN                0.10    0.00 0.01        0.08        0.10        0.10        0.11        0.12
-#speciesFAGSYL               -0.06    0.00 0.01       -0.08       -0.07       -0.06       -0.06       -0.04
-#speciesFRAEXC               -0.25    0.00 0.01       -0.28       -0.26       -0.25       -0.25       -0.23
-#speciesQUEROB               -0.12    0.00 0.01       -0.14       -0.13       -0.12       -0.11       -0.10
-#m.index:speciesALNGLU        0.02    0.00 0.01        0.01        0.02        0.02        0.03        0.04
-#m.index:speciesBETPEN       -0.02    0.00 0.01       -0.04       -0.03       -0.02       -0.02       -0.01
-#m.index:speciesFAGSYL        0.11    0.00 0.01        0.09        0.10        0.11        0.11        0.13
-#m.index:speciesFRAEXC        0.18    0.00 0.01        0.16        0.17        0.18        0.18        0.19
-#m.index:speciesQUEROB        0.15    0.00 0.01        0.14        0.15        0.15        0.16        0.17
-#speciesALNGLU:sp.temp        0.00    0.00 0.00        0.00        0.00        0.00        0.01        0.01
-#speciesBETPEN:sp.temp       -0.02    0.00 0.00       -0.02       -0.02       -0.02       -0.02       -0.02
-#speciesFAGSYL:sp.temp        0.01    0.00 0.00        0.01        0.01        0.01        0.01        0.02
-#speciesFRAEXC:sp.temp        0.04    0.00 0.00        0.04        0.04        0.04        0.04        0.04
-#speciesQUEROB:sp.temp        0.02    0.00 0.00        0.02        0.02        0.02        0.02        0.02
-#speciesALNGLU:sm.elev       -0.01    0.00 0.00       -0.02       -0.02       -0.01       -0.01       -0.01
-#speciesBETPEN:sm.elev       -0.01    0.00 0.00       -0.01       -0.01       -0.01        0.00        0.00
-#speciesFAGSYL:sm.elev       -0.03    0.00 0.00       -0.04       -0.03       -0.03       -0.03       -0.03
-#speciesFRAEXC:sm.elev       -0.09    0.00 0.00       -0.10       -0.09       -0.09       -0.09       -0.09
-#speciesQUEROB:sm.elev       -0.06    0.00 0.00       -0.07       -0.07       -0.06       -0.06       -0.06
-#speciesALNGLU:space         -0.07    0.00 0.01       -0.09       -0.07       -0.07       -0.06       -0.04
-#speciesBETPEN:space         -0.01    0.00 0.01       -0.02       -0.01       -0.01        0.00        0.01
-#speciesFAGSYL:space         -0.26    0.00 0.01       -0.28       -0.27       -0.26       -0.26       -0.24
-#speciesFRAEXC:space         -0.82    0.00 0.01       -0.84       -0.82       -0.82       -0.81       -0.80
-#speciesQUEROB:space         -0.44    0.00 0.01       -0.46       -0.45       -0.44       -0.44       -0.42
-#speciesALNGLU:cc            -0.01    0.00 0.01       -0.02       -0.01       -0.01        0.00        0.01
-#speciesBETPEN:cc            -0.02    0.00 0.01       -0.03       -0.03       -0.02       -0.02       -0.01
-#speciesFAGSYL:cc            -0.16    0.00 0.01       -0.17       -0.16       -0.16       -0.16       -0.15
-#speciesFRAEXC:cc            -0.19    0.00 0.01       -0.20       -0.19       -0.19       -0.18       -0.18
-#speciesQUEROB:cc            -0.16    0.00 0.01       -0.17       -0.17       -0.16       -0.16       -0.15
-#m.index:cc                   0.09    0.00 0.00        0.08        0.09        0.09        0.10        0.10
-#sp.temp:cc                  -0.01    0.00 0.00       -0.01       -0.01       -0.01       -0.01       -0.01
-#sm.elev:cc                  -0.02    0.00 0.00       -0.02       -0.02       -0.02       -0.02       -0.01
-#space:cc                     0.02    0.00 0.01        0.01        0.01        0.02        0.02        0.03
-#sigma                        0.95    0.00 0.00        0.94        0.94        0.95        0.95        0.95
-#log-fit_ratio                0.00    0.00 0.00        0.00        0.00        0.00        0.00        0.00
-#R2                           0.15    0.00 0.00        0.15        0.15        0.15        0.15        0.16
-#mean_PPD                     0.34    0.00 0.00        0.34        0.34        0.34        0.34        0.35
-#log-posterior         -1475535.51    0.39 6.56 -1475549.17 -1475539.73 -1475535.12 -1475531.09 -1475523.93
-#n_eff Rhat
-#(Intercept)            1943 1.00
-#m.index                3061 1.00
-#sp.temp                2969 1.00
-#sm.elev                4000 1.00
-#space                  3301 1.00
-#cc                     4000 1.00
-#speciesALNGLU          4000 1.00
-#speciesBETPEN          3066 1.00
-#speciesFAGSYL          3040 1.00
-#speciesFRAEXC          4000 1.00
-#speciesQUEROB          4000 1.00
-#m.index:speciesALNGLU  2417 1.00
-#m.index:speciesBETPEN  4000 1.00
-#m.index:speciesFAGSYL  2451 1.00
-#m.index:speciesFRAEXC  4000 1.00
-#m.index:speciesQUEROB  4000 1.00
-#speciesALNGLU:sp.temp  4000 1.00
-#speciesBETPEN:sp.temp  3075 1.00
-#speciesFAGSYL:sp.temp  4000 1.00
-#speciesFRAEXC:sp.temp  4000 1.00
-#speciesQUEROB:sp.temp  4000 1.00
-#speciesALNGLU:sm.elev  4000 1.00
-#speciesBETPEN:sm.elev  4000 1.00
-#speciesFAGSYL:sm.elev  4000 1.00
-#speciesFRAEXC:sm.elev  4000 1.00
-#speciesQUEROB:sm.elev  4000 1.00
-#speciesALNGLU:space    4000 1.00
-#speciesBETPEN:space    4000 1.00
-#speciesFAGSYL:space    4000 1.00
-#speciesFRAEXC:space    3738 1.00
-#speciesQUEROB:space    4000 1.00
-#speciesALNGLU:cc       4000 1.00
-#speciesBETPEN:cc       4000 1.00
-#speciesFAGSYL:cc       4000 1.00
-#speciesFRAEXC:cc       4000 1.00
-#speciesQUEROB:cc       4000 1.00
-#m.index:cc             4000 1.00
-#sp.temp:cc             2551 1.00
-#sm.elev:cc             4000 1.00
-#space:cc               2169 1.00
-#sigma                  4000 1.00
-#log-fit_ratio          4000 1.00
-#R2                     3169 1.00
-#mean_PPD               4000 1.00
-#log-posterior           282 1.01
-
-#Samples were drawn using NUTS(diag_e) at Wed Aug 29 11:43:39 2018.
-#For each parameter, n_eff is a crude measure of effective sample size,
-#and Rhat is the potential scale reduction factor on split chains (at convergence, Rhat=1).
-
-
+cols <- colorRampPalette(brewer.pal(9,"Set1"))(6)
 ##### Interaction Plots code
-nao<- plot_model(fit, type = "pred", terms = c("nao.z", "cc")) + xlab("NAO") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
-elev<- plot_model(fit, type = "pred", terms = c("elev.z", "cc")) + xlab("Elevation") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
-mat<- plot_model(fit, type = "pred", terms = c("mat.z", "cc")) + xlab("Mean Spring Temperature") + ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
-space<- plot_model(fit, type = "pred", terms = c("space.z", "cc")) + xlab("Space") + ylab("Number of False Springs") + ggtitle("") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
-cc<- plot_model(fit, type = "pred", terms = c("cc.z", "species")) + xlab("Climate Change") + ylab("Number of False Springs") + ggtitle("") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))
+nao<- plot_model(fit, type = "pred", terms = c("nao.z", "species")) + xlab("NAO") + 
+  ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))+
+  scale_colour_manual(name="Species", values=cols,
+                      labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
+                               "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                               "BETPEN"=expression(paste(italic("Betula lenta"))),
+                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
+                               "QUEROB"=expression(paste(italic("Quercus robur"))))) 
+elev<- plot_model(fit, type = "pred", terms = c("elev.z", "species")) + xlab("Elevation") + 
+  ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4)) +
+  scale_colour_manual(name="Species", values=cols,
+                      labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
+                               "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                               "BETPEN"=expression(paste(italic("Betula lenta"))),
+                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
+                               "QUEROB"=expression(paste(italic("Quercus robur"))))) 
+mat<- plot_model(fit, type = "pred", terms = c("mat.z", "species")) + xlab("Mean Spring Temperature") + 
+  ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4)) +
+  scale_colour_manual(name="Species", values=cols,
+                      labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
+                               "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                               "BETPEN"=expression(paste(italic("Betula lenta"))),
+                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
+                               "QUEROB"=expression(paste(italic("Quercus robur"))))) 
+space<- plot_model(fit, type = "pred", terms = c("dist.z", "species")) + xlab("Distance from Coast") + ylab("Number of False Springs") + 
+  ggtitle("") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4)) + theme(legend.position = "none") +
+  scale_colour_manual(name="Species", values=cols,
+                      labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
+                               "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                               "BETPEN"=expression(paste(italic("Betula lenta"))),
+                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
+                               "QUEROB"=expression(paste(italic("Quercus robur"))))) 
+ccsp<- plot_model(fit, type = "pred", terms = c("cc.z", "species")) + xlab("Climate Change") + ylab("Number of False Springs") + ggtitle("") + 
+  scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4))  + theme(legend.position = "none") +
+  scale_colour_manual(name="Species", values=cols,
+                      labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
+                               "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                               "BETPEN"=expression(paste(italic("Betula lenta"))),
+                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
+                               "QUEROB"=expression(paste(italic("Quercus robur"))))) 
+
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend<-g_legend(ccsp)
 
 quartz()
-ggarrange(nao, mat, elev, space, ncol=2, nrow=2)
+grid.arrange(nao, mat, ccsp, elev, space, mylegend, ncol=3, nrow=2)
+
+colz <- colorRampPalette(brewer.pal(9,"Set1"))(2)
+nao<- plot_model(fit, type = "pred", terms = c("nao.z", "cc.z")) + xlab("NAO") + 
+  ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4)) + 
+  scale_color_manual(name="Climate Change", values=colz,
+                     labels=c("-0.459208492649012"="Before 1984",
+                              "0.544414297170614"="After 1984"))
+elev<- plot_model(fit, type = "pred", terms = c("elev.z", "cc.z")) + xlab("Elevation") + 
+  ylab("Number of False Springs") + ggtitle("") + 
+  scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4)) + 
+  scale_color_manual(name="Climate Change", values=colz,
+                     labels=c("-0.459208492649012"="Before 1984",
+                              "0.544414297170614"="After 1984"))
+mat<- plot_model(fit, type = "pred", terms = c("mat.z", "cc.z")) + xlab("Mean Spring Temperature") + 
+  ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4)) + 
+  scale_color_manual(name="Climate Change", values=colz,
+                     labels=c("-0.459208492649012"="Before 1984",
+                              "0.544414297170614"="After 1984"))
+space<- plot_model(fit, type = "pred", terms = c("dist.z", "cc.z")) + xlab("Distance from Coast") + ylab("Number of False Springs") + 
+  ggtitle("") + scale_y_continuous(expand = c(0, 0)) + coord_cartesian(ylim=c(0,0.4)) + 
+  scale_color_manual(name="Climate Change", values=colz,
+                     labels=c("-0.459208492649012"="Before 1984",
+                              "0.544414297170614"="After 1984"))
+
+quartz()
+ggarrange(nao, elev, mat, space, ncol=2, nrow=2)
 
 ### A cleaner version! ####
 
@@ -293,149 +266,6 @@ post.inter <- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
 cbind(lm = b, stan_lm = rstan::get_posterior_mean(post.inter)[1:26,]) # shrunk
 # }
 
-### Output... Now speciesAESHIP is shown but the Intercept is negative and the 
-## interaction terms are still missing AESHIP
-
-#                             mean  se_mean sd        2.5%         25%         50%         75%       97.5%
-#(Intercept)                 -0.25    0.00 0.04       -0.32       -0.28       -0.25       -0.22       -0.17
-#m.index                     -0.22    0.00 0.01       -0.23       -0.22       -0.22       -0.22       -0.21
-#sp.temp                     -0.03    0.00 0.00       -0.04       -0.04       -0.03       -0.03       -0.03
-#sm.elev                      0.11    0.00 0.00        0.11        0.11        0.11        0.11        0.11
-#space                        0.90    0.00 0.01        0.89        0.89        0.90        0.90        0.91
-#cc                           0.26    0.00 0.01        0.24        0.25        0.26        0.26        0.27
-#speciesAESHIP                0.22    0.00 0.01        0.20        0.21        0.22        0.22        0.23
-#speciesALNGLU                0.20    0.00 0.01        0.18        0.19        0.20        0.20        0.21
-#speciesBETPEN                0.32    0.00 0.01        0.31        0.32        0.32        0.32        0.33
-#speciesFAGSYL                0.15    0.00 0.01        0.14        0.15        0.15        0.16        0.17
-#speciesFRAEXC               -0.04    0.00 0.01       -0.05       -0.04       -0.04       -0.03       -0.02
-#speciesQUEROB                0.10    0.00 0.01        0.08        0.09        0.10        0.10        0.11
-#m.index:speciesALNGLU        0.02    0.00 0.01        0.01        0.02        0.02        0.03        0.04
-#m.index:speciesBETPEN       -0.02    0.00 0.01       -0.04       -0.03       -0.02       -0.02       -0.01
-#m.index:speciesFAGSYL        0.11    0.00 0.01        0.09        0.10        0.11        0.11        0.12
-#m.index:speciesFRAEXC        0.18    0.00 0.01        0.16        0.17        0.18        0.18        0.19
-#m.index:speciesQUEROB        0.15    0.00 0.01        0.14        0.15        0.15        0.16        0.17
-#speciesALNGLU:sp.temp        0.00    0.00 0.00        0.00        0.00        0.00        0.01        0.01
-#speciesBETPEN:sp.temp       -0.02    0.00 0.00       -0.02       -0.02       -0.02       -0.02       -0.02
-#speciesFAGSYL:sp.temp        0.01    0.00 0.00        0.01        0.01        0.01        0.01        0.02
-#speciesFRAEXC:sp.temp        0.04    0.00 0.00        0.04        0.04        0.04        0.04        0.04
-#speciesQUEROB:sp.temp        0.02    0.00 0.00        0.02        0.02        0.02        0.02        0.02
-#speciesALNGLU:sm.elev       -0.01    0.00 0.00       -0.02       -0.02       -0.01       -0.01       -0.01
-#speciesBETPEN:sm.elev       -0.01    0.00 0.00       -0.01       -0.01       -0.01        0.00        0.00
-#speciesFAGSYL:sm.elev       -0.03    0.00 0.00       -0.04       -0.03       -0.03       -0.03       -0.03
-#speciesFRAEXC:sm.elev       -0.09    0.00 0.00       -0.10       -0.09       -0.09       -0.09       -0.09
-#speciesQUEROB:sm.elev       -0.06    0.00 0.00       -0.07       -0.07       -0.06       -0.06       -0.06
-#speciesALNGLU:space         -0.07    0.00 0.01       -0.09       -0.07       -0.07       -0.06       -0.04
-#speciesBETPEN:space         -0.01    0.00 0.01       -0.02       -0.01       -0.01        0.00        0.01
-#speciesFAGSYL:space         -0.26    0.00 0.01       -0.28       -0.27       -0.26       -0.26       -0.24
-#speciesFRAEXC:space         -0.82    0.00 0.01       -0.84       -0.83       -0.82       -0.81       -0.80
-#speciesQUEROB:space         -0.44    0.00 0.01       -0.46       -0.45       -0.44       -0.44       -0.43
-#speciesALNGLU:cc            -0.01    0.00 0.01       -0.02       -0.01       -0.01        0.00        0.00
-#speciesBETPEN:cc            -0.02    0.00 0.01       -0.03       -0.03       -0.02       -0.02       -0.01
-#speciesFAGSYL:cc            -0.16    0.00 0.01       -0.17       -0.16       -0.16       -0.16       -0.15
-#speciesFRAEXC:cc            -0.19    0.00 0.01       -0.20       -0.19       -0.19       -0.18       -0.18
-#speciesQUEROB:cc            -0.16    0.00 0.01       -0.17       -0.17       -0.16       -0.16       -0.15
-#m.index:cc                   0.09    0.00 0.00        0.08        0.09        0.09        0.10        0.10
-#sp.temp:cc                  -0.01    0.00 0.00       -0.01       -0.01       -0.01       -0.01       -0.01
-#sm.elev:cc                  -0.02    0.00 0.00       -0.02       -0.02       -0.02       -0.02       -0.01
-#space:cc                     0.02    0.00 0.01        0.01        0.01        0.02        0.02        0.03
-#sigma                        0.95    0.00 0.00        0.94        0.94        0.95        0.95        0.95
-#log-fit_ratio                0.05    0.00 0.00        0.05        0.05        0.05        0.05        0.05
-#R2                           0.24    0.00 0.00        0.24        0.24        0.24        0.24        0.24
-#mean_PPD                     0.34    0.00 0.00        0.34        0.34        0.34        0.34        0.35
-#log-posterior         -1475529.29    0.45 6.89 -1475543.97 -1475533.85 -1475528.89 -1475524.38 -1475517.00
-#n_eff Rhat
-#(Intercept)            2140 1.00
-#m.index                4000 1.00
-#sp.temp                2329 1.00
-#sm.elev                3219 1.00
-#space                  4000 1.00
-#cc                     4000 1.00
-#speciesAESHIP          2247 1.00
-#speciesALNGLU          4000 1.00
-#speciesBETPEN          4000 1.00
-#speciesFAGSYL          4000 1.00
-#speciesFRAEXC          4000 1.00
-#speciesQUEROB          4000 1.00
-#m.index:speciesALNGLU  3568 1.00
-#m.index:speciesBETPEN  4000 1.00
-#m.index:speciesFAGSYL  3175 1.00
-#m.index:speciesFRAEXC  4000 1.00
-#m.index:speciesQUEROB  4000 1.00
-#speciesALNGLU:sp.temp  4000 1.00
-#speciesBETPEN:sp.temp  3386 1.00
-#speciesFAGSYL:sp.temp  4000 1.00
-#speciesFRAEXC:sp.temp  4000 1.00
-#speciesQUEROB:sp.temp  4000 1.00
-#speciesALNGLU:sm.elev  4000 1.00
-#speciesBETPEN:sm.elev  3706 1.00
-#speciesFAGSYL:sm.elev  4000 1.00
-#speciesFRAEXC:sm.elev  4000 1.00
-#speciesQUEROB:sm.elev  3924 1.00
-#speciesALNGLU:space    4000 1.00
-#speciesBETPEN:space    4000 1.00
-#speciesFAGSYL:space    4000 1.00
-#speciesFRAEXC:space    4000 1.00
-#speciesQUEROB:space    4000 1.00
-#speciesALNGLU:cc       4000 1.00
-#speciesBETPEN:cc       4000 1.00
-#speciesFAGSYL:cc       4000 1.00
-#speciesFRAEXC:cc       4000 1.00
-#speciesQUEROB:cc       4000 1.00
-#m.index:cc             4000 1.00
-#sp.temp:cc             2841 1.00
-#sm.elev:cc             4000 1.00
-#space:cc               3020 1.00
-#sigma                  4000 1.00
-#log-fit_ratio          4000 1.00
-#R2                     4000 1.00
-#mean_PPD               3926 1.00
-#log-posterior           235 1.02
-
-#Samples were drawn using NUTS(diag_e) at Wed Aug 29 12:53:07 2018.
-#For each parameter, n_eff is a crude measure of effective sample size,
-#and Rhat is the potential scale reduction factor on split chains (at convergence, Rhat=1).
-
-### Now prep like an rstan model ####
-
-bb$sp<-as.numeric(as.factor(bb$species))
-fit.sp<-lm(fs.count~ m.index + m.index:sp + sp.temp + sp.temp:sp + sm.elev + sm.elev:sp + 
-          space + space:sp + cc  + cc:sp + sp + m.index:cc + sp.temp:cc +sm.elev:cc +
-          space:cc, data=bb)             # not necessary in this case
-
-b <- coef(fit.sp)[-1]
-R <- qr.R(fit.sp$qr)[-1,-1]
-SSR <- crossprod(fit.sp$residuals)[1]
-not_NA <- !is.na(fitted(fit.sp))
-N <- sum(not_NA)
-spp.nao<-unique(ave(bb$m.index, bb$sp))
-spp.mat<-unique(ave(bb$sp.temp, bb$sp))
-spp.cc<-unique(ave(bb$cc, bb$sp))
-spp.elev<-unique(ave(bb$sm.elev, bb$sp))
-spp.space<-unique(ave(bb$space, bb$sp))
-xbar <- c(as.numeric(mean(bb$m.index)),  as.numeric(mean(bb$sp.temp)), as.numeric(mean(bb$sm.elev)), as.numeric(mean(bb$space)), 
-          as.numeric(mean(bb$cc)),  
-          
-          as.numeric(as.factor("AESHIP")),
-          as.numeric(as.factor("ALNGLU")), as.numeric(as.factor("BETPEN")), 
-          as.numeric(as.factor("FAGSYL")), as.numeric(as.factor("FRAEXC")), as.numeric(as.factor("QUEROB")),
-          
-          spp.nao, spp.mat, spp.cc, spp.elev, spp.space,
-          
-          as.numeric(mean(bb$m.index*bb$cc)), as.numeric(mean(bb$sp.temp*bb$cc)), as.numeric(mean(bb$sm.elev*bb$cc)), 
-          as.numeric(mean(bb$space*bb$cc)))
-xbarnames<-colnames(R)
-names(xbar)<-xbarnames
-
-y <- bb$fs.count[not_NA]
-ybar <- mean(y)
-s_y <- sd(y)
-post.inter <- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
-                             # the next line is only to make the example go fast
-                             chains = 4, iter = 2000)
-cbind(lm = b, stan_lm = rstan::get_posterior_mean(post.inter)[1:26,]) # shrunk
-# }
-
-
 
 
 ##### Ugly but workable code for plotting ####
@@ -450,45 +280,45 @@ simple<-subset(simple, select=c("var", "mean", "2.5%", "97.5%"))
 simple$species<-c(1,1,1,1,1,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,0,0,0,0)
 simple$Jvar<-NA
 #simple$Jvar<-ifelse(simple$var=="(Intercept)", 10, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="m.index", 9, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="nao.z", 9, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="m.index:speciesALNGLU", 8.9, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="m.index:speciesBETPEN", 8.8, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="m.index:speciesFAGSYL", 8.7, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="m.index:speciesFRAEXC", 8.6, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="m.index:speciesQUEROB", 8.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="sp.temp", 8, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="mat.z", 8, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sp.temp:speciesALNGLU", 7.9, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sp.temp:speciesBETPEN", 7.8, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFAGSYL", 7.7, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sp.temp:speciesFRAEXC", 7.6, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sp.temp:speciesQUEROB", 7.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="sm.elev", 7, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="elev.z", 7, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sm.elev:speciesALNGLU", 6.9, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sm.elev:speciesBETPEN", 6.8, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFAGSYL", 6.7, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sm.elev:speciesFRAEXC", 6.6, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="sm.elev:speciesQUEROB", 6.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="space", 6, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="dist.z", 6, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="space:speciesALNGLU", 5.9, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="space:speciesBETPEN", 5.8, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="space:speciesFAGSYL", 5.7, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="space:speciesFRAEXC", 5.6, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="space:speciesQUEROB", 5.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="cc", 5, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="cc.z", 5, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="cc:speciesALNGLU", 4.9, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="cc:speciesBETPEN", 4.8, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="cc:speciesFAGSYL", 4.7, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="cc:speciesFRAEXC", 4.6, simple$Jvar)
 #simple$Jvar<-ifelse(simple$var=="cc:speciesQUEROB", 4.5, simple$Jvar)
 
-simple$Jvar<-ifelse(simple$var=="m.index:cc", 4, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sp.temp:cc", 3, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="sm.elev:cc", 2, simple$Jvar)
-simple$Jvar<-ifelse(simple$var=="space:cc", 1, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="nao.z:cc.z", 4, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="mat.z:cc.z", 3, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="elev.z:cc.z", 2, simple$Jvar)
+simple$Jvar<-ifelse(simple$var=="dist.z:cc.z", 1, simple$Jvar)
 
 species<-unique(simple$species)
 simple$est<-simple$mean
@@ -541,15 +371,15 @@ simple<-simple[!(simple$var=="speciesALNGLU"|simple$var=="speciesBETPEN"|simple$
 
 
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
-estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Space Parameter", "Climate Change",
+estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Distance from Coast", "Climate Change",
              "NAO Index x \nClimate Change", "Mean Spring Temperature \nx Climate Change",
-             "Elevation x \nClimate Chnage", "Space Parameter \nx Climate Change")
+             "Elevation x \nClimate Chnage", "Distance from Coast \nx Climate Change")
 estimates<-rev(estimates)
 regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar)) +
   geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=mean, y=Jvar), col="blue3") +
   geom_segment(arrow = arrow(length = unit(0.00, "npc")), col="blue3") +
   scale_y_discrete(limits = sort(unique(simple$var)), labels=estimates) +
-  xlab("Model Estimate Change in \nNumber of False Springs") + ylab("") + theme_linedraw() +
+  xlab("Model Estimate of Change in \nNumber of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
