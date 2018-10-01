@@ -21,10 +21,11 @@ bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE))
 
 
-mod.nb<-stan_glm.nb(fs~ nao.z + mat.z + dist.z + space.z +
+mod.nb<-stan_glm(fs~ nao.z + mat.z + dist.z + space.z +
                 cc.z + species + nao.z:species + 
                 mat.z:species + dist.z:species + space.z:species + cc.z:species + 
-                nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z, data=bb, link="log", cores=4)
+                nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z, data=bb, family=binomial(link="logit"), cores=4)
 
 
-save(mod, file="/n/wolkovich_lab/Lab/Cat/elevnb.Rdata")
+save(mod.nb, file="/n/wolkovich_lab/Lab/Cat/distnb.Rdata")
+

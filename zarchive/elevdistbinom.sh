@@ -2,13 +2,13 @@
 
 #SBATCH -p wolkovich
 
-#SBATCH -n 4
+#SBATCH -n 2
 
 #SBATCH -N 1
 
-#SBATCH -t 0-30:00:00
+#SBATCH -t 0-65:00:00
 
-#SBATCH --mem 10000
+#SBATCH --mem 30000
 
 #SBATCH -o hostname.out
 
@@ -23,4 +23,4 @@ module load R/3.4.2-fasrc01
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/Newspace.R eigenvector
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/ElevDist_binom.R rndslopes
