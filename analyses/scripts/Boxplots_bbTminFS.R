@@ -29,8 +29,12 @@ mat$cc<-ifelse(mat$year<1984, 0, 1)
 mat$species<-ifelse(mat$species=="BETPEN", "aaBETPEN", mat$species)
 mat$species<-ifelse(mat$species=="FRAEXC", "zFRAEXC", mat$species)
 pre<-subset(mat, mat$cc==0)
-post<-subset(mat, mat$cc==1)
+for(i in unique(pre$species)){
+  pre<-pre[(pre$bb[i]<quantile(pre$bb[i], 0.75) & pre$bb>quantile(pre$bb[i], 0.25)),]
+}
 
+post<-subset(mat, mat$cc==1)
+post<-post[(post$bb<quantile(post$bb, 0.75) & post$bb>quantile(post$bb, 0.25)),]
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 pre.plot<- ggplot(pre, aes(x=species, y=bb)) + geom_boxplot(aes(col=as.factor(species))) +
@@ -53,7 +57,7 @@ pre.plot<- ggplot(pre, aes(x=species, y=bb)) + geom_boxplot(aes(col=as.factor(sp
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Day of Budburst") + coord_cartesian(ylim=c(0,250)) + 
+  ylab("Day of Budburst") + coord_cartesian(ylim=c(90,120)) + 
   geom_hline(yintercept=107.59, linetype="dotted", col="black") +
   annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold")
 
@@ -78,7 +82,7 @@ post.plot<- ggplot(post, aes(x=species, y=bb)) + geom_boxplot(aes(col=as.factor(
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  coord_cartesian(ylim=c(0,250)) + 
+  coord_cartesian(ylim=c(90,120)) + 
   geom_hline(yintercept=101.69, linetype="dotted", col="black") +
   annotate("text", x = 5.75, y = 245, label = "After 1984", family="Helvetica", size=3, fontface="bold")
 
