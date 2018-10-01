@@ -2,7 +2,7 @@
 
 #SBATCH -p wolkovich
 
-#SBATCH -n 2
+#SBATCH -n 4
 
 #SBATCH -N 1
 
@@ -23,4 +23,4 @@ module load R/3.4.2-fasrc01
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/ElevDist_arm.R rndslopes
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/ElevNB.R rndslopes
