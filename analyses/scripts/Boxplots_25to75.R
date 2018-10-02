@@ -61,14 +61,14 @@ budburst<- ggplot(plus, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha
         text=element_text(family="Helvetica"),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
-        plot.margin = unit(c(1.5,0,1.5,1.5), "lines"), 
+        plot.margin = unit(c(1.5,1.5,1.0,1.5), "lines"), 
         axis.title.x = element_blank(), 
         axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
-  #scale_y_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Day of Budburst") + #coord_cartesian(ylim=c(60,150)) + 
+  ylab("Day of Budburst") + coord_cartesian(ylim=c(50,165)) + 
   geom_hline(yintercept=106.53, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
@@ -118,14 +118,14 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
         text=element_text(family="Helvetica"),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
-        plot.margin = unit(c(1.5,0,1.5,1.5), "lines"), 
+        plot.margin = unit(c(1.5,1.5,1.0,1.5), "lines"), 
         axis.title.x = element_blank(), 
         axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
-  #scale_y_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Day of Budburst") + #coord_cartesian(ylim=c(60,150)) + 
+  ylab("Minimum Temperature \nfrom Budburst to Leafout") + coord_cartesian(ylim=c(-5,18)) + 
   geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
@@ -140,22 +140,12 @@ f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs.count),]
 f$fs<-ifelse(f$fs.count>0, 1, 0)
-f$lat.long<-paste(f$lat, f$long)
-f$fs<-ave(f$fs,f$lat.long, FUN=sum)
+f$fs<-ave(f$fs,f$PEP_ID, f$species, f$cc, FUN=sum)
 
-pref<-subset(f, f$cc==0)
-for(i in unique(pref$species)){
-  pref<-pref[(pref$fs[pref$species==i]<quantile(pref$fs[pref$species==i], 0.75) & pref$fs[pref$species==i]>quantile(pref$fs[pref$species==i], 0.25)),]
-}
-
-postf<-subset(f, f$cc==1)
-for(i in unique(postf$species)){
-  postf<-postf[(postf$fs[postf$species==i]<quantile(postf$fs[postf$species==i], 0.75) & postf$fs[postf$species==i]>quantile(postf$fs[postf$species==i], 0.25)),]
-}
-
-plusf<-full_join(pref, postf)
+plusf<-subset(f, select=c(species, cc, fs))
+plusf<-plusf[!duplicated(plusf),]
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-falsespring<- ggplot(plusf, aes(x=species, y=fs, alpha=cc)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species))) +
+falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species))) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -174,25 +164,29 @@ falsespring<- ggplot(plusf, aes(x=species, y=fs, alpha=cc)) + geom_boxplot(aes(a
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="Helvetica"),
-        legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=45, hjust=1),
+        legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=35, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
-        plot.margin = unit(c(1.5,0,1.5,1.5), "lines")) +
-        #axis.title.x = element_blank(), 
+        plot.margin = unit(c(1.5,1.5, 1.0, 1.5), "lines"),
+        axis.title.x = element_blank()) + 
         #axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
-  #scale_y_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Day of Budburst") + #coord_cartesian(ylim=c(60,150)) + 
-  geom_hline(yintercept=7.66, linetype="dotted", col="black") +
+  ylab("Number of Years \nwith False Springs") + coord_cartesian(ylim=c(0,25)) + 
+  #geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                      labels=c("0"="1951-1983", "1"="1984-2016")) +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 
+quartz()
 ggarrange(budburst, tmin, falsespring, ncol=1, nrow=3)
 
+## Budburst: took the average day of budburst for each individual and condensed to the 25th-75th quartile
+## Tmin: same thing as budburst
+## False Spring: counted the number of false spring years from 1951-1983 and for 1984-2016 for each individual
 
 
 
