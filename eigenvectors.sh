@@ -6,7 +6,7 @@
 
 #SBATCH -N 1
 
-#SBATCH -t 0-30:00:00
+#SBATCH -t 0-120:00:00
 
 #SBATCH --mem 10000
 

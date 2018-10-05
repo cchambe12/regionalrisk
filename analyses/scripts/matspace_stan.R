@@ -62,7 +62,9 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #shapefile(coords, "output/bbspace.shp")
 
 dx<-read.csv("output/space_updated.csv", header=TRUE)
-xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+#xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+#xx<-subset(xx, year>1950)
+xx<-read.csv("output/fs_yearsitespp_5.csv", header=TRUE)
 xx<-subset(xx, year>1950)
 df<-read.csv("output/mat_MAM.csv", header=TRUE)
 df<-subset(df, year>1950)
@@ -123,7 +125,7 @@ dd<-bb.sub.nodup
 #dd$space<-round(dd$space, digits=3)
 #dd<-dd[!duplicated(dd),]
 
-write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.nov.csv", row.names = FALSE)
+write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.nov_5.csv", row.names = FALSE)
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)
 #mat<-mat[!duplicated(mat),]
@@ -161,7 +163,7 @@ bb.stan<-na.omit(bb.stan)
 #bb.map<-na.omit(bb.map)
 
 #bb.stan<-bb
-write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb_latprep_nov.csv", row.names = FALSE)
+write.csv(bb.stan, file="~/Documents/git/regionalrisk/analyses/output/bb_latprep_nov_5.csv", row.names = FALSE)
 bb.stan<-read.csv("output/bb.brm.nointer.csv", header=TRUE)
 
 #bb<-bb.stan[sample(nrow(bb.stan), 500), ]

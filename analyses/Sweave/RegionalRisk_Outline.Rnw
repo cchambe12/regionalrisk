@@ -104,7 +104,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item By better understanding these regional climatic implications and which factors are most crucial for predicting risk, we may be able to determine which regions may be at risk currently and which regions may become more at risk in the future.
 \end{enumerate}
 
-\item The majority of false spring studies assess the effects of one predictor (e.g. elevation or distance from the coast) on false spring prevalence but most fail to incorporate multiple effects. 
+\item The majority of false spring studies assess the effects of one predictor (e.g. temperature, elevation or distance from the coast) on false spring prevalence but most fail to incorporate multiple effects. 
 \begin{enumerate}
 \item Our primary aim is to investigate the known regional factors on false spring risk and compare the effect of them and their interaction with climate change. The key regional factors we identify for this study are: mean spring temperature, NAO index, elevation and distance from the coast.
 \end{enumerate}
@@ -220,7 +220,7 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS_perDecade.pdf}
+  -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS.pdf}
   -\caption{}\label{fig:hadbrms}
   -\end{center}
   -\end{figure}}
