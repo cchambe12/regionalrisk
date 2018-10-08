@@ -11,6 +11,7 @@ library(rstan)
 library(rstanarm)
 library(sjPlot)
 library(sjmisc)
+library(MASS)
 library(RColorBrewer)
 library(dplyr)
 library(bayesplot)
@@ -40,6 +41,14 @@ bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE))
 
+bb$nao.z <- abs((bb$nao-mean(bb$nao,na.rm=TRUE))/(2*sd(bb$nao,na.rm=TRUE)))
+bb$mat.z <- abs((bb$mst-mean(bb$mst,na.rm=TRUE))/(2*sd(bb$mst,na.rm=TRUE)))
+bb$cc.z <- abs((bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE)))
+bb$elev.z <- abs((bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE)))
+bb$lat.z <- abs((bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE)))
+bb$dist.z <-abs((bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE)))
+bb$space.z <-abs((bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE)))
+
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 
 bb$species<-ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species)
@@ -47,7 +56,7 @@ bb$species<-ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species)
 fit<-glm(fs~ nao.z + mat.z + elev.z + dist.z + space.z +
           cc.z + species + nao.z:species + 
           mat.z:species + elev.z:species + dist.z:species + space.z:species + cc.z:species + 
-          nao.z:cc.z + mat.z:cc.z + elev.z:cc.z + dist.z:cc.z + space.z:cc.z, data=bb, family=binomial(link="logit"))             # not necessary in this case
+          nao.z:cc.z + mat.z:cc.z + elev.z:cc.z + dist.z:cc.z + space.z:cc.z, data=bb)
 
 b <- coef(fit)[-1]
 R <- qr.R(fit$qr)[-1,-1]
@@ -94,7 +103,7 @@ names(xbar)<-xbarnames
 y <- bb$fs.count[not_NA]
 ybar <- mean(y)
 s_y <- sd(y)
-post.inter <- stan_biglm(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
+post.inter <- stan_biglm.fit(b, R, SSR, N, xbar, ybar, s_y, prior = R2(.75),
                              # the next line is only to make the example go fast
                              chains = 4, iter = 2000)
 cbind(lm = b, stan_lm = rstan::get_posterior_mean(post.inter)[1:26,]) # shrunk
