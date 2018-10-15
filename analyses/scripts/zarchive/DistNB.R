@@ -3,7 +3,7 @@ options(stringsAsFactors = FALSE)
 
 ## Libraries
 library(rstan)
-library(rstanarm)
+library(brms)
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
@@ -21,10 +21,11 @@ bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE))
 
 
-mod.nb<-stan_glm(fs~ nao.z + mat.z + dist.z + space.z +
+mod.nb<-brm(fs~ nao.z + mat.z + dist.z + space.z +
                 cc.z + species + nao.z:species + 
                 mat.z:species + dist.z:species + space.z:species + cc.z:species + 
-                nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z, data=bb, family=neg_binomial_2, cores=4)
+                nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z, data=bb, cores=4,
+            family=zero_one_inflated_beta())
 
 
 save(mod.nb, file="/n/wolkovich_lab/Lab/Cat/distnb.Rdata")

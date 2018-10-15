@@ -30,7 +30,7 @@ Y<-bbs$Y
 
 X<-subset(bbs, select=c(elev, distkm, mst))
 
-select<-ME(Y~., data=as.data.frame(X), listw = listw, family="gaussian", nsim=99, alpha=0.05)
+select<-ME(Y~., data=as.data.frame(X), listw = listw, family="gaussian", nsim=80, alpha=0.02)
 MEM.select<-select$vectors
 
 
