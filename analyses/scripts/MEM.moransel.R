@@ -19,7 +19,7 @@
 # structure could be detected is printed.
 
 MEM.moransel <- function (y, listw, MEM.autocor = c("positive", "negative", "all"), 
-                          nperm = 999, alpha = 0.0001) {
+                          nperm = 999, alpha = 0.05) {
   
   SPATIAL = "FALSE"
   # number of regions:

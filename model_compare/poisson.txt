@@ -1,0 +1,90 @@
+Family: poisson 
+  Links: mu = log 
+Formula: fs ~ nao.z + mat.z + dist.z + space.z + elev.z + cc.z + species + nao.z:species + mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z 
+   Data: bb (Number of observations: 1000) 
+Samples: 2 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup samples = 2000
+
+Population-Level Effects: 
+                      Estimate Est.Error  l-95% CI u-95% CI Eff.Sample Rhat
+Intercept                -4.26      0.53     -5.31    -3.26         25 1.08
+nao.z                    -0.51      0.89     -2.25     1.15          8 1.35
+mat.z                    -1.13      0.84     -2.50     0.50         16 1.10
+dist.z                   -0.56      0.92     -2.23     1.14          3 1.63
+space.z                  -0.49      0.77     -1.82     1.15          4 1.29
+elev.z                    0.53      0.95     -1.53     2.50         23 1.03
+cc.z                     -1.02      1.17     -3.19     0.98          9 1.29
+speciesALNGLU         -6067.88   4684.69 -14739.96 -1984.97          2 3.52
+speciesBETPEN            -2.96      1.15     -5.15    -0.62          7 1.47
+speciesFAGSYL         -3109.38   1998.28  -7454.11  -844.19          1 3.09
+speciesFRAEXC         -4534.18   1756.56  -8868.79 -2194.34          4 2.17
+speciesQUEROB         -9331.28   5181.93 -21238.11 -4052.85          2 2.76
+nao.z:speciesALNGLU    -863.50    824.92  -2128.55   798.55          4 1.63
+nao.z:speciesBETPEN       0.23      1.30     -2.46     2.60         16 1.12
+nao.z:speciesFAGSYL     726.32   1271.10  -1246.55  3335.06          2 1.85
+nao.z:speciesFRAEXC     309.59   1142.41  -1634.50  2907.41         17 1.02
+nao.z:speciesQUEROB     -29.35   1788.72  -2727.39  3187.02          1 2.59
+mat.z:speciesALNGLU    2237.41   2316.18  -1685.51  6655.21          1 1.92
+mat.z:speciesBETPEN      -1.26      1.01     -3.17     0.72          8 1.30
+mat.z:speciesFAGSYL    -461.66    856.44  -1783.37  1110.48          1 3.01
+mat.z:speciesFRAEXC    -360.22   1279.66  -2366.68  3156.77         11 1.34
+mat.z:speciesQUEROB   -1491.77    788.35  -3452.64   -75.75          8 1.38
+dist.z:speciesALNGLU   -171.76   1055.16  -2821.80   976.32          3 1.45
+dist.z:speciesBETPEN      1.21      1.37     -1.06     3.64          4 1.61
+dist.z:speciesFAGSYL   -470.44    788.55  -2318.64   682.35          5 1.96
+dist.z:speciesFRAEXC   1148.86   1491.79  -1510.76  4313.28          8 1.32
+dist.z:speciesQUEROB   -467.19    482.77  -1273.86   492.20         28 1.12
+space.z:speciesALNGLU  -117.15   1403.81  -2334.88  3136.32          5 1.56
+space.z:speciesBETPEN     1.46      0.81     -0.29     3.20          3 1.28
+space.z:speciesFAGSYL   274.10    271.58   -155.20   985.55          2 1.48
+space.z:speciesFRAEXC   444.99   1135.83  -1930.96  2087.02          3 1.69
+space.z:speciesQUEROB  1103.07   1287.19   -608.48  3838.61          1 2.06
+elev.z:speciesALNGLU  -1192.76   1921.56  -3906.59  3958.43          9 1.08
+elev.z:speciesBETPEN     -1.69      1.15     -3.71     0.58          5 1.36
+elev.z:speciesFAGSYL    609.85    587.32   -158.98  1977.78          3 2.26
+elev.z:speciesFRAEXC  -3003.36   1347.66  -5676.83  -575.05         17 1.13
+elev.z:speciesQUEROB    933.89   1600.02  -1260.70  4456.83          4 2.36
+cc.z:speciesALNGLU     -739.99    986.87  -2757.28   363.03          2 2.43
+cc.z:speciesBETPEN       -6.51      1.71     -9.82    -3.39          5 1.28
+cc.z:speciesFAGSYL     -373.04    748.90  -1336.48  1476.89          7 1.33
+cc.z:speciesFRAEXC      220.97   1071.62  -1751.78  2615.98          8 1.39
+cc.z:speciesQUEROB     4343.61   4945.27   -159.04 14167.83          2 3.80
+nao.z:cc.z               -2.97      1.86     -6.05     0.26         11 1.25
+mat.z:cc.z               -1.73      1.64     -4.68     1.43          5 1.66
+dist.z:cc.z              -2.31      1.58     -5.39     0.32          7 1.36
+space.z:cc.z              2.64      0.58      1.43     3.73         25 1.09
+elev.z:cc.z              -0.47      2.08     -4.77     3.08          5 1.35
+
+Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+is a crude measure of effective sample size, and Rhat is the potential 
+scale reduction factor on split chains (at convergence, Rhat = 1).
+Warning messages:
+1: The model has not converged (some Rhats are > 1.1). Do not analyse the results! 
+We recommend running more iterations and/or setting stronger priors. 
+2: There were 116 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help.
+See http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup 
+
+
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+LEAVE ONE OUT!
+
+Computed from 2000 by 1000 log-likelihood matrix
+
+         Estimate SE
+elpd_loo       NA NA
+p_loo          NA NA
+looic          NA NA
+------
+Monte Carlo SE of elpd_loo is NA.
+
+Pareto k diagnostic values:
+                         Count Pct.    Min. n_eff
+(-Inf, 0.5]   (good)     383   38.3%   172       
+ (0.5, 0.7]   (ok)        22    2.2%   259       
+   (0.7, 1]   (bad)        9    0.9%   61        
+   (1, Inf)   (very bad) 586   58.6%   <NA>      
+See help('pareto-k-diagnostic') for details.
+Warning message:
+Found 595 observations with a pareto_k > 0.7 in model 'poisson'. With this many problematic observations, it may be more appropriate to use 'kfold' with argument 'K = 10' to perform 10-fold cross-validation rather than LOO. 
+
+

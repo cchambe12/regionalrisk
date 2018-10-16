@@ -1,0 +1,89 @@
+Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: fs ~ nao.z + mat.z + dist.z + space.z + elev.z + cc.z + species + nao.z:species + mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z 
+   Data: bb (Number of observations: 1000) 
+Samples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup samples = 4000
+
+Population-Level Effects: 
+                      Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+Intercept                 0.03      0.01     0.01     0.04       3149 1.00
+nao.z                     0.00      0.02    -0.03     0.04       1477 1.00
+mat.z                    -0.01      0.02    -0.06     0.03       1019 1.00
+dist.z                   -0.02      0.02    -0.07     0.02       1091 1.00
+space.z                   0.02      0.02    -0.02     0.06       1385 1.00
+elev.z                    0.04      0.03    -0.02     0.09       1030 1.00
+cc.z                     -0.04      0.02    -0.07    -0.00       1086 1.00
+speciesALNGLU            -0.02      0.01    -0.05     0.00       4000 1.00
+speciesBETPEN            -0.01      0.01    -0.03     0.01       3446 1.00
+speciesFAGSYL            -0.02      0.01    -0.04     0.00       3558 1.00
+speciesFRAEXC            -0.02      0.01    -0.05    -0.00       4000 1.00
+speciesQUEROB            -0.03      0.01    -0.05    -0.01       3619 1.00
+nao.z:speciesALNGLU      -0.00      0.03    -0.06     0.05       3004 1.00
+nao.z:speciesBETPEN      -0.01      0.02    -0.05     0.04       1958 1.00
+nao.z:speciesFAGSYL      -0.00      0.02    -0.05     0.04       1939 1.00
+nao.z:speciesFRAEXC      -0.00      0.03    -0.05     0.05       2333 1.00
+nao.z:speciesQUEROB       0.00      0.02    -0.05     0.05       2154 1.00
+mat.z:speciesALNGLU       0.01      0.03    -0.05     0.07       1520 1.00
+mat.z:speciesBETPEN      -0.04      0.03    -0.09     0.01       1154 1.00
+mat.z:speciesFAGSYL      -0.02      0.03    -0.08     0.03       1344 1.00
+mat.z:speciesFRAEXC       0.02      0.03    -0.05     0.08       1770 1.00
+mat.z:speciesQUEROB       0.01      0.03    -0.04     0.07       1340 1.00
+dist.z:speciesALNGLU      0.03      0.04    -0.05     0.11       1846 1.00
+dist.z:speciesBETPEN     -0.01      0.03    -0.07     0.04       1294 1.00
+dist.z:speciesFAGSYL      0.04      0.03    -0.02     0.09       1357 1.00
+dist.z:speciesFRAEXC      0.02      0.04    -0.06     0.10       1873 1.00
+dist.z:speciesQUEROB      0.02      0.03    -0.04     0.08       1394 1.00
+space.z:speciesALNGLU    -0.01      0.03    -0.08     0.05       4000 1.00
+space.z:speciesBETPEN     0.08      0.02     0.03     0.12       1567 1.00
+space.z:speciesFAGSYL     0.04      0.03    -0.01     0.09       1744 1.00
+space.z:speciesFRAEXC    -0.02      0.03    -0.08     0.04       1839 1.00
+space.z:speciesQUEROB    -0.00      0.02    -0.05     0.04       1545 1.00
+elev.z:speciesALNGLU     -0.05      0.04    -0.13     0.04       1501 1.00
+elev.z:speciesBETPEN     -0.01      0.04    -0.08     0.05       1333 1.00
+elev.z:speciesFAGSYL     -0.05      0.04    -0.12     0.02       1404 1.00
+elev.z:speciesFRAEXC     -0.04      0.04    -0.12     0.05       1590 1.00
+elev.z:speciesQUEROB     -0.04      0.04    -0.11     0.04       1446 1.00
+cc.z:speciesALNGLU        0.04      0.03    -0.01     0.09       1890 1.00
+cc.z:speciesBETPEN        0.04      0.02    -0.00     0.09       1660 1.00
+cc.z:speciesFAGSYL        0.06      0.02     0.01     0.11       1801 1.00
+cc.z:speciesFRAEXC        0.04      0.03    -0.01     0.09       1771 1.00
+cc.z:speciesQUEROB        0.03      0.02    -0.01     0.08       1824 1.00
+nao.z:cc.z                0.01      0.01    -0.02     0.04       4000 1.00
+mat.z:cc.z               -0.04      0.02    -0.07    -0.01       4000 1.00
+dist.z:cc.z               0.02      0.02    -0.01     0.06       4000 1.00
+space.z:cc.z              0.04      0.01     0.01     0.07       4000 1.00
+elev.z:cc.z              -0.04      0.02    -0.08    -0.00       3845 1.00
+
+Family Specific Parameters: 
+      Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+sigma     0.09      0.00     0.09     0.10       4000 1.00
+
+Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+is a crude measure of effective sample size, and Rhat is the potential 
+scale reduction factor on split chains (at convergence, Rhat = 1).
+
+
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+LEAVE ONE OUT
+
+(loo1 <- loo(base.test))
+
+Computed from 4000 by 1000 log-likelihood matrix
+
+         Estimate    SE
+elpd_loo    890.3 153.7
+p_loo       110.8  32.9
+looic     -1780.5 307.5
+------
+Monte Carlo SE of elpd_loo is NA.
+
+Pareto k diagnostic values:
+                         Count Pct.    Min. n_eff
+(-Inf, 0.5]   (good)     988   98.8%   1888      
+ (0.5, 0.7]   (ok)         1    0.1%   146       
+   (0.7, 1]   (bad)        2    0.2%   13        
+   (1, Inf)   (very bad)   9    0.9%   3         
+See help('pareto-k-diagnostic') for details.
+
+

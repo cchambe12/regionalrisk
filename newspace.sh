@@ -6,7 +6,7 @@
 
 #SBATCH -N 1
 
-#SBATCH -t 0-40:00:00
+#SBATCH -t 0-168:00:00
 
 #SBATCH --mem 10000
 
@@ -23,4 +23,4 @@ module load gcc/7.1.0-fasrc01 R_core/3.5.1-fasrc02
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/Newspace.R eigenvector
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/NewspaceV2.R eigenvector

@@ -1,0 +1,140 @@
+Family: zero_inflated_binomial 
+  Links: mu = logit; zi = identity 
+Formula: fs ~ nao.z + mat.z + dist.z + space.z + elev.z + cc.z + species + nao.z:species + mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z 
+   Data: bb (Number of observations: 1000) 
+Samples: 2 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup samples = 2000
+
+Population-Level Effects: 
+                               Estimate        Est.Error          l-95% CI         u-95% CI Eff.Sample
+Intercept                97489390750.01  117523411860.57      -58485672.00  325215403748.22          1
+nao.z                   -31933546707.47   50781425599.67  -151985872366.69   14768190793.89          2
+mat.z                     8480575775.59   33299221567.52   -52083901356.26   86007857119.41          9
+dist.z                   70519459369.33  162940010345.33  -143734541214.75  494694495719.84          7
+space.z                 162922015676.77  221664590913.63     -176385568.11  762044853007.83          2
+elev.z                   73120251097.62  102890600111.77     -507341524.19  305965888639.32          1
+cc.z                    -56358489739.16   74370948064.76  -221769130420.25      73176321.44          2
+speciesALNGLU          -219971171343.76  275064654660.69  -779749954810.50     475023954.13          2
+speciesBETPEN             2285523918.69   32999934787.75   -73871792322.36   80689772243.23         17
+speciesFAGSYL          -257289419219.25  347017554406.57 -1236377954635.98    4207331278.72          2
+speciesFRAEXC             5339395935.36   55570898293.28  -113493085244.05  165236178744.89         29
+speciesQUEROB           -60024842602.13  102995634559.06  -295997294960.08  105968172233.62          2
+nao.z:speciesALNGLU     -98659561181.55  123226981568.88  -326766286560.73    1773214360.45          1
+nao.z:speciesBETPEN      -7372322802.07   11007967410.41   -32565025127.88    6107855899.69          6
+nao.z:speciesFAGSYL     133852299474.49  263880753635.04  -124399536764.03  941998893129.14          3
+nao.z:speciesFRAEXC       4390359735.53    5996358876.20     -463676048.93   21836099582.71          2
+nao.z:speciesQUEROB     -62613636282.15  568382288231.18 -1485772000959.58 1013825864243.59          7
+mat.z:speciesALNGLU     -95524281055.88  159587817533.44  -529206151188.29    2330968982.66          3
+mat.z:speciesBETPEN       2268213873.62   83854729077.25  -170794165199.06  194385772956.83          7
+mat.z:speciesFAGSYL      16025800989.11  108312748478.52  -260482349382.88  287336850091.36          8
+mat.z:speciesFRAEXC   -1712336077336.38 2157474841932.18 -5760886122269.51   10194511245.09          2
+mat.z:speciesQUEROB      83589086587.08  139792014104.24   -59113850275.75  421585045729.47          2
+dist.z:speciesALNGLU    -37466500346.96  126347102427.45  -409529295371.79  243092849604.40         10
+dist.z:speciesBETPEN    -23028124291.13   49412399664.65  -177313094824.25   27292013258.39          3
+dist.z:speciesFAGSYL    -19307631411.16   59061111684.73  -189068303326.09   68925747698.79         10
+dist.z:speciesFRAEXC     41996845986.63   85615655728.36   -59810126224.40  293520774187.95          3
+dist.z:speciesQUEROB   -235919050266.36  285220024302.25  -757488051647.73    8114216799.17          1
+space.z:speciesALNGLU   -88352871269.81  254365654634.78  -725646533540.49  357656325177.48         14
+space.z:speciesBETPEN   246244690906.57  356815102123.50      -57383324.95 1039517807597.90          2
+space.z:speciesFAGSYL   127612032742.83  162429373545.59      -95718100.98  425194890486.08          1
+space.z:speciesFRAEXC    54021319227.84  134733757400.51  -192538474976.95  455899894430.51          9
+space.z:speciesQUEROB    51359221417.68   81694634454.40   -35161587935.20  238978939511.75          3
+elev.z:speciesALNGLU     27746769638.54   80062754048.66   -84643623510.59  237681211855.02          5
+elev.z:speciesBETPEN      3080879304.57   17882614048.14   -29563918276.90   43382822183.18          8
+elev.z:speciesFAGSYL     97187280008.70  180227841460.00   -56787338767.46  549660127766.86          3
+elev.z:speciesFRAEXC     -1826323507.74  169258041062.17  -373296040474.07  461954692618.97          8
+elev.z:speciesQUEROB     77721782452.67  130766389099.25   -11480948839.42  505543819687.13          3
+cc.z:speciesALNGLU       71602882353.66  108965901347.36    -1354000168.40  356662380819.36          2
+cc.z:speciesBETPEN       83600367416.30  164220727119.22   -80940991586.86  510091608940.26          3
+cc.z:speciesFAGSYL       31685349794.21  249040823207.28  -605560817269.70  497054770106.68          7
+cc.z:speciesFRAEXC        8663298243.90   31615907798.93   -49423597051.94   88915014799.90          6
+cc.z:speciesQUEROB      -72605483315.20  141808470663.49  -478510934076.74   88462281932.41          3
+nao.z:cc.z             -166973819563.95  210536974522.36  -627885837454.60     423772538.19          1
+mat.z:cc.z              -11041315722.05   86545143613.92  -278311120265.01  118612440028.88         11
+dist.z:cc.z              37953283770.37   95205322866.68  -118153010901.01  303253023700.62          5
+space.z:cc.z             16810043180.37   28344955102.09    -8715649930.42   88552488073.28          2
+elev.z:cc.z             -60855140964.17  138335324145.92  -435132733099.48   56862869882.76          4
+                      Rhat
+Intercept             3.19
+nao.z                 1.91
+mat.z                 1.05
+dist.z                1.24
+space.z               1.92
+elev.z                1.58
+cc.z                  2.43
+speciesALNGLU         3.03
+speciesBETPEN         1.01
+speciesFAGSYL         1.97
+speciesFRAEXC         1.01
+speciesQUEROB         1.29
+nao.z:speciesALNGLU   1.87
+nao.z:speciesBETPEN   1.15
+nao.z:speciesFAGSYL   2.18
+nao.z:speciesFRAEXC   1.46
+nao.z:speciesQUEROB   1.33
+mat.z:speciesALNGLU   1.72
+mat.z:speciesBETPEN   1.55
+mat.z:speciesFAGSYL   1.52
+mat.z:speciesFRAEXC   3.49
+mat.z:speciesQUEROB   1.33
+dist.z:speciesALNGLU  1.07
+dist.z:speciesBETPEN  1.21
+dist.z:speciesFAGSYL  1.14
+dist.z:speciesFRAEXC  2.28
+dist.z:speciesQUEROB  2.34
+space.z:speciesALNGLU 1.11
+space.z:speciesBETPEN 3.04
+space.z:speciesFAGSYL 2.70
+space.z:speciesFRAEXC 1.10
+space.z:speciesQUEROB 2.56
+elev.z:speciesALNGLU  2.12
+elev.z:speciesBETPEN  1.03
+elev.z:speciesFAGSYL  2.59
+elev.z:speciesFRAEXC  1.30
+elev.z:speciesQUEROB  1.46
+cc.z:speciesALNGLU    2.52
+cc.z:speciesBETPEN    1.22
+cc.z:speciesFAGSYL    1.16
+cc.z:speciesFRAEXC    1.94
+cc.z:speciesQUEROB    2.35
+nao.z:cc.z            2.26
+mat.z:cc.z            1.21
+dist.z:cc.z           1.73
+space.z:cc.z          1.35
+elev.z:cc.z           2.04
+
+Family Specific Parameters: 
+   Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+zi     0.98      0.01     0.96     0.99       1555 1.00
+
+Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+is a crude measure of effective sample size, and Rhat is the potential 
+scale reduction factor on split chains (at convergence, Rhat = 1).
+Warning messages:
+1: The model has not converged (some Rhats are > 1.1). Do not analyse the results! 
+We recommend running more iterations and/or setting stronger priors. 
+2: There were 586 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help.
+See http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup 
+
+
+<><>><><><><><><><><><><><>><><><><><><><><><><><>><><><><><><><><><><><>><><><><><><><><><>
+LEAVE ONE OUT!
+
+
+
+Computed from 2000 by 1000 log-likelihood matrix
+
+         Estimate SE
+elpd_loo       NA NA
+p_loo          NA NA
+looic          NA NA
+------
+Monte Carlo SE of elpd_loo is NA.
+
+Pareto k diagnostic values:
+                         Count Pct.    Min. n_eff
+(-Inf, 0.5]   (good)     970   97.0%   1808      
+ (0.5, 0.7]   (ok)         0    0.0%   <NA>      
+   (0.7, 1]   (bad)        0    0.0%   <NA>      
+   (1, Inf)   (very bad)  30    3.0%   <NA>      
+See help('pareto-k-diagnostic') for details.
