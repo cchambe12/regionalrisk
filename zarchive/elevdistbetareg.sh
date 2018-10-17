@@ -19,6 +19,7 @@
 #SBATCH --mail-user=cchamberlain@g.harvard.edu
 
 source new-modules.sh
+export R_LIBS_USER=$HOME/apps/R:$R_LIBS_USER
 module load gcc/7.1.0-fasrc01 R_core/3.5.1-fasrc02
 module load R_packages
 

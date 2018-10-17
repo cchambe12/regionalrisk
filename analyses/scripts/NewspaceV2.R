@@ -28,7 +28,7 @@ C <- as.matrix(C)
 
 X<-subset(bbs, select=c(elev, distkm, mst))
 
-select<-ME(Y~., data=as.data.frame(X), listw = listw, family="gaussian", nsim=40, alpha=0.02)
+select<-ME(Y~., data=as.data.frame(X), listw = listw, family="gaussian", nsim=40, alpha=0.05)
 dselect<-select$vectors
 
 write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect.csv", row.names=FALSE)

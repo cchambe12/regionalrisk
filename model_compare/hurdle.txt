@@ -1,0 +1,79 @@
+Family: hurdle_negbinomial 
+  Links: mu = log; shape = identity; hu = identity 
+Formula: fs ~ nao.z + mat.z + dist.z + space.z + elev.z + cc.z + species + nao.z:species + mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z 
+   Data: bb (Number of observations: 1000) 
+Samples: 2 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup samples = 2000
+
+Population-Level Effects: 
+                      Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+Intercept                 0.75      7.74   -16.88    15.03          9 1.17
+nao.z                    19.16     13.77    -9.76    46.20         11 1.19
+mat.z                    20.47     15.32    -4.88    54.43          5 2.02
+dist.z                   -6.77     26.23   -47.82    45.39          1 2.42
+space.z                   1.98     15.13   -29.29    18.87          2 2.20
+elev.z                  -14.67     17.44   -45.29     5.81          1 2.94
+cc.z                     36.22     13.60     7.34    65.04          6 1.45
+speciesALNGLU           -65.26     89.23  -242.49    56.11          2 2.28
+speciesBETPEN           -28.28     28.74   -87.90    18.26          3 2.26
+speciesFAGSYL           -16.92     25.41   -52.60    58.78          5 1.58
+speciesFRAEXC           -36.57     63.90  -175.04    83.61          5 1.82
+speciesQUEROB           -29.13     38.78   -99.60    15.24          1 3.58
+nao.z:speciesALNGLU      67.04    103.77   -25.34   332.79          4 2.00
+nao.z:speciesBETPEN      -6.01     12.82   -27.83    20.96          7 1.46
+nao.z:speciesFAGSYL     389.06    429.19   -19.75  1257.03          1 2.65
+nao.z:speciesFRAEXC     -94.24    114.87  -295.68    45.90          1 2.45
+nao.z:speciesQUEROB     -50.71    195.21  -298.59   254.05          1 5.68
+mat.z:speciesALNGLU      58.85     70.20   -73.66   209.21          2 1.71
+mat.z:speciesBETPEN     -20.09      9.83   -36.04    -0.95         10 1.31
+mat.z:speciesFAGSYL      14.42     24.04   -35.57    52.54          2 2.05
+mat.z:speciesFRAEXC     124.99     99.93   -93.75   283.39          2 1.65
+mat.z:speciesQUEROB      43.52     27.35    12.68   100.35          1 3.72
+dist.z:speciesALNGLU    -79.78     83.70  -215.76    56.05          1 1.97
+dist.z:speciesBETPEN     28.48     38.70   -52.33   112.98          8 1.63
+dist.z:speciesFAGSYL    129.22    183.40   -66.66   466.11          1 3.13
+dist.z:speciesFRAEXC     19.90     53.10   -61.59   114.92          1 2.62
+dist.z:speciesQUEROB     23.96     28.98   -38.73    86.13          5 1.60
+space.z:speciesALNGLU  -165.63    193.50  -472.76    25.13          1 4.23
+space.z:speciesBETPEN    20.78     17.21   -13.68    47.80          3 1.59
+space.z:speciesFAGSYL  -313.65    428.71  -974.06   365.11          1 4.34
+space.z:speciesFRAEXC   -18.88     25.13   -59.04    12.20          1 3.80
+space.z:speciesQUEROB     0.50     39.10   -60.16    92.36          3 1.40
+elev.z:speciesALNGLU   -124.50    137.64  -388.52    -4.73          2 2.66
+elev.z:speciesBETPEN    -23.89     16.93   -59.32    12.06         10 1.04
+elev.z:speciesFAGSYL    -92.85    208.26  -422.01   143.45          1 3.66
+elev.z:speciesFRAEXC     79.85     73.25   -38.02   257.84          8 1.15
+elev.z:speciesQUEROB    448.22    676.13  -429.37  1361.04          1 4.63
+cc.z:speciesALNGLU      931.80   1054.70    -0.54  3220.48          1 3.55
+cc.z:speciesBETPEN      -51.19     59.91  -173.01    45.69          3 1.71
+cc.z:speciesFAGSYL       29.52    131.32  -131.32   215.23          1 5.07
+cc.z:speciesFRAEXC       34.98     85.56  -109.62   189.72          5 1.55
+cc.z:speciesQUEROB       43.80    155.39  -152.31   357.91          1 2.91
+nao.z:cc.z               26.75     28.00   -14.85    84.03          3 2.00
+mat.z:cc.z               51.32     35.26     9.05   126.35          4 2.28
+dist.z:cc.z             -22.97     35.42   -65.43    47.03          1 2.10
+space.z:cc.z              3.35     34.52   -62.72    44.94          1 2.29
+elev.z:cc.z             -14.37     14.71   -37.99    12.77          2 2.63
+
+Family Specific Parameters: 
+      Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+shape     2.18      7.47     0.00    19.41         34 1.08
+hu        0.99      0.01     0.98     1.00          1 3.50
+
+Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+is a crude measure of effective sample size, and Rhat is the potential 
+scale reduction factor on split chains (at convergence, Rhat = 1).
+Warning messages:
+1: The model has not converged (some Rhats are > 1.1). Do not analyse the results! 
+We recommend running more iterations and/or setting stronger priors. 
+2: There were 2000 divergent transitions after warmup. Increasing adapt_delta above 0.8 may help.
+See http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup 
+
+
+
+
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+LEAVE ONE OUT!
+
+Didn't work - too many NAs in response and predictions... bad model!
+
