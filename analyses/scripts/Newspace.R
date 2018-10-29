@@ -7,6 +7,7 @@ library(vegan)
 
 
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/regrisk.nov.csv", header=TRUE)
+bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/regrisk.nov.csv", header=TRUE)
 MEM_model<-"positive"
 style<-"B"
 
@@ -41,17 +42,22 @@ dselect<-as.data.frame(moransel[["MEM.select"]])
 #MEM.select<-select$vectors
 
 write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect.csv", row.names=FALSE)
-
+dselect<-read.csv("~/Documents/git/regionalrisk/analyses/output/memselect.csv", header=TRUE)
 
 dx<-cbind(bbs, dselect)
-rex<-dx%>%dplyr::select(-lat.long)
-rex.mod<-lm(y~ ., data=rex)
+library(dplyr)
+rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -distance, -space, -cc, -nao, -year)
+rex.mod<-lm(fs.count~ ., data=rex)
 space<-residuals(rex.mod)
+eigen<-space
 
-b_space<-cbind(bbs, space)
-prep_space<-full_join(bb, b_space, by="lat.long")
+bb<-bb%>%dplyr::select(-space)
+b_space<-cbind(bbs, eigen)
+beig<-subset(b_space, select=c("lat.long", "eigen"))
+prep_space<-full_join(bb, beig, by="lat.long")
 
 
-write.csv(prep_space, file="/n/wolkovich_lab/Lab/Cat/fs_space_new.csv", row.names=FALSE)
-write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/mem_select.csv", row.names=FALSE)
+
+write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_new.csv", row.names=FALSE)
+#write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/mem_select.csv", row.names=FALSE)
 

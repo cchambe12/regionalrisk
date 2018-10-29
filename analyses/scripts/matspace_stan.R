@@ -61,7 +61,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #coords<-spTransform(spg, CRS("+proj=longlat"))
 #shapefile(coords, "output/bbspace.shp")
 
-dx<-read.csv("output/space_updated.csv", header=TRUE)
+dx<-read.csv("output/fs_space_new.csv", header=TRUE)
 #xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 #xx<-subset(xx, year>1950)
 xx<-read.csv("output/fs_yearsitespp_5.csv", header=TRUE)
