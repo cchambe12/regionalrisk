@@ -21,27 +21,27 @@ bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
-bb<-bb[sample(nrow(bb), 8000), ]
+bb<-bb[sample(nrow(bb), 1000), ]
 
-binom<-brm(fs ~ nao.z + mat.z + dist.z + space.z + elev.z +
-            cc.z + species + nao.z:species + 
-            mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
-            nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb, chains=2, cores=2, 
-          family=binomial(), iter = 4500, warmup=2000)
+#binom<-brm(fs ~ nao.z + mat.z + dist.z + space.z + elev.z +
+ #           cc.z + species + nao.z:species + 
+  #          mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
+   #         nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb, chains=2, cores=2, 
+    #      family=binomial(), iter = 4500, warmup=2000)
 
 
 
-save(binom, file="/n/wolkovich_lab/Lab/Cat/elevdist_binom.Rdata")
+#save(binom, file="/n/wolkovich_lab/Lab/Cat/elevdist_binom.Rdata")
 
 ## 10000 iterations, warmup at 5000
-pois<-brm(fs.count ~ nao.z + mat.z + dist.z + space.z + elev.z +
-            cc.z + species + nao.z:species + 
-            mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
-            nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb,
-          family = poisson(), chains=2, cores=2 , iter = 4500, warmup=2500)
+#pois<-brm(fs.count ~ nao.z + mat.z + dist.z + space.z + elev.z +
+ #           cc.z + species + nao.z:species + 
+  #          mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
+   #         nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb,
+    #      family = poisson(), chains=2, cores=2 , iter = 4500, warmup=2500)
 
 
-save(pois, file="/n/wolkovich_lab/Lab/Cat/elevdist_pois.Rdata")
+#save(pois, file="/n/wolkovich_lab/Lab/Cat/elevdist_pois.Rdata")
 
 negbinom<-brm(fs ~ nao.z + mat.z + dist.z + space.z + elev.z +
            cc.z + species + nao.z:species + 
