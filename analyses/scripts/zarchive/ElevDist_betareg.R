@@ -22,34 +22,14 @@ bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
 
-#binom<-brm(fs ~ nao.z + mat.z + dist.z + space.z + elev.z +
- #           cc.z + species + nao.z:species + 
-  #          mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
-   #         nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb, chains=2, cores=2, 
-    #      family=binomial(), iter = 4500, warmup=2000)
-
-
-
-#save(binom, file="/n/wolkovich_lab/Lab/Cat/elevdist_binom.Rdata")
-
-## 10000 iterations, warmup at 5000
-#pois<-brm(fs.count ~ nao.z + mat.z + dist.z + space.z + elev.z +
- #           cc.z + species + nao.z:species + 
-  #          mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
-   #         nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb,
-    #      family = poisson(), chains=2, cores=2 , iter = 4500, warmup=2500)
-
-
-#save(pois, file="/n/wolkovich_lab/Lab/Cat/elevdist_pois.Rdata")
-
-
-feelthebern<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+poistotal<-brm(fs.count ~ nao.z + mat.z + dist.z + elev.z + space.z +
                        cc.z + species + nao.z:species + 
                        mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
                        nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, data=bb, chains=2,
-                     family=bernoulli(), cores=2, iter = 4000, warmup=2000)
+                     family=poisson(), cores=2, iter = 4500, warmup=2000, thin=10, 
+                 prior = prior(cauchy(0,13)))
 
-save(feelthebern, file="/n/wolkovich_lab/Lab/Cat/elevdist_all.Rdata")
+save(poistotal, file="/n/wolkovich_lab/Lab/Cat/elevdist_poisall.Rdata")
 
 
 
