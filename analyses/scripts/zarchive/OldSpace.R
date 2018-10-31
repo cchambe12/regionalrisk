@@ -9,7 +9,7 @@ options(mc.cores = parallel::detectCores())
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/regrisk.nov.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_space_new.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
-                        "distkm", "space"))
+                        "distkm", "eigen"))
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 
@@ -19,7 +19,7 @@ bb$cc.z <- (bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE))
 bb$elev.z <- (bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE))
 bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
-bb$space.z <-(bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE))
+bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
 bb<-bb[sample(nrow(bb), 800), ]
 
@@ -28,7 +28,7 @@ pois.test<-brm(fs.count ~ nao.z + mat.z + dist.z + space.z + elev.z +
           mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
          mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb, chains=2, cores=2, 
       family=poisson(), iter = 4500, warmup=2000, thin=1.5, 
-      priors = c(prior(poisson(0,13))))
+      prior = prior(cauchy(0,13)))
 
 
 
