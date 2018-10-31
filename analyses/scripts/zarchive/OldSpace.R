@@ -21,14 +21,32 @@ bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
-bb<-bb[sample(nrow(bb), 800), ]
+library(lme4)
+
+poisbase<-glm(fs ~ nao.z + mat.z + dist.z + space.z + elev.z +
+            cc.z + species + 
+            mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
+            mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb, family=quasibinomial())
+
+poisnodist<-glm(fs.count ~ nao.z + mat.z + space.z + elev.z +
+                cc.z + species + 
+                mat.z:species + space.z:species + elev.z:species + cc.z:species + 
+                mat.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb, family=poisson(link="log"))
+
+prior <- c(set_prior("normal(-10,-10)", class = "b"),
+           set_prior("normal(1,2)", class = "b", coef = "treat"),
+           set_prior("cauchy(0,2)", class = "sd", 
+                     group = "subject", coef = "Intercept"),
+           set_prior("uniform(-5,5)", class = "delta"))
+
+bb<-bb[sample(nrow(bb), 15000), ]
 
 pois.test<-brm(fs.count ~ nao.z + mat.z + dist.z + space.z + elev.z +
            cc.z + species + 
           mat.z:species + dist.z:species + space.z:species + elev.z:species + cc.z:species + 
          mat.z:cc.z + dist.z:cc.z + space.z:cc.z + elev.z:cc.z, data=bb, chains=2, cores=2, 
-      family=poisson(), iter = 4500, warmup=2000, thin=1.5, 
-      prior = prior(cauchy(0,13)))
+      family=poisson(), iter = 4000, warmup=2500, 
+      prior = prior(normal(-6,6), class=b))
 
 
 
