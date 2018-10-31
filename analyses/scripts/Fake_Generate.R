@@ -90,6 +90,23 @@ fake$elev.z <- (fake$elev-mean(fake$elev,na.rm=TRUE))/(2*sd(fake$elev,na.rm=TRUE
 fake$dist.z <-(fake$dist-mean(fake$dist,na.rm=TRUE))/(2*sd(fake$dist,na.rm=TRUE))
 fake$space.z <-(fake$space-mean(fake$space,na.rm=TRUE))/(2*sd(fake$space,na.rm=TRUE))
 
-gaus<-brm(fs ~ nao.z + mat.z + cc.z + elev.z + dist.z + space.z, data=fake)
+fake$fs.one<-ifelse(fake$fs>1, 1, 0)
+library(brms)
+fake<-fake[sample(nrow(fake), 800), ]
 
+fake$sp<-as.character(fake$sp)
+binom<-brm(fs.one ~ nao.z + mat.z + cc.z + elev.z + dist.z + space.z +
+           nao.z:sp + mat.z:sp + dist.z:sp + space.z:sp + 
+           elev.z:sp + cc.z:sp + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + 
+           space.z:cc.z + elev.z:cc.z, data=fake, family=binomial())
+
+pois<-brm(fs.one ~ nao.z + mat.z + cc.z + elev.z + dist.z + space.z +
+             nao.z:sp + mat.z:sp + dist.z:sp + space.z:sp + 
+             elev.z:sp + cc.z:sp + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + 
+             space.z:cc.z + elev.z:cc.z, data=fake, family=poisson())
+
+bringbernieback<-brm(fs.one ~ nao.z + mat.z + cc.z + elev.z + dist.z + space.z +
+             nao.z:sp + mat.z:sp + dist.z:sp + space.z:sp + 
+             elev.z:sp + cc.z:sp + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + 
+             space.z:cc.z + elev.z:cc.z, data=fake, family=bernoulli())
 
