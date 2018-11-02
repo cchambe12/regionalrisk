@@ -86,14 +86,14 @@ tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
 tm$species<-ifelse(tm$species=="FRAEXC", "zFRAEXC", tm$species)
 tm<-tm[!is.na(tm$Tmin),]
 pret<-subset(tm, tm$cc==0)
-for(i in unique(pret$species)){
-  pret<-pret[(pret$Tmin[pret$species==i]<quantile(pret$Tmin[pret$species==i], 0.75) & pret$Tmin[pret$species==i]>quantile(pret$Tmin[pret$species==i], 0.25)),]
-}
+#for(i in unique(pret$species)){
+ # pret<-pret[(pret$Tmin[pret$species==i]<quantile(pret$Tmin[pret$species==i], 0.75) & pret$Tmin[pret$species==i]>quantile(pret$Tmin[pret$species==i], 0.25)),]
+#}
 
 postt<-subset(tm, tm$cc==1)
-for(i in unique(postt$species)){
-  postt<-postt[(postt$Tmin[postt$species==i]<quantile(postt$Tmin[postt$species==i], 0.75) & postt$Tmin[postt$species==i]>quantile(postt$Tmin[postt$species==i], 0.25)),]
-}
+#for(i in unique(postt$species)){
+#  postt<-postt[(postt$Tmin[postt$species==i]<quantile(postt$Tmin[postt$species==i], 0.75) & postt$Tmin[postt$species==i]>quantile(postt$Tmin[postt$species==i], 0.25)),]
+#}
 
 plust<-full_join(pret, postt)
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)

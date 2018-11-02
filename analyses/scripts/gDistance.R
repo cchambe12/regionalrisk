@@ -39,36 +39,36 @@ foo<-broom::tidy(coast)
 bc<-SpatialPointsDataFrame(data.frame(x=b5$LONG,y =b5$LAT),data=data.frame(b5),proj4string = wgs84)
 
 #  Project into something - Decimal degrees are no fun to work with when measuring distance!
-bcProj<-spTransform(bc,utm10n)
+#bcProj<-spTransform(bc,utm10n)
 
 #creating example construction data layer:
 con.coords <- subset(foo, select=c("long", "lat"))
 con<-SpatialPointsDataFrame(data.frame(x=con.coords$long,y =con.coords$lat),data=con.coords,proj4string = wgs84)
-projection(con) <- utm10n
+#projection(con) <- wgs84
 
 #All at once (black carbon points on top, construction on the y-axis)
-dist2<-apply(gDistance(bcProj, con,byid=TRUE),2,min) ## then need to multiply by 100 to get km
+dist2<-apply(gDistance(bc, con,byid=TRUE),2,min) ## then need to multiply by 100 to get km
 b2$distance<- dist2
-b2$distkm<- b2$distance/1000
+b2$distkm<- b2$distance*111
 
-dist1<-apply(gDistance(bcProj, con,byid=TRUE),2,min) 
+dist1<-apply(gDistance(bc, con,byid=TRUE),2,min) 
 b1$distance<- dist1
-b1$distkm<- b1$distance/1000
+b1$distkm<- b1$distance*111
 
-dist3<-apply(gDistance(bcProj, con,byid=TRUE),2,min) 
+dist3<-apply(gDistance(bc, con,byid=TRUE),2,min) 
 b3$distance<- dist3
-b3$distkm<- b3$distance/1000
+b3$distkm<- b3$distance*111
 
-dist4<-apply(gDistance(bcProj, con,byid=TRUE),2,min) 
+dist4<-apply(gDistance(bc, con,byid=TRUE),2,min) 
 b4$distance<- dist4
-b4$distkm<- b4$distance/1000
+b4$distkm<- b4$distance*111
 
-dist5<-apply(gDistance(bcProj, con,byid=TRUE),2,min) 
+dist5<-apply(gDistance(bc, con,byid=TRUE),2,min) 
 b5$distance<- dist5
-b5$distkm<- b5$distance/1000
+b5$distkm<- b5$distance*111
 
 distances <- rbind(b1, b2, b3, b4, b5)
-write.csv(distances, file = "~/Documents/git/regionalrisk/analyses/output/dist_utm.csv",row.names = FALSE)
+write.csv(distances, file = "~/Documents/git/regionalrisk/analyses/output/dist_wgs.csv",row.names = FALSE)
 
 
 

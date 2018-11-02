@@ -21,13 +21,13 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 
 #bb<-read.csv("output/fs_matspspace.csv", header=TRUE)
-bb<-read.csv("output/fs_matspring.csv", header=TRUE)
-nao<-read.csv("output/icpc_nao.csv", header=TRUE)
-nf<-nao%>%gather(month, index, -year)
-nf$m.index<-ave(nf$index, nf$year)
-nx<-dplyr::select(nf, year, m.index)
-nx<-nx[!duplicated(nx),]
-nx<-filter(nx, year<=2016)
+#bb<-read.csv("output/fs_matspring.csv", header=TRUE)
+#nao<-read.csv("output/icpc_nao.csv", header=TRUE)
+#nf<-nao%>%gather(month, index, -year)
+#nf$m.index<-ave(nf$index, nf$year)
+#nx<-dplyr::select(nf, year, m.index)
+#nx<-nx[!duplicated(nx),]
+#nx<-filter(nx, year<=2016)
 #write.csv(nx, file="~/Documents/git/regionalrisk/analyses/output/nao.csv", row.names = FALSE)
 
 prep_cc<-bb
@@ -47,10 +47,13 @@ ggplot(fs.cc, aes(x=mat.cc, y=fs.num, col=cc)) + geom_smooth(aes(x=mat.cc, y=fs.
 
 ggplot(prep_cc, aes(x=year, y=fs.num))+ geom_point(aes(col=species))
 
+bb<-read.csv("output/fs_space_new.csv", header=TRUE)
+xx<-read.csv("output/BBdata.csv", header=TRUE)
 
 dxx<-bb
-dxx$fs.yr<-ave(dxx$fs, dxx$year, FUN=sum)
-dxx$fs.yrspp<-ave(dxx$fs, dxx$species, dxx$year, FUN=sum)
+#dxx$fs<-ifelse(dxx$fs.count>0, 1, 0)
+dxx$fs.yr<-ave(dxx$fs.count, dxx$year, FUN=sum)
+dxx$fs.yrspp<-ave(dxx$fs.count, dxx$species, dxx$year, FUN=sum)
 ### Sites per species -
 #length(unique(dxx$lat.long[dxx$species=="AESHIP"])) # 10191
 #length(unique(dxx$lat.long[dxx$species=="ALNGLU"])) # 6775
@@ -73,14 +76,15 @@ dxx$fs.prop<-dxx$fs.yr/dxx$num.sites
 
 dxx$fs.ave<-ave(dxx$fs.prop, FUN=median)
 
-xx<-inner_join(dxx, bx)
-dxx<-inner_join(dxx, nx)
-impcols<-c("year", "fs.prop", "m.index", "fs.ave")
-dxx<-subset(dxx, select=impcols)
+#dxx<-inner_join(dxx, xx)
+xx<-inner_join(xx, dxx)
+#impcols<-c("year", "fs.prop", "nao", "fs.ave")
+#dxx<-subset(dxx, select=impcols)
 
+xx$bb.yr<-ave(xx$bb, xx$year)
 xx$x<-scale(xx$bb.yr, center = FALSE, scale = TRUE)
 xx$sx<-scale((xx$bb.yr^3), center=FALSE, scale=TRUE)
-dxx$nao<-(dxx$m.index+1.29)/3
+#dxx$nao<-(dxx$m.index+1.29)/3
 
 #ggplot(dxx, aes(x=year, y=fs.yr)) + geom_point() + xlab("Year") + ylab("Number of False Springs")
 all<-ggplot(dxx, aes(x=year, y=fs.prop)) + geom_line() + xlab("Year") + ylab("Proportion of Sites with False Springs") + 
