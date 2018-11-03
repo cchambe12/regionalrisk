@@ -78,5 +78,5 @@ distances$disty<-distances$distkm/10000
 
 ggplot(dis.far, aes(x=LONG, y=LAT, fill=distkm)) + geom_point(aes(fill=distkm))
 
-ggplot(distances, aes(x=LONG, y=LAT, fill=disty)) + geom_point(aes(fill=disty))
+ggplot(distances, aes(x=LONG, y=LAT, fill=distkm)) + geom_point(aes(fill=distkm))
 
