@@ -107,10 +107,11 @@ nao<-nao[!duplicated(nao),]
 
 bb<-full_join(bb, nao)
 
-dist<-read.csv("output/dist_utm.csv", header=TRUE)
+#dist<-read.csv("output/dist_utm.csv", header=TRUE)
+dist<-read.csv("output/dist_wgs.csv", header=TRUE)
 dist<-dist%>%rename(long=LONG)%>%rename(lat=LAT)
 
-bb<-full_join(bb, dist)
+bb<-full_join(dx, dist)
 
 
 #### Space parameter? ####
