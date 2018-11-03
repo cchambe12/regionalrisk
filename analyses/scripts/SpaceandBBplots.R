@@ -35,7 +35,7 @@ dxx<-bb
 #length(unique(xx$PEP_ID[xx$species=="BETPEN"])) # lat.long: 10139 - eigen: 10137 - PEP: 10465
 #length(unique(xx$PEP_ID[xx$species=="FAGSYL"])) # lat.long: 9099 - eigen: 9097 - PEP: 9363
 #length(unique(xx$PEP_ID[xx$species=="FRAEXC"])) # lat.long: 7327 - eigen: 7325 - PEP: 7503
-#length(unique(xx$PEP_ID[xx$species=="QUEROB"])) # lat.long: 8831 - eigen: 8809 - PEP: 9044
+#length(unique(xx$lat.long[xx$species=="QUEROB"])) # lat.long: 8831 - eigen: 8809 - PEP: 9044
 #dxx$spp.prop<-NA
 #dxx$spp.sites<-as.numeric(ave(dxx$lat.long, dxx$year, dxx$species, FUN=length))
 #dxx$spp.prop<-ifelse(dxx$species=="AESHIP", dxx$fs.yrspp/dxx$spp.sites, dxx$spp.prop)
@@ -194,8 +194,8 @@ tminplot<-ggarrange(bpen, aglu, ahip, fsyl, qrob, fexc, ncol=3, nrow=2)
 
 
 png("figures/TminBB_bySpp.png", 
-    width=800,
-    height=500)
+    width=8,
+    height=5, units="in", res = 350 )
 grid.draw(tminplot)
 dev.off()
 

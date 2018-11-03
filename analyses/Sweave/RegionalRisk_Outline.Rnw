@@ -76,7 +76,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item Spring onset is advancing with temperate tree and shrub species initiating leafout 4-6 days on average earlier per $^{\circ}$C of warming \citep{Wolkovich2012, IPCC2014}.
 %\item With climate change advancing, this interaction of cues may shift spring phenologies both across and within species. 
 \item Last spring freeze dates are not predicted to advance at the same rate \citep{Inouye2008, Martin2010, Labe2016, Sgubin2018}, potentially amplifying the effects of false spring events in these regions.
-\item In Germany, for example, the last freeze date has advanced by 2.6 days per decade since 1955 \citep{Zohner2016} but leafout is advancing around twice as fast. %EMW: Compared to?
+\item In Germany, for example, the last freeze date has advanced by 2.6 days per decade since 1955 \citep{Zohner2016} but leafout is advancing around twice as fast.
 \item Major false spring events have been recorded in recent years and have found it can take 16-38 days for trees to refoliate \citep{Gu2008, Augspurger2009, Augspurger2013, Menzel2015}, which can detrimentally affect crucial processes such as carbon updake and nutrient cycling \citep{Hufkens2012, Richardson2013, Klosterman2018}.
 \end{enumerate}
 
@@ -87,20 +87,21 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item Temperate plants are exposed to freezing temperatures numerous times throughout the year, however, individuals are most at risk to damage from stochastic spring frosts, when frost tolerance is lowest \citep{Sakai1987}. 
 \item Frost tolerance greatly diminishes once individuals exit the dormancy phase (i.e. processes leading to budburst) through full leaf expansion \citep{Vitasse2014, Lenz2016}. %EMW: Combined two items that say the same thing .... 
 \item Individuals that initiate budburst and have not fully leafed out before the last spring freeze are at risk of leaf tissue loss, damage to the xylem, and slowed canopy development \citep{Gu2008, Hufkens2012}.
-\item False spring events can result in photosynthetic tissue loss, which could potentially impact multiple years of growth and, with the growing season extending, individuals could be exposed to more frosts in the future \citep{Liu2018}. %EMW: Do you really need this here? Maybe cut for now? Or save for discussion
+%\item False spring events can result in photosynthetic tissue loss, which could potentially impact multiple years of growth and, with the growing season extending, individuals could be exposed to more frosts in the future \citep{Liu2018}. %EMW: Do you really need this here? Maybe cut for now? Or save for discussion
 \item Individuals and species that initiate budburst earlier in the season are more frost resistant \citep{Korner2016}, however, as climate change advances, less frost resistant individuals may start initiating budburst before the last freeze date.
 \item Despite the importance of false spring events, the extent of damage and the frequency and intensity of false spring events is still largely unknown.
 \end{enumerate}
 
-\item The North Atlantic Ossilation (NAO) index is often used to describe winter and spring circulation across Europe. %EMW: Need better transition from above paragraph. 
+\item Plant phenology and climate are tightly intertwined \citep{Wolkovich2011}, thus understanding major climate oscillation patterns is essential for predicting budburst and, ultimately, false spring risk.  
 \begin{enumerate}
-\item More positive NAO phases tend to result in higher than average winter and early spring temperatures, and with climate change, higher NAO phases has correlated to even earlier budburst dates in some regions \citep{Chmielewski2001}, however it is unclear if more positive NAO phases also translates to more false springs.
+\item The North Atlantic Oscillation (NAO) index is often used to describe winter and spring circulation across Europe. %EMW: Need better transition from above paragraph.
+\item More positive NAO phases tend to result in higher than average winter and spring temperatures, and with climate change, higher NAO phases has correlated to even earlier budburst dates in some regions \citep{Chmielewski2001}, however it is unclear if more positive NAO phases also translates to more false springs.
 \end{enumerate}
 
 \item There is large debate over whether or not spring freeze damage will increase \citep{Hannenin1991, Augspurger2013, Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994, Vitra2017} with climate change and there is also great variation within studies. %EMW: Add ... and also great variation in the studies? (Here you need to start set up the reader for your study which will compare many of these factors...) 
 \begin{enumerate}
 \item Some research suggests false spring incidence has declined in many regions (i.e. across parts of North America and Asia), however the prevalence of spring frosts has consistently increased across Europe since 1982 \citep{Liu2018}.
-\item However, recent studies have demonstrated regional effects may be more closely related to false spring risk: whether via altitudinal variation \citep{Vitra2017} or distance from the coast \citep{Wypych2016a}.
+\item However, recent studies have demonstrated regional effects may be more closely related to false spring risk: whether via altitudinal variation \citep{Vitra2017, Ma2018} or distance from the coast \citep{Wypych2016a, Ma2018}.
 \item By better understanding these regional climatic implications and which factors are most crucial for predicting risk, we may be able to determine which regions may be at risk currently and which regions may become more at risk in the future.
 \end{enumerate}
 
@@ -126,8 +127,8 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item We obtained phenological data from the Pan European Phenology network (PEP725, www.pep725.edu), which provides open access phenology records across Europe \citep{Templ2018}.
 \item Since plants are most susceptible to damage from frost between budburst and full leafout, we selected only leafout data \citep[i.e., in][BBCH 11, which is defined as the point of leaf unfolding and the first visible leaf stalk]{Meier2001} from the PEP725 dataset.
 \item We then subtracted 12 days from the leafout date to establish a rough estimate for day of budburst \citep{Donnelly2017}. 
-\item The species used in the study were \textit{Aesculus hippocastanum L.}, \textit{Alnus glutinosa} (L.) Gaertn., \textit{Betula pendula} Roth., \textit{Fagus sylvatica} Ehrh., \textit{Fraxinus excelsior} L., \textit{Quercus robur} L.
-\item Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used for crops, (2) there were at least 140,000 observations of BBCH 11, (3) to represent over half of the total number of sites available (11,684), (4) there were observations for at least 65 out of the 66 years of the study (1951-2016). % Do we want a table here with a breakdown of data for the supplement?
+\item The species used in the study were \textit{Aesculus hippocastanum} Poir., \textit{Alnus glutinosa} (L.) Gaertn., \textit{Betula pendula} Roth., \textit{Fagus sylvatica} Ehrh., \textit{Fraxinus excelsior} L., \textit{Quercus robur} L.
+\item Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used for crops, (2) there were at least 90,000 observations of BBCH 11, (3) to represent over half of the total number of sites available (11,684), (4) there were observations for at least 65 out of the 66 years of the study (1951-2016). % Do we want a table here with a breakdown of data for the supplement?
 \end{enumerate}
 \subsection*{Climate Data}
 \begin{enumerate}
@@ -135,8 +136,8 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item We used the daily minimum temperature dataset to determine if a false spring occurred.
 \item False springs in this study were defined as temperatures at or below -2.2$^{\circ}$C \citep{Schwartz1993}.
 \item In order to capture regional climatic effects we calculated the mean spring temperature by using the daily mean temperature from February 1 through April 30.
-\item Mean spring temperature was calculated -- likely after chilling was accummulated -- in an attempt to incorporate a the general effects of spring forcing temperatures in our Bayesian hierarchichal model and to compare differences in spring across sites \citep{Basler2012, Korner2016}.
-\item We collected NAO-index data from the KNMI Climate Explorer annual NAO time series \citep{NAO}.
+\item Mean spring temperature was calculated -- likely after chilling was accummulated -- in an attempt to incorporate the general effects of spring forcing temperatures in our Bayesian hierarchichal model and to compare differences in spring across sites \citep{Basler2012, Korner2016}.
+\item We collected NAO-index data from the KNMI Climate Explorer annual NAO time series and selected the NAO indices from November until April to best capture the effects of NAO on budburst for each region \citep{NAO}.
 \item Since the primary aim of the study is to predict fals spring incidence in a changing climate, we split the data: before temperature trends increased (1951-1983) and after trends increased \citep[1984-2016,][]{Stocker2013, Kharouba2018}.
 %\item Since the primary aim of the study is to predict false spring incidence in a changing climate, we split our data to before and after 1983 to capture reported temporal shifts in temperature trends  % Was moved to intro
 \end{enumerate}
@@ -145,42 +146,47 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \begin{enumerate}
 \item A false spring was determined if temperatures fell below -2.2$^{\circ}$C at least once between budburst and leafout.
 \begin{enumerate}
-\item We scaled the elevation predictor by dividing it by 100 to be consistent with the other predictors in the model.
+%\item We scaled the elevation predictor by dividing it by 100 to be consistent with the other predictors in the model.
+\item We scaled all of the predictors and found a z-score following the binary predictor approach in order to best compare the effects of each climate variable to each other \citep{Gelman2006}.
 \item We used a space parameter, rather than a more traditional latitude parameter, to adjust for spatial autocorrelation issues using a minimization of Moran's \textit{I} of the residuals \citep{Baumen2017} (Figure S1).
 \item We then took the calculated eigenvectors determined from the MIR approach and regressed these against the number of false springs for each datapoint to establish a spatial parameter (space). % get citation from Nacho regarding regression
 \end{enumerate}
 
 \item We used a Bayesian hierarchical model approach to analyze our data to best estimate the number of false springs across-species levels. 
 \begin{enumerate}
-\item We fit a mixed-effects model using mean spring temperature, NAO, elevation, space, and climate change as predictors and all two-way interactions (fixed effects) and species as modeled groups on the main effects (random effects).
-\item (Although, we may find that space and elevation are collinear and may decide to take space out and use elevation instead - unless space is picking up more of the distance from the coast then we'll use the space parameter instead of elevation)
+\item We fit a (POISSON or BERNOULLI distribution) model using mean spring temperature, NAO, elevation, distance from the coast, space, and climate change as predictors and all two-way interactions (fixed effects) and species as two-way interactions to simulate modeled groups on the main effects.
+%\item (Although, we may find that space and elevation are collinear and may decide to take space out and use elevation instead - unless space is picking up more of the distance from the coast then we'll use the space parameter instead of elevation)
 \item The Bayesian hierarchical model was fit using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows: (subject to change as per above, this is just the ideal model)
 \begin{align*} \label{eq:1} %% potentially...
-y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp_{(i)}}} + \beta_{elevation_{sp_{(i)}}}
-+ \beta_{space_{sp_{(i)}}} + \beta_{ClimateChange_{sp_{(i)}}} \\
-+& \beta_{MeanSpringTemp \times Climate Change_{(i)}} + \beta_{NAO \times Climate Change_{(i)}} \\
-+& \beta_{elevation \times Climate Change_{(i)}} + \beta_{space \times Climate Change_{(i)}} + \sigma_{sp_{(i)}} 
+y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} + \beta_{Space_{(i)}} + \beta_{ClimateChange_{(i)}} \\
++& \beta_{MeanSpringTemp \times Species_{(i)}} + \beta_{NAO \times Species_{(i)}}+ \beta_{Elevation \times Species_{(i)}} + \beta_{DistanceCoast \times Species_{(i)}} + \beta_{Space \time Species_{(i)}} + \beta_{ClimateChange \times Species_{(i)}} \\
++& \beta_{MeanSpringTemp \times ClimateChange_{(i)}} + \beta_{NAO \times ClimateChange_{(i)}} \\
++& \beta_{Elevation \times ClimateChange_{(i)}} + \beta_{DistanceCoast \times ClimateChange_{(i)}} + \beta_{Space \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} 
 \end{align*}
-\item The $\beta$ coefficients and $\alpha$ were modeled at the species level:
-\begin{align*}
-1.& \; \beta_{MeanSpringTemp_{sp}} \thicksim N(\mu_{MeanSpringTemp}, \sigma{^2}_{MeanSpringTemp}) \\
-   &... \\
-5.& \; \beta_{ClimateChange_{sp}} \thicksim N(\mu_{ClimateChange}, \sigma{^2}_{ClimateChange})
-\end{align*}
+%\item The $\beta$ coefficients and $\alpha$ were modeled at the species level:
+%\begin{align*}
+%1.& \; \beta_{MeanSpringTemp_{sp}} \thicksim N(\mu_{MeanSpringTemp}, \sigma{^2}_{MeanSpringTemp}) \\
+%   &... \\
+%5.& \; \beta_{ClimateChange_{sp}} \thicksim N(\mu_{ClimateChange}, \sigma{^2}_{ClimateChange})
+%\end{align*}
 \item We ran two chains, each with 4,000 warm-up iterations and 2,500 sampling iterations for a total of 10,000 posterior samples for each predictor. 
 \item We evaluated our model performance on $\hat{R}$ values that were close to 1 and assessed chain convergence and posterior predictive checks \citep{Gelman2006}.
 \end{enumerate}
 \end{enumerate}
 
-%\section*{Results}
-%\subsection*{Species variation in budburst and false spring incidence}
-%\begin{enumerate}
-%\item There is variation in day of budburst across the six species and across space - BB maps Fig (should I include a small model here to demonstrate this? (i.e. fs ~ cc + (cc|species)))
-%\begin{enumerate}
-%\item Earlier budbursting species experienced more false spring conditions - proportion of sites Fig
-%\item Our data supports evidence that day of budburst is advancing earlier over time, especially after the early 1980s
-%\end{enumerate}
-%\end{enumerate}
+\section*{Results}
+\subsection*{Species variation in budburst and false spring incidence}
+\begin{enumerate}
+\item There is variation in day of budburst across the six species and across space (Figure \ref{fig:bbmap}). 
+\begin{enumerate}
+\item As seen in Figure \ref{fig:bbmap}, the top three species (\textit{Betula pendula}, \textit{Alnus glutinosa}, \textit{Aesculus hippocastenum}) generally initiated budburst earlier than the bottom three species (\textit{Fagus sylvatica}, \textit{Quercus robur}, \textit{Fraxinus excelsior}).
+\item Across all species, some regions tended to initiate budburst earlier than others (i.e. United Kingdom was earlier than parts of Austria).
+\end{enumerate}
+\item All species initiated budburst earlier after 1983 (Figure \ref{fig:boxfs}) and the minimum temperature between budburst and leafout was, on average, higher after 1983. 
+\begin{enumerate}
+\item Our data supports evidence that day of budburst is advancing earlier over time, especially after the early 1980s
+\end{enumerate}
+\end{enumerate}
 
 %\subsection*{The effects of climatic regional variation on false spring incidence - potentially! still waiting on final model results!}
 %\begin{enumerate}
@@ -221,7 +227,7 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS.pdf}
-  -\caption{}\label{fig:hadbrms}
+  -\caption{}\label{fig:boxfs}
   -\end{center}
   -\end{figure}}
   
@@ -267,17 +273,17 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{sp_{(i)}}} + \beta_{NAO_{sp
 \hline
 \textbf{Species} & \textbf{Num. of Observations} & \textbf{Num. of Sites} & \textbf{Num. of Years} \\
 \hline
-\textit{Aesculus hippocastanum} & 216396 & 10158 & 66  \\
+\textit{Aesculus hippocastanum} & 156836 & 10158 & 66  \\
 \hline
-\textit{Alnus glutinosa} & 136991 & 6775 & 66 \\
+\textit{Alnus glutinosa} & 91182 & 6775 & 66 \\
 \hline
-\textit{Betula pendula} & 215729 & 10139 & 66 \\
+\textit{Betula pendula} & 155251 & 10139 & 66 \\
 \hline
-\textit{Fagus sylvatica} & 185949 & 9099 & 66 \\
+\textit{Fagus sylvatica} & 129133 & 9099 & 66 \\
 \hline
-\textit{Fraxinus excelsior} & 143269 & 7327 & 65 \\
+\textit{Fraxinus excelsior} & 92665 & 7327 & 65 \\
 \hline
-\textit{Quercus robur} & 184406  & 8811 & 66 \\
+\textit{Quercus robur} & 131635  & 8811 & 66 \\
 \end{tabular}
 \end{center}
   
