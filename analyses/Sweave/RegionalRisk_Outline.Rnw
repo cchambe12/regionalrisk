@@ -135,7 +135,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item We collected daily gridded climate data from the European Climate Assessment \& Dataset (ECA\&D) and used the E-OBS 0.25 degree regular latitude-longitude grid from version 16. 
 \item We used the daily minimum temperature dataset to determine if a false spring occurred.
 \item False springs in this study were defined as temperatures at or below -2.2$^{\circ}$C \citep{Schwartz1993}.
-\item In order to capture regional climatic effects we calculated the mean spring temperature by using the daily mean temperature from February 1 through April 30.
+\item In order to capture regional climatic effects we calculated the mean spring temperature by using the daily mean temperature from March 1 through May 30.
 \item Mean spring temperature was calculated -- likely after chilling was accummulated -- in an attempt to incorporate the general effects of spring forcing temperatures in our Bayesian hierarchichal model and to compare differences in spring across sites \citep{Basler2012, Korner2016}.
 \item We collected NAO-index data from the KNMI Climate Explorer annual NAO time series and selected the NAO indices from November until April to best capture the effects of NAO on budburst for each region \citep{NAO}.
 \item Since the primary aim of the study is to predict fals spring incidence in a changing climate, we split the data: before temperature trends increased (1951-1983) and after trends increased \citep[1984-2016,][]{Stocker2013, Kharouba2018}.
@@ -179,12 +179,14 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
 \begin{enumerate}
 \item There is variation in day of budburst across the six species and across space (Figure \ref{fig:bbmap}). 
 \begin{enumerate}
-\item As seen in Figure \ref{fig:bbmap}, the top three species (\textit{Betula pendula}, \textit{Alnus glutinosa}, \textit{Aesculus hippocastenum}) generally initiated budburst earlier than the bottom three species (\textit{Fagus sylvatica}, \textit{Quercus robur}, \textit{Fraxinus excelsior}).
+\item The top three species (\textit{Betula pendula}, \textit{Alnus glutinosa}, \textit{Aesculus hippocastenum}) generally initiated budburst earlier than the bottom three species (\textit{Fagus sylvatica}, \textit{Quercus robur}, \textit{Fraxinus excelsior}).
 \item Across all species, some regions tended to initiate budburst earlier than others (i.e. United Kingdom was earlier than parts of Austria).
 \end{enumerate}
 \item All species initiated budburst earlier after 1983 (Figure \ref{fig:boxfs}) and the minimum temperature between budburst and leafout was, on average, higher after 1983. 
+\item Species that initiated budburst early were not always at a higher risk of false springs (Figure \ref{fig:boxfs}), as is evident by \textit{Alnus glutinosa}.
 \begin{enumerate}
-\item Our data supports evidence that day of budburst is advancing earlier over time, especially after the early 1980s
+\item As seen in Figure (\ref{fig:mst}), mean spring temperature for most species ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} the mean spring temperature rarely dropped below 0$^{\circ}$C.
+\item The average minimum temperature between budburst and leafout, however, varied across the six species with \textit{Betula pendula} and \textit{Aesculus hippocastenum} experiencing the lowest minimum temperatures. 
 \end{enumerate}
 \end{enumerate}
 
@@ -228,6 +230,20 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
   -\begin{center}
   -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS.pdf}
   -\caption{}\label{fig:boxfs}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/MSTBB_bySpp.png}
+  -\caption{}\label{fig:mst}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/TminBB_bySpp.png}
+  -\caption{}\label{fig:tmin}
   -\end{center}
   -\end{figure}}
   

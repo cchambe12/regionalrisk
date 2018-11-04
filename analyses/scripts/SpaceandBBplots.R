@@ -53,7 +53,7 @@ dxx<-bb
 
 xx<-inner_join(xx, dxx)
 
-xx$bb.yr<-ave(xx$bb, xx$year)
+xx$bb.yr<-ave(xx$bb, xx$species, xx$year)
 #xx$x<-scale(xx$bb.yr, center = FALSE, scale = TRUE)
 #xx$sx<-xx$bb.yr-90.2963
 
@@ -120,7 +120,13 @@ qrob<-ggplot(querob, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
 quartz()
-ggarrange(bpen, aglu, ahip, fsyl, qrob, fexc, ncol=3, nrow=2)
+mstplots<-ggarrange(bpen, aglu, ahip, fsyl, qrob, fexc, ncol=3, nrow=2)
+
+png("figures/MSTBB_bySpp.png", 
+    width=8,
+    height=5, units="in", res = 350 )
+grid.draw(mstplots)
+dev.off()
 
 
 ###### Now let's compare to Tmin!

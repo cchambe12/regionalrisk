@@ -64,8 +64,9 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 dx<-read.csv("output/fs_space_new.csv", header=TRUE)
 #xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 #xx<-subset(xx, year>1950)
+dx<-subset(dx, select=c("lat", "long", "lat.long", "eigen", "distkm", "elev", "mst", "nao", "year", "species", "cc"))
 xx<-read.csv("output/fs_yearsitespp_5.csv", header=TRUE)
-xx<-subset(xx, year>1950)
+xx<-subset(xx, select=c("lat", "long", "fs.count", "year", "species", "fs"))
 df<-read.csv("output/mat_MAM.csv", header=TRUE)
 df<-subset(df, year>1950)
 mat<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
@@ -113,7 +114,9 @@ dist<-dist%>%rename(long=LONG)%>%rename(lat=LAT)
 
 bb<-full_join(dx, dist)
 
-
+bb<-full_join(dx, xx)
+bb<-bb[!duplicated(bb),]
+bb<-na.omit(bb)
 #### Space parameter? ####
 # summary(lm(space~elev+lat+long, data=bb))
 
@@ -127,6 +130,7 @@ dd<-bb.sub.nodup
 #dd<-dd[!duplicated(dd),]
 
 write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.nov_5.csv", row.names = FALSE)
+write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_space_new_5.csv", row.names = FALSE)
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)
 #mat<-mat[!duplicated(mat),]

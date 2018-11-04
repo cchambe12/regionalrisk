@@ -22,8 +22,20 @@ qr<-read.csv("querob_data.csv", header=TRUE)
 ah<-read.csv("aeship_data.csv", header=TRUE)
 ag<-read.csv("alnglu_data.csv", header=TRUE)
 
+d<-read.csv("~/Documents/git/springfreeze/input/Budburst.clean.csv",header=TRUE)
+tx<-c("CL0", "WL1")
+d<-d[(d$treatcode%in%tx),]
+d<-subset(d, select=c("sp", "lday", "bday"))
+d<-na.omit(d)
+d$dvr<-d$lday-d$bday
+d$dvr.sp<-ave(d$dvr, d$sp)
+dx<-subset(d, select=c("sp", "dvr.sp"))
+dx<-dx[!duplicated(dx),]
+
 ## Start looking at the data a bit...
 bp$fs<- ifelse(bp$Tmin<=-2.2, 1, 0)
+bp$lo<-ave(bp$PEP_ID, bp$year, FUN=max)
+bp$bb<-bp$lo-5
 bp<-bp[!duplicated(bp),]
 bp$fs.count<- ave(bp$fs, bp$PEP_ID, bp$year, FUN=sum)
 betpen<-bp%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
