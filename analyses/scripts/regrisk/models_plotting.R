@@ -13,11 +13,13 @@ library(egg)
 library(RColorBrewer)
 library(sjmisc)
 library(sjPlot)
+library(ggeffects)
 
 
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(6)
 ##### Interaction Plots code
-nao<- plot_model(bernszeroonepriors, type = "pred", terms = c("nao.z", "species")) + xlab("NAO") + 
+naosp<- ggpredict(bernszeroonepriors, terms = c("nao.z", "species")) 
+naosp.p<-ggplot(nao, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("NAO") + 
   ylab("Number of False Springs") + ggtitle("A.") + theme_classic() + theme(legend.position = "none") + 
   scale_y_continuous(expand = c(0, 0)) + 
   coord_cartesian(ylim=c(0,0.8))+
@@ -92,8 +94,8 @@ space<- plot_model(bernszeroonepriors, type = "pred", terms = c("dist.z", "speci
 ccsp<- plot_model(bernszeroonepriors, type = "pred", terms = c("cc.z", "species")) + xlab("Climate Change") + ylab("Number of False Springs") + ggtitle("E.") + 
   scale_y_continuous(expand = c(0, 0)) + 
   coord_cartesian(ylim=c(0,0.4))  + 
-  theme_classic() + #theme(legend.position = "none") + 
-  theme(legend.text.align = 0, legend.key = element_rect(fill="white")) +
+  theme_classic() + theme(legend.position = "none") + 
+  #theme(legend.text.align = 0, legend.key = element_rect(fill="white")) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
@@ -122,7 +124,8 @@ grid.arrange(nao, mat, ccsp, elev, space, mylegend, ncol=3, nrow=2)
 
 colz <- colorRampPalette(brewer.pal(9,"Set1"))(2)
 colz<-rev(colz)
-nao<- marginal_effects(bernszeroonepriors, type = "pred", terms = c("nao.z", "cc.z")) + xlab("NAO") + 
+nao<-ggpredict(bernszeroonepriors, terms=c("nao.z", "cc.z"))
+nao.p<- ggplot(nao, aes(x=x, predicted=predicted, col=group)) + xlab("NAO") + 
   ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
   coord_cartesian(ylim=c(0,0.4)) + 
