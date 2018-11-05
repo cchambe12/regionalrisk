@@ -125,39 +125,46 @@ grid.arrange(nao, mat, ccsp, elev, space, mylegend, ncol=3, nrow=2)
 colz <- colorRampPalette(brewer.pal(9,"Set1"))(2)
 colz<-rev(colz)
 nao<-ggpredict(bernszeroonepriors, terms=c("nao.z", "cc.z"))
-nao.p<- ggplot(nao, aes(x=x, predicted=predicted, col=group)) + xlab("NAO") + 
+write.csv(nao, file="naopredict.csv", row.names=FALSE)
+nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("NAO") + 
   ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  #coord_cartesian(ylim=c(0,0.4)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
                     labels=c("-0.459208492649012"="1950-1983",
                              "0.544414297170614"="1984-2016"))
-elev<- plot_model(fit, type = "pred", terms = c("elev.z", "cc.z")) + xlab("Elevation") + 
+elev<-ggpredict(bernszeroonepriors, terms=c("elev.z", "cc.z"))
+write.csv(elev, file="elevpredict.csv", row.names=FALSE)
+elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation") + 
   ylab("Number of False Springs") + ggtitle("") + 
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  #coord_cartesian(ylim=c(0,0.4)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
                     labels=c("-0.459208492649012"="1950-1983",
                              "0.544414297170614"="1984-2016"))
-mat<- plot_model(fit, type = "pred", terms = c("mat.z", "cc.z")) + xlab("Mean Spring Temperature") + 
+mat<-ggpredict(bernszeroonepriors, terms=c("mat.z", "cc.z"))
+write.csv(mat, file="output/matpredict.csv", row.names=FALSE)
+mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature") + 
   ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  #coord_cartesian(ylim=c(0,0.4)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
                     labels=c("-0.459208492649012"="1950-1983",
                              "0.544414297170614"="1984-2016"))
-space<- plot_model(fit, type = "pred", terms = c("dist.z", "cc.z")) + xlab("Distance from Coast") + ylab("Number of False Springs") + 
+dist<-ggpredict(bernszeroonepriors, terms=c("dist.z", "cc.z"))
+write.csv(dist, file="output/distpredict.csv", row.names=FALSE)
+dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + + xlab("Distance from Coast") + ylab("Number of False Springs") + 
   ggtitle("") + #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  #coord_cartesian(ylim=c(0,0.4)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
