@@ -15,12 +15,9 @@ library(tidyr)
 library(ggplot2)
 library(lubridate)
 library(ncdf4)
-library(Interpol.T)
-library(chillR)
 library(raster)
 library(reshape2)
 library(data.table)
-library(arm)
 
 setwd("~/Documents/git/regionalrisk/analyses")
 d<-read.csv("output/bbch_region_alnus.csv", header=TRUE)
@@ -34,7 +31,7 @@ df<-d%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$bb<-df$lo-12
+df$bb<-df$lo-16 ## was 12; based on Danf's WL1 and CS0 data for Alnus incana
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo)
 df$pep.year<-paste(df$year, df$PEP_ID)
@@ -89,4 +86,4 @@ dx<-dplyr::select(dx, -date)
 alnglu<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 any.nas<-alnglu[is.na(alnglu$Tmin),]
 
-write.csv(alnglu, file="~/Documents/git/regionalrisk/analyses/output/alnglu_data.csv", row.names=FALSE)
+write.csv(alnglu, file="~/Documents/git/regionalrisk/analyses/output/alnglu_data_dvr.csv", row.names=FALSE)

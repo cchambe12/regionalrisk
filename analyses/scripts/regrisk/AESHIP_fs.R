@@ -31,7 +31,7 @@ df<-d%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$bb<-df$lo-12
+df$bb<-df$lo-16 ## instead of 12; used Danf's data for Acer species WL1 and CS0 to find average 
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo)
 df$pep.year<-paste(df$year, df$PEP_ID)
@@ -76,14 +76,17 @@ dx<-dx%>%
   rename(date=variable)%>%
   rename(Tmin=value)
 
+#dx<-read.csv("~/Desktop/tmin_aeship.csv", header=TRUE)
 dx$date<-substr(dx$date, 2,11)
-dx$Date<-gsub("[.]","-", dx$date)
+#dx<-dx[is.na(dx$Tmin),]
+#dx$Date<-ifelse(is.na(dx$Date), (gsub("[.]","-", dx$date)), dx$Date)
+dx$Date<-gsub("[.]", "-", dx$date)
 #write.csv(dx, file="~/Desktop/tmin_aeship.csv", row.names=FALSE)
 
 dxx<-dplyr::select(dxx, -date)
 dx<-dplyr::select(dx, -date)
 
 aeship<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
-any.nas<-aeship[is.na(aeship$Tmin),]
 
-write.csv(good, file="~/Documents/git/regionalrisk/analyses/output/aeship_data.csv", row.names=FALSE)
+
+write.csv(aeship, file="~/Documents/git/regionalrisk/analyses/output/aeship_data_dvr.csv", row.names=FALSE)

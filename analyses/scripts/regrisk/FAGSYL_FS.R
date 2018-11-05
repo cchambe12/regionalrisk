@@ -31,7 +31,7 @@ df<-d%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$bb<-df$lo-12
+df$bb<-df$lo-8 # was 12; used Danf's dvr data for WL1 and CS0 average for Fagus grandifolia
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<- df[order(df$PEP_ID, df$year), ]
 df$pep.year<-paste(df$year, df$PEP_ID)
@@ -79,4 +79,4 @@ dx<-dplyr::select(dx, -date)
 fagsyl<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 any.nas<-fagsyl[is.na(fagsyl$Tmin),]
 
-write.csv(fagsyl, file="~/Documents/git/regionalrisk/analyses/output/fagsyl_data.csv", row.names=FALSE)
+write.csv(fagsyl, file="~/Documents/git/regionalrisk/analyses/output/fagsyl_data_dvr.csv", row.names=FALSE)

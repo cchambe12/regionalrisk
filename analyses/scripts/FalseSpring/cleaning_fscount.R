@@ -15,22 +15,22 @@ library(lubridate)
 
 ### Load data
 setwd("~/Documents/git/regionalrisk/analyses/output")
-bp<-read.csv("betpen_data.csv", header=TRUE)
+bp<-read.csv("betpen_data_dvr.csv", header=TRUE)
 fs<-read.csv("fagsyl_data.csv", header=TRUE)
 fe<-read.csv("fraexc_data.csv", header=TRUE)
 qr<-read.csv("querob_data.csv", header=TRUE)
-ah<-read.csv("aeship_data.csv", header=TRUE)
-ag<-read.csv("alnglu_data.csv", header=TRUE)
+ah<-read.csv("aeship_data_dvr.csv", header=TRUE)
+ag<-read.csv("alnglu_data_dvr.csv", header=TRUE)
 
-d<-read.csv("~/Documents/git/springfreeze/input/Budburst.clean.csv",header=TRUE)
-tx<-c("CL0", "WL1")
-d<-d[(d$treatcode%in%tx),]
-d<-subset(d, select=c("sp", "lday", "bday"))
-d<-na.omit(d)
-d$dvr<-d$lday-d$bday
-d$dvr.sp<-ave(d$dvr, d$sp)
-dx<-subset(d, select=c("sp", "dvr.sp"))
-dx<-dx[!duplicated(dx),]
+#d<-read.csv("~/Documents/git/springfreeze/input/Budburst.clean.csv",header=TRUE)
+#tx<-c("CL0", "WL1")
+#d<-d[(d$treatcode%in%tx),]
+#d<-subset(d, select=c("sp", "lday", "bday"))
+#d<-na.omit(d)
+#d$dvr<-d$lday-d$bday
+#d$dvr.sp<-ave(d$dvr, d$sp)
+#dx<-subset(d, select=c("sp", "dvr.sp"))
+#dx<-dx[!duplicated(dx),]
 
 ## Start looking at the data a bit...
 bp$fs<- ifelse(bp$Tmin<=-2.2, 1, 0)
@@ -83,6 +83,10 @@ d<-full_join(d, fraexc)
 
 fs$fs<- ifelse(fs$Tmin<=-2.2, 1, 0)
 fs<-fs[!duplicated(fs),]
+fs$lo<-ave(fs$doy, fs$year, fs$PEP_ID, FUN=last)
+fs$bb<-fs$lo-8
+fs$foo<-paste(fs$year, fs$PEP_ID)
+fs<-fs[!(fs$doy<fs$bb),]
 fs$fs.count<- ave(fs$fs, fs$PEP_ID, fs$year, FUN=sum)
 fagsyl<-fs%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 fagsyl<-fagsyl[!duplicated(fagsyl),]
@@ -105,5 +109,5 @@ querob$fs<-ifelse(querob$fs.count>=1, 1, 0)
 
 d<-full_join(d, querob)
 
-write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/fs_yearsitespp.csv", row.names = FALSE)
+write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/fs_dvr.csv", row.names = FALSE)
 

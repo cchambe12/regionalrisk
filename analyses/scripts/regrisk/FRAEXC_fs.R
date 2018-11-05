@@ -34,10 +34,9 @@ df<-d%>%
   rename(bb=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$lo<-df$bb+12
+df$bb<-df$lo-12 
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<- df[order(df$PEP_ID, df$year), ]
-df<-arrange(df, PEP_ID, year)
 df$pep.year<-paste(df$year, df$PEP_ID)
 days.btw <- Map(seq, df$bb, df$lo, by = 1)
 
@@ -49,6 +48,7 @@ dxx<-dplyr::select(dxx, -pep.year)
 x<-paste(dxx$year, dxx$doy)
 dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
+
 
 ## Climate Data time...
 r<-brick("~/Desktop/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")

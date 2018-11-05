@@ -31,23 +31,28 @@ df<-d%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$bb<-df$lo-12
-df$bb<-ave(df$bb, df$lat, df$long, df$year, FUN=min)
+df$bb<-df$lo-15 #was 12; used Danf's WL1 and CS0 data average for all Betula species
 
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
-df<- df[order(df$PEP_ID, df$year), ]
+df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo)
 df$pep.year<-paste(df$year, df$PEP_ID)
-days.btw <- Map(seq, df$bb, df$lo, by = 1)
 
-dxx <- data.frame(PEP_ID=df$PEP_ID, lat=df$lat, long=df$long,
-                  pep.year = rep.int(df$pep.year, vapply(days.btw, length, 1L)), 
-                  doy = do.call(c, days.btw))
-dxx$year<-substr(dxx$pep.year, 1, 4)
+dxx<-data_frame()
+days.btw<-array()
+for(i in length(df$pep.year)){
+  days.btw[i] <- Map(seq, df$bb[i], df$lo[i], by = 1)
+  dxx <- data.frame(PEP_ID=df$PEP_ID, year=df$year, lat=df$lat, long=df$long,
+                    pep.year = rep.int(df$pep.year, vapply(days.btw[i], length, 1L)), 
+                    doy = do.call(c, days.btw[i]))
+}
+
+dxx<-dxx[!duplicated(dxx),]
 dxx<-dplyr::select(dxx, -pep.year)
 x<-paste(dxx$year, dxx$doy)
 dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 
+## Climate Data time...
 r<-brick("~/Desktop/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 
 bb<-dxx
@@ -83,4 +88,4 @@ dx<-dplyr::select(dx, -date)
 betpen<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 any.nas<-betpen[is.na(betpen$Tmin),]
 
-write.csv(betpen, file="~/Documents/git/regionalrisk/analyses/output/betpen_data.csv", row.names=FALSE)
+write.csv(betpen, file="~/Documents/git/regionalrisk/analyses/output/betpen_data_dvr.csv", row.names=FALSE)
