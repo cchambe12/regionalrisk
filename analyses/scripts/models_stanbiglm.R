@@ -8,10 +8,10 @@ options(stringsAsFactors = FALSE)
 
 ## Libraries
 library(rstan)
-library(rstanarm)
+library(brms)
 library(sjPlot)
 library(sjmisc)
-library(MASS)
+#library(MASS)
 library(RColorBrewer)
 library(dplyr)
 library(bayesplot)
@@ -21,9 +21,10 @@ library(egg)
 # Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses/output")
 
+bb<-read.csv("fs_space_new.csv", header=TRUE)
 #bs<-read.csv("regrisk.fixed.csv", header=TRUE)
 #bb<-read.csv("bb_latprep_nov.csv", header=TRUE)
-bb<-read.csv("bb_latprep_nov_5.csv", header=TRUE)
+#bb<-read.csv("bb_latprep_nov_5.csv", header=TRUE)
 
 #bb$sm.elev<-bb$elev/100
 #bb<-na.omit(bb)
@@ -33,30 +34,22 @@ bb<-read.csv("bb_latprep_nov_5.csv", header=TRUE)
 ### Lines 27-67 are following Ben's example on the stan_biglm documentation
 ## Need a coastal parameter!
 
-bb$nao.z <- (bb$nao-mean(bb$nao,na.rm=TRUE))/(2*sd(bb$nao,na.rm=TRUE))
-bb$mat.z <- (bb$mst-mean(bb$mst,na.rm=TRUE))/(2*sd(bb$mst,na.rm=TRUE))
-bb$cc.z <- (bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE))
-bb$elev.z <- (bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE))
-bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
-bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
-bb$space.z <-(bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE))
-
 bb$nao.z <- abs((bb$nao-mean(bb$nao,na.rm=TRUE))/(2*sd(bb$nao,na.rm=TRUE)))
 bb$mat.z <- abs((bb$mst-mean(bb$mst,na.rm=TRUE))/(2*sd(bb$mst,na.rm=TRUE)))
 bb$cc.z <- abs((bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE)))
 bb$elev.z <- abs((bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE)))
 bb$lat.z <- abs((bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE)))
 bb$dist.z <-abs((bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE)))
-bb$space.z <-abs((bb$space-mean(bb$space,na.rm=TRUE))/(2*sd(bb$space,na.rm=TRUE)))
+bb$space.z <-abs((bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE)))
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 
 bb$species<-ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species)
 
-fit<-glm(fs~ nao.z + mat.z + elev.z + dist.z + space.z +
+fit<-glm(fs.count~ nao.z + mat.z + elev.z + dist.z + space.z +
           cc.z + species + nao.z:species + 
           mat.z:species + elev.z:species + dist.z:species + space.z:species + cc.z:species + 
-          nao.z:cc.z + mat.z:cc.z + elev.z:cc.z + dist.z:cc.z + space.z:cc.z, data=bb)
+          nao.z:cc.z + mat.z:cc.z + elev.z:cc.z + dist.z:cc.z + space.z:cc.z, data=bb, family=quasipoisson())
 
 b <- coef(fit)[-1]
 R <- qr.R(fit$qr)[-1,-1]
@@ -128,93 +121,95 @@ mod<-lm(~m.index*cc, data=bb)
 
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(6)
 ##### Interaction Plots code
-nao<- plot_model(fit, type = "pred", terms = c("nao.z", "species")) + xlab("NAO") + 
-  ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
-  #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4))+
+nao<- plot_model(bernszeroonepriors, type = "pred", terms = c("nao.z", "species")) + xlab("NAO") + 
+  ylab("Number of False Springs") + ggtitle("A.") + theme_classic() + theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0, 0)) + 
+  coord_cartesian(ylim=c(0,0.8))+
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                                "BETPEN"=expression(paste(italic("Betula lenta"))),
-                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                                "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   scale_fill_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                                "BETPEN"=expression(paste(italic("Betula lenta"))),
-                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                                "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-elev<- plot_model(fit, type = "pred", terms = c("elev.z", "species")) + xlab("Elevation") + 
-  ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
-  #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) +
+elev<- plot_model(bernsshort, type = "pred", terms = c("elev.z", "species")) + xlab("Elevation") + 
+  ylab("Number of False Springs") + ggtitle("B.") + theme_classic() + theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0, 0)) + 
+  coord_cartesian(ylim=c(0,0.8)) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                                "BETPEN"=expression(paste(italic("Betula lenta"))),
-                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                                "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                              "BETPEN"=expression(paste(italic("Betula lenta"))),
-                             "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                             "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-mat<- plot_model(fit, type = "pred", terms = c("mat.z", "species")) + xlab("Mean Spring Temperature") + 
-  ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
-  #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) +
+mat<- plot_model(bernsshort, type = "pred", terms = c("mat.z", "species")) + xlab("Mean Spring Temperature") + 
+  ylab("Number of False Springs") + ggtitle("C.") + theme_classic()+ theme(legend.position = "none") + 
+  scale_y_continuous(expand = c(0, 0)) + 
+  coord_cartesian(ylim=c(0,0.8)) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                                "BETPEN"=expression(paste(italic("Betula lenta"))),
-                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                                "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                              "BETPEN"=expression(paste(italic("Betula lenta"))),
-                             "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                             "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-space<- plot_model(fit, type = "pred", terms = c("dist.z", "species")) + xlab("Distance from Coast") + ylab("Number of False Springs") + 
-  ggtitle("") + #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + theme(legend.position = "none") +
+space<- plot_model(bernsshort, type = "pred", terms = c("dist.z", "species")) + xlab("Distance from Coast") + ylab("Number of False Springs") + 
+  ggtitle("D.") + scale_y_continuous(expand = c(0, 0)) + 
+  coord_cartesian(ylim=c(0,0.8)) + 
+  theme_classic() + theme(legend.position = "none") + 
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                                "BETPEN"=expression(paste(italic("Betula lenta"))),
-                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                                "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                              "BETPEN"=expression(paste(italic("Betula lenta"))),
-                             "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                             "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-ccsp<- plot_model(fit, type = "pred", terms = c("cc.z", "species")) + xlab("Climate Change") + ylab("Number of False Springs") + ggtitle("") + 
-  #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4))  + theme(legend.position = "none") + 
-  theme(legend.text.align = 0) +
+ccsp<- plot_model(bernsshort, type = "pred", terms = c("cc.z", "species")) + xlab("Climate Change") + ylab("Number of False Springs") + ggtitle("E.") + 
+  scale_y_continuous(expand = c(0, 0)) + 
+  coord_cartesian(ylim=c(0,0.4))  + 
+  theme_classic() + theme(legend.position = "none") + 
+  #theme(legend.text.align = 0, legend.key = element_rect(fill="white")) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                                "BETPEN"=expression(paste(italic("Betula lenta"))),
-                               "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                               "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                                "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                              "BETPEN"=expression(paste(italic("Betula lenta"))),
-                             "aaFAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                             "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 
@@ -231,7 +226,7 @@ grid.arrange(nao, mat, ccsp, elev, space, mylegend, ncol=3, nrow=2)
 
 colz <- colorRampPalette(brewer.pal(9,"Set1"))(2)
 colz<-rev(colz)
-nao<- plot_model(fit, type = "pred", terms = c("nao.z", "cc.z")) + xlab("NAO") + 
+nao<- marginal_effects(bernszeroonepriors, type = "pred", terms = c("nao.z", "cc.z")) + xlab("NAO") + 
   ylab("Number of False Springs") + ggtitle("") + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
   coord_cartesian(ylim=c(0,0.4)) + 
