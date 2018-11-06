@@ -11,6 +11,7 @@ library(rstan)
 library(brms)
 library(sjPlot)
 library(sjmisc)
+library(jtools)
 #library(MASS)
 library(RColorBrewer)
 library(dplyr)
@@ -453,95 +454,106 @@ regrisk<-ggplot(simple, aes(x=`2.5%`, xend=`97.5%`, y=Jvar, yend=Jvar)) +
 quartz()
 regrisk
 
-brms<-as.data.frame(tidy(slopes.fast,robust = TRUE))
-brms<-brms[2:46,]
+############ Model Output
+brms<-as.data.frame(tidy(bernszeroonepriors,robust = TRUE))
+brms<-brms[2:47,]
 brms$term<-gsub(".*b_","",brms$term)
 brms$term<-gsub(".*r_species","",brms$term)
-brms<-brms[!(brms$term=="sd_species__m.index" | brms$term=="sd_species__sp.temp" | brms$term=="sd_species__sm.elev"
-           | brms$term=="sd_species__space" | brms$term=="sd_species__cc" | brms$term=="sigma"),]
+brms<-brms[!(brms$term=="sd_species__nao.z" | brms$term=="sd_species__mat.z" | brms$term=="sd_species__elev.z"
+             | brms$term=="sd_species__dist.z" | brms$term=="sd_species__space.z" | brms$term=="sd_species__cc.z" | brms$term=="sigma"),]
 
-brms$species<-c(0,0,0,0,0,0,0,0,0, 1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6,1,2,3,4,5,6)
+brms$species<-c(0,0,0,0,0,0, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 0,0,0,0,0)
 brms$Jvar<-NA
-brms$Jvar<-ifelse(brms$term=="m.index", 9, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[AESHIP,m.index]", 8.9, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[ALNGLU,m.index]", 8.8, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[BETPEN,m.index]", 8.7, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FAGSYL,m.index]", 8.6, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FRAEXC,m.index]", 8.5, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[QUEROB,m.index]", 8.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="nao.z", 11, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[AESHIP,nao.z]", 8.9, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[ALNGLU,nao.z]", 8.8, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[BETPEN,nao.z]", 8.7, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FAGSYL,nao.z]", 8.6, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FRAEXC,nao.z]", 8.5, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[QUEROB,nao.z]", 8.4, brms$Jvar)
 
-brms$Jvar<-ifelse(brms$term=="sp.temp", 8, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[AESHIP,sp.temp]", 7.9, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[ALNGLU,sp.temp]", 7.8, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[BETPEN,sp.temp]", 7.7, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FAGSYL,sp.temp]", 7.6, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FRAEXC,sp.temp]", 7.5, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[QUEROB,sp.temp]", 7.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="mat.z", 10, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[AESHIP,mat.z]", 7.9, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[ALNGLU,mat.z]", 7.8, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[BETPEN,mat.z]", 7.7, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FAGSYL,mat.z]", 7.6, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FRAEXC,mat.z]", 7.5, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[QUEROB,mat.z]", 7.4, brms$Jvar)
 
-brms$Jvar<-ifelse(brms$term=="sm.elev", 7, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[AESHIP,sm.elev]", 6.9, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[ALNGLU,sm.elev]", 6.8, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[BETPEN,sm.elev]", 6.7, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FAGSYL,sm.elev]", 6.6, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FRAEXC,sm.elev]", 6.5, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[QUEROB,sm.elev]", 6.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="elev.z", 9, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[AESHIP,elev.z]", 6.9, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[ALNGLU,elev.z]", 6.8, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[BETPEN,elev.z]", 6.7, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FAGSYL,elev.z]", 6.6, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FRAEXC,elev.z]", 6.5, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[QUEROB,elev.z]", 6.4, brms$Jvar)
 
-brms$Jvar<-ifelse(brms$term=="space", 6, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[AESHIP,space]", 5.9, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[ALNGLU,space]", 5.8, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[BETPEN,space]", 5.7, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FAGSYL,space]", 5.6, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FRAEXC,space]", 5.5, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[QUEROB,space]", 5.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="dist.z", 8, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[AESHIP,dist.z]", 6.9, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[ALNGLU,dist.z]", 6.8, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[BETPEN,dist.z]", 6.7, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FAGSYL,dist.z]", 6.6, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FRAEXC,dist.z]", 6.5, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[QUEROB,dist.z]", 6.4, brms$Jvar)
 
-brms$Jvar<-ifelse(brms$term=="cc", 5, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[AESHIP,cc]", 4.9, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[ALNGLU,cc]", 4.8, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[BETPEN,cc]", 4.7, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FAGSYL,cc]", 4.6, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[FRAEXC,cc]", 4.5, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="[QUEROB,cc]", 4.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="space.z", 7, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[AESHIP,space]", 5.9, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[ALNGLU,space]", 5.8, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[BETPEN,space]", 5.7, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FAGSYL,space]", 5.6, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FRAEXC,space]", 5.5, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[QUEROB,space]", 5.4, brms$Jvar)
 
-brms$Jvar<-ifelse(brms$term=="m.index:cc", 4, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="sp.temp:cc", 3, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="cc:sm.elev", 2, brms$Jvar)
-brms$Jvar<-ifelse(brms$term=="cc:space", 1, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="cc.z", 6, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[AESHIP,cc]", 4.9, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[ALNGLU,cc]", 4.8, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[BETPEN,cc]", 4.7, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FAGSYL,cc]", 4.6, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[FRAEXC,cc]", 4.5, brms$Jvar)
+#brms$Jvar<-ifelse(brms$term=="[QUEROB,cc]", 4.4, brms$Jvar)
 
+brms$Jvar<-ifelse(brms$term=="nao.z:cc.z", 5, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="mat.z:cc.z", 4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="elev.z:cc.z", 3, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="dist.z:cc.z", 2, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="space.z:cc.z", 1, brms$Jvar)
+
+bb<-brms[(brms$species==0),]
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
-estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Space Parameter", "Climate Change",
+estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Distanct from Coast", "Space Parameter", "Climate Change",
              "NAO Index x \nClimate Change", "Mean Spring Temperature \nx Climate Change",
-             "Elevation x \nClimate Chnage", "Space Parameter \nx Climate Change")
+             "Elevation x \nClimate Chnage", "Distance from Coast \nx Climate Change", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
-regrisk<-ggplot(brms, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(species))) +
+regrisk<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(species))) +
   geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar, col=as.factor(species), size=as.factor(species))) +
-  scale_colour_manual(name="Species", values=cols,
-                      labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
-                               "2"=expression(paste(italic("Alnus glutinosa"))),
-                               "3"=expression(paste(italic("Betula lenta"))),
-                               "4"=expression(paste(italic("Fagus sylvatica"))),
-                               "5"=expression(paste(italic("Fraxinus excelsior"))),
-                               "6"=expression(paste(italic("Quercus robur"))),
-                               "0"="Overall Effects"))+
+  #scale_colour_manual(name="Species", values=cols,
+  #                   labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
+  #                           "2"=expression(paste(italic("Alnus glutinosa"))),
+  #                          "3"=expression(paste(italic("Betula lenta"))),
+  #                         "4"=expression(paste(italic("Fagus sylvatica"))),
+  #                        "5"=expression(paste(italic("Fraxinus excelsior"))),
+  #                       "6"=expression(paste(italic("Quercus robur"))),
+  #                      "0"="Overall Effects"))+
   geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
   scale_y_discrete(limits = sort(unique(brms$term)), labels=estimates) +
   xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=5), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
-        text=element_text(family="sans"), legend.position = c(0.85,0.25),
-        legend.text.align = 0) + #+ coord_cartesian(ylim=c(1,5), xlim=c(-20, 10))
-  scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
-                    labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
-                             "2"=expression(paste(italic("Alnus glutinosa"))),
-                             "3"=expression(paste(italic("Betula lenta"))),
-                             "4"=expression(paste(italic("Fagus sylvatica"))),
-                             "5"=expression(paste(italic("Fraxinus excelsior"))),
-                             "6"=expression(paste(italic("Quercus robur"))),
-                             "0"="Overall Effects"))
+        text=element_text(family="sans"), legend.position = "none",
+        legend.text.align = 0) + coord_cartesian(ylim=c(1,11))
+#scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
+#                 labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
+#                         "2"=expression(paste(italic("Alnus glutinosa"))),
+#                        "3"=expression(paste(italic("Betula lenta"))),
+#                       "4"=expression(paste(italic("Fagus sylvatica"))),
+#                      "5"=expression(paste(italic("Fraxinus excelsior"))),
+#                     "6"=expression(paste(italic("Quercus robur"))),
+#                    "0"="Overall Effects"))
 quartz()
 regrisk
 
-nao<-interact_plot(model = slopes.fast, pred = m.index, modx = cc) + xlab("NAO Index") + ylab("Num. False Springs") + theme(legend.position = "none")
+nao<-interact_plot(model = bernszeroonepriors, pred = nao.z, modx = cc.z) + xlab("NAO Index") + ylab("Num. False Springs") + theme(legend.position = "none")
 elev<-interact_plot(model = slopes.fast, pred = sm.elev, modx = cc) + xlab("Elevation") + ylab("Num. False Springs") + theme(legend.position = "none")
 mat<-interact_plot(model = slopes.fast, pred = sp.temp, modx = cc) + xlab("Mean Spring Temperature") + ylab("Num. False Springs") 
 spa<-interact_plot(model = slopes.fast, pred = space, modx = cc) + xlab("Space") + ylab("Num. False Springs")
