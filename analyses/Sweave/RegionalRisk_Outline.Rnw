@@ -180,7 +180,7 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
 \item There is variation in day of budburst across the six species and across space (Figure \ref{fig:bbmap}). 
 \begin{enumerate}
 \item The top three species (\textit{Betula pendula}, \textit{Alnus glutinosa}, \textit{Aesculus hippocastenum}) generally initiated budburst earlier than the bottom three species (\textit{Fagus sylvatica}, \textit{Quercus robur}, \textit{Fraxinus excelsior}).
-\item Across all species, some regions tended to initiate budburst earlier than others (i.e. United Kingdom was earlier than parts of Austria).
+\item Across all species, certain regions tended to initiate budburst earlier than others (i.e. United Kingdom was earlier than parts of Austria).
 \end{enumerate}
 \item All species initiated budburst earlier after 1983 (Figure \ref{fig:boxfs}) and the minimum temperature between budburst and leafout was, on average, higher after 1983. 
 \item Species that initiated budburst early were not always at a higher risk of false springs (Figure \ref{fig:boxfs}), as is evident by \textit{Alnus glutinosa}.
@@ -190,9 +190,9 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
 \end{enumerate}
 \end{enumerate}
 
-%\subsection*{The effects of climatic regional variation on false spring incidence - potentially! still waiting on final model results!}
-%\begin{enumerate}
-%\item The relationship between the main effects and false spring as compared before and after 1983 (Fig. Main effects)
+\subsection*{The effects of climatic regional variation on false spring incidence}
+\begin{enumerate}
+\item 
 %\begin{enumerate}
 %\item As elevation increases, plants are exposed to more frequent false spring conditions and the rate of increase is greater under climate change.
 %\item As mean spring temperature increases, there are fewer false springs and the rate of decrease is greater after 1983.
