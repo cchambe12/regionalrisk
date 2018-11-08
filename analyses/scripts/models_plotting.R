@@ -16,6 +16,7 @@ library(sjPlot)
 library(ggeffects)
 library(broom)
 
+setwd("~/Documents/git/regionalrisk/analyses/output")
 
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(6)
 ##### Interaction Plots code
@@ -531,11 +532,11 @@ elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=grou
   #scale_y_continuous(expand = c(0, 0)) + 
   coord_cartesian(ylim=c(0,0.4)) + 
   scale_color_manual(name="Climate Change", values=colz,
-                     labels=c("-0.459208492649012"="1950-1983",
-                              "0.544414297170614"="1984-2016")) +
+                     labels=c("-0.459201306681485"="1950-1983",
+                              "0.544422816636883"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
-                    labels=c("-0.459208492649012"="1950-1983",
-                             "0.544414297170614"="1984-2016"))
+                    labels=c("-0.459201306681485"="1950-1983",
+                             "0.544422816636883"="1984-2016"))
 mat<-ggpredict(berndvrfinal, terms=c("mat.z", "cc.z"))
 #write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/matpredict_dvr.csv", row.names=FALSE)
 #mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict_dvr.csv", header=TRUE)
@@ -558,11 +559,11 @@ dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=grou
   ggtitle("") + theme_classic() + #scale_y_continuous(expand = c(0, 0)) + 
   coord_cartesian(ylim=c(0,0.4)) + 
   scale_color_manual(name="Climate Change", values=colz,
-                     labels=c("-0.459208492649012"="1950-1983",
-                              "0.544414297170614"="1984-2016")) +
+                     labels=c("-0.459201306681485"="1950-1983",
+                              "0.544422816636883"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
-                    labels=c("-0.459208492649012"="1950-1983",
-                             "0.544414297170614"="1984-2016"))
+                    labels=c("-0.459201306681485"="1950-1983",
+                             "0.544422816636883"="1984-2016"))
 
 quartz()
 ggarrange(nao.p, elev.p, mat.p, dist.p, ncol=2, nrow=2)
