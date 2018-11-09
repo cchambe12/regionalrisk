@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  28 SEP 2018 12:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 NOV 2018 13:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -790,14 +790,7 @@ LaTeX Info: Redefining \\ on input line 3056.
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(./RegionalRisk_Outline.aux
-
-LaTeX Warning: Label `fig:hadbrms' multiply defined.
-
-
-LaTeX Warning: Label `fig:hadbrms' multiply defined.
-
-)
+(./RegionalRisk_Outline.aux)
 \openout1 = `RegionalRisk_Outline.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
@@ -814,7 +807,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
 LaTeX Font Info:    ... okay on input line 90.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 90.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 90.
- (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 90.
@@ -880,93 +874,154 @@ Underfull \hbox (badness 10000) in paragraph at lines 93--103
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (4.15327pt too wide) in paragraph at lines 146--147
+Overfull \hbox (4.15327pt too wide) in paragraph at lines 143--144
 []\T1/aer/m/n/10 There is large de-bate over whether or not spring freeze dam-a
 ge will in-crease (Hän-ni-nen, 1991; Augspurger,
  []
 
-[2] [3] [4] (./RegionalRisk_Outline.bbl [5] [6] [7] [8])
-<..//figures/BB_gis.pdf, id=40, 845.1575pt x 597.23125pt>
+[2] [3] [4]
+! Missing number, treated as zero.
+<to be read again> 
+                   S
+l.207 \end{align*}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Missing number, treated as zero.
+<to be read again> 
+                   S
+l.207 \end{align*}
+                  
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+
+Overfull \hbox (187.91382pt too wide) in paragraph at lines 207--207
+[] 
+ []
+
+[5]
+Runaway argument?
+{fig:intrxns)). \end {enumerate} 
+! Paragraph ended before \ref was complete.
+<to be read again> 
+                   \par 
+l.245 
+      
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+(./RegionalRisk_Outline.bbl [6] [7] [8] [9])
+<..//figures/BB_gis.pdf, id=43, 845.1575pt x 597.23125pt>
 File: ..//figures/BB_gis.pdf Graphic file (type pdf)
 
 <use ..//figures/BB_gis.pdf>
-Package pdftex.def Info: ..//figures/BB_gis.pdf used on input line 262.
+Package pdftex.def Info: ..//figures/BB_gis.pdf used on input line 273.
 (pdftex.def)             Requested size: 398.33858pt x 281.49155pt.
- [9]
-<..//figures/Boxplot_BBTminFS_perDecade.pdf, id=44, 665.0166pt x 661.70142pt>
-File: ..//figures/Boxplot_BBTminFS_perDecade.pdf Graphic file (type pdf)
+ [10]
+<..//figures/Boxplot_BBTminFS.pdf, id=47, 489.01636pt x 423.43213pt>
+File: ..//figures/Boxplot_BBTminFS.pdf Graphic file (type pdf)
 
-<use ..//figures/Boxplot_BBTminFS_perDecade.pdf>
-Package pdftex.def Info: ..//figures/Boxplot_BBTminFS_perDecade.pdf used on inp
-ut line 269.
-(pdftex.def)             Requested size: 341.43306pt x 339.73502pt.
- [10 <..//figures/BB_gis.pdf>]
-<..//figures/ModelOutput_ElevDist_NovApr.pdf, id=55, 458.45288pt x 330.46811pt>
-File: ..//figures/ModelOutput_ElevDist_NovApr.pdf Graphic file (type pdf)
-<use ..//figures/ModelOutput_ElevDist_NovApr.pdf>
-Package pdftex.def Info: ..//figures/ModelOutput_ElevDist_NovApr.pdf used on in
-put line 283.
-(pdftex.def)             Requested size: 341.43306pt x 246.12088pt.
- [11 <..//figures/Boxplot_BBTminFS_perDecade.pdf>]
-<..//figures/InteractionPlots/Elev&Dist_CC_NovApr.pdf, id=254, 508.11864pt x 39
-2.86867pt>
-File: ..//figures/InteractionPlots/Elev&Dist_CC_NovApr.pdf Graphic file (type p
-df)
- <use ..//figures/InteractionPlots/Elev&Dist_CC_NovApr.pdf>
-Package pdftex.def Info: ..//figures/InteractionPlots/Elev&Dist_CC_NovApr.pdf u
-sed on input line 290.
-(pdftex.def)             Requested size: 341.43306pt x 263.99994pt.
- [12 <..//figures/ModelOutput_ElevDist_NovApr.pdf>]
-<..//figures/InteractionPlots/Species_Elev&Dist_NovApr.pdf, id=348, 564.15167pt
- x 382.044pt>
-File: ..//figures/InteractionPlots/Species_Elev&Dist_NovApr.pdf Graphic file (t
-ype pdf)
- <use ..//figures/InteractionPlots/Species_Elev&Dist_NovApr.pdf>
-Package pdftex.def Info: ..//figures/InteractionPlots/Species_Elev&Dist_NovApr.
-pdf used on input line 297.
-(pdftex.def)             Requested size: 455.24408pt x 308.29971pt.
+<use ..//figures/Boxplot_BBTminFS.pdf>
+Package pdftex.def Info: ..//figures/Boxplot_BBTminFS.pdf used on input line 28
+0.
+(pdftex.def)             Requested size: 341.43306pt x 295.65099pt.
+ [11 <..//figures/BB_gis.pdf>]
+<..//figures/MSTBB_bySpp.png, id=58, 2810.5pt x 1756.5625pt>
+File: ..//figures/MSTBB_bySpp.png Graphic file (type png)
 
-[13 <..//figures/InteractionPlots/Elev&Dist_CC_NovApr.pdf>]
-<..//figures/space_extremes.pdf, id=570, 845.1575pt x 597.23125pt>
+<use ..//figures/MSTBB_bySpp.png>
+Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 287.
+(pdftex.def)             Requested size: 341.43306pt x 213.3783pt.
+ [12 <..//figures/Boxplot_BBTminFS.pdf>]
+<..//figures/TminBB_bySpp.png, id=231, 2810.5pt x 1756.5625pt>
+File: ..//figures/TminBB_bySpp.png Graphic file (type png)
+
+<use ..//figures/TminBB_bySpp.png>
+Package pdftex.def Info: ..//figures/TminBB_bySpp.png used on input line 294.
+(pdftex.def)             Requested size: 341.43306pt x 213.3783pt.
+
+<..//figures/model_output_dvr.pdf, id=232, 355.93768pt x 304.99847pt>
+File: ..//figures/model_output_dvr.pdf Graphic file (type pdf)
+
+<use ..//figures/model_output_dvr.pdf>
+Package pdftex.def Info: ..//figures/model_output_dvr.pdf used on input line 30
+8.
+(pdftex.def)             Requested size: 455.24408pt x 390.12213pt.
+ [13 <..//figures/MSTBB_bySpp.png> <..//figures/TminBB_bySpp.png>]
+<..//figures/InteractionPlots/IntrxnPlots_dvr.pdf, id=239, 544.4127pt x 341.929
+46pt>
+File: ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf Graphic file (type pdf)
+ <use ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf>
+Package pdftex.def Info: ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf used 
+on input line 316.
+(pdftex.def)             Requested size: 455.24408pt x 285.92487pt.
+ [14 <..//figures/model_output_dvr.pdf>]
+<..//figures/model_output_berniefive.pdf, id=345, 355.93768pt x 304.99847pt>
+File: ..//figures/model_output_berniefive.pdf Graphic file (type pdf)
+
+<use ..//figures/model_output_berniefive.pdf>
+Package pdftex.def Info: ..//figures/model_output_berniefive.pdf used on input 
+line 323.
+(pdftex.def)             Requested size: 455.24408pt x 390.12213pt.
+ [15 <..//figures/InteractionPlots/IntrxnPlots_dvr.pdf>] [16 <..//figures/model
+_output_berniefive.pdf>]
+<..//figures/space_extremes.pdf, id=670, 845.1575pt x 597.23125pt>
 File: ..//figures/space_extremes.pdf Graphic file (type pdf)
 
 <use ..//figures/space_extremes.pdf>
-Package pdftex.def Info: ..//figures/space_extremes.pdf used on input line 332.
+Package pdftex.def Info: ..//figures/space_extremes.pdf used on input line 359.
 
 (pdftex.def)             Requested size: 341.43306pt x 241.27586pt.
- [14 <..//figures/InteractionPlots/Species_Elev&Dist_NovApr.pdf>] [15 <..//figu
-res/space_extremes.pdf>]
-(./RegionalRisk_Outline.aux)
 
-LaTeX Warning: There were multiply-defined labels.
 
- ) 
+! LaTeX Error: \begin{enumerate} on input line 236 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.365 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[17 <..//figures/space_extremes.pdf>] (./RegionalRisk_Outline.aux) )
+(\end occurred inside a group at level 1)
+
+### semi simple group (level 1) entered at line 236 (\begingroup)
+### bottom level 
 Here is how much of TeX's memory you used:
- 16109 strings out of 493014
- 315067 string characters out of 6133351
- 338012 words of memory out of 5000000
- 19436 multiletter control sequences out of 15000+600000
+ 16130 strings out of 493014
+ 315307 string characters out of 6133351
+ 339171 words of memory out of 5000000
+ 19454 multiletter control sequences out of 15000+600000
  33938 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,10n,42p,10410b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/
-2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/201
-6/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on RegionalRisk_Outline.pdf (15 pages, 6479191 bytes).
+ 37i,9n,42p,10410b,673s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.
+pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on RegionalRisk_Outline.pdf (17 pages, 5661938 bytes).
 PDF statistics:
- 896 PDF objects out of 1000 (max. 8388607)
- 665 compressed objects within 7 object streams
+ 725 PDF objects out of 1000 (max. 8388607)
+ 535 compressed objects within 6 object streams
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

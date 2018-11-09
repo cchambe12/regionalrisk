@@ -22,7 +22,7 @@ library(gridExtra)
 setwd("~/Documents/git/regionalrisk/analyses/")
 
 
-bb<-read.csv("output/fs_space_new.csv", header=TRUE)
+bb<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
 xx<-read.csv("output/BBdata.csv", header=TRUE)
 
 dxx<-bb
@@ -130,7 +130,7 @@ dev.off()
 
 
 ###### Now let's compare to Tmin!
-tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
+tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
 
 tm<-full_join(xx, tm)
 tm<-na.omit(tm)

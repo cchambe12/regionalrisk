@@ -79,7 +79,7 @@ budburst<- ggplot(plus, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha
 
 
 ###### Tmin boxplots now...
-tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
+tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
 
 tm$cc<-ifelse(tm$year<1984, 0, 1)
 tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
@@ -133,7 +133,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 ### And finally... False springs!
-f<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+f<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
 
 f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)

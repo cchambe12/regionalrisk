@@ -332,9 +332,9 @@ nao<-ggpredict(bernszeroonepriors, terms=c("nao.z", "cc.z"))
 #nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict.csv", header=TRUE)
 #nao$group<-as.character(nao$group)
 nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("NAO") + 
-  ylab("Number of False Springs") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  coord_cartesian(ylim=c(0,1)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
@@ -346,9 +346,9 @@ elev<-ggpredict(bernszeroonepriors, terms=c("elev.z", "cc.z"))
 #elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict.csv", header=TRUE)
 #elev$group<-as.character(elev$group)
 elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation") + 
-  ylab("Number of False Springs") + ggtitle("") + theme_classic() +
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() +
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  coord_cartesian(ylim=c(0,1)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
@@ -360,9 +360,9 @@ mat<-ggpredict(bernszeroonepriors, terms=c("mat.z", "cc.z"))
 #mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict.csv", header=TRUE)
 #mat$group<-as.character(mat$group)
 mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature") + 
-  ylab("Number of False Springs") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  coord_cartesian(ylim=c(0,1)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
@@ -373,9 +373,9 @@ dist<-ggpredict(bernszeroonepriors, terms=c("dist.z", "cc.z"))
 #write.csv(dist, file="~/Documents/git/regionalrisk/analyses/output/distpredict.csv", row.names=FALSE)
 #dist<-read.csv("~/Documents/git/regionalrisk/analyses/output/distpredict.csv", header=TRUE)
 #dist$group<-as.character(dist$group)
-dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast") + ylab("Number of False Springs") + 
+dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast") + ylab("Probability of False Spring") + 
   ggtitle("") + theme_classic() + #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  coord_cartesian(ylim=c(0,1)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
@@ -514,9 +514,9 @@ nao<-ggpredict(berndvrfinal, terms=c("nao.z", "cc.z"))
 #nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict_dvr.csv", header=TRUE)
 #nao$group<-as.character(nao$group)
 nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("NAO") + 
-  ylab("Number of False Springs") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  coord_cartesian(ylim=c(0,1)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
@@ -528,9 +528,9 @@ elev<-ggpredict(berndvrfinal, terms=c("elev.z", "cc.z"))
 #elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict_dvr.csv", header=TRUE)
 #elev$group<-as.character(elev$group)
 elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation") + 
-  ylab("Number of False Springs") + ggtitle("") + theme_classic() +
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() +
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  coord_cartesian(ylim=c(0,1)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459201306681485"="1950-1983",
                               "0.544422816636883"="1984-2016")) +
@@ -542,9 +542,9 @@ mat<-ggpredict(berndvrfinal, terms=c("mat.z", "cc.z"))
 #mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict_dvr.csv", header=TRUE)
 #mat$group<-as.character(mat$group)
 mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature") + 
-  ylab("Number of False Springs") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  coord_cartesian(ylim=c(0,1)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
@@ -555,9 +555,9 @@ dist<-ggpredict(berndvrfinal, terms=c("dist.z", "cc.z"))
 #write.csv(dist, file="~/Documents/git/regionalrisk/analyses/output/distpredict_dvr.csv", row.names=FALSE)
 #dist<-read.csv("~/Documents/git/regionalrisk/analyses/output/distpredict_dvr.csv", header=TRUE)
 #dist$group<-as.character(dist$group)
-dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast") + ylab("Number of False Springs") + 
+dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast") + ylab("Probability of False Spring") + 
   ggtitle("") + theme_classic() + #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  coord_cartesian(ylim=c(0,1)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459201306681485"="1950-1983",
                               "0.544422816636883"="1984-2016")) +
@@ -635,9 +635,9 @@ brms$Jvar<-ifelse(brms$term=="space.z:cc.z", 1, brms$Jvar)
 
 bb<-brms[(brms$species==0),]
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
-estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Distance from Coast", "Space Parameter", "Climate Change",
+estimates<-c("NAO Index", "Mean Spring Temperature", "Distance from Coast", "Elevation","Space Parameter", "Climate Change",
              "NAO Index x \nClimate Change", "Mean Spring Temperature \nx Climate Change",
-             "Elevation x \nClimate Change", "Distance from Coast \nx Climate Change", "Space Parameter \nx Climate Change")
+             "Distance from Coast \nx Climate Change", "Elevation x \nClimate Change", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
 regrisk.dvr<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(species))) +
   geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar, col=as.factor(species), size=as.factor(species))) +
@@ -656,9 +656,7 @@ regrisk.dvr<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.facto
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
-        legend.text.align = 0, axis.line.y = element_blank(), axis.text.y = element_blank(),
-        axis.ticks.y = element_blank()) + coord_cartesian(ylim=c(1,11)) + ggtitle("DVR Change, -2.2") +
-  coord_cartesian(xlim=c(-2, 1))
+        legend.text.align = 0) + coord_cartesian(ylim=c(1,11), xlim=c(-2, 1))
 #scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
 #                 labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
 #                         "2"=expression(paste(italic("Alnus glutinosa"))),
@@ -735,9 +733,9 @@ brms$Jvar<-ifelse(brms$term=="space.z:cc.z", 1, brms$Jvar)
 
 bb<-brms[(brms$species==0),]
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
-estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Distance from Coast", "Space Parameter", "Climate Change",
+estimates<-c("NAO Index", "Mean Spring Temperature", "Distance from Coast", "Elevation", "Space Parameter", "Climate Change",
              "NAO Index x \nClimate Change", "Mean Spring Temperature \nx Climate Change",
-             "Elevation x \nClimate Change", "Distance from Coast \nx Climate Change", "Space Parameter \nx Climate Change")
+             "Distance from Coast \nx Climate Change", "Elevation x \nClimate Change", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
 regrisk.five<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(species))) +
   geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar, col=as.factor(species), size=as.factor(species))) +
@@ -757,8 +755,7 @@ regrisk.five<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.fact
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0, axis.line.y = element_blank(), axis.text.y = element_blank(),
-        axis.ticks.y = element_blank()) + coord_cartesian(ylim=c(1,11)) + ggtitle("-5 False Spring") +
-  coord_cartesian(xlim=c(-2, 1))
+        axis.ticks.y = element_blank()) + coord_cartesian(ylim=c(1,11), xlim=c(-2,1))
 #scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
 #                 labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
 #                         "2"=expression(paste(italic("Alnus glutinosa"))),
@@ -836,9 +833,9 @@ brms$Jvar<-ifelse(brms$term=="space.z:cc.z", 1, brms$Jvar)
 
 bb<-brms[(brms$species==0),]
 cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
-estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Distance from Coast", "Space Parameter", "Climate Change",
+estimates<-c("NAO Index", "Mean Spring Temperature", "Distance from Coast", "Elevation", "Space Parameter", "Climate Change",
              "NAO Index x \nClimate Change", "Mean Spring Temperature \nx Climate Change",
-             "Elevation x \nClimate Change", "Distance from Coast \nx Climate Change", "Space Parameter \nx Climate Change")
+             "Distance from Coast \nx Climate Change", "Elevation x \nClimate Change", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
 regrisk<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(species))) +
   geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar, col=as.factor(species), size=as.factor(species))) +
@@ -857,8 +854,8 @@ regrisk<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(sp
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
-        legend.text.align = 0) + coord_cartesian(ylim=c(1,11)) + ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-2, 1))
+        legend.text.align = 0)  + #ggtitle("Original Parameters") +
+  coord_cartesian(xlim=c(-2, 1), ylim=c(1,11))
 #scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
 #                 labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
 #                         "2"=expression(paste(italic("Alnus glutinosa"))),

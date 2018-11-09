@@ -12,12 +12,12 @@ library(tidyr)
 
 # Setting working directory
 setwd("~/Documents/git/regionalrisk/analyses/")
-aes<-read.csv("output/aeship_data.csv", header=TRUE)
-ag<-read.csv("output/alnglu_data.csv", header=TRUE)
-bp<-read.csv("output/betpen_data.csv", header=TRUE)
-fsyl<-read.csv("output/fagsyl_data.csv", header=TRUE)
-fex<-read.csv("output/fraexc_data.csv", header=TRUE)
-qr<-read.csv("output/querob_data.csv", header=TRUE)
+aes<-read.csv("output/aeship_data_dvr.csv", header=TRUE)
+ag<-read.csv("output/alnglu_data_dvr.csv", header=TRUE)
+bp<-read.csv("output/betpen_data_dvr.csv", header=TRUE)
+fsyl<-read.csv("output/fagsyl_data_dvr.csv", header=TRUE)
+fex<-read.csv("output/fraexc_data_dvr.csv", header=TRUE)
+qr<-read.csv("output/querob_data_dvr.csv", header=TRUE)
 
 
 aes$lat.long<-paste(aes$lat, aes$long)
@@ -66,5 +66,5 @@ qr<-qr[!duplicated(qr),]
 
 d<-full_join(qr, d)
 tm<-d ## full data not averaged during DVR
-write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/tminprep_boxplots.csv", row.names=FALSE)
+write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/tminprep_boxplots_dvr.csv", row.names=FALSE)
 write.csv(tm, file="~/Documents/git/regionalrisk/analyses/output/tminfull.csv", row.names = FALSE)

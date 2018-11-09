@@ -63,10 +63,6 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%% 1) PIECE TOGETHER THE PUZZLE! %%%%%
-%%%%% 2) FORMULATE QUESTIONS %%%%%
-%%%%% 3) ONCE THE INTRO IS SOLID, THEN MOVE ON TO METHODS! %%%%%%
-
 
 \section*{Introduction}
 \begin{enumerate}
@@ -192,14 +188,21 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
 
 \subsection*{The effects of climatic regional variation on false spring incidence}
 \begin{enumerate}
-\item 
-%\begin{enumerate}
-%\item As elevation increases, plants are exposed to more frequent false spring conditions and the rate of increase is greater under climate change.
-%\item As mean spring temperature increases, there are fewer false springs and the rate of decrease is greater after 1983.
-%\item NAO-index does not seem to be a strong predictor of false spring, ( discussion: which may mean that even though budburst is earlier, late spring freezes are less likely to occur in high NAO years.)
-%\item As the space parameter increases (which captures distance from the coast and shifts in elevation), false spring incidence increased. 
-%\end{enumerate}
-%\end{enumerate}
+\item The effects of the predictors varied in both direction and magnitude (Figure \ref{fig:maineffects}).
+  \begin{enumerate}
+  \item Mean spring temperature had the biggest effect on the number of false springs, with warmer spring temperatures resulting is fewer false springs. 
+  \item More positive NAO indices, higher elevations, and sites further from the coast all increased the likelihood of false springs. 
+  \item Overall, there were fewer false springs after 1983. 
+  \end{enumerate}
+\item Most of the interactions with increasing temperatures (i.e. the Climate Change predictor), demonstrate a decreased risk in false springs, however, the rate of false spring risk increased at sites further from the coast after 1983 (Figure (\ref{fig:intrxns)). 
+\end{enumerate}
+
+\subsection*{The effects of changing the temperature threshold}
+\begin{enumerate}
+\item By changing the temperature threshold for defining a false spring --- from -2.2$^{\circ}$C to -5$^{\circ}$C --- many of the predictors changed in both magnitude and direction but overall there were fewer false springs (Figure \ref{fig:five}).
+\end{enumerate}
+
+
 
 %\section*{Discussion \& Conclusion - jumbles of thoughts right now...}
 %\begin{enumerate}
@@ -253,28 +256,30 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
 %  -\caption{The black line indicates the proportion of sites that had false spring conditions for each year across all species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}.}\label{fig:fsprop}
 %  -\end{center}
 %  -\end{figure}}
-
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/ModelOutput_ElevDist_NovApr.pdf}
-  -\caption{}\label{fig:hadbrms}
-  -\end{center}
-  -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/InteractionPlots/Elev&Dist_CC_NovApr.pdf}
-  -\caption{}\label{fig:hadbrms}
-  -\end{center}
-  -\end{figure}}
-  
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/InteractionPlots/Species_Elev&Dist_NovApr.pdf}
+  -\includegraphics[width=16cm]{..//figures/model_output_dvr.pdf}
   -\caption{}\label{fig:maineffects}
   -\end{center}
   -\end{figure}}
   
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//figures/InteractionPlots/IntrxnPlots_dvr.pdf}
+  -\caption{}\label{fig:intrxns}
+  -\end{center}
+  -\end{figure}}
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//figures/model_output_berniefive.pdf}
+  -\caption{}\label{fig:five}
+  -\end{center}
+  -\end{figure}}
+
+
 \section*{Supplement: Tables and Figures}
 %{\begin{figure} [H]
 %  -\begin{center}
