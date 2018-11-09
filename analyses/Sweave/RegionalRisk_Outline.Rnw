@@ -111,8 +111,10 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item For this purpose, we assessed the number of false springs that occured across 11,648 sites around Europe, spanning altitudinal and coastal gradients, using observed phenological data (754,786 observations) for six temperate, deciduous trees and combined that with daily gridded climate data for each site that extended from 1951-2016. %% Do we want a table here with a breakdown of sites, species, and years? Probably in the supplement? 
 \item In this study, a false spring was tallied when temperatures fell below -2.2$^{\circ}$ \citep{Schwartz1993} between budburst and leafout (CITE Rethinking here?).
 \item Since the primary aim of the study is to predict false spring incidence in a changing climate, we split our data to before and after 1983 to capture reported temporal shifts in temperature trends \citep{Stocker2013, Kharouba2018}.
-\item We predicted that: (1) Earlier budburst species would experience more false springs, especially after 1983 and  %EMW: Nice! But be sure you set the reader up for it above... 
-(2) there would be different regional effects (i.e. mean spring temperature, NAO index, elevation, distance from the coast) on false spring incidence and those trends would shift when coupled with the effects of climate change. %EMW Can we adjust this and/or add to it to get more at the predictors and comparison of them? I think one prediction was that climate change has altered the prevalence of false springs, you can spell that out better in (1) with small tweaks .... the next hypothesis is that XYZ factors may also alter the prevalence of false springs.... so we should probably say that and make sure the intro before here sets the reader up for what we say here. We can focus on a couple major ones and then say 'we also test the effects of A and B' in the methods. I think the big ones are NAO, elevation (and maybe spring temp?).
+\item We predicted that: (1) Earlier budburst species would experience more false springs, especially after 1983,  %EMW: Nice! But be sure you set the reader up for it above... 
+(2) there would be different regional effects (i.e. mean spring temperature, NAO index, elevation, distance from the coast) on false spring incidence and those trends would shift when coupled with the effects of climate change and (3) changing the temperature threshold (i.e. from -2.2$^{\circ}$) or changing the time between budburst and leafout would change the direction and magnitude of the different regional effects. 
+
+%EMW Can we adjust this and/or add to it to get more at the predictors and comparison of them? I think one prediction was that climate change has altered the prevalence of false springs, you can spell that out better in (1) with small tweaks .... the next hypothesis is that XYZ factors may also alter the prevalence of false springs.... so we should probably say that and make sure the intro before here sets the reader up for what we say here. We can focus on a couple major ones and then say 'we also test the effects of A and B' in the methods. I think the big ones are NAO, elevation (and maybe spring temp?).
 \end{enumerate}
 \end{enumerate}
 %% WHERE DOES THIS GO? \item By using only gridded climate data from March 1st until June 30th, we compared the first half of our data (1951-1983) to the latter half (1984-2016) and found that some regions experienced increased exposure to false spring conditions, whereas many regions experienced fewer or similar conditions (Figure \ref{fig:region}). %% supplement? %EMW: Sounds like a mix of methods (first part) and results/discussion (second part).
@@ -124,7 +126,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item Since plants are most susceptible to damage from frost between budburst and full leafout, we selected only leafout data \citep[i.e., in][BBCH 11, which is defined as the point of leaf unfolding and the first visible leaf stalk]{Meier2001} from the PEP725 dataset.
 \item The species used in the study were \textit{Aesculus hippocastanum} Poir., \textit{Alnus glutinosa} (L.) Gaertn., \textit{Betula pendula} Roth., \textit{Fagus sylvatica} Ehrh., \textit{Fraxinus excelsior} L., \textit{Quercus robur} L.
 \item Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used for crops, (2) there were at least 90,000 observations of BBCH 11 (leafout), (3) to represent over half of the total number of sites available (11,684), and (4) there were observations for at least 65 out of the 66 years of the study (1951-2016). % Do we want a table here with a breakdown of data for the supplement?
-\item We then calculated budburst by subtracting 16 days from leafout for \textit{Aesculus hippocastenum} and \textit{Alnus glutinosa}, 15 days for \textit{Betula pendula}, 8 days for \textit{Fagus sylvatica}, and 12 days for \textit{Fraxinus excelsior} and \textit{Quercus robur} \citep{Flynn2018}.
+\item We then calculated budburst by subtracting 16 days from leafout for \textit{Aesculus hippocastanum} and \textit{Alnus glutinosa}, 15 days for \textit{Betula pendula}, 8 days for \textit{Fagus sylvatica}, and 12 days for \textit{Fraxinus excelsior} and \textit{Quercus robur} \citep{Flynn2018}.
 \end{enumerate}
 \subsection*{Climate Data}
 \begin{enumerate}
@@ -168,6 +170,19 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
 \item We ran two chains, each with 4,000 warm-up iterations and 2,500 sampling iterations for a total of 10,000 posterior samples for each predictor. 
 \item We evaluated our model performance on $\hat{R}$ values that were close to one and assessed chain convergence and posterior predictive checks \citep{Gelman2006}.
 \end{enumerate}
+
+\subsection*{Testing the temperature threshold and timing between budburst and leafout}
+\item The definition of a false spring has been established to be freezing temperatures of -2.2$^{\circ}$C \citep{Schwartz1993} after budburst.
+\begin{enumerate}
+\item However, some species are able to tolerate more extreme freezes between budburst and leafout \citep{Lenz2013,Rethinking}.
+\item Thus, we used the same methods as above to test the different regional effects on false spring incidence except we used -5$^{\circ}$C to define a false spring temperature and compared the results to the original (i.e. -2.2$^{\circ}$C) model.
+\end{enumerate}
+
+\item Plants are most susceptible to false spring damage between budburst and leafout \citep{Augspurger2013, Lenz2016}.
+\begin{enumerate}
+\item Different species have different rates of budburst, which is consistent with the original model.
+\item We analyzed a standardized approach but using the same timing between budburst and leafout and compared this model output to the original (i.e. with varying times between budburst and leafout).
+\end{enumerate}
 \end{enumerate}
 
 \section*{Results}
@@ -175,14 +190,14 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
 \begin{enumerate}
 \item There is variation in day of budburst across the six species and across space (Figure \ref{fig:bbmap}). 
 \begin{enumerate}
-\item The top three species (\textit{Betula pendula}, \textit{Alnus glutinosa}, \textit{Aesculus hippocastenum}) generally initiated budburst earlier than the bottom three species (\textit{Fagus sylvatica}, \textit{Quercus robur}, \textit{Fraxinus excelsior}).
-\item Across all species, certain regions tended to initiate budburst earlier than others (i.e. United Kingdom was earlier than parts of Austria).
+\item The top three species (\textit{Betula pendula}, \textit{Alnus glutinosa}, \textit{Aesculus hippocastanum}) generally initiated budburst earlier than the bottom three species (\textit{Fagus sylvatica}, \textit{Quercus robur}, \textit{Fraxinus excelsior}).
+%\item Across all species, certain regions tended to initiate budburst earlier than others (i.e. United Kingdom was earlier than parts of Austria).
 \end{enumerate}
 \item All species initiated budburst earlier after 1983 (Figure \ref{fig:boxfs}) and the minimum temperature between budburst and leafout was, on average, higher after 1983. 
 \item Species that initiated budburst early were not always at a higher risk of false springs (Figure \ref{fig:boxfs}), as is evident by \textit{Alnus glutinosa}.
 \begin{enumerate}
-\item As seen in Figure (\ref{fig:mst}), mean spring temperature for most species ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} the mean spring temperature rarely dropped below 0$^{\circ}$C.
-\item The average minimum temperature between budburst and leafout, however, varied across the six species with \textit{Betula pendula} and \textit{Aesculus hippocastenum} experiencing the lowest minimum temperatures. 
+\item As seen in Figure (\ref{fig:mst}), mean spring temperature for most species ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} the mean spring temperature rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures.
+\item The average minimum temperature between budburst and leafout, however, varied across the six species with \textit{Betula pendula} and \textit{Aesculus hippocastanum} experiencing the lowest minimum temperatures. 
 \end{enumerate}
 \end{enumerate}
 
@@ -191,15 +206,34 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
 \item The effects of the predictors varied in both direction and magnitude (Figure \ref{fig:maineffects}).
   \begin{enumerate}
   \item Mean spring temperature had the biggest effect on the number of false springs, with warmer spring temperatures resulting is fewer false springs. 
-  \item More positive NAO indices, higher elevations, and sites further from the coast all increased the likelihood of false springs. 
+  \item More positive NAO indices, higher elevations, and sites further from the coast all increased the likelihood of false spring incidence. 
   \item Overall, there were fewer false springs after 1983. 
   \end{enumerate}
-\item Most of the interactions with increasing temperatures (i.e. the Climate Change predictor), demonstrate a decreased risk in false springs, however, the rate of false spring risk increased at sites further from the coast after 1983 (Figure \ref{fig:intrxns}). 
+\item Most of the interactions with increasing temperatures (i.e. the Climate Change predictor) exhibit a decreased risk in false springs, however, the probability of false spring incidence increased at sites further from the coast after 1983 (Figure \ref{fig:maineffects}). 
+  \begin{enumerate}
+  \item With climate change, the rate of false spring incidence decreased with increasing NAO indices (Figure \ref{fig:intrxns)A).
+  \item The probability of a false spring is lower at higher elevations at after 1983 than before 1983 (Figure \ref{fig:intrxns)B).
+  \item With climate change, the probability of a false spring is slightly higher at lower mean spring temperature sites but the probability is slightly lower at higer mean spring temperature sites (Figure \ref{fig:intrxns)C).
+  \item There is increased risk of a false spring further from the coast before and after climate change(Figure \ref{fig:intrxns)D).
+  \end{enumerate}
+\item The probability of a false spring occurring varies by species with each predictor (Figure \ref{fig:spp})
+  \begin{enumerate}
+  \item With increasing mean spring temperature, there are fewer false springs for each species, however \textit{Aesculus hippocastanum} has the greatest risk of false springs and \textit{Fraxinus excelsior} has the lowest risk. 
+  \item With increasing elevation, \textit{Betula pendula} has the greatest risk of a false spring occurring and the risk increases for \texit{Aesculus hippocastanum} and \textit{Quercus robur} as well. 
+  \item All other predictors do not drastically effect the probability of false spring risk at the species level.
 \end{enumerate}
 
-\subsection*{The effects of changing the temperature threshold}
-\begin{enumerate}
+\subsection*{Lower temperature threshold and standardized rate of budburst}
 \item By changing the temperature threshold for defining a false spring --- from -2.2$^{\circ}$C to -5$^{\circ}$C --- many of the predictors changed in both magnitude and direction but overall there were fewer false springs (Figure \ref{fig:five}).
+\begin{enumerate}
+  \begin{enumerate}
+  \item With a lower false spring temperature, increasing elevation greatly increased the risk of a false spring and more positive NAO indices after climate change also increased the risk of false springs.
+  \end{enumerate}
+  
+\item Standardizing the rate of budburst to 12 days between budburst and leafout across all species also changed the magnitude and direction of some predictors (Figure \ref{fig:orig})
+  \begin{enumerate}
+  \item More positive NAO indices resulted in a slightly decreased risk of false springs. 
+  \item Higher elevations greatly increased the risk of a false spring.
 \end{enumerate}
 
 
@@ -224,14 +258,14 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=14cm]{..//figures/BB_gis.pdf}
+  -\includegraphics[width=14cm]{..//figures/BB_dvr.pdf}
   -\caption{The average day of budburst is mapped by site for each species. Species are ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}. Earlier budburst dates are blue and later budburst dates are in red. }\label{fig:bbmap}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS.pdf}
+  -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS_dvr.pdf}
   -\caption{}\label{fig:boxfs}
   -\end{center}
   -\end{figure}}
@@ -271,10 +305,24 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
   -\caption{}\label{fig:intrxns}
   -\end{center}
   -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//figures/InteractionPlots/Species_dvr.pdf}
+  -\caption{}\label{fig:spp}
+  -\end{center}
+  -\end{figure}}
 
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//figures/model_output_berniefive.pdf}
+  -\caption{}\label{fig:five}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//figures/model_output_bern.pdf}
   -\caption{}\label{fig:five}
   -\end{center}
   -\end{figure}}

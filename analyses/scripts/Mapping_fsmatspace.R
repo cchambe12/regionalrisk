@@ -19,6 +19,9 @@ library(egg)
 library(RColorBrewer)
 library(raster)
 
+library(maptools)
+library(ggplotify)
+
 
 ##Simple approach
 ## map without background
@@ -51,113 +54,181 @@ mp + theme(panel.border = element_blank(),
       panel.grid.minor = element_blank()) + geom_point(aes(color=space)) + geom_jitter()
 
 setwd("~/Documents/git/regionalrisk/analyses")
-d<-read.csv("output/fs_bb_sitedata.csv", header=TRUE)
+d<-read.csv("output/BBdata_dvr.csv", header=TRUE)
 d<-d[(d$bb>=0),]
+d$bb.space<-ave(d$bb, d$PEP_ID, d$species)
 
 #Using GGPLOT, plot the Base World Map
 mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
-site<-d%>%dplyr::select(LAT, LON, bb.space, species)
+site<-d%>%dplyr::select(lat, long, bb.space, species)
 site<-site[!duplicated(site),]
 myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
 sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(30, 168))
 a.site<-filter(site, species=="AESHIP")
-aes <- ggplot(a.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
-  coord_cartesian(ylim=c(30,70),xlim=c(-10,35)) 
-aes<- aes + theme(panel.border = element_blank(),
-           panel.grid.major = element_blank(),
-           panel.grid.minor = element_blank(),
-           legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter() +
-  annotate("text",label= "Aesculus hippocastanum", col="firebrick3", x=0, y=70, fontface="italic", size=2) + sc +
-  xlab("Longitude") + ylab("Latitude")
+boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
+mapWorld<-fortify(boundars)
+aes <- ggplot() +
+  geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
+               color = 'gray', fill="lightgrey", size = .2) +
+  geom_jitter(width=3,aes(x=a.site$long, y=a.site$lat, color=a.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(), 
+        legend.position = "none",
+        axis.title = element_blank(),
+        panel.background = element_rect(fill="grey95")) +
+  annotate("text",label= "Aesculus \nhippocastanum", col="#7FC97F", x=-12, y=68,fontface="bold.italic", size=3,
+           family="Helvetica", hjust=0) + sc + 
+  labs(color="Day of Budburst")
 
 spg<-a.site
-coordinates(spg)<- ~LON+LAT
+coordinates(spg)<- ~long+lat
 proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
 coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/aeship.shp")
+shapefile(coords, "output/aeship_dvr.shp")
 
 ag.site<-filter(site, species=="ALNGLU")
-aln<- ggplot(ag.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
-  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
-aln<- aln + theme(panel.border = element_blank(),
-                  panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank(),
-                  legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter() + 
-  annotate("text",label= "Alnus glutinosa ", col="orangered1", x=0, y=70, fontface="italic", size=2) + sc +
-  xlab("Longitude") + ylab("Latitude")
+boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
+mapWorld<-fortify(boundars)
+aln <- ggplot() +
+  geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
+               color = 'gray', fill="lightgrey", size = .2) +
+  geom_jitter(width=3,aes(x=ag.site$long, y=ag.site$lat, color=ag.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(), 
+        axis.title = element_blank(),
+        panel.background = element_rect(fill="grey95")) +
+  annotate("text",label= "Alnus glutinosa", col="gold2", x=1, y=70,fontface="bold.italic", size=3,
+           family="Helvetica") + sc + 
+  labs(color="Day of Budburst")
 
 spg<-ag.site
-coordinates(spg)<- ~LON+LAT
+coordinates(spg)<- ~long+lat
 proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
 coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/alnglu.shp")
+shapefile(coords, "output/alnglu_dvr.shp")
 
 b.site<-filter(site, species=="BETPEN")
-bet<- ggplot(b.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
-  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
-bet<- bet + theme(panel.border = element_blank(),
-                  panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank()) + geom_point(aes(col=bb.space)) + geom_jitter() + 
-  annotate("text",label= "Betula pendula", col="orange3", x=0, y=70, fontface="italic", size=2) + sc + labs(color="Day of Budburst")+
-  xlab("Longitude") + ylab("Latitude")
+boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
+mapWorld<-fortify(boundars)
+bet <- ggplot() +
+  geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
+               color = 'gray', fill="lightgrey", size = .2) +
+  geom_jitter(width=3,aes(x=b.site$long, y=b.site$lat, color=b.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(), 
+        legend.position = "none",
+        axis.title = element_blank(),
+        panel.background = element_rect(fill="grey95")) +
+  annotate("text",label= "Betula pendula", col="#CAB1C4", x=0, y=70,fontface="bold.italic", size=3,
+           family="Helvetica") + sc + 
+  labs(color="Day of Budburst")
 
 b.site<-na.omit(b.site)
 spg<-b.site
-coordinates(spg)<- ~LON+LAT
+coordinates(spg)<- ~long+lat
 proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
 coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/betpen.shp", overwrite=TRUE)
+shapefile(coords, "output/betpen_dvr.shp", overwrite=TRUE)
 
 f.site<-filter(site, species=="FAGSYL")
-syl<- ggplot(f.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
-  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
-syl<- syl + theme(panel.border = element_blank(),
-                  panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank(),
-                  legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter()+ 
-  annotate("text",label= "Fagus sylvatica", col="sienna2", x=0, y=70, fontface="italic", size=2) + sc +
-  xlab("Longitude") + ylab("Latitude")
+boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
+mapWorld<-fortify(boundars)
+syl <- ggplot() +
+  geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
+               color = 'gray', fill="lightgrey", size = .2) +
+  geom_jitter(width=3,aes(x=f.site$long, y=f.site$lat, color=f.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(), 
+        legend.position = "none",
+        axis.title = element_blank(),
+        panel.background = element_rect(fill="grey95")) +
+  annotate("text",label= "Fagus sylvatica", col="#CB1788", x=0, y=70,fontface="bold.italic", size=3,
+           family="Helvetica") + sc + 
+  labs(color="Day of Budburst")
 
 spg<-f.site
-coordinates(spg)<- ~LON+LAT
+coordinates(spg)<- ~long+lat
 proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
 coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/fagsyl.shp")
+shapefile(coords, "output/fagsyl_dvr.shp")
 
 fe.site<-filter(site, species=="FRAEXC")
-fra<- ggplot(fe.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
-  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
-fra<- fra + theme(panel.border = element_blank(),
-                  panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank(),
-                  legend.position="none") + geom_point(aes(col=bb.space)) + geom_jitter()+ 
-  annotate("text",label= "Fraxinus excelsior", col="green4", x=0, y=70, fontface="italic", size=2) + sc +
-  xlab("Longitude") + ylab("Latitude")
+boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
+mapWorld<-fortify(boundars)
+fra <- ggplot() +
+  geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
+               color = 'gray', fill="lightgrey", size = .2) +
+  geom_jitter(width=3,aes(x=fe.site$long, y=fe.site$lat, color=fe.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        panel.background = element_rect(fill="grey95")) +
+  annotate("text",label= "Fraxinus excelsior", col="#BF5B17", x=3, y=70,fontface="bold.italic", size=3,
+           family="Helvetica") + sc + 
+  labs(color="Day of Budburst")
 
 spg<-fe.site
-coordinates(spg)<- ~LON+LAT
+coordinates(spg)<- ~long+lat
 proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
 coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/fraexc.shp")
+shapefile(coords, "output/fraexc_dvr.shp")
 
 q.site<-filter(site, species=="QUEROB")
-que<- ggplot(q.site, aes(x=LON, y=LAT, col=bb.space)) +   mapWorld +
-  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
-que<- que + theme(panel.border = element_blank(),
+boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
+mapWorld<-fortify(boundars)
+que <- ggplot() +
+  geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
+               color = 'gray', fill="lightgrey", size = .2) +
+  geom_jitter(width=3,aes(x=q.site$long, y=q.site$lat, color=q.site$bb), size=0.8, alpha=0.4) + 
+  theme_classic() +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
+    theme(panel.border = element_blank(),
                   panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank()) + geom_point(aes(col=bb.space)) + geom_jitter() + 
-  annotate("text",label= "Quercus robur", col="purple2", x=0, y=70,fontface="italic", size=2) + sc + labs(color="Day of Budburst")+
-  xlab("Longitude") + ylab("Latitude")
+                  panel.grid.minor = element_blank(),
+                  axis.line = element_blank(),
+                  axis.ticks = element_blank(),
+                  axis.text = element_blank(), 
+          legend.position = "none",
+          axis.title = element_blank(),
+          panel.background = element_rect(fill="grey95")) +
+  annotate("text",label= "Quercus robur", col="#87A6A6", x=0, y=70,fontface="bold.italic", size=3,
+           family="Helvetica") + sc + 
+    labs(color="Day of Budburst")
 
 spg<-q.site
-coordinates(spg)<- ~LON+LAT
+coordinates(spg)<- ~long+lat
 proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
 coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/querob.shp")
+shapefile(coords, "output/querob_dvr.shp")
 
 
 quartz()
-ggarrange(aes, aln, bet, syl, fra, que, ncol=3, nrow=2)
+ggarrange(aes, bet, aln, que, syl, fra, ncol=3, nrow=2)
 
 ## mapping with rworldmap
 mapDevice() #create world map shaped window
