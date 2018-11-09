@@ -140,7 +140,7 @@ f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs.count),]
 f$fs<-ifelse(f$fs.count>0, 1, 0)
-f$fs<-ave(f$fs,f$PEP_ID, f$species, f$cc, FUN=sum)
+f$fs<-ave(f$fs,f$lat.long, f$species, f$cc, FUN=sum)
 
 plusf<-subset(f, select=c(species, cc, fs))
 plusf<-plusf[!duplicated(plusf),]

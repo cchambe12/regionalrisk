@@ -15,9 +15,9 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 aes<-read.csv("output/aeship_data_dvr.csv", header=TRUE)
 ag<-read.csv("output/alnglu_data_dvr.csv", header=TRUE)
 bp<-read.csv("output/betpen_data_dvr.csv", header=TRUE)
-fsyl<-read.csv("output/fagsyl_data_dvr.csv", header=TRUE)
-fex<-read.csv("output/fraexc_data_dvr.csv", header=TRUE)
-qr<-read.csv("output/querob_data_dvr.csv", header=TRUE)
+fsyl<-read.csv("output/fagsyl_data.csv", header=TRUE)
+fex<-read.csv("output/fraexc_data.csv", header=TRUE)
+qr<-read.csv("output/querob_data.csv", header=TRUE)
 
 
 aes$lat.long<-paste(aes$lat, aes$long)
