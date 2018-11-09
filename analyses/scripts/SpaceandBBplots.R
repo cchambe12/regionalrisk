@@ -23,7 +23,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 
 bb<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
-xx<-read.csv("output/BBdata.csv", header=TRUE)
+xx<-read.csv("output/BBdata_dvr.csv", header=TRUE)
 
 dxx<-bb
 #dxx$fs<-ifelse(dxx$fs.count>0, 1, 0)

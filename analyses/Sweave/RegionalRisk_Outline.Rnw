@@ -122,9 +122,9 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \begin{enumerate}
 \item We obtained phenological data from the Pan European Phenology network (PEP725, www.pep725.edu), which provides open access phenology records across Europe \citep{Templ2018}.
 \item Since plants are most susceptible to damage from frost between budburst and full leafout, we selected only leafout data \citep[i.e., in][BBCH 11, which is defined as the point of leaf unfolding and the first visible leaf stalk]{Meier2001} from the PEP725 dataset.
-\item We then subtracted 12 days from the leafout date to establish a rough estimate for day of budburst \citep{Donnelly2017}. 
 \item The species used in the study were \textit{Aesculus hippocastanum} Poir., \textit{Alnus glutinosa} (L.) Gaertn., \textit{Betula pendula} Roth., \textit{Fagus sylvatica} Ehrh., \textit{Fraxinus excelsior} L., \textit{Quercus robur} L.
-\item Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used for crops, (2) there were at least 90,000 observations of BBCH 11, (3) to represent over half of the total number of sites available (11,684), (4) there were observations for at least 65 out of the 66 years of the study (1951-2016). % Do we want a table here with a breakdown of data for the supplement?
+\item Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used for crops, (2) there were at least 90,000 observations of BBCH 11 (leafout), (3) to represent over half of the total number of sites available (11,684), and (4) there were observations for at least 65 out of the 66 years of the study (1951-2016). % Do we want a table here with a breakdown of data for the supplement?
+\item We then calculated budburst by subtracting 16 days from leafout for \textit{Aesculus hippocastenum} and \textit{Alnus glutinosa}, 15 days for \textit{Betula pendula}, 8 days for \textit{Fagus sylvatica}, and 12 days for \textit{Fraxinus excelsior} and \textit{Quercus robur} \citep{Flynn2018}.
 \end{enumerate}
 \subsection*{Climate Data}
 \begin{enumerate}
@@ -150,14 +150,14 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 \item We used a Bayesian hierarchical model approach to analyze our data to best estimate the number of false springs across-species levels. 
 \begin{enumerate}
-\item We fit a (POISSON or BERNOULLI distribution) model using mean spring temperature, NAO, elevation, distance from the coast, space, and climate change as predictors and all two-way interactions (fixed effects) and species as two-way interactions to simulate modeled groups on the main effects.
+\item We fit a bernoulli distribution model using mean spring temperature, NAO, elevation, distance from the coast, space, and climate change as predictors and all two-way interactions (fixed effects) and species as two-way interactions to simulate modeled groups on the main effects.
 %\item (Although, we may find that space and elevation are collinear and may decide to take space out and use elevation instead - unless space is picking up more of the distance from the coast then we'll use the space parameter instead of elevation)
 \item The Bayesian hierarchical model was fit using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows: (subject to change as per above, this is just the ideal model)
 \begin{align*} \label{eq:1} %% potentially...
-y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} + \beta_{Space_{(i)}} + \beta_{ClimateChange_{(i)}} \\
-+& \beta_{MeanSpringTemp \times Species_{(i)}} + \beta_{NAO \times Species_{(i)}}+ \beta_{Elevation \times Species_{(i)}} + \beta_{DistanceCoast \times Species_{(i)}} + \beta_{Space \time Species_{(i)}} + \beta_{ClimateChange \times Species_{(i)}} \\
-+& \beta_{MeanSpringTemp \times ClimateChange_{(i)}} + \beta_{NAO \times ClimateChange_{(i)}} \\
-+& \beta_{Elevation \times ClimateChange_{(i)}} + \beta_{DistanceCoast \times ClimateChange_{(i)}} + \beta_{Space \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} 
+y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} + \beta_{Space_{(i)}} \\ +& \beta_{ClimateChange_{(i)}}
++ \beta_{MeanSpringTemp \times Species_{(i)}} + \beta_{NAO \times Species_{(i)}}+ \beta_{Elevation \times Species_{(i)}} \\ +& \beta_{DistanceCoast \times Species_{(i)}} + \beta_{Space \times Species_{(i)}} + \beta_{ClimateChange \times Species_{(i)}} \\
++& \beta_{MeanSpringTemp \times ClimateChange_{(i)}} + \beta_{NAO \times ClimateChange_{(i)}}
++ \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \beta_{Space \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} 
 \end{align*}
 %\item The $\beta$ coefficients and $\alpha$ were modeled at the species level:
 %\begin{align*}
@@ -166,7 +166,7 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
 %5.& \; \beta_{ClimateChange_{sp}} \thicksim N(\mu_{ClimateChange}, \sigma{^2}_{ClimateChange})
 %\end{align*}
 \item We ran two chains, each with 4,000 warm-up iterations and 2,500 sampling iterations for a total of 10,000 posterior samples for each predictor. 
-\item We evaluated our model performance on $\hat{R}$ values that were close to 1 and assessed chain convergence and posterior predictive checks \citep{Gelman2006}.
+\item We evaluated our model performance on $\hat{R}$ values that were close to one and assessed chain convergence and posterior predictive checks \citep{Gelman2006}.
 \end{enumerate}
 \end{enumerate}
 
@@ -194,7 +194,7 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
   \item More positive NAO indices, higher elevations, and sites further from the coast all increased the likelihood of false springs. 
   \item Overall, there were fewer false springs after 1983. 
   \end{enumerate}
-\item Most of the interactions with increasing temperatures (i.e. the Climate Change predictor), demonstrate a decreased risk in false springs, however, the rate of false spring risk increased at sites further from the coast after 1983 (Figure (\ref{fig:intrxns)). 
+\item Most of the interactions with increasing temperatures (i.e. the Climate Change predictor), demonstrate a decreased risk in false springs, however, the rate of false spring risk increased at sites further from the coast after 1983 (Figure \ref{fig:intrxns}). 
 \end{enumerate}
 
 \subsection*{The effects of changing the temperature threshold}
@@ -307,13 +307,6 @@ y_i \thicksim N(\alpha_(i) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+ 
 \textit{Quercus robur} & 131635  & 8811 & 66 \\
 \end{tabular}
 \end{center}
-  
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/space_extremes.pdf}
-  -\caption{Space parameter values are mapped for each location to elucidate patterns in the parameter values.}\label{fig:space}
-  -\end{center}
-  -\end{figure}}
   
 
 \end{document}

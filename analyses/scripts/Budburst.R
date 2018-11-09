@@ -30,7 +30,7 @@ aes<-aes%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-aes$bb<-aes$lo-12
+aes$bb<-aes$lo-16
 aes$species<-"AESHIP"
 
 ag<-ag%>%
@@ -41,7 +41,7 @@ ag<-ag%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-ag$bb<-ag$lo-12
+ag$bb<-ag$lo-16
 ag$species<-"ALNGLU"
 
 d<-full_join(aes, ag)
@@ -54,7 +54,7 @@ bp<-bp%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-bp$bb<-bp$lo-12
+bp$bb<-bp$lo-15
 bp$species<-"BETPEN"
 
 d<-full_join(d, bp)
@@ -67,7 +67,7 @@ fsyl<-fsyl%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-fsyl$bb<-fsyl$lo-12
+fsyl$bb<-fsyl$lo-8
 fsyl$species<-"FAGSYL"
 
 d<-full_join(d, fsyl)
@@ -101,4 +101,4 @@ d<-full_join(d, qr)
 d<-dplyr::select(d, lat, long, year, PEP_ID, species, bb)
 d<-d[!duplicated(d),]
 
-write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/BBdata.csv", row.names=FALSE)
+write.csv(d, file="~/Documents/git/regionalrisk/analyses/output/BBdata_dvr.csv", row.names=FALSE)

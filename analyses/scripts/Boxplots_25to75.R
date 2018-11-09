@@ -23,7 +23,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 #xx<-subset(xx, year>1950)
 
-mat<-read.csv("output/BBdata.csv", header=TRUE)
+mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
 
 mat$cc<-ifelse(mat$year<1984, 0, 1)
 mat$species<-ifelse(mat$species=="BETPEN", "aaBETPEN", mat$species)
