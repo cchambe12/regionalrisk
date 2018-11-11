@@ -6,8 +6,8 @@ library(spdep)
 library(vegan)
 
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/regrisk.nov.csv", header=TRUE)
-bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/regrisk.nov.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_dvr_cleaned.csv", header=TRUE)
+#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/regrisk.nov.csv", header=TRUE)
 MEM_model<-"positive"
 style<-"B"
 
@@ -58,6 +58,6 @@ prep_space<-full_join(bb, beig, by="lat.long")
 
 
 
-write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_new.csv", row.names=FALSE)
+write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_dvr_cleaned.csv", row.names=FALSE)
 #write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/mem_select.csv", row.names=FALSE)
 
