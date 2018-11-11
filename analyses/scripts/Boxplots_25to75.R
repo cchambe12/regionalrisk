@@ -24,6 +24,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #xx<-subset(xx, year>1950)
 
 mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
+mat$bb.avg<-ave(mat$bb, mat$species)
 
 mat$cc<-ifelse(mat$year<1984, 0, 1)
 mat$species<-ifelse(mat$species=="BETPEN", "afBETPEN", mat$species)

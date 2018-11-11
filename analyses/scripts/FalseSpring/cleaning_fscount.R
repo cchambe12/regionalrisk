@@ -23,20 +23,21 @@ ah<-read.csv("aeship_data.csv", header=TRUE)
 ag<-read.csv("alnglu_data_dvr.csv", header=TRUE)
 
 #d<-read.csv("~/Documents/git/springfreeze/input/Budburst.clean.csv",header=TRUE)
-#tx<-c("CL0", "WL1")
+#tx<-c("CL0", "CS0", "WL0", "WS0")
 #d<-d[(d$treatcode%in%tx),]
-#d<-subset(d, select=c("sp", "lday", "bday","treatcode"))
+#d<-subset(d, select=c("sp", "lday", "bday", "treatcode"))
 #d<-na.omit(d)
 #d$dvr<-d$lday-d$bday
-#d$dvr.sp<-ave(d$dvr, d$sp, d$treatcode)
+#d$dvr.sp<-ave(d$dvr, d$sp)
 #dx<-subset(d, select=c("sp", "dvr.sp", "treatcode", "dvr"))
 #dx<-dx[!duplicated(dx),]
 #dx$avg.dvr<-ave(dx$dvr, dx$sp)
 
 ## Start looking at the data a bit...
 bp$fs<- ifelse(bp$Tmin<=-2.2, 1, 0)
-bp$lo<-ave(bp$PEP_ID, bp$year, FUN=max)
+bp$lo<-ave(bp$doy, bp$PEP_ID, bp$year, FUN=last)
 bp$bb<-bp$lo-10 # Based on Danf's BETPAP - most closely related. Choose WL0 based on keeping all species consistent
+bp<-bp[!(bp$doy<bp$bb),]
 bp<-bp[!duplicated(bp),]
 bp$fs.count<- ave(bp$fs, bp$PEP_ID, bp$year, FUN=sum)
 betpen<-bp%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
@@ -47,8 +48,9 @@ betpen$fs<-ifelse(betpen$fs.count>=1, 1, 0) # 155251
 #betpen<-dplyr::select(betpen, -fs.count)
 
 ah$fs<- ifelse(ah$Tmin<=-2.2, 1, 0)
-ah$lo<-ave(ah$PEP_ID, ah$year, FUN=max)
+ah$lo<-ave(ah$doy, ah$PEP_ID, ah$year, FUN=last)
 ah$bb<-ah$lo-7 # Based on Danf's ACESAC - most closely related. Choose WL0 based on keeping all species consistent
+ah<-ah[!(ah$doy<ah$bb),]
 ah<-ah[!duplicated(ah),]
 ah$fs.count<- ave(ah$fs, ah$PEP_ID, ah$year, FUN=sum)
 aeship<-ah%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
@@ -61,8 +63,9 @@ aeship$fs<-ifelse(aeship$fs.count>=1, 1, 0)
 d<-full_join(betpen, aeship)
 
 ag$fs<- ifelse(ag$Tmin<=-2.2, 1, 0)
-ag$lo<-ave(ag$PEP_ID, ag$year, FUN=max)
+ag$lo<-ave(ag$doy, ag$PEP_ID, ag$year, FUN=last)
 ag$bb<-ag$lo-15 # Based on Danf's ALNINC - most closely related. Choose WL0 based on keeping all species consistent
+ag<-ag[!(ag$doy<ag$bb),]
 ag<-ag[!duplicated(ag),]
 ag$fs.count<- ave(ag$fs, ag$PEP_ID, ag$year, FUN=sum)
 alnglu<-ag%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
@@ -75,8 +78,9 @@ alnglu$fs<-ifelse(alnglu$fs.count>=1, 1, 0)
 d<-full_join(d, alnglu)
 
 fe$fs<- ifelse(fe$Tmin<=-2.2, 1, 0)
-fe$lo<-ave(fe$PEP_ID, fe$year, FUN=max)
+fe$lo<-ave(fe$doy, fe$PEP_ID, fe$year, FUN=last)
 fe$bb<-fe$lo-6 # Based on Danf's FRANIG - most closely related. Choose WL0 based on keeping all species consistent
+fe<-fe[!(fe$doy<fe$bb),]
 fe<-fe[!duplicated(fe),]
 fe$fs.count<- ave(fe$fs, fe$PEP_ID, fe$year, FUN=sum)
 fraexc<-fe%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
@@ -91,9 +95,8 @@ d<-full_join(d, fraexc)
 fs$fs<- ifelse(fs$Tmin<=-2.2, 1, 0)
 fs$lo<-ave(fs$doy, fs$year, fs$PEP_ID, FUN=last)
 fs$bb<-fs$lo-11 # Based on Danf's FAGGRA - most closely related. Choose WL0 based on keeping all species consistent
-fs<-fs[!duplicated(fs),]
-fs$foo<-paste(fs$year, fs$PEP_ID)
 fs<-fs[!(fs$doy<fs$bb),]
+fs<-fs[!duplicated(fs),]
 fs$fs.count<- ave(fs$fs, fs$PEP_ID, fs$year, FUN=sum)
 fagsyl<-fs%>%dplyr::select(lat, long, PEP_ID, fs.count, year)
 fagsyl<-fagsyl[!duplicated(fagsyl),]
@@ -107,6 +110,7 @@ d<-full_join(d, fagsyl)
 qr$fs<- ifelse(qr$Tmin<=-2.2, 1, 0)
 qr$lo<-ave(qr$doy, qr$year, qr$PEP_ID, FUN=last)
 qr$bb<-qr$lo-9 # Based on Danf's QUEALB - most closely related. Choose WL0 based on keeping all species consistent
+qr<-qr[!(qr$doy<qr$bb),]
 qr<-qr[!duplicated(qr),]
 qr$fs.count<- ave(qr$fs, qr$PEP_ID, qr$year, FUN=sum)
 querob<-qr%>%dplyr::select(lat, long, PEP_ID, fs.count, year)

@@ -6,8 +6,8 @@ library(spdep)
 library(vegan)
 
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_dvr_cleaned.csv", header=TRUE)
-#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/regrisk.nov.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newdvr_space.csv", header=TRUE)
+#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newdvr_space.csv", header=TRUE)
 MEM_model<-"positive"
 style<-"B"
 
@@ -20,6 +20,7 @@ nb <- graph2nb(gabrielneigh(as.matrix(C), nnmult=5), sym=TRUE)
 listw <- nb2listw(nb, style=style)
 MEM <- scores.listw(listw, MEM.autocor = MEM_model)
 
+bb$lat.long<-paste(bb$lat, bb$long)
 bb$Y<-ave(bb$fs.count, bb$lat.long, FUN=sum)
 bbs<-bb[!duplicated(bb$lat.long),]
 Y<-bbs$Y
@@ -30,6 +31,7 @@ C <- as.matrix(C)
 X<-subset(bbs, select=c(elev, distkm, mst))
 
 source("/n/wolkovich_lab/Lab/Cat/MEM.moransel.R")
+#source("~/Documents/git/regionalrisk/analyses/scripts/MEM.moransel.R")
 moransel<-MEM.moransel(Y, listw, MEM.autocor = MEM_model, nperm=999, alpha=0.05)
 
 all<-as.data.frame(moransel[["MEM.all"]])

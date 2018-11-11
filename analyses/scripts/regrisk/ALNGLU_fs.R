@@ -31,7 +31,7 @@ df<-d%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$bb<-df$lo-16 ## was 12; based on Danf's WL1 and CS0 data for Alnus incana
+df$bb<-df$lo-17 ## was 12; based on Danf's WL1 and CS0 data for Alnus incana
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo)
 df$pep.year<-paste(df$year, df$PEP_ID)
@@ -52,7 +52,7 @@ dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 
 ## Climate Data time...
-r<-brick("~/Desktop/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
+r<-brick("~/Desktop/Big Data Items/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 
 bb<-dxx
 bb$lat.long<-paste(bb$lat, bb$long, sep=",")
