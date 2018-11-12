@@ -25,13 +25,13 @@ cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 ############################################################################
 ################### Minus Five #############################################
 
-naosp<- ggpredict(bernsfive, terms = c("nao.z", "species")) 
+naosp<- ggpredict(bernsnewdvr, terms = c("nao.z", "species"), prob=0.5) 
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_five.csv", row.names = FALSE)
 naosp<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_five.csv", header=TRUE)
 naosp.p<-ggplot(naosp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("NAO") + 
   ylab("Number of False Springs") + ggtitle("A.") + theme_classic() + theme(legend.position = "none") + 
   scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4))+
+  #coord_cartesian(ylim=c(0,0.4))+
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
@@ -145,20 +145,35 @@ grid.arrange(naosp.p, matsp.p, ccsp.p, elevsp.p, spacesp.p, mylegend, ncol=3, nr
 
 colz <- colorRampPalette(brewer.pal(9,"Set1"))(2)
 colz<-rev(colz)
-nao<-ggpredict(bernsfive, terms=c("nao.z", "cc.z"))
+nao<-ggpredict(bernsnewdvr, terms=c("nao.z", "cc.z"), prob=0.5)
 #write.csv(nao, file="naopredict_five.csv", row.names=FALSE)
 #nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict_five.csv", header=TRUE)
 #nao$group<-as.character(nao$group)
 nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("NAO") + 
   ylab("Number of False Springs") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.4)) + 
+  #coord_cartesian(ylim=c(0,0.4)) + 
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459208492649012"="1950-1983",
                               "0.544414297170614"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
                     labels=c("-0.459208492649012"="1950-1983",
                              "0.544414297170614"="1984-2016"))
+
+test<-read.csv("fs_newdvr_space.csv", header=TRUE)
+test$nao.z <- (test$nao-mean(test$nao,na.rm=TRUE))/(2*sd(test$nao,na.rm=TRUE))
+test$cc.z <- (test$cc-mean(test$cc,na.rm=TRUE))/(2*sd(test$cc,na.rm=TRUE))
+naocc.test<-ggplot(test, aes(x=nao.z, y=fs, col=as.character(cc.z))) + geom_line(aes(col=as.character(cc.z)), stat="smooth", method="lm") + xlab("NAO") + 
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
+  #scale_y_continuous(expand = c(0, 0)) + 
+  #coord_cartesian(ylim=c(0,0.4)) + 
+  scale_color_manual(name="Climate Change", values=colz,
+                     labels=c("-0.459208492649012"="1950-1983",
+                              "0.544414297170614"="1984-2016")) +
+  scale_fill_manual(name="Climate Change", values=colz,
+                    labels=c("-0.459208492649012"="1950-1983",
+                             "0.544414297170614"="1984-2016"))
+
 elev<-ggpredict(bernsfive, terms=c("elev.z", "cc.z"))
 #write.csv(elev, file="elevpredict_five.csv", row.names=FALSE)
 #elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict_five.csv", header=TRUE)
@@ -586,7 +601,7 @@ ggarrange(nao.p, mat.p, elev.p, dist.p, ncol=2, nrow=2)
 
 
 ############ Model Output
-brms<-as.data.frame(tidy(berndvrfinal,robust = TRUE))
+brms<-as.data.frame(tidy(bernsnewdvr, prob = 0.5))
 brms<-brms[2:47,]
 brms$term<-gsub(".*b_","",brms$term)
 brms$term<-gsub(".*r_species","",brms$term)

@@ -130,8 +130,18 @@ dd<-bb.sub.nodup
 #dd$space<-round(dd$space, digits=3)
 #dd<-dd[!duplicated(dd),]
 
+buds<-read.csv("output/BBdata.csv", header=TRUE)
+buds<-dplyr::select(buds, -PEP_ID)
+buds<-buds[!duplicated(buds),]
+
+bb<-full_join(dx, buds)
+bb<-bb[!duplicated(bb),]
+bb<-na.omit(bb)
+
 write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.nov_5.csv", row.names = FALSE)
 write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_newdvr_space.csv", row.names = FALSE)
+write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_space_new_bb.csv", row.names = FALSE)
+
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)
 #mat<-mat[!duplicated(mat),]

@@ -75,6 +75,7 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                        labels=c("0"="1951-1983", "1"="1984-2016")) +
+  ggtitle("A.") +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 
@@ -133,6 +134,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                      labels=c("0"="1951-1983", "1"="1984-2016")) +
+  ggtitle("B.") +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 ### And finally... False springs!
@@ -182,6 +184,7 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                      labels=c("0"="1951-1983", "1"="1984-2016")) +
+  ggtitle("C.") +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 

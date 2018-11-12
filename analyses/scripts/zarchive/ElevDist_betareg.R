@@ -20,27 +20,28 @@ bb$elev.z <- (bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE))
 bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
+#bb$bb.z <-(bb$bb-mean(bb$bb,na.rm=TRUE))/(2*sd(bb$bb,na.rm=TRUE))
 
-#bb<-bb[sample(nrow(bb), 80000), ]
+bb<-bb[sample(nrow(bb), 80000), ]
 
-bernsnewdvr<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+berndvrshort<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                          cc.z + species + nao.z:species + 
                          mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
-                         nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, data=bb, chains=2,
-                       family=bernoulli(), cores=2, iter = 4000, warmup=2000,
-                       prior = prior(normal(0,1), class = "b"))
+                         nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, 
+             data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2000,
+             prior = prior(normal(0,1), class = "b"))
 
-save(bernsshort, file="/n/wolkovich_lab/Lab/Cat/elevdist_bernsshort.Rdata")
+save(berndvrshort, file="/n/wolkovich_lab/Lab/Cat/elevdist_berndvrshort.Rdata")
 
 
-poisnewdvr<-brm(fs.count ~ nao.z + mat.z + dist.z + elev.z + space.z +
-                       cc.z + species + nao.z:species + 
-                       mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
-                       nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, data=bb, chains=2,
-                     family=poisson(), cores=2, iter = 4000, warmup=2000,
-                 prior = prior(normal(0,1), class = "b"))
+#poisnewdvr<-brm(fs.count ~ nao.z + mat.z + dist.z + elev.z + space.z +
+ #                      cc.z + species + nao.z:species + 
+  #                     mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
+   #                    nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, data=bb, chains=2,
+    #                 family=poisson(), cores=2, iter = 4000, warmup=2000,
+     #            prior = prior(normal(0,1), class = "b"))
 
-save(poisshort, file="/n/wolkovich_lab/Lab/Cat/elevdist_poisshort.Rdata")
+#save(poisshort, file="/n/wolkovich_lab/Lab/Cat/elevdist_poisshort.Rdata")
 
 
 

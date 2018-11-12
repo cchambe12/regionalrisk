@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 NOV 2018 07:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  12 NOV 2018 16:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,80 +874,79 @@ Underfull \hbox (badness 10000) in paragraph at lines 93--103
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (4.15327pt too wide) in paragraph at lines 143--144
+Overfull \hbox (4.15327pt too wide) in paragraph at lines 149--150
 []\T1/aer/m/n/10 There is large de-bate over whether or not spring freeze dam-a
 ge will in-crease (Hän-ni-nen, 1991; Augspurger,
  []
 
-[2] [3] [4] [5] (./RegionalRisk_Outline.bbl [6] [7] [8] [9])
-<..//figures/BB_gis.pdf, id=43, 845.1575pt x 597.23125pt>
-File: ..//figures/BB_gis.pdf Graphic file (type pdf)
+[2] [3] [4] [5] [6]
+Overfull \hbox (0.8128pt too wide) in paragraph at lines 265--266
+[]\T1/aer/m/n/10 There is in-creased risk of a false spring fur-ther from the c
+oast be-fore and af-ter cli-mate change(Figure
+ []
 
-<use ..//figures/BB_gis.pdf>
-Package pdftex.def Info: ..//figures/BB_gis.pdf used on input line 273.
-(pdftex.def)             Requested size: 398.33858pt x 281.49155pt.
- [10]
-<..//figures/Boxplot_BBTminFS.pdf, id=47, 489.01636pt x 423.43213pt>
-File: ..//figures/Boxplot_BBTminFS.pdf Graphic file (type pdf)
+[7] [8] (./RegionalRisk_Outline.bbl [9] [10] [11] [12])
+<..//figures/BB_dvr.png, id=52, 2810.5pt x 1756.5625pt>
+File: ..//figures/BB_dvr.png Graphic file (type png)
 
-<use ..//figures/Boxplot_BBTminFS.pdf>
-Package pdftex.def Info: ..//figures/Boxplot_BBTminFS.pdf used on input line 28
-0.
-(pdftex.def)             Requested size: 341.43306pt x 295.65099pt.
- [11 <..//figures/BB_gis.pdf>]
-<..//figures/MSTBB_bySpp.png, id=58, 2810.5pt x 1756.5625pt>
+<use ..//figures/BB_dvr.png>
+Package pdftex.def Info: ..//figures/BB_dvr.png used on input line 334.
+(pdftex.def)             Requested size: 398.33858pt x 248.9458pt.
+
+<..//figures/Boxplot_BBTminFS_dvr.pdf, id=54, 476.91837pt x 428.52608pt>
+File: ..//figures/Boxplot_BBTminFS_dvr.pdf Graphic file (type pdf)
+
+<use ..//figures/Boxplot_BBTminFS_dvr.pdf>
+Package pdftex.def Info: ..//figures/Boxplot_BBTminFS_dvr.pdf used on input lin
+e 341.
+(pdftex.def)             Requested size: 341.43306pt x 306.79268pt.
+ [13 <..//figures/BB_dvr.png>]
+<..//figures/MSTBB_bySpp.png, id=62, 2810.5pt x 1756.5625pt>
 File: ..//figures/MSTBB_bySpp.png Graphic file (type png)
 
 <use ..//figures/MSTBB_bySpp.png>
-Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 287.
+Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 348.
 (pdftex.def)             Requested size: 341.43306pt x 213.3783pt.
- [12 <..//figures/Boxplot_BBTminFS.pdf>]
-<..//figures/TminBB_bySpp.png, id=231, 2810.5pt x 1756.5625pt>
-File: ..//figures/TminBB_bySpp.png Graphic file (type png)
-
-<use ..//figures/TminBB_bySpp.png>
-Package pdftex.def Info: ..//figures/TminBB_bySpp.png used on input line 294.
-(pdftex.def)             Requested size: 341.43306pt x 213.3783pt.
-
-<..//figures/model_output_dvr.pdf, id=232, 380.1339pt x 354.66423pt>
+ [14 <..//figures/Boxplot_BBTminFS_dvr.pdf>]
+<..//figures/model_output_dvr.pdf, id=274, 350.20708pt x 310.0924pt>
 File: ..//figures/model_output_dvr.pdf Graphic file (type pdf)
 
 <use ..//figures/model_output_dvr.pdf>
-Package pdftex.def Info: ..//figures/model_output_dvr.pdf used on input line 30
-8.
-(pdftex.def)             Requested size: 455.24408pt x 424.75072pt.
- [13 <..//figures/MSTBB_bySpp.png> <..//figures/TminBB_bySpp.png>]
-<..//figures/InteractionPlots/IntrxnPlots_dvr.pdf, id=239, 538.04535pt x 335.56
-207pt>
+Package pdftex.def Info: ..//figures/model_output_dvr.pdf used on input line 35
+6.
+(pdftex.def)             Requested size: 455.24408pt x 403.11534pt.
+ [15 <..//figures/MSTBB_bySpp.png>]
+<..//figures/InteractionPlots/IntrxnPlots_dvr.pdf, id=279, 507.48186pt x 308.81
+894pt>
 File: ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf Graphic file (type pdf)
  <use ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf>
 Package pdftex.def Info: ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf used 
-on input line 316.
-(pdftex.def)             Requested size: 455.24408pt x 283.92343pt.
- [14 <..//figures/model_output_dvr.pdf>]
-<..//figures/model_output_berniefive.pdf, id=337, 355.93768pt x 304.99847pt>
-File: ..//figures/model_output_berniefive.pdf Graphic file (type pdf)
+on input line 364.
+(pdftex.def)             Requested size: 455.24408pt x 277.03444pt.
+ [16 <..//figures/model_output_dvr.pdf>]
+<..//figures/InteractionPlots/Species_dvr.pdf, id=377, 510.02875pt x 335.56207p
+t>
+File: ..//figures/InteractionPlots/Species_dvr.pdf Graphic file (type pdf)
+ <use ..//figures/InteractionPlots/Species_dvr.pdf>
+Package pdftex.def Info: ..//figures/InteractionPlots/Species_dvr.pdf used on i
+nput line 371.
+(pdftex.def)             Requested size: 455.24408pt x 299.52998pt.
+ [17 <..//figures/InteractionPlots/IntrxnPlots_dvr.pdf>]
+<..//figures/model_output_bern.pdf, id=622, 394.77887pt x 333.65182pt>
+File: ..//figures/model_output_bern.pdf Graphic file (type pdf)
 
-<use ..//figures/model_output_berniefive.pdf>
-Package pdftex.def Info: ..//figures/model_output_berniefive.pdf used on input 
-line 323.
-(pdftex.def)             Requested size: 455.24408pt x 390.12213pt.
- [15 <..//figures/InteractionPlots/IntrxnPlots_dvr.pdf>] [16 <..//figures/model
-_output_berniefive.pdf>]
-<..//figures/space_extremes.pdf, id=662, 845.1575pt x 597.23125pt>
-File: ..//figures/space_extremes.pdf Graphic file (type pdf)
-
-<use ..//figures/space_extremes.pdf>
-Package pdftex.def Info: ..//figures/space_extremes.pdf used on input line 359.
-
-(pdftex.def)             Requested size: 341.43306pt x 241.27586pt.
- [17 <..//figures/space_extremes.pdf>]
+<use ..//figures/model_output_bern.pdf>
+Package pdftex.def Info: ..//figures/model_output_bern.pdf used on input line 3
+79.
+(pdftex.def)             Requested size: 455.24408pt x 384.78102pt.
+ [18 <..//figures/InteractionPlots/Species_dvr.pdf>] [19 <..//figures/model_out
+put_bern.pdf>]
 (./RegionalRisk_Outline.aux) ) 
 Here is how much of TeX's memory you used:
- 16130 strings out of 493014
- 315307 string characters out of 6133351
- 339171 words of memory out of 5000000
- 19454 multiletter control sequences out of 15000+600000
+ 16142 strings out of 493014
+ 315501 string characters out of 6133351
+ 338672 words of memory out of 5000000
+ 19467 multiletter control sequences out of 15000+600000
  33938 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,9n,42p,10410b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -966,10 +965,10 @@ sy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
 10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9
 .pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/ms
 bm10.pfb>
-Output written on RegionalRisk_Outline.pdf (17 pages, 5655815 bytes).
+Output written on RegionalRisk_Outline.pdf (19 pages, 4140387 bytes).
 PDF statistics:
- 717 PDF objects out of 1000 (max. 8388607)
- 529 compressed objects within 6 object streams
+ 1062 PDF objects out of 1200 (max. 8388607)
+ 788 compressed objects within 8 object streams
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

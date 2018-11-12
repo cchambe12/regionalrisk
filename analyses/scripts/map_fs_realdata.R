@@ -28,17 +28,22 @@ d<-d[!duplicated(d),]
 d$numfs<-ave(d$fs.count, d$lat.long, d$cc, FUN=sum)
 df<-d%>%spread(cc, numfs)
 
+df$total<-ave(df$fs.count, df$lat.long, FUN=sum)
+
 df<-na.omit(df)
 df$diff<-df$`1`-df$`0`
 
+df<-df[!(df$total<2),]
 
 #mapWorld <- borders("world", colour="gray94", fill="gray92") # create a layer of borders
 boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
 mapWorld<-fortify(boundars)
-mp <- ggplot() +
+myPalette <- colorRampPalette(brewer.pal(6, "Spectral"))
+sc <- scale_colour_gradientn(colours = myPalette(50), limits=c(1, 38))
+mp <- ggplot() + 
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
-            color = 'gray', fill="lightgrey", size = .2) +
-  geom_jitter(width=1.5,aes(x=df$long, y=df$lat, col=as.integer(df$diff))) + theme_classic() +
+            color = 'gray', fill="lightgrey", size = .2) + 
+  geom_jitter(width=3,aes(x=df$long, y=df$lat, color=df$total, alpha=df$total), size=0.8) + theme_classic() +
   theme(panel.border = element_blank(),
            panel.grid.major = element_blank(),
            panel.grid.minor = element_blank(),
@@ -47,11 +52,27 @@ mp <- ggplot() +
         #legend.position = "none",
         legend.key = element_rect(fill="white", color="white"),
         legend.box.background = element_rect(fill="white"),legend.text = element_text(size=7), legend.key.size = unit(0.3,"cm"),
-        legend.title = element_text(size=8))+
-  guides(shape=FALSE)  +
-  xlab("") + ylab("") + coord_cartesian(xlim=c(-13,40), ylim=c(34,72))
+        legend.title = element_text(size=8))+ sc +
+  xlab("") + ylab("") + coord_cartesian(ylim=c(30,70),xlim=c(-10,35)) + guides(alpha=FALSE)
 
-
+que <- ggplot() +
+  geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
+               color = 'gray', fill="lightgrey", size = .2) +
+  geom_jitter(width=3,aes(x=q.site$long, y=q.site$lat, color=q.site$bb), size=0.8, alpha=0.4) + 
+  theme_classic() +
+  coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
+  theme(panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank(), 
+        legend.position = "none",
+        axis.title = element_blank(),
+        panel.background = element_rect(fill="grey95")) +
+  annotate("text",label= "Quercus robur", col="#CB1788", x=0, y=70,fontface="bold.italic", size=3,
+           family="Helvetica") + sc + 
+  labs(color="Day of Budburst")
 
 quartz()
 mp

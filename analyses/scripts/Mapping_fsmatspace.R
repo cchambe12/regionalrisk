@@ -78,12 +78,12 @@ aes <- ggplot() +
         axis.line = element_blank(),
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
-        legend.position = "none",
+        #legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Aesculus \nhippocastanum", col="#7FC97F", x=-12, y=68,fontface="bold.italic", size=3,
+  annotate("text",label= "Aesculus \nhippocastanum", col="gold2", x=-12, y=68,fontface="bold.italic", size=3,
            family="Helvetica", hjust=0) + sc + 
-  labs(color="Day of Budburst")
+  labs(color="Day of Budburst") + ggtitle("C.")
 
 spg<-a.site
 coordinates(spg)<- ~long+lat
@@ -106,10 +106,11 @@ aln <- ggplot() +
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
         axis.title = element_blank(),
-        panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Alnus glutinosa", col="gold2", x=1, y=70,fontface="bold.italic", size=3,
+        panel.background = element_rect(fill="grey95"),
+        legend.position = "none") +
+  annotate("text",label= "Alnus glutinosa", col="#CAB1C4", x=1, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-  labs(color="Day of Budburst")
+  labs(color="Day of Budburst") + ggtitle("B.")
 
 spg<-ag.site
 coordinates(spg)<- ~long+lat
@@ -134,9 +135,9 @@ bet <- ggplot() +
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Betula pendula", col="#CAB1C4", x=0, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "Betula pendula", col="#7FC97F", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-  labs(color="Day of Budburst")
+  labs(color="Day of Budburst") + ggtitle("A.")
 
 b.site<-na.omit(b.site)
 spg<-b.site
@@ -162,9 +163,9 @@ syl <- ggplot() +
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Fagus sylvatica", col="#CB1788", x=0, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "Fagus sylvatica", col="#87A6A6", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-  labs(color="Day of Budburst")
+  labs(color="Day of Budburst") + ggtitle("D.")
 
 spg<-f.site
 coordinates(spg)<- ~long+lat
@@ -190,7 +191,7 @@ fra <- ggplot() +
         panel.background = element_rect(fill="grey95")) +
   annotate("text",label= "Fraxinus excelsior", col="#BF5B17", x=3, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-  labs(color="Day of Budburst")
+  labs(color="Day of Budburst") + ggtitle("F.")
 
 spg<-fe.site
 coordinates(spg)<- ~long+lat
@@ -216,9 +217,9 @@ que <- ggplot() +
           legend.position = "none",
           axis.title = element_blank(),
           panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Quercus robur", col="#87A6A6", x=0, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "Quercus robur", col="#CB1788", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-    labs(color="Day of Budburst")
+    labs(color="Day of Budburst") + ggtitle("E.")
 
 spg<-q.site
 coordinates(spg)<- ~long+lat
@@ -228,7 +229,13 @@ shapefile(coords, "output/querob_dvr.shp")
 
 
 quartz()
-ggarrange(aes, bet, aln, que, syl, fra, ncol=3, nrow=2)
+mappies<-ggarrange(bet, aln, aes, syl, que, fra, ncol=3, nrow=2)
+
+png("figures/BB_dvr.png", 
+    width=8,
+    height=5, units="in", res = 350 )
+grid.draw(mappies)
+dev.off()
 
 ## mapping with rworldmap
 mapDevice() #create world map shaped window

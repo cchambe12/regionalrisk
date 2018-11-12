@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{amssymb} % for math symbols
+\usepackage{amsmath} % for aligning equations
+\usepackage{textcomp}
+\usepackage{mdframed}
+\usepackage{natbib}
+\bibliographystyle{..//bib/styles/besjournals.bst}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{1.5}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+%% R Script
+<<label=libraries, echo=FALSE, results="asis", message=FALSE, warning=FALSE>>=
+  options(stringsAsFactors=FALSE)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+@
+
+\begin{document}
+\noindent \textbf{\Large{Regional Risk: Supplement}}
+
+\noindent Authors:\\
+C. J. Chamberlain $^{1,2}$, B. I. Cook $^{3}$, I. Morales Castilla $^{1,4}$ \& E. M. Wolkovich $^{1,2}$
+\vspace{2ex}\\
+\emph{Author affiliations:}\\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
+$^{3}$NASA Goddard Institute for Space Studies, New York, New York, USA; \\
+$^{4}$Edificio Ciencias, Campus Universitario 28805 Alcalá de Henares, Madrid, Spain \\
+\vspace{2ex}
+$^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\labelitemi}{$-$}
+\setkeys{Gin}{width=0.8\textwidth}
+
+\section*{Species rate of budburst calculations}
+\begin{enumerate}
+\item We used data from a growth chamber experiment (Flynn2018) to determine the average number of days between budburst and leafout for our study specices. 
+\item Cuttings for the experiment were made in January 2015 from two field sites: Harvard Forest (HF, 42.5$^{\circ}$N, 72.2$^{\circ}$W) and the Station de Biologie des Laurentides in St-Hippolyte, Qu\'ebec (SH, 45.9$^{\circ}$N, 74.0$^{\circ}$W). 
+\item The experiment examined budburst and leafout for \texit{Acer saccharum} (Marshall), \texit{Alnus incana} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus nigra} (Marshall), and \textit{Quercus alba} (L.) in a fully crossed design of three levels of chilling (field chilling, field chilling plus 30 days at either 1 or 4 $^{\circ}$C), two levels of forcing (20$^{\circ}$C/10$^{\circ}$C or 15$^{\circ}$C/5$^{\circ}$C day/night temperatures, such that thermoperiodicity followed photoperiod) and two levels of photoperiod (8 versus 12 hour days) resulting in 12 treatment combinations. 
+\item Phenological observations of each cutting were made every 2-3 days over 82 days. 
+\item Phenology was assessed using a BBCH scale that was modified for trees \citep{Finn2007}. 
+\item We used data from \textit{Acer saccharum} for \textit{Aesculus hippacastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} for \textit{Quercus robur} \citep{Hipp2017}.
+\end{enumerate}
+
+
+\section*{Supplement: Tables and Figures}
+%{\begin{figure} [H]
+%  -\begin{center}
+%  -\includegraphics[width=12cm]{..//figures/FS_Diff.pdf}
+%  -\caption{Number of years with freezing events that occured before temperature shifts related to climate change began (1951-1983) as compared to after reported climate shifts (1984-2016). If temperatures fell below -2$^{\circ}$C between March 1 and June 30, a year with a spring freeze was tallied. Some regions experienced more years with spring freezes after climate change began, whereas other years experienced the same number or even fewer years with spring freezes. Regions that had more years with spring freezes after climate change began are blue and green and regions that had fewer freezes are depicted in red.}\label{fig:region}
+%  -\end{center}
+%  -\end{figure}}
+  
+\begin{center}
+\captionof{table}{Data points collected for each species} \label{tab:spp} 
+\begin{tabular}{c c c c}
+\hline
+\textbf{Species} & \textbf{Num. of Observations} & \textbf{Num. of Sites} & \textbf{Num. of Years} \\
+\hline
+\textit{Aesculus hippocastanum} & 156836 & 10158 & 66  \\
+\hline
+\textit{Alnus glutinosa} & 91182 & 6775 & 66 \\
+\hline
+\textit{Betula pendula} & 155251 & 10139 & 66 \\
+\hline
+\textit{Fagus sylvatica} & 129133 & 9099 & 66 \\
+\hline
+\textit{Fraxinus excelsior} & 92665 & 7327 & 65 \\
+\hline
+\textit{Quercus robur} & 131635  & 8811 & 66 \\
+\end{tabular}
+\end{center}
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//figures/TminBB_bySpp.png}
+  -\caption{}\label{fig:tmin}
+  -\end{center}
+  -\end{figure}}
+
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//figures/model_output_berniefive.pdf}
+  -\caption{}\label{fig:five}
+  -\end{center}
+  -\end{figure}}
+  
+%{\begin{figure} [H]
+%  -\begin{center}
+%  -\includegraphics[width=16cm]{..//figures/PropSitesbyYrwBB.png}
+%  -\caption{The black line indicates the proportion of sites that had false spring conditions for each year across all species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}.}\label{fig:fsprop}
+%  -\end{center}
+%  -\end{figure}}
+
+\end{document}

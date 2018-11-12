@@ -6,7 +6,7 @@ library(spdep)
 library(vegan)
 
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newdvr_space.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_new_5.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newdvr_space.csv", header=TRUE)
 MEM_model<-"positive"
 style<-"B"
@@ -48,18 +48,18 @@ dselect<-read.csv("~/Documents/git/regionalrisk/analyses/output/memselect.csv", 
 
 dx<-cbind(bbs, dselect)
 library(dplyr)
-rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -distance, -space, -cc, -nao, -year)
+rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -eigen, -cc, -nao, -year)
 rex.mod<-lm(fs.count~ ., data=rex)
 space<-residuals(rex.mod)
 eigen<-space
 
-bb<-bb%>%dplyr::select(-space)
+bb<-bb%>%dplyr::select(-eigen)
 b_space<-cbind(bbs, eigen)
 beig<-subset(b_space, select=c("lat.long", "eigen"))
 prep_space<-full_join(bb, beig, by="lat.long")
 
 
 
-write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_dvr_cleaned.csv", row.names=FALSE)
+write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_new_5.csv", row.names=FALSE)
 #write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/mem_select.csv", row.names=FALSE)
 

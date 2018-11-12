@@ -23,7 +23,15 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 
 bb<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
+foo<-read.csv("output/fs_space_new.csv", header=TRUE)
+
 xx<-read.csv("output/BBdata_dvr.csv", header=TRUE)
+
+pre<-xx[(xx$year<1984),]
+pre$bb.avg<-ave(pre$bb, pre$species)
+
+post<-xx[(xx$year>1983),]
+post$bb.avg<-ave(post$bb, post$species)
 
 dxx<-bb
 #dxx$fs<-ifelse(dxx$fs.count>0, 1, 0)
@@ -54,6 +62,12 @@ dxx<-bb
 xx<-inner_join(xx, dxx)
 
 xx$bb.yr<-ave(xx$bb, xx$species, xx$year)
+
+pref<-xx[(xx$cc==0),]
+pref$numfs<-ave(pref$fs.count, pref$species, FUN=sum)
+
+postf<-xx[(xx$cc==1),]
+postf$numfs<-ave(postf$fs.count, postf$species, FUN=sum)
 #xx$x<-scale(xx$bb.yr, center = FALSE, scale = TRUE)
 #xx$sx<-xx$bb.yr-90.2963
 

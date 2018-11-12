@@ -1,4 +1,4 @@
-\begin{thebibliography}{43}
+\begin{thebibliography}{50}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Augspurger(2009)}]{Augspurger2009}
@@ -16,6 +16,14 @@ Basler, D. \& K{\"{o}}rner, C. (2012) {Photoperiod sensitivity of bud burst in
   14 temperate forest tree species}. \emph{Agricultural and Forest Meteorology}
   \textbf{165}, 73--81.
 
+\bibitem[{Buerki \emph{et~al.}(2010)Buerki, Lowry~II, Alvarez,
+  Razafimandimbison, Kupfer \& Callmander}]{Buerki2010}
+Buerki, S., Lowry~II, P., Alvarez, N., Razafimandimbison, S., Kupfer, P. \&
+  Callmander, M. (2010) {Phylogeny and circumscription of Sapindaceae
+  revisited: Molecular sequence data, morphology and biogeography support
+  recognition of a new family, Xanthoceraceae}. \emph{Plant Ecology and
+  Evolution} \textbf{143}, 148--159.
+
 \bibitem[{{B{\"u}rkner, Paul-Christian }(2017)}]{brms}
 {B{\"u}rkner, Paul-Christian } (2017) {{brms}: An {R} Package for {Bayesia}
   Multilevel Models}. \emph{{Journal of Statistical Software}} \textbf{80},
@@ -31,18 +39,36 @@ Chmielewski, F.M. \& R{\"o}tzer, T. (2001) Response of tree phenology to
   climate change across europe. \emph{Agricultural and Forest Meteorology}
   \textbf{108}, 101 -- 112.
 
+\bibitem[{Cleland \emph{et~al.}(2006)Cleland, Chiariello, Loarie, Mooney \&
+  Field}]{Cleland2006}
+Cleland, E., Chiariello, N., Loarie, S., Mooney, H. \& Field, C. (2006) Diverse
+  responses of phenology to global changes in a grassland ecosystem.
+  \emph{PNAS} \textbf{103}, 13740--13744.
+
+\bibitem[{Cleland \emph{et~al.}(2007)Cleland, Chuine, Menzel, Mooney \&
+  Schwartz}]{Cleland2007}
+Cleland, E.E., Chuine, I., Menzel, A., Mooney, H.A. \& Schwartz, M.D. (2007)
+  {Shifting plant phenology in response to global change}. \emph{Trends in
+  Ecology and Evolution} \textbf{22}, 357--365.
+
 \bibitem[{David \emph{et~al.}(2017)David, Thomas, St{\'e}phane \&
   Jason}]{Baumen2017}
 David, B., Thomas, D., St{\'e}phane, D. \& Jason, V. (2017) Disentangling good
   from bad practices in the selection of spatial or phylogenetic eigenvectors.
   \emph{Ecography} \textbf{0}.
 
-\bibitem[{Donnelly \emph{et~al.}(2017)Donnelly, Yu, Caffarra, Hanes, Liang,
-  Desai, Liu \& Schwartz}]{Donnelly2017}
-Donnelly, A., Yu, R., Caffarra, A., Hanes, J.M., Liang, L., Desai, A.R., Liu,
-  L. \& Schwartz, M.D. (2017) Interspecific and interannual variation in the
-  duration of spring phenophases in a northern mixed forest. \emph{Agricultural
-  and Forest Meteorology} \textbf{243}, 55--67.
+\bibitem[{Flynn \& Wolkovich(2018)}]{Flynn2018}
+Flynn, D.F.B. \& Wolkovich, E.M. (2018) Temperature and photoperiod drive
+  spring phenology across all species in a temperate forest community.
+  \emph{New Phytologist} .
+
+\bibitem[{Fu \emph{et~al.}(2015)Fu, Piao, Vitasse, Zhao, De~Boeck, Liu, Yang,
+  Weber, H{\"a}nninen \& Janssens}]{Fu2015}
+Fu, Y.H., Piao, S., Vitasse, Y., Zhao, H., De~Boeck, H.J., Liu, Q., Yang, H.,
+  Weber, U., H{\"a}nninen, H. \& Janssens, I.A. (2015) Increased heat
+  requirement for leaf flushing in temperate woody species over 1980-2012:
+  effects of chilling, precipitation and insolation. \emph{Global Change
+  Biology} \textbf{21}, 2687--2697.
 
 \bibitem[{Gelman \& Hill(2006)}]{Gelman2006}
 Gelman, A. \& Hill, J. (2006) \emph{Data analysis using regression and
@@ -57,6 +83,13 @@ Gu, L., Hanson, P.J., Post, W.M., Kaiser, D.P., Yang, B., Nemani, R., Pallardy,
 \bibitem[{H{\"a}nninen(1991)}]{Hannenin1991}
 H{\"a}nninen, H. (1991) Does climatic warming increase the risk of frost damage
   in northern trees? \emph{Plant, Cell \& Environment} \textbf{14}, 449--454.
+
+\bibitem[{Hipp \emph{et~al.}(2017)Hipp, S.~Manos, Gonz{\'a}lez-Rodr{\'\i}guez,
+  Hahn, Kaproth, McVay, Avalos \& Cavender-Bares}]{Hipp2017}
+Hipp, A., S.~Manos, P., Gonz{\'a}lez-Rodr{\'\i}guez, A., Hahn, M., Kaproth, M.,
+  McVay, J., Avalos, S. \& Cavender-Bares, J. (2017) {Sympatric parallel
+  diversification of major oak clades in the Americas and the origins of
+  Mexican species diversity}. \emph{New Phytologist} \textbf{217}.
 
 \bibitem[{Hufkens \emph{et~al.}(2012)Hufkens, Friedl, Keenan, Sonnentag,
   Bailey, O'Keefe \& Richardson}]{Hufkens2012}
@@ -232,6 +265,12 @@ Vitra, A., Lenz, A. \& Vitasse, Y. (2017) Frost hardening and dehardening
   potential in temperate trees from winter to budburst. \emph{New Phytologist}
   \textbf{216}, 113--123.
 
+\bibitem[{Wang \emph{et~al.}(2016)Wang, McAllister, Bartlett \&
+  Buggs}]{Wang2016}
+Wang, N., McAllister, H.A., Bartlett, P.R. \& Buggs, R.J.A. (2016) {Molecular
+  phylogeny and genome size evolution of the genus \textit{Betula}
+  (Betulaceae)}. \emph{Annals of Botany} \textbf{117}, 1023--1035.
+
 \bibitem[{Wolkovich \emph{et~al.}(2012)Wolkovich, Cook, Allen, Crimmins,
   Betancourt, Travers, Pau, Regetz, Davies, Kraft, Ault, Bolmgren, Mazer,
   McCabe, McGill, Parmesan, Salamin, Schwartz \& Cleland}]{Wolkovich2012}
@@ -248,6 +287,12 @@ Wypych, A., Ustrnul, Z., Sulikowska, A., Chmielewski, F.M. \& Bochenek, B.
   (2016) Spatial and temporal variability of the frost-free season in central
   europe and its circulation background. \emph{International Journal of
   Climatology} \textbf{37}, 3340--3352.
+
+\bibitem[{Xin(2016)}]{Xin2016}
+Xin, Q. (2016) {A risk-benefit model to simulate vegetation spring onset in
+  response to multi-decadal climate variability: Theoretical basis and
+  applications from the field to the Northern Hemisphere}. \emph{Agriculture
+  and Forest Meteorology} \textbf{228-229}, 139--163.
 
 \bibitem[{Zohner \emph{et~al.}(2016)Zohner, Benito, Svenning \&
   Renner}]{Zohner2016}
