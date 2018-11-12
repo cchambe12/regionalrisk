@@ -30,7 +30,7 @@ aes<-aes%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-aes$bb<-aes$lo-7
+aes$bb<-aes$lo-11
 aes$species<-"AESHIP"
 
 ag<-ag%>%
@@ -41,7 +41,7 @@ ag<-ag%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-ag$bb<-ag$lo-15
+ag$bb<-ag$lo-12
 ag$species<-"ALNGLU"
 
 d<-full_join(aes, ag)
@@ -54,7 +54,7 @@ bp<-bp%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-bp$bb<-bp$lo-10
+bp$bb<-bp$lo-11
 bp$species<-"BETPEN"
 
 d<-full_join(d, bp)
@@ -67,7 +67,7 @@ fsyl<-fsyl%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-fsyl$bb<-fsyl$lo-11
+fsyl$bb<-fsyl$lo-5
 fsyl$species<-"FAGSYL"
 
 d<-full_join(d, fsyl)
@@ -80,7 +80,7 @@ fex<-fex%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-fex$bb<-fex$lo-6
+fex$bb<-fex$lo-7
 fex$species<-"FRAEXC"
 
 d<-full_join(d, fex)
@@ -93,7 +93,7 @@ qr<-qr%>%
   rename(lo=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-qr$bb<-qr$lo-9
+qr$bb<-qr$lo-7
 qr$species<-"QUEROB"
 
 d<-full_join(d, qr)

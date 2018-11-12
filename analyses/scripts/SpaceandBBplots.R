@@ -65,7 +65,7 @@ ahip<-ggplot(aeship, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
   axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-  plot.title=element_text(colour = "#7FC97F", size = 9),axis.title = element_text(size=9)) +
+  plot.title=element_text(colour = "#FDD98D", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
@@ -75,7 +75,7 @@ aglu<-ggplot(alnglu, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#FDD98D", size = 9),axis.title = element_text(size=9)) +
+        plot.title=element_text(colour = "#CAB1C4", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
@@ -85,7 +85,7 @@ bpen<-ggplot(betpen, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),plot.title=element_text(colour = "#CAB1C4", size = 9),
+        plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),plot.title=element_text(colour = "#7FC97F", size = 9),
         axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") + scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
@@ -95,7 +95,7 @@ fsyl<-ggplot(fagsyl, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#CB1788", size = 9),axis.title = element_text(size=9)) +
+        plot.title=element_text(colour = "#87A6A6", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
@@ -115,7 +115,7 @@ qrob<-ggplot(querob, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#87A6A6", size = 9),axis.title = element_text(size=9)) +
+        plot.title=element_text(colour = "#CB1788", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
@@ -141,7 +141,7 @@ ahip<-ggplot(aeship, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#7FC97F", size = 9),axis.title = element_text(size=9)) +
+        plot.title=element_text(colour = "#FDD98D", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,30,60,90,120, 150)))
 
@@ -151,7 +151,7 @@ aglu<-ggplot(alnglu, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#FDD98D", size = 9),axis.title = element_text(size=9)) +
+        plot.title=element_text(colour = "#CAB1C4", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,30,60,90,120, 150)))
 
@@ -161,7 +161,7 @@ bpen<-ggplot(betpen, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
-        plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),plot.title=element_text(colour = "#CAB1C4", size = 9),
+        plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),plot.title=element_text(colour = "#7FC97F", size = 9),
         axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") + scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,30,60,90,120, 150)))
 
@@ -171,7 +171,7 @@ fsyl<-ggplot(fagsyl, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#CB1788", size = 9),axis.title = element_text(size=9)) +
+        plot.title=element_text(colour = "#87A6A6", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,30,60,90,120, 150)))
 
@@ -191,7 +191,7 @@ qrob<-ggplot(querob, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#87A6A6", size = 9),axis.title = element_text(size=9)) +
+        plot.title=element_text(colour = "#CB1788", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,30,60,90,120,150)))
 

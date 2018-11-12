@@ -6,8 +6,8 @@ require(brms)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_new.csv", header=TRUE)
-#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_space_new.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newdvr_space.csv", header=TRUE)
+#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newdvr_space.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))
 
@@ -21,9 +21,9 @@ bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
-bb<-bb[sample(nrow(bb), 80000), ]
+#bb<-bb[sample(nrow(bb), 80000), ]
 
-bernsshort<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+bernsnewdvr<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                          cc.z + species + nao.z:species + 
                          mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
                          nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, data=bb, chains=2,
@@ -32,7 +32,8 @@ bernsshort<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
 
 save(bernsshort, file="/n/wolkovich_lab/Lab/Cat/elevdist_bernsshort.Rdata")
 
-poisshort<-brm(fs.count ~ nao.z + mat.z + dist.z + elev.z + space.z +
+
+poisnewdvr<-brm(fs.count ~ nao.z + mat.z + dist.z + elev.z + space.z +
                        cc.z + species + nao.z:species + 
                        mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
                        nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, data=bb, chains=2,
