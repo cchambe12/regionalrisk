@@ -6,7 +6,7 @@ require(brms)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newdvr_space.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_new_5.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newdvr_space.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))
@@ -22,16 +22,16 @@ bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 #bb$bb.z <-(bb$bb-mean(bb$bb,na.rm=TRUE))/(2*sd(bb$bb,na.rm=TRUE))
 
-bb<-bb[sample(nrow(bb), 80000), ]
+#bb<-bb[sample(nrow(bb), 80000), ]
 
-berndvrshort<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+bernfivefull<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                          cc.z + species + nao.z:species + 
                          mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
                          nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, 
              data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2000,
              prior = prior(normal(0,1), class = "b"))
 
-save(berndvrshort, file="/n/wolkovich_lab/Lab/Cat/elevdist_berndvrshort.Rdata")
+save(bernfivefull, file="/n/wolkovich_lab/Lab/Cat/elevdist_bernfivefull.Rdata")
 
 
 #poisnewdvr<-brm(fs.count ~ nao.z + mat.z + dist.z + elev.z + space.z +
