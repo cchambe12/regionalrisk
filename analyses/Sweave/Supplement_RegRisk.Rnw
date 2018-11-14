@@ -105,6 +105,13 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   -\caption{}\label{fig:tmin}
   -\end{center}
   -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//figures/model_output_dvr.pdf}
+  -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs.}\label{fig:five}
+  -\end{center}
+  -\end{figure}}
 
 
 {\begin{figure} [H]

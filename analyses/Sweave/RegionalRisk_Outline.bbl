@@ -1,4 +1,4 @@
-\begin{thebibliography}{50}
+\begin{thebibliography}{54}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Augspurger(2009)}]{Augspurger2009}
@@ -56,6 +56,13 @@ Cleland, E.E., Chuine, I., Menzel, A., Mooney, H.A. \& Schwartz, M.D. (2007)
 David, B., Thomas, D., St{\'e}phane, D. \& Jason, V. (2017) Disentangling good
   from bad practices in the selection of spatial or phylogenetic eigenvectors.
   \emph{Ecography} \textbf{0}.
+
+\bibitem[{Donnelly \emph{et~al.}(2017)Donnelly, Yu, Caffarra, Hanes, Liang,
+  Desai, Liu \& Schwartz}]{Donnelly2017}
+Donnelly, A., Yu, R., Caffarra, A., Hanes, J.M., Liang, L., Desai, A.R., Liu,
+  L. \& Schwartz, M.D. (2017) Interspecific and interannual variation in the
+  duration of spring phenophases in a northern mixed forest. \emph{Agricultural
+  and Forest Meteorology} \textbf{243}, 55--67.
 
 \bibitem[{Flynn \& Wolkovich(2018)}]{Flynn2018}
 Flynn, D.F.B. \& Wolkovich, E.M. (2018) Temperature and photoperiod drive
@@ -153,6 +160,13 @@ Labe, Z., Ault, T. \& Zurita-Milla, R. (2016) Identifying anomalously early
 Lenz, A., Hoch, G., K{\"{o}}rner, C. \& Vitasse, Y. (2016) {Convergence of
   leaf-out towards minimum risk of freezing damage in temperate trees}.
   \emph{Functional Ecology} \textbf{30}, 1--11.
+
+\bibitem[{Lenz \emph{et~al.}(2013)Lenz, Hoch, Vitasse \&
+  K{\"{o}}rner}]{Lenz2013}
+Lenz, A., Hoch, G., Vitasse, Y. \& K{\"{o}}rner, C. (2013) {European deciduous
+  trees exhibit similar safety margins against damage by spring freeze events
+  along elevational gradients}. \emph{New Phytologist} \textbf{200},
+  1166--1175.
 
 \bibitem[{Liu \emph{et~al.}(2018)Liu, Piao, Janssens, Fu, Peng, Lian, Ciais,
   Myneni, Pe{\~n}uelas \& Wang}]{Liu2018}
@@ -281,18 +295,33 @@ Wolkovich, E.M., Cook, B.I., Allen, J.M., Crimmins, T.M., Betancourt, J.L.,
   plant phenological responses to climate change}. \emph{Nature} \textbf{485},
   18--21.
 
-\bibitem[{Wypych \emph{et~al.}(2016)Wypych, Ustrnul, Sulikowska, Chmielewski \&
-  Bochenek}]{Wypych2016a}
+\bibitem[{Wypych \emph{et~al.}(2016{\natexlab{a}})Wypych, Sulikowska, Ustrnul
+  \& Czekierda}]{Wypych2016}
+Wypych, A., Sulikowska, A., Ustrnul, Z. \& Czekierda, D. (2016{\natexlab{a}})
+  Variability of growing degree days in poland in response to ongoing climate
+  changes in europe. \emph{International Journal of Biometeorology}
+  \textbf{61}, 49--59.
+
+\bibitem[{Wypych \emph{et~al.}(2016{\natexlab{b}})Wypych, Ustrnul, Sulikowska,
+  Chmielewski \& Bochenek}]{Wypych2016a}
 Wypych, A., Ustrnul, Z., Sulikowska, A., Chmielewski, F.M. \& Bochenek, B.
-  (2016) Spatial and temporal variability of the frost-free season in central
-  europe and its circulation background. \emph{International Journal of
-  Climatology} \textbf{37}, 3340--3352.
+  (2016{\natexlab{b}}) Spatial and temporal variability of the frost-free
+  season in central europe and its circulation background. \emph{International
+  Journal of Climatology} \textbf{37}, 3340--3352.
 
 \bibitem[{Xin(2016)}]{Xin2016}
 Xin, Q. (2016) {A risk-benefit model to simulate vegetation spring onset in
   response to multi-decadal climate variability: Theoretical basis and
   applications from the field to the Northern Hemisphere}. \emph{Agriculture
   and Forest Meteorology} \textbf{228-229}, 139--163.
+
+\bibitem[{Zhuo \emph{et~al.}(2018)Zhuo, Zheng, Zhang, Zhang, Jiang, Ahmad, Sun,
+  Wang, Cheng \& Zhang}]{Zhuo2018}
+Zhuo, X., Zheng, T., Zhang, Z., Zhang, Y., Jiang, L., Ahmad, S., Sun, L., Wang,
+  J., Cheng, T. \& Zhang, Q. (2018) Genome-wide analysis of the nac
+  transcription factor gene family reveals differential expression patterns and
+  cold-stress responses in the woody plant prunus mume. \emph{Genes}
+  \textbf{9}.
 
 \bibitem[{Zohner \emph{et~al.}(2016)Zohner, Benito, Svenning \&
   Renner}]{Zohner2016}
