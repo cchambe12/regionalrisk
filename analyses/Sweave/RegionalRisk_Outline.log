@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  14 NOV 2018 11:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  14 NOV 2018 15:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,95 +874,88 @@ Underfull \hbox (badness 10000) in paragraph at lines 93--103
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (4.15327pt too wide) in paragraph at lines 150--151
+[2]
+Overfull \hbox (4.15327pt too wide) in paragraph at lines 164--165
 []\T1/aer/m/n/10 There is large de-bate over whether or not spring freeze dam-a
 ge will in-crease (Hän-ni-nen, 1991; Augspurger,
  []
 
-[2] [3] [4] [5] [6] [7] [8] [9] (./RegionalRisk_Outline.bbl [10] [11] [12]
-[13]) <..//figures/BB_dvr.png, id=56, 2810.5pt x 1756.5625pt>
+[3] [4] [5] [6] [7] [8] [9] [10] (./RegionalRisk_Outline.bbl [11] [12] [13]
+[14]) <..//figures/BB_dvr.png, id=59, 2810.5pt x 1756.5625pt>
 File: ..//figures/BB_dvr.png Graphic file (type png)
 
 <use ..//figures/BB_dvr.png>
-Package pdftex.def Info: ..//figures/BB_dvr.png used on input line 361.
+Package pdftex.def Info: ..//figures/BB_dvr.png used on input line 384.
 (pdftex.def)             Requested size: 398.33858pt x 248.9458pt.
- [14]
-<..//figures/Boxplot_BBTminFS_dvr.pdf, id=61, 476.91837pt x 428.52608pt>
+ [15]
+<..//figures/Boxplot_BBTminFS_dvr.pdf, id=64, 476.91837pt x 428.52608pt>
 File: ..//figures/Boxplot_BBTminFS_dvr.pdf Graphic file (type pdf)
 
 <use ..//figures/Boxplot_BBTminFS_dvr.pdf>
 Package pdftex.def Info: ..//figures/Boxplot_BBTminFS_dvr.pdf used on input lin
-e 368.
+e 391.
 (pdftex.def)             Requested size: 341.43306pt x 306.79268pt.
- [15 <..//figures/BB_dvr.png>]
-<..//figures/MSTBB_bySpp.png, id=68, 2810.5pt x 1756.5625pt>
+ [16 <..//figures/BB_dvr.png>]
+<..//figures/MSTBB_bySpp.png, id=71, 2810.5pt x 1756.5625pt>
 File: ..//figures/MSTBB_bySpp.png Graphic file (type png)
 
 <use ..//figures/MSTBB_bySpp.png>
-Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 375.
+Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 398.
 (pdftex.def)             Requested size: 341.43306pt x 213.3783pt.
- [16 <..//figures/Boxplot_BBTminFS_dvr.pdf>]
-<..//figures/model_output_dvr.pdf, id=280, 350.20708pt x 310.0924pt>
-File: ..//figures/model_output_dvr.pdf Graphic file (type pdf)
+ [17 <..//figures/Boxplot_BBTminFS_dvr.pdf>]
+<..//figures/model_output_bern_50.pdf, id=283, 395.41556pt x 327.28444pt>
+File: ..//figures/model_output_bern_50.pdf Graphic file (type pdf)
 
-<use ..//figures/model_output_dvr.pdf>
-Package pdftex.def Info: ..//figures/model_output_dvr.pdf used on input line 38
-3.
-(pdftex.def)             Requested size: 455.24408pt x 403.11534pt.
- [17 <..//figures/MSTBB_bySpp.png>]
-<..//figures/InteractionPlots/IntrxnPlots_dvr.pdf, id=285, 507.48186pt x 308.81
-894pt>
-File: ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf Graphic file (type pdf)
- <use ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf>
-Package pdftex.def Info: ..//figures/InteractionPlots/IntrxnPlots_dvr.pdf used 
-on input line 391.
-(pdftex.def)             Requested size: 455.24408pt x 277.03444pt.
- [18 <..//figures/model_output_dvr.pdf>]
-<..//figures/InteractionPlots/Species_dvr.pdf, id=383, 510.02875pt x 335.56207p
-t>
-File: ..//figures/InteractionPlots/Species_dvr.pdf Graphic file (type pdf)
- <use ..//figures/InteractionPlots/Species_dvr.pdf>
-Package pdftex.def Info: ..//figures/InteractionPlots/Species_dvr.pdf used on i
-nput line 398.
-(pdftex.def)             Requested size: 455.24408pt x 299.52998pt.
- [19 <..//figures/InteractionPlots/IntrxnPlots_dvr.pdf>]
-<..//figures/model_output_bern.pdf, id=629, 394.77887pt x 333.65182pt>
-File: ..//figures/model_output_bern.pdf Graphic file (type pdf)
-
-<use ..//figures/model_output_bern.pdf>
-Package pdftex.def Info: ..//figures/model_output_bern.pdf used on input line 4
-06.
-(pdftex.def)             Requested size: 455.24408pt x 384.78102pt.
- [20 <..//figures/InteractionPlots/Species_dvr.pdf>] [21 <..//figures/model_out
-put_bern.pdf>]
-(./RegionalRisk_Outline.aux) ) 
+<use ..//figures/model_output_bern_50.pdf>
+Package pdftex.def Info: ..//figures/model_output_bern_50.pdf used on input lin
+e 406.
+(pdftex.def)             Requested size: 455.24408pt x 376.80864pt.
+ [18 <..//figures/MSTBB_bySpp.png>]
+<..//figures/InteractionPlots/IntrxnPlots_bernie.pdf, id=288, 468.00395pt x 334
+.28851pt>
+File: ..//figures/InteractionPlots/IntrxnPlots_bernie.pdf Graphic file (type pd
+f)
+ <use ..//figures/InteractionPlots/IntrxnPlots_bernie.pdf>
+Package pdftex.def Info: ..//figures/InteractionPlots/IntrxnPlots_bernie.pdf us
+ed on input line 414.
+(pdftex.def)             Requested size: 455.24408pt x 325.1725pt.
+ [19 <..//figures/model_output_bern_50.pdf>]
+<..//figures/InteractionPlots/Species_bernie.pdf, id=387, 503.66136pt x 340.019
+21pt>
+File: ..//figures/InteractionPlots/Species_bernie.pdf Graphic file (type pdf)
+ <use ..//figures/InteractionPlots/Species_bernie.pdf>
+Package pdftex.def Info: ..//figures/InteractionPlots/Species_bernie.pdf used o
+n input line 421.
+(pdftex.def)             Requested size: 455.24408pt x 307.33228pt.
+ [20 <..//figures/InteractionPlots/IntrxnPlots_bernie.pdf>] [21 <..//figures/In
+teractionPlots/Species_bernie.pdf>] (./RegionalRisk_Outline.aux) ) 
 Here is how much of TeX's memory you used:
- 16154 strings out of 493014
- 315711 string characters out of 6133351
- 340016 words of memory out of 5000000
- 19479 multiletter control sequences out of 15000+600000
+ 16148 strings out of 493014
+ 315579 string characters out of 6133351
+ 340007 words of memory out of 5000000
+ 19474 multiletter control sequences out of 15000+600000
  33938 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,9n,42p,10410b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
-10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9
-.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/ms
-bm10.pfb>
-Output written on RegionalRisk_Outline.pdf (21 pages, 4147941 bytes).
+</usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on RegionalRisk_Outline.pdf (21 pages, 4037361 bytes).
 PDF statistics:
- 1068 PDF objects out of 1200 (max. 8388607)
- 792 compressed objects within 8 object streams
+ 970 PDF objects out of 1000 (max. 8388607)
+ 718 compressed objects within 8 object streams
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

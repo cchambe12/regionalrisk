@@ -74,6 +74,8 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   \item Mean spring temperature and elevation were the strongest predictors of false spring risk, with higher mean spring temperatures having fewer false springs and higher elevations experiencing more false springs.
   \item Overall, false spring risk decreased with climate change for all species, however, there was a slight increase in false spring risk with climate change at sites further from the coast.
   \item Our results suggest that assessing a slew of regional and climatic factors is essential for predicting false spring risk and that these factors better predict false spring risk than budburst date, however more robust observational data that includes both budburst and leafout times are crucial for forecasting false spring risk more accurately.
+  \end{enumerate}
+\end{enumerate}
 
 
 \section*{Introduction}
@@ -309,7 +311,8 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
   \item Individuals that initiate budburst earlier in the season aren't necessarily exposed to more false springs, thus, investigating site effects is a more consistent proxy for false spring risk than budburst time. 
   \item Overall, the frequency of false spring events is decreasing with climate change however additional studies are crucial to understand how the intensity and duration of these events are shifting.
   \item Furthermore, incorporating both budburst and leafout data as well as species-specific temperature thresholds will advance our knowledge of false spring risk in a changing climate. 
-  
+  \end{enumerate}
+\end{enumerate}
   
   
   
@@ -354,7 +357,7 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/model_output_bern.pdf}
+  -\includegraphics[width=16cm]{..//figures/model_output_bern_50.pdf}
   -\caption{Model output with standardized durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs.}\label{fig:maineffects}
   -\end{center}
   -\end{figure}}
@@ -362,14 +365,14 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/InteractionPlots/IntrxnPlots_dvr.pdf}
-  -\caption{}\label{fig:intrxns}
+  -\includegraphics[width=16cm]{..//figures/InteractionPlots/IntrxnPlots_bernie.pdf}
+  -\caption{A plot showing the interaction effects on false spring risk for each predictor coupled with climate change. (A.) As mean spring temperature increases, there were fewer false springs but there were fewer false springs after 1983 at sites with lower mean spring temperatures. (B.) As elevation increased, false spring risk increased but there were fewer false springs at higher altitudes after 1983. (C.) As NAO indices increased, there were more false springs before 1983 but fewer after 1983. (D.) There were more false springs further from the coast and the rate of increase was consistent, however, there were fewer false springs in total after 1983.}\label{fig:intrxns}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/InteractionPlots/Species_dvr.pdf}
+  -\includegraphics[width=16cm]{..//figures/InteractionPlots/Species_bernie.pdf}
   -\caption{}\label{fig:spp}
   -\end{center}
   -\end{figure}}
