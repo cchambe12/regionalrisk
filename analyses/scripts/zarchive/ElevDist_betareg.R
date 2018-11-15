@@ -6,7 +6,7 @@ require(brms)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_new_5.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_new.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newdvr_space.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))
@@ -24,14 +24,14 @@ bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
 #bb<-bb[sample(nrow(bb), 80000), ]
 
-bernfivefull<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+bernfullbigpriors<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                          cc.z + species + nao.z:species + 
                          mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
                          nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, 
              data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2000,
-             prior = prior(normal(0,1), class = "b"))
+             prior = prior(normal(0,5), class = "b"))
 
-save(bernfivefull, file="/n/wolkovich_lab/Lab/Cat/elevdist_bernfivefull.Rdata")
+save(bernfullbigpriors, file="/n/wolkovich_lab/Lab/Cat/elevdist_bernfullbigpriors.Rdata")
 
 
 #poisnewdvr<-brm(fs.count ~ nao.z + mat.z + dist.z + elev.z + space.z +

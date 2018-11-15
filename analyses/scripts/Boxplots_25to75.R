@@ -23,13 +23,13 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 #xx<-subset(xx, year>1950)
 
-mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
+mat<-read.csv("output/BBdata.csv", header=TRUE)
 mat$bb.avg<-ave(mat$bb, mat$species)
 
 mat$cc<-ifelse(mat$year<1984, 0, 1)
 mat$species<-ifelse(mat$species=="BETPEN", "aaBETPEN", mat$species)
 mat$species<-ifelse(mat$species=="FRAEXC", "zFRAEXC", mat$species)
-mat$species<-ifelse(mat$species=="ALNGLU", "abALNGLU", mat$species)
+#mat$species<-ifelse(mat$species=="ALNGLU", "abALNGLU", mat$species)
 pre<-subset(mat, mat$cc==0)
 #for(i in unique(pre$species)){
  # pre<-pre[(pre$bb[pre$species==i]<quantile(pre$bb[pre$species==i], 0.75) & pre$bb[pre$species==i]>quantile(pre$bb[pre$species==i], 0.25)),]
@@ -46,14 +46,14 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
   scale_fill_manual(name="Species", values=cols,
                       labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                                "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                               "abALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                               "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                                "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))),
                                "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) + 
   scale_color_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                             "abALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                             "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) + 
@@ -68,7 +68,7 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
         axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
-                            "abALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
+                            "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "cQUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Day of Budburst") + coord_cartesian(ylim=c(50,165)) + 
   geom_hline(yintercept=107.96, linetype="dotted", col="black") +
@@ -87,7 +87,7 @@ tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
 tm$cc<-ifelse(tm$year<1984, 0, 1)
 tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
 tm$species<-ifelse(tm$species=="FRAEXC", "zFRAEXC", tm$species)
-tm$species<-ifelse(tm$species=="ALNGLU", "abALNGLU", tm$species)
+#tm$species<-ifelse(tm$species=="ALNGLU", "abALNGLU", tm$species)
 tm<-tm[!is.na(tm$Tmin),]
 pret<-subset(tm, tm$cc==0)
 #for(i in unique(pret$species)){
@@ -105,14 +105,14 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                             "abALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                             "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) + 
   scale_color_manual(name="Species", values=cols,
                      labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                               "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                              "abALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                               "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                               "QUEROB"=expression(paste(italic("Quercus robur"))),
                               "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) + 
@@ -127,7 +127,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
         axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
-                            "abALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
+                            "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Minimum Temperature \nfrom Budburst to Leafout") + coord_cartesian(ylim=c(-5,20)) + 
   geom_hline(yintercept=7.69, linetype="dotted", col="black") +
@@ -143,7 +143,7 @@ f<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
 f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
-f$species<-ifelse(f$species=="ALNGLU", "abALNGLU", f$species)
+#f$species<-ifelse(f$species=="ALNGLU", "abALNGLU", f$species)
 f<-f[!is.na(f$fs.count),]
 f$fs<-ifelse(f$fs.count>0, 1, 0)
 f$fs<-ave(f$fs,f$lat.long, f$species, f$cc, FUN=sum)
@@ -155,14 +155,14 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                             "abALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                             "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) + 
   scale_color_manual(name="Species", values=cols,
                      labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                               "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                              "abALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
                               "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                               "QUEROB"=expression(paste(italic("Quercus robur"))),
                               "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) + 
@@ -176,9 +176,9 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
         axis.title.x = element_blank()) + 
         #axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula \n(DVR = 11 days)", "AESHIP" = "Aesculus \nhippocastanum \n(DVR = 11 days)",
-                            "abALNGLU" = "Alnus glutinosa \n(DVR = 12 days)", "FAGSYL"="Fagus sylvatica \n(DVR = 8 days)",
-                            "QUEROB"="Quercus robur \n(DVR = 7 days)", "zFRAEXC"="Fraxinus \nexcelsior \n(DVR = 7 days)")) +
+  scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
+                            "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
+                            "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Number of Years \nwith False Springs") + coord_cartesian(ylim=c(0,25)) + 
   #geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +

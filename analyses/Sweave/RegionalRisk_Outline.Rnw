@@ -335,14 +335,14 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=14cm]{..//figures/BB_dvr.png}
+  -\includegraphics[width=14cm]{..//figures/BB_gis.png}
   -\caption{The average day of budburst is mapped by site for each species. Species are ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}. Earlier budburst dates are blue and later budburst dates are in red. }\label{fig:bbmap}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS_dvr.pdf}
+  -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS.pdf}
   -\caption{Budburst, minimum temperatures and false springs were compared before and after 1983 for each species. We plotted the day of budburst (A.) before and after 1983 for each species across all sites. We then compared the average minimum temperatures (B.) between budburst and leafout for all species across all sites. The bottom panel (C.), shows the total number of years there was a false spring before and after 1983 at each site across all species. Species are ordered by day of budburst.  }\label{fig:boxfs}
   -\end{center}
   -\end{figure}}
