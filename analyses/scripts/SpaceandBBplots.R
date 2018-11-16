@@ -22,10 +22,10 @@ library(gridExtra)
 setwd("~/Documents/git/regionalrisk/analyses/")
 
 
-bb<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
-foo<-read.csv("output/fs_space_new.csv", header=TRUE)
+#bb<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
+bb<-read.csv("output/fs_space_new.csv", header=TRUE)
 
-xx<-read.csv("output/BBdata_dvr.csv", header=TRUE)
+xx<-read.csv("output/BBdata.csv", header=TRUE)
 
 pre<-xx[(xx$year<1984),]
 pre$bb.avg<-ave(pre$bb, pre$species)
@@ -75,27 +75,27 @@ postf$numfs<-ave(postf$fs.count, postf$species, FUN=sum)
 
 aeship<-subset(xx, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("C. Aesculus hippocastanum \n(Avg Day of Budburst = 95.29)")))) + 
+  ggtitle(expression(paste(italic("Aesculus hippocastanum \n(Avg Day of Budburst = 99.24)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
   axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-  plot.title=element_text(colour = "#FDD98D", size = 9),axis.title = element_text(size=9)) +
+  plot.title=element_text(colour = "#CAB1C4", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
 alnglu<-subset(xx, species=="ALNGLU")
 aglu<-ggplot(alnglu, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("B. Alnus glutinosa \n(Avg Day of Budburst = 98.32)")))) + 
+  ggtitle(expression(paste(italic("Alnus glutinosa \n(Avg Day of Budburst = 98.91)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#CAB1C4", size = 9),axis.title = element_text(size=9)) +
+        plot.title=element_text(colour = "gold2", size = 9),axis.title = element_text(size=9)) +
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
 betpen<-subset(xx, species=="BETPEN")
 bpen<-ggplot(betpen, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("A. Betula pendula \n(Avg Day of Budburst = 97.31)")))) + 
+  ggtitle(expression(paste(italic("Betula pendula \n(Avg Day of Budburst = 98.76)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
@@ -105,7 +105,7 @@ bpen<-ggplot(betpen, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
 
 fagsyl<-subset(xx, species=="FAGSYL")
 fsyl<-ggplot(fagsyl, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("D. Fagus sylvatica \n(Avg Day of Budburst = 113.83)")))) + 
+  ggtitle(expression(paste(italic("Fagus sylvatica \n(Avg Day of Budburst = 106.7)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -115,7 +115,7 @@ fsyl<-ggplot(fagsyl, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
 
 fraexc<-subset(xx, species=="FRAEXC")
 fexc<-ggplot(fraexc, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("F. Fraxinus excelsior \n(Avg Day of Budburst = 117.80)")))) + 
+  ggtitle(expression(paste(italic("Fraxinus excelsior \n(Avg Day of Budburst = 116.34)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -125,7 +125,7 @@ fexc<-ggplot(fraexc, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
 
 querob<-subset(xx, species=="QUEROB")
 qrob<-ggplot(querob, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("E. Quercus robur \n(Avg Day of Budburst = 111.74)")))) + 
+  ggtitle(expression(paste(italic("Quercus robur \n(Avg Day of Budburst = 113.0)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -144,24 +144,14 @@ dev.off()
 
 
 ###### Now let's compare to Tmin!
-tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
+tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
 
 tm<-full_join(xx, tm)
 tm<-na.omit(tm)
 
 aeship<-subset(tm, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Minimum Temperature from \nBudburst to Leafout") + 
-  ggtitle(expression(paste(italic("C. Aesculus hippocastanum \n(Avg Day of Budburst = 95.29)")))) + 
-  coord_cartesian(ylim=c(-5,20)) +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
-        axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
-        plot.title=element_text(colour = "#FDD98D", size = 9),axis.title = element_text(size=9)) +
-  geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
-  scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,30,60,90,120, 150)))
-
-alnglu<-subset(tm, species=="ALNGLU")
-aglu<-ggplot(alnglu, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Minimum Temperature from \nBudburst to Leafout") + 
-  ggtitle(expression(paste(italic("B. Alnus glutinosa \n(Avg Day of Budburst = 98.32)")))) + 
+  ggtitle(expression(paste(italic("Aesculus hippocastanum \n(Avg Day of Budburst = 99.24)")))) + 
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -169,9 +159,19 @@ aglu<-ggplot(alnglu, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
   geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,30,60,90,120, 150)))
 
+alnglu<-subset(tm, species=="ALNGLU")
+aglu<-ggplot(alnglu, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Minimum Temperature from \nBudburst to Leafout") + 
+  ggtitle(expression(paste(italic("Alnus glutinosa \n(Avg Day of Budburst = 98.91)")))) + 
+  coord_cartesian(ylim=c(-5,20)) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
+        plot.title=element_text(colour = "gold2", size = 9),axis.title = element_text(size=9)) +
+  geom_line(aes(y=bb.yr/10), col="blue", stat="smooth", size=2, method="auto") +
+  scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,30,60,90,120, 150)))
+
 betpen<-subset(tm, species=="BETPEN")
 bpen<-ggplot(betpen, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Minimum Temperature from \nBudburst to Leafout") + 
-  ggtitle(expression(paste(italic("A. Betula pendula \n(Avg Day of Budburst = 97.31)")))) + 
+  ggtitle(expression(paste(italic("Betula pendula \n(Avg Day of Budburst = 98.76)")))) + 
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
@@ -181,7 +181,7 @@ bpen<-ggplot(betpen, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
 
 fagsyl<-subset(tm, species=="FAGSYL")
 fsyl<-ggplot(fagsyl, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Minimum Temperature from \nBudburst to Leafout") + 
-  ggtitle(expression(paste(italic("D. Fagus sylvatica \n(Avg Day of Budburst = 113.83)")))) + 
+  ggtitle(expression(paste(italic("Fagus sylvatica \n(Avg Day of Budburst = 106.7)")))) + 
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -191,7 +191,7 @@ fsyl<-ggplot(fagsyl, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
 
 fraexc<-subset(tm, species=="FRAEXC")
 fexc<-ggplot(fraexc, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Minimum Temperature from \nBudburst to Leafout") + 
-  ggtitle(expression(paste(italic("F. Fraxinus excelsior \n(Avg Day of Budburst = 117.80)")))) + 
+  ggtitle(expression(paste(italic("Fraxinus excelsior \n(Avg Day of Budburst = 116.34)")))) + 
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -201,7 +201,7 @@ fexc<-ggplot(fraexc, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year"
 
 querob<-subset(tm, species=="QUEROB")
 qrob<-ggplot(querob, aes(x=year, y=Tmin)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Minimum Temperature from \nBudburst to Leafout") + 
-  ggtitle(expression(paste(italic("E. Quercus robur \n(Avg Day of Budburst = 111.74)")))) + 
+  ggtitle(expression(paste(italic("Quercus robur \n(Avg Day of Budburst = 113.0)")))) + 
   coord_cartesian(ylim=c(-5,20)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),

@@ -18,6 +18,8 @@ library(tidyr)
 library(egg)
 library(RColorBrewer)
 library(raster)
+library(grid)
+library(gridExtra)
 
 library(maptools)
 library(ggplotify)
@@ -54,7 +56,7 @@ mp + theme(panel.border = element_blank(),
       panel.grid.minor = element_blank()) + geom_point(aes(color=space)) + geom_jitter()
 
 setwd("~/Documents/git/regionalrisk/analyses")
-d<-read.csv("output/BBdata_dvr.csv", header=TRUE)
+d<-read.csv("output/BBdata.csv", header=TRUE)
 d<-d[(d$bb>=0),]
 d$bb.space<-ave(d$bb, d$PEP_ID, d$species)
 
@@ -78,18 +80,18 @@ aes <- ggplot() +
         axis.line = element_blank(),
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
-        #legend.position = "none",
+        legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Aesculus \nhippocastanum", col="gold2", x=-12, y=68,fontface="bold.italic", size=3,
+  annotate("text",label= "Aesculus \nhippocastanum", col="#CAB1C4", x=-12, y=68,fontface="bold.italic", size=3,
            family="Helvetica", hjust=0) + sc + 
-  labs(color="Day of Budburst") + ggtitle("C.")
+  labs(color="Day of Budburst") + ggtitle("")
 
-spg<-a.site
-coordinates(spg)<- ~long+lat
-proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
-coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/aeship_dvr.shp")
+#spg<-a.site
+#coordinates(spg)<- ~long+lat
+#proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+#coords<-spTransform(spg, CRS("+proj=longlat"))
+#shapefile(coords, "output/aeship_dvr.shp")
 
 ag.site<-filter(site, species=="ALNGLU")
 boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
@@ -106,17 +108,16 @@ aln <- ggplot() +
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
         axis.title = element_blank(),
-        panel.background = element_rect(fill="grey95"),
-        legend.position = "none") +
-  annotate("text",label= "Alnus glutinosa", col="#CAB1C4", x=1, y=70,fontface="bold.italic", size=3,
+        panel.background = element_rect(fill="grey95")) +
+  annotate("text",label= "Alnus glutinosa", col="gold2", x=1, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-  labs(color="Day of Budburst") + ggtitle("B.")
+  labs(color="Day of Budburst") + ggtitle("")
 
-spg<-ag.site
-coordinates(spg)<- ~long+lat
-proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
-coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/alnglu_dvr.shp")
+#spg<-ag.site
+#coordinates(spg)<- ~long+lat
+#proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+#coords<-spTransform(spg, CRS("+proj=longlat"))
+#shapefile(coords, "output/alnglu_dvr.shp")
 
 b.site<-filter(site, species=="BETPEN")
 boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
@@ -137,14 +138,14 @@ bet <- ggplot() +
         panel.background = element_rect(fill="grey95")) +
   annotate("text",label= "Betula pendula", col="#7FC97F", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-  labs(color="Day of Budburst") + ggtitle("A.")
+  labs(color="Day of Budburst") + ggtitle("")
 
-b.site<-na.omit(b.site)
-spg<-b.site
-coordinates(spg)<- ~long+lat
-proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
-coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/betpen_dvr.shp", overwrite=TRUE)
+#b.site<-na.omit(b.site)
+#spg<-b.site
+#coordinates(spg)<- ~long+lat
+#proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+#coords<-spTransform(spg, CRS("+proj=longlat"))
+#shapefile(coords, "output/betpen_dvr.shp", overwrite=TRUE)
 
 f.site<-filter(site, species=="FAGSYL")
 boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
@@ -165,13 +166,13 @@ syl <- ggplot() +
         panel.background = element_rect(fill="grey95")) +
   annotate("text",label= "Fagus sylvatica", col="#87A6A6", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-  labs(color="Day of Budburst") + ggtitle("D.")
+  labs(color="Day of Budburst") + ggtitle("")
 
-spg<-f.site
-coordinates(spg)<- ~long+lat
-proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
-coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/fagsyl_dvr.shp")
+#spg<-f.site
+#coordinates(spg)<- ~long+lat
+#proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+#coords<-spTransform(spg, CRS("+proj=longlat"))
+#shapefile(coords, "output/fagsyl_dvr.shp")
 
 fe.site<-filter(site, species=="FRAEXC")
 boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
@@ -191,13 +192,13 @@ fra <- ggplot() +
         panel.background = element_rect(fill="grey95")) +
   annotate("text",label= "Fraxinus excelsior", col="#BF5B17", x=3, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-  labs(color="Day of Budburst") + ggtitle("F.")
+  labs(color="Day of Budburst") + ggtitle("")
 
-spg<-fe.site
-coordinates(spg)<- ~long+lat
-proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
-coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/fraexc_dvr.shp")
+#spg<-fe.site
+#coordinates(spg)<- ~long+lat
+#proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+#coords<-spTransform(spg, CRS("+proj=longlat"))
+#shapefile(coords, "output/fraexc_dvr.shp")
 
 q.site<-filter(site, species=="QUEROB")
 boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
@@ -219,19 +220,19 @@ que <- ggplot() +
           panel.background = element_rect(fill="grey95")) +
   annotate("text",label= "Quercus robur", col="#CB1788", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
-    labs(color="Day of Budburst") + ggtitle("E.")
+    labs(color="Day of Budburst") + ggtitle("")
 
-spg<-q.site
-coordinates(spg)<- ~long+lat
-proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
-coords<-spTransform(spg, CRS("+proj=longlat"))
-shapefile(coords, "output/querob_dvr.shp")
+#spg<-q.site
+#coordinates(spg)<- ~long+lat
+#proj4string(spg)<-CRS("+proj=longlat +datum=WGS84")
+#coords<-spTransform(spg, CRS("+proj=longlat"))
+#shapefile(coords, "output/querob_dvr.shp")
 
 
 quartz()
-mappies<-ggarrange(bet, aln, aes, syl, que, fra, ncol=3, nrow=2)
+mappies<-ggarrange(bet, aes, aln, syl, que, fra, ncol=3, nrow=2)
 
-png("figures/BB_dvr.png", 
+png("figures/BB_base.png", 
     width=8,
     height=5, units="in", res = 350 )
 grid.draw(mappies)

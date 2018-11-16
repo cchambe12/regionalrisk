@@ -111,9 +111,9 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 \section*{Abstract}
 \begin{enumerate}
-\item Late spring freezing events, also known as false springs, can be ecologically damaging but the risk of these events with climate change is still not well understood. 
+\item Late spring freezing events, also known as false springs, can be ecologically damaging but how the risk of these events is changing with climate change is still not well understood. 
   \begin{enumerate}
-  \item With earlier budburst dates and longer growing seasons, the risk of false springs could potentially increase in some regions and individuals that initiate budburst earlier are at greater risk of false springs.
+  \item With earlier budburst dates and longer growing seasons, the risk of false springs could potentially increase in some regions with advancing budburst times.
   \item Many studies have investigated various regional and climatic effects on false spring risk with climate change-induced shifts however none have compared multiple factors at once.
   \item Using PEP725 leafout data for 6 species across 11,648 sites in Europe, we assessed the effects of NAO, mean spring temperature, elevation and distance from the coast to determine which factors were the strongest predictors of false spring risk and how these predictors shifted with climate change. 
   \item Species that initiated budburst early did not always have an increased risk of false spring.
@@ -381,21 +381,21 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=14cm]{..//figures/BB_dvr.png}
+  -\includegraphics[width=14cm]{..//figures/BB_base.png}
   -\caption{The average day of budburst is mapped by site for each species. Species are ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}. Earlier budburst dates are blue and later budburst dates are in red. }\label{fig:bbmap}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/Boxplot_BBTminFS_dvr.pdf}
+  -\includegraphics[width=14cm]{..//figures/Boxplot_BBTminFS.pdf}
   -\caption{Budburst, minimum temperatures and false springs were compared before and after 1983 for each species. We plotted the day of budburst (A.) before and after 1983 for each species across all sites. We then compared the average minimum temperatures (B.) between budburst and leafout for all species across all sites. The bottom panel (C.), shows the total number of years there was a false spring before and after 1983 at each site across all species. Species are ordered by day of budburst.  }\label{fig:boxfs}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/MSTBB_bySpp.png}
+  -\includegraphics[width=16cm]{..//figures/MSTBB_bySpp.png}
   -\caption{Mean spring temperatures are plotted for each site over time (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:mst}
   -\end{center}
   -\end{figure}}
@@ -403,7 +403,7 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/model_output_bern_50.pdf}
+  -\includegraphics[width=12cm]{..//figures/model_output_bern_50.pdf}
   -\caption{Model output with standardized durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs.}\label{fig:maineffects}
   -\end{center}
   -\end{figure}}
@@ -412,14 +412,14 @@ y_i \thicksim N(\alpha_(i)) +& \beta_{MeanSpringTemp_{(i)}} + \beta_{NAO_{(i)}}+
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//figures/InteractionPlots/IntrxnPlots_bernie.pdf}
-  -\caption{A plot showing the interaction effects on false spring risk for each predictor coupled with climate change. (A.) As mean spring temperature increases, there were fewer false springs but there were fewer false springs after 1983 at sites with lower mean spring temperatures. (B.) As elevation increased, false spring risk increased but there were fewer false springs at higher altitudes after 1983. (C.) As NAO indices increased, there were more false springs before 1983 but fewer after 1983. (D.) There were more false springs further from the coast and the rate of increase was consistent, however, there were fewer false springs in total after 1983.}\label{fig:intrxns}
+  -\caption{Plots showing the interaction effects on false spring risk for each predictor coupled with climate change. (A.) As mean spring temperature increases, there were fewer false springs but there were fewer false springs after 1983 at sites with lower mean spring temperatures. (B.) As elevation increased, false spring risk increased but there were fewer false springs at higher altitudes after 1983. (C.) As NAO indices increased, there were more false springs before 1983 but fewer after 1983. (D.) There were more false springs further from the coast and the rate of increase was consistent, however, there were fewer false springs in total after 1983. Note, the y-axis for panels A and B are from 0.00 to 1.00 but the y-axis is only from 0.00 to 0.20 for panels C and D to better see the relationships. Since we found the z-score for each predictor, the x-axis for each panel does not reflect the raw data.}\label{fig:intrxns}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//figures/InteractionPlots/Species_bernie.pdf}
-  -\caption{}\label{fig:spp}
+  -\caption{Plots showing the interaction effects of each predictor with species. (A.) As mean spring temperature increases, the probability of a false spring decreases for each species but \textit{Fraxinus excelsior} always has the lowest risk of false spring. (B.) The risk of a false spring increases with increasing altitude but the relationship is strongest for \textit{Aesculus hippocastanum} and \textit{Betula pendula}. (C.) There are slightly fewer false springs for \textit{Aesculus hippocastanum} and \textit{Betula pendula} in years with higher NAO indices. (D.) There's an increase in false spring risk for individuals further from the coast, especially for \textit{Fraxinus excelsior}. (E.) There are fewer false springs after 1983, especially for \textit{Aesculus hippocastanum} and \textit{Betula pendula}. Note, the y-axis for panels A and B are from 0.00 to 1.00 but the y-axis is only from 0.00 to 0.10 for panels C, D and E to better see the relationships. Since we found the z-score for each predictor, the x-axis for each panel does not reflect the raw data.}\label{fig:spp}
   -\end{center}
   -\end{figure}}
 
