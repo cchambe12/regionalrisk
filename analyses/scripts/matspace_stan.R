@@ -62,7 +62,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #shapefile(coords, "output/bbspace.shp")
 
 dx<-read.csv("output/fs_space_new.csv", header=TRUE)
-#xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+#xx<-read.csv("output/fs_yearsitespp_5.csv", header=TRUE)
 #xx<-subset(xx, year>1950)
 dx<-subset(dx, select=c("lat", "long", "lat.long", "eigen", "distkm", "elev", "mst", "nao", "year", "species", "cc"))
 #xx<-read.csv("output/fs_yearsitespp_5.csv", header=TRUE)
@@ -140,7 +140,7 @@ bb<-na.omit(bb)
 
 write.csv(dd, file="~/Documents/git/regionalrisk/analyses/output/regrisk.nov_5.csv", row.names = FALSE)
 write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_newdvr_space.csv", row.names = FALSE)
-write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_space_new_bb.csv", row.names = FALSE)
+write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_space_new_5.csv", row.names = FALSE)
 
 #mat<-mat%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
 #mat<-dplyr::select(mat, species, lat, long, elev)

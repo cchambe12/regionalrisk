@@ -6,8 +6,8 @@ library(spdep)
 library(vegan)
 
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_yearsitespp_5.csv", header=TRUE)
-#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newdvr_space.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_new_5.csv", header=TRUE)
+#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_yearsitespp_5.csv", header=TRUE)
 MEM_model<-"positive"
 style<-"B"
 
