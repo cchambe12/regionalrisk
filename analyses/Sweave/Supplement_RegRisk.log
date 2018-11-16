@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  16 NOV 2018 07:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  16 NOV 2018 09:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -790,7 +790,7 @@ LaTeX Info: Redefining \\ on input line 3056.
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-No file Supplement_RegRisk.aux.
+(./Supplement_RegRisk.aux)
 \openout1 = `Supplement_RegRisk.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
@@ -807,6 +807,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
 LaTeX Font Info:    ... okay on input line 90.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 90.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 90.
+
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
@@ -870,96 +871,59 @@ Underfull \hbox (badness 10000) in paragraph at lines 93--103
 
  []
 
-! Undefined control sequence.
-l.113 ... examined budburst and leafout for \texit
-                                                  {Acer saccharum} (Marshall...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+(./Supplement_RegRisk.bbl [1
 
-! Undefined control sequence.
-l.113 ...\texit{Acer saccharum} (Marshall), \texit
-                                                  {Alnus incana} (L.), \text...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Package natbib Warning: Citation `Finn2007' on page 1 undefined on input line 1
-15.
-
-
-Package natbib Warning: Citation `Buerki2010' on page 1 undefined on input line
- 116.
-
-
-Package natbib Warning: Citation `Wang2016' on page 1 undefined on input line 1
-16.
-
-
-Package natbib Warning: Citation `Hipp2017' on page 1 undefined on input line 1
-16.
-
-[1
-
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<..//figures/TminBB_bySpp.png, id=15, 2810.5pt x 1756.5625pt>
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+<..//figures/TminBB_bySpp.png, id=14, 2810.5pt x 1756.5625pt>
 File: ..//figures/TminBB_bySpp.png Graphic file (type png)
 
 <use ..//figures/TminBB_bySpp.png>
-Package pdftex.def Info: ..//figures/TminBB_bySpp.png used on input line 150.
-(pdftex.def)             Requested size: 341.43306pt x 213.3783pt.
+Package pdftex.def Info: ..//figures/TminBB_bySpp.png used on input line 152.
+(pdftex.def)             Requested size: 455.24408pt x 284.51332pt.
+ [2]
+<..//figures/model_output_dvr_50.pdf, id=21, 395.41556pt x 327.28444pt>
+File: ..//figures/model_output_dvr_50.pdf Graphic file (type pdf)
 
-<..//figures/model_output_dvr.pdf, id=17, 350.20708pt x 310.0924pt>
-File: ..//figures/model_output_dvr.pdf Graphic file (type pdf)
-
-<use ..//figures/model_output_dvr.pdf>
-Package pdftex.def Info: ..//figures/model_output_dvr.pdf used on input line 15
-7.
-(pdftex.def)             Requested size: 455.24408pt x 403.11534pt.
- [2 <..//figures/TminBB_bySpp.png>]
-<..//figures/model_output_berniefive.pdf, id=23, 355.93768pt x 304.99847pt>
+<use ..//figures/model_output_dvr_50.pdf>
+Package pdftex.def Info: ..//figures/model_output_dvr_50.pdf used on input line
+ 159.
+(pdftex.def)             Requested size: 341.43306pt x 282.60773pt.
+ [3 <..//figures/TminBB_bySpp.png>]
+<..//figures/model_output_berniefive.pdf, id=27, 355.93768pt x 304.99847pt>
 File: ..//figures/model_output_berniefive.pdf Graphic file (type pdf)
 
 <use ..//figures/model_output_berniefive.pdf>
 Package pdftex.def Info: ..//figures/model_output_berniefive.pdf used on input 
-line 165.
-(pdftex.def)             Requested size: 455.24408pt x 390.12213pt.
- [3 <..//figures/model_output_dvr.pdf>]
-
-Package natbib Warning: There were undefined citations.
-
-[4 <..//figures/model_output_berniefive.pdf>] (./Supplement_RegRisk.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+line 166.
+(pdftex.def)             Requested size: 341.43306pt x 292.59044pt.
+ [4 <..//figures/model_output_dvr_50.pdf>] [5 <..//figures/model_output_bernief
+ive.pdf>]
+(./Supplement_RegRisk.aux) ) 
 Here is how much of TeX's memory you used:
- 15956 strings out of 493014
- 311881 string characters out of 6133351
- 334080 words of memory out of 5000000
- 19299 multiletter control sequences out of 15000+600000
- 26812 words of font info for 59 fonts, out of 8000000 for 9000
+ 15997 strings out of 493014
+ 312463 string characters out of 6133351
+ 334460 words of memory out of 5000000
+ 19326 multiletter control sequences out of 15000+600000
+ 32426 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,6n,42p,10408b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Supplement_RegRisk.pdf (4 pages, 996019 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+i10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
+9.pfb>
+Output written on Supplement_RegRisk.pdf (5 pages, 1022077 bytes).
 PDF statistics:
- 249 PDF objects out of 1000 (max. 8388607)
- 183 compressed objects within 2 object streams
+ 260 PDF objects out of 1000 (max. 8388607)
+ 191 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

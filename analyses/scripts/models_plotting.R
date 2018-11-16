@@ -671,13 +671,14 @@ ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_line(aes(col=group), size=1.2)
 bbsp<- ggpredict(bernsbb, terms = c("bb.z", "species"), ci.lvl=0.5) 
 #write.csv(bbsp, file="~/Documents/git/regionalrisk/analyses/output/bbsp_predicted_50.csv", row.names = FALSE)
 #bbsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/bbsp_predicted_50.csv", header=TRUE)
+bbsp$group<-as.character(bbsp$group)
 bbsp$group<-ifelse(bbsp$group=="BETPEN", "aaBETPEN", bbsp$group)
 bbsp$group<-ifelse(bbsp$group=="FRAEXC", "zFRAEXC", bbsp$group)
 bbsp.p<-ggplot(bbsp, aes(x=x, y=predicted))+ geom_line(aes(col=group), size=1.2) + xlab("Day of Budburst") + ylab("Probability of False Spring") + ggtitle("F.") + 
   scale_y_continuous(expand = c(0, 0)) + 
   coord_cartesian(ylim=c(0,1))  + 
-  theme_classic() + theme(legend.position = "none") + 
-  #theme(legend.text.align = 0, legend.key = element_blank()) +
+  theme_classic() + #theme(legend.position = "none") + 
+  theme(legend.text.align = 0, legend.key = element_blank()) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),

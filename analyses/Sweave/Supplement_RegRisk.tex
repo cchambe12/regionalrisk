@@ -108,13 +108,15 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 \section*{Species rate of budburst calculations}
 \begin{enumerate}
-\item We used data from a growth chamber experiment (Flynn2018) to determine the average number of days between budburst and leafout for our study specices. 
+\item We used data from a growth chamber experiment (Flynn2018) to determine the average number of days between budburst and leafout for our study species. 
 \item Cuttings for the experiment were made in January 2015 from two field sites: Harvard Forest (HF, 42.5$^{\circ}$N, 72.2$^{\circ}$W) and the Station de Biologie des Laurentides in St-Hippolyte, Qu\'ebec (SH, 45.9$^{\circ}$N, 74.0$^{\circ}$W). 
-\item The experiment examined budburst and leafout for \texit{Acer saccharum} (Marshall), \texit{Alnus incana} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus nigra} (Marshall), and \textit{Quercus alba} (L.) in a fully crossed design of three levels of chilling (field chilling, field chilling plus 30 days at either 1 or 4 $^{\circ}$C), two levels of forcing (20$^{\circ}$C/10$^{\circ}$C or 15$^{\circ}$C/5$^{\circ}$C day/night temperatures, such that thermoperiodicity followed photoperiod) and two levels of photoperiod (8 versus 12 hour days) resulting in 12 treatment combinations. 
+\item The experiment examined budburst and leafout for \textit{Acer saccharum} (Marshall), \textit{Alnus incana} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus nigra} (Marshall), and \textit{Quercus alba} (L.) in a fully crossed design of three levels of chilling (field chilling, field chilling plus 30 days at either 1 or 4 $^{\circ}$C), two levels of forcing (20$^{\circ}$C/10$^{\circ}$C or 15$^{\circ}$C/5$^{\circ}$C day/night temperatures, such that thermoperiodicity followed photoperiod) and two levels of photoperiod (8 versus 12 hour days) resulting in 12 treatment combinations. 
 \item Phenological observations of each cutting were made every 2-3 days over 82 days. 
 \item Phenology was assessed using a BBCH scale that was modified for trees \citep{Finn2007}. 
 \item We used data from \textit{Acer saccharum} for \textit{Aesculus hippacastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} for \textit{Quercus robur} \citep{Hipp2017}.
 \end{enumerate}
+
+\bibliography{..//bib/regionalrisk.bib}
 
 
 \section*{Supplement: Tables and Figures}
@@ -126,7 +128,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 %  -\end{figure}}
   
 \begin{center}
-\captionof{table}{Data points collected for each species} \label{tab:spp} 
+\captionof{table}{Data collected from PEP725 for each species} \label{tab:spp} 
 \begin{tabular}{c c c c}
 \hline
 \textbf{Species} & \textbf{Num. of Observations} & \textbf{Num. of Sites} & \textbf{Num. of Years} \\
@@ -147,26 +149,26 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/TminBB_bySpp.png}
-  -\caption{}\label{fig:tmin}
+  -\includegraphics[width=16cm]{..//figures/TminBB_bySpp.png}
+  -\caption{Minimum temperatures between budburst and leafout are plotted for each site over time (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:tmin}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/model_output_dvr.pdf}
-  -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs.}\label{fig:five}
+  -\includegraphics[width=12cm]{..//figures/model_output_dvr_50.pdf}
+  -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 744,295 zeros and 10,491 ones for false spring in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
-
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/model_output_berniefive.pdf}
-  -\caption{}\label{fig:five}
+  -\includegraphics[width=12cm]{..//figures/model_output_berniefive.pdf}
+  -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 755,677 zeros and 1,025 ones for false spring in the data, rendering a less stable model.}\label{fig:five}
   -\end{center}
   -\end{figure}}
   
+
 %{\begin{figure} [H]
 %  -\begin{center}
 %  -\includegraphics[width=16cm]{..//figures/PropSitesbyYrwBB.png}
