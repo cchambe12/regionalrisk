@@ -44,11 +44,11 @@ dselect<-as.data.frame(moransel[["MEM.select"]])
 #MEM.select<-select$vectors
 
 write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect.csv", row.names=FALSE)
-dselect<-read.csv("~/Documents/git/regionalrisk/analyses/output/memselect.csv", header=TRUE)
+dselect<-read.csv("~/Documents/git/regionalrisk/memselect.csv", header=TRUE)
 
 dx<-cbind(bbs, dselect)
 library(dplyr)
-rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -eigen, -cc, -nao, -year)
+rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -PEP_ID, -fs, -year)
 rex.mod<-lm(fs.count~ ., data=rex)
 space<-residuals(rex.mod)
 eigen<-space

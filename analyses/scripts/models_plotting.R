@@ -783,7 +783,7 @@ ggarrange(nao.p, mat.p, elev.p, dist.p, ncol=2, nrow=2)
 
 
 ############ Model Output BB
-brms<-as.data.frame(tidy(berndvrshort, prob = 0.5))
+brms<-as.data.frame(tidy(bernfullfive, prob = 0.5))
 brms<-brms[2:54,]
 brms$term<-gsub(".*b_","",brms$term)
 brms$term<-gsub(".*r_species","",brms$term)
@@ -883,7 +883,7 @@ regrisk.dvr<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.facto
 quartz()
 regrisk.dvr
 
-brms<-as.data.frame(tidy(bernsfive,robust = TRUE))
+brms<-as.data.frame(tidy(bernfullfive,robust = TRUE), prob=0.5)
 brms<-brms[2:47,]
 brms$term<-gsub(".*b_","",brms$term)
 brms$term<-gsub(".*r_species","",brms$term)
