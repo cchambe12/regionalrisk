@@ -6,8 +6,8 @@ library(spdep)
 library(vegan)
 
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_new_5.csv", header=TRUE)
-#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_yearsitespp_5.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_dvr_allpred.csv", header=TRUE)
+#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_allspp_orig_allpred.csv", header=TRUE)
 MEM_model<-"positive"
 style<-"B"
 
@@ -20,8 +20,9 @@ nb <- graph2nb(gabrielneigh(as.matrix(C), nnmult=5), sym=TRUE)
 listw <- nb2listw(nb, style=style)
 MEM <- scores.listw(listw, MEM.autocor = MEM_model)
 
+bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 bb$lat.long<-paste(bb$lat, bb$long)
-bb$Y<-ave(bb$fs.count, bb$lat.long, FUN=sum)
+bb$Y<-ave(bb$fs, bb$lat.long, FUN=sum)
 bbs<-bb[!duplicated(bb$lat.long),]
 Y<-bbs$Y
 
@@ -36,30 +37,30 @@ moransel<-MEM.moransel(Y, listw, MEM.autocor = MEM_model, nperm=999, alpha=0.05)
 
 all<-as.data.frame(moransel[["MEM.all"]])
 
-write.csv(all, file="/n/wolkovich_lab/Lab/Cat/memall.csv", row.names=FALSE)
+#write.csv(all, file="/n/wolkovich_lab/Lab/Cat/memall.csv", row.names=FALSE)
 
 dselect<-as.data.frame(moransel[["MEM.select"]])
 
 #select<-ME(Y~., data=as.data.frame(X), listw = listw, family="gaussian", nsim=80, alpha=0.02)
 #MEM.select<-select$vectors
 
-write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect.csv", row.names=FALSE)
-dselect<-read.csv("~/Documents/git/regionalrisk/memselect.csv", header=TRUE)
+write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect_dvr.csv", row.names=FALSE)
+#dselect<-read.csv("~/Documents/git/regionalrisk/analyses/output/memselect_orig.csv", header=TRUE)
 
 dx<-cbind(bbs, dselect)
 library(dplyr)
-rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -PEP_ID, -fs, -year)
-rex.mod<-lm(fs.count~ ., data=rex)
+rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -lat.long, -distance, -year, -fs.count, -nao, -cc, -fs)
+rex.mod<-lm(Y~ ., data=rex)
 space<-residuals(rex.mod)
 eigen<-space
 
-bb<-bb%>%dplyr::select(-eigen)
+#bb<-bb%>%dplyr::select(-eigen)
 b_space<-cbind(bbs, eigen)
 beig<-subset(b_space, select=c("lat.long", "eigen"))
 prep_space<-full_join(bb, beig, by="lat.long")
 
 
 
-write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_new_5.csv", row.names=FALSE)
-#write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/mem_select.csv", row.names=FALSE)
+#write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_dvr.csv", row.names=FALSE)
+write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/fs_space_dvr.csv", row.names=FALSE)
 
