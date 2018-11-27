@@ -113,7 +113,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \item Plant phenology and climate are tightly intertwined \citep{Wolkovich2011}, thus understanding major climate oscillation patterns is essential for predicting budburst and, ultimately, false spring risk.  
 \begin{enumerate}
 \item The North Atlantic Oscillation (NAO) index is often used to describe winter and spring circulation across Europe. %EMW: Need better transition from above paragraph.
-\item More positive NAO phases tend to result in higher than average winter and spring temperatures, and with climate change, higher NAO phases has correlated to even earlier budburst dates in some regions \citep{Chmielewski2001}, however it is unclear if more positive NAO phases also translates to more false springs.
+\item More positive NAO phases tend to result in higher than average winter and spring temperatures, and with climate change, higher NAO phases has correlated to even earlier budburst dates in some regions \citep{Chmielewski2001}, however it is unclear if more positive NAO phases also translates to more false springs. %IMC: I would consider citing some more work documenting the effects of NAO on trees: e.g. Madrigal-González, J. et al. (2017) Nature communications, 8(1), 2222.
 \end{enumerate}
 
 \item There is large debate over whether or not spring freeze damage will increase \citep{Hannenin1991, Augspurger2013, Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994, Vitra2017} with climate change and there is also great variation within studies. %EMW: Add ... and also great variation in the studies? (Here you need to start set up the reader for your study which will compare many of these factors...) 
@@ -138,6 +138,12 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 (2) there would be different regional effects (i.e. mean spring temperature, NAO index, elevation, distance from the coast) on false spring incidence and those trends would shift when coupled with the effects of climate change %(3) using different rates of budburst would change the probability of false spring incidence across species. 
 
 %EMW Can we adjust this and/or add to it to get more at the predictors and comparison of them? I think one prediction was that climate change has altered the prevalence of false springs, you can spell that out better in (1) with small tweaks .... the next hypothesis is that XYZ factors may also alter the prevalence of false springs.... so we should probably say that and make sure the intro before here sets the reader up for what we say here. We can focus on a couple major ones and then say 'we also test the effects of A and B' in the methods. I think the big ones are NAO, elevation (and maybe spring temp?).
+
+%IMC - General comment on the intro: 
+% 1) I'm not sure if the intro needs restructuring. As is, it starts listing several FS effects and patterns before defining FS, its relevance and how we still don't know much about the topic (done in the 2nd paragraph). In my mind it would make more sense to shift the 2nd by the 1st paragraph, but I can be convinced otherwise.
+% 2) Perhaps once fully written, the intro would be a bit too long (but sure you do a great job at streamlining). In the case anything needs to go I'd suggest paragraph 3 because this paper is not about cues, righ? 
+
+%IMC - i'M
 \end{enumerate}
 \end{enumerate}
 %% WHERE DOES THIS GO? \item By using only gridded climate data from March 1st until June 30th, we compared the first half of our data (1951-1983) to the latter half (1984-2016) and found that some regions experienced increased exposure to false spring conditions, whereas many regions experienced fewer or similar conditions (Figure \ref{fig:region}). %% supplement? %EMW: Sounds like a mix of methods (first part) and results/discussion (second part).
@@ -175,9 +181,9 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \begin{enumerate}
 %\item We scaled the elevation predictor by dividing it by 100 to be consistent with the other predictors in the model.
 \item We scaled all of the predictors and used a z-score following the binary predictor approach in order to best compare the effects of each climate variable to each other \citep{Gelman2006}.
-\item We used a space parameter, rather than a more traditional latitude parameter, to adjust for spatial autocorrelation issues using a minimization of Moran's \textit{I} of the residuals \citep{Baumen2017} (Figure S1).
+\item We used a space parameter, rather than a more traditional latitude parameter, to adjust for spatial autocorrelation issues using a minimization of Moran's \textit{I} of the residuals \citep{Baumen2017} (Figure S1). % Regarding Moran's I minimization
 \item We then took the calculated eigenvectors determined from the MIR approach and regressed these against the number of false springs for each datapoint to establish a spatial parameter (space). % get citation from Nacho regarding regression
-\end{enumerate}
+\end{enumerate} % IMC - Perhaps we should have a subsection in the Supplement where we explain in detail why/how we obtain and parameterize our proxy for spatial structure? Also,  in that supplement I would include a map or an additional analysis to interpret the spatial predictor (what does it mean to have a positive slope?). I'm happy to help with this, writing a couple paragraphs explaining the rationale, what do we mean by spatial autocorrelation issues, and so on. 
 
 \item We used a Bayesian hierarchical model approach to analyze our data to best estimate the number of false springs across-species levels. 
 \begin{enumerate}
@@ -286,7 +292,7 @@ y_i \thicksim N(\alpha_(i)) +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}}
   
 \item Past studies using single predictors for false spring events has lead to contradicting predictions in future false spring risk.
   \begin{enumerate}
-  \item Through our holistic approach, we were able to assess the myriad of climatic and regional effects on false spring risk -- and how the magnitude of those effects compare to one another -- by incorporating the space parameter, thus erasing the collinearity issues of certain effects (i.e. elevation and distance from the coast).
+  \item Through our holistic approach, we were able to assess the myriad of climatic and regional effects on false spring risk -- and how the magnitude of those effects compare to one another -- by incorporating the space parameter, thus erasing the collinearity issues of certain effects (i.e. elevation and distance from the coast). %IMC- I'm an ESL so perhaps I'm wrong, but is holistic the word we need there? Do we mean that our analysis is multivariate?
   \item This was an essential step in forecasting false spring risk.
   \item Our study supports findings from previous studies: higher elevations tend to experience more false springs but that risk is diminishing with climate change \citep{Vitra2017} and sites that are generally warmer have lower risks of false springs and that risk is decreasing with climate change \citep{Wypych2016}.
   \item However, we also discovered that effects of elevation and distance from the coast cannot be assumed to be the same, which contradicts previous studies \citep{Ma2018}.
@@ -366,7 +372,7 @@ y_i \thicksim N(\alpha_(i)) +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}}
   -\caption{Mean spring temperatures are plotted for each site over time (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:mst}
   -\end{center}
   -\end{figure}}
-  
+  %% IMC - I would try to make the dots smaller, I'm aware there are buzillion points and so it's not easy that the cloud of dots reflects the tendency lines. An alternative would be to bin the dots into consecutive boxplots at regular steps in the x-axis (e.g. every 5 years?).
   
 {\begin{figure} [H]
   -\begin{center}
