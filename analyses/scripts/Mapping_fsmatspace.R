@@ -47,13 +47,16 @@ map("world", fill=TRUE
 
 #Using GGPLOT, plot the Base World Map
 mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
-site<-d%>%dplyr::select(lat, long, space)
+site<-d%>%dplyr::select(lat, long, eigen)
 site<-site[!duplicated(site),]
-mp <- ggplot(site, aes(x=long, y=lat, color=space)) +   mapWorld +
+site$extreme<-ifelse(site$eigen>=0.4 | site$eigen<=0.1, site$eigen, NA)
+ext<-na.omit(site)
+mp <- ggplot(ext, aes(x=long, y=lat, color=extreme)) +   mapWorld +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))
+quartz()
 mp + theme(panel.border = element_blank(),
       panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank()) + geom_point(aes(color=space)) + geom_jitter()
+      panel.grid.minor = element_blank()) + geom_point(aes(color=extreme)) + geom_jitter()
 
 setwd("~/Documents/git/regionalrisk/analyses")
 d<-read.csv("output/BBdata.csv", header=TRUE)

@@ -7,7 +7,10 @@ library(vegan)
 
 
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_dvr_allpred.csv", header=TRUE)
+#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_allspp_dvr_allpred.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_allspp_orig_allpred.csv", header=TRUE)
+#d<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_space_orig.csv", header=TRUE)
+#foo<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_space_dvr.csv", header=TRUE)
 MEM_model<-"positive"
 style<-"B"
 
@@ -22,7 +25,7 @@ MEM <- scores.listw(listw, MEM.autocor = MEM_model)
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 bb$lat.long<-paste(bb$lat, bb$long)
-bb$Y<-ave(bb$fs, bb$lat.long, FUN=sum)
+bb$Y<-ave(bb$fs, bb$lat.long)
 bbs<-bb[!duplicated(bb$lat.long),]
 Y<-bbs$Y
 
@@ -45,13 +48,14 @@ dselect<-as.data.frame(moransel[["MEM.select"]])
 #MEM.select<-select$vectors
 
 write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect_dvr.csv", row.names=FALSE)
-#dselect<-read.csv("~/Documents/git/regionalrisk/analyses/output/memselect_orig.csv", header=TRUE)
-
+#dselect<-read.csv("~/Documents/git/regionalrisk/analyses/scripts/memselect_orig.csv", header=TRUE)
+#deselect<-bb
 dx<-cbind(bbs, dselect)
 library(dplyr)
-rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -lat.long, -distance, -year, -fs.count, -nao, -cc, -fs)
+rex<-dx%>%dplyr::select(-lat.long, -lat, -long, -species, -lat.long, -distance, -year, -fs.count, -nao, -cc, -fs,
+                        -distkm, -elev, -mst)
 rex.mod<-lm(Y~ ., data=rex)
-space<-residuals(rex.mod)
+space<-rex.mod$fitted.values ## space<-rex.mod$fitted.values - vector which is the predicted with spatial autocorrelation
 eigen<-space
 
 #bb<-bb%>%dplyr::select(-eigen)
@@ -61,6 +65,6 @@ prep_space<-full_join(bb, beig, by="lat.long")
 
 
 
-#write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_dvr.csv", row.names=FALSE)
-write.csv(dx, file="/n/wolkovich_lab/Lab/Cat/fs_space_dvr.csv", row.names=FALSE)
+#write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_space_orig.csv", row.names=FALSE)
+write.csv(prep_space, file="/n/wolkovich_lab/Lab/Cat/fs_space_dvr.csv", row.names=FALSE)
 

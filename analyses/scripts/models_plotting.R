@@ -239,7 +239,7 @@ grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 ################################################################################
 ################################ MODEL OUTPUT ##################################
 
-brms<-as.data.frame(tidy(bernsfinal,robust = TRUE, prob=0.5))
+brms<-as.data.frame(tidy(orig.full,robust = TRUE, prob=0.5))
 #brms0<-as.data.frame(tidy(bernsfinal,robust = TRUE))
 brms<-brms[2:47,]
 brms$term<-gsub(".*b_","",brms$term)
@@ -326,7 +326,7 @@ regrisk<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(sp
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
-        legend.text.align = 0)  + #ggtitle("Original Parameters") +
+        legend.text.align = 0)  #+ ggtitle("Original Parameters") +
   coord_cartesian(xlim=c(-2, 1), ylim=c(1,11))
 #scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
 #                 labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
