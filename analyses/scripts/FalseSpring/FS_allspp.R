@@ -10,12 +10,6 @@ library(data.table)
 
 dxx<-read.csv("/n/wolkovich_lab/Lab/Cat/allspp_climateprep.csv", header=TRUE)
 
-dxx<-dxx[!duplicated(dxx),]
-dxx<-dplyr::select(dxx, -pep.year)
-x<-paste(dxx$year, dxx$doy)
-dxx$date<-as.Date(strptime(x, format="%Y %j"))
-dxx$Date<- as.character(dxx$date)
-
 r<-brick("/n/wolkovich_lab/Lab/Cat/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 
 bb<-dxx

@@ -50,7 +50,7 @@ moransel<-MEM.moransel(Y, listw, MEM.autocor = MEM_model, nperm=999, alpha=0.05)
 dselect<-as.data.frame(moransel[["MEM.select"]])
 
 write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect_dvr.csv", row.names=FALSE)
-dselect<-read.csv("~/Documents/git/regionalrisk/memselect_dvr.csv", header=TRUE)
+#dselect<-read.csv("~/Documents/git/regionalrisk/memselect_dvr.csv", header=TRUE)
 
 dx<-cbind(Y, dselect)
 
@@ -63,5 +63,5 @@ library(dplyr)
 prep_space<-full_join(bb, eigen)
 
 write.csv(prep_space, file="/n/wolkovich_lab/Lab/Cat/fs_space_dvr.csv", row.names=FALSE)
-write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_newspace_dvr.csv", row.names=FALSE)
+#write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_newspace_dvr.csv", row.names=FALSE)
 

@@ -39,6 +39,7 @@ df<-d%>%
   rename(lat=LAT)%>%
   rename(long=LON)
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
+df$bb<-df$lo-12
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo, species)
 df$pep.year<-paste(df$year, df$PEP_ID, df$species)
 
@@ -53,7 +54,7 @@ days.btw <- Map(seq, df$bb, df$lo, by = 1)
 dxx <- data.frame(pep.year = rep.int(df$pep.year, vapply(days.btw, length, 1L)), 
                   doy = do.call(c, days.btw))
 
-dxx$year<-substr(dxx$pep.year,0,4)
+dxx$year<-as.numeric(substr(dxx$pep.year,0,4))
 dxx$PEP_ID<-gsub("^\\S+\\s+|\\s+\\S+$", "", dxx$pep.year)
 substrRight <- function(x, n){
   substr(x, nchar(x)-n+1, nchar(x))
@@ -63,12 +64,12 @@ dxx$species<-substrRight(dxx$pep.year, 6)
 coords<-df%>%dplyr::select(lat, long, pep.year)
 dxx<-full_join(dxx, coords)
 
-write.csv(dxx, file="~/Desktop/allspp_climateprep.csv", row.names=FALSE)
-
 dxx<-dxx[!duplicated(dxx),]
 dxx<-dplyr::select(dxx, -pep.year)
 x<-paste(dxx$year, dxx$doy)
 dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
+
+write.csv(dxx, file="~/Desktop/allspp_climateprep.csv", row.names=FALSE)
 
 

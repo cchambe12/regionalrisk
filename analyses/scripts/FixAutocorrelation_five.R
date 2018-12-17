@@ -8,7 +8,7 @@ library(vegan)
 #setwd("~/Documents/git/regionalrisk/analyses/output")
 
 #bb<-read.csv("fs_allspp_orig_allpred.csv", header=TRUE)
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_orig_allpred.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_five_allpred.csv", header=TRUE)
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 
@@ -49,7 +49,7 @@ moransel<-MEM.moransel(Y, listw, MEM.autocor = MEM_model, nperm=999, alpha=0.05)
 
 dselect<-as.data.frame(moransel[["MEM.select"]])
 
-write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect_orig.csv", row.names=FALSE)
+write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect_five.csv", row.names=FALSE)
 #dselect<-read.csv("~/Documents/git/regionalrisk/memselect_orig.csv", header=TRUE)
 
 dx<-cbind(Y, dselect)
@@ -62,5 +62,5 @@ eigen<-cbind(foo, eigen)
 library(dplyr)
 prep_space<-full_join(bb, eigen)
 
-write.csv(prep_space, file="/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv", row.names=FALSE)
+write.csv(prep_space, file="/n/wolkovich_lab/Lab/Cat/fs_newspace_five.csv", row.names=FALSE)
 #write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", row.names=FALSE)

@@ -6,9 +6,9 @@
 
 #SBATCH -N 1
 
-#SBATCH -t 0-40:00:00
+#SBATCH -t 0-100:00:00
 
-#SBATCH --mem 10000
+#SBATCH --mem 30000
 
 #SBATCH -o hostname.out
 
@@ -19,8 +19,9 @@
 #SBATCH --mail-user=cchamberlain@g.harvard.edu
 
 source new-modules.sh
+export R_LIBS_USER=$HOME/apps/R:$R_LIBS_USER
 module load gcc/7.1.0-fasrc01 R_core/3.5.1-fasrc02
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/FixAutocorrelation_five.R eigenvector
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/Bern_five.R rndslopes
