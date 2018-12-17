@@ -25,6 +25,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #### get the data
 
 ## fix KNMI Climate Explorer data for NAO - https://climexp.knmi.nl/getindices.cgi?WMO=NCEPData/cpc_nao&STATION=CPC_NAO&TYPE=i&id=someone@somewhere
+# http://www.cpc.noaa.gov/products/precip/CWlink/daily_ao_index/teleconnections.shtml - 17 December 2018
 #setwd("~/Documents/git/regionalrisk")
 #nao<-read.delim("data/icpc_nao_daily.dat.txt", header=TRUE)
 #write.csv(nao, "~/Documents/git/regionalrisk/analyses/output/icpc_nao_daily.csv", row.names=FALSE)
