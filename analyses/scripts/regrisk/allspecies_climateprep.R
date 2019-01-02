@@ -48,6 +48,8 @@ days.btw<-array()
 #pb <- txtProgressBar(min = 1, max = nrow(df), style = 3)
 
 #foo<-df[sample(nrow(df), 20), ]
+df<-df[(df$bb>=0),]
+df<-na.omit(df)
 
 days.btw <- Map(seq, df$bb, df$lo, by = 1)
 
@@ -60,7 +62,7 @@ substrRight <- function(x, n){
   substr(x, nchar(x)-n+1, nchar(x))
 }
 
-dxx$species<-substrRight(dxx$pep.year, 6)
+dxx$species<-as.numeric(as.factor(substrRight(dxx$pep.year, 6)))
 coords<-df%>%dplyr::select(lat, long, pep.year)
 dxx<-full_join(dxx, coords)
 

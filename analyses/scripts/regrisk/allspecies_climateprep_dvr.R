@@ -62,13 +62,13 @@ days.btw <- Map(seq, df$bb, df$lo, by = 1)
 dxx <- data.frame(pep.year = rep.int(df$pep.year, vapply(days.btw, length, 1L)), 
                   doy = do.call(c, days.btw))
 
-dxx$year<-substr(dxx$pep.year,0,4)
+dxx$year<-as.numeric(substr(dxx$pep.year,0,4))
 dxx$PEP_ID<-gsub("^\\S+\\s+|\\s+\\S+$", "", dxx$pep.year)
 substrRight <- function(x, n){
   substr(x, nchar(x)-n+1, nchar(x))
 }
 
-dxx$species<-as.numeric(substrRight(dxx$pep.year, 6))
+dxx$species<-as.numeric(as.factor(substrRight(dxx$pep.year, 6)))
 coords<-df%>%dplyr::select(lat, long, pep.year)
 dxx<-full_join(dxx, coords)
 
