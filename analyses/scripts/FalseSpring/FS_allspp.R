@@ -30,13 +30,13 @@ values <- extract(r,points)
 
 dclim <- cbind.data.frame(coordinates(points),values)
 
-dx<-melt(dclim, id.vars=c("x","y"))
+dx<-reshape2::melt(dclim, id.vars=c("x","y"))
 
 dx<-dx%>%
-  rename(long=x)%>%
-  rename(lat=y)%>%
-  rename(date=variable)%>%
-  rename(Tmin=value)
+  dplyr::rename(long=x)%>%
+  dplyr::rename(lat=y)%>%
+  dplyr::rename(date=variable)%>%
+  dplyr::rename(Tmin=value)
 
 dx$date<-substr(dx$date, 2,11)
 dx$Date<- gsub("[.]", "-", dx$date)

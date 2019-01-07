@@ -62,13 +62,15 @@ setwd("~/Documents/git/regionalrisk/analyses")
 d<-read.csv("output/BBdata.csv", header=TRUE)
 d<-d[(d$bb>=0),]
 d$bb.space<-ave(d$bb, d$PEP_ID, d$species)
+d$cc<-ifelse(d$year<=1983, 0, 1)
+d$bb.avg<-ave(d$bb, d$species)
 
 #Using GGPLOT, plot the Base World Map
 mapWorld <- borders("world", colour="gray72", fill="gray65",ylim=c(30,70),xlim=c(-10,35)) # create a layer of borders
 site<-d%>%dplyr::select(lat, long, bb.space, species)
 site<-site[!duplicated(site),]
-myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
-sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(30, 168))
+myPalette <- colorRampPalette(brewer.pal(11, "YlOrRd"))
+sc <- scale_colour_gradientn(colours = myPalette(100), limits=c(50, 150))
 a.site<-filter(site, species=="AESHIP")
 boundars<-readShapeSpatial("~/Documents/git/regionalrisk/analyses/input/natural_earth_vector/50m_cultural/ne_50m_admin_0_countries.shp")
 mapWorld<-fortify(boundars)
@@ -111,7 +113,8 @@ aln <- ggplot() +
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
         axis.title = element_blank(),
-        panel.background = element_rect(fill="grey95")) +
+        panel.background = element_rect(fill="grey95"),
+        legend.position = "none") +
   annotate("text",label= "Alnus glutinosa", col="gold2", x=1, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
@@ -192,7 +195,8 @@ fra <- ggplot() +
         axis.ticks = element_blank(),
         axis.text = element_blank(),
         axis.title = element_blank(),
-        panel.background = element_rect(fill="grey95")) +
+        panel.background = element_rect(fill="grey95"),
+        legend.position = "none") +
   annotate("text",label= "Fraxinus excelsior", col="#BF5B17", x=3, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
@@ -231,9 +235,18 @@ que <- ggplot() +
 #coords<-spTransform(spg, CRS("+proj=longlat"))
 #shapefile(coords, "output/querob_dvr.shp")
 
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend<-g_legend(que)
 
 quartz()
-mappies<-ggarrange(bet, aes, aln, syl, que, fra, ncol=3, nrow=2)
+g1<-ggarrange(bet, aes, aln, syl, que, fra, ncol=3, nrow=2)
+g2<-grid.arrange(mylegend)
+mappies<-grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
 
 png("figures/BB_base.png", 
     width=8,

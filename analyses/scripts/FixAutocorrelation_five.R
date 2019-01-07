@@ -7,7 +7,7 @@ library(vegan)
 
 #setwd("~/Documents/git/regionalrisk/analyses/output")
 
-#bb<-read.csv("fs_allspp_orig_allpred.csv", header=TRUE)
+#goo<-read.csv("fs_allspp_five_allpred.csv", header=TRUE)
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_five_allpred.csv", header=TRUE)
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)

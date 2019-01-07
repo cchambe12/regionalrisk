@@ -29,8 +29,8 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #dx<-subset(dx, select=c("lat", "long", "lat.long", "distkm", "elev", "mst", "nao", "year", "species", "cc"))
 #xx<-read.csv("output/fs_yearsitespp_5.csv", header=TRUE)
 #xx<-read.csv("output/fs_allspp_dvr.csv", header=TRUE)
-xx<-read.csv("output/fs_allspp_five.csv", header=TRUE)
-#foo<-read.csv("output/fs_allspp_original.csv", header=TRUE)
+#xx<-read.csv("output/fs_allspp_five.csv", header=TRUE)
+xx<-read.csv("output/fs_allspp_original.csv", header=TRUE)
 xx<-subset(xx, select=c("lat", "long", "fs.count", "year", "species", "fs"))
 df<-read.csv("output/mat_MAM.csv", header=TRUE)
 df<-subset(df, year>1950)
@@ -59,6 +59,12 @@ bb$cc<-ifelse(bb$year<=1983&bb$year>1950, 0, 1)
 
 xx<-dplyr::select(xx, lat, long, species, fs.count, year)
 xx<-xx[!duplicated(xx),]
+xx$species<-ifelse(xx$species==1, "AESHIP", xx$species)
+xx$species<-ifelse(xx$species==2, "ALNGLU", xx$species)
+xx$species<-ifelse(xx$species==3, "BETPEN", xx$species)
+xx$species<-ifelse(xx$species==4, "FAGSYL", xx$species)
+xx$species<-ifelse(xx$species==5, "FRAEXC", xx$species)
+xx$species<-ifelse(xx$species==6, "QUEROB", xx$species)
 bb<-full_join(bb, xx)
 bb<-na.omit(bb)
 bb<-bb[!duplicated(bb),]
@@ -78,17 +84,17 @@ dist<-dist%>%rename(long=LONG)%>%rename(lat=LAT)
 
 bb<-full_join(bb, dist)
 
-bb<-full_join(dx, xx)
-bb<-bb[!duplicated(bb),]
-bb<-na.omit(bb)
+#bb<-full_join(dx, xx)
+#bb<-bb[!duplicated(bb),]
+#bb<-na.omit(bb)
 
-buds<-read.csv("output/BBdata.csv", header=TRUE)
-buds<-dplyr::select(buds, -PEP_ID)
-buds<-buds[!duplicated(buds),]
+#buds<-read.csv("output/BBdata.csv", header=TRUE)
+#buds<-dplyr::select(buds, -PEP_ID)
+#buds<-buds[!duplicated(buds),]
 
-bb<-full_join(dx, buds)
-bb<-bb[!duplicated(bb),]
-bb<-na.omit(bb)
+#bb<-full_join(bb, buds)
+#bb<-bb[!duplicated(bb),]
+#bb<-na.omit(bb)
 
 write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_dvr_allpred.csv", row.names = FALSE)
 write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_orig_allpred.csv", row.names = FALSE)

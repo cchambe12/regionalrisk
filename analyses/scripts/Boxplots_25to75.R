@@ -42,7 +42,7 @@ post<-subset(mat, mat$cc==1)
 
 plus<-full_join(pre, post)
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species))) +
+budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   scale_fill_manual(name="Species", values=cols,
                       labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                                "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -65,7 +65,8 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
         legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
         plot.margin = unit(c(1.5,1.5,1.0,1.5), "lines"), 
         axis.title.x = element_blank(), 
-        axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
+        axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank(),
+        legend.position = "none") + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
@@ -82,7 +83,7 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
 
 
 ###### Tmin boxplots now...
-tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
+tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
 
 tm$cc<-ifelse(tm$year<1984, 0, 1)
 tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
@@ -101,7 +102,7 @@ postt<-subset(tm, tm$cc==1)
 
 plust<-full_join(pret, postt)
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species))) +
+tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -124,12 +125,13 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
         legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
         plot.margin = unit(c(1.5,1.5,1.0,1.5), "lines"), 
         axis.title.x = element_blank(), 
+        legend.position = "none",
         axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Minimum Temperature \nfrom Budburst to Leafout") + coord_cartesian(ylim=c(-5,20)) + 
+  ylab("Minimum Temperature \nfrom Budburst to Leafout") + coord_cartesian(ylim=c(0,15)) + 
   geom_hline(yintercept=7.69, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
@@ -138,7 +140,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 ### And finally... False springs!
-f<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
+f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
 
 f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
@@ -151,7 +153,7 @@ f$fs<-ave(f$fs,f$lat.long, f$species, f$cc, FUN=sum)
 plusf<-subset(f, select=c(species, cc, fs))
 plusf<-plusf[!duplicated(plusf),]
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species))) +
+falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -173,13 +175,14 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=35, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
         plot.margin = unit(c(1.5,1.5, 1.0, 1.5), "lines"),
-        axis.title.x = element_blank()) + 
+        axis.title.x = element_blank(),
+        legend.position = "none") + 
         #axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Number of Years \nwith False Springs") + coord_cartesian(ylim=c(0,25)) + 
+  ylab("Number of Years \nwith False Springs") + coord_cartesian(ylim=c(0,31)) + 
   #geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
@@ -188,14 +191,23 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend<-g_legend(tmin)
+
 quartz()
-ggarrange(budburst, tmin, falsespring, ncol=1, nrow=3)
+g1<-ggarrange(budburst, tmin, falsespring, nrow=3)
+g2<-grid.arrange(mylegend)
+grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
+
 
 ## Budburst: took the average day of budburst for each individual and condensed to the 25th-75th quartile
 ## Tmin: same thing as budburst
 ## False Spring: counted the number of false spring years from 1951-1983 and for 1984-2016 for each individual
-
-
 
 
 

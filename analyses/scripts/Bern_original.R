@@ -7,7 +7,8 @@ rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv", header=TRUE)
-#bb<-read.csv("~/Documents/git/regionalrisk/fs_space_orig.csv", header=TRUE)
+#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", header=TRUE)
+#check<-read.csv("~/Desktop/fs_newspace_orig.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))
 
@@ -23,6 +24,7 @@ bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 #bb$bb.z <-(bb$bb-mean(bb$bb,na.rm=TRUE))/(2*sd(bb$bb,na.rm=TRUE))
 
 bb<-bb[sample(nrow(bb), 80000), ]
+
 
 orig.short<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                          cc.z + species + nao.z:species + 
