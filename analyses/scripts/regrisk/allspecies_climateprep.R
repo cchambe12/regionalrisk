@@ -62,7 +62,7 @@ substrRight <- function(x, n){
   substr(x, nchar(x)-n+1, nchar(x))
 }
 
-dxx$species<-as.numeric(as.factor(substrRight(dxx$pep.year, 6)))
+dxx$species<-substrRight(dxx$pep.year, 6)
 coords<-df%>%dplyr::select(lat, long, pep.year)
 dxx<-full_join(dxx, coords)
 
@@ -71,6 +71,7 @@ dxx<-dplyr::select(dxx, -pep.year)
 x<-paste(dxx$year, dxx$doy)
 dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
+dxx<-na.omit(dxx)
 
 write.csv(dxx, file="~/Desktop/allspp_climateprep.csv", row.names=FALSE)
 

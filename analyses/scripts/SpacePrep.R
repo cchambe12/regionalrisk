@@ -59,12 +59,12 @@ bb$cc<-ifelse(bb$year<=1983&bb$year>1950, 0, 1)
 
 xx<-dplyr::select(xx, lat, long, species, fs.count, year)
 xx<-xx[!duplicated(xx),]
-xx$species<-ifelse(xx$species==1, "AESHIP", xx$species)
-xx$species<-ifelse(xx$species==2, "ALNGLU", xx$species)
-xx$species<-ifelse(xx$species==3, "BETPEN", xx$species)
-xx$species<-ifelse(xx$species==4, "FAGSYL", xx$species)
-xx$species<-ifelse(xx$species==5, "FRAEXC", xx$species)
-xx$species<-ifelse(xx$species==6, "QUEROB", xx$species)
+#xx$species<-ifelse(xx$species==1, "AESHIP", xx$species)
+#xx$species<-ifelse(xx$species==2, "ALNGLU", xx$species)
+#xx$species<-ifelse(xx$species==3, "BETPEN", xx$species)
+#xx$species<-ifelse(xx$species==4, "FAGSYL", xx$species)
+#xx$species<-ifelse(xx$species==5, "FRAEXC", xx$species)
+#xx$species<-ifelse(xx$species==6, "QUEROB", xx$species)
 bb<-full_join(bb, xx)
 bb<-na.omit(bb)
 bb<-bb[!duplicated(bb),]
@@ -96,7 +96,7 @@ bb<-full_join(bb, dist)
 #bb<-bb[!duplicated(bb),]
 #bb<-na.omit(bb)
 
-write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_dvr_allpred.csv", row.names = FALSE)
+#write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_dvr_allpred.csv", row.names = FALSE)
 write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_orig_allpred.csv", row.names = FALSE)
-write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_five_allpred.csv", row.names = FALSE)
+#write.csv(bb, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_five_allpred.csv", row.names = FALSE)
 

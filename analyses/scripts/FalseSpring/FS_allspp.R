@@ -61,3 +61,4 @@ allspp<-na.omit(allspp)
 allspp$fs<-ifelse(allspp$fs.count>=1, 1, 0)
 
 write.csv(allspp, file="/n/wolkovich_lab/Lab/Cat/fs_allspp_original.csv", row.names = FALSE)
+#write.csv(allspp, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_original.csv", row.names = FALSE)

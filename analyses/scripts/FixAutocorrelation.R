@@ -41,7 +41,7 @@ nb <- graph2nb(gabrielneigh(as.matrix(C), nnmult=5), sym=TRUE)
 listw <- nb2listw(nb, style=style)
 MEM <- scores.listw(listw, MEM.autocor = MEM_model)
 
-#Y <- decostand(Y, method = "hellinger")
+Y <- decostand(Y, method = "hellinger")
 C <- as.matrix(C)
 
 source("/n/wolkovich_lab/Lab/Cat/MEM.moransel.R")
@@ -57,7 +57,7 @@ dx<-cbind(Y, dselect)
 rex.mod<-lm(Y~ ., data=dx)
 space<-rex.mod$fitted.values ## space<-rex.mod$fitted.values - vector which is the predicted with spatial autocorrelation
 eigen<-space
-eigen<-cbind(foo, eigen)
+eigen<-cbind(eigen, foo)
 
 library(dplyr)
 prep_space<-full_join(bb, eigen)
