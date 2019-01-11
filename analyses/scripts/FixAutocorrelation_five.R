@@ -41,7 +41,7 @@ nb <- graph2nb(gabrielneigh(as.matrix(C), nnmult=5), sym=TRUE)
 listw <- nb2listw(nb, style=style)
 MEM <- scores.listw(listw, MEM.autocor = MEM_model)
 
-#Y <- decostand(Y, method = "hellinger")
+Y <- decostand(Y, method = "normalize")
 C <- as.matrix(C)
 
 source("/n/wolkovich_lab/Lab/Cat/MEM.moransel.R")
