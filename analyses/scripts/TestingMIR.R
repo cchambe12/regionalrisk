@@ -64,16 +64,16 @@ MEM <- scores.listw(listw, MEM.autocor = MEM_model)
 #source("/n/wolkovich_lab/Lab/Cat/MEM.moransel.R")
 #source("..//scripts/MEM.moransel.R")
 #moransel<-MEM.moransel(Y, listw, MEM.autocor = MEM_model, nperm=999, alpha=0.05)
-moransel2<-MEM.moransel(Y, listw, MEM.autocor = MEM_model, nperm=999, alpha=0.001)
+#moransel2<-MEM.moransel(Y, listw, MEM.autocor = MEM_model, nperm=999, alpha=0.001)
 
 #dselect<-as.data.frame(moransel[["MEM.select"]])
-dselect2<-as.data.frame(moransel2[["MEM.select"]])
+#dselect2<-as.data.frame(moransel2[["MEM.select"]])
 
 
 #write.csv(dselect, file="/n/wolkovich_lab/Lab/Cat/memselect_orig_pafull.csv", row.names=FALSE)
 #dselect<-read.csv("~/Documents/git/regionalrisk/memselect_orig.csv", header=TRUE)
 
-dx<-cbind(Y, dselect2)
+dx<-cbind(Y, MEM)
 
 rex.mod<-lm(Y~ ., data=dx)
 space<-rex.mod$fitted.values ## space<-rex.mod$fitted.values - vector which is the predicted with spatial autocorrelation
@@ -87,9 +87,9 @@ write.csv(prep_space, file="/n/wolkovich_lab/Lab/Cat/fs_newspace_orig_pa.csv", r
 #write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", row.names=FALSE)
 
 if(FALSE){
-  bb<- read.csv("~/Desktop/fs_newspace_orig.csv", header=TRUE)
+  goo<- read.csv("~/Desktop/fs_newspace_orig_pa.csv", header=TRUE)
   
-  goo<-prep_space
+  #goo<-prep_space
   
   goo<-subset(goo, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                           "distkm", "eigen"))
