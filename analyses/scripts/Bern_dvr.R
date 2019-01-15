@@ -6,7 +6,8 @@ require(brms)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_dvr.csv", header=TRUE)
+if(FALSE){
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_dvr.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/fs_space_dvr.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))
@@ -34,7 +35,9 @@ dvr.short<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
 
 save(dvr.short, file="/n/wolkovich_lab/Lab/Cat/dvr_short.Rdata")
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_space_dvr.csv", header=TRUE)
+}
+
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_dvr.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/fs_space_dvr.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))

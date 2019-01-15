@@ -126,7 +126,7 @@ The effects of the predictors varied in both direction and magnitude (Figure \re
 
 Most of the interactions with increasing temperatures (i.e., the Climate Change predictor) exhibit a decreased risk in false springs, especially with NAO (-0.83) however, the probability of false spring incidence increased at sites with higher mean spring temperatures after 1983 (+0.42) (Figure \ref{fig:maineffects}). After climate change, the rate of false spring incidence largely decreased with increasing NAO indices (Figure \ref{fig:intrxns}A). The probability of a false spring remained the same after 1983 and before 1983 (Figure \ref{fig:intrxns}B). After climate change, the probability of a false spring is higher at sites with warmer mean spring temperatures (Figure \ref{fig:intrxns}C). There was a slightly decreased risk of a false springs further from the coast before climate change (Figure \ref{fig:intrxns}D).
 
-The probability of a false spring occurring varied by species with each predictor (Figure \ref{fig:spp}). With increasing mean spring temperatures, there were fewer false springs for each species, however \textit{Betula pendula} had the greatest risk of false springs and \textit{Fraxinus excelsior} had the lowest risk. With increasing elevation, all species had a greater risk of a false spring occurring except for \textit{Fraxinus excelsior}, which had a slightly decreased risk at higher elevations. There was an increased risk of false spring for all species at sites further from the coast (Figure \ref{fig:spp}D). With increasing NAO indices, the risk of false spring remained consistent for most species except \textit{Fagus sylvatica} experienced more with highter NAOs. \textit{Betula pendula}, \texit{Aesculus hippocastenum} and \textit{Alnus glutinosa} all experienced more false springs after 1983.
+The probability of a false spring occurring varied by species with each predictor (Figure \ref{fig:spp}). With increasing mean spring temperatures, there were fewer false springs for each species, however \textit{Betula pendula} had the greatest risk of false springs and \textit{Fraxinus excelsior} had the lowest risk. With increasing elevation, all species had a greater risk of a false spring occurring except for \textit{Fraxinus excelsior}, which had a slightly decreased risk at higher elevations. There was an increased risk of false spring for all species at sites further from the coast. With increasing NAO indices, the risk of false spring remained consistent for most species except \textit{Fagus sylvatica} experienced more with highter NAOs. \textit{Betula pendula}, \texit{Aesculus hippocastenum} and \textit{Alnus glutinosa} all experienced more false springs after 1983.
 
 \subsection*{Standardized rate of budburst}
 %\item By changing the temperature threshold for defining a false spring --- from -2.2$^{\circ}$C to -5$^{\circ}$C --- many of the predictors changed in both magnitude and direction but overall there were fewer false springs (Figure \ref{fig:five}).
@@ -210,7 +210,6 @@ False spring risk is influenced by numerous climatic and regional factors and al
   -\end{center}
   -\end{figure}}
   
-
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//figures/InteractionPlots/IntrxnPlots_orig.pdf}
@@ -224,6 +223,7 @@ False spring risk is influenced by numerous climatic and regional factors and al
   -\caption{Plots showing the interaction effects of each predictor with species. (A.) As mean spring temperature increases, the probability of a false spring decreases for each species but \textit{Fraxinus excelsior} always has the lowest risk of false spring. (B.) The risk of a false spring increases with increasing altitude but the relationship is strongest for \textit{Aesculus hippocastanum} and \textit{Betula pendula}. (C.) There are slightly fewer false springs for \textit{Aesculus hippocastanum} and \textit{Betula pendula} in years with higher NAO indices. (D.) There's an increase in false spring risk for individuals further from the coast, especially for \textit{Fraxinus excelsior}. (E.) There are fewer false springs after 1983, especially for \textit{Aesculus hippocastanum} and \textit{Betula pendula}. Note, the y-axis for panels A and B are from 0.00 to 1.00 but the y-axis is only from 0.00 to 0.10 for panels C, D and E to better see the relationships. Since we found the z-score for each predictor, the x-axis for each panel does not reflect the raw data.}\label{fig:spp}
   -\end{center}
   -\end{figure}}
+
 
   
 
