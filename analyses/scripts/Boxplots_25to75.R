@@ -24,6 +24,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #xx<-subset(xx, year>1950)
 
 mat<-read.csv("output/BBdata.csv", header=TRUE)
+#mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
 mat$bb.avg<-ave(mat$bb, mat$species)
 
 mat$cc<-ifelse(mat$year<1984, 0, 1)
@@ -84,6 +85,7 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
 
 ###### Tmin boxplots now...
 tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
+#tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
 
 tm$cc<-ifelse(tm$year<1984, 0, 1)
 tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
@@ -140,7 +142,9 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 ### And finally... False springs!
-f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
+#f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
+#f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
+f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
 
 f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
@@ -173,10 +177,9 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="Helvetica"),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=35, hjust=1),
-        legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
+        legend.key = element_rect(colour = "transparent", fill = "white"), legend.position = "none",
         plot.margin = unit(c(1.5,1.5, 1.0, 1.5), "lines"),
-        axis.title.x = element_blank(),
-        legend.position = "none") + 
+        axis.title.x = element_blank()) + 
         #axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
@@ -197,7 +200,7 @@ g_legend<-function(a.gplot){
   legend <- tmp$grobs[[leg]]
   return(legend)}
 
-mylegend<-g_legend(tmin)
+mylegend<-g_legend(falsespring)
 
 quartz()
 g1<-ggarrange(budburst, tmin, falsespring, nrow=3)
