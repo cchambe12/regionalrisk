@@ -130,19 +130,11 @@ The probability of a false spring occurring varied by species with each predicto
 
 \subsection*{Standardized rate of budburst}
 %\item By changing the temperature threshold for defining a false spring --- from -2.2$^{\circ}$C to -5$^{\circ}$C --- many of the predictors changed in both magnitude and direction but overall there were fewer false springs (Figure \ref{fig:five}).
-\begin{enumerate}
+
 %\item With a lower false spring temperature, increasing elevation greatly increased the risk of a false spring and more positive NAO indices after climate change also increased the risk of false springs.
 %\end{enumerate}
 
-\item By having different durations of vegetative risk for each species the magnitude and direction of the predictors remained consistent with the original model (Figure S2). %\ref{fig:orig})
-  \begin{enumerate}
-  \item There were fewer false springs after 1983 and mean spring temperature and elevation were the strongest predictors for false spring risk. 
-  \item And, again, distance was the only, albeit weakly, positive interaction effect with climate change. 
-  \end{enumerate}
-
-\end{enumerate}  
-  
-
+By having different durations of vegetative risk for each species the magnitude and direction of the predictors remained consistent with the original model (Figure S2). There were fewer false springs after 1983 and mean spring temperature and distance from the coast were the strongest predictors for false spring risk. And, again, mean spring temperature was the only, albeit strongly, positive interaction effect with climate change. 
 
 \section*{Discussion}
 \begin{enumerate}

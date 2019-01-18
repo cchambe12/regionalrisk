@@ -68,7 +68,7 @@ substrRight <- function(x, n){
   substr(x, nchar(x)-n+1, nchar(x))
 }
 
-dxx$species<-substrRight(dxx$pep.year, 6))
+dxx$species<-substrRight(dxx$pep.year, 6)
 coords<-df%>%dplyr::select(lat, long, pep.year)
 dxx<-full_join(dxx, coords)
 

@@ -23,8 +23,8 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
 #xx<-subset(xx, year>1950)
 
-mat<-read.csv("output/BBdata.csv", header=TRUE)
-#mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
+#mat<-read.csv("output/BBdata.csv", header=TRUE)
+mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
 mat$bb.avg<-ave(mat$bb, mat$species)
 
 mat$cc<-ifelse(mat$year<1984, 0, 1)
@@ -84,8 +84,8 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
 
 
 ###### Tmin boxplots now...
-tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
-#tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
+#tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
+tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
 
 tm$cc<-ifelse(tm$year<1984, 0, 1)
 tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
@@ -143,8 +143,8 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
 
 ### And finally... False springs!
 #f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
-#f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
-f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
+f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
+#f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
 
 f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
