@@ -6,6 +6,7 @@ require(brms)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
+if(FALSE){
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_five.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/fs_space_orig.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
@@ -33,6 +34,8 @@ five.short<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
 
 save(five.short, file="/n/wolkovich_lab/Lab/Cat/five_short.Rdata")
 
+}
+
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_five.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/fs_space_orig.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
@@ -51,7 +54,8 @@ bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 five.full<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                   cc.z + species + nao.z:species + 
                   mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
-                  nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, 
+                 nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z +
+                  nao.z:cc.z:species + mat.z:cc.z:species + dist.z:cc.z:species + elev.z:cc.z:species + space.z:cc.z:species, 
                 data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2500,
                 prior = prior(normal(0,1), class = "b"))
 

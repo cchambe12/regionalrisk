@@ -58,7 +58,8 @@ dvr.full<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                  cc.z + species + nao.z:species + 
                  mat.z:species + dist.z:species + elev.z:species + space.z:species +
                    cc.z:species + 
-                 nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, 
+                nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z +
+                nao.z:cc.z:species + mat.z:cc.z:species + dist.z:cc.z:species + elev.z:cc.z:species + space.z:cc.z:species,  
                data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2500,
                prior = prior(normal(0,1), class = "b"))
 

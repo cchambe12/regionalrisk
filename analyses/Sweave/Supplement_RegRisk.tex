@@ -106,6 +106,19 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \renewcommand{\labelitemi}{$-$}
 \setkeys{Gin}{width=0.8\textwidth}
 
+\section*{Methods: Space Parameter}
+The ultimate intent for the space parameter is to control for spatial autocorrelation in the model. To do this, we needed to ensure that the space parameter does not ‘interfere’ with other spatially-structured parameters in the model. Thus, we first ran a linear model to estimate the number of false springs using all model parameters except for space. 
+
+\begin{align*} \label{eq:s1} 
+y_i \thicksim N(\alpha_(i)) +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}} + \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} \\ +& \beta_{ClimateChange_{(i)}}
++ \beta_{NAO \times Species_{(i)}} + \beta_{MeanSpringTemp \times Species_{(i)}} + \beta_{Elevation \times Species_{(i)}} \\ +& \beta_{DistanceCoast \times Species_{(i)}} + \beta_{ClimateChange \times Species_{(i)}} \\
++& \beta_{NAO \times ClimateChange_{(i)}} + \beta_{MeanSpringTemp \times ClimateChange_{(i)}} 
++ \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} 
+\end{align*}
+
+We then took the residuals of that regression to use as our Y values in our eigenvector selection --- using a minimization of Moran's \textit{I} of the residuals \citep[][MIR]{Baumen2017}. We then took the calculated eigenvectors determined from the MIR approach and regressed these against the residuals from \ref{eg:s1}. The fitted values from this regression were used as the space parameter in our models.
+
+
 \section*{Species rate of budburst calculations}
 \begin{enumerate}
 \item We used data from a growth chamber experiment (Flynn2018) to determine the average number of days between budburst and leafout for our study species. 
