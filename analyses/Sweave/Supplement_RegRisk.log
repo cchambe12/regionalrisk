@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  23 JAN 2019 11:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  30 JAN 2019 16:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -872,35 +872,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 93--103
  []
 
 
+LaTeX Warning: Reference `eq:s1' on page 1 undefined on input line 119.
+
+
 LaTeX Warning: Reference `eg:s1' on page 1 undefined on input line 119.
 
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./Supplement_RegRisk.bbl [2])
+(./Supplement_RegRisk.bbl) [2]
 <..//figures/TminBB_bySpp.png, id=21, 2810.5pt x 1756.5625pt>
 File: ..//figures/TminBB_bySpp.png Graphic file (type png)
 
 <use ..//figures/TminBB_bySpp.png>
-Package pdftex.def Info: ..//figures/TminBB_bySpp.png used on input line 165.
+Package pdftex.def Info: ..//figures/TminBB_bySpp.png used on input line 158.
 (pdftex.def)             Requested size: 455.24408pt x 284.51332pt.
- [3]
-<..//figures/model_output_dvr_50.pdf, id=27, 395.41556pt x 327.28444pt>
+
+<..//figures/model_output_dvr_50.pdf, id=23, 395.41556pt x 327.28444pt>
 File: ..//figures/model_output_dvr_50.pdf Graphic file (type pdf)
 
 <use ..//figures/model_output_dvr_50.pdf>
 Package pdftex.def Info: ..//figures/model_output_dvr_50.pdf used on input line
- 172.
+ 165.
 (pdftex.def)             Requested size: 341.43306pt x 282.60773pt.
- [4 <..//figures/TminBB_bySpp.png>]
-<..//figures/model_output_berniefive_50.pdf, id=33, 417.70152pt x 340.65599pt>
+ [3 <..//figures/TminBB_bySpp.png>]
+<..//figures/model_output_berniefive_50.pdf, id=30, 417.70152pt x 340.65599pt>
 File: ..//figures/model_output_berniefive_50.pdf Graphic file (type pdf)
 
 <use ..//figures/model_output_berniefive_50.pdf>
 Package pdftex.def Info: ..//figures/model_output_berniefive_50.pdf used on inp
-ut line 179.
+ut line 172.
 (pdftex.def)             Requested size: 341.43306pt x 278.46126pt.
- [5 <..//figures/model_output_dvr_50.pdf>] [6 <..//figures/model_output_bernief
+ [4 <..//figures/model_output_dvr_50.pdf>] [5 <..//figures/model_output_bernief
 ive_50.pdf>]
 (./Supplement_RegRisk.aux)
 
@@ -908,10 +911,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16001 strings out of 493014
- 312539 string characters out of 6133351
+ 16002 strings out of 493014
+ 312546 string characters out of 6133351
  335528 words of memory out of 5000000
- 19330 multiletter control sequences out of 15000+600000
+ 19331 multiletter control sequences out of 15000+600000
  32426 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,9n,42p,10408b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -930,10 +933,10 @@ e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/
 16/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/201
 6/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/
 texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Supplement_RegRisk.pdf (6 pages, 1050539 bytes).
+Output written on Supplement_RegRisk.pdf (5 pages, 1049521 bytes).
 PDF statistics:
- 276 PDF objects out of 1000 (max. 8388607)
- 202 compressed objects within 3 object streams
+ 272 PDF objects out of 1000 (max. 8388607)
+ 200 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

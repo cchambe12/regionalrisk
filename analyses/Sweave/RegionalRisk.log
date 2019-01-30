@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 JAN 2019 11:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  30 JAN 2019 16:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -751,6 +751,10 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count158
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 
@@ -768,6 +772,27 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \c@ContinuedFloat=\count159
 Package caption Info: float package is loaded.
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count160
+\output=\toks24
+\linenoprevgraf=\count161
+\linenumbersep=\dimen175
+\linenumberwidth=\dimen176
+\c@linenumber=\count162
+\c@pagewiselinenumber=\count163
+\c@LN@truepage=\count164
+\c@internallinenumber=\count165
+\c@internallinenumbers=\count166
+\quotelinenumbersep=\dimen177
+\bframerule=\dimen178
+\bframesep=\dimen179
+\bframebox=\box59
+LaTeX Info: Redefining \\ on input line 3056.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
@@ -775,39 +800,39 @@ tim
 (./RegionalRisk.aux)
 \openout1 = `RegionalRisk.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 90.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 90.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 92.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 92.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    ... okay on input line 92.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count160
-\scratchdimen=\dimen175
-\scratchbox=\box59
-\nofMPsegments=\count161
-\nofMParguments=\count162
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count163
-\MPscratchDim=\dimen176
-\MPnumerator=\count164
-\makeMPintoPDFobject=\count165
-\everyMPtoPDFconversion=\toks25
+\scratchcounter=\count167
+\scratchdimen=\dimen180
+\scratchbox=\box60
+\nofMPsegments=\count168
+\nofMParguments=\count169
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count170
+\MPscratchDim=\dimen181
+\MPnumerator=\count171
+\makeMPintoPDFobject=\count172
+\everyMPtoPDFconversion=\toks26
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -830,95 +855,94 @@ Dictionary: translator-basic-dictionary, Language: English
 (/usr/local/texlive/2016/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2016/03/01 v2.6q siunitx: Abbreviated units
 )
-\AtBeginShipoutBox=\box60
+\AtBeginShipoutBox=\box61
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-\c__siunitx_mathsf_int=\count166
-LaTeX Font Info:    Try loading font information for U+msa on input line 90.
+\c__siunitx_mathsf_int=\count173
+LaTeX Font Info:    Try loading font information for U+msa on input line 92.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 90.
+LaTeX Font Info:    Try loading font information for U+msb on input line 92.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-\c__siunitx_mathtt_int=\count167
+\c__siunitx_mathtt_int=\count174
+LaTeX Font Info:    Try loading font information for T1+aess on input line 94.
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--103
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aess.fd
+File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 95--105
 
  []
 
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3] [4] [5]
-! Undefined control sequence.
-l.175 ...ter NAOs. \textit{Betula pendula}, \texit
-                                                  {Aesculus hippocastenum} a...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+[2] [3] [4] [5] [6] [7] [8] (./RegionalRisk.bbl
+LaTeX Font Info:    Try loading font information for T1+aett on input line 27.
 
-[6] [7] [8] (./RegionalRisk.bbl [9] [10] [11] [12] [13])
-<..//figures/BB_base.png, id=55, 2810.5pt x 1756.5625pt>
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aett.fd
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+) [9] [10] [11]
+[12] [13]) <..//figures/BB_base.png, id=57, 2810.5pt x 1756.5625pt>
 File: ..//figures/BB_base.png Graphic file (type png)
 
 <use ..//figures/BB_base.png>
-Package pdftex.def Info: ..//figures/BB_base.png used on input line 232.
+Package pdftex.def Info: ..//figures/BB_base.png used on input line 195.
 (pdftex.def)             Requested size: 398.33858pt x 248.9458pt.
-
-<..//figures/Boxplot_BBTminFS_noDots.pdf, id=57, 446.99155pt x 427.25261pt>
+ [14]
+<..//figures/Boxplot_BBTminFS_noDots.pdf, id=62, 448.26501pt x 385.22772pt>
 File: ..//figures/Boxplot_BBTminFS_noDots.pdf Graphic file (type pdf)
 
 <use ..//figures/Boxplot_BBTminFS_noDots.pdf>
 Package pdftex.def Info: ..//figures/Boxplot_BBTminFS_noDots.pdf used on input 
-line 239.
-(pdftex.def)             Requested size: 398.33858pt x 380.76215pt.
- [14 <..//figures/BB_base.png>]
-<..//figures/MSTBB_bySpp.png, id=64, 2810.5pt x 1756.5625pt>
+line 202.
+(pdftex.def)             Requested size: 398.33858pt x 342.32843pt.
+ [15 <..//figures/BB_base.png>]
+<..//figures/MSTBB_bySpp.png, id=69, 2810.5pt x 1756.5625pt>
 File: ..//figures/MSTBB_bySpp.png Graphic file (type png)
 
 <use ..//figures/MSTBB_bySpp.png>
-Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 246.
+Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 209.
 (pdftex.def)             Requested size: 455.24408pt x 284.51332pt.
- [15 <..//figures/Boxplot_BBTminFS_noDots.pdf>] <..//figures/model_output_orig_
-50.pdf, id=209, 459.72632pt x 365.48875pt>
+ [16 <..//figures/Boxplot_BBTminFS_noDots.pdf>] <..//figures/model_output_orig_
+50.pdf, id=214, 459.72632pt x 365.48875pt>
 File: ..//figures/model_output_orig_50.pdf Graphic file (type pdf)
 
 <use ..//figures/model_output_orig_50.pdf>
 Package pdftex.def Info: ..//figures/model_output_orig_50.pdf used on input lin
-e 254.
+e 217.
 (pdftex.def)             Requested size: 341.43306pt x 271.44455pt.
- [16 <..//figures/MSTBB_bySpp.png>]
-<..//figures/InteractionPlots/IntrxnPlots_orig.pdf, id=214, 426.61583pt x 342.5
+ [17 <..//figures/MSTBB_bySpp.png>]
+<..//figures/InteractionPlots/IntrxnPlots_orig.pdf, id=219, 426.61583pt x 342.5
 6612pt>
 File: ..//figures/InteractionPlots/IntrxnPlots_orig.pdf Graphic file (type pdf)
 
  <use ..//figures/InteractionPlots/IntrxnPlots_orig.pdf>
 Package pdftex.def Info: ..//figures/InteractionPlots/IntrxnPlots_orig.pdf used
- on input line 261.
+ on input line 225.
 (pdftex.def)             Requested size: 455.24408pt x 365.56987pt.
- [17 <..//figures/model_output_orig_50.pdf>]
-<..//figures/InteractionPlots/Species_orig.pdf, id=304, 507.48186pt x 331.1048p
+ [18 <..//figures/model_output_orig_50.pdf>]
+<..//figures/InteractionPlots/Species_orig.pdf, id=309, 507.48186pt x 331.1048p
 t>
 File: ..//figures/InteractionPlots/Species_orig.pdf Graphic file (type pdf)
  <use ..//figures/InteractionPlots/Species_orig.pdf>
 Package pdftex.def Info: ..//figures/InteractionPlots/Species_orig.pdf used on 
-input line 268.
+input line 232.
 (pdftex.def)             Requested size: 455.24408pt x 297.02658pt.
- [18 <..//figures/InteractionPlots/IntrxnPlots_orig.pdf>] [19 <..//figures/Inte
+ [19 <..//figures/InteractionPlots/IntrxnPlots_orig.pdf>] [20 <..//figures/Inte
 ractionPlots/Species_orig.pdf>] (./RegionalRisk.aux) ) 
 Here is how much of TeX's memory you used:
- 15914 strings out of 493014
- 311877 string characters out of 6133351
- 335524 words of memory out of 5000000
- 19252 multiletter control sequences out of 15000+600000
- 30117 words of font info for 64 fonts, out of 8000000 for 9000
+ 16270 strings out of 493014
+ 317266 string characters out of 6133351
+ 340579 words of memory out of 5000000
+ 19584 multiletter control sequences out of 15000+600000
+ 34259 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,9n,42p,10402b,585s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,9n,42p,10402b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/te
@@ -929,14 +953,16 @@ ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
-public/amsfonts/symbols/msbm10.pfb>
-Output written on RegionalRisk.pdf (19 pages, 3244619 bytes).
+ype1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/amsfonts/symbols/msbm10.pfb>
+Output written on RegionalRisk.pdf (20 pages, 3273592 bytes).
 PDF statistics:
- 890 PDF objects out of 1000 (max. 8388607)
- 659 compressed objects within 7 object streams
+ 901 PDF objects out of 1000 (max. 8388607)
+ 667 compressed objects within 7 object streams
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
