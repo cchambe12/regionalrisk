@@ -19,14 +19,20 @@ setwd("~/Documents/git/regionalrisk/")
 
 #load("orig_full.Rdata")
 
-varies <- get_variables(orig.full)
-varies <- gsub(".*b_","",varies)
-
 check <- bb %>% add_fitted_draws(orig.full, prob=0.5) %>%
   filter(species==c("FRAEXC", "BETPEN"))
 
 foo <- ungroup(check) %>%
   dplyr::select(species, cc, elev, .value)
+
+bb %>%
+  add_fitted_draws(orig.full) %>%
+  filter(species==c("FRAEXC", "BETPEN")) %>%
+  ggplot(aes(x = .value, y = elev, linetype=as.factor(cc), col=species)) +
+  stat_pointintervalh(.width = c(.25, .75))
+
+
+
 
 foo <- foo[!duplicated(foo),] ### super close!!! Need to find a way to get 50% cred intervals
 
