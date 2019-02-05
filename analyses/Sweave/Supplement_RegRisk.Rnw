@@ -93,11 +93,11 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
 \hline
 \textbf{Species} & \textbf{Num. of Observations} & \textbf{Num. of Sites} & \textbf{Num. of Years} \\
 \hline
-\textit{Aesculus hippocastanum} & 156836 & 10158 & 66  \\
+\textit{Aesculus hippocastanum} & 156468 & 10157 & 66  \\
 \hline
-\textit{Alnus glutinosa} & 91182 & 6775 & 66 \\
+\textit{Alnus glutinosa} & 91094 & 6775 & 65 \\
 \hline
-\textit{Betula pendula} & 155251 & 10139 & 66 \\
+\textit{Betula pendula} & 154897 & 10139 & 66 \\
 \hline
 \textit{Fagus sylvatica} & 129133 & 9099 & 66 \\
 \hline
@@ -117,14 +117,14 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//figures/model_output_dvr_50.pdf}
-  -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 744,295 zeros and 10,491 ones for false spring in the data.}\label{fig:dvr}
+  -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false spring in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
 
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//figures/model_output_berniefive_50.pdf}
-  -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 755,677 zeros and 1,025 ones for false spring in the data, rendering a less stable model.}\label{fig:five}
+  -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model.}\label{fig:five}
   -\end{center}
   -\end{figure}}
   

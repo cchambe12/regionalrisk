@@ -169,7 +169,7 @@ False spring risk is influenced by numerous climatic and regional factors and al
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//figures/model_output_orig_50.pdf}
-  -\caption{Model output with standardized durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. %% NEED TO CHECK! There were 743,086 zeros and 11,700 ones for false spring in the data.
+  -\caption{Model output with standardized durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 582,211 zeros and 172,877 ones for false spring in the data.
   }\label{fig:maineffects}
   -\end{center}
   -\end{figure}}

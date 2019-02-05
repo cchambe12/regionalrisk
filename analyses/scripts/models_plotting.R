@@ -249,7 +249,7 @@ grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 ################################################################################
 ################################ MODEL OUTPUT ##################################
 
-brms<-as.data.frame(tidy(orig.full,robust = TRUE, prob=0.5))
+brms<-as.data.frame(tidy(five.full,robust = TRUE, prob=0.5))
 #brms0<-as.data.frame(tidy(bernsfinal,robust = TRUE))
 brms<-brms[2:47,]
 brms$term<-gsub(".*b_","",brms$term)
