@@ -36,20 +36,28 @@ bb<-bb[sample(nrow(bb), 10000), ]
 
 #species <- data.frame(species = c("BETPEN", "FRAEXC"))
 
-#goo <- marginal_effects(orig.full, probs = c(0.25, 0.75), method = "fitted",
+### This function never compiles. Error about memory space, I've tried changing the memory space but to no avail... yet.
+#goo <- marginal_effects(orig.full, probs = c(0.25, 0.75), method = "fitted", 
  #                       effects = c("elev.z", "elev.z:cc.z"), conditions = species) 
+
+me.elev.fits <- fitted(orig.full, nsamples = 10,
+                       probs=0.9)
+
+fittedness <- as.data.frame(cbind(Y = standata(orig.full)$Y, me.elev.fits))
+ggplot(fittedness) + geom_point(aes(x = Estimate, y = Y))
 
 
 
 me.elev <- bb %>%  add_predicted_draws(orig.full, method = "predict") %>%
   filter(species==c("BETPEN", "FRAEXC"))
 
-#check<-check[sample(nrow(check), 10000), ]
 
 
+
+### The Plotting ###
 quartz()
-ggplot(me.elev, aes(x=elev, y=.prediction, col=species, linetype=as.factor(cc))) + stat_smooth(method="lm", span=0.5, se=TRUE, 
-                                                                                        aes(fill=species, linetype=as.factor(cc))) +
+ggplot(me.elev.fits, aes(x=elev.z, y=Estimate, col=species, linetype=as.factor(cc))) + 
+  stat_smooth(method="lm", span=0.9, se=TRUE, aes(fill=species, linetype=as.factor(cc))) +
   theme_classic() +
   scale_colour_manual(name="Species", values=c("#7FC97F","#BF5B17"),
                       labels=c("BETPEN"=expression(paste(italic("Betula pendula"))),

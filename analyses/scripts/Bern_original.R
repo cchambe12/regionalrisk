@@ -52,23 +52,24 @@ bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
-orig.full<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+bb$species <- ifelse(bb$species=="FAGSYL", "aaaFAGSYL", bb$species)
+
+orig.full.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                   cc.z + species + nao.z:species + 
                   mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
-                 nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z +
-                 nao.z:cc.z:species + mat.z:cc.z:species + dist.z:cc.z:species + elev.z:cc.z:species + space.z:cc.z:species,  
+                 nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z,  
                 data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2500,
                 prior = prior(normal(0,1), class = "b"))
 
-save(orig.full, file="/n/wolkovich_lab/Lab/Cat/orig_full_itrxns.Rdata")
+save(orig.full.fagus, file="/n/wolkovich_lab/Lab/Cat/orig_full_fagus.Rdata")
 
-#orig.bigpriors<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
- #                cc.z + species + nao.z:species + 
-  #               mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
-   #             nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, 
-    #           data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2500,
-     #          prior = prior(normal(0,5), class = "b"))
+orig.bigpriors.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+                 cc.z + species + nao.z:species + 
+                 mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
+                nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z, 
+               data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2500,
+               prior = prior(normal(0,5), class = "b"))
 
-#save(orig.bigpriors, file="/n/wolkovich_lab/Lab/Cat/orig_bigpriors.Rdata")
+save(orig.bigpriors.fagus, file="/n/wolkovich_lab/Lab/Cat/orig_bigpriors_fagus.Rdata")
 
 
