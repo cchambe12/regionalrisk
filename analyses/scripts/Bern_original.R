@@ -1,7 +1,9 @@
-## Libraries
 ### 15 Oct 2018 - can't install brms, rstanarm or I think rstan properly
+## Libraries
 require(rstan)
 require(brms)
+
+options(stringsAsFactors = FALSE)
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
@@ -24,7 +26,7 @@ bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 #bb$bb.z <-(bb$bb-mean(bb$bb,na.rm=TRUE))/(2*sd(bb$bb,na.rm=TRUE))
 
-bb<-bb[sample(nrow(bb), 80000), ]
+bb<-bb[sample(nrow(bb), 1000), ]
 
 
 orig.short<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
@@ -38,7 +40,7 @@ save(orig.short, file="/n/wolkovich_lab/Lab/Cat/orig_short.Rdata")
 }
 
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv", header=TRUE)
-#bb<-read.csv("~/Documents/git/regionalrisk/fs_space_orig.csv", header=TRUE)
+#bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))
 
@@ -52,7 +54,7 @@ bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
-bb$species <- ifelse(bb$species=="FAGSYL", "aaaFAGSYL", bb$species)
+bb$species <- as.character(ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species))
 
 orig.full.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                   cc.z + species + nao.z:species + 

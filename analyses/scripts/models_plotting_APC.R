@@ -40,36 +40,76 @@ bb<-bb[sample(nrow(bb), 10000), ]
 #goo <- marginal_effects(orig.full, probs = c(0.25, 0.75), method = "fitted", 
  #                       effects = c("elev.z", "elev.z:cc.z"), conditions = species) 
 
-me.elev.fits <- fitted(orig.full, nsamples = 10,
-                       probs=0.9)
 
-fittedness <- as.data.frame(cbind(Y = standata(orig.full)$Y, me.elev.fits))
-ggplot(fittedness) + geom_point(aes(x = Estimate, y = Y))
-
-
-
+##### LIZZIE, start here through..... 
 me.elev <- bb %>%  add_predicted_draws(orig.full, method = "predict") %>%
   filter(species==c("BETPEN", "FRAEXC"))
 
 
 
 
-### The Plotting ###
+### Quick Plotting to see! Need to edit the standard error plotting but just to get a feel for now ###
 quartz()
-ggplot(me.elev.fits, aes(x=elev.z, y=Estimate, col=species, linetype=as.factor(cc))) + 
+ggplot(me.elev, aes(x=elev.z:cc.z, y=.prediction, col=species, linetype=as.factor(cc))) + 
   stat_smooth(method="lm", span=0.9, se=TRUE, aes(fill=species, linetype=as.factor(cc))) +
   theme_classic() +
   scale_colour_manual(name="Species", values=c("#7FC97F","#BF5B17"),
                       labels=c("BETPEN"=expression(paste(italic("Betula pendula"))),
                                "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) + xlab("Elevation") + ylab("Probability of False Spring") +
   guides(fill=FALSE, linetype=FALSE) + scale_linetype_manual(name="Climate Change", values=c("solid", "dotted"),
-                                         labels=c("0"="1950-1983",
-                                                  "1"="1984-2016")) + 
+                                                             labels=c("0"="1950-1983",
+                                                                      "1"="1984-2016")) + 
   theme(legend.key = element_rect(colour = "transparent", fill = "transparent"), legend.text.align = 0) +
   guides(color=guide_legend(override.aes=list(fill=NA))) +
   scale_fill_manual(name="Species", values=c("#7FC97F","#BF5B17"),
+                    labels=c("BETPEN"=expression(paste(italic("Betula pendula"))),
+                             "FRAEXC"=expression(paste(italic("Fraxinus excelsior")))))
+
+
+#### HERE! 
+
+
+
+
+if(FALSE){
+launch_shinystan(orig.full)
+
+me.elev.fits <- fitted(orig.full, nsamples = 10,
+                       probs=c(0.1,0.9))
+
+fittedness <- as.data.frame(cbind(Y = standata(orig.full)$Y, elev = standata(orig.full)$elev.z, 
+                                   species = standata(orig.full)$species, cc = standata(orig.full)$cc.z,
+                                    me.elev.fits))
+
+quartz()
+ggplot(fittedness, aes(x=elev.z, y=Y, col=species, linetype=as.factor(cc))) + 
+  stat_smooth(method="lm", span=0.9, se=TRUE, aes(fill=species, linetype=as.factor(cc))) +
+  theme_classic() +
+  scale_colour_manual(name="Species", values=c("#7FC97F","#BF5B17"),
                       labels=c("BETPEN"=expression(paste(italic("Betula pendula"))),
-                               "FRAEXC"=expression(paste(italic("Fraxinus excelsior")))))
+                               "FRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) + xlab("Elevation") + ylab("Probability of False Spring") +
+  guides(fill=FALSE, linetype=FALSE) + scale_linetype_manual(name="Climate Change", values=c("solid", "dotted"),
+                                                             labels=c("0"="1950-1983",
+                                                                      "1"="1984-2016")) + 
+  theme(legend.key = element_rect(colour = "transparent", fill = "transparent"), legend.text.align = 0) +
+  guides(color=guide_legend(override.aes=list(fill=NA))) +
+  scale_fill_manual(name="Species", values=c("#7FC97F","#BF5B17"),
+                    labels=c("BETPEN"=expression(paste(italic("Betula pendula"))),
+                             "FRAEXC"=expression(paste(italic("Fraxinus excelsior")))))
+
+
+
+
+ggplot(fittedness) + geom_point(aes(x = Estimate, y = Y))
+
+
+}
+
+
+
+
+
+
 
 me.mat <- bb %>%  add_predicted_draws(orig.full, method = "predict") %>%
   filter(species==c("ALNGLU", "QUEROB"))
