@@ -18,7 +18,7 @@ library(ggeffects)
 
 setwd("~/Documents/git/regionalrisk/")
 
-load("orig_full.Rdata")
+load("orig_full_fagus.Rdata")
 
 bb <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
 
@@ -32,6 +32,8 @@ bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
+bb$species <- as.character(ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species))
+
 bb<-bb[sample(nrow(bb), 10000), ]
 
 #species <- data.frame(species = c("BETPEN", "FRAEXC"))
@@ -42,7 +44,7 @@ bb<-bb[sample(nrow(bb), 10000), ]
 
 
 ##### LIZZIE, start here through..... 
-me.elev <- bb %>%  add_predicted_draws(orig.full, method = "predict") %>%
+me.elev <- bb %>%  add_predicted_draws(orig.full.fagus, method = "predict") %>%
   filter(species==c("BETPEN", "FRAEXC"))
 
 
@@ -50,7 +52,7 @@ me.elev <- bb %>%  add_predicted_draws(orig.full, method = "predict") %>%
 
 ### Quick Plotting to see! Need to edit the standard error plotting but just to get a feel for now ###
 quartz()
-ggplot(me.elev, aes(x=elev.z:cc.z, y=.prediction, col=species, linetype=as.factor(cc))) + 
+ggplot(me.elev, aes(x=elev, y=.prediction, col=species, linetype=as.factor(cc))) + 
   stat_smooth(method="lm", span=0.9, se=TRUE, aes(fill=species, linetype=as.factor(cc))) +
   theme_classic() +
   scale_colour_manual(name="Species", values=c("#7FC97F","#BF5B17"),
