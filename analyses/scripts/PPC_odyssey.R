@@ -15,6 +15,7 @@ bb <- read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv", header=TRUE)
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 
+if(FALSE){
 bb$nao.z <- (bb$nao-mean(bb$nao,na.rm=TRUE))/(2*sd(bb$nao,na.rm=TRUE))
 bb$mat.z <- (bb$mst-mean(bb$mst,na.rm=TRUE))/(2*sd(bb$mst,na.rm=TRUE))
 bb$cc.z <- (bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE))
@@ -43,31 +44,71 @@ png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png",
     height=5, units="in", res = 350 )
 orig.ppc
 dev.off()
+}
 
-orig.ppc.stat <- ppc_stat(orig.full.fagus)
+
+
+#d<-d[sample(nrow(d), 755088), ]
+y <- as.vector(bb$fs)
+yrep <- posterior_predict(orig.full.fagus, draws = 755088)
+ppc.sd <- ppc_stat(y, yrep, stat = "sd")
 
 png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
     width=8,
     height=5, units="in", res = 350 )
-orig.ppc.stat
+ppc.sd
+dev.off()
+
+ppc.min <- ppc_stat(y, yrep, stat = "min")
+
+png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+    width=8,
+    height=5, units="in", res = 350 )
+ppc.min
+dev.off()
+
+ppc.max <- ppc_stat(y, yrep, stat = "max")
+
+png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+    width=8,
+    height=5, units="in", res = 350 )
+ppc.max
 dev.off()
 
 
 load("/n/wolkovich_lab/Lab/Cat/orig_bigpriors_fagus.Rdata")
 
-bigpriors.ppc <- pp_check(orig.full.fagus)
+bigpriors.ppc <- pp_check(orig.bigpriors.fagus)
 
-png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+png("/n/wolkovich_lab/Lab/Cat/orig_ppc_bigpriors.png", 
     width=8,
     height=5, units="in", res = 350 )
-orig.ppc
+bigpriors.ppc
 dev.off()
 
-bigpriors.ppc.stat <- ppc_stat(orig.full.fagus)
+#y <- as.vector(bb$fs)
+yrep <- posterior_predict(orig.bigpriors.fagus, draws = 755088)
+bigpriors.sd <- ppc_stat(y, yrep, stat = "sd")
 
 png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
     width=8,
     height=5, units="in", res = 350 )
-orig.ppc.stat
+bigpriors.sd
+dev.off()
+
+bigpriors.min <- ppc_stat(y, yrep, stat = "min")
+
+png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+    width=8,
+    height=5, units="in", res = 350 )
+bigpriors.min
+dev.off()
+
+bigpriors.max <- ppc_stat(y, yrep, stat = "max")
+
+png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+    width=8,
+    height=5, units="in", res = 350 )
+bigpriors.max
 dev.off()
 
