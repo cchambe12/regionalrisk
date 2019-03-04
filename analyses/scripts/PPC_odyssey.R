@@ -53,7 +53,7 @@ y <- as.vector(bb$fs)
 yrep <- posterior_predict(orig.full.fagus, draws = 755088)
 ppc.sd <- ppc_stat(y, yrep, stat = "sd")
 
-png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+png("/n/wolkovich_lab/Lab/Cat/ppc_sd.png", 
     width=8,
     height=5, units="in", res = 350 )
 ppc.sd
@@ -61,20 +61,21 @@ dev.off()
 
 ppc.min <- ppc_stat(y, yrep, stat = "min")
 
-png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+png("/n/wolkovich_lab/Lab/Cat/ppc_min.png", 
     width=8,
     height=5, units="in", res = 350 )
 ppc.min
 dev.off()
 
+if(FALSE){
 ppc.max <- ppc_stat(y, yrep, stat = "max")
 
-png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+png("/n/wolkovich_lab/Lab/Cat/ppc_max.png", 
     width=8,
     height=5, units="in", res = 350 )
 ppc.max
 dev.off()
-
+}
 
 load("/n/wolkovich_lab/Lab/Cat/orig_bigpriors_fagus.Rdata")
 
@@ -90,7 +91,7 @@ dev.off()
 yrep <- posterior_predict(orig.bigpriors.fagus, draws = 755088)
 bigpriors.sd <- ppc_stat(y, yrep, stat = "sd")
 
-png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+png("/n/wolkovich_lab/Lab/Cat/big_sd.png", 
     width=8,
     height=5, units="in", res = 350 )
 bigpriors.sd
@@ -98,7 +99,7 @@ dev.off()
 
 bigpriors.min <- ppc_stat(y, yrep, stat = "min")
 
-png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+png("/n/wolkovich_lab/Lab/Cat/big_min.png", 
     width=8,
     height=5, units="in", res = 350 )
 bigpriors.min
@@ -106,7 +107,7 @@ dev.off()
 
 bigpriors.max <- ppc_stat(y, yrep, stat = "max")
 
-png("/n/wolkovich_lab/Lab/Cat/orig_ppc.png", 
+png("/n/wolkovich_lab/Lab/Cat/big_max.png", 
     width=8,
     height=5, units="in", res = 350 )
 bigpriors.max
