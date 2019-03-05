@@ -24,20 +24,18 @@ Basler D, K{\"{o}}rner C (2012) {Photoperiod sensitivity of bud burst in 14
   temperate forest tree species}.
 \newblock \emph{Agricultural and Forest Meteorology}, \textbf{165}, 73--81.
 \newblock \doi{10.1016/j.agrformet.2012.06.001}.
-\newblock \urlprefix\url{http://dx.doi.org/10.1016/j.agrformet.2012.06.001}.
 
 \bibitem[{Buerki \emph{et~al.}(2010)Buerki, Lowry~II, Alvarez,
   Razafimandimbison, Kupfer, \& Callmander}]{Buerki2010}
 Buerki S, Lowry~II P, Alvarez N, Razafimandimbison S, Kupfer P, Callmander M
-  (2010) {Phylogeny and circumscription of Sapindaceae revisited: Molecular
-  sequence data, morphology and biogeography support recognition of a new
-  family, Xanthoceraceae}.
+  (2010) {Phylogeny and circumscription of \textit{Sapindaceae} revisited:
+  Molecular sequence data, morphology and biogeography support recognition of a
+  new family, \textit{Xanthoceraceae}}.
 \newblock \emph{Plant Ecology and Evolution}, \textbf{143}, 148--159.
 \newblock \doi{10.5091/plecevo.2010.437}.
 
-\bibitem[{{B{\"u}rkner, Paul-Christian }(2017)}]{brms}
-{B{\"u}rkner, Paul-Christian } (2017) {{brms}: An {R} Package for {Bayesia}
-  Multilevel Models}.
+\bibitem[{B{\"u}rkner(2017)}]{brms}
+B{\"u}rkner PC (2017) {{brms}: An {R} Package for {Bayesia} Multilevel Models}.
 \newblock \emph{{Journal of Statistical Software}}, \textbf{80}, 1--28.
 
 \bibitem[{Chen \emph{et~al.}(2005)Chen, Hu, \& Yu}]{Chen2005}
@@ -51,8 +49,6 @@ Chmielewski FM, R{\"o}tzer T (2001) {Response of tree phenology to climate
   change across Europe}.
 \newblock \emph{Agricultural and Forest Meteorology}, \textbf{108}, 101 -- 112.
 \newblock \doi{https://doi.org/10.1016/S0168-1923(01)00233-7}.
-\newblock
-  \urlprefix\url{http://www.sciencedirect.com/science/article/pii/S0168192301002337}.
 
 \bibitem[{Cleland \emph{et~al.}(2006)Cleland, Chiariello, Loarie, Mooney, \&
   Field}]{Cleland2006}

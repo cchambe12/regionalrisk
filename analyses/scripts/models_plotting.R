@@ -31,7 +31,7 @@ cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 #naosp<- ggpredict(orig.full, terms = c("nao.z", "species"), ci.lvl=0.5) 
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted.csv", row.names = FALSE)
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_50.csv", row.names = FALSE)
-naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_90.csv", header=TRUE)
+naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_50.csv", header=TRUE)
 naosp0$group<-ifelse(naosp0$group=="BETPEN", "aaBETPEN", naosp0$group)
 naosp0$group<-ifelse(naosp0$group=="FRAEXC", "zFRAEXC", naosp0$group)
 naosp0$x <- (naosp0$x)*sd(bb$nao)*2 + mean(bb$nao)
@@ -58,7 +58,7 @@ naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab
 #elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.5) 
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_50.csv", row.names = FALSE)
-elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_90.csv", header=TRUE)
+elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_50.csv", header=TRUE)
 elevsp$group<-ifelse(elevsp$group=="BETPEN", "aaBETPEN", elevsp$group)
 elevsp$group<-ifelse(elevsp$group=="FRAEXC", "zFRAEXC", elevsp$group)
 elevsp$x <- (elevsp$x)*sd(bb$elev)*2 + mean(bb$elev)
@@ -84,7 +84,7 @@ elevsp.p<-ggplot(elevsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xla
 #matsp<- ggpredict(orig.full, terms = c("mat.z", "species"), ci.lvl = 0.5) 
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted.csv", row.names = FALSE)
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_50.csv", row.names = FALSE)
-matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_90.csv", header=TRUE)
+matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_50.csv", header=TRUE)
 matsp$group<-ifelse(matsp$group=="BETPEN", "aaBETPEN", matsp$group)
 matsp$group<-ifelse(matsp$group=="FRAEXC", "zFRAEXC", matsp$group)
 matsp$x <- (matsp$x)*sd(bb$mst)*2 + mean(bb$mst)
@@ -110,7 +110,7 @@ matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab(
 #spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.5) 
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_50.csv", row.names = FALSE)
-spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/distsp_predicted_90.csv", header=TRUE)
+spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_50.csv", header=TRUE)
 spacesp$group<-ifelse(spacesp$group=="BETPEN", "aaBETPEN", spacesp$group)
 spacesp$group<-ifelse(spacesp$group=="FRAEXC", "zFRAEXC", spacesp$group)
 spacesp$x <- (spacesp$x)*sd(bb$distkm)*2 + mean(bb$distkm)
@@ -136,13 +136,14 @@ spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + x
 #ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.5) 
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_50.csv", row.names = FALSE)
-ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_90.csv", header=TRUE)
+ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_50.csv", header=TRUE)
 ccsp$group<-ifelse(ccsp$group=="BETPEN", "aaBETPEN", ccsp$group)
 ccsp$group<-ifelse(ccsp$group=="FRAEXC", "zFRAEXC", ccsp$group)
 ccsp$x <- (ccsp$x)*sd(bb$cc)*2 + mean(bb$cc)
-ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("E.") + 
-  scale_y_continuous(expand = c(0, 0)) + 
-  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
+ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ #geom_line(aes(col=group)) + 
+  xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("E.") + 
+  scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1)) +
+  #geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1))  + theme(legend.key = element_rect(fill="transparent")) +
   theme_classic() + theme(legend.position = "none") + 
   theme(legend.text.align = 0) +
@@ -181,6 +182,7 @@ colz<-rev(colz)
 #write.csv(nao, file="naopredict_50.csv", row.names=FALSE)
 nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict_50.csv", header=TRUE)
 nao$group<-as.character(nao$group)
+nao$x <- (nao$x)*sd(bb$nao)*2 + mean(bb$nao)
 nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("NAO") + 
   ylab("Probability of \nFalse Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
@@ -197,7 +199,8 @@ nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)
 #write.csv(elev, file="elevpredict_50.csv", row.names=FALSE)
 elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict_50.csv", header=TRUE)
 elev$group<-as.character(elev$group)
-elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation") + 
+elev$x <- (elev$x)*sd(bb$elev)*2 + mean(bb$elev)
+elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation (m)") + 
   ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") +
   #scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
@@ -213,7 +216,8 @@ elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=grou
 #write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/matpredict_50.csv", row.names=FALSE)
 mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict_50.csv", header=TRUE)
 mat$group<-as.character(mat$group)
-mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature") + 
+mat$x <- (mat$x)*sd(bb$mst)*2 + mean(bb$mst)
+mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature (°C)") + 
   ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
@@ -229,7 +233,8 @@ mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)
 #write.csv(dist, file="~/Documents/git/regionalrisk/analyses/output/distpredict_50.csv", row.names=FALSE)
 dist<-read.csv("~/Documents/git/regionalrisk/analyses/output/distpredict_50.csv", header=TRUE)
 dist$group<-as.character(dist$group)
-dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast") + ylab("Probability of \nFalse Spring") + 
+dist$x <- (dist$x)*sd(bb$distkm)*2 + mean(bb$distkm)
+dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast (km)") + ylab("Probability of \nFalse Spring") + 
   ggtitle("B.") + theme_classic() + #scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) + theme(legend.position = "none") +
