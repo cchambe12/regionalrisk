@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{Sweave}
 \usepackage{float}
+\usepackage{subcaption}
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{siunitx}
@@ -10,7 +11,7 @@
 \usepackage{mdframed}
 \usepackage{natbib}
 \bibliographystyle{..//bib/styles/besjournals.bst}
-\usepackage[small]{caption}
+\usepackage{caption}
 \setlength{\captionmargin}{30pt}
 \setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{10pt}
@@ -70,7 +71,7 @@ y_i \thicksim N(\alpha_(i)) +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}}
 + \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} 
 \end{align*}
 
-We then took the residuals of that regression (\ref{eq:s1}) to use as our Y values in our eigenvector selection. The eigenvector selection method we used was a minimization of Moran's \textit{I} of the residuals \citep[][MIR]{Baumen2017}. We then took the calculated eigenvectors determined from the MIR approach and regressed these against the residuals from \ref{eg:s1}. The fitted values from this final regression were used as the space parameter in our models.
+We then took the residuals of the regression (Equation S1) to use as our Y values in our eigenvector selection. The eigenvector selection method we used was a minimization of Moran's \textit{I} of the residuals \citep[][MIR]{Baumen2017}. We then took the calculated eigenvectors determined from the MIR approach and regressed these against the residuals from Equation S1. The fitted values from this final regression were used as the space parameter in our models.
 
 
 \section*{Species rate of budburst calculations}
@@ -94,25 +95,40 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
 \textbf{Species} & \textbf{Num. of Observations} & \textbf{Num. of Sites} & \textbf{Num. of Years} \\
 \hline
 \textit{Aesculus hippocastanum} & 156468 & 10157 & 66  \\
-\hline
 \textit{Alnus glutinosa} & 91094 & 6775 & 65 \\
-\hline
 \textit{Betula pendula} & 154897 & 10139 & 66 \\
-\hline
 \textit{Fagus sylvatica} & 129133 & 9099 & 66 \\
-\hline
 \textit{Fraxinus excelsior} & 92665 & 7327 & 65 \\
-\hline
 \textit{Quercus robur} & 131635  & 8811 & 66 \\
 \end{tabular}
 \end{center}
 
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/TminBB_bySpp.png}
-  -\caption{Minimum temperatures between budburst and leafout are plotted for each site over time (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:tmin}
-  -\end{center}
-  -\end{figure}}
+\begin{figure} [H]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=6cm]{..//figures/PPCs/orig_ppc.png}
+  \caption{}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=6cm]{..//figures/PPCs/ppc_sd.png}
+  \caption{}
+  \label{fig:sfig2}
+\end{subfigure}
+\caption{(a) Posterior predictive check comparing the simulated model estimates to the raw data. The curves overlap greatly, which suggests our model is valid and fit the data. (b) Posterior predictive check comparing the standard deviation from our model output to the data. The model fits our data well, which suggests our model is valid.}
+\label{fig:fig}
+\end{figure}
+
+
+
+
+%{\begin{figure} [H]
+ % -\begin{center}
+  %-\includegraphics[width=16cm]{..//figures/TminBB_bySpp.png}
+  %-\caption{Minimum temperatures between budburst and leafout are plotted for each site over time (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:tmin}
+  %-\end{center}
+  %-\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
@@ -123,7 +139,7 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/model_output_berniefive_50.pdf}
+  -\includegraphics[width=12cm]{..//figures/model_output_five_50.pdf}
   -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model.}\label{fig:five}
   -\end{center}
   -\end{figure}}

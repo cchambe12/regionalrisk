@@ -20,26 +20,16 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 ########################
 #### get the data
-#xx<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
-#xx<-subset(xx, year>1950)
-
-mat<-read.csv("output/BBdata.csv", header=TRUE)
+mat<-read.csv("output/BBdata.csv", header=TRUE) #### mean day of budburst is 104.88
 #mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
 mat$bb.avg<-ave(mat$bb, mat$species)
 
 mat$cc<-ifelse(mat$year<1984, 0, 1)
 mat$species<-ifelse(mat$species=="BETPEN", "aaBETPEN", mat$species)
 mat$species<-ifelse(mat$species=="FRAEXC", "zFRAEXC", mat$species)
-#mat$species<-ifelse(mat$species=="ALNGLU", "abALNGLU", mat$species)
 pre<-subset(mat, mat$cc==0)
-#for(i in unique(pre$species)){
- # pre<-pre[(pre$bb[pre$species==i]<quantile(pre$bb[pre$species==i], 0.75) & pre$bb[pre$species==i]>quantile(pre$bb[pre$species==i], 0.25)),]
-#}
 
 post<-subset(mat, mat$cc==1)
-#for(i in unique(post$species)){
- # post<-post[(post$bb[post$species==i]<quantile(post$bb[post$species==i], 0.75) & post$bb[post$species==i]>quantile(post$bb[post$species==i], 0.25)),]
-#}
 
 plus<-full_join(pre, post)
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
@@ -73,7 +63,7 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "cQUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Day of Budburst") + coord_cartesian(ylim=c(50,165)) + 
-  geom_hline(yintercept=107.96, linetype="dotted", col="black") +
+  geom_hline(yintercept=104.88, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                        labels=c("0"="1951-1983", "1"="1984-2016")) +
@@ -84,8 +74,8 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
 
 
 ###### Tmin boxplots now...
-#tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
-tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
+tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE) #### mean tmin is 7.54
+#tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
 
 tm$cc<-ifelse(tm$year<1984, 0, 1)
 tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
@@ -93,14 +83,8 @@ tm$species<-ifelse(tm$species=="FRAEXC", "zFRAEXC", tm$species)
 #tm$species<-ifelse(tm$species=="ALNGLU", "abALNGLU", tm$species)
 tm<-tm[!is.na(tm$Tmin),]
 pret<-subset(tm, tm$cc==0)
-#for(i in unique(pret$species)){
- # pret<-pret[(pret$Tmin[pret$species==i]<quantile(pret$Tmin[pret$species==i], 0.75) & pret$Tmin[pret$species==i]>quantile(pret$Tmin[pret$species==i], 0.25)),]
-#}
 
 postt<-subset(tm, tm$cc==1)
-#for(i in unique(postt$species)){
-#  postt<-postt[(postt$Tmin[postt$species==i]<quantile(postt$Tmin[postt$species==i], 0.75) & postt$Tmin[postt$species==i]>quantile(postt$Tmin[postt$species==i], 0.25)),]
-#}
 
 plust<-full_join(pret, postt)
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
@@ -134,7 +118,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Minimum Temperature \nfrom Budburst to Leafout") + coord_cartesian(ylim=c(0,15)) + 
-  geom_hline(yintercept=7.69, linetype="dotted", col="black") +
+  geom_hline(yintercept=7.54, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                      labels=c("0"="1951-1983", "1"="1984-2016")) +
@@ -142,14 +126,13 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 ### And finally... False springs!
-#f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
+f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
-f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
+#f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
 
 f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
-#f$species<-ifelse(f$species=="ALNGLU", "abALNGLU", f$species)
 f<-f[!is.na(f$fs.count),]
 f$fs<-ifelse(f$fs.count>0, 1, 0)
 f$fs<-ave(f$fs,f$lat.long, f$species, f$cc, FUN=sum)

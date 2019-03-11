@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  5 MAR 2019 14:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 MAR 2019 10:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -881,88 +881,80 @@ Underfull \hbox (badness 10000) in paragraph at lines 95--105
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3] [4] [5] [6] [7] [8] (./RegionalRisk.bbl [9]
+[2] [3] [4] [5] [6] [7] [8] [9] [10] (./RegionalRisk.bbl [11]
 LaTeX Font Info:    Try loading font information for T1+aett on input line 73.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [10] [11] [12]
-[13]) <..//figures/BB_base.png, id=57, 2810.5pt x 1756.5625pt>
+) [12] [13] [14]
+[15]) <..//figures/BB_base.png, id=63, 2810.5pt x 1756.5625pt>
 File: ..//figures/BB_base.png Graphic file (type png)
 
 <use ..//figures/BB_base.png>
-Package pdftex.def Info: ..//figures/BB_base.png used on input line 195.
+Package pdftex.def Info: ..//figures/BB_base.png used on input line 215.
 (pdftex.def)             Requested size: 398.33858pt x 248.9458pt.
- [14]
-<..//figures/Boxplot_BBTminFS_noDots.pdf, id=62, 448.26501pt x 385.22772pt>
+ [16]
+<..//figures/MSTBB_bySpp.png, id=68, 2810.5pt x 1756.5625pt>
+File: ..//figures/MSTBB_bySpp.png Graphic file (type png)
+
+<use ..//figures/MSTBB_bySpp.png>
+Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 222.
+(pdftex.def)             Requested size: 455.24408pt x 284.51332pt.
+ [17 <..//figures/BB_base.png>]
+<..//figures/Boxplot_BBTminFS_noDots.pdf, id=75, 585.45323pt x 550.97586pt>
 File: ..//figures/Boxplot_BBTminFS_noDots.pdf Graphic file (type pdf)
 
 <use ..//figures/Boxplot_BBTminFS_noDots.pdf>
 Package pdftex.def Info: ..//figures/Boxplot_BBTminFS_noDots.pdf used on input 
-line 202.
-(pdftex.def)             Requested size: 398.33858pt x 342.32843pt.
- [15 <..//figures/BB_base.png>]
-<..//figures/MSTBB_bySpp.png, id=69, 2810.5pt x 1756.5625pt>
-File: ..//figures/MSTBB_bySpp.png Graphic file (type png)
+line 229.
+(pdftex.def)             Requested size: 398.33858pt x 374.88562pt.
+ [18 <..//figures/MSTBB_bySpp.png>] <..//figures/MainModel_wAPCplots.pdf, id=80
+, 936.85788pt x 551.63892pt>
+File: ..//figures/MainModel_wAPCplots.pdf Graphic file (type pdf)
 
-<use ..//figures/MSTBB_bySpp.png>
-Package pdftex.def Info: ..//figures/MSTBB_bySpp.png used on input line 209.
-(pdftex.def)             Requested size: 455.24408pt x 284.51332pt.
- [16 <..//figures/Boxplot_BBTminFS_noDots.pdf>] <..//figures/model_output_orig_
-50.pdf, id=214, 459.72632pt x 365.48875pt>
-File: ..//figures/model_output_orig_50.pdf Graphic file (type pdf)
-
-<use ..//figures/model_output_orig_50.pdf>
-Package pdftex.def Info: ..//figures/model_output_orig_50.pdf used on input lin
-e 217.
-(pdftex.def)             Requested size: 341.43306pt x 271.44455pt.
- [17 <..//figures/MSTBB_bySpp.png>]
-<..//figures/InteractionPlots/IntrxnPlots_orig.pdf, id=219, 515.75945pt x 362.9
-4185pt>
-File: ..//figures/InteractionPlots/IntrxnPlots_orig.pdf Graphic file (type pdf)
-
- <use ..//figures/InteractionPlots/IntrxnPlots_orig.pdf>
-Package pdftex.def Info: ..//figures/InteractionPlots/IntrxnPlots_orig.pdf used
- on input line 225.
-(pdftex.def)             Requested size: 455.24408pt x 320.35896pt.
- [18 <..//figures/model_output_orig_50.pdf>]
-<..//figures/InteractionPlots/Species_orig.pdf, id=309, 531.67793pt x 346.3866p
+<use ..//figures/MainModel_wAPCplots.pdf>
+Package pdftex.def Info: ..//figures/MainModel_wAPCplots.pdf used on input line
+ 237.
+(pdftex.def)             Requested size: 455.24408pt x 268.058pt.
+ [19 <..//figures/Boxplot_BBTminFS_noDots.pdf>]
+<..//figures/InteractionPlots/Species_orig.pdf, id=226, 531.67793pt x 346.3866p
 t>
 File: ..//figures/InteractionPlots/Species_orig.pdf Graphic file (type pdf)
  <use ..//figures/InteractionPlots/Species_orig.pdf>
 Package pdftex.def Info: ..//figures/InteractionPlots/Species_orig.pdf used on 
-input line 232.
+input line 253.
 (pdftex.def)             Requested size: 455.24408pt x 296.59702pt.
- [19 <..//figures/InteractionPlots/IntrxnPlots_orig.pdf>] [20 <..//figures/Inte
-ractionPlots/Species_orig.pdf>] (./RegionalRisk.aux) ) 
+ [20 <..//figures/MainModel_wAPCplots.pdf>] [21 <..//figures/InteractionPlots/S
+pecies_orig.pdf>]
+(./RegionalRisk.aux) ) 
 Here is how much of TeX's memory you used:
- 16270 strings out of 493014
- 317266 string characters out of 6133351
- 340562 words of memory out of 5000000
- 19584 multiletter control sequences out of 15000+600000
+ 16264 strings out of 493014
+ 317013 string characters out of 6133351
+ 340553 words of memory out of 5000000
+ 19579 multiletter control sequences out of 15000+600000
  34259 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,9n,42p,10402b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf
--dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/amsfonts/symbols/msbm10.pfb>
-Output written on RegionalRisk.pdf (20 pages, 3228749 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.
+pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pf
+b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+
+Output written on RegionalRisk.pdf (21 pages, 3319355 bytes).
 PDF statistics:
- 857 PDF objects out of 1000 (max. 8388607)
- 634 compressed objects within 7 object streams
+ 860 PDF objects out of 1000 (max. 8388607)
+ 636 compressed objects within 7 object streams
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

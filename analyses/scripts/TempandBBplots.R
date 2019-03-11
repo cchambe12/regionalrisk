@@ -22,8 +22,8 @@ library(gridExtra)
 setwd("~/Documents/git/regionalrisk/analyses/")
 
 
-#bb<-read.csv("output/fs_newdvr_space.csv", header=TRUE)
-bb<-read.csv("output/fs_space_new.csv", header=TRUE)
+#bb<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
+bb<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
 
 xx<-read.csv("output/BBdata.csv", header=TRUE)
 
@@ -34,31 +34,6 @@ post<-xx[(xx$year>1983),]
 post$bb.avg<-ave(post$bb, post$species)
 
 dxx<-bb
-#dxx$fs<-ifelse(dxx$fs.count>0, 1, 0)
-#dxx$fs.yr<-ave(dxx$fs.count, dxx$year, FUN=sum)
-#dxx$fs.yrspp<-ave(dxx$fs.count, dxx$species, dxx$year, FUN=sum)
-### Sites per species -
-#length(unique(xx$PEP_ID[xx$species=="AESHIP"])) # lat.long: 10158 - eigen: 10158 - PEP: 10496
-#length(unique(xx$PEP_ID[xx$species=="ALNGLU"])) # lat.long: 6775 - eigen: 6775 - PEP: 6915
-#length(unique(xx$PEP_ID[xx$species=="BETPEN"])) # lat.long: 10139 - eigen: 10137 - PEP: 10465
-#length(unique(xx$PEP_ID[xx$species=="FAGSYL"])) # lat.long: 9099 - eigen: 9097 - PEP: 9363
-#length(unique(xx$PEP_ID[xx$species=="FRAEXC"])) # lat.long: 7327 - eigen: 7325 - PEP: 7503
-#length(unique(xx$lat.long[xx$species=="QUEROB"])) # lat.long: 8831 - eigen: 8809 - PEP: 9044
-#dxx$spp.prop<-NA
-#dxx$spp.sites<-as.numeric(ave(dxx$lat.long, dxx$year, dxx$species, FUN=length))
-#dxx$spp.prop<-ifelse(dxx$species=="AESHIP", dxx$fs.yrspp/dxx$spp.sites, dxx$spp.prop)
-#dxx$spp.prop<-ifelse(dxx$species=="ALNGLU", dxx$fs.yrspp/dxx$spp.sites, dxx$spp.prop)
-#dxx$spp.prop<-ifelse(dxx$species=="BETPEN", dxx$fs.yrspp/dxx$spp.sites, dxx$spp.prop)
-#dxx$spp.prop<-ifelse(dxx$species=="FAGSYL", dxx$fs.yrspp/dxx$spp.sites, dxx$spp.prop)
-#dxx$spp.prop<-ifelse(dxx$species=="FRAEXC", dxx$fs.yrspp/dxx$spp.sites, dxx$spp.prop)
-#dxx$spp.prop<-ifelse(dxx$species=="QUEROB", dxx$fs.yrspp/dxx$spp.sites, dxx$spp.prop)
-#dxx$spp.ave<-ave(dxx$spp.prop, dxx$species, FUN=median)
-
-#dxx$num.sites<-as.numeric(ave(dxx$lat.long, dxx$year, FUN=length))
-#dxx$fs.prop<-dxx$fs.yr/dxx$num.sites
-
-#dxx$fs.ave<-ave(dxx$fs.prop, FUN=median)
-
 xx<-inner_join(xx, dxx)
 
 xx$bb.yr<-ave(xx$bb, xx$species, xx$year)
@@ -68,10 +43,6 @@ pref$numfs<-ave(pref$fs.count, pref$species, FUN=sum)
 
 postf<-xx[(xx$cc==1),]
 postf$numfs<-ave(postf$fs.count, postf$species, FUN=sum)
-#xx$x<-scale(xx$bb.yr, center = FALSE, scale = TRUE)
-#xx$sx<-xx$bb.yr-90.2963
-
-#xx$tempsite<-ave(xx$mst, xx$lat.long, xx$year)
 
 aeship<-subset(xx, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
@@ -134,7 +105,7 @@ qrob<-ggplot(querob, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
   scale_y_continuous(sec.axis = sec_axis(~.*10, name="Avg Day of Budburst", labels=c(0,35,70,105,140)))
 
 quartz()
-mstplots<-ggarrange(ahip, bpen, aglu, qrob, fsyl, fexc, ncol=3, nrow=2)
+mstplots<-ggarrange(bpen, ahip, aglu, fsyl, qrob, fexc, ncol=3, nrow=2)
 
 png("figures/MSTBB_bySpp.png", 
     width=8,
