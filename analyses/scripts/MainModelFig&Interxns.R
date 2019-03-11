@@ -1,5 +1,8 @@
 ## Cat - 4 March 2019
 # Final model - now some plots!
+##### Use the same script for all three models!!!! Need to adjust model choice depending on question 
+##(i.e., original model, duration of veg risk model or temp threshold model?)
+## Need to change on lines 20-22, 24-26, 38-45, and 390-392
 
 ## housekeeping
 rm(list=ls()) 
@@ -34,9 +37,14 @@ bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
 ## Let's just check out the model
 sort(unique(bb$species))
-summary(orig.full)
-orig_sum <- posterior_samples(orig.full)
-#str(orig_sum)
+#summary(orig.full)
+#mod_sum <- posterior_samples(orig.full)
+#summary(dvr.full)
+mod_sum <- posterior_samples(dvr.full)
+#summary(five.full)
+#mod_sum <- posterior_samples(five.full)
+
+#str(mod_sum)
 
 # Okay, I want to plot AESHIP's fs by distance from coast, pre and post climate change
 
@@ -66,12 +74,12 @@ fraexc.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeri
 for(i in 1:length(newdist)){
   
   ## BETPEN...
-  betpen.dist.precc.onedist <- (orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesBETPEN`)*newdist[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newdist[i])
-  betpen.dist.postcc.onedist <-(orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesBETPEN`)*newdist[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
+  betpen.dist.precc.onedist <- (mod_sum$b_Intercept + mod_sum$b_speciesBETPEN) + (mod_sum$b_dist.z + mod_sum$`b_dist.z:speciesBETPEN`)*newdist[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newdist[i])
+  betpen.dist.postcc.onedist <-(mod_sum$b_Intercept + mod_sum$b_speciesBETPEN) + (mod_sum$b_dist.z + mod_sum$`b_dist.z:speciesBETPEN`)*newdist[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(betpen.dist.precc.onedist),
                                fs.25=quantile(betpen.dist.precc.onedist, 0.25), fs.75=quantile(betpen.dist.precc.onedist, 0.75))
   postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(betpen.dist.postcc.onedist),
@@ -80,12 +88,12 @@ for(i in 1:length(newdist)){
   betpen.dist.postcc <- rbind(betpen.dist.postcc, postcc.df.here)
   
   ## FRAEXC...
-  fraexc.dist.precc.onedist <- (orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFRAEXC`)*newdist[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newdist[i])
-  fraexc.dist.postcc.onedist <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFRAEXC`)*newdist[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
+  fraexc.dist.precc.onedist <- (mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_dist.z + mod_sum$`b_dist.z:speciesFRAEXC`)*newdist[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newdist[i])
+  fraexc.dist.postcc.onedist <-(mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_dist.z + mod_sum$`b_dist.z:speciesFRAEXC`)*newdist[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(fraexc.dist.precc.onedist),
                                fs.25=quantile(fraexc.dist.precc.onedist, 0.25), fs.75=quantile(fraexc.dist.precc.onedist, 0.75))
   postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(fraexc.dist.postcc.onedist),
@@ -145,12 +153,12 @@ fraexc.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(
 for(i in 1:length(newmat)){
   
   ## BETPEN...
-  betpen.mat.precc.onemat <- (orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesBETPEN`)*newmat[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newmat[i])
-  betpen.mat.postcc.onemat <-(orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesBETPEN`)*newmat[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
+  betpen.mat.precc.onemat <- (mod_sum$b_Intercept + mod_sum$b_speciesBETPEN) + (mod_sum$b_mat.z + mod_sum$`b_mat.z:speciesBETPEN`)*newmat[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newmat[i])
+  betpen.mat.postcc.onemat <-(mod_sum$b_Intercept + mod_sum$b_speciesBETPEN) + (mod_sum$b_mat.z + mod_sum$`b_mat.z:speciesBETPEN`)*newmat[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(betpen.mat.precc.onemat),
                                fs.25=quantile(betpen.mat.precc.onemat, 0.25), fs.75=quantile(betpen.mat.precc.onemat, 0.75))
   postcc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(betpen.mat.postcc.onemat),
@@ -159,12 +167,12 @@ for(i in 1:length(newmat)){
   betpen.mat.postcc <- rbind(betpen.mat.postcc, postcc.df.here)
   
   ## FRAEXC...
-  fraexc.mat.precc.onemat <- (orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFRAEXC`)*newmat[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newmat[i])
-  fraexc.mat.postcc.onemat <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFRAEXC`)*newmat[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
+  fraexc.mat.precc.onemat <- (mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_mat.z + mod_sum$`b_mat.z:speciesFRAEXC`)*newmat[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newmat[i])
+  fraexc.mat.postcc.onemat <-(mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_mat.z + mod_sum$`b_mat.z:speciesFRAEXC`)*newmat[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(fraexc.mat.precc.onemat),
                                fs.25=quantile(fraexc.mat.precc.onemat, 0.25), fs.75=quantile(fraexc.mat.precc.onemat, 0.75))
   postcc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(fraexc.mat.postcc.onemat),
@@ -221,12 +229,12 @@ fraexc.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeri
 for(i in 1:length(newelev)){
   
   ## BETPEN...
-  betpen.elev.precc.oneelev <- (orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesBETPEN`)*newelev[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newelev[i])
-  betpen.elev.postcc.oneelev <-(orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesBETPEN`)*newelev[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
+  betpen.elev.precc.oneelev <- (mod_sum$b_Intercept + mod_sum$b_speciesBETPEN) + (mod_sum$b_elev.z + mod_sum$`b_elev.z:speciesBETPEN`)*newelev[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newelev[i])
+  betpen.elev.postcc.oneelev <-(mod_sum$b_Intercept + mod_sum$b_speciesBETPEN) + (mod_sum$b_elev.z + mod_sum$`b_elev.z:speciesBETPEN`)*newelev[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(betpen.elev.precc.oneelev),
                                fs.25=quantile(betpen.elev.precc.oneelev, 0.25), fs.75=quantile(betpen.elev.precc.oneelev, 0.75))
   postcc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(betpen.elev.postcc.oneelev),
@@ -235,12 +243,12 @@ for(i in 1:length(newelev)){
   betpen.elev.postcc <- rbind(betpen.elev.postcc, postcc.df.here)
   
   ## FRAEXC...
-  fraexc.elev.precc.oneelev <- (orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFRAEXC`)*newelev[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newelev[i])
-  fraexc.elev.postcc.oneelev <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFRAEXC`)*newelev[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
+  fraexc.elev.precc.oneelev <- (mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_elev.z + mod_sum$`b_elev.z:speciesFRAEXC`)*newelev[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newelev[i])
+  fraexc.elev.postcc.oneelev <-(mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_elev.z + mod_sum$`b_elev.z:speciesFRAEXC`)*newelev[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(fraexc.elev.precc.oneelev),
                                fs.25=quantile(fraexc.elev.precc.oneelev, 0.25), fs.75=quantile(fraexc.elev.precc.oneelev, 0.75))
   postcc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(fraexc.elev.postcc.oneelev),
@@ -299,12 +307,12 @@ fraexc.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(
 for(i in 1:length(newnao)){
   
   ## BETPEN...
-  betpen.nao.precc.onenao <- (orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesBETPEN`)*newnao[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newnao[i])
-  betpen.nao.postcc.onenao <-(orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesBETPEN`)*newnao[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
+  betpen.nao.precc.onenao <- (mod_sum$b_Intercept + mod_sum$b_speciesBETPEN) + (mod_sum$b_nao.z + mod_sum$`b_nao.z:speciesBETPEN`)*newnao[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newnao[i])
+  betpen.nao.postcc.onenao <-(mod_sum$b_Intercept + mod_sum$b_speciesBETPEN) + (mod_sum$b_nao.z + mod_sum$`b_nao.z:speciesBETPEN`)*newnao[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(betpen.nao.precc.onenao),
                                fs.25=quantile(betpen.nao.precc.onenao, 0.25), fs.75=quantile(betpen.nao.precc.onenao, 0.75))
   postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(betpen.nao.postcc.onenao),
@@ -313,12 +321,12 @@ for(i in 1:length(newnao)){
   betpen.nao.postcc <- rbind(betpen.nao.postcc, postcc.df.here)
   
   ## FRAEXC...
-  fraexc.nao.precc.onenao <- (orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFRAEXC`)*newnao[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newnao[i])
-  fraexc.nao.postcc.onenao <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFRAEXC`)*newnao[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
+  fraexc.nao.precc.onenao <- (mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_nao.z + mod_sum$`b_nao.z:speciesFRAEXC`)*newnao[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newnao[i])
+  fraexc.nao.postcc.onenao <-(mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_nao.z + mod_sum$`b_nao.z:speciesFRAEXC`)*newnao[i] + 
+    (mod_sum$b_cc.z + mod_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fraexc.nao.precc.onenao),
                                fs.25=quantile(fraexc.nao.precc.onenao, 0.25), fs.75=quantile(fraexc.nao.precc.onenao, 0.75))
   postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fraexc.nao.postcc.onenao),
@@ -379,11 +387,14 @@ inters <- grid.arrange(g1, g2, heights=c(2, 1.5))
 ###################### NOW FOR THE MAIN MODEL ##########################################
 ########################################################################################
 library(broom)
-modoutput<-as.data.frame(tidy(orig.full ,robust = TRUE, prob=0.5))
-#modoutput0<-as.data.frame(tidy(bernsfinal,robust = TRUE))
+#modoutput<-as.data.frame(tidy(orig.full ,robust = TRUE, prob=0.5))
+modoutput<-as.data.frame(tidy(dvr.full ,robust = TRUE, prob=0.5))
+#modoutput<-as.data.frame(tidy(five.full ,robust = TRUE, prob=0.5))
+
+
 modoutput<-modoutput[2:47,]
 modoutput$term<-gsub(".*b_","",modoutput$term)
-#modoutput$term<-gsub(".*r_species","",modoutput$term)
+
 modoutput<-modoutput[!(modoutput$term=="sd_species__nao.z" | modoutput$term=="sd_species__mat.z" | modoutput$term=="sd_species__elev.z"
              | modoutput$term=="sd_species__dist.z" | modoutput$term=="sd_species__space.z" | modoutput$term=="sd_species__cc.z" | modoutput$term=="sigma"
              | modoutput$term=="speciesALNGLU" | modoutput$term=="speciesBETPEN" | modoutput$term=="speciesFAGSYL"
@@ -419,7 +430,7 @@ regrisk<-ggplot(modoutput, aes(x=lower, xend=upper, y=Jvar, yend=Jvar)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1, .5), ylim=c(1,11)) + ggtitle("A.")
+  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11)) + ggtitle("A.")
 
 ###### Need to mess around with how to order it all... 
 quartz()

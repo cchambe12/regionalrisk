@@ -118,6 +118,7 @@ gaus<-brm(fs.one ~ nao.z + mat.z + cc.z + elev.z + dist.z + space.z +
 
 
 loo(binom, pois) ## poisson better
-loo(binom, bringbernieback, reloo=TRUE) ## bernoilli better 
-loo(pois, bringbernieback)
+loo(binom, bringbernieback, reloo=TRUE) ## bernoilli better due to pareto_k issues with binom
+loo(pois, bringbernieback) ## bernoilli best!
+loo(gaus, bringbernieback) ## just to be absolutely certain... bernie wins again
 

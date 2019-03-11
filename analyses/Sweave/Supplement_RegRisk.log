@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 MAR 2019 11:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 MAR 2019 12:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -886,60 +886,69 @@ Underfull \hbox (badness 10000) in paragraph at lines 94--104
 File: ..//figures/PPCs/orig_ppc.png Graphic file (type png)
 
 <use ..//figures/PPCs/orig_ppc.png>
-Package pdftex.def Info: ..//figures/PPCs/orig_ppc.png used on input line 160.
+Package pdftex.def Info: ..//figures/PPCs/orig_ppc.png used on input line 157.
 (pdftex.def)             Requested size: 170.71652pt x 106.69656pt.
 
 <..//figures/PPCs/ppc_sd.png, id=22, 578.16pt x 361.35pt>
 File: ..//figures/PPCs/ppc_sd.png Graphic file (type png)
 
 <use ..//figures/PPCs/ppc_sd.png>
-Package pdftex.def Info: ..//figures/PPCs/ppc_sd.png used on input line 166.
+Package pdftex.def Info: ..//figures/PPCs/ppc_sd.png used on input line 163.
 (pdftex.def)             Requested size: 170.71652pt x 106.69656pt.
 
-<..//figures/model_output_dvr_50.pdf, id=23, 505.89pt x 505.89pt>
-File: ..//figures/model_output_dvr_50.pdf Graphic file (type pdf)
+<..//figures/APC_allpred_allspp_baseR.pdf, id=23, 631.00943pt x 399.87274pt>
+File: ..//figures/APC_allpred_allspp_baseR.pdf Graphic file (type pdf)
 
-<use ..//figures/model_output_dvr_50.pdf>
-Package pdftex.def Info: ..//figures/model_output_dvr_50.pdf used on input line
- 186.
-(pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
+<use ..//figures/APC_allpred_allspp_baseR.pdf>
+Package pdftex.def Info: ..//figures/APC_allpred_allspp_baseR.pdf used on input
+ line 174.
+(pdftex.def)             Requested size: 455.24408pt x 288.4878pt.
  [3 <..//figures/PPCs/orig_ppc.png (PNG copy)> <..//figures/PPCs/ppc_sd.png (PN
 G copy)>]
-<..//figures/model_output_five_50.pdf, id=28, 505.89pt x 505.89pt>
-File: ..//figures/model_output_five_50.pdf Graphic file (type pdf)
+<..//figures/MainModel_wAPCplots_dvr.pdf, id=28, 837.40373pt x 493.95552pt>
+File: ..//figures/MainModel_wAPCplots_dvr.pdf Graphic file (type pdf)
 
-<use ..//figures/model_output_five_50.pdf>
-Package pdftex.def Info: ..//figures/model_output_five_50.pdf used on input lin
-e 193.
-(pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
- [4 <..//figures/model_output_dvr_50.pdf>] [5 <..//figures/model_output_five_50
-.pdf>] (./Supplement_RegRisk.aux) ) 
+<use ..//figures/MainModel_wAPCplots_dvr.pdf>
+Package pdftex.def Info: ..//figures/MainModel_wAPCplots_dvr.pdf used on input 
+line 181.
+(pdftex.def)             Requested size: 341.43306pt x 201.40002pt.
+ [4 <..//figures/APC_allpred_allspp_baseR.pdf>]
+<..//figures/MainModel_wAPCplots_five.pdf, id=267, 840.05586pt x 527.10684pt>
+File: ..//figures/MainModel_wAPCplots_five.pdf Graphic file (type pdf)
+
+<use ..//figures/MainModel_wAPCplots_five.pdf>
+Package pdftex.def Info: ..//figures/MainModel_wAPCplots_five.pdf used on input
+ line 188.
+(pdftex.def)             Requested size: 341.43306pt x 214.24118pt.
+ [5 <..//figures/MainModel_wAPCplots_dvr.pdf>] [6 <..//figures/MainModel_wAPCpl
+ots_five.pdf>]
+(./Supplement_RegRisk.aux) ) 
 Here is how much of TeX's memory you used:
- 16039 strings out of 493014
- 313344 string characters out of 6133351
- 332120 words of memory out of 5000000
- 19372 multiletter control sequences out of 15000+600000
+ 16045 strings out of 493014
+ 313601 string characters out of 6133351
+ 332128 words of memory out of 5000000
+ 19377 multiletter control sequences out of 15000+600000
  26812 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,9n,42p,10408b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/sym
-bols/msbm10.pfb>
-Output written on Supplement_RegRisk.pdf (5 pages, 453084 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10
+.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/ms
+bm10.pfb>
+Output written on Supplement_RegRisk.pdf (6 pages, 1818436 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 190 compressed objects within 2 object streams
+ 941 PDF objects out of 1000 (max. 8388607)
+ 701 compressed objects within 8 object streams
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

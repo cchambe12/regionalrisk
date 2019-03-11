@@ -121,7 +121,7 @@ We then took the residuals of the regression (Equation S1) to use as our Y value
 
 
 \section*{Species rate of budburst calculations}
-We used data from a growth chamber experiment (Flynn2018) to determine the average number of days between budburst and leafout for our study species. Cuttings for the experiment were made in January 2015 from two field sites: Harvard Forest (HF, 42.5$^{\circ}$N, 72.2$^{\circ}$W) and the Station de Biologie des Laurentides in St-Hippolyte, Qu\'ebec (SH, 45.9$^{\circ}$N, 74.0$^{\circ}$W). The experiment examined budburst and leafout for \textit{Acer saccharum} (Marshall), \textit{Alnus incana} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus nigra} (Marshall), and \textit{Quercus alba} (L.) in a fully crossed design of three levels of chilling (field chilling, field chilling plus 30 days at either 1 or 4 $^{\circ}$C), two levels of forcing (20$^{\circ}$C/10$^{\circ}$C or 15$^{\circ}$C/5$^{\circ}$C day/night temperatures, such that thermoperiodicity followed photoperiod) and two levels of photoperiod (8 versus 12 hour days) resulting in 12 treatment combinations. Phenological observations of each cutting were made every 2-3 days over 82 days. Phenology was assessed using a BBCH scale that was modified for trees \citep{Finn2007}. We used data from \textit{Acer saccharum} for \textit{Aesculus hippacastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} for \textit{Quercus robur} \citep{Hipp2017}.
+We used data from a growth chamber experiment (Flynn2018) to determine the average number of days between budburst and leafout for our study species. Cuttings for the experiment were made in January 2015 from two field sites: Harvard Forest (HF, 42.5$^{\circ}$N, 72.2$^{\circ}$W) and the Station de Biologie des Laurentides in St-Hippolyte, Qu\'ebec (SH, 45.9$^{\circ}$N, 74.0$^{\circ}$W). The experiment examined budburst and leafout for \textit{Acer saccharum} (Marshall), \textit{Alnus incana} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus nigra} (Marshall), and \textit{Quercus alba} (L.) in a fully crossed design of three levels of chilling (field chilling, field chilling plus 30 days at either 1 or 4 $^{\circ}$C), two levels of forcing (20$^{\circ}$C/10$^{\circ}$C or 15$^{\circ}$C/5$^{\circ}$C day/night temperatures, such that thermoperiodicity followed photoperiod) and two levels of photoperiod (8 versus 12 hour days) resulting in 12 treatment combinations. Phenological observations of each cutting were made every 2-3 days over 82 days. Phenology was assessed using a BBCH scale that was modified for trees \citep{Finn2007}. We used data from \textit{Acer saccharum} for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} for \textit{Quercus robur} \citep{Hipp2017}.
 
 \bibliography{..//bib/regionalrisk.bib}
 
@@ -141,20 +141,17 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
 \textbf{Species} & \textbf{Num. of Observations} & \textbf{Num. of Sites} & \textbf{Num. of Years} \\
 \hline
 \textit{Aesculus hippocastanum} & 156468 & 10157 & 66  \\
-\hline
 \textit{Alnus glutinosa} & 91094 & 6775 & 65 \\
-\hline
 \textit{Betula pendula} & 154897 & 10139 & 66 \\
-\hline
 \textit{Fagus sylvatica} & 129133 & 9099 & 66 \\
-\hline
 \textit{Fraxinus excelsior} & 92665 & 7327 & 65 \\
-\hline
 \textit{Quercus robur} & 131635  & 8811 & 66 \\
 \end{tabular}
 \end{center}
 
-\begin{figure}
+\vspace{15ex}
+
+\begin{figure} [H]
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=6cm]{..//figures/PPCs/orig_ppc.png}
@@ -172,26 +169,24 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
 \end{figure}
 
 
-
-
-%{\begin{figure} [H]
- % -\begin{center}
-  %-\includegraphics[width=16cm]{..//figures/TminBB_bySpp.png}
-  %-\caption{Minimum temperatures between budburst and leafout are plotted for each site over time (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:tmin}
-  %-\end{center}
-  %-\end{figure}}
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//figures/APC_allpred_allspp_baseR.pdf}
+  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index). All species are represented. }\label{fig:tmin}
+  -\end{center}
+  -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/model_output_dvr_50.pdf}
-  -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false spring in the data.}\label{fig:dvr}
+  -\includegraphics[width=12cm]{..//figures/MainModel_wAPCplots_dvr.pdf}
+  -\caption{(A) Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false spring in the data. Panels B-E breakdown the interactions of each of the main effects with climate change (i.e., Mean spring temperature, distance from the coast, elevation, and NAO index). The two extreme species -- \textit{Betula pendula} and \textit{Fraxinus excelsior} --- were chosen to best represent the variation across all species.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/model_output_five_50.pdf}
-  -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model.}\label{fig:five}
+  -\includegraphics[width=12cm]{..//figures/MainModel_wAPCplots_five.pdf}
+  -\caption{(A) Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model. Panels B-E breakdown the interactions of each of the main effects with climate change. }\label{fig:five}
   -\end{center}
   -\end{figure}}
   
