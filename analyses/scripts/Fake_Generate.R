@@ -110,3 +110,15 @@ bringbernieback<-brm(fs.one ~ nao.z + mat.z + cc.z + elev.z + dist.z + space.z +
              elev.z:sp + cc.z:sp + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + 
              space.z:cc.z + elev.z:cc.z, data=fake, family=bernoulli())
 
+gaus<-brm(fs.one ~ nao.z + mat.z + cc.z + elev.z + dist.z + space.z +
+                       nao.z:sp + mat.z:sp + dist.z:sp + space.z:sp + 
+                       elev.z:sp + cc.z:sp + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + 
+                       space.z:cc.z + elev.z:cc.z, data=fake, family=gaussian())
+
+
+
+loo(binom, pois) ## poisson better
+loo(binom, bringbernieback, reloo=TRUE) ## bernoilli better due to pareto_k issues with binom
+loo(pois, bringbernieback) ## bernoilli best!
+loo(gaus, bringbernieback) ## just to be absolutely certain... bernie wins again
+

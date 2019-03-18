@@ -1,4 +1,4 @@
-\begin{thebibliography}{54}
+\begin{thebibliography}{53}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Augspurger(2009)}]{Augspurger2009}
@@ -127,6 +127,9 @@ Klosterman, S., Hufkens, K. \& Richardson, A.D. (2018) {Later springs green-up
   faster: the relation between onset and completion of green-up in deciduous
   forests of North America}. \emph{International Journal of Biometeorology} .
 
+\bibitem[{KNMI(2018)}]{NAOdata}
+KNMI (2018) {Daily CPC NAO data}.
+
 \bibitem[{Kollas \emph{et~al.}(2014)Kollas, K{\"{o}}rner \&
   Randin}]{Kollas2014}
 Kollas, C., K{\"{o}}rner, C. \& Randin, C.F. (2014) {Spring frost and growing
@@ -205,13 +208,6 @@ Menzel, A., Helm, R. \& Zang, C. (2015) {Patterns of late spring frost leaf
   in south-eastern Germany based on repeated digital photographs}.
   \emph{Frontiers in Plant Science} \textbf{6}, 110.
 
-\bibitem[{Pau \emph{et~al.}(2011)Pau, Wolkovich, Cook, Davies, Kraft, Bolmgren,
-  Betancourt \& Cleland}]{Wolkovich2011}
-Pau, S., Wolkovich, E., Cook, B., Davies, J., Kraft, N., Bolmgren, K.,
-  Betancourt, J. \& Cleland, E. (2011) Predicting phenology by integrating
-  ecology, evolution and climate science. \emph{Global Change Biology}
-  \textbf{17}, 3633--3643.
-
 \bibitem[{{R Development Core Team}(2017)}]{R}
 {R Development Core Team} (2017) R: A language and environment for statistical
   computing. \emph{R Foundation for Statistical Computing, Vienna, Austria} .
@@ -261,12 +257,6 @@ Templ, B., Koch, E., Bolmgren, K., Ungersb{\"o}ck, M., Paul, A., Scheifinger,
   A., Vu{\v{c}}eti{\v{c}}, V., Zimmermann, K. \& Zust, A. (2018) {Pan European
   Phenological database (PEP725): a single point of access for European data}.
   \emph{International Journal of Biometeorology} \textbf{62}, 1109--1113.
-
-\bibitem[{Trouet \emph{et~al.}(2009)Trouet, Esper, Graham, Baker, Scourse \&
-  Frank}]{NAO}
-Trouet, V., Esper, J., Graham, N., Baker, A., Scourse, J. \& Frank, D. (2009)
-  {Persistent positive North Atlantic Oscillation mode dominated the Medieval
-  Climate Anomaly}. \emph{Science} .
 
 \bibitem[{Vitasse \emph{et~al.}(2014)Vitasse, Lenz \&
   K{\~A}¶rner}]{Vitasse2014}

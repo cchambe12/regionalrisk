@@ -5,6 +5,8 @@
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
 
+###### 4 March 2019 - need to finish adding 90 cred intervals to plots! ######
+
 ## Libraries
 library(rstan)
 library(brms)
@@ -17,6 +19,7 @@ library(ggeffects)
 library(broom)
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
+bb <- read.csv("fs_newspace_orig.csv", header=TRUE)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
@@ -25,16 +28,18 @@ cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 ############################################################################
 ################### Original ##############################################
 
-#naosp<- ggpredict(bernsfinal, terms = c("nao.z", "species"), ci.lvl=0.5) 
+#naosp<- ggpredict(orig.full, terms = c("nao.z", "species"), ci.lvl=0.5) 
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted.csv", row.names = FALSE)
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_50.csv", row.names = FALSE)
 naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_50.csv", header=TRUE)
 naosp0$group<-ifelse(naosp0$group=="BETPEN", "aaBETPEN", naosp0$group)
 naosp0$group<-ifelse(naosp0$group=="FRAEXC", "zFRAEXC", naosp0$group)
-naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("NAO") + 
-  ylab("Probability of False Spring") + ggtitle("C.") + theme_classic() + theme(legend.position = "none") + 
+naosp0$x <- (naosp0$x)*sd(bb$nao)*2 + mean(bb$nao)
+naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("NAO Index") + 
+  ylab("Probability of False Spring") + ggtitle("D.") + theme_classic() + theme(legend.position = "none") + 
   scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.1))+
+  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
+  coord_cartesian(ylim=c(0,1)) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
@@ -48,16 +53,19 @@ naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab
                              "aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
-                             "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-#elevsp<- ggpredict(bernsfinal, terms = c("elev.z", "species"), ci.lvl=0.5) 
+                             "QUEROB"=expression(paste(italic("Quercus robur")))))
+
+#elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.5) 
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_50.csv", row.names = FALSE)
-elevsp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_50.csv", header=TRUE)
-elevsp0$group<-ifelse(elevsp0$group=="BETPEN", "aaBETPEN", elevsp0$group)
-elevsp0$group<-ifelse(elevsp0$group=="FRAEXC", "zFRAEXC", elevsp0$group)
-elevsp.p<-ggplot(elevsp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Elevation") + 
-  ylab("Probability of False Spring") + ggtitle("B.") + theme_classic() + theme(legend.position = "none") + 
+elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_50.csv", header=TRUE)
+elevsp$group<-ifelse(elevsp$group=="BETPEN", "aaBETPEN", elevsp$group)
+elevsp$group<-ifelse(elevsp$group=="FRAEXC", "zFRAEXC", elevsp$group)
+elevsp$x <- (elevsp$x)*sd(bb$elev)*2 + mean(bb$elev)
+elevsp.p<-ggplot(elevsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Elevation (m)") + 
+  ylab("Probability of False Spring") + ggtitle("C.") + theme_classic() + theme(legend.position = "none") + 
   scale_y_continuous(expand = c(0, 0)) + 
+  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -73,15 +81,17 @@ elevsp.p<-ggplot(elevsp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xl
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-#matsp<- ggpredict(bernsfinal, terms = c("mat.z", "species"), ci.lvl = 0.5) 
+#matsp<- ggpredict(orig.full, terms = c("mat.z", "species"), ci.lvl = 0.5) 
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted.csv", row.names = FALSE)
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_50.csv", row.names = FALSE)
 matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_50.csv", header=TRUE)
 matsp$group<-ifelse(matsp$group=="BETPEN", "aaBETPEN", matsp$group)
 matsp$group<-ifelse(matsp$group=="FRAEXC", "zFRAEXC", matsp$group)
-matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Mean Spring Temperature") + 
+matsp$x <- (matsp$x)*sd(bb$mst)*2 + mean(bb$mst)
+matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Mean Spring Temperature (°C)") + 
   ylab("Probability of False Spring") + ggtitle("A.") + theme_classic()+ theme(legend.position = "none") + 
   scale_y_continuous(expand = c(0, 0)) + 
+  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -97,15 +107,17 @@ matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab(
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-#spacesp<- ggpredict(bernsfinal, terms = c("space.z", "species"), ci.lvl = 0.5) 
+#spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.5) 
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_50.csv", row.names = FALSE)
 spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_50.csv", header=TRUE)
 spacesp$group<-ifelse(spacesp$group=="BETPEN", "aaBETPEN", spacesp$group)
 spacesp$group<-ifelse(spacesp$group=="FRAEXC", "zFRAEXC", spacesp$group)
-spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Distance from Coast") + ylab("Probability of False Spring") + 
-  ggtitle("D.") + scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.1)) + 
+spacesp$x <- (spacesp$x)*sd(bb$distkm)*2 + mean(bb$distkm)
+spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Distance from Coast (km)") + ylab("Probability of False Spring") + 
+  ggtitle("B.") + scale_y_continuous(expand = c(0, 0)) + 
+  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
+  coord_cartesian(ylim=c(0,1)) + 
   theme_classic() + theme(legend.position = "none") + 
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -121,17 +133,20 @@ spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + x
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-#ccsp<- ggpredict(bernsfinal, terms = c("cc.z", "species"), ci.lvl = 0.5) 
+#ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.5) 
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_50.csv", row.names = FALSE)
 ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_50.csv", header=TRUE)
 ccsp$group<-ifelse(ccsp$group=="BETPEN", "aaBETPEN", ccsp$group)
 ccsp$group<-ifelse(ccsp$group=="FRAEXC", "zFRAEXC", ccsp$group)
-ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("E.") + 
-  scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.1))  + 
+ccsp$x <- (ccsp$x)*sd(bb$cc)*2 + mean(bb$cc)
+ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ #geom_line(aes(col=group)) + 
+  xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("E.") + 
+  scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1)) +
+  #geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
+  coord_cartesian(ylim=c(0,1))  + theme(legend.key = element_rect(fill="transparent")) +
   theme_classic() + theme(legend.position = "none") + 
-  #theme(legend.text.align = 0, legend.key = element_rect(fill="white")) +
+  theme(legend.text.align = 0) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
@@ -145,7 +160,7 @@ ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("C
                              "aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
-                             "QUEROB"=expression(paste(italic("Quercus robur"))))) 
+                             "QUEROB"=expression(paste(italic("Quercus robur")))))
 
 g_legend<-function(a.gplot){
   tmp <- ggplot_gtable(ggplot_build(a.gplot))
@@ -156,71 +171,79 @@ g_legend<-function(a.gplot){
 mylegend<-g_legend(ccsp.p)
 
 quartz()
-g1<-grid.arrange(matsp.p, elevsp.p, mylegend, ncol=3, widths=c(1.5, 1.5, 1))
-g2<-grid.arrange(naosp.p, spacesp.p, ccsp.p, ncol=3, widths=c(1,1,1))
+g1<-grid.arrange(matsp.p, spacesp.p, mylegend, ncol=3, widths=c(1.5, 1.5, 1))
+g2<-grid.arrange(elevsp.p, naosp.p, ccsp.p, ncol=3, widths=c(1,1,1))
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 
 colz <- colorRampPalette(brewer.pal(9,"Set1"))(2)
 colz<-rev(colz)
-nao<-ggpredict(bernsfinal, terms=c("nao.z", "cc.z"), ci.lvl = 0.5)
+#nao<-ggpredict(orig.full, terms=c("nao.z", "cc.z"), ci.lvl = 0.5)
 #write.csv(nao, file="naopredict.csv", row.names=FALSE)
 #write.csv(nao, file="naopredict_50.csv", row.names=FALSE)
-#nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict_50.csv", header=TRUE)
-#nao$group<-as.character(nao$group)
+nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict_50.csv", header=TRUE)
+nao$group<-as.character(nao$group)
+nao$x <- (nao$x)*sd(bb$nao)*2 + mean(bb$nao)
 nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("NAO") + 
   ylab("Probability of \nFalse Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
+  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.2)) + ggtitle("C.") +
+  coord_cartesian(ylim=c(0,1)) + ggtitle("D.") +
   scale_color_manual(name="Climate Change", values=colz,
-                     labels=c("-0.459208492649012"="1950-1983",
-                              "0.544414297170614"="1984-2016")) +
+                     labels=c("-0.459191120180519"="1950-1983",
+                              "0.544434894155798"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
-                    labels=c("-0.459208492649012"="1950-1983",
-                             "0.544414297170614"="1984-2016"))
-elev<-ggpredict(bernsfinal, terms=c("elev.z", "cc.z"), ci.lvl=0.5)
+                    labels=c("-0.459191120180519"="1950-1983",
+                             "0.544434894155798"="1984-2016"))
+#elev<-ggpredict(orig.full, terms=c("elev.z", "cc.z"), ci.lvl=0.5)
 #write.csv(elev, file="elevpredict.csv", row.names=FALSE)
 #write.csv(elev, file="elevpredict_50.csv", row.names=FALSE)
-#elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict_50.csv", header=TRUE)
-#elev$group<-as.character(elev$group)
-elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation") + 
+elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict_50.csv", header=TRUE)
+elev$group<-as.character(elev$group)
+elev$x <- (elev$x)*sd(bb$elev)*2 + mean(bb$elev)
+elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation (m)") + 
   ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") +
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,1)) + ggtitle("B.") +
+  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
+  coord_cartesian(ylim=c(0,1)) + ggtitle("C.") +
   scale_color_manual(name="Climate Change", values=colz,
-                     labels=c("-0.459208492649012"="1950-1983",
-                              "0.544414297170614"="1984-2016")) +
+                     labels=c("-0.459191120180519"="1950-1983",
+                              "0.544434894155798"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
-                    labels=c("-0.459208492649012"="1950-1983",
-                             "0.544414297170614"="1984-2016"))
-mat<-ggpredict(bernsfinal, terms=c("mat.z", "cc.z"), ci.lvl=0.5)
+                    labels=c("-0.459191120180519"="1950-1983",
+                             "0.544434894155798"="1984-2016"))
+#mat<-ggpredict(orig.full, terms=c("mat.z", "cc.z"), ci.lvl=0.5)
 #write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/matpredict.csv", row.names=FALSE)
 #write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/matpredict_50.csv", row.names=FALSE)
-#mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict_50.csv", header=TRUE)
-#mat$group<-as.character(mat$group)
-mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature") + 
+mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict_50.csv", header=TRUE)
+mat$group<-as.character(mat$group)
+mat$x <- (mat$x)*sd(bb$mst)*2 + mean(bb$mst)
+mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature (°C)") + 
   ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
   #scale_y_continuous(expand = c(0, 0)) + 
+  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) + ggtitle("A.") +
   scale_color_manual(name="Climate Change", values=colz,
-                     labels=c("-0.459208492649012"="1950-1983",
-                              "0.544414297170614"="1984-2016")) +
+                     labels=c("-0.459191120180519"="1950-1983",
+                              "0.544434894155798"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
-                    labels=c("-0.459208492649012"="1950-1983",
-                             "0.544414297170614"="1984-2016"))
-dist<-ggpredict(bernsfinal, terms=c("dist.z", "cc.z"), ci.lvl=0.5)
+                    labels=c("-0.459191120180519"="1950-1983",
+                             "0.544434894155798"="1984-2016"))
+#dist<-ggpredict(orig.full, terms=c("dist.z", "cc.z"), ci.lvl=0.5)
 #write.csv(dist, file="~/Documents/git/regionalrisk/analyses/output/distpredict.csv", row.names=FALSE)
 #write.csv(dist, file="~/Documents/git/regionalrisk/analyses/output/distpredict_50.csv", row.names=FALSE)
-#dist<-read.csv("~/Documents/git/regionalrisk/analyses/output/distpredict_50.csv", header=TRUE)
-#dist$group<-as.character(dist$group)
-dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast") + ylab("Probability of \nFalse Spring") + 
-  ggtitle("D.") + theme_classic() + #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,0.2)) + theme(legend.position = "none") +
+dist<-read.csv("~/Documents/git/regionalrisk/analyses/output/distpredict_50.csv", header=TRUE)
+dist$group<-as.character(dist$group)
+dist$x <- (dist$x)*sd(bb$distkm)*2 + mean(bb$distkm)
+dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast (km)") + ylab("Probability of \nFalse Spring") + 
+  ggtitle("B.") + theme_classic() + #scale_y_continuous(expand = c(0, 0)) + 
+  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
+  coord_cartesian(ylim=c(0,1)) + theme(legend.position = "none") +
   scale_color_manual(name="Climate Change", values=colz,
-                     labels=c("-0.459208492649012"="1950-1983",
-                              "0.544414297170614"="1984-2016")) +
+                     labels=c("-0.459191120180519"="1950-1983",
+                              "0.544434894155798"="1984-2016")) +
   scale_fill_manual(name="Climate Change", values=colz,
-                    labels=c("-0.459208492649012"="1950-1983",
-                             "0.544414297170614"="1984-2016"))
+                    labels=c("-0.459191120180519"="1950-1983",
+                             "0.544434894155798"="1984-2016"))
 
 g_legend<-function(a.gplot){
   tmp <- ggplot_gtable(ggplot_build(a.gplot))
@@ -231,111 +254,116 @@ g_legend<-function(a.gplot){
 mylegend<-g_legend(dist.p)
 
 quartz()
-g1<-ggarrange(mat.p, elev.p, ncol=2, widths=c(1.5,1.5))
-g2<-grid.arrange(nao.p, dist.p, mylegend, ncol=3, widths=c(1, 1, 0.5))
+g1<-ggarrange(mat.p, dist.p, ncol=2, widths=c(1.5,1.5))
+g2<-grid.arrange(elev.p, nao.p, mylegend, ncol=3, widths=c(1, 1, 0.5))
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 
 
 ################################################################################
 ################################ MODEL OUTPUT ##################################
+head(rhat(orig.bigpriors.fagus))
+head(neff_ratio(orig.bigpriors.fagus))
 
-brms<-as.data.frame(tidy(bernsfinal,robust = TRUE, prob=0.5))
+
+brms<-as.data.frame(tidy(five.full,robust = TRUE, prob=0.9))
 #brms0<-as.data.frame(tidy(bernsfinal,robust = TRUE))
 brms<-brms[2:47,]
 brms$term<-gsub(".*b_","",brms$term)
-brms$term<-gsub(".*r_species","",brms$term)
+#brms$term<-gsub(".*r_species","",brms$term)
 brms<-brms[!(brms$term=="sd_species__nao.z" | brms$term=="sd_species__mat.z" | brms$term=="sd_species__elev.z"
-             | brms$term=="sd_species__dist.z" | brms$term=="sd_species__space.z" | brms$term=="sd_species__cc.z" | brms$term=="sigma"),]
+             | brms$term=="sd_species__dist.z" | brms$term=="sd_species__space.z" | brms$term=="sd_species__cc.z" | brms$term=="sigma"
+             | brms$term=="speciesALNGLU" | brms$term=="speciesBETPEN" | brms$term=="speciesFAGSYL"
+             | brms$term=="speciesFRAEXC" | brms$term=="speciesQUEROB"),]
 
-brms$species<-c(0,0,0,0,0,0, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 0,0,0,0,0)
+brms$species<-c(1,1,1,1,1,1, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 2,3,4,5,6, 1,1,1,1,1)
 brms$Jvar<-NA
 brms$Jvar<-ifelse(brms$term=="nao.z", 11, brms$Jvar)
 #brms$Jvar<-ifelse(brms$term=="[AESHIP,nao.z]", 8.9, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[ALNGLU,nao.z]", 8.8, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[BETPEN,nao.z]", 8.7, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FAGSYL,nao.z]", 8.6, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FRAEXC,nao.z]", 8.5, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[QUEROB,nao.z]", 8.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="nao.z:speciesALNGLU", 10.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="nao.z:speciesBETPEN", 10.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="nao.z:speciesFAGSYL", 10.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="nao.z:speciesFRAEXC", 10.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="nao.z:speciesQUEROB", 10.5, brms$Jvar)
 
 brms$Jvar<-ifelse(brms$term=="mat.z", 10, brms$Jvar)
 #brms$Jvar<-ifelse(brms$term=="[AESHIP,mat.z]", 7.9, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[ALNGLU,mat.z]", 7.8, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[BETPEN,mat.z]", 7.7, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FAGSYL,mat.z]", 7.6, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FRAEXC,mat.z]", 7.5, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[QUEROB,mat.z]", 7.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="mat.z:speciesALNGLU", 9.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="mat.z:speciesBETPEN", 9.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="mat.z:speciesFAGSYL", 9.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="mat.z:speciesFRAEXC", 9.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="mat.z:speciesQUEROB", 9.5, brms$Jvar)
 
 brms$Jvar<-ifelse(brms$term=="elev.z", 9, brms$Jvar)
 #brms$Jvar<-ifelse(brms$term=="[AESHIP,elev.z]", 6.9, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[ALNGLU,elev.z]", 6.8, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[BETPEN,elev.z]", 6.7, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FAGSYL,elev.z]", 6.6, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FRAEXC,elev.z]", 6.5, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[QUEROB,elev.z]", 6.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="elev.z:speciesALNGLU", 8.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="elev.z:speciesBETPEN", 8.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="elev.z:speciesFAGSYL", 8.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="elev.z:speciesFRAEXC", 8.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="elev.z:speciesQUEROB", 8.5, brms$Jvar)
 
 brms$Jvar<-ifelse(brms$term=="dist.z", 8, brms$Jvar)
 #brms$Jvar<-ifelse(brms$term=="[AESHIP,dist.z]", 6.9, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[ALNGLU,dist.z]", 6.8, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[BETPEN,dist.z]", 6.7, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FAGSYL,dist.z]", 6.6, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FRAEXC,dist.z]", 6.5, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[QUEROB,dist.z]", 6.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="dist.z:speciesALNGLU", 7.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="dist.z:speciesBETPEN", 7.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="dist.z:speciesFAGSYL", 7.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="dist.z:speciesFRAEXC", 7.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="dist.z:speciesQUEROB", 7.5, brms$Jvar)
 
 brms$Jvar<-ifelse(brms$term=="space.z", 7, brms$Jvar)
 #brms$Jvar<-ifelse(brms$term=="[AESHIP,space]", 5.9, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[ALNGLU,space]", 5.8, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[BETPEN,space]", 5.7, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FAGSYL,space]", 5.6, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FRAEXC,space]", 5.5, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[QUEROB,space]", 5.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="space.z:speciesALNGLU", 6.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="space.z:speciesBETPEN", 6.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="space.z:speciesFAGSYL", 6.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="space.z:speciesFRAEXC", 6.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="space.z:speciesQUEROB", 6.5, brms$Jvar)
 
 brms$Jvar<-ifelse(brms$term=="cc.z", 6, brms$Jvar)
 #brms$Jvar<-ifelse(brms$term=="[AESHIP,cc]", 4.9, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[ALNGLU,cc]", 4.8, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[BETPEN,cc]", 4.7, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FAGSYL,cc]", 4.6, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[FRAEXC,cc]", 4.5, brms$Jvar)
-#brms$Jvar<-ifelse(brms$term=="[QUEROB,cc]", 4.4, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="cc.z:speciesALNGLU", 5.9, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="cc.z:speciesBETPEN", 5.8, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="cc.z:speciesFAGSYL", 5.7, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="cc.z:speciesFRAEXC", 5.6, brms$Jvar)
+brms$Jvar<-ifelse(brms$term=="cc.z:speciesQUEROB", 5.5, brms$Jvar)
 
 brms$Jvar<-ifelse(brms$term=="nao.z:cc.z", 5, brms$Jvar)
 brms$Jvar<-ifelse(brms$term=="mat.z:cc.z", 4, brms$Jvar)
 brms$Jvar<-ifelse(brms$term=="elev.z:cc.z", 3, brms$Jvar)
 brms$Jvar<-ifelse(brms$term=="dist.z:cc.z", 2, brms$Jvar)
 brms$Jvar<-ifelse(brms$term=="space.z:cc.z", 1, brms$Jvar)
+brms$species<-as.character(brms$species)
 
 bb<-brms[(brms$species==0),]
-cols <- colorRampPalette(brewer.pal(9,"Set1"))(7)
+cols <- c("#CAB1C4", "gold2", "#7FC97F", "#87A6A6", "#BF5B17", "#CB1788")
 estimates<-c("NAO Index", "Mean Spring Temperature", "Elevation", "Distance from Coast", "Space Parameter", "Climate Change",
              "NAO Index x \nClimate Change", "Mean Spring Temperature \nx Climate Change", "Elevation x \nClimate Change",
              "Distance from Coast \nx Climate Change", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
-regrisk<-ggplot(bb, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(species))) +
+regrisk<-ggplot(brms, aes(x=lower, xend=upper, y=Jvar, yend=Jvar, col=as.factor(species))) +
   geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar, col=as.factor(species), size=as.factor(species))) +
-  #scale_colour_manual(name="Species", values=cols,
-  #                   labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
-  #                           "2"=expression(paste(italic("Alnus glutinosa"))),
-  #                          "3"=expression(paste(italic("Betula pendula"))),
-  #                         "4"=expression(paste(italic("Fagus sylvatica"))),
-  #                        "5"=expression(paste(italic("Fraxinus excelsior"))),
-  #                       "6"=expression(paste(italic("Quercus robur"))),
-  #                      "0"="Overall Effects"))+
+  scale_color_manual(name="Species", values=cols,
+                     labels=c("1"=bquote(paste(italic("Aesculus hippocastanum"))),
+                             "2"=bquote(paste(italic("Alnus glutinosa"))),
+                            "3"=bquote(paste(italic("Betula pendula"))),
+                           "4"=bquote(paste(italic("Fagus sylvatica"))),
+                          "5"=bquote(paste(italic("Fraxinus excelsior"))),
+                         "6"=bquote(paste(italic("Quercus robur")))))+
   geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
+  guides(size=FALSE) +
   scale_y_discrete(limits = sort(unique(brms$term)), labels=estimates) +
   xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=5), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
-        text=element_text(family="sans"), legend.position = "none",
-        legend.text.align = 0)  + #ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-2, 1), ylim=c(1,11))
-#scale_size_manual(values=c(3, 1, 1, 1, 1, 1, 1, 1, 1, 1), name="Species",
-#                 labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
-#                         "2"=expression(paste(italic("Alnus glutinosa"))),
-#                        "3"=expression(paste(italic("Betula pendula"))),
-#                       "4"=expression(paste(italic("Fagus sylvatica"))),
-#                      "5"=expression(paste(italic("Fraxinus excelsior"))),
-#                     "6"=expression(paste(italic("Quercus robur"))),
-#                    "0"="Overall Effects"))
+        text=element_text(family="sans"), legend.position = c(0.86, 0.195),
+        legend.text.align = 0) +  #+ ggtitle("Original Parameters") +
+  coord_cartesian(xlim=c(-1.5, 1.5), ylim=c(1,11)) +
+ scale_size_manual(values=c(2, 1, 1, 1, 1, 1), name="Species",
+              labels=c("1"=expression(paste(italic("Aesculus hippocastanum"))),
+                        "2"=expression(paste(italic("Alnus glutinosa"))),
+                        "3"=expression(paste(italic("Betula pendula"))),
+                       "4"=expression(paste(italic("Fagus sylvatica"))),
+                      "5"=expression(paste(italic("Fraxinus excelsior"))),
+                     "6"=expression(paste(italic("Quercus robur")))))
 quartz()
 regrisk
 

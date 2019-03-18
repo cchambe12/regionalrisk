@@ -9,14 +9,10 @@ library(reshape2)
 library(data.table)
 
 dxx<-read.csv("/n/wolkovich_lab/Lab/Cat/allspp_climateprep.csv", header=TRUE)
-
-dxx<-dxx[!duplicated(dxx),]
-dxx<-dplyr::select(dxx, -pep.year)
-x<-paste(dxx$year, dxx$doy)
-dxx$date<-as.Date(strptime(x, format="%Y %j"))
-dxx$Date<- as.character(dxx$date)
+#dxx<-read.csv("~/Desktop/allspp_climateprep.csv", header=TRUE)
 
 r<-brick("/n/wolkovich_lab/Lab/Cat/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
+#r<-brick("~/Desktop/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 
 bb<-dxx
 bb$lat.long<-paste(bb$lat, bb$long, sep=",")
@@ -34,13 +30,13 @@ values <- extract(r,points)
 
 dclim <- cbind.data.frame(coordinates(points),values)
 
-dx<-melt(dclim, id.vars=c("x","y"))
+dx<-reshape2::melt(dclim, id.vars=c("x","y"))
 
 dx<-dx%>%
-  rename(long=x)%>%
-  rename(lat=y)%>%
-  rename(date=variable)%>%
-  rename(Tmin=value)
+  dplyr::rename(long=x)%>%
+  dplyr::rename(lat=y)%>%
+  dplyr::rename(date=variable)%>%
+  dplyr::rename(Tmin=value)
 
 dx$date<-substr(dx$date, 2,11)
 dx$Date<- gsub("[.]", "-", dx$date)
@@ -51,6 +47,7 @@ dx<-dplyr::select(dx, -date)
 x<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 
 write.csv(x, file="/n/wolkovich_lab/Lab/Cat/allspp_data.csv", row.names=FALSE)
+#write.csv(x, file="~/Desktop/allspp_data.csv", row.names=FALSE)
 
 x$fs<- ifelse(x$Tmin<=-2.2, 1, 0)
 x$lo<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last)
@@ -64,3 +61,4 @@ allspp<-na.omit(allspp)
 allspp$fs<-ifelse(allspp$fs.count>=1, 1, 0)
 
 write.csv(allspp, file="/n/wolkovich_lab/Lab/Cat/fs_allspp_original.csv", row.names = FALSE)
+#write.csv(allspp, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_original.csv", row.names = FALSE)
