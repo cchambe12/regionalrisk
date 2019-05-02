@@ -17,23 +17,13 @@ library(RColorBrewer)
 
 setwd("~/Documents/git/regionalrisk")
 
-#load("orig_full.Rdata")
-load("dvr_full.Rdata")
+load("orig_full.Rdata")
+#load("dvr_full.Rdata")
 #load("five_full.Rdata")
 
-#bb <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
-bb <- read.csv("analyses/output/fs_newspace_dvr.csv", header=TRUE)
+bb <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
+#bb <- read.csv("analyses/output/fs_newspace_dvr.csv", header=TRUE)
 #bb <- read.csv("analyses/output/fs_newspace_five.csv", header=TRUE)
-
-bb$fs<-ifelse(bb$fs.count>0, 1, 0)
-
-bb$nao.z <- (bb$nao-mean(bb$nao,na.rm=TRUE))/(2*sd(bb$nao,na.rm=TRUE))
-bb$mat.z <- (bb$mst-mean(bb$mst,na.rm=TRUE))/(2*sd(bb$mst,na.rm=TRUE))
-bb$cc.z <- (bb$cc-mean(bb$cc,na.rm=TRUE))/(2*sd(bb$cc,na.rm=TRUE))
-bb$elev.z <- (bb$elev-mean(bb$elev,na.rm=TRUE))/(2*sd(bb$elev,na.rm=TRUE))
-bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
-bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
-bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
 ## Let's just check out the model
 sort(unique(bb$species))

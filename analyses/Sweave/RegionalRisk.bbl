@@ -1,4 +1,4 @@
-\begin{thebibliography}{53}
+\begin{thebibliography}{59}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
@@ -25,6 +25,12 @@ Basler D, K{\"{o}}rner C (2012) {Photoperiod sensitivity of bud burst in 14
 \newblock \emph{Agricultural and Forest Meteorology}, \textbf{165}, 73--81.
 \newblock \doi{10.1016/j.agrformet.2012.06.001}.
 
+\bibitem[{Bennett \emph{et~al.}(2018)Bennett, Calosi, Clusella-Trullas
+  \emph{et~al.}}]{bennett2018globtherm}
+Bennett JM, Calosi P, Clusella-Trullas S, \emph{et~al.} (2018) Globtherm, a
+  global database on thermal tolerances for aquatic and terrestrial organisms.
+\newblock \emph{Scientific data}, \textbf{5}, 180022.
+
 \bibitem[{Buerki \emph{et~al.}(2010)Buerki, Lowry~II, Alvarez,
   Razafimandimbison, Kupfer, \& Callmander}]{Buerki2010}
 Buerki S, Lowry~II P, Alvarez N, Razafimandimbison S, Kupfer P, Callmander M
@@ -37,6 +43,15 @@ Buerki S, Lowry~II P, Alvarez N, Razafimandimbison S, Kupfer P, Callmander M
 \bibitem[{B{\"u}rkner(2017)}]{brms}
 B{\"u}rkner PC (2017) {{brms}: An {R} Package for {Bayesia} Multilevel Models}.
 \newblock \emph{{Journal of Statistical Software}}, \textbf{80}, 1--28.
+
+\bibitem[{Chamberlain \emph{et~al.}()Chamberlain, Cook, de~Cortazar~Atauri, \&
+  Wolkovich}]{Chamberlain2019}
+Chamberlain CJ, Cook BI, de~Cortazar~Atauri IG, Wolkovich EM (????) Rethinking
+  false spring risk.
+\newblock \emph{Global Change Biology}, \textbf{0}.
+\newblock \doi{10.1111/gcb.14642}.
+\newblock
+  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/gcb.14642}.
 
 \bibitem[{Chen \emph{et~al.}(2005)Chen, Hu, \& Yu}]{Chen2005}
 Chen X, Hu B, Yu R (2005) {Spatial and temporal variation of phenological
@@ -72,6 +87,14 @@ David B, Thomas D, St{\'e}phane D, Jason V (2017) Disentangling good from bad
 \newblock
   \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/ecog.03380}.
 
+\bibitem[{Diniz-Filho \emph{et~al.}(2012)Diniz-Filho, Bini, Rangel,
+  Morales-Castilla, Olalla-T{\'a}rraga, Rodr{\'\i}guez, \&
+  Hawkins}]{diniz2012selection}
+Diniz-Filho JAF, Bini LM, Rangel TF, Morales-Castilla I, Olalla-T{\'a}rraga
+  M{\'A}, Rodr{\'\i}guez M{\'A}, Hawkins BA (2012) On the selection of
+  phylogenetic eigenvectors for ecological analyses.
+\newblock \emph{Ecography}, \textbf{35}, 239--249.
+
 \bibitem[{Donnelly \emph{et~al.}(2017)Donnelly, Yu, Caffarra
   \emph{et~al.}}]{Donnelly2017}
 Donnelly A, Yu R, Caffarra A, \emph{et~al.} (2017) Interspecific and
@@ -98,6 +121,11 @@ Fu YH, Piao S, Vitasse Y, \emph{et~al.} (2015) Increased heat requirement for
 Gelman A, Hill J (2006) \emph{Data analysis using regression and
   multilevel/hierarchical models}.
 \newblock Cambridge university press.
+
+\bibitem[{Griffith \& Peres-Neto(2006)}]{griffith2006spatial}
+Griffith DA, Peres-Neto PR (2006) Spatial modeling in ecology: the flexibility
+  of eigenfunction spatial analyses.
+\newblock \emph{Ecology}, \textbf{87}, 2603--2613.
 
 \bibitem[{Gu \emph{et~al.}(2008)Gu, Hanson, Post \emph{et~al.}}]{Gu2008}
 Gu L, Hanson PJ, Post WM, \emph{et~al.} (2008) {The 2007 Eastern US spring
@@ -260,6 +288,13 @@ Menzel A, Helm R, Zang C (2015) {Patterns of late spring frost leaf damage and
 \newblock \emph{Frontiers in Plant Science}, \textbf{6}, 110.
 \newblock \doi{10.3389/fpls.2015.00110}.
 
+\bibitem[{Morales-Castilla \emph{et~al.}(2012)Morales-Castilla, Olalla-Tarraga,
+  Purvis, Hawkins, \& Rodriguez}]{morales2012imprint}
+Morales-Castilla I, Olalla-Tarraga MA, Purvis A, Hawkins BA, Rodriguez MA
+  (2012) The imprint of cenozoic migrations and evolutionary history on the
+  biogeographic gradient of body size in new world mammals.
+\newblock \emph{The American Naturalist}, \textbf{180}, 246--256.
+
 \bibitem[{{R Development Core Team}(2017)}]{R}
 {R Development Core Team} (2017) R: A language and environment for statistical
   computing.
@@ -312,6 +347,12 @@ Templ B, Koch E, Bolmgren K, \emph{et~al.} (2018) {Pan European Phenological
   1109--1113.
 \newblock \doi{10.1007/s00484-018-1512-8}.
 \newblock \urlprefix\url{https://doi.org/10.1007/s00484-018-1512-8}.
+
+\bibitem[{USA-NPN(2019)}]{NPN2019}
+USA-NPN (2019) Plant and animal phenology data.
+\newblock \emph{USA National Phenology Network}.
+\newblock \doi{10.5066/F78S4N1V}.
+\newblock \urlprefix\url{http://doi.org/10.5066/F78S4N1V}.
 
 \bibitem[{Vitasse \emph{et~al.}(2014)Vitasse, Lenz, \&
   K{\~A}¶rner}]{Vitasse2014}
