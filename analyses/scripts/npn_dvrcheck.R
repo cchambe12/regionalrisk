@@ -7,6 +7,8 @@ options(stringsAsFactors = FALSE)
 
 ## Libraries
 library(dplyr)
+library(ggplot2)
+
 
 setwd("~/Documents/git/regionalrisk/analyses/input")
 
@@ -35,4 +37,12 @@ dvr$dvr <- dvr$leafout - dvr$budburst
 dvr <- dvr[!is.na(dvr$dvr),]
 mean(dvr$dvr) # 12.53 days!  
 
+dvr$spp <- paste(dvr$Genus.x, dvr$Species.x)
+
+cols <- colorRampPalette(brewer.pal(9,"Set3"))(9)
+
+
+quartz()
+ggplot(dvr, aes(y=dvr, x=spp)) + geom_boxplot(aes(col=spp)) + theme_classic() +
+  scale_color_manual(values=cols, labels=dvr$spp) + coord_cartesian(ylim=c(0,40))
 
