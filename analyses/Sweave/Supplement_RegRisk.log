@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 MAR 2019 12:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 MAY 2019 15:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -878,77 +878,95 @@ Underfull \hbox (badness 10000) in paragraph at lines 94--104
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
+
+ []
+
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./Supplement_RegRisk.bbl) [2]
-<..//figures/PPCs/orig_ppc.png, id=21, 578.16pt x 361.35pt>
+
+LaTeX Warning: Reference `eq:s1' on page 2 undefined on input line 123.
+
+
+LaTeX Warning: Reference `eq:s1' on page 2 undefined on input line 123.
+
+[2] (./Supplement_RegRisk.bbl [3])
+<..//figures/PPCs/orig_ppc.png, id=24, 578.16pt x 361.35pt>
 File: ..//figures/PPCs/orig_ppc.png Graphic file (type png)
 
 <use ..//figures/PPCs/orig_ppc.png>
-Package pdftex.def Info: ..//figures/PPCs/orig_ppc.png used on input line 157.
+Package pdftex.def Info: ..//figures/PPCs/orig_ppc.png used on input line 188.
 (pdftex.def)             Requested size: 170.71652pt x 106.69656pt.
 
-<..//figures/PPCs/ppc_sd.png, id=22, 578.16pt x 361.35pt>
+<..//figures/PPCs/ppc_sd.png, id=25, 578.16pt x 361.35pt>
 File: ..//figures/PPCs/ppc_sd.png Graphic file (type png)
 
 <use ..//figures/PPCs/ppc_sd.png>
-Package pdftex.def Info: ..//figures/PPCs/ppc_sd.png used on input line 163.
+Package pdftex.def Info: ..//figures/PPCs/ppc_sd.png used on input line 194.
 (pdftex.def)             Requested size: 170.71652pt x 106.69656pt.
 
-<..//figures/APC_allpred_allspp_baseR.pdf, id=23, 631.00943pt x 399.87274pt>
+<..//figures/APC_allpred_allspp_baseR.pdf, id=26, 631.00943pt x 399.87274pt>
 File: ..//figures/APC_allpred_allspp_baseR.pdf Graphic file (type pdf)
 
 <use ..//figures/APC_allpred_allspp_baseR.pdf>
 Package pdftex.def Info: ..//figures/APC_allpred_allspp_baseR.pdf used on input
- line 174.
+ line 205.
 (pdftex.def)             Requested size: 455.24408pt x 288.4878pt.
- [3 <..//figures/PPCs/orig_ppc.png (PNG copy)> <..//figures/PPCs/ppc_sd.png (PN
+ [4 <..//figures/PPCs/orig_ppc.png (PNG copy)> <..//figures/PPCs/ppc_sd.png (PN
 G copy)>]
-<..//figures/MainModel_wAPCplots_dvr.pdf, id=28, 837.40373pt x 493.95552pt>
+Overfull \vbox (77.33412pt too high) has occurred while \output is active []
+
+
+[5 <..//figures/APC_allpred_allspp_baseR.pdf>]
+<..//figures/MainModel_wAPCplots_dvr.pdf, id=269, 837.40373pt x 493.95552pt>
 File: ..//figures/MainModel_wAPCplots_dvr.pdf Graphic file (type pdf)
 
 <use ..//figures/MainModel_wAPCplots_dvr.pdf>
 Package pdftex.def Info: ..//figures/MainModel_wAPCplots_dvr.pdf used on input 
-line 181.
+line 212.
 (pdftex.def)             Requested size: 341.43306pt x 201.40002pt.
- [4 <..//figures/APC_allpred_allspp_baseR.pdf>]
-<..//figures/MainModel_wAPCplots_five.pdf, id=267, 840.05586pt x 527.10684pt>
+
+<..//figures/MainModel_wAPCplots_five.pdf, id=270, 840.05586pt x 527.10684pt>
 File: ..//figures/MainModel_wAPCplots_five.pdf Graphic file (type pdf)
 
 <use ..//figures/MainModel_wAPCplots_five.pdf>
 Package pdftex.def Info: ..//figures/MainModel_wAPCplots_five.pdf used on input
- line 188.
+ line 219.
 (pdftex.def)             Requested size: 341.43306pt x 214.24118pt.
- [5 <..//figures/MainModel_wAPCplots_dvr.pdf>] [6 <..//figures/MainModel_wAPCpl
+ [6 <..//figures/MainModel_wAPCplots_dvr.pdf>] [7 <..//figures/MainModel_wAPCpl
 ots_five.pdf>]
-(./Supplement_RegRisk.aux) ) 
+(./Supplement_RegRisk.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 16045 strings out of 493014
- 313601 string characters out of 6133351
- 332128 words of memory out of 5000000
- 19377 multiletter control sequences out of 15000+600000
+ 16067 strings out of 493014
+ 314160 string characters out of 6133351
+ 334683 words of memory out of 5000000
+ 19399 multiletter control sequences out of 15000+600000
  26812 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,9n,42p,10408b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10
-.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/ms
-bm10.pfb>
-Output written on Supplement_RegRisk.pdf (6 pages, 1818436 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Supplement_RegRisk.pdf (7 pages, 1827829 bytes).
 PDF statistics:
- 941 PDF objects out of 1000 (max. 8388607)
- 701 compressed objects within 8 object streams
+ 946 PDF objects out of 1000 (max. 8388607)
+ 705 compressed objects within 8 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

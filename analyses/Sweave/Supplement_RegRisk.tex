@@ -107,8 +107,11 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \renewcommand{\labelitemi}{$-$}
 \setkeys{Gin}{width=0.8\textwidth}
 
-\section*{Methods: Space Parameter}
-The ultimate intent for the space parameter is to control for spatial autocorrelation in the model and to remove collinearity issues. To do this, we needed to ensure that the space parameter does not interfere with other spatially-structured parameters in the model. Thus, we first ran a linear model to estimate the number of false springs using all model parameters except for space. 
+\section*{Methods: Spatial predictor} %I'm not too sure about the 'space parameter' terminology, I'd rather use either spatial or geographic predictor or proxy. I'm using spatial predictor, but all our predictors are spatial, so please feel free to change.
+
+Spatial autocorrelation (SA) is a common issue in spatial ecology given that close spatial units tend to be more similar than units far apart, and thus, cannot be considered as independent units, which is a frequent assumption in statistical tests \citep{diniz2003spatial}. If model residuals are spatially autocorrelated, and thus, non-independent then model coefficients and errors may be biased in a hard to predict way \citep{mauricio2009coefficient}. On the contrary, if model residuals are notautocorrelated, then SA should not be of concern \citep{hawkins2012eight}.\\
+
+To control for spatial autocorrelation and to account for spatially structured processes independent from our regional predictors of false springs, we generate an additional \emph{spatial predictor} for the model. To avoid collinearity, we computed our \emph{spatial predictor} from the residuals of a linear model of false springs as a function of all other regional factors that are also spatially structured (e.g. spring temperature, altitude, distance to the coast), following the logic of spatial filter modelling \citep{diniz2005modelling}. The calculation of the \emph{spatial predictor} followed the next steps: (a) we fit a linear model of false spring versus regional factors,
 
 \begin{align*} \label{eq:s1} 
 y_i \thicksim N(\alpha_(i)) +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}} + \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} \\ +& \beta_{ClimateChange_{(i)}}
@@ -117,7 +120,7 @@ y_i \thicksim N(\alpha_(i)) +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}}
 + \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} 
 \end{align*}
 
-We then took the residuals of the regression (Equation S1) to use as our Y values in our eigenvector selection. The eigenvector selection method we used was a minimization of Moran's \textit{I} of the residuals \citep[][MIR]{Baumen2017}. We then took the calculated eigenvectors determined from the MIR approach and regressed these against the residuals from Equation S1. The fitted values from this final regression were used as the space parameter in our models.
+(b) We extracted the residuals of the regression \ref{eq:s1}, which represent the portion of the variation in the number of false springs that is independent from the predictors in the model. (c) Residuals were utilized as our \emph{Y} values in a selection of spatial eigenvectors aimed at keeping only the minimal subset of spatial eigenvectors that are able to remove SA from model residuals. Specifically, we selected eigenvectors following the the minimization of Moran's \textit{I} of the residuals approach \citep[][MIR]{griffith2006spatial,diniz2012selection,Baumen2017}. (d) We fit a linear model between the residuals of \ref{eq:s1} and the subset of selected eigenvectors. And (e) we take the fitted values from this regression as our \emph{spatial predictor} in our final model (see equation from main text), which can be interpreted as a latent variable summarizing the spatial structure in false springs that is unaccounted for by the rest of regional factors in our model \citep{morales2012imprint}. A \emph{spatial predictor} generated in this way has three major advantages. First, it ensures that no SA is left in model residuals. Second, it avoids introducing collinearity issues with other predictors in the model. And third, it can be interpreted as a latent variable summarizing spatial processes (e.g. local adaptation, plasticity, etc.) occurring at multiple scales.
 
 
 \section*{Species rate of budburst calculations}
@@ -151,6 +154,34 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
 
 \vspace{15ex}
 
+
+
+% latex table generated in R 3.5.1 by xtable 1.8-2 package
+% Thu May  9 15:52:49 2019
+\begin{table}[ht]
+\centering
+\caption{Mean budburst days and confidence intervals for each species for before (1951-1983) and after climate change  (1984-2016).} 
+\begin{tabular}{lrrr}
+  \hline
+Species (years) & Mean Budburst & 2.5\% & 97.5\% \\ 
+  \hline
+\textit{Aesculus hippocastanum (1984-2016)} & 95.35 & 95.26 & 95.44 \\ 
+  \textit{Alnus glutinosa (1984-2016)} & 94.90 & 94.67 & 95.13 \\ 
+  \textit{Betula pendula (1984-2016)} & 95.44 & 95.23 & 95.66 \\ 
+  \textit{Fagus sylvatica (1984-2016)} & 103.75 & 103.52 & 103.97 \\ 
+  \textit{Fraxinus excelsior (1984-2016)} & 113.48 & 113.26 & 113.71 \\ 
+  \textit{Quercus robur (1984-2016)} & 109.60 & 109.38 & 109.82 \\ 
+  \textit{Aesculus hippocastanum (1951-1983)} & 102.20 & 102.00 & 102.41 \\ 
+  \textit{Alnus glutinosa (1951-1983)} & 102.81 & 102.27 & 103.36 \\ 
+  \textit{Betula pendula (1951-1983)} & 101.31 & 100.81 & 101.81 \\ 
+  \textit{Fagus sylvatica (1951-1983)} & 109.07 & 108.56 & 109.59 \\ 
+  \textit{Fraxinus excelsior (1951-1983)} & 119.36 & 118.82 & 119.89 \\ 
+  \textit{Quercus robur (1951-1983)} & 115.85 & 115.34 & 116.36 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
 \begin{figure} [H]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -164,7 +195,7 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
   \caption{}
   \label{fig:sfig2}
 \end{subfigure}
-\caption{(a) Posterior predictive check comparing the simulated model estimates to the raw data. The curves overlap greatly, which suggests our model is valid and fit the data. (b) Posterior predictive check comparing the standard deviation from our model output to the data. The model fits our data well, which suggests our model is valid.}
+\caption{(a) Posterior predictive check comparing the simulated model estimates to the raw data. The curves overlap greatly, which suggests our model is valid and fit the data. (b) Posterior predictive check comparing the standard deviation from our model output to the data. The model fits our data well, which suggests our model is valid.} %IMC: the fit between data and predictions is pretty tight so I'm aware that perhaps this is not necessary, but as a reviewer I would like to see some quantification of that model accuracy (pseudo-R² is an alternative, but any other could work too). 
 \label{fig:fig}
 \end{figure}
 

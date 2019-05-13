@@ -108,6 +108,31 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
 
 \vspace{15ex}
 
+<<echo=FALSE>>=
+
+library(xtable)
+
+
+@
+
+<<label=supptablebb, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("/Users/CatherineChamberlain/Documents/git/regionalrisk/analyses/")
+
+bbchange <- read.csv("output/changeinbb.csv", header=TRUE)
+colnames(bbchange) = c("Species (years)", "Mean Budburst", "2.5\\%", "97.5\\%")
+# add multicolumn later for BB and LO headers above these column names
+
+
+bbchange$`Species (years)` = paste("\\textit{",bbchange$`Species (years)`,"}", sep="")
+
+print(xtable(bbchange, 
+             caption = "Mean budburst days and confidence intervals for each species for before (1951-1983) and after climate change  (1984-2016).",
+             align = c("l", "l", "r","r","r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x})
+@
+
 \begin{figure} [H]
 \begin{subfigure}{.5\textwidth}
   \centering

@@ -25,6 +25,7 @@ bb <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
 #bb <- read.csv("analyses/output/fs_newspace_dvr.csv", header=TRUE)
 #bb <- read.csv("analyses/output/fs_newspace_five.csv", header=TRUE)
 
+if(FALSE){
 ## Let's just check out the model
 sort(unique(bb$species))
 #summary(orig.full)
@@ -57,6 +58,18 @@ inverselogit <- function(x){ exp(x) / (1+exp(x) ) }
 betpen.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
 betpen.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
 
+aeship.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+aeship.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+
+alnglu.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+alnglu.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+
+frasyl.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+frasyl.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+
+querob.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+querob.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+
 fraexc.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
 fraexc.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
 
@@ -76,6 +89,20 @@ for(i in 1:length(newdist)){
                                 fs.25=quantile(betpen.dist.postcc.onedist, 0.25), fs.75=quantile(betpen.dist.postcc.onedist, 0.75))
   betpen.dist.precc <- rbind(betpen.dist.precc, precc.df.here)
   betpen.dist.postcc <- rbind(betpen.dist.postcc, postcc.df.here)
+  
+  ## AESHIP...
+  aeship.dist.precc.onedist <- (mod_sum$b_Intercept ) + (mod_sum$b_dist.z )*newdist[i] + 
+    (mod_sum$b_cc.z )*sort(unique(bb$cc.z))[1] +
+    mod_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newdist[i])
+  betpen.dist.postcc.onedist <-(mod_sum$b_Intercept) + (mod_sum$b_dist.z )*newdist[i] + 
+    (mod_sum$b_cc.z )*sort(unique(bb$cc.z))[2] +
+    mod_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
+  precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(aeship.dist.precc.onedist),
+                               fs.25=quantile(aeship.dist.precc.onedist, 0.25), fs.75=quantile(aeship.dist.precc.onedist, 0.75))
+  postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(aeship.dist.postcc.onedist),
+                                fs.25=quantile(aeship.dist.postcc.onedist, 0.25), fs.75=quantile(aeship.dist.postcc.onedist, 0.75))
+  betpen.dist.precc <- rbind(aeship.dist.precc, precc.df.here)
+  betpen.dist.postcc <- rbind(aeship.dist.postcc, postcc.df.here)
   
   ## FRAEXC...
   fraexc.dist.precc.onedist <- (mod_sum$b_Intercept + mod_sum$b_speciesFRAEXC) + (mod_sum$b_dist.z + mod_sum$`b_dist.z:speciesFRAEXC`)*newdist[i] + 
@@ -370,15 +397,15 @@ quartz()
 g1 <- grid.arrange(meantemp, distances, ncol=2)
 g2 <- grid.arrange(elevations, naoindex, ncol=2, widths=c(1, 1))
 inters <- grid.arrange(g1, g2, heights=c(2, 1.5))
-
+}
 
 
 ########################################################################################
 ###################### NOW FOR THE MAIN MODEL ##########################################
 ########################################################################################
 library(broom)
-#modoutput<-as.data.frame(tidy(orig.full ,robust = TRUE, prob=0.5))
-modoutput<-as.data.frame(tidy(dvr.full ,robust = TRUE, prob=0.5))
+modoutput<-as.data.frame(tidy(orig.full ,robust = TRUE, prob=0.9))
+#modoutput<-as.data.frame(tidy(dvr.full ,robust = TRUE, prob=0.5))
 #modoutput<-as.data.frame(tidy(five.full ,robust = TRUE, prob=0.5))
 
 
@@ -420,8 +447,10 @@ regrisk<-ggplot(modoutput, aes(x=lower, xend=upper, y=Jvar, yend=Jvar)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11)) + ggtitle("A.")
+  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11)) #+ ggtitle("A.")
 
 ###### Need to mess around with how to order it all... 
 quartz()
 grid.arrange(regrisk, inters, ncol=2, widths=c(1.5, 2))
+
+regrisk

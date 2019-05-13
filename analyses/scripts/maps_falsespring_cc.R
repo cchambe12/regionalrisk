@@ -53,11 +53,12 @@ aes <- ggplot() + # data=a.site, aes(x=a.site$long, y=a.site$lat, fill=a.site$di
                color = 'gray86', fill="gray96", size = .2) +  ### This creates the base map
   #geom_polygon(data=a.site, aes(x=a.site$long, y=a.site$lat, fill=a.site$diff)) +  ### this removes extra background features from ggplot2
   stat_density2d(geom="raster") + geom_point(aes(col=diff,  x = long, y = lat),
-                                             data = a.site) +
+                                             data = a.site, size=0.4) +
   #geom_tile(aes(color=a.site$diff)) +
   #geom_jitter(width=3,aes(x=a.site$long, y=a.site$lat, color=a.site$diff), alpha=0.4) + 
   #scale_size_area() + ## add in a.site$diff + 1
-  scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
+  scale_color_viridis_c(alpha=0.8, direction=-1) + 
+  theme_classic() +
   coord_cartesian(ylim=c(40,60),xlim=c(5,18))+  ### zooms in on Europe
   theme(panel.border = element_blank(), ### extra tweaks to background and plot to make sure it doesn't have grid lines, etc.
         panel.grid.major = element_blank(),
@@ -80,9 +81,10 @@ b.site<-filter(site, species=="BETPEN")
 bet <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray86', fill="gray96", size = .2) +  ### This creates the base map
-  geom_point(aes(col=diff,  x = long, y = lat),data = b.site) +
-scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
-  coord_cartesian(ylim=c(40,60),xlim=c(5,18))+  ### zooms in on Europe
+  geom_point(aes(col=diff,  x = long, y = lat),data = b.site, size=0.4) +
+#scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
+  scale_color_viridis_c(alpha=0.8, direction=-1) + 
+   coord_cartesian(ylim=c(40,60),xlim=c(5,18))+  ### zooms in on Europe
   theme(panel.border = element_blank(), ### extra tweaks to background and plot to make sure it doesn't have grid lines, etc.
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -100,8 +102,9 @@ ag.site<-filter(site, species=="ALNGLU")
 aln <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray86', fill="gray96", size = .2) +  ### This creates the base map
-  geom_point(aes(col=diff,  x = long, y = lat),data = ag.site) +
-  scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
+  geom_point(aes(col=diff,  x = long, y = lat),data = ag.site, size=0.4) +
+  scale_color_viridis_c(alpha=0.8, direction=-1) + 
+  #scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
   coord_cartesian(ylim=c(40,60),xlim=c(5,18))+  ### zooms in on Europe
   theme(panel.border = element_blank(), ### extra tweaks to background and plot to make sure it doesn't have grid lines, etc.
         panel.grid.major = element_blank(),
@@ -120,8 +123,9 @@ f.site<-filter(site, species=="FAGSYL")
 fsyl <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray86', fill="gray96", size = .2) +  ### This creates the base map
-  geom_point(aes(col=diff,  x = long, y = lat),data = f.site) +
-  scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
+  geom_point(aes(col=diff,  x = long, y = lat),data = f.site, size=0.4) +
+  scale_color_viridis_c(alpha=0.8, direction=-1) + 
+  #scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
   coord_cartesian(ylim=c(40,60),xlim=c(5,18))+  ### zooms in on Europe
   theme(panel.border = element_blank(), ### extra tweaks to background and plot to make sure it doesn't have grid lines, etc.
         panel.grid.major = element_blank(),
@@ -140,8 +144,9 @@ fe.site<-filter(site, species=="FRAEXC")
 fra <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray86', fill="gray96", size = .2) +  ### This creates the base map
-  geom_point(aes(col=diff,  x = long, y = lat),data = fe.site) +
-  scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
+  geom_point(aes(col=diff,  x = long, y = lat),data = fe.site, size=0.4) +
+  scale_color_viridis_c(alpha=0.8, direction=-1) + 
+  #scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
   coord_cartesian(ylim=c(40,60),xlim=c(5,18))+  ### zooms in on Europe
   theme(panel.border = element_blank(), ### extra tweaks to background and plot to make sure it doesn't have grid lines, etc.
         panel.grid.major = element_blank(),
@@ -160,8 +165,9 @@ q.site<-filter(site, species=="QUEROB")
 que <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray86', fill="gray96", size = .2) +  ### This creates the base map
-  geom_point(aes(col=diff,  x = long, y = lat),data = q.site) +
-  scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
+  geom_point(aes(col=diff,  x = long, y = lat),data = q.site, size=0.4) +
+  scale_color_viridis_c(alpha=0.8, direction=-1) + 
+  #scale_color_gradient2(low = "blue", high = "red", mid="white", na.value=NA, limits=c(-.5,0.5)) + theme_classic() +
   coord_cartesian(ylim=c(40,60),xlim=c(5,18))+  ### zooms in on Europe
   theme(panel.border = element_blank(), ### extra tweaks to background and plot to make sure it doesn't have grid lines, etc.
         panel.grid.major = element_blank(),

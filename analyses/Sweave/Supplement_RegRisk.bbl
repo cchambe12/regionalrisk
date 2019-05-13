@@ -1,4 +1,4 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{12}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Buerki \emph{et~al.}(2010)Buerki, Lowry~II, Alvarez,
@@ -15,10 +15,38 @@ David, B., Thomas, D., St{\'e}phane, D. \& Jason, V. (2017) Disentangling good
   from bad practices in the selection of spatial or phylogenetic eigenvectors.
   \emph{Ecography} \textbf{0}.
 
+\bibitem[{Diniz-Filho \& Bini(2005)}]{diniz2005modelling}
+Diniz-Filho, J.A.F. \& Bini, L.M. (2005) Modelling geographical patterns in
+  species richness using eigenvector-based spatial filters. \emph{Global
+  Ecology and Biogeography} \textbf{14}, 177--185.
+
+\bibitem[{Diniz-Filho \emph{et~al.}(2003)Diniz-Filho, Bini \&
+  Hawkins}]{diniz2003spatial}
+Diniz-Filho, J.A.F., Bini, L.M. \& Hawkins, B.A. (2003) Spatial autocorrelation
+  and red herrings in geographical ecology. \emph{Global ecology and
+  Biogeography} \textbf{12}, 53--64.
+
+\bibitem[{Diniz-Filho \emph{et~al.}(2012)Diniz-Filho, Bini, Rangel,
+  Morales-Castilla, Olalla-T{\'a}rraga, Rodr{\'\i}guez \&
+  Hawkins}]{diniz2012selection}
+Diniz-Filho, J.A.F., Bini, L.M., Rangel, T.F., Morales-Castilla, I.,
+  Olalla-T{\'a}rraga, M.{\'A}., Rodr{\'\i}guez, M.{\'A}. \& Hawkins, B.A.
+  (2012) On the selection of phylogenetic eigenvectors for ecological analyses.
+  \emph{Ecography} \textbf{35}, 239--249.
+
 \bibitem[{Finn \emph{et~al.}(2007)Finn, Straszewski \& Peterson}]{Finn2007}
 Finn, G.A., Straszewski, A.E. \& Peterson, V. (2007) A general growth stage key
   for describing trees and woody plants. \emph{Annals of Applied Biology}
   \textbf{151}, 127--131.
+
+\bibitem[{Griffith \& Peres-Neto(2006)}]{griffith2006spatial}
+Griffith, D.A. \& Peres-Neto, P.R. (2006) Spatial modeling in ecology: the
+  flexibility of eigenfunction spatial analyses. \emph{Ecology} \textbf{87},
+  2603--2613.
+
+\bibitem[{Hawkins(2012)}]{hawkins2012eight}
+Hawkins, B.A. (2012) Eight (and a half) deadly sins of spatial analysis.
+  \emph{Journal of Biogeography} \textbf{39}, 1--9.
 
 \bibitem[{Hipp \emph{et~al.}(2017)Hipp, S.~Manos, Gonz{\'a}lez-Rodr{\'\i}guez,
   Hahn, Kaproth, McVay, Avalos \& Cavender-Bares}]{Hipp2017}
@@ -26,6 +54,22 @@ Hipp, A., S.~Manos, P., Gonz{\'a}lez-Rodr{\'\i}guez, A., Hahn, M., Kaproth, M.,
   McVay, J., Avalos, S. \& Cavender-Bares, J. (2017) {Sympatric parallel
   diversification of major oak clades in the Americas and the origins of
   Mexican species diversity}. \emph{New Phytologist} \textbf{217}.
+
+\bibitem[{Mauricio~Bini \emph{et~al.}(2009)Mauricio~Bini, Diniz-Filho, Rangel,
+  Akre, Albaladejo, Albuquerque, Aparicio, Araujo, Baselga, Beck
+  \emph{et~al.}}]{mauricio2009coefficient}
+Mauricio~Bini, L., Diniz-Filho, J.A.F., Rangel, T.F., Akre, T.S., Albaladejo,
+  R.G., Albuquerque, F.S., Aparicio, A., Araujo, M.B., Baselga, A., Beck, J.
+  \emph{et~al.} (2009) Coefficient shifts in geographical ecology: an empirical
+  evaluation of spatial and non-spatial regression. \emph{Ecography}
+  \textbf{32}, 193--204.
+
+\bibitem[{Morales-Castilla \emph{et~al.}(2012)Morales-Castilla, Olalla-Tarraga,
+  Purvis, Hawkins \& Rodriguez}]{morales2012imprint}
+Morales-Castilla, I., Olalla-Tarraga, M.A., Purvis, A., Hawkins, B.A. \&
+  Rodriguez, M.A. (2012) The imprint of cenozoic migrations and evolutionary
+  history on the biogeographic gradient of body size in new world mammals.
+  \emph{The American Naturalist} \textbf{180}, 246--256.
 
 \bibitem[{Wang \emph{et~al.}(2016)Wang, McAllister, Bartlett \&
   Buggs}]{Wang2016}

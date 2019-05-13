@@ -7,13 +7,15 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 
 ## Libraries
-library(ggplot2)
-library(egg)
-library(RColorBrewer)
-library(maptools)
+#library(ggplot2)
+#library(egg)
+#library(RColorBrewer)
+library(dplyr)
+#library(maptools)
 
 
 setwd("~/Documents/git/regionalrisk")
+
 
 bb <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
 
@@ -35,6 +37,7 @@ coeflocc <- as.data.frame(coef(locc))
 coeflocc$parameter <- rownames(coeflocc)
 
 bbchange <- full_join(confinlocc, coeflocc)
+
 
 bbchange[8, 1] <- bbchange$`2.5 %`[8] + bbchange$`2.5 %`[7] + bbchange$`2.5 %`[1] + + bbchange$`2.5 %`[2]
 bbchange[8, 2] <- bbchange$`97.5 %`[8] + bbchange$`97.5 %`[7] + bbchange$`97.5 %`[1] + + bbchange$`97.5 %`[2]
@@ -66,7 +69,10 @@ bbchange$leafout <- bbchange$`coef(locc)`
 bbchange$`coef(locc)`<-NULL
 bbchange <- subset(bbchange, select=c("leafout", "2.5 %", "97.5 %"))
 
+#write.csv(bbchange, file="analyses/output/changeinbb.csv", row.names=TRUE)
 
+
+if(FALSE){
 ### Now let's try and make those maps..
 bbbefore <- bbbycc[(bbbycc$cc=="before"),]
 bbbefore$meanbbpre <- ave(bbbefore$bb, bbbefore$lat.long, bbbefore$species)
@@ -255,5 +261,5 @@ png("figures/budburst_diff.png", ### makes it a nice png and saves it so it does
     height=5, units="in", res = 350 )
 grid.draw(mappies)
 dev.off()
-
+}
 

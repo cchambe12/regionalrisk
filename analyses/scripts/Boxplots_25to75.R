@@ -17,11 +17,23 @@ library(RColorBrewer)
 # Setting working directory
 setwd("~/Documents/git/regionalrisk/analyses/")
 
+bb <- read.csv("output/fs_newspace_orig.csv", header=TRUE)
+
+sites <- subset(bb, select=c("lat.long", "cc"))
+sites <- sites[!duplicated(sites),]
+tt <- as.data.frame(table(sites$lat.long))
+tt <- tt[(tt$Freq==2),]
+
+goodsites <- unique(tt$Var1)
+
 
 ########################
 #### get the data
 mat<-read.csv("output/BBdata.csv", header=TRUE) #### mean day of budburst is 104.88
 #mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
+#mat$lat.long <- paste(mat$lat, mat$long)
+#mat <- mat[(mat$lat.long%in%goodsites),]
+
 mat$bb.avg<-ave(mat$bb, mat$species)
 
 mat$cc<-ifelse(mat$year<1984, 0, 1)
@@ -76,6 +88,8 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
 ###### Tmin boxplots now...
 tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE) #### mean tmin is 7.54
 #tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
+#tm$lat.long <- paste(tm$lat, tm$long)
+#tm <- tm[(tm$lat.long%in%goodsites),]
 
 tm$cc<-ifelse(tm$year<1984, 0, 1)
 tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
@@ -130,17 +144,20 @@ f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
 
-f$cc<-ifelse(f$year<1980, 0, 1)
+f <- f[(f$lat.long%in%goodsites),]
+
+#f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
-f<-f[!is.na(f$fs.count),]
-f$fs<-ifelse(f$fs.count>0, 1, 0)
+f<-f[!is.na(f$fs),]
+#f$fs<-ifelse(f$fs.count>0, 1, 0)
 f$fs<-ave(f$fs,f$lat.long, f$species, f$cc, FUN=sum)
+
 
 plusf<-subset(f, select=c(species, cc, fs))
 plusf<-plusf[!duplicated(plusf),]
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=16) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -168,7 +185,7 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Number of Years \nwith False Springs") + coord_cartesian(ylim=c(0,31)) + 
+  ylab("Probability of \nFalse Spring Risk") + coord_cartesian(ylim=c(0, 31)) + 
   #geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
