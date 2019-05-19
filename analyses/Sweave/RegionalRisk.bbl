@@ -1,4 +1,4 @@
-\begin{thebibliography}{59}
+\begin{thebibliography}{56}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
@@ -65,12 +65,6 @@ Chmielewski FM, R{\"o}tzer T (2001) {Response of tree phenology to climate
 \newblock \emph{Agricultural and Forest Meteorology}, \textbf{108}, 101 -- 112.
 \newblock \doi{https://doi.org/10.1016/S0168-1923(01)00233-7}.
 
-\bibitem[{Cleland \emph{et~al.}(2006)Cleland, Chiariello, Loarie, Mooney, \&
-  Field}]{Cleland2006}
-Cleland E, Chiariello N, Loarie S, Mooney H, Field C (2006) Diverse responses
-  of phenology to global changes in a grassland ecosystem.
-\newblock \emph{PNAS}, \textbf{103}, 13740--13744.
-
 \bibitem[{Cleland \emph{et~al.}(2007)Cleland, Chuine, Menzel, Mooney, \&
   Schwartz}]{Cleland2007}
 Cleland EE, Chuine I, Menzel A, Mooney HA, Schwartz MD (2007) {Shifting plant
@@ -108,14 +102,6 @@ Flynn DFB, Wolkovich EM (2018) Temperature and photoperiod drive spring
 \newblock \emph{New Phytologist}.
 \newblock \doi{10.1111/nph.15232}.
 \newblock \urlprefix\url{http://dx.doi.org/10.1111/nph.15232}.
-
-\bibitem[{Fu \emph{et~al.}(2015)Fu, Piao, Vitasse \emph{et~al.}}]{Fu2015}
-Fu YH, Piao S, Vitasse Y, \emph{et~al.} (2015) Increased heat requirement for
-  leaf flushing in temperate woody species over 1980-2012: effects of chilling,
-  precipitation and insolation.
-\newblock \emph{Global Change Biology}, \textbf{21}, 2687--2697.
-\newblock \doi{10.1111/gcb.12863}.
-\newblock \urlprefix\url{http://dx.doi.org/10.1111/gcb.12863}.
 
 \bibitem[{Gelman \& Hill(2006)}]{Gelman2006}
 Gelman A, Hill J (2006) \emph{Data analysis using regression and
@@ -355,8 +341,8 @@ USA-NPN (2019) Plant and animal phenology data.
 \newblock \urlprefix\url{http://doi.org/10.5066/F78S4N1V}.
 
 \bibitem[{Vitasse \emph{et~al.}(2014)Vitasse, Lenz, \&
-  K{\~A}¶rner}]{Vitasse2014}
-Vitasse Y, Lenz A, K{\~A}¶rner C (2014) The interaction between freezing
+  K{\"{o}}rner}]{Vitasse2014}
+Vitasse Y, Lenz A, K{\"{o}}rner C (2014) The interaction between freezing
   tolerance and phenology in temperate deciduous trees.
 \newblock \emph{Frontiers in Plant Science}, \textbf{5}.
 \newblock \doi{10.3389/fpls.2014.00541}.
@@ -400,13 +386,6 @@ Wypych A, Ustrnul Z, Sulikowska A, Chmielewski FM, Bochenek B
   season in Central Europe and its circulation background}.
 \newblock \emph{International Journal of Climatology}, \textbf{37}, 3340--3352.
 \newblock \doi{10.1002/joc.4920}.
-
-\bibitem[{Xin(2016)}]{Xin2016}
-Xin Q (2016) {A risk-benefit model to simulate vegetation spring onset in
-  response to multi-decadal climate variability: Theoretical basis and
-  applications from the field to the Northern Hemisphere}.
-\newblock \emph{Agriculture and Forest Meteorology}, \textbf{228-229},
-  139--163.
 
 \bibitem[{Zhuo \emph{et~al.}(2018)Zhuo, Zheng, Zhang \emph{et~al.}}]{Zhuo2018}
 Zhuo X, Zheng T, Zhang Z, \emph{et~al.} (2018) {Genome-wide analysis of the NAC
