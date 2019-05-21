@@ -17,8 +17,8 @@ library(RColorBrewer)
 
 setwd("~/Documents/git/regionalrisk")
 
-load("orig_full.Rdata")
-#load("dvr_full.Rdata")
+#load("orig_full.Rdata")
+load("dvr_full.Rdata")
 #load("five_full.Rdata")
 
 bb <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
@@ -404,9 +404,9 @@ inters <- grid.arrange(g1, g2, heights=c(2, 1.5))
 ###################### NOW FOR THE MAIN MODEL ##########################################
 ########################################################################################
 library(broom)
-modoutput<-as.data.frame(tidy(orig.full ,robust = TRUE, prob=0.9))
-#modoutput<-as.data.frame(tidy(dvr.full ,robust = TRUE, prob=0.5))
-#modoutput<-as.data.frame(tidy(five.full ,robust = TRUE, prob=0.5))
+#modoutput<-as.data.frame(tidy(orig.full ,robust = TRUE, prob=0.9))
+#modoutput<-as.data.frame(tidy(dvr.full ,robust = TRUE, prob=0.9))
+modoutput<-as.data.frame(tidy(five.full ,robust = TRUE, prob=0.9))
 
 
 modoutput<-modoutput[2:47,]
@@ -447,7 +447,7 @@ regrisk<-ggplot(modoutput, aes(x=lower, xend=upper, y=Jvar, yend=Jvar)) +
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11)) #+ ggtitle("A.")
+  coord_cartesian(xlim=c(-1.2, 1.2), ylim=c(1,11)) #+ ggtitle("A.")
 
 ###### Need to mess around with how to order it all... 
 quartz()

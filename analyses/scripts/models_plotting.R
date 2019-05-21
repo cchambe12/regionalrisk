@@ -263,6 +263,11 @@ grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 
 ################################################################################
 ################################ MODEL OUTPUT ##################################
+#setwd("~/Documents/git/regionalrisk")
+#load("orig_full.Rdata")
+#bernorig<-as.data.frame(tidy(orig.full,robust = TRUE, prob=0.9))
+#write.csv(bernorig, file="analyses/output/orig_full_modeloutput_90.csv", row.names = FALSE)
+
 head(rhat(orig.bigpriors.fagus))
 head(neff_ratio(orig.bigpriors.fagus))
 

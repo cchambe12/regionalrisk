@@ -7,10 +7,12 @@
 \usepackage{siunitx}
 \usepackage{amssymb} % for math symbols
 \usepackage{amsmath} % for aligning equations
+%\usepackage{hyperref}
 \usepackage{textcomp}
 \usepackage{mdframed}
 \usepackage{natbib}
-\bibliographystyle{..//bib/styles/besjournals.bst}
+\bibliographystyle{..//bib/styles/gcb}
+%\usepackage[hyphens]{url}
 \usepackage{caption}
 \setlength{\captionmargin}{30pt}
 \setlength{\abovecaptionskip}{0pt}
@@ -67,22 +69,40 @@ Spatial autocorrelation (SA) is a common issue in spatial ecology given that clo
 
 To control for spatial autocorrelation and to account for spatially structured processes independent from our regional predictors of false springs, we generate an additional \emph{spatial predictor} for the model. To avoid collinearity, we computed our \emph{spatial predictor} from the residuals of a linear model of false springs as a function of all other regional factors that are also spatially structured (e.g. spring temperature, altitude, distance to the coast), following the logic of spatial filter modelling \citep{diniz2005modelling}. The calculation of the \emph{spatial predictor} followed the next steps: (a) we fit a linear model of false spring versus regional factors,
 
-\begin{align*} \label{eq:s1} 
+\begin{align*}
 y_i \thicksim N(\alpha_(i)) +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}} + \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} \\ +& \beta_{ClimateChange_{(i)}}
 + \beta_{NAO \times Species_{(i)}} + \beta_{MeanSpringTemp \times Species_{(i)}} + \beta_{Elevation \times Species_{(i)}} \\ +& \beta_{DistanceCoast \times Species_{(i)}} + \beta_{ClimateChange \times Species_{(i)}} \\
 +& \beta_{NAO \times ClimateChange_{(i)}} + \beta_{MeanSpringTemp \times ClimateChange_{(i)}} 
-+ \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} 
++ \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} \tag{S1}
 \end{align*}
 
-(b) We extracted the residuals of the regression \ref{eq:s1}, which represent the portion of the variation in the number of false springs that is independent from the predictors in the model. (c) Residuals were utilized as our \emph{Y} values in a selection of spatial eigenvectors aimed at keeping only the minimal subset of spatial eigenvectors that are able to remove SA from model residuals. Specifically, we selected eigenvectors following the the minimization of Moran's \textit{I} of the residuals approach \citep[][MIR]{griffith2006spatial,diniz2012selection,Baumen2017}. (d) We fit a linear model between the residuals of \ref{eq:s1} and the subset of selected eigenvectors. And (e) we take the fitted values from this regression as our \emph{spatial predictor} in our final model (see equation from main text), which can be interpreted as a latent variable summarizing the spatial structure in false springs that is unaccounted for by the rest of regional factors in our model \citep{morales2012imprint}. A \emph{spatial predictor} generated in this way has three major advantages. First, it ensures that no SA is left in model residuals. Second, it avoids introducing collinearity issues with other predictors in the model. And third, it can be interpreted as a latent variable summarizing spatial processes (e.g. local adaptation, plasticity, etc.) occurring at multiple scales.
+(b) We extracted the residuals of the regression Equation S1, which represent the portion of the variation in the number of false springs that is independent from the predictors in the model. (c) Residuals were utilized as our \emph{Y} values in a selection of spatial eigenvectors aimed at keeping only the minimal subset of spatial eigenvectors that are able to remove SA from model residuals. Specifically, we selected eigenvectors following the the minimization of Moran's \textit{I} of the residuals (MIR) approach \citep{griffith2006spatial,diniz2012selection,Baumen2017}. (d) We fit a linear model between the residuals of Equation S1 and the subset of selected eigenvectors. And (e) we take the fitted values from this regression as our \emph{spatial predictor} in our final model (see equation from main text), which can be interpreted as a latent variable summarizing the spatial structure in false springs that is unaccounted for by the rest of regional factors in our model \citep{morales2012imprint}. A \emph{spatial predictor} generated in this way has three major advantages. First, it ensures that no SA is left in model residuals. Second, it avoids introducing collinearity issues with other predictors in the model. And third, it can be interpreted as a latent variable summarizing spatial processes (e.g. local adaptation, plasticity, etc.) occurring at multiple scales.
 
 
 \section*{Species rate of budburst calculations}
-We used data from a growth chamber experiment (Flynn2018) to determine the average number of days between budburst and leafout for our study species. Cuttings for the experiment were made in January 2015 from two field sites: Harvard Forest (HF, 42.5$^{\circ}$N, 72.2$^{\circ}$W) and the Station de Biologie des Laurentides in St-Hippolyte, Qu\'ebec (SH, 45.9$^{\circ}$N, 74.0$^{\circ}$W). The experiment examined budburst and leafout for \textit{Acer saccharum} (Marshall), \textit{Alnus incana} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus nigra} (Marshall), and \textit{Quercus alba} (L.) in a fully crossed design of three levels of chilling (field chilling, field chilling plus 30 days at either 1 or 4 $^{\circ}$C), two levels of forcing (20$^{\circ}$C/10$^{\circ}$C or 15$^{\circ}$C/5$^{\circ}$C day/night temperatures, such that thermoperiodicity followed photoperiod) and two levels of photoperiod (8 versus 12 hour days) resulting in 12 treatment combinations. Phenological observations of each cutting were made every 2-3 days over 82 days. Phenology was assessed using a BBCH scale that was modified for trees \citep{Finn2007}. We used data from \textit{Acer saccharum} for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} for \textit{Quercus robur} \citep{Hipp2017}.
+We used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. Cuttings for the experiment were made in January 2015 from two field sites: Harvard Forest (HF, 42.5$^{\circ}$N, 72.2$^{\circ}$W) and the Station de Biologie des Laurentides in St-Hippolyte, Qu\'ebec (SH, 45.9$^{\circ}$N, 74.0$^{\circ}$W). The experiment examined budburst and leafout for \textit{Acer saccharum} (Marshall), \textit{Alnus incana} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus nigra} (Marshall), and \textit{Quercus alba} (L.) in a fully crossed design of three levels of chilling (field chilling, field chilling plus 30 days at either 1 or 4 $^{\circ}$C), two levels of forcing (20$^{\circ}$C/10$^{\circ}$C or 15$^{\circ}$C/5$^{\circ}$C day/night temperatures, such that thermoperiodicity followed photoperiod) and two levels of photoperiod (8 versus 12 hour days) resulting in 12 treatment combinations. Phenological observations of each cutting were made every 2-3 days over 82 days. Phenology was assessed using a BBCH scale that was modified for trees \citep{Finn2007}. We then took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, data were provided by the USA National Phenology Network and the many participants who contribute to its Nature’s Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average duration of vegetative risk was approximately 12 days.  
 
+To determine varying durations of vegetative risk for each species we used data from the growth chamber experiment \citep{Flynn2018}. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
+
+\section*{Results: The effects of climatic and spatial variation on false spring incidence}
+The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. The model estimates on the logit scale were converted to probability percentages for easier interpretation. To convert we used the equation \citep{Bruin2011}:
+
+\begin{equation}\label{eq:s2}
+(exp(\emph{Model Estimate}) -1 ) * 100 \tag{S2}
+\end{equation}
+
+And to convert interactions we used the following equation \citep{Bruin2011}:
+
+\begin{equation}\label{eq:s2}
+(exp((Model Estimate + Interaction Term with Climate Change)/(Model Estimate))-1) * 100 \tag{S3}
+\end{equation}
+
+
+\newpage
+\nocite{NPN2019}
 \bibliography{..//bib/regionalrisk.bib}
 
-
+\newpage
 \section*{Supplement: Tables and Figures}
 %{\begin{figure} [H]
 %  -\begin{center}
@@ -93,9 +113,9 @@ We used data from a growth chamber experiment (Flynn2018) to determine the avera
   
 \begin{center}
 \captionof{table}{Data collected from PEP725 for each species} \label{tab:spp} 
-\begin{tabular}{c c c c}
+\begin{tabular}{l r r r}
 \hline
-\textbf{Species} & \textbf{Num. of Observations} & \textbf{Num. of Sites} & \textbf{Num. of Years} \\
+Species & Num. of Observations & Num. of Sites & Num. of Years \\
 \hline
 \textit{Aesculus hippocastanum} & 156468 & 10157 & 66  \\
 \textit{Alnus glutinosa} & 91094 & 6775 & 65 \\
@@ -130,10 +150,37 @@ print(xtable(bbchange,
              align = c("l", "l", "r","r","r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
-      sanitize.text.function = function(x) {x})
+      sanitize.text.function = function(x) {x}, table.placement="H")
 @
 
-\begin{figure} [H]
+<<label=suppmodoutput, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("/Users/CatherineChamberlain/Documents/git/regionalrisk/analyses/")
+
+modoutput <- read.csv("output/orig_full_modeloutput_90.csv", header=TRUE)
+modoutput <- modoutput[c(2:7,43:47),]
+modoutput <- subset(modoutput, select=c("term", "estimate", "lower", "upper"))
+colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "90\\%")
+# add multicolumn later for BB and LO headers above these column names
+
+modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
+modoutput$Term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$Term)
+modoutput$Term <- gsub("b_elev.z", "Elevation", modoutput$Term)
+modoutput$Term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$Term)
+modoutput$Term <- gsub("b_space.z", "Space Parameter", modoutput$Term)
+modoutput$Term <- gsub("b_cc.z", "Climate Change", modoutput$Term)
+modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
+
+
+print(xtable(modoutput, 
+             caption = "Summary of Bernouilli model of false spring risk without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
+             align = c("l", "l", "r","r","r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+@
+
+
+{\begin{figure} [H]
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=6cm]{..//figures/PPCs/orig_ppc.png}
@@ -147,28 +194,28 @@ print(xtable(bbchange,
   \label{fig:sfig2}
 \end{subfigure}
 \caption{(a) Posterior predictive check comparing the simulated model estimates to the raw data. The curves overlap greatly, which suggests our model is valid and fit the data. (b) Posterior predictive check comparing the standard deviation from our model output to the data. The model fits our data well, which suggests our model is valid.} %IMC: the fit between data and predictions is pretty tight so I'm aware that perhaps this is not necessary, but as a reviewer I would like to see some quantification of that model accuracy (pseudo-R² is an alternative, but any other could work too). 
-\label{fig:fig}
-\end{figure}
+\label{fig:suppppc}
+\end{figure}}
 
 
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//figures/APC_allpred_allspp_baseR.pdf}
-  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index). All species are represented. }\label{fig:tmin}
+  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index). All species are represented. }\label{fig:suppapc}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/MainModel_wAPCplots_dvr.pdf}
-  -\caption{(A) Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false spring in the data. Panels B-E breakdown the interactions of each of the main effects with climate change (i.e., Mean spring temperature, distance from the coast, elevation, and NAO index). The two extreme species -- \textit{Betula pendula} and \textit{Fraxinus excelsior} --- were chosen to best represent the variation across all species.}\label{fig:dvr}
+  -\includegraphics[width=12cm]{..//figures/model_output_dvr_90.pdf}
+  -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false spring in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/MainModel_wAPCplots_five.pdf}
-  -\caption{(A) Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 50\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model. Panels B-E breakdown the interactions of each of the main effects with climate change. }\label{fig:five}
+  -\includegraphics[width=12cm]{..//figures/model_output_five_90.pdf}
+  -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model. }\label{fig:five}
   -\end{center}
   -\end{figure}}
   

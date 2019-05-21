@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 MAY 2019 15:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  21 MAY 2019 11:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -796,28 +796,31 @@ LaTeX Info: Redefining \\ on input line 3056.
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(./Supplement_RegRisk.aux)
+(./Supplement_RegRisk.aux
+
+LaTeX Warning: Label `eq:s2' multiply defined.
+
+)
 \openout1 = `Supplement_RegRisk.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 91.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 91.
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 93.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 93.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    ... okay on input line 93.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -859,97 +862,115 @@ File: siunitx-abbreviations.cfg 2016/03/01 v2.6q siunitx: Abbreviated units
 )
 \AtBeginShipoutBox=\box61
 \c__siunitx_mathsf_int=\count175
-LaTeX Font Info:    Try loading font information for U+msa on input line 91.
+LaTeX Font Info:    Try loading font information for U+msa on input line 93.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 91.
+LaTeX Font Info:    Try loading font information for U+msb on input line 93.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 \c__siunitx_mathtt_int=\count176
-LaTeX Font Info:    Try loading font information for T1+aess on input line 93.
+LaTeX Font Info:    Try loading font information for T1+aess on input line 95.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aess.fd
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 94--104
+Underfull \hbox (badness 10000) in paragraph at lines 96--106
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--113
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
 
  []
 
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3] (./Supplement_RegRisk.bbl
+LaTeX Font Info:    Try loading font information for T1+aett on input line 14.
 
-LaTeX Warning: Reference `eq:s1' on page 2 undefined on input line 123.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aett.fd
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+Underfull \hbox (badness 1107) in paragraph at lines 27--33
+\T1/aer/m/n/10 se-lec-tion of spa-tial or phy-lo-ge-netic eigen-vec-tors.  \T1/
+aer/m/it/10 Ecog-ra-phy\T1/aer/m/n/10 , \T1/aer/bx/n/10 0\T1/aer/m/n/10 .  doi:
+10.1111/ecog.03380.  URL
+ []
 
 
-LaTeX Warning: Reference `eq:s1' on page 2 undefined on input line 123.
+Underfull \hbox (badness 2529) in paragraph at lines 67--72
+[]\T1/aer/m/n/10 Flynn DFB, Wolkovich EM (2018) Tem-per-a-ture and pho-tope-rio
+d drive spring phe-nol-ogy across
+ []
 
-[2] (./Supplement_RegRisk.bbl [3])
-<..//figures/PPCs/orig_ppc.png, id=24, 578.16pt x 361.35pt>
+
+Underfull \hbox (badness 1281) in paragraph at lines 67--72
+\T1/aer/m/n/10 all species in a tem-per-ate for-est com-mu-nity.  \T1/aer/m/it/
+10 New Phy-tol-o-gist\T1/aer/m/n/10 .  doi:10.1111/nph.15232.  URL
+ []
+
+[4]
+Underfull \hbox (badness 2057) in paragraph at lines 105--109
+[]\T1/aer/m/n/10 USA-NPN (2019) Plant and an-i-mal phe-nol-ogy data.  \T1/aer/m
+/it/10 USA Na-tional Phe-nol-ogy Net-work\T1/aer/m/n/10 .  doi:
+ []
+
+) [5] [6] <..//figures/PPCs/orig_ppc.png, id=35, 578.16pt x 361.35pt>
 File: ..//figures/PPCs/orig_ppc.png Graphic file (type png)
 
 <use ..//figures/PPCs/orig_ppc.png>
-Package pdftex.def Info: ..//figures/PPCs/orig_ppc.png used on input line 188.
+Package pdftex.def Info: ..//figures/PPCs/orig_ppc.png used on input line 238.
 (pdftex.def)             Requested size: 170.71652pt x 106.69656pt.
 
-<..//figures/PPCs/ppc_sd.png, id=25, 578.16pt x 361.35pt>
+<..//figures/PPCs/ppc_sd.png, id=36, 578.16pt x 361.35pt>
 File: ..//figures/PPCs/ppc_sd.png Graphic file (type png)
 
 <use ..//figures/PPCs/ppc_sd.png>
-Package pdftex.def Info: ..//figures/PPCs/ppc_sd.png used on input line 194.
+Package pdftex.def Info: ..//figures/PPCs/ppc_sd.png used on input line 244.
 (pdftex.def)             Requested size: 170.71652pt x 106.69656pt.
 
-<..//figures/APC_allpred_allspp_baseR.pdf, id=26, 631.00943pt x 399.87274pt>
+<..//figures/APC_allpred_allspp_baseR.pdf, id=37, 631.00943pt x 399.87274pt>
 File: ..//figures/APC_allpred_allspp_baseR.pdf Graphic file (type pdf)
 
 <use ..//figures/APC_allpred_allspp_baseR.pdf>
 Package pdftex.def Info: ..//figures/APC_allpred_allspp_baseR.pdf used on input
- line 205.
+ line 255.
 (pdftex.def)             Requested size: 455.24408pt x 288.4878pt.
- [4 <..//figures/PPCs/orig_ppc.png (PNG copy)> <..//figures/PPCs/ppc_sd.png (PN
+ [7 <..//figures/PPCs/orig_ppc.png (PNG copy)> <..//figures/PPCs/ppc_sd.png (PN
 G copy)>]
-Overfull \vbox (77.33412pt too high) has occurred while \output is active []
+<..//figures/model_output_dvr_90.pdf, id=43, 466.73048pt x 385.22772pt>
+File: ..//figures/model_output_dvr_90.pdf Graphic file (type pdf)
 
+<use ..//figures/model_output_dvr_90.pdf>
+Package pdftex.def Info: ..//figures/model_output_dvr_90.pdf used on input line
+ 262.
+(pdftex.def)             Requested size: 341.43306pt x 281.81346pt.
+ [8 <..//figures/APC_allpred_allspp_baseR.pdf>]
+<..//figures/model_output_five_90.pdf, id=282, 452.72215pt x 397.3258pt>
+File: ..//figures/model_output_five_90.pdf Graphic file (type pdf)
 
-[5 <..//figures/APC_allpred_allspp_baseR.pdf>]
-<..//figures/MainModel_wAPCplots_dvr.pdf, id=269, 837.40373pt x 493.95552pt>
-File: ..//figures/MainModel_wAPCplots_dvr.pdf Graphic file (type pdf)
+<use ..//figures/model_output_five_90.pdf>
+Package pdftex.def Info: ..//figures/model_output_five_90.pdf used on input lin
+e 269.
+(pdftex.def)             Requested size: 341.43306pt x 299.6548pt.
+ [9 <..//figures/model_output_dvr_90.pdf>] [10 <..//figures/model_output_five_9
+0.pdf>] (./Supplement_RegRisk.aux)
 
-<use ..//figures/MainModel_wAPCplots_dvr.pdf>
-Package pdftex.def Info: ..//figures/MainModel_wAPCplots_dvr.pdf used on input 
-line 212.
-(pdftex.def)             Requested size: 341.43306pt x 201.40002pt.
-
-<..//figures/MainModel_wAPCplots_five.pdf, id=270, 840.05586pt x 527.10684pt>
-File: ..//figures/MainModel_wAPCplots_five.pdf Graphic file (type pdf)
-
-<use ..//figures/MainModel_wAPCplots_five.pdf>
-Package pdftex.def Info: ..//figures/MainModel_wAPCplots_five.pdf used on input
- line 219.
-(pdftex.def)             Requested size: 341.43306pt x 214.24118pt.
- [6 <..//figures/MainModel_wAPCplots_dvr.pdf>] [7 <..//figures/MainModel_wAPCpl
-ots_five.pdf>]
-(./Supplement_RegRisk.aux)
-
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16067 strings out of 493014
- 314160 string characters out of 6133351
- 334683 words of memory out of 5000000
- 19399 multiletter control sequences out of 15000+600000
- 26812 words of font info for 59 fonts, out of 8000000 for 9000
+ 16112 strings out of 493014
+ 314798 string characters out of 6133351
+ 333787 words of memory out of 5000000
+ 19438 multiletter control sequences out of 15000+600000
+ 32208 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,9n,42p,10408b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,9n,42p,10408b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -960,13 +981,15 @@ ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loca
 l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
 ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/
-2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Supplement_RegRisk.pdf (7 pages, 1827829 bytes).
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Supplement_RegRisk.pdf (10 pages, 1060766 bytes).
 PDF statistics:
- 946 PDF objects out of 1000 (max. 8388607)
- 705 compressed objects within 8 object streams
+ 533 PDF objects out of 1000 (max. 8388607)
+ 395 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

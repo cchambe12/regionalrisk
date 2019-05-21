@@ -1,4 +1,4 @@
-\begin{thebibliography}{56}
+\begin{thebibliography}{57}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
@@ -347,6 +347,16 @@ Vitasse Y, Lenz A, K{\"{o}}rner C (2014) The interaction between freezing
 \newblock \emph{Frontiers in Plant Science}, \textbf{5}.
 \newblock \doi{10.3389/fpls.2014.00541}.
 \newblock \urlprefix\url{http://dx.doi.org/10.3389/fpls.2014.00541}.
+
+\bibitem[{Vitasse \emph{et~al.}(2018)Vitasse, Schneider, Rixen, Christen, \&
+  Rebetez}]{Vitasse2018}
+Vitasse Y, Schneider L, Rixen C, Christen D, Rebetez M (2018) {Increase in the
+  risk of exposure of forest and fruit trees to spring frosts at higher
+  elevations in Switzerland over the last four decades}.
+\newblock \emph{Agricultural and Forest Meteorology}, \textbf{248}, 60 -- 69.
+\newblock \doi{https://doi.org/10.1016/j.agrformet.2017.09.005}.
+\newblock
+  \urlprefix\url{http://www.sciencedirect.com/science/article/pii/S0168192317303003}.
 
 \bibitem[{Vitra \emph{et~al.}(2017)Vitra, Lenz, \& Vitasse}]{Vitra2017}
 Vitra A, Lenz A, Vitasse Y (2017) Frost hardening and dehardening potential in
