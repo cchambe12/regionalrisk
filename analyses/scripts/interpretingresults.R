@@ -33,14 +33,19 @@ invlogit <- function(x) {(1/(1+exp(-(x))))}
 #space.z:cc.z             -0.05      0.01    -0.07    -0.03       3971 1.00
 
 int = -0.88
-linpreddiff <- function(coef, pred) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
-                                                invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-1)))*100} ## Based on UCLA and Gelman-Hill, 2007 pg 81
+linpreddiff <- function(coef, pred, interval) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
+                                                invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-interval)))*100} ## Based on UCLA and Gelman-Hill, 2007 pg 81
 
-linpreddiff(-0.48, fs$mst) # -1.569
-linpreddiff(0.14, fs$nao) # 2.56 for every 0.5 index
-linpreddiff(0.4, fs$distkm) # 0.332 for every 10 kilometers
-linpreddiff(0.19, fs$elev) # 0.9536 for every 100m
-linpreddiff(0.35, fs$cc) # 7.225
+2*sd(fs$mst) # 3.11
+linpreddiff(-0.48, fs$mst, 3) # -5.299% for every 3 degrees
+2*sd(fs$nao) #0.56
+linpreddiff(0.14, fs$nao, 0.5) # 2.54% for every 0.5 index
+2*sd(fs$distkm) # 283.34
+linpreddiff(0.4, fs$distkm, 300) # 9.316% for every 300 kilometers
+2*sd(fs$elev)
+linpreddiff(0.19, fs$elev, 450) # 4.16% for every 450m
+2*sd(fs$cc)
+linpreddiff(0.35, fs$cc, 1) # 7.225%
 
 #### Now try and make fake data to really tease this apart and test
 ndata <- 1000
