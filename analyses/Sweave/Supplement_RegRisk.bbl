@@ -7,12 +7,6 @@
   \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
   \urlstyle{rm}\Url}\fi
 
-\bibitem[{Bruin(2011)}]{Bruin2011}
-Bruin J (2011) {FAQ: How Do I Interpret Odds Ratios In Logistic Regression?}
-\newblock \emph{{UCLA: Institute for Digital Research \& Education}}.
-\newblock
-  \urlprefix\url{https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/}.
-
 \bibitem[{Buerki \emph{et~al.}(2010)Buerki, Lowry~II, Alvarez,
   Razafimandimbison, Kupfer, \& Callmander}]{Buerki2010}
 Buerki S, Lowry~II P, Alvarez N, Razafimandimbison S, Kupfer P, Callmander M
@@ -69,6 +63,11 @@ Flynn DFB, Wolkovich EM (2018) Temperature and photoperiod drive spring
 \newblock \emph{New Phytologist}.
 \newblock \doi{10.1111/nph.15232}.
 \newblock \urlprefix\url{http://dx.doi.org/10.1111/nph.15232}.
+
+\bibitem[{Gelman \& Hill(2006)}]{Gelman2006}
+Gelman A, Hill J (2006) \emph{Data analysis using regression and
+  multilevel/hierarchical models}.
+\newblock Cambridge university press.
 
 \bibitem[{Griffith \& Peres-Neto(2006)}]{griffith2006spatial}
 Griffith DA, Peres-Neto PR (2006) Spatial modeling in ecology: the flexibility

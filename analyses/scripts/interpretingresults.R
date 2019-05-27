@@ -36,16 +36,21 @@ int = -0.88
 linpreddiff <- function(coef, pred, interval) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
                                                 invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-interval)))*100} ## Based on UCLA and Gelman-Hill, 2007 pg 81
 
-2*sd(fs$mst) # 3.11
-linpreddiff(-0.48, fs$mst, 3) # -5.299% for every 3 degrees
-2*sd(fs$nao) #0.56
-linpreddiff(0.14, fs$nao, 0.5) # 2.54% for every 0.5 index
-2*sd(fs$distkm) # 283.34
-linpreddiff(0.4, fs$distkm, 300) # 9.316% for every 300 kilometers
-2*sd(fs$elev)
-linpreddiff(0.19, fs$elev, 450) # 4.16% for every 450m
-2*sd(fs$cc)
+sd(fs$mst) # 1.56
+linpreddiff(-0.48, fs$mst, 2) # -3.331% for every 2 degrees
+sd(fs$nao) #0.28
+linpreddiff(0.14, fs$nao, 0.3) # 1.54% for every 0.3 index
+sd(fs$distkm) # 141.67
+linpreddiff(0.4, fs$distkm, 150) # 4.83% for every 150 kilometers
+sd(fs$elev) # 214.193
+linpreddiff(0.19, fs$elev, 200) # 1.89% for every 200m
+2*sd(fs$cc) # before vs after
 linpreddiff(0.35, fs$cc, 1) # 7.225%
+
+
+### Now let's work on the interactions...
+# According to Gelman & Hill 2007, should just say the predictor's effect was reduced (if opposite signs) or increased (if both positive or both negative) with interaction
+
 
 #### Now try and make fake data to really tease this apart and test
 ndata <- 1000
