@@ -9,7 +9,7 @@ rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 if(FALSE){
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/FinalModels/fs_newspace_orig.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", header=TRUE)
 #check<-read.csv("~/Desktop/fs_newspace_orig.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
@@ -39,7 +39,7 @@ orig.short<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
 save(orig.short, file="/n/wolkovich_lab/Lab/Cat/orig_short.Rdata")
 }
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/FinalModels/fs_newspace_orig.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))
@@ -54,17 +54,18 @@ bb$lat.z <- (bb$lat-mean(bb$lat,na.rm=TRUE))/(2*sd(bb$lat,na.rm=TRUE))
 bb$dist.z <-(bb$distkm-mean(bb$distkm,na.rm=TRUE))/(2*sd(bb$distkm,na.rm=TRUE))
 bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
-bb$species <- as.character(ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species))
+#bb$species <- as.character(ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species))
 
-orig.full.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+orig.full<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                   cc.z + species + nao.z:species + 
                   mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
                  nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z,  
-                data=bb, chains=2,family=bernoulli(), cores=2, iter = 4000, warmup=2500,
+                data=bb, chains=4,family=bernoulli(), cores=4, iter = 4000, warmup=2500,
                 prior = prior(normal(0,1), class = "b"))
 
-save(orig.full.fagus, file="/n/wolkovich_lab/Lab/Cat/orig_full_fagus.Rdata")
+save(orig.full, file="/n/wolkovich_lab/Lab/Cat/orig_full.Rdata")
 
+if(FALSE){
 orig.bigpriors.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                  cc.z + species + nao.z:species + 
                  mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
@@ -73,5 +74,5 @@ orig.bigpriors.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                prior = prior(normal(0,5), class = "b"))
 
 save(orig.bigpriors.fagus, file="/n/wolkovich_lab/Lab/Cat/orig_bigpriors_fagus.Rdata")
-
+}
 
