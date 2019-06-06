@@ -55,6 +55,7 @@ linpreddiff(0.35, fs$cc, 1) # 7.225%
 
 
 #### Now try and make fake data to really tease this apart and test
+set.seed(1234)
 ndata <- 1000
 agri <- rnorm(ndata, 0, 10)
 cc <- rnorm(ndata, 0, 1)
@@ -67,15 +68,17 @@ y <- rbinom(ndata, 1, p)
 
 m0 <- lm(y ~ agri + cc + agri + agri:cc)
 
-0.433774 + -0.038109*mean(agri)
-
 m1 <- glm(y ~ agri + cc +agri:cc, family = "binomial")
 
-int = -0.829
+(coef(m1)[2])/4
+
+
+int = coef(m1)[1]
 testnonz <- function(coef, pred) {(invlogit(int + coef*mean(pred)) - 
                                           invlogit(int + coef*(mean(pred)-1)))*100}
 
-testnonz(-0.45496, agri) ## -10.12255
+testnonz((coef(m1)[2]), agri) ## -9.922911
+
 
 agri.z <- (agri-mean(agri,na.rm=TRUE))/(2*sd(agri,na.rm=TRUE))
 cc.z <- (cc-mean(cc,na.rm=TRUE))/(2*sd(cc,na.rm=TRUE))
@@ -85,5 +88,22 @@ m2 <- glm(y ~ agri.z + cc.z + agri.z:cc.z, family = "binomial")
 int = -0.8653
 testz <- function(coef, pred) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
                                         invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-1)))*100}
+zpred <- testz(-8.715, agri)
 
-testz(-8.715, agri) ## -10.13641
+
+testz <- function(coef, pred) {(invlogit(int + (coef*(sd(pred)*2))*mean(pred)) - 
+                                  invlogit(int + (coef*(sd(pred)*2))*(mean(pred)-1)))*100}
+
+testz <- function(coef, pred) {(invlogit(int + coef*mean(pred))) - 
+                                  invlogit(int + (coef*(mean(pred)-1)))*100}
+
+testz <- function(coef, pred) {(int + coef*mean(pred)) - (int + (coef*(mean(pred)-1)))}
+
+div4 = coef/4 #-2.17875
+
+
+ ##
+
+backpred <- (zpred*2*sd(pred))+mean(pred)
+
+
