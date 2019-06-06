@@ -32,22 +32,34 @@ invlogit <- function(x) {(1/(1+exp(-(x))))}
 #elev.z:cc.z               0.00      0.02    -0.03     0.03       2106 1.00
 #space.z:cc.z             -0.05      0.01    -0.07    -0.03       3971 1.00
 
-int = -0.88
+int = mean(fixef(orig.full, pars="Intercept", summary=FALSE))
 linpreddiff <- function(coef, pred, interval) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
-                                                invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-interval)))*100} ## Based on UCLA and Gelman-Hill, 2007 pg 81
-
-####### ADD DIVIDE BY 4 RULE BACK INTO CODE!!! #####
+                                                invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-interval)))*100} ## Based on UCLA and Gelman-Hill, 2007 pg 81 and https://stats.stackexchange.com/questions/185509/convert-standardized-beta-coefficient-estimates-to-raw-data-scale-to-interpret-o
 
 sd(fs$mst) # 1.56
-linpreddiff(-0.48, fs$mst, 2) # -3.331% for every 2 degrees
+linpreddiff(mean(fixef(orig.full, pars="mat.z", summary=FALSE)), fs$mst, 2) # -3.331% for every 2 degrees
 sd(fs$nao) #0.28
-linpreddiff(0.14, fs$nao, 0.3) # 1.54% for every 0.3 index
+linpreddiff(mean(fixef(orig.full, pars="nao.z", summary=FALSE)), fs$nao, 0.3) # 1.54% for every 0.3 index
 sd(fs$distkm) # 141.67
-linpreddiff(0.4, fs$distkm, 150) # 4.83% for every 150 kilometers
+linpreddiff(mean(fixef(orig.full, pars="dist.z", summary=FALSE)), fs$distkm, 150) # 4.83% for every 150 kilometers
 sd(fs$elev) # 214.193
-linpreddiff(0.19, fs$elev, 200) # 1.89% for every 200m
+linpreddiff(mean(fixef(orig.full, pars="elev.z", summary=FALSE)), fs$elev, 200) # 1.89% for every 200m
 2*sd(fs$cc) # before vs after
-linpreddiff(0.35, fs$cc, 1) # 7.225%
+linpreddiff(mean(fixef(orig.full, pars="cc.z", summary=FALSE)), fs$cc, 1) # 7.225%
+
+### Versus the Divide by 4 Rule, using just intervals of 1:
+(mean(fixef(orig.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100 ## -3.819176 (vs -1.562206)
+(mean(fixef(orig.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100 ## 6.383681 (vs 5.03561)
+(mean(fixef(orig.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100 ## 0.03546983 (vs 0.03327847)
+(mean(fixef(orig.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100 ## 0.01117761 (vs 0.009678633)
+(mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.842486 (vs 7.225)
+
+### So if we multiply by the sd used above to change intervals and use the Divide by 4 rule:
+(mean(fixef(orig.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2 ## -7.638351 (vs -3.331)
+(mean(fixef(orig.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3 ## 1.915104 (vs 1.54)
+(mean(fixef(orig.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150 ## 5.320474 (vs 4.83)
+(mean(fixef(orig.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200 ## 2.235522 (vs 1.89)
+(mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.842486 (vs 7.225)
 
 
 ### Now let's work on the interactions...
@@ -66,44 +78,28 @@ z <- a + ba*agri + bc*cc
 p <- 1/(1+exp(-z))
 y <- rbinom(ndata, 1, p)
 
-m0 <- lm(y ~ agri + cc + agri + agri:cc)
+#m0 <- lm(y ~ agri + cc + agri + agri:cc)
 
 m1 <- glm(y ~ agri + cc +agri:cc, family = "binomial")
 
-(coef(m1)[2])/4
-
-
 int = coef(m1)[1]
-testnonz <- function(coef, pred) {(invlogit(int + coef*mean(pred)) - 
+testnonz <- function(coef, pred) {(invlogit(int + coef*mean(pred)) -   ### combination of Gelman-Hill, 2007 and https://stats.stackexchange.com/questions/185509/convert-standardized-beta-coefficient-estimates-to-raw-data-scale-to-interpret-o
                                           invlogit(int + coef*(mean(pred)-1)))*100}
 
-testnonz((coef(m1)[2]), agri) ## -9.922911
+testnonz((coef(m1)[2]), agri) ## -10.55498
 
-
+## Now for a z-scored model
 agri.z <- (agri-mean(agri,na.rm=TRUE))/(2*sd(agri,na.rm=TRUE))
 cc.z <- (cc-mean(cc,na.rm=TRUE))/(2*sd(cc,na.rm=TRUE))
 
 m2 <- glm(y ~ agri.z + cc.z + agri.z:cc.z, family = "binomial")
 
-int = -0.8653
+int = coef(m2)[1]
 testz <- function(coef, pred) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
                                         invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-1)))*100}
-zpred <- testz(-8.715, agri)
+testz(coef(m2)[2], agri) # -10.95105
 
-
-testz <- function(coef, pred) {(invlogit(int + (coef*(sd(pred)*2))*mean(pred)) - 
-                                  invlogit(int + (coef*(sd(pred)*2))*(mean(pred)-1)))*100}
-
-testz <- function(coef, pred) {(invlogit(int + coef*mean(pred))) - 
-                                  invlogit(int + (coef*(mean(pred)-1)))*100}
-
-testz <- function(coef, pred) {(int + coef*mean(pred)) - (int + (coef*(mean(pred)-1)))}
-
-div4 = coef/4 #-2.17875
-
-
- ##
-
-backpred <- (zpred*2*sd(pred))+mean(pred)
-
+### Divide by 4 rule: need to multiply by 100 to convert to percent as above
+(coef(m1)[2]/4)*100 # -11.73362 (vs. -10.55498)
+(coef(m2)[2]/4)/(sd(agri)*2)*100 # -11.73134 (vs. -10.95105)
 
