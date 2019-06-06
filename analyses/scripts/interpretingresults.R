@@ -36,6 +36,8 @@ int = -0.88
 linpreddiff <- function(coef, pred, interval) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
                                                 invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-interval)))*100} ## Based on UCLA and Gelman-Hill, 2007 pg 81
 
+####### ADD DIVIDE BY 4 RULE BACK INTO CODE!!! #####
+
 sd(fs$mst) # 1.56
 linpreddiff(-0.48, fs$mst, 2) # -3.331% for every 2 degrees
 sd(fs$nao) #0.28
