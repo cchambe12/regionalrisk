@@ -1,0 +1,117 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Buerki \emph{et~al.}(2010)Buerki, Lowry~II, Alvarez,
+  Razafimandimbison, Kupfer, \& Callmander}]{Buerki2010}
+Buerki S, Lowry~II P, Alvarez N, Razafimandimbison S, Kupfer P, Callmander M
+  (2010) {Phylogeny and circumscription of \textit{Sapindaceae} revisited:
+  Molecular sequence data, morphology and biogeography support recognition of a
+  new family, \textit{Xanthoceraceae}}.
+\newblock \emph{Plant Ecology and Evolution}, \textbf{143}, 148--159.
+\newblock \doi{10.5091/plecevo.2010.437}.
+
+\bibitem[{David \emph{et~al.}(2017)David, Thomas, St{\'e}phane, \&
+  Jason}]{Baumen2017}
+David B, Thomas D, St{\'e}phane D, Jason V (2017) Disentangling good from bad
+  practices in the selection of spatial or phylogenetic eigenvectors.
+\newblock \emph{Ecography}, \textbf{0}.
+\newblock \doi{10.1111/ecog.03380}.
+\newblock
+  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/ecog.03380}.
+
+\bibitem[{Diniz-Filho \& Bini(2005)}]{diniz2005modelling}
+Diniz-Filho JAF, Bini LM (2005) Modelling geographical patterns in species
+  richness using eigenvector-based spatial filters.
+\newblock \emph{Global Ecology and Biogeography}, \textbf{14}, 177--185.
+
+\bibitem[{Diniz-Filho \emph{et~al.}(2003)Diniz-Filho, Bini, \&
+  Hawkins}]{diniz2003spatial}
+Diniz-Filho JAF, Bini LM, Hawkins BA (2003) Spatial autocorrelation and red
+  herrings in geographical ecology.
+\newblock \emph{Global ecology and Biogeography}, \textbf{12}, 53--64.
+
+\bibitem[{Diniz-Filho \emph{et~al.}(2012)Diniz-Filho, Bini, Rangel,
+  Morales-Castilla, Olalla-T{\'a}rraga, Rodr{\'\i}guez, \&
+  Hawkins}]{diniz2012selection}
+Diniz-Filho JAF, Bini LM, Rangel TF, Morales-Castilla I, Olalla-T{\'a}rraga
+  M{\'A}, Rodr{\'\i}guez M{\'A}, Hawkins BA (2012) On the selection of
+  phylogenetic eigenvectors for ecological analyses.
+\newblock \emph{Ecography}, \textbf{35}, 239--249.
+
+\bibitem[{Donnelly \emph{et~al.}(2017)Donnelly, Yu, Caffarra
+  \emph{et~al.}}]{Donnelly2017}
+Donnelly A, Yu R, Caffarra A, \emph{et~al.} (2017) Interspecific and
+  interannual variation in the duration of spring phenophases in a northern
+  mixed forest.
+\newblock \emph{Agricultural and Forest Meteorology}, \textbf{243}, 55--67.
+
+\bibitem[{Finn \emph{et~al.}(2007)Finn, Straszewski, \& Peterson}]{Finn2007}
+Finn GA, Straszewski AE, Peterson V (2007) A general growth stage key for
+  describing trees and woody plants.
+\newblock \emph{Annals of Applied Biology}, \textbf{151}, 127--131.
+\newblock \doi{10.1111/j.1744-7348.2007.00159.x}.
+
+\bibitem[{Flynn \& Wolkovich(2018)}]{Flynn2018}
+Flynn DFB, Wolkovich EM (2018) Temperature and photoperiod drive spring
+  phenology across all species in a temperate forest community.
+\newblock \emph{New Phytologist}.
+\newblock \doi{10.1111/nph.15232}.
+\newblock \urlprefix\url{http://dx.doi.org/10.1111/nph.15232}.
+
+\bibitem[{Gelman \& Hill(2006)}]{Gelman2006}
+Gelman A, Hill J (2006) \emph{Data analysis using regression and
+  multilevel/hierarchical models}.
+\newblock Cambridge university press.
+
+\bibitem[{Griffith \& Peres-Neto(2006)}]{griffith2006spatial}
+Griffith DA, Peres-Neto PR (2006) Spatial modeling in ecology: the flexibility
+  of eigenfunction spatial analyses.
+\newblock \emph{Ecology}, \textbf{87}, 2603--2613.
+
+\bibitem[{Hawkins(2012)}]{hawkins2012eight}
+Hawkins BA (2012) Eight (and a half) deadly sins of spatial analysis.
+\newblock \emph{Journal of Biogeography}, \textbf{39}, 1--9.
+
+\bibitem[{Hipp \emph{et~al.}(2017)Hipp, S.~Manos, Gonz{\'a}lez-Rodr{\'\i}guez
+  \emph{et~al.}}]{Hipp2017}
+Hipp A, S~Manos P, Gonz{\'a}lez-Rodr{\'\i}guez A, \emph{et~al.} (2017)
+  {Sympatric parallel diversification of major oak clades in the Americas and
+  the origins of Mexican species diversity}.
+\newblock \emph{New Phytologist}, \textbf{217}.
+\newblock \doi{10.1111/nph.14773}.
+
+\bibitem[{Mauricio~Bini \emph{et~al.}(2009)Mauricio~Bini, Diniz-Filho, Rangel
+  \emph{et~al.}}]{mauricio2009coefficient}
+Mauricio~Bini L, Diniz-Filho JAF, Rangel TF, \emph{et~al.} (2009) Coefficient
+  shifts in geographical ecology: an empirical evaluation of spatial and
+  non-spatial regression.
+\newblock \emph{Ecography}, \textbf{32}, 193--204.
+
+\bibitem[{Morales-Castilla \emph{et~al.}(2012)Morales-Castilla, Olalla-Tarraga,
+  Purvis, Hawkins, \& Rodriguez}]{morales2012imprint}
+Morales-Castilla I, Olalla-Tarraga MA, Purvis A, Hawkins BA, Rodriguez MA
+  (2012) The imprint of cenozoic migrations and evolutionary history on the
+  biogeographic gradient of body size in new world mammals.
+\newblock \emph{The American Naturalist}, \textbf{180}, 246--256.
+
+\bibitem[{USA-NPN(2019)}]{NPN2019}
+USA-NPN (2019) Plant and animal phenology data.
+\newblock \emph{USA National Phenology Network}.
+\newblock \doi{10.5066/F78S4N1V}.
+\newblock \urlprefix\url{http://doi.org/10.5066/F78S4N1V}.
+
+\bibitem[{Wang \emph{et~al.}(2016)Wang, McAllister, Bartlett, \&
+  Buggs}]{Wang2016}
+Wang N, McAllister HA, Bartlett PR, Buggs RJA (2016) {Molecular phylogeny and
+  genome size evolution of the genus \textit{Betula} (Betulaceae)}.
+\newblock \emph{Annals of Botany}, \textbf{117}, 1023--1035.
+\newblock \doi{10.1093/aob/mcw048}.
+\newblock \urlprefix\url{http://dx.doi.org/10.1093/aob/mcw048}.
+
+\end{thebibliography}
