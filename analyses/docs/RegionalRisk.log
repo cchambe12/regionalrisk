@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  27 MAY 2019 14:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 JUN 2019 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -908,14 +908,14 @@ File: ..//figures/Boxplot_BBTminFS_noDots.pdf Graphic file (type pdf)
 Package pdftex.def Info: ..//figures/Boxplot_BBTminFS_noDots.pdf used on input 
 line 248.
 (pdftex.def)             Requested size: 398.33858pt x 374.88562pt.
- [19 <..//figures/MSTBB_bySpp.png>] <..//figures/model_output_90.pdf, id=84, 48
-1.3755pt x 396.05234pt>
+ [19 <..//figures/MSTBB_bySpp.png>] <..//figures/model_output_90.pdf, id=84, 50
+5.89pt x 505.89pt>
 File: ..//figures/model_output_90.pdf Graphic file (type pdf)
 
 <use ..//figures/model_output_90.pdf>
 Package pdftex.def Info: ..//figures/model_output_90.pdf used on input line 256
 .
-(pdftex.def)             Requested size: 284.52756pt x 234.11pt.
+(pdftex.def)             Requested size: 284.52756pt x 284.53154pt.
  [20 <..//figures/Boxplot_BBTminFS_noDots.pdf>]
 <..//figures/InteractionPlots/Species_orig.pdf, id=229, 609.36024pt x 396.05234
 pt>
@@ -951,10 +951,10 @@ b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
 sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
 
-Output written on RegionalRisk.pdf (22 pages, 2927795 bytes).
+Output written on RegionalRisk.pdf (22 pages, 2948708 bytes).
 PDF statistics:
- 656 PDF objects out of 1000 (max. 8388607)
- 483 compressed objects within 5 object streams
+ 664 PDF objects out of 1000 (max. 8388607)
+ 489 compressed objects within 5 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
