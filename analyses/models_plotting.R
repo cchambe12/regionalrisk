@@ -265,10 +265,49 @@ grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 ###################### NOW FOR THE MAIN MODEL ##########################################
 ########################################################################################
 library(broom)
-#modoutput<-as.data.frame(tidy(orig.full ,robust = TRUE, prob=0.9))
-#modoutput<-as.data.frame(tidy(dvr.full ,robust = TRUE, prob=0.9))
-modoutput<-as.data.frame(tidy(five.full ,robust = TRUE, prob=0.9))
+setwd("~/Documents/git/regionalrisk")
+load("orig_full.Rdata")
+load("dvr_full.Rdata")
+load("five_full.Rdata")
+modorig<-as.data.frame(tidy(orig.full, prob=0.9))
+names(modorig)<-c("term", "estimate", "error", "10%", "90%")
+modorig50<-as.data.frame(tidy(orig.full, prob=0.5))
+names(modorig50)<-c("term", "estimate", "error", "50%", "wrong")
+modorig <- full_join(modorig, modorig50)
+#modorig25<-as.data.frame(tidy(orig.full, prob=0.25))
+#names(modorig25)<-c("term", "estimate", "error", "25%", "75%")
+#modorig <- full_join(modorig, modorig25)
+modorig <- subset(modorig, select=c("term", "estimate", "10%", "50%", "90%"))
 
+#write.csv(modorig, file="analyses/output/orig_full_modeloutput.csv", row.names=FALSE)
+
+moddvr<-as.data.frame(tidy(dvr.full, prob=0.9))
+names(moddvr)<-c("term", "estimate", "error", "10%", "90%")
+moddvr50<-as.data.frame(tidy(dvr.full, prob=0.5))
+names(moddvr50)<-c("term", "estimate", "error", "50%", "wrong")
+moddvr <- full_join(moddvr, moddvr50)
+#moddvr25<-as.data.frame(tidy(dvr.full, prob=0.25))
+#names(moddvr25)<-c("term", "estimate", "error", "25%", "75%")
+#moddvr <- full_join(moddvr, moddvr25)
+moddvr <- subset(moddvr, select=c("term", "estimate", "10%", "50%", "90%"))
+
+#write.csv(moddvr, file="analyses/output/dvr_full_modeloutput.csv", row.names=FALSE)
+
+modfive<-as.data.frame(tidy(five.full, prob=0.9))
+names(modfive)<-c("term", "estimate", "error", "10%", "90%")
+modfive50<-as.data.frame(tidy(five.full, prob=0.5))
+names(modfive50)<-c("term", "estimate", "error", "50%", "wrong")
+modfive <- full_join(modfive, modfive50)
+#modfive25<-as.data.frame(tidy(five.full, prob=0.25))
+#names(modfive25)<-c("term", "estimate", "error", "25%", "75%")
+#modfive <- full_join(modfive, modfive25)
+modfive <- subset(modfive, select=c("term", "estimate", "10%", "50%", "90%"))
+
+#write.csv(modfive, file="analyses/output/five_full_modeloutput.csv", row.names=FALSE)
+
+
+### Now to make the plots
+modoutput <- moddvr #modelhere
 
 modoutput<-modoutput[2:47,]
 modoutput$term<-gsub(".*b_","",modoutput$term)
@@ -297,7 +336,7 @@ estimates<-c("Mean Spring Temperature", "Distance from Coast", "Elevation", "NAO
              "Elevation x \nClimate Change", "NAO Index x \nClimate Change", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
 modoutput <- modoutput[!is.na(modoutput$Jvar),]
-regrisk<-ggplot(modoutput, aes(x=lower, xend=upper, y=Jvar, yend=Jvar)) +
+regrisk<-ggplot(modoutput, aes(x=`10%`, xend=`90%`, y=Jvar, yend=Jvar)) +
   geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar), col="black") +
   geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
   guides(size=FALSE) +
@@ -307,8 +346,14 @@ regrisk<-ggplot(modoutput, aes(x=lower, xend=upper, y=Jvar, yend=Jvar)) +
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
-        legend.text.align = 0) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1.2, 1.2), ylim=c(1,11)) #+ ggtitle("A.")
+        legend.text.align = 0,
+        plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
+  coord_cartesian(xlim=c(-1.2, 1.2), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
+  annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
+  annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
+  annotate("text", x = 0.5, y = 12, colour = "black", size=3, label="More False Spring Risk") +
+  annotate("text", x = -0.5, y = 12, colour = "black", size=3, label="Less False Spring Risk") 
+
 
 quartz()
 regrisk

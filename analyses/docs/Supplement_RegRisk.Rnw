@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{siunitx}
+\usepackage{multirow}
 \usepackage{amssymb} % for math symbols
 \usepackage{amsmath} % for aligning equations
 %\usepackage{hyperref}
@@ -85,15 +86,16 @@ We used data from a growth chamber experiment \citep{Flynn2018} to determine the
 To determine varying durations of vegetative risk for each species we used data from the growth chamber experiment \citep{Flynn2018}. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
 
 \section*{Results: The effects of climatic and spatial variation on false spring incidence}
-The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. The model estimates on the logit scale were converted to probability percentages for easier interpretation. To convert we used the equations below \citep{Gelman2006}:
+The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. The model estimates on the logit scale were converted to probability percentages for easier interpretation \citep{Gelman2006}. %To convert we used the equations below \citep{Gelman2006}:
 
+\iffalse
 \begin{align*}
 inverselogit = & (1/(1+exp(-(Model Estimate)))) \tag{S2} 
 \end{align*}
 \begin{align*}
 inverselogit(Intercept &+ (Model Estimate/(sd(Raw Data Predictor)*2))*mean(Raw Data Predictor)) - \\ & inverselogit(Intercept + (Model Estimate/(sd(Raw Data Predictor)*2)) \\ & *(mean(Raw Data Predictor)-(2*sd(Raw Data Predictor))) * 100 \tag{S3} 
 \end{align*}
-
+\fi
 
 \newpage
 \nocite{NPN2019}
@@ -110,16 +112,17 @@ inverselogit(Intercept &+ (Model Estimate/(sd(Raw Data Predictor)*2))*mean(Raw D
   
 \begin{center}
 \captionof{table}{Data collected from PEP725 for each species} \label{tab:spp} 
-\begin{tabular}{l r r r}
+\begin{tabular}{l r r r r}
 \hline
-Species & Num. of Observations & Num. of Sites & Num. of Years \\
+Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of Years \\
 \hline
-\textit{Aesculus hippocastanum} & 156468 & 10157 & 66  \\
-\textit{Alnus glutinosa} & 91094 & 6775 & 65 \\
-\textit{Betula pendula} & 154897 & 10139 & 66 \\
-\textit{Fagus sylvatica} & 129133 & 9099 & 66 \\
-\textit{Fraxinus excelsior} & 92665 & 7327 & 65 \\
-\textit{Quercus robur} & 131635  & 8811 & 66 \\
+\textit{Aesculus hippocastanum} & 156468 & 44746 & 10157 & 66  \\
+\textit{Alnus glutinosa} & 91094 & 27296 & 6775 & 65 \\
+\textit{Betula pendula} & 154897 & 46685 & 10139 & 66 \\
+\textit{Fagus sylvatica} & 129133 & 29237 & 9099 & 66 \\
+\textit{Fraxinus excelsior} & 92665 & 8256 & 7327 & 65 \\
+\textit{Quercus robur} & 131635 & 16657 & 8811 & 66 \\
+\hline
 \end{tabular}
 \end{center}
 
@@ -132,31 +135,34 @@ library(xtable)
 
 @
 
-<<label=supptablebb, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+
+\begin{center}
+\captionof{table}{Mean day of budburst and standard deviation for each species for before (1951-1983) and after climate change (1984-2016).}
+\begin{tabular}{l c c| c c}
+\cline{2-5}
+& \multicolumn{2}{ c| }{1951-1983}
+& \multicolumn{2}{ c }{1984-2016} \\ \cline{2-5}
+& mean & sd & mean & sd \\
+\hline
+\textit{Aesculus hippocastanum} & 102.2 & 12.44 & 95.35 & 12.09  \\
+\textit{Alnus glutinosa} & 102.8 & 14.81 & 94.90 & 14.71 \\
+\textit{Betula pendula} & 101.3 & 11.76 & 95.44 & 11.25 \\
+\textit{Fagus sylvatica} & 109.1 & 9.978 & 103.7 & 9.623 \\
+\textit{Fraxinus excelsior} & 119.4 & 11.79 & 113.5 & 11.53 \\
+\textit{Quercus robur} & 115.9 & 11.31 & 109.6 & 10.95 \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+<<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
 
-bbchange <- read.csv("output/changeinbb.csv", header=TRUE)
-colnames(bbchange) = c("Species (years)", "Mean Budburst", "2.5\\%", "97.5\\%")
-# add multicolumn later for BB and LO headers above these column names
-
-
-bbchange$`Species (years)` = paste("\\textit{",bbchange$`Species (years)`,"}", sep="")
-
-print(xtable(bbchange, 
-             caption = "Mean budburst days and confidence intervals for each species for before (1951-1983) and after climate change  (1984-2016).",
-             align = c("l", "l", "r","r","r")), #>{\\textit}l
-      include.rownames=F, 
-      caption.placement = "top", 
-      sanitize.text.function = function(x) {x}, table.placement="H")
-@
-
-<<label=suppmodoutput, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
-
-modoutput <- read.csv("output/orig_full_modeloutput_90.csv", header=TRUE)
+modoutput <- read.csv("output/orig_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
-modoutput <- subset(modoutput, select=c("term", "estimate", "lower", "upper"))
-colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "90\\%")
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "50\\%", "90\\%")
 # add multicolumn later for BB and LO headers above these column names
 
 modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
@@ -169,14 +175,15 @@ modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernouilli model of false spring risk without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
-             align = c("l", "l", "r","r","r")), #>{\\textit}l
+             caption = "Summary of main Bernouilli model of false spring risk without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
+             align = c("l", "l", "r","r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
 @
 
 
+\iffalse
 {\begin{figure} [H]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -193,7 +200,7 @@ print(xtable(modoutput,
 \caption{(a) Posterior predictive check comparing the simulated model estimates to the raw data. The curves overlap greatly, which suggests our model is valid and fit the data. (b) Posterior predictive check comparing the standard deviation from our model output to the data. The model fits our data well, which suggests our model is valid.} %IMC: the fit between data and predictions is pretty tight so I'm aware that perhaps this is not necessary, but as a reviewer I would like to see some quantification of that model accuracy (pseudo-R² is an alternative, but any other could work too). 
 \label{fig:suppppc}
 \end{figure}}
-
+\fi
 
 {\begin{figure} [H]
   -\begin{center}
@@ -208,6 +215,32 @@ print(xtable(modoutput,
   -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false spring in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
+  
+<<label=suppmoddvr, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
+
+modoutput <- read.csv("output/dvr_full_modeloutput.csv", header=TRUE)
+modoutput <- modoutput[c(2:7,43:47),]
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "50\\%", "90\\%")
+# add multicolumn later for BB and LO headers above these column names
+
+modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
+modoutput$Term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$Term)
+modoutput$Term <- gsub("b_elev.z", "Elevation", modoutput$Term)
+modoutput$Term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$Term)
+modoutput$Term <- gsub("b_space.z", "Space Parameter", modoutput$Term)
+modoutput$Term <- gsub("b_cc.z", "Climate Change", modoutput$Term)
+modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
+
+
+print(xtable(modoutput, 
+             caption = "Summary of Bernouilli model of false spring risk with varying durations of vegetative risk for each species without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
+             align = c("l", "l", "r","r","r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+@
 
 {\begin{figure} [H]
   -\begin{center}
@@ -215,6 +248,32 @@ print(xtable(modoutput,
   -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model. }\label{fig:five}
   -\end{center}
   -\end{figure}}
+  
+<<label=suppmodfive, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
+
+modoutput <- read.csv("output/five_full_modeloutput.csv", header=TRUE)
+modoutput <- modoutput[c(2:7,43:47),]
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "50\\%", "90\\%")
+# add multicolumn later for BB and LO headers above these column names
+
+modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
+modoutput$Term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$Term)
+modoutput$Term <- gsub("b_elev.z", "Elevation", modoutput$Term)
+modoutput$Term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$Term)
+modoutput$Term <- gsub("b_space.z", "Space Parameter", modoutput$Term)
+modoutput$Term <- gsub("b_cc.z", "Climate Change", modoutput$Term)
+modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
+
+
+print(xtable(modoutput, 
+             caption = "Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
+             align = c("l", "l", "r","r","r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+@
   
 
 %{\begin{figure} [H]

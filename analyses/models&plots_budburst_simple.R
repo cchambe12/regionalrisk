@@ -31,7 +31,7 @@ meanleafoutdates <- meanleafoutdates[!duplicated(meanleafoutdates),]
 
 locc <- lm(bb ~ species*cc, data=bbbycc)
 
-confinlocc <- as.data.frame(confint(locc, levels = c(0.025)))
+confinlocc <- as.data.frame(confint(locc, levels = c(0.025, 0.05)))
 confinlocc$parameter <- rownames(confinlocc)
 coeflocc <- as.data.frame(coef(locc))
 coeflocc$parameter <- rownames(coeflocc)

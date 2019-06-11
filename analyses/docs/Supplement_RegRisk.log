@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  27 MAY 2019 15:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 JUN 2019 12:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -546,6 +546,9 @@ Package: translator 2010/06/12 ver 1.10
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/beamer/translator/translator-lang
 uage-mappings.tex)))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen167
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
@@ -563,7 +566,7 @@ Package: amsmath 2016/03/10 v2.15b AMS math features
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen167
+\pmbraise@=\dimen168
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
@@ -580,7 +583,7 @@ LaTeX Info: Redefining \dots on input line 397.
 LaTeX Info: Redefining \cdots on input line 518.
 \Mathstrutbox@=\box52
 \strutbox@=\box53
-\big@size=\dimen168
+\big@size=\dimen169
 LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 \macc@depth=\count146
@@ -593,12 +596,12 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 \column@=\count151
 \maxfields@=\count152
 \andhelp@=\toks21
-\eqnshift@=\dimen169
-\alignsep@=\dimen170
-\tagshift@=\dimen171
-\tagwidth@=\dimen172
-\totwidth@=\dimen173
-\lineht@=\dimen174
+\eqnshift@=\dimen170
+\alignsep@=\dimen171
+\tagshift@=\dimen172
+\tagwidth@=\dimen173
+\totwidth@=\dimen174
+\lineht@=\dimen175
 \@envbody=\toks22
 \multlinegap=\skip57
 \multlinetaggap=\skip58
@@ -779,16 +782,16 @@ Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \linenopenalty=\count162
 \output=\toks24
 \linenoprevgraf=\count163
-\linenumbersep=\dimen175
-\linenumberwidth=\dimen176
+\linenumbersep=\dimen176
+\linenumberwidth=\dimen177
 \c@linenumber=\count164
 \c@pagewiselinenumber=\count165
 \c@LN@truepage=\count166
 \c@internallinenumber=\count167
 \c@internallinenumbers=\count168
-\quotelinenumbersep=\dimen177
-\bframerule=\dimen178
-\bframesep=\dimen179
+\quotelinenumbersep=\dimen178
+\bframerule=\dimen179
+\bframesep=\dimen180
 \bframebox=\box59
 LaTeX Info: Redefining \\ on input line 3056.
 )
@@ -799,36 +802,36 @@ tim
 (./Supplement_RegRisk.aux)
 \openout1 = `Supplement_RegRisk.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 93.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 93.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 94.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 94.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    ... okay on input line 94.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count169
-\scratchdimen=\dimen180
+\scratchdimen=\dimen181
 \scratchbox=\box60
 \nofMPsegments=\count170
 \nofMParguments=\count171
 \everyMPshowfont=\toks25
 \MPscratchCnt=\count172
-\MPscratchDim=\dimen181
+\MPscratchDim=\dimen182
 \MPnumerator=\count173
 \makeMPintoPDFobject=\count174
 \everyMPtoPDFconversion=\toks26
@@ -859,27 +862,27 @@ File: siunitx-abbreviations.cfg 2016/03/01 v2.6q siunitx: Abbreviated units
 )
 \AtBeginShipoutBox=\box61
 \c__siunitx_mathsf_int=\count175
-LaTeX Font Info:    Try loading font information for U+msa on input line 93.
+LaTeX Font Info:    Try loading font information for U+msa on input line 94.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 93.
+LaTeX Font Info:    Try loading font information for U+msb on input line 94.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 \c__siunitx_mathtt_int=\count176
-LaTeX Font Info:    Try loading font information for T1+aess on input line 95.
+LaTeX Font Info:    Try loading font information for T1+aess on input line 96.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aess.fd
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 96--106
+Underfull \hbox (badness 10000) in paragraph at lines 97--107
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
 
  []
 
@@ -916,74 +919,63 @@ Underfull \hbox (badness 2057) in paragraph at lines 104--108
 /it/10 USA Na-tional Phe-nol-ogy Net-work\T1/aer/m/n/10 .  doi:
  []
 
-) [5] [6] <..//figures/PPCs/orig_ppc.png, id=35, 578.16pt x 361.35pt>
-File: ..//figures/PPCs/orig_ppc.png Graphic file (type png)
+) [5]
+Overfull \hbox (11.4847pt too wide) in paragraph at lines 161--173
+ [] 
+ []
 
-<use ..//figures/PPCs/orig_ppc.png>
-Package pdftex.def Info: ..//figures/PPCs/orig_ppc.png used on input line 235.
-(pdftex.def)             Requested size: 170.71652pt x 106.69656pt.
-
-<..//figures/PPCs/ppc_sd.png, id=36, 578.16pt x 361.35pt>
-File: ..//figures/PPCs/ppc_sd.png Graphic file (type png)
-
-<use ..//figures/PPCs/ppc_sd.png>
-Package pdftex.def Info: ..//figures/PPCs/ppc_sd.png used on input line 241.
-(pdftex.def)             Requested size: 170.71652pt x 106.69656pt.
-
-<..//figures/APC_allpred_allspp_baseR.pdf, id=37, 631.00943pt x 399.87274pt>
+[6]
+<..//figures/APC_allpred_allspp_baseR.pdf, id=34, 631.00943pt x 399.87274pt>
 File: ..//figures/APC_allpred_allspp_baseR.pdf Graphic file (type pdf)
 
 <use ..//figures/APC_allpred_allspp_baseR.pdf>
 Package pdftex.def Info: ..//figures/APC_allpred_allspp_baseR.pdf used on input
- line 252.
+ line 251.
 (pdftex.def)             Requested size: 455.24408pt x 288.4878pt.
- [7 <..//figures/PPCs/orig_ppc.png (PNG copy)> <..//figures/PPCs/ppc_sd.png (PN
-G copy)>]
-<..//figures/model_output_dvr_90.pdf, id=43, 466.73048pt x 385.22772pt>
+ [7]
+<..//figures/model_output_dvr_90.pdf, id=39, 505.89pt x 505.89pt>
 File: ..//figures/model_output_dvr_90.pdf Graphic file (type pdf)
 
 <use ..//figures/model_output_dvr_90.pdf>
 Package pdftex.def Info: ..//figures/model_output_dvr_90.pdf used on input line
- 259.
-(pdftex.def)             Requested size: 341.43306pt x 281.81346pt.
- [8 <..//figures/APC_allpred_allspp_baseR.pdf>]
-<..//figures/model_output_five_90.pdf, id=282, 452.72215pt x 397.3258pt>
+ 258.
+(pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
+ [8 <..//figures/APC_allpred_allspp_baseR.pdf>] [9 <..//figures/model_output_dv
+r_90.pdf>]
+<..//figures/model_output_five_90.pdf, id=387, 505.89pt x 505.89pt>
 File: ..//figures/model_output_five_90.pdf Graphic file (type pdf)
 
 <use ..//figures/model_output_five_90.pdf>
 Package pdftex.def Info: ..//figures/model_output_five_90.pdf used on input lin
-e 266.
-(pdftex.def)             Requested size: 341.43306pt x 299.6548pt.
- [9 <..//figures/model_output_dvr_90.pdf>] [10 <..//figures/model_output_five_9
-0.pdf>] (./Supplement_RegRisk.aux) ) 
+e 294.
+(pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
+ [10] [11 <..//figures/model_output_five_90.pdf>] [12] (./Supplement_RegRisk.au
+x) ) 
 Here is how much of TeX's memory you used:
- 16106 strings out of 493014
- 314747 string characters out of 6133351
- 333745 words of memory out of 5000000
- 19434 multiletter control sequences out of 15000+600000
- 27133 words of font info for 60 fonts, out of 8000000 for 9000
+ 16088 strings out of 493014
+ 314510 string characters out of 6133351
+ 334915 words of memory out of 5000000
+ 19422 multiletter control sequences out of 15000+600000
+ 24073 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,9n,42p,10408b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb>
-Output written on Supplement_RegRisk.pdf (10 pages, 1059110 bytes).
+ 42i,9n,42p,10390b,587s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pf
+b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Supplement_RegRisk.pdf (12 pages, 984225 bytes).
 PDF statistics:
- 533 PDF objects out of 1000 (max. 8388607)
- 395 compressed objects within 4 object streams
+ 546 PDF objects out of 1000 (max. 8388607)
+ 405 compressed objects within 5 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
