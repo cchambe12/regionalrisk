@@ -150,20 +150,22 @@ We collected daily gridded climate data from the European Climate Assessment \& 
 We scaled all of the predictors and used a z-score following the binary predictor approach in order to best compare the effects of each climate variable to each other \citep{Gelman2006}.To generate our spatial predictor we first extracted spatial eigenvectors corresponding to our analyses units and selected the subset that minimizes spatial autocorrelation of the residuals of a model including all predictors except for the spatial predictor \citep{diniz2012selection,Baumen2017} (see supplement `Methods: Spatial parameter' for more details). We then took the eigenvector subset determined from the minimisation of Moran’s I in the residuals (MIR approach) and regressed them against the above residuals---i.e. number of false springs \emph{vs.} regional factors. Finally we used the fitted values of that regression as our spatial predictor, which, by definition, represents the portion of the variation in false springs that is both spatially structured and independent from all other predictors in the model (e.g. average spring temperature, altitude, etc.) \citep{griffith2006spatial,morales2012imprint}. % get citation from Nacho regarding regression %% IMC- you may delete the reference to my paper, but I think the logic is explained plainly in the supplement of that paper
 
 
-We used a Bayesian model approach to analyze our data to best estimate the number of false springs across-species levels. We fit a Bernoulli distribution model using mean spring temperature, NAO, elevation, distance from the coast, space, and climate change as predictors and all two-way interactions (fixed effects) and species as two-way interactions to simulate modeled groups on the main effects. The Bayesian model was fit using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows: 
+We used a Bayesian model approach to analyze our data to best estimate the number of false springs across-species levels. We fit a Bernoulli distribution model using mean spring temperature, NAO, elevation, distance from the coast, space, and climate change as predictors and all two-way interactions (fixed effects) and species as two-way interactions to simulate modeled groups on the main effects. The Bayesian model was fit using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows: \setlength{\mathindent}
 \begin{align*} \label{eq:1} 
-y_i \thicksim logit(\alpha_(i)) +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}} + \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} + \beta_{Space_{(i)}} \\ +& \beta_{ClimateChange_{(i)}}
-+ \beta_{NAO \times Species_{(i)}} + \beta_{MeanSpringTemp \times Species_{(i)}} + \beta_{Elevation \times Species_{(i)}} \\ +& \beta_{DistanceCoast \times Species_{(i)}} + \beta_{Space \times Species_{(i)}} + \beta_{ClimateChange \times Species_{(i)}} \\
+y_{(i)}  = \alpha_{(i)} +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}} + \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} + \beta_{Space_{(i)}} \\ +& \beta_{ClimateChange_{(i)}} 
++ \beta_{NAO \times Species_{(i)}} + \beta_{MeanSpringTemp \times Species_{(i)}} + \beta_{Elevation \times Species_{(i)}} + \beta_{DistanceCoast \times Species_{(i)}} + \beta_{Space \times Species_{(i)}} + \beta_{ClimateChange \times Species_{(i)}} \\
 +& \beta_{NAO \times ClimateChange_{(i)}} + \beta_{MeanSpringTemp \times ClimateChange_{(i)}} 
-+ \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \beta_{Space \times ClimateChange_{(i)}} + \sigma_{sp_{(i)}} 
++ \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \beta_{Space \times ClimateChange_{(i)}} + \sigma_{(i)}, \\   
 \end{align*}
 %\item The $\beta$ coefficients and $\alpha$ were modeled at the species level:
-%\begin{align*}
+{\setlength{\mathindent}0cm}
+\begin{align*}
+y_{(i)} \thicksim Bernoulli(0,1)
 %1.& \; \beta_{MeanSpringTemp_{sp}} \thicksim N(\mu_{MeanSpringTemp}, \sigma{^2}_{MeanSpringTemp}) \\
 %   &... \\
 %5.& \; \beta_{ClimateChange_{sp}} \thicksim N(\mu_{ClimateChange}, \sigma{^2}_{ClimateChange})
-%\end{align*}
-We ran two chains, each with 2,500 warm-up iterations and 4,000 sampling iterations for a total of 8,000 posterior samples for each predictor. We evaluated our model performance on $\hat{R}$ values that were close to one, assessed chain convergence and posterior predictive checks.% (Figure SXX) and through leave-one-out cross-validation \citep{Gelman2006}.
+\end{align*}
+We ran four chains, each with 2,500 warm-up iterations and 4,000 sampling iterations for a total of 8,000 posterior samples for each predictor. We evaluated our model performance on $\hat{R}$ values that were close to one, assessed chain convergence and posterior predictive checks.% (Figure SXX) and through leave-one-out cross-validation \citep{Gelman2006}.
 
 %\subsection*{Testing the duration of vegetative risk on false spring incidence}
 %The definition of a false spring has been established to be freezing temperatures of -2.2$^{\circ}$C \citep{Schwartz1993} after budburst but plants are most susceptible to damage during the duration of vegetative risk \citep{Augspurger2013, Lenz2016}. Different species have different durations of vegetative risk, which is also shifting with climate change \citep{Cleland2006, Fu2015, Xin2016}.
