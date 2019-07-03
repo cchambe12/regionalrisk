@@ -62,10 +62,6 @@ linpreddiff(mean(fixef(orig.full, pars="cc.z", summary=FALSE)), fs$cc, 1) # 7.22
 (mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.842486 (vs 7.225)
 
 
-### Now let's work on the interactions...
-# According to Gelman & Hill 2007, should just say the predictor's effect was reduced (if opposite signs) or increased (if both positive or both negative) with interaction
-
-
 #### Now try and make fake data to really tease this apart and test
 set.seed(1234)
 ndata <- 1000

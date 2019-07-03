@@ -1,0 +1,62 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: RegionalRisk.aux
+The style file: ..//bib/styles/gcb.bst
+Database file #1: ..//bib/regionalrisk.bib.bib
+Warning--entry type for "NAOdata" isn't style-file defined
+--line 295 of file ..//bib/regionalrisk.bib.bib
+Name 2 in "Martin, Melissa and Gavazov, Konstantin, and K{\"{o}}rner, Christian, and Hattenschwiler, Stephan and Rixen, Christian" has a comma at the end for entry Martin2010
+while executing---line 1451 of file ..//bib/styles/gcb.bst
+Name 3 in "Martin, Melissa and Gavazov, Konstantin, and K{\"{o}}rner, Christian, and Hattenschwiler, Stephan and Rixen, Christian" has a comma at the end for entry Martin2010
+while executing---line 1451 of file ..//bib/styles/gcb.bst
+Warning--empty year in Chamberlain2019; set to ????
+Name 2 in "Martin, Melissa and Gavazov, Konstantin, and K{\"{o}}rner, Christian, and Hattenschwiler, Stephan and Rixen, Christian" has a comma at the end for entry Martin2010
+while executing---line 1528 of file ..//bib/styles/gcb.bst
+Name 3 in "Martin, Melissa and Gavazov, Konstantin, and K{\"{o}}rner, Christian, and Hattenschwiler, Stephan and Rixen, Christian" has a comma at the end for entry Martin2010
+while executing---line 1528 of file ..//bib/styles/gcb.bst
+Name 2 in "Martin, Melissa and Gavazov, Konstantin, and K{\"{o}}rner, Christian, and Hattenschwiler, Stephan and Rixen, Christian" has a comma at the end for entry Martin2010
+while executing---line 1528 of file ..//bib/styles/gcb.bst
+Name 3 in "Martin, Melissa and Gavazov, Konstantin, and K{\"{o}}rner, Christian, and Hattenschwiler, Stephan and Rixen, Christian" has a comma at the end for entry Martin2010
+while executing---line 1528 of file ..//bib/styles/gcb.bst
+You've used 57 entries,
+            2914 wiz_defined-function locations,
+            1048 strings with 20209 characters,
+and the built_in function-call counts, 57383 in all, are:
+= -- 5275
+> -- 2090
+< -- 20
++ -- 1045
+- -- 576
+* -- 4874
+:= -- 7946
+add.period$ -- 175
+call.type$ -- 57
+change.case$ -- 464
+chr.to.int$ -- 56
+cite$ -- 58
+duplicate$ -- 4549
+empty$ -- 4802
+format.name$ -- 737
+if$ -- 11968
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 570
+newline$ -- 298
+num.names$ -- 228
+pop$ -- 1391
+preamble$ -- 1
+purify$ -- 410
+quote$ -- 0
+skip$ -- 1194
+stack$ -- 0
+substring$ -- 5477
+swap$ -- 1380
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 504
+warning$ -- 1
+while$ -- 427
+width$ -- 0
+write$ -- 806
+(There were 6 error messages)
