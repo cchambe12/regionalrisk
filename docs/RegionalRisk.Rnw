@@ -44,16 +44,21 @@ library(ggplot2)
 @
 
 \begin{document}
-\noindent \textbf{\Large{Spatial and climatic effects on false spring risk across six European tree species with climate change}}
+\noindent \textbf{\Large{Heightened false spring risk with climate change across six European tree species \\
+OR \\
+False spring risk increases across European trees in the face of climate change \\
+OR \\
+Climate change increases the risk of false springs in European trees}}
 
 \noindent Authors:\\
-C. J. Chamberlain $^{1,2}$, B. I. Cook $^{3}$, I. Morales Castilla $^{1,4}$ \& E. M. Wolkovich $^{1,2}$
+C. J. Chamberlain $^{1,2}$, B. I. Cook $^{3}$, I. Morales Castilla $^{1,4}$ \& E. M. Wolkovich $^{1,2,5}$
 \vspace{2ex}\\
 \emph{Author affiliations:}\\
 $^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
 $^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
 $^{3}$NASA Goddard Institute for Space Studies, New York, New York, USA; \\
-$^{4}$Edificio Ciencias, Campus Universitario 28805 Alcalá de Henares, Madrid, Spain \\
+$^{4}$Edificio Ciencias, Campus Universitario 28805 Alcal\'{a} de Henares, Madrid, Spain \\
+$^{5}$ Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
 \vspace{2ex}
 $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
@@ -104,21 +109,16 @@ We collected daily gridded climate data from the European Climate Assessment \& 
 We scaled all of the predictors and used a z-score following the binary predictor approach in order to best compare the effects of each climate variable to each other \citep{Gelman2006}.To generate our spatial predictor we first extracted spatial eigenvectors corresponding to our analyses units and selected the subset that minimizes spatial autocorrelation of the residuals of a model including all predictors except for the spatial predictor \citep{diniz2012selection,Baumen2017} (see supplement `Methods: Spatial parameter' for more details). We then took the eigenvector subset determined from the minimisation of Moran’s I in the residuals (MIR approach) and regressed them against the above residuals---i.e. number of false springs \emph{vs.} regional factors. Finally we used the fitted values of that regression as our spatial predictor, which, by definition, represents the portion of the variation in false springs that is both spatially structured and independent from all other predictors in the model (e.g. average spring temperature, altitude, etc.) \citep{griffith2006spatial,morales2012imprint}. % get citation from Nacho regarding regression %% IMC- you may delete the reference to my paper, but I think the logic is explained plainly in the supplement of that paper
 
 
-We used a Bayesian model approach to analyze our data to best estimate the number of false springs across-species levels. We fit a Bernoulli distribution model using mean spring temperature, NAO, elevation, distance from the coast, space, and climate change as predictors and all two-way interactions (fixed effects) and species as two-way interactions to simulate modeled groups on the main effects. The Bayesian model was fit using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows: \setlength{\mathindent}
-\begin{align*} \label{eq:1} 
-y_{(i)}  = \alpha_{(i)} +&  \beta_{NAO_{(i)}} + \beta_{MeanSpringTemp_{(i)}} + \beta_{Elevation_{(i)}} + \beta_{DistanceCoast_{(i)}} + \beta_{Space_{(i)}} \\ +& \beta_{ClimateChange_{(i)}} 
-+ \beta_{NAO \times Species_{(i)}} + \beta_{MeanSpringTemp \times Species_{(i)}} + \beta_{Elevation \times Species_{(i)}} + \beta_{DistanceCoast \times Species_{(i)}} + \beta_{Space \times Species_{(i)}} + \beta_{ClimateChange \times Species_{(i)}} \\
-+& \beta_{NAO \times ClimateChange_{(i)}} + \beta_{MeanSpringTemp \times ClimateChange_{(i)}} 
-+ \beta_{Elevation \times ClimateChange_{(i)}} \\ +& \beta_{DistanceCoast \times ClimateChange_{(i)}} + \beta_{Space \times ClimateChange_{(i)}} + \sigma_{(i)}, \\   
-\end{align*}
-%\item The $\beta$ coefficients and $\alpha$ were modeled at the species level:
-{\setlength{\mathindent}0cm}
+We used a Bayesian model approach to analyze our data to best estimate the number of false springs across-species levels. We fit a Bernoulli distribution model using mean spring temperature, NAO, elevation, distance from the coast, space, and climate change as predictors and all two-way interactions (fixed effects) and species as two-way interactions to simulate modeled groups on the main effects. The Bayesian model was fit using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows:
+
 \begin{align*}
-y_{(i)} \thicksim Bernoulli(0,1)
-%1.& \; \beta_{MeanSpringTemp_{sp}} \thicksim N(\mu_{MeanSpringTemp}, \sigma{^2}_{MeanSpringTemp}) \\
-%   &... \\
-%5.& \; \beta_{ClimateChange_{sp}} \thicksim N(\mu_{ClimateChange}, \sigma{^2}_{ClimateChange})
+y_i &= Bernouilli(\alpha_{[i]} +  \beta_{NAO_{[i]}} + \beta_{MeanSpringTemp_{[i]}} + \beta_{Elevation_{[i]}} + \beta_{DistanceCoast_{[i]}} + \beta_{Space_{[i]}} \\ 
+  &+ \beta_{ClimateChange_{[i]}} + \beta_{NAO \times Species_{[i]}} + \beta_{MeanSpringTemp \times Species_{[i]}} + \beta_{Elevation \times Species_{[i]}} + \beta_{DistanceCoast \times Species_{[i]}}\\
+  &+ \beta_{Space \times Species_{[i]}} + \beta_{ClimateChange \times Species_{[i]}} + \beta_{NAO \times ClimateChange_{[i]}} + \beta_{MeanSpringTemp \times ClimateChange_{[i]}}\\
+  &+ \beta_{Elevation \times ClimateChange_{[i]}} + \beta_{DistanceCoast \times ClimateChange_{[i]}} + \beta_{Space \times ClimateChange_{[i]}} + \epsilon_{[i]},\\
+  & \epsilon_i \sim Bernouilli(0,\sigma^2_y))  
 \end{align*}
+
 We ran four chains, each with 2,500 warm-up iterations and 4,000 sampling iterations for a total of 8,000 posterior samples for each predictor. We evaluated our model performance on $\hat{R}$ values that were close to one, assessed chain convergence and posterior predictive checks.% (Figure SXX) and through leave-one-out cross-validation \citep{Gelman2006}.
 
 %\subsection*{Testing the duration of vegetative risk on false spring incidence}
@@ -187,21 +187,21 @@ Furthermore, incorporating both budburst and leafout data as well as species-spe
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=14cm]{..//figures/BB_base.png}
+  -\includegraphics[width=14cm]{..//analyses/figures/BB_base.png}
   -\caption{The average day of budburst is mapped by site for each species. Species are ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}. Earlier budburst dates are yellow and later budburst dates are in red. }\label{fig:bbmap}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/MSTBB_bySpp.png}
+  -\includegraphics[width=16cm]{..//analyses/figures/MSTBB_bySpp.png}
   -\caption{Mean spring temperatures are plotted for each site over time (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:mst}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=14cm]{..//figures/Boxplot_BBTminFS_noDots.pdf}
+  -\includegraphics[width=14cm]{..//analyses/figures/Boxplot_BBTminFS_noDots.pdf}
   -\caption{Budburst, minimum temperatures and false springs were compared before and after 1983 for each species. We plotted the day of budburst (A.) before and after 1983 for each species across all sites. We then compared the average minimum temperatures (B.) between budburst and leafout for all species across all sites. The bottom panel (C.), shows the total number of years there was a false spring before and after 1983 at each site across all species. Species are ordered by day of budburst.  }\label{fig:boxfs}
   -\end{center}
   -\end{figure}}
@@ -209,7 +209,7 @@ Furthermore, incorporating both budburst and leafout data as well as species-spe
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=10cm]{..//figures/model_output_90.pdf}
+  -\includegraphics[width=10cm]{..//analyses/figures/model_output_90.pdf}
   -\caption{Model output with standardized durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 582,211 zeros and 172,877 ones for false spring in the data.}\label{fig:maineffects}
   -\end{center}
   -\end{figure}}
@@ -224,7 +224,7 @@ Furthermore, incorporating both budburst and leafout data as well as species-spe
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/InteractionPlots/Species_orig.pdf}
+  -\includegraphics[width=16cm]{..//analyses/figures/InteractionPlots/Species_orig.pdf}
   -\caption{Plots showing the interaction effects of each predictor with species. (A.) As mean spring temperature increases, the probability of a false spring decreases for each species but \textit{Fraxinus excelsior} always has the lowest risk of false spring. (B.) There's an increase in false spring risk for individuals further from the coast, especially for \textit{Fraxinus excelsior}. (C.) The risk of a false spring increases with increasing elevation but the relationship is strongest for \textit{Aesculus hippocastanum} and \textit{Betula pendula}. (D.) There are slightly more false springs in years with higher NAOs, especially for \textit{Fagus sylvatica}.  (E.) There are more false springs after 1983, especially for \textit{Aesculus hippocastanum} and \textit{Betula pendula}. Since we found the z-score for each predictor, the x-axis for each panel does not reflect the raw data.}\label{fig:spp}
   -\end{center}
   -\end{figure}}

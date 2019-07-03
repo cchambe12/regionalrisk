@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage{mdframed}
+\usepackage{natbib}
+\usepackage{bibentry}
+\bibliographystyle{..//bib/styles/besjournals.bst}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{1.5}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+\begin{document}
+\nobibliography*
+\noindent \textbf{\Large{Rethinking False Spring Risk: Submission Questions}}\\
+\vspace{3ex}
+
+\noindent \textbf{What is the scientific question you are addressing?} \\
+
+\noindent With climate change, there is growing interest in false spring events, which can affect both plant performance and survival. By better understanding the influence of known spatial and climatic factors for predicting false spring risk, we may be able to determine which regions are at risk currently and which regions will be more at risk in the future.  %% 58 words
+
+\noindent \textbf{What is/are the key finding(s) that answers this question?} \\
+
+\noindent False spring risk is influenced by multiple climatic and geographic factors, all of which must be incorporated into models to best predict spatiotemporal, species-specific shifts in false springs. Some factors are better at predicting risk than others, however it is essential to all factors, which contribute to an individual's risk of false spring and also increase the prediction accuracy of the overall model. Our results suggest there is a heightened risk of false springs with climate change and that there will be complex responses to warming in the future, which could in turn, have escalating impacts on plant community dynamics and further augment climatic shifts.  
+
+\noindent \textbf{Why is this work important and timely?}\\
+
+\noindent Recent studies have documented how climate change is reshaping false springs, with cascading ecological and economic impacts. New models, such as ours, are essential to predict the effects of climate change on false spring risk across different spatial and climatic regimes. \\
+
+\noindent \textbf{ Does your paper fall within the scope of GCB; what biological AND global change aspects does it address?}\\
+
+\noindent The manuscript will demonstrate how an integrated view of false spring that incorporates the complexity of factors underlying plant strategies to frost would rapidly advance progress in this field, including improved predictions of spring freeze risk with global change, and, novel insights into how plants are shaped by spring frost. \\ % 50 words
+
+\noindent \textbf{What are the three most recently published papers that are relevant to this question?} \\
+
+\bibentry{Ma2018}\\
+\bibentry{Liu2018}\\ 
+\bibentry{Vitasse2018}\\
+
+\noindent \textbf{ If you listed non-preferred reviewers, please provide a justification for each.} \\
+
+\noindent N/A \\
+
+\noindent \textbf{ If your manuscript does not conform to author or formatting guidelines (e.g. exceeding word limit), please provide a justification.} \\
+
+\noindent N/A \\
+
+\bibliography{..//bib/RegionalRisk.bib}
+
+
+\end{document}
