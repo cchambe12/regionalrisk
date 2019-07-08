@@ -1,6 +1,6 @@
 \documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -195,30 +195,30 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 
 
 
-% latex table generated in R 3.5.1 by xtable 1.8-3 package
-% Tue Jun 11 13:04:03 2019
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Mon Jul  8 14:55:12 2019
 \begin{table}[H]
 \centering
 \caption{Summary of main Bernouilli model of false spring risk without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
   \hline
-Term & Model Estimate & 10\% & 50\% & 90\% \\ 
+Term & Model Estimate & 10\% & 25\% & 75\% & 90\% \\ 
   \hline
-NAO Index & 0.14 & 0.12 & 0.13 & 0.16 \\ 
+NAO Index & 0.14 & 0.12 & 0.13 & 0.15 & 0.16 \\ 
   Mean Spring 
-Temperature & -0.48 & -0.50 & -0.49 & -0.45 \\ 
+Temperature & -0.48 & -0.50 & -0.49 & -0.47 & -0.45 \\ 
   Distance from 
-Coast & 0.40 & 0.38 & 0.39 & 0.43 \\ 
-  Elevation & 0.19 & 0.16 & 0.18 & 0.22 \\ 
-  Space Parameter & -0.06 & -0.08 & -0.07 & -0.05 \\ 
-  Climate Change & 0.35 & 0.33 & 0.34 & 0.37 \\ 
-  NAO Index by Climate Change & -0.83 & -0.85 & -0.84 & -0.81 \\ 
+Coast & 0.40 & 0.38 & 0.39 & 0.41 & 0.43 \\ 
+  Elevation & 0.19 & 0.16 & 0.18 & 0.20 & 0.22 \\ 
+  Space Parameter & -0.06 & -0.08 & -0.07 & -0.06 & -0.05 \\ 
+  Climate Change & 0.35 & 0.33 & 0.34 & 0.36 & 0.37 \\ 
+  NAO Index by Climate Change & -0.83 & -0.85 & -0.84 & -0.82 & -0.81 \\ 
   Mean Spring 
-Temperature by Climate Change & 0.42 & 0.40 & 0.41 & 0.44 \\ 
+Temperature by Climate Change & 0.42 & 0.40 & 0.41 & 0.43 & 0.44 \\ 
   Distance from 
-Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.10 \\ 
-  Elevation by Climate Change & -0.00 & -0.03 & -0.01 & 0.03 \\ 
-  Space Parameter by Climate Change & -0.05 & -0.07 & -0.05 & -0.03 \\ 
+Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.11 & -0.10 \\ 
+  Elevation by Climate Change & -0.00 & -0.03 & -0.01 & 0.01 & 0.03 \\ 
+  Space Parameter by Climate Change & -0.05 & -0.07 & -0.05 & -0.04 & -0.03 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -229,13 +229,13 @@ Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.10 \\
 {\begin{figure} [H]
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=6cm]{..//figures/PPCs/orig_ppc.png}
+  \includegraphics[width=6cm]{..//analyses/figures/PPCs/orig_ppc.png}
   \caption{}
   \label{fig:sfig1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=6cm]{..//figures/PPCs/ppc_sd.png}
+  \includegraphics[width=6cm]{..//analyses/figures/PPCs/ppc_sd.png}
   \caption{}
   \label{fig:sfig2}
 \end{subfigure}
@@ -246,42 +246,42 @@ Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.10 \\
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/APC_allpred_allspp_baseR.pdf}
+  -\includegraphics[width=16cm]{..//analyses/figures/APC_allpred_allspp_baseR.pdf}
   -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index). All species are represented. }\label{fig:suppapc}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/model_output_dvr_90.pdf}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_dvr_90.pdf}
   -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false spring in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
-% latex table generated in R 3.5.1 by xtable 1.8-3 package
-% Tue Jun 11 13:04:03 2019
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Mon Jul  8 14:55:12 2019
 \begin{table}[H]
 \centering
 \caption{Summary of Bernouilli model of false spring risk with varying durations of vegetative risk for each species without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
   \hline
-Term & Model Estimate & 10\% & 50\% & 90\% \\ 
+Term & Model Estimate & 10\% & 25\% & 75\% & 90\% \\ 
   \hline
-NAO Index & 0.15 & 0.13 & 0.14 & 0.17 \\ 
+NAO Index & 0.15 & 0.13 & 0.14 & 0.16 & 0.17 \\ 
   Mean Spring 
-Temperature & -0.50 & -0.53 & -0.51 & -0.48 \\ 
+Temperature & -0.50 & -0.53 & -0.51 & -0.49 & -0.48 \\ 
   Distance from 
-Coast & 0.40 & 0.38 & 0.39 & 0.43 \\ 
-  Elevation & 0.15 & 0.12 & 0.14 & 0.18 \\ 
-  Space Parameter & -0.06 & -0.08 & -0.07 & -0.04 \\ 
-  Climate Change & 0.34 & 0.32 & 0.34 & 0.37 \\ 
-  NAO Index by Climate Change & -0.64 & -0.68 & -0.65 & -0.59 \\ 
+Coast & 0.40 & 0.38 & 0.39 & 0.42 & 0.43 \\ 
+  Elevation & 0.15 & 0.12 & 0.14 & 0.16 & 0.18 \\ 
+  Space Parameter & -0.06 & -0.08 & -0.07 & -0.06 & -0.04 \\ 
+  Climate Change & 0.34 & 0.32 & 0.34 & 0.35 & 0.37 \\ 
+  NAO Index by Climate Change & -0.64 & -0.68 & -0.65 & -0.62 & -0.59 \\ 
   Mean Spring 
-Temperature by Climate Change & 0.59 & 0.54 & 0.57 & 0.64 \\ 
+Temperature by Climate Change & 0.59 & 0.54 & 0.57 & 0.61 & 0.64 \\ 
   Distance from 
-Coast by Climate Change & -0.17 & -0.22 & -0.19 & -0.11 \\ 
-  Elevation by Climate Change & 0.13 & 0.08 & 0.11 & 0.19 \\ 
-  Space Parameter by Climate Change & -0.07 & -0.11 & -0.09 & -0.04 \\ 
+Coast by Climate Change & -0.17 & -0.22 & -0.19 & -0.14 & -0.11 \\ 
+  Elevation by Climate Change & 0.13 & 0.08 & 0.11 & 0.15 & 0.19 \\ 
+  Space Parameter by Climate Change & -0.07 & -0.11 & -0.09 & -0.06 & -0.04 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -289,35 +289,35 @@ Coast by Climate Change & -0.17 & -0.22 & -0.19 & -0.11 \\
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/model_output_five_90.pdf}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_five_90.pdf}
   -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model. }\label{fig:five}
   -\end{center}
   -\end{figure}}
   
-% latex table generated in R 3.5.1 by xtable 1.8-3 package
-% Tue Jun 11 13:04:03 2019
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Mon Jul  8 14:55:12 2019
 \begin{table}[H]
 \centering
 \caption{Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
   \hline
-Term & Model Estimate & 10\% & 50\% & 90\% \\ 
+Term & Model Estimate & 10\% & 25\% & 75\% & 90\% \\ 
   \hline
-NAO Index & 0.09 & 0.05 & 0.07 & 0.14 \\ 
+NAO Index & 0.09 & 0.05 & 0.07 & 0.11 & 0.14 \\ 
   Mean Spring 
-Temperature & -0.72 & -0.77 & -0.74 & -0.67 \\ 
+Temperature & -0.72 & -0.77 & -0.74 & -0.70 & -0.67 \\ 
   Distance from 
-Coast & 0.21 & 0.15 & 0.18 & 0.27 \\ 
-  Elevation & 0.63 & 0.58 & 0.61 & 0.68 \\ 
-  Space Parameter & -0.02 & -0.06 & -0.04 & 0.03 \\ 
-  Climate Change & 0.58 & 0.53 & 0.56 & 0.63 \\ 
-  NAO Index by Climate Change & -0.92 & -1.02 & -0.96 & -0.83 \\ 
+Coast & 0.21 & 0.15 & 0.18 & 0.23 & 0.27 \\ 
+  Elevation & 0.63 & 0.58 & 0.61 & 0.65 & 0.68 \\ 
+  Space Parameter & -0.02 & -0.06 & -0.04 & 0.00 & 0.03 \\ 
+  Climate Change & 0.58 & 0.53 & 0.56 & 0.60 & 0.63 \\ 
+  NAO Index by Climate Change & -0.92 & -1.02 & -0.96 & -0.88 & -0.83 \\ 
   Mean Spring 
-Temperature by Climate Change & 0.64 & 0.55 & 0.60 & 0.74 \\ 
+Temperature by Climate Change & 0.64 & 0.55 & 0.60 & 0.69 & 0.74 \\ 
   Distance from 
-Coast by Climate Change & 0.01 & -0.10 & -0.03 & 0.13 \\ 
-  Elevation by Climate Change & -0.24 & -0.35 & -0.29 & -0.14 \\ 
-  Space Parameter by Climate Change & -0.04 & -0.13 & -0.08 & 0.05 \\ 
+Coast by Climate Change & 0.01 & -0.10 & -0.03 & 0.06 & 0.13 \\ 
+  Elevation by Climate Change & -0.24 & -0.35 & -0.29 & -0.20 & -0.14 \\ 
+  Space Parameter by Climate Change & -0.04 & -0.13 & -0.08 & -0.01 & 0.05 \\ 
    \hline
 \end{tabular}
 \end{table}

@@ -160,7 +160,7 @@ setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
 modoutput <- read.csv("output/orig_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "50\\%", "90\\%")
+colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 # add multicolumn later for BB and LO headers above these column names
 
 modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
@@ -174,7 +174,7 @@ modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
 
 print(xtable(modoutput, 
              caption = "Summary of main Bernouilli model of false spring risk without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
-             align = c("l", "l", "r","r","r", "r")), #>{\\textit}l
+             align = c("l", "l", "r","r","r","r","r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
@@ -185,13 +185,13 @@ print(xtable(modoutput,
 {\begin{figure} [H]
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=6cm]{..//figures/PPCs/orig_ppc.png}
+  \includegraphics[width=6cm]{..//analyses/figures/PPCs/orig_ppc.png}
   \caption{}
   \label{fig:sfig1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=6cm]{..//figures/PPCs/ppc_sd.png}
+  \includegraphics[width=6cm]{..//analyses/figures/PPCs/ppc_sd.png}
   \caption{}
   \label{fig:sfig2}
 \end{subfigure}
@@ -202,14 +202,14 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//figures/APC_allpred_allspp_baseR.pdf}
+  -\includegraphics[width=16cm]{..//analyses/figures/APC_allpred_allspp_baseR.pdf}
   -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index). All species are represented. }\label{fig:suppapc}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/model_output_dvr_90.pdf}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_dvr_90.pdf}
   -\caption{Model output with different durations of vegetative risk for each species. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false spring in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
@@ -220,7 +220,7 @@ setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
 modoutput <- read.csv("output/dvr_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "50\\%", "90\\%")
+colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 # add multicolumn later for BB and LO headers above these column names
 
 modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
@@ -234,7 +234,7 @@ modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
 
 print(xtable(modoutput, 
              caption = "Summary of Bernouilli model of false spring risk with varying durations of vegetative risk for each species without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
-             align = c("l", "l", "r","r","r", "r")), #>{\\textit}l
+             align = c("l", "l", "r","r","r", "r","r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
@@ -242,7 +242,7 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//figures/model_output_five_90.pdf}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_five_90.pdf}
   -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive parameter effects indicate an increased probability of a false spring whereas more negative effects suggest a lower probability of a false spring. Uncertainly intervals are at 90\%. Parameter effects closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false spring in the data, rendering a less stable model. }\label{fig:five}
   -\end{center}
   -\end{figure}}
@@ -253,7 +253,7 @@ setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
 modoutput <- read.csv("output/five_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "50\\%", "90\\%")
+colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 # add multicolumn later for BB and LO headers above these column names
 
 modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
@@ -267,7 +267,7 @@ modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
 
 print(xtable(modoutput, 
              caption = "Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
-             align = c("l", "l", "r","r","r", "r")), #>{\\textit}l
+             align = c("l", "l", "r","r","r", "r","r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
