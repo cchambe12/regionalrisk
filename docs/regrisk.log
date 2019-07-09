@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 JUL 2019 15:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 JUL 2019 14:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**RegionalRisk.tex
-(./RegionalRisk.tex
+**regrisk.tex
+(./regrisk.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
@@ -797,8 +797,8 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-No file RegionalRisk.aux.
-\openout1 = `RegionalRisk.aux'.
+(./regrisk.aux)
+\openout1 = `regrisk.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
 LaTeX Font Info:    ... okay on input line 92.
@@ -814,7 +814,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
 LaTeX Font Info:    ... okay on input line 92.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 92.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 92.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 92.
@@ -880,462 +880,45 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--110
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-Package natbib Warning: Citation `Chen2005' on page 2 undefined on input line 1
-25.
-
-
-Package natbib Warning: Citation `Kukal2018' on page 2 undefined on input line 
-125.
-
-
-Package natbib Warning: Citation `Liu2006' on page 2 undefined on input line 12
-5.
-
-
-Package natbib Warning: Citation `Wypych2016a' on page 2 undefined on input lin
-e 125.
-
-
-Package natbib Warning: Citation `IPCC2014' on page 2 undefined on input line 1
-25.
-
-
-Package natbib Warning: Citation `Wolkovich2012' on page 2 undefined on input l
-ine 125.
-
-
-Package natbib Warning: Citation `Inouye2008' on page 2 undefined on input line
- 125.
-
-
-Package natbib Warning: Citation `Labe2016' on page 2 undefined on input line 1
-25.
-
-
-Package natbib Warning: Citation `Martin2010' on page 2 undefined on input line
- 125.
-
-
-Package natbib Warning: Citation `Sgubin2018' on page 2 undefined on input line
- 125.
-
-
-Package natbib Warning: Citation `Zohner2016' on page 2 undefined on input line
- 125.
-
-
-Package natbib Warning: Citation `Augspurger2009' on page 2 undefined on input 
-line 125.
-
-
-Package natbib Warning: Citation `Augspurger2013' on page 2 undefined on input 
-line 125.
-
-
-Package natbib Warning: Citation `Gu2008' on page 2 undefined on input line 125
-.
-
-
-Package natbib Warning: Citation `Menzel2015' on page 2 undefined on input line
- 125.
-
-
-Package natbib Warning: Citation `Hufkens2012' on page 2 undefined on input lin
-e 125.
-
-
-Package natbib Warning: Citation `Klosterman2018' on page 2 undefined on input 
-line 125.
-
-
-Package natbib Warning: Citation `Richardson2013' on page 2 undefined on input 
-line 125.
-
-
-Package natbib Warning: Citation `Kollas2014' on page 2 undefined on input line
- 127.
-
-
-Package natbib Warning: Citation `Sakai1987' on page 2 undefined on input line 
-127.
-
-
-Package natbib Warning: Citation `Vitasse2014' on page 2 undefined on input lin
-e 127.
-
-
-Package natbib Warning: Citation `Lenz2016' on page 2 undefined on input line 1
-30.
-
-
-Package natbib Warning: Citation `Vitasse2014' on page 2 undefined on input lin
-e 130.
-
-
-Package natbib Warning: Citation `Gu2008' on page 2 undefined on input line 130
-.
-
-
-Package natbib Warning: Citation `Hufkens2012' on page 2 undefined on input lin
-e 130.
-
-
-Package natbib Warning: Citation `Lenz2016' on page 2 undefined on input line 1
-30.
-
-
-Package natbib Warning: Citation `Chamberlain2019' on page 2 undefined on input
- line 130.
-
-[2]
-
-Package natbib Warning: Citation `Augspurger2013' on page 3 undefined on input 
-line 132.
-
-
-Package natbib Warning: Citation `Hannenin1991' on page 3 undefined on input li
-ne 132.
-
-
-Package natbib Warning: Citation `Labe2016' on page 3 undefined on input line 1
-32.
-
-
-Package natbib Warning: Citation `Scheifinger2003' on page 3 undefined on input
- line 132.
-
-
-Package natbib Warning: Citation `Kramer1994' on page 3 undefined on input line
- 132.
-
-
-Package natbib Warning: Citation `Vitra2017' on page 3 undefined on input line 
-132.
-
-
-Package natbib Warning: Citation `Liu2018' on page 3 undefined on input line 13
-3.
-
-
-Package natbib Warning: Citation `Ma2018' on page 3 undefined on input line 133
-.
-
-
-Package natbib Warning: Citation `Vitasse2018' on page 3 undefined on input lin
-e 133.
-
-
-Package natbib Warning: Citation `Vitra2017' on page 3 undefined on input line 
-133.
-
-
-Package natbib Warning: Citation `Ma2018' on page 3 undefined on input line 133
-.
-
-
-Package natbib Warning: Citation `Wypych2016a' on page 3 undefined on input lin
-e 133.
-
-
-Package natbib Warning: Citation `Chmielewski2001' on page 3 undefined on input
- line 135.
-
-
-Package natbib Warning: Citation `Schwartz1993' on page 3 undefined on input li
-ne 139.
-
-
-Package natbib Warning: Citation `Kharouba2018' on page 3 undefined on input li
-ne 139.
-
-
-Package natbib Warning: Citation `Stocker2013' on page 3 undefined on input lin
-e 139.
-
-[3]
-
-Package natbib Warning: Citation `Templ2018' on page 4 undefined on input line 
-146.
-
-
-Package natbib Warning: Citation `Meier2001' on page 4 undefined on input line 
-146.
-
-
-Package natbib Warning: Citation `Donnelly2017' on page 4 undefined on input li
-ne 146.
-
-
-Package natbib Warning: Citation `Flynn2018' on page 4 undefined on input line 
-146.
-
-
-Package natbib Warning: Citation `NPN2019' on page 4 undefined on input line 14
-6.
-
-
-Package natbib Warning: Citation `Buerki2010' on page 4 undefined on input line
- 148.
-
-
-Package natbib Warning: Citation `Wang2016' on page 4 undefined on input line 1
-48.
-
-
-Package natbib Warning: Citation `Hipp2017' on page 4 undefined on input line 1
-48.
-
-
-Package natbib Warning: Citation `Flynn2018' on page 4 undefined on input line 
-148.
-
-
-Package natbib Warning: Citation `Schwartz1993' on page 4 undefined on input li
-ne 151.
-
-
-Package natbib Warning: Citation `Schwartz1993' on page 4 undefined on input li
-ne 151.
-
-
-Package natbib Warning: Citation `Lenz2013' on page 4 undefined on input line 1
-51.
-
-
-Package natbib Warning: Citation `Sakai1987' on page 4 undefined on input line 
-151.
-
-
-Package natbib Warning: Citation `Basler2012' on page 4 undefined on input line
- 152.
-
-
-Package natbib Warning: Citation `Korner2016' on page 4 undefined on input line
- 152.
-
-
-Package natbib Warning: Citation `NAOdata' on page 4 undefined on input line 15
-2.
-
-
-Package natbib Warning: Citation `Kharouba2018' on page 4 undefined on input li
-ne 152.
-
-
-Package natbib Warning: Citation `Stocker2013' on page 4 undefined on input lin
-e 152.
-
-[4]
-
-Package natbib Warning: Citation `Gelman2006' on page 5 undefined on input line
- 156.
-
-
-Package natbib Warning: Citation `diniz2012selection' on page 5 undefined on in
-put line 156.
-
-
-Package natbib Warning: Citation `Baumen2017' on page 5 undefined on input line
- 156.
-
-
-Package natbib Warning: Citation `griffith2006spatial' on page 5 undefined on i
-nput line 156.
-
-
-Package natbib Warning: Citation `morales2012imprint' on page 5 undefined on in
-put line 156.
-
-
-Package natbib Warning: Citation `brms' on page 5 undefined on input line 159.
-
-
-Package natbib Warning: Citation `R' on page 5 undefined on input line 159.
-
-[5]
-
-LaTeX Warning: Reference `fig:bbmap' on page 6 undefined on input line 179.
-
-
-LaTeX Warning: Reference `fig:mst' on page 6 undefined on input line 181.
-
-
-LaTeX Warning: Reference `fig:boxfs' on page 6 undefined on input line 183.
-
-
-LaTeX Warning: Reference `fig:boxfs' on page 6 undefined on input line 183.
-
-
-LaTeX Warning: Reference `fig:boxfs' on page 6 undefined on input line 183.
-
-[6]
-
-LaTeX Warning: Reference `fig:maineffects' on page 7 undefined on input line 18
-6.
-
-
-LaTeX Warning: Reference `fig:maineffects' on page 7 undefined on input line 18
-8.
-
-[7]
-
-LaTeX Warning: Reference `fig:spp' on page 8 undefined on input line 190.
-
-
-LaTeX Warning: Reference `fig:spp' on page 8 undefined on input line 190.
-
-
-LaTeX Warning: Reference `fig:spp' on page 8 undefined on input line 190.
-
-
-LaTeX Warning: Reference `fig:spp' on page 8 undefined on input line 190.
-
-
-LaTeX Warning: Reference `fig:spp' on page 8 undefined on input line 190.
-
-
-LaTeX Warning: Reference `fig:spp' on page 8 undefined on input line 190.
-
-[8]
-
-Package natbib Warning: Citation `Cleland2007' on page 9 undefined on input lin
-e 203.
-
-
-Package natbib Warning: Citation `IPCC2014' on page 9 undefined on input line 2
-03.
-
-
-Package natbib Warning: Citation `Wolkovich2012' on page 9 undefined on input l
-ine 203.
-
-
-Package natbib Warning: Citation `Ma2018' on page 9 undefined on input line 203
-.
-
-
-LaTeX Warning: Reference `fig:boxfs' on page 9 undefined on input line 203.
-
-
-LaTeX Warning: Reference `fig:spp' on page 9 undefined on input line 203.
-
-
-LaTeX Warning: Reference `fig:boxfs' on page 9 undefined on input line 203.
-
-
-Package natbib Warning: Citation `Liu2018' on page 9 undefined on input line 20
-6.
-
-
-Package natbib Warning: Citation `Ma2018' on page 9 undefined on input line 206
-.
-
-
-Package natbib Warning: Citation `Vitasse2018' on page 9 undefined on input lin
-e 206.
-
-
-Package natbib Warning: Citation `Vitra2017' on page 9 undefined on input line 
-206.
-
-
-Package natbib Warning: Citation `Wypych2016a' on page 9 undefined on input lin
-e 206.
-
-[9]
-
-Package natbib Warning: Citation `Vitasse2018' on page 10 undefined on input li
-ne 209.
-
-
-Package natbib Warning: Citation `Vitra2017' on page 10 undefined on input line
- 209.
-
-
-Package natbib Warning: Citation `Wypych2016' on page 10 undefined on input lin
-e 209.
-
-
-Package natbib Warning: Citation `Liu2018' on page 10 undefined on input line 2
-09.
-
-
-Package natbib Warning: Citation `Ma2018' on page 10 undefined on input line 20
-9.
-
-
-Package natbib Warning: Citation `Liu2018' on page 10 undefined on input line 2
-12.
-
-
-Package natbib Warning: Citation `Korner2016' on page 10 undefined on input lin
-e 215.
-
-
-Package natbib Warning: Citation `Lenz2013' on page 10 undefined on input line 
-215.
-
-
-Package natbib Warning: Citation `Zhuo2018' on page 10 undefined on input line 
-215.
-
-
-Package natbib Warning: Citation `bennett2018globtherm' on page 10 undefined on
- input line 215.
-
-
-Package natbib Warning: Citation `Lenz2016' on page 10 undefined on input line 
-215.
-
-[10]
-
-Package natbib Warning: Citation `Chamberlain2019' on page 11 undefined on inpu
-t line 217.
-
-
-Package natbib Warning: Citation `Lenz2016' on page 11 undefined on input line 
-217.
-
-[11] (./RegionalRisk.bbl
+[2] [3] [4] [5] [6] [7] [8] [9] [10] [11] (./regrisk.bbl [12]
 LaTeX Font Info:    Try loading font information for T1+aett on input line 54.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [12] [13] [14]
-[15] [16]) <..//analyses/figures/BB_base.png, id=66, 2810.5pt x 1756.5625pt>
+) [13] [14] [15]
+[16] [17]) <..//analyses/figures/BB_base.png, id=69, 2810.5pt x 1756.5625pt>
 File: ..//analyses/figures/BB_base.png Graphic file (type png)
 
 <use ..//analyses/figures/BB_base.png>
 Package pdftex.def Info: ..//analyses/figures/BB_base.png used on input line 23
 7.
 (pdftex.def)             Requested size: 398.33858pt x 248.9458pt.
- [17]
-<..//analyses/figures/MSTBB_bySpp.png, id=71, 2810.5pt x 1756.5625pt>
+ [18]
+<..//analyses/figures/MSTBB_bySpp.png, id=74, 2810.5pt x 1756.5625pt>
 File: ..//analyses/figures/MSTBB_bySpp.png Graphic file (type png)
 
 <use ..//analyses/figures/MSTBB_bySpp.png>
 Package pdftex.def Info: ..//analyses/figures/MSTBB_bySpp.png used on input lin
 e 244.
 (pdftex.def)             Requested size: 455.24408pt x 284.51332pt.
- [18 <..//analyses/figures/BB_base.png>]
-<..//analyses/figures/Boxplot_BBTminFS_noDots.pdf, id=78, 585.45323pt x 550.975
+ [19 <..//analyses/figures/BB_base.png>]
+<..//analyses/figures/Boxplot_BBTminFS_noDots.pdf, id=82, 585.45323pt x 550.975
 86pt>
 File: ..//analyses/figures/Boxplot_BBTminFS_noDots.pdf Graphic file (type pdf)
  <use ..//analyses/figures/Boxplot_BBTminFS_noDots.pdf>
 Package pdftex.def Info: ..//analyses/figures/Boxplot_BBTminFS_noDots.pdf used 
 on input line 251.
 (pdftex.def)             Requested size: 398.33858pt x 374.88562pt.
- [19 <..//analyses/figures/MSTBB_bySpp.png>]
-<..//analyses/figures/model_output_90.pdf, id=84, 505.89pt x 505.89pt>
+ [20 <..//analyses/figures/MSTBB_bySpp.png>]
+<..//analyses/figures/model_output_90.pdf, id=87, 505.89pt x 505.89pt>
 File: ..//analyses/figures/model_output_90.pdf Graphic file (type pdf)
 
 <use ..//analyses/figures/model_output_90.pdf>
 Package pdftex.def Info: ..//analyses/figures/model_output_90.pdf used on input
  line 259.
 (pdftex.def)             Requested size: 284.52756pt x 284.53154pt.
- [20 <..//analyses/figures/Boxplot_BBTminFS_noDots.pdf>]
-<..//analyses/figures/InteractionPlots/Species_orig.pdf, id=229, 609.36024pt x 
+ [21 <..//analyses/figures/Boxplot_BBTminFS_noDots.pdf>]
+<..//analyses/figures/InteractionPlots/Species_orig.pdf, id=232, 609.36024pt x 
 396.05234pt>
 File: ..//analyses/figures/InteractionPlots/Species_orig.pdf Graphic file (type
  pdf)
@@ -1344,51 +927,36 @@ Package pdftex.def Info: ..//analyses/figures/InteractionPlots/Species_orig.pdf
  used on input line 274.
 (pdftex.def)             Requested size: 455.24408pt x 295.89029pt.
 
-[21 <..//analyses/figures/model_output_90.pdf>]
-
-Package natbib Warning: There were undefined citations.
-
-[22 <..//analyses/figures/InteractionPlots/Species_orig.pdf>]
-(./RegionalRisk.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[22 <..//analyses/figures/model_output_90.pdf>] [23 <..//analyses/figures/Inter
+actionPlots/Species_orig.pdf>] (./regrisk.aux) ) 
 Here is how much of TeX's memory you used:
- 16273 strings out of 493014
- 317478 string characters out of 6133351
- 337378 words of memory out of 5000000
- 19590 multiletter control sequences out of 15000+600000
+ 16276 strings out of 493014
+ 317484 string characters out of 6133351
+ 340943 words of memory out of 5000000
+ 19591 multiletter control sequences out of 15000+600000
  34259 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,9n,42p,10402b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on RegionalRisk.pdf (22 pages, 2954929 bytes).
+ 37i,9n,42p,10397b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmtt10.pfb>
+Output written on regrisk.pdf (23 pages, 2956861 bytes).
 PDF statistics:
- 664 PDF objects out of 1000 (max. 8388607)
- 489 compressed objects within 5 object streams
+ 667 PDF objects out of 1000 (max. 8388607)
+ 491 compressed objects within 5 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

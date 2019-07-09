@@ -8,16 +8,33 @@ Cleaning sequence...
 https://github.com/cchambe12/regionalrisk
 
 ## Cleaning starts...
-With analyses/scripts/species
+** Step 1: regionalrisk/analyses/speciesdata_pep
+	* Run through each species you wish to get an output file for
+	* Repo currently only supports Aesculus hippocastenum, Alnus glutinosa, Betula pendula, Fagus sylvatica, Fraxinus excelsior, and Quercus robber
 
-analyses/scripts/regrisk/allspecies_climateprep.R
-This script cleans the PEP data and gets climate data
+** Step 2: analyses/climatedata
+	* Depending on model used you will need a different script
+		a) allspecies_climateprep.R: prepares all species for the original and -5degC models
+		b) allspecies_climateprep_dvr.R: prepares for varying durations of vegetative risk
+		c) allspecies_climateprep_fullleaf.R: prepares for BBCH 11 being defined as budburst instead of leafout and adding 12 days to find leafout
 
-<><><><><><><><><><><><
-Prep Data for Model
-<><><><><><><><><><><><
+** Step 3: analyses/countfalsesprings
+	* Again, choose script that matches model of interest
 
-analyses/scripts/FalseSpring/FS_allspp.R
+** Step 4: analyses/addin_allpreds
+	** First, must run gdistance.R, meanspringtemp.R, and nao.R
+	** Then, run spaceprep.R
+	** Then, go to the `mir' folder
+		* run whichever model you are interested in
+
+** Step 5: analyses/models
+	* Now you can run your model
+
+<><><><><><><><><><><><><><><><
+Details on files for model prep
+<><><><><><><><><><><><><><><><
+
+analyses/scripts/countfalsesprings/FS_allspp.R
 uses the above script to combine into a master list
 	
 	Meta:
@@ -30,35 +47,35 @@ uses the above script to combine into a master list
 	fs - if there was at least one day of freezing temperatures for that year for that species
 
 
-analyses/scripts/MAT.R
+analyses/addin_allpreds/meanspringtemp.R
 collects mean annual temperature data and makes new output file...
-mat_compressed.csv
+mat_MAM.csv
 
-analyses/scripts/gDistance.R
+analyses/addin_allpreds/gdistance.R
 Gathers distance from coast data for each site
 
-analyses/scripts/NAO.R
+analyses/addin_allpreds/nao.R
 Gathers NAO data from Nov-Apr for each site and year
 
-analyses/scripts/SpacePrep.R
+analyses/addin_allpreds/spaceprep.R
 Gathers all of the above information and collates MST, NAO, elevation, distance and false spring information and prepares for finding the space parameter
 <><> output file is fs_allspp_orig_allpred.csv
 
 <><><><><><><><><><><><
 Spatial Autocorrelation
 <><><><><><><><><><><><
-analyses/scripts/Newspace.r
+analyses/addin_allpreds/mir/fixautocorrelation.r
 Sends off to Odyssey to get space parameter information based on Baumen et al. 2017
 <><><> output file is fs_space_orig.csv
 
 <><><><><><><><><><><><
 Run the Model!
 <><><><><><><><><><><><
-analyses/scripts/Bern_original.R
-Sends off to Odyssey for final model using fs_space_orig.csv
+analyses/models/bern_original.R
+Sends off to Odyssey for final model using fs_newspace_orig.csv
 
 
-fs_space_orig.csv
+fs_newspace_orig.csv
 
 	Meta:
 	lat - latitude

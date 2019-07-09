@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 JUL 2019 14:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 JUL 2019 15:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Supplement_RegRisk.tex
-(./Supplement_RegRisk.tex
+**regrisk_supp.tex
+(./regrisk_supp.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
@@ -799,8 +799,8 @@ LaTeX Info: Redefining \\ on input line 3056.
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(./Supplement_RegRisk.aux)
-\openout1 = `Supplement_RegRisk.aux'.
+(./regrisk_supp.aux)
+\openout1 = `regrisk_supp.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
 LaTeX Font Info:    ... okay on input line 94.
@@ -889,7 +889,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--116
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3] (./Supplement_RegRisk.bbl
+[2] [3] (./regrisk_supp.bbl
 LaTeX Font Info:    Try loading font information for T1+aett on input line 26.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aett.fd
@@ -950,29 +950,28 @@ File: ..//analyses/figures/model_output_five_90.pdf Graphic file (type pdf)
 Package pdftex.def Info: ..//analyses/figures/model_output_five_90.pdf used on 
 input line 292.
 (pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
- [10] [11 <..//analyses/figures/model_output_five_90.pdf>] [12] (./Supplement_R
-egRisk.aux) ) 
+ [10] [11 <..//analyses/figures/model_output_five_90.pdf>] [12] (./regrisk_supp
+.aux) ) 
 Here is how much of TeX's memory you used:
  16088 strings out of 493014
- 314627 string characters out of 6133351
- 334915 words of memory out of 5000000
+ 314561 string characters out of 6133351
+ 334909 words of memory out of 5000000
  19422 multiletter control sequences out of 15000+600000
  24073 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,8n,42p,10390b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
-fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
->
-Output written on Supplement_RegRisk.pdf (12 pages, 968744 bytes).
+ 42i,8n,42p,10384b,589s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
+0.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12
+.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.
+pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pf
+b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on regrisk_supp.pdf (12 pages, 968744 bytes).
 PDF statistics:
  537 PDF objects out of 1000 (max. 8388607)
  399 compressed objects within 4 object streams

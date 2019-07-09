@@ -155,7 +155,7 @@ library(xtable)
 
 
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
+setwd("..//analyses/")
 
 modoutput <- read.csv("output/orig_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
@@ -215,7 +215,7 @@ print(xtable(modoutput,
   -\end{figure}}
   
 <<label=suppmoddvr, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
+setwd("..//analyses/")
 
 modoutput <- read.csv("output/dvr_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
@@ -248,7 +248,7 @@ print(xtable(modoutput,
   -\end{figure}}
   
 <<label=suppmodfive, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("/Users/catchamberlain/Documents/git/regionalrisk/analyses/")
+setwd("..//analyses/")
 
 modoutput <- read.csv("output/five_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
