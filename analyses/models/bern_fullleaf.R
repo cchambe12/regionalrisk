@@ -38,7 +38,7 @@ orig.short<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
 save(orig.short, file="/n/wolkovich_lab/Lab/Cat/orig_short.Rdata")
 }
 
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/FinalModels/fs_newspace_fullleaf.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_fullleaf.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newspace_fullleaf.csv", header=TRUE)
 bb<-subset(bb, select=c("species", "lat", "elev", "year", "mst", "cc", "fs.count", "nao",
                         "distkm", "eigen"))
@@ -55,14 +55,14 @@ bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
 #bb$species <- as.character(ifelse(bb$species=="FAGSYL", "aaFAGSYL", bb$species))
 
-orig.full<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
+fullleaf.full<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                   cc.z + species + nao.z:species + 
                   mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + 
                  nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z,  
                 data=bb, chains=4,family=bernoulli(), cores=4, iter = 4000, warmup=2500,
                 prior = prior(normal(0,1), class = "b"))
 
-save(orig.full, file="/n/wolkovich_lab/Lab/Cat/orig_full.Rdata")
+save(fullleaf.full, file="/n/wolkovich_lab/Lab/Cat/fullleaf_full.Rdata")
 
 if(FALSE){
 orig.bigpriors.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
