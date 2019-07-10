@@ -12,6 +12,8 @@ library(brms)
 setwd("~/Documents/git/regionalrisk")
 
 load("orig_full.Rdata")
+load("dvr_full.Rdata")
+load("five_full.Rdata")
 
 fs <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
 
@@ -60,6 +62,20 @@ linpreddiff(mean(fixef(orig.full, pars="cc.z", summary=FALSE)), fs$cc, 1) # 7.22
 (mean(fixef(orig.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150 ## 5.320474 (vs 4.83)
 (mean(fixef(orig.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200 ## 2.235522 (vs 1.89)
 (mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.842486 (vs 7.225)
+
+### Same rule but for DVR:
+(mean(fixef(dvr.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2 ## -8.078 
+(mean(fixef(dvr.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3 ## 2.04 
+(mean(fixef(dvr.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150 ## 5.36
+(mean(fixef(dvr.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200 ## 1.77 
+(mean(fixef(dvr.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.6
+
+### Same rule but for Five model:
+(mean(fixef(five.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2 ## -11.56
+(mean(fixef(five.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3 ## 1.26
+(mean(fixef(five.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150 ## 2.75
+(mean(fixef(five.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200 ## 7.35
+(mean(fixef(five.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 14.55
 
 
 #### Now try and make fake data to really tease this apart and test
