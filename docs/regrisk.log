@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 JUL 2019 12:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 JUL 2019 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -873,7 +873,7 @@ LaTeX Font Info:    Try loading font information for T1+aess on input line 98.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aess.fd
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 99--110
+Underfull \hbox (badness 10000) in paragraph at lines 99--111
 
  []
 
@@ -890,8 +890,8 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 File: ..//analyses/figures/BB_base.png Graphic file (type png)
 
 <use ..//analyses/figures/BB_base.png>
-Package pdftex.def Info: ..//analyses/figures/BB_base.png used on input line 25
-2.
+Package pdftex.def Info: ..//analyses/figures/BB_base.png used on input line 24
+5.
 (pdftex.def)             Requested size: 398.33858pt x 248.9458pt.
 
 <..//analyses/figures/MSTBB_bySpp.png, id=74, 2810.5pt x 1756.5625pt>
@@ -899,7 +899,7 @@ File: ..//analyses/figures/MSTBB_bySpp.png Graphic file (type png)
 
 <use ..//analyses/figures/MSTBB_bySpp.png>
 Package pdftex.def Info: ..//analyses/figures/MSTBB_bySpp.png used on input lin
-e 259.
+e 252.
 (pdftex.def)             Requested size: 455.24408pt x 284.51332pt.
  [19 <..//analyses/figures/BB_base.png>]
 <..//analyses/figures/Boxplot_BBTminFS_noDots.pdf, id=82, 585.45323pt x 550.975
@@ -907,7 +907,7 @@ e 259.
 File: ..//analyses/figures/Boxplot_BBTminFS_noDots.pdf Graphic file (type pdf)
  <use ..//analyses/figures/Boxplot_BBTminFS_noDots.pdf>
 Package pdftex.def Info: ..//analyses/figures/Boxplot_BBTminFS_noDots.pdf used 
-on input line 266.
+on input line 259.
 (pdftex.def)             Requested size: 398.33858pt x 374.88562pt.
  [20 <..//analyses/figures/MSTBB_bySpp.png>]
 <..//analyses/figures/model_output_90.pdf, id=87, 505.89pt x 505.89pt>
@@ -915,7 +915,7 @@ File: ..//analyses/figures/model_output_90.pdf Graphic file (type pdf)
 
 <use ..//analyses/figures/model_output_90.pdf>
 Package pdftex.def Info: ..//analyses/figures/model_output_90.pdf used on input
- line 274.
+ line 267.
 (pdftex.def)             Requested size: 284.52756pt x 284.53154pt.
  [21 <..//analyses/figures/Boxplot_BBTminFS_noDots.pdf>]
 <..//analyses/figures/InteractionPlots/Species_orig.pdf, id=232, 609.36024pt x 
@@ -924,7 +924,7 @@ File: ..//analyses/figures/InteractionPlots/Species_orig.pdf Graphic file (type
  pdf)
  <use ..//analyses/figures/InteractionPlots/Species_orig.pdf>
 Package pdftex.def Info: ..//analyses/figures/InteractionPlots/Species_orig.pdf
- used on input line 289.
+ used on input line 282.
 (pdftex.def)             Requested size: 455.24408pt x 295.89029pt.
 
 [22 <..//analyses/figures/model_output_90.pdf>] [23 <..//analyses/figures/Inter
@@ -953,7 +953,7 @@ ic/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmtt10.pfb>
-Output written on regrisk.pdf (23 pages, 2958457 bytes).
+Output written on regrisk.pdf (23 pages, 2975144 bytes).
 PDF statistics:
  667 PDF objects out of 1000 (max. 8388607)
  491 compressed objects within 5 object streams

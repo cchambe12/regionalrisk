@@ -66,7 +66,7 @@ aes <- ggplot() +
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) + ### to make sure the continent doesn't blend in with the ocean
-  annotate("text",label= "Aesculus \nhippocastanum", col="#CAB1C4", x=-12, y=68,fontface="bold.italic", size=3,
+  annotate("text",label= "B. Aesculus \nhippocastanum", col="#CAB1C4", x=-12, y=68,fontface="bold.italic", size=3,
            family="Helvetica", hjust=0) + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -94,7 +94,7 @@ aln <- ggplot() +
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95"),
         legend.position = "none") +
-  annotate("text",label= "Alnus glutinosa", col="gold2", x=1, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "C. Alnus glutinosa", col="gold2", x=1, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -122,7 +122,7 @@ bet <- ggplot() +
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Betula pendula", col="#7FC97F", x=0, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "A. Betula pendula", col="#7FC97F", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -151,7 +151,7 @@ syl <- ggplot() +
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Fagus sylvatica", col="#87A6A6", x=0, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "D. Fagus sylvatica", col="#87A6A6", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -179,7 +179,7 @@ fra <- ggplot() +
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95"),
         legend.position = "none") +
-  annotate("text",label= "Fraxinus excelsior", col="#BF5B17", x=3, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "F. Fraxinus excelsior", col="#BF5B17", x=3, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -210,7 +210,7 @@ que <- ggplot() +
           legend.position = "none", ##### Need to comment this line out to get the legend for the "g_legend" function, then remove comment to rerun the plot for arranging the grid
           axis.title = element_blank(),
           panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "Quercus robur", col="#CB1788", x=0, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "E. Quercus robur", col="#CB1788", x=0, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
     labs(color="Day of Budburst") + ggtitle("")
 

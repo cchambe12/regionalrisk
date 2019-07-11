@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 JUL 2019 11:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 JUL 2019 11:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**regrisk_supp.tex
-(./regrisk_supp.tex
+**submissionquestions_gcb.tex
+(./submissionquestions_gcb.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
@@ -204,46 +204,23 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks16
 \@floatcapt=\box28
 )
-(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/subcaption.sty
-Package: subcaption 2016/02/20 v1.1-142 Sub-captions (AR)
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen109
-\captionmargin@=\dimen110
-\captionwidth=\dimen111
-\caption@tempdima=\dimen112
-\caption@indent=\dimen113
-\caption@parindent=\dimen114
-\caption@hangindent=\dimen115
-)
-\c@ContinuedFloat=\count92
-Package caption Info: float package is loaded.
-)
-\c@subfigure=\count93
-\c@subtable=\count94
-)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2016/02/03 v2.11 `tabularx' package (DPC)
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/tools/array.sty
 Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
-\col@sep=\dimen116
-\extrarowheight=\dimen117
+\col@sep=\dimen109
+\extrarowheight=\dimen110
 \NC@list=\toks17
 \extratabsurround=\skip44
 \backup@length=\skip45
 )
-\TX@col@width=\dimen118
-\TX@old@table=\dimen119
-\TX@old@col=\dimen120
-\TX@target=\dimen121
-\TX@delta=\dimen122
-\TX@cols=\count95
+\TX@col@width=\dimen111
+\TX@old@table=\dimen112
+\TX@old@col=\dimen113
+\TX@target=\dimen114
+\TX@delta=\dimen115
+\TX@cols=\count92
 \TX@ftn=\toks18
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/siunitx/siunitx.sty
@@ -260,31 +237,31 @@ L3 Module: l3tl 2016/03/26 v6465 L3 Token lists
 L3 Module: l3str 2016/03/24 v6441 L3 Strings
 L3 Module: l3seq 2015/08/05 v5777 L3 Sequences and stacks
 L3 Module: l3int 2016/03/24 v6441 L3 Integers
-\c_max_int=\count96
-\l_tmpa_int=\count97
-\l_tmpb_int=\count98
-\g_tmpa_int=\count99
-\g_tmpb_int=\count100
+\c_max_int=\count93
+\l_tmpa_int=\count94
+\l_tmpb_int=\count95
+\g_tmpa_int=\count96
+\g_tmpb_int=\count97
 L3 Module: l3quark 2015/08/17 v5855 L3 Quarks
 L3 Module: l3prg 2015/11/01 v6216 L3 Control structures
-\g__prg_map_int=\count101
+\g__prg_map_int=\count98
 L3 Module: l3clist 2015/09/02 v5901 L3 Comma separated lists
 L3 Module: l3token 2016/04/03 v6470 L3 Experimental token manipulation
 L3 Module: l3prop 2016/01/05 v6366 L3 Property lists
 L3 Module: l3msg 2016/03/26 v6464 L3 Messages
 L3 Module: l3file 2016/03/25 v6458 L3 File and I/O operations
-\l_iow_line_count_int=\count102
-\l__iow_target_count_int=\count103
-\l__iow_current_line_int=\count104
-\l__iow_current_word_int=\count105
-\l__iow_current_indentation_int=\count106
+\l_iow_line_count_int=\count99
+\l__iow_target_count_int=\count100
+\l__iow_current_line_int=\count101
+\l__iow_current_word_int=\count102
+\l__iow_current_indentation_int=\count103
 L3 Module: l3skip 2016/01/05 v6366 L3 Dimensions and skips
-\c_zero_dim=\dimen123
-\c_max_dim=\dimen124
-\l_tmpa_dim=\dimen125
-\l_tmpb_dim=\dimen126
-\g_tmpa_dim=\dimen127
-\g_tmpb_dim=\dimen128
+\c_zero_dim=\dimen116
+\c_max_dim=\dimen117
+\l_tmpa_dim=\dimen118
+\l_tmpb_dim=\dimen119
+\g_tmpa_dim=\dimen120
+\g_tmpb_dim=\dimen121
 \c_zero_skip=\skip46
 \c_max_skip=\skip47
 \l_tmpa_skip=\skip48
@@ -298,18 +275,18 @@ L3 Module: l3skip 2016/01/05 v6366 L3 Dimensions and skips
 \g_tmpa_muskip=\muskip14
 \g_tmpb_muskip=\muskip15
 L3 Module: l3keys 2015/11/17 v6284 L3 Key-value interfaces
-\g__keyval_level_int=\count107
-\l_keys_choice_int=\count108
+\g__keyval_level_int=\count104
+\l_keys_choice_int=\count105
 L3 Module: l3fp 2016/03/26 v6465 L3 Floating points
-\c__fp_leading_shift_int=\count109
-\c__fp_middle_shift_int=\count110
-\c__fp_trailing_shift_int=\count111
-\c__fp_big_leading_shift_int=\count112
-\c__fp_big_middle_shift_int=\count113
-\c__fp_big_trailing_shift_int=\count114
-\c__fp_Bigg_leading_shift_int=\count115
-\c__fp_Bigg_middle_shift_int=\count116
-\c__fp_Bigg_trailing_shift_int=\count117
+\c__fp_leading_shift_int=\count106
+\c__fp_middle_shift_int=\count107
+\c__fp_trailing_shift_int=\count108
+\c__fp_big_leading_shift_int=\count109
+\c__fp_big_middle_shift_int=\count110
+\c__fp_big_trailing_shift_int=\count111
+\c__fp_Bigg_leading_shift_int=\count112
+\c__fp_Bigg_middle_shift_int=\count113
+\c__fp_Bigg_trailing_shift_int=\count114
 L3 Module: l3box 2015/08/09 v5822 L3 Experimental boxes
 \c_empty_box=\box29
 \l_tmpa_box=\box30
@@ -318,13 +295,13 @@ L3 Module: l3box 2015/08/09 v5822 L3 Experimental boxes
 \g_tmpb_box=\box33
 L3 Module: l3coffins 2016/05/17 v6508 L3 Coffin code layer
 \l__coffin_internal_box=\box34
-\l__coffin_internal_dim=\dimen129
-\l__coffin_offset_x_dim=\dimen130
-\l__coffin_offset_y_dim=\dimen131
-\l__coffin_x_dim=\dimen132
-\l__coffin_y_dim=\dimen133
-\l__coffin_x_prime_dim=\dimen134
-\l__coffin_y_prime_dim=\dimen135
+\l__coffin_internal_dim=\dimen122
+\l__coffin_offset_x_dim=\dimen123
+\l__coffin_offset_y_dim=\dimen124
+\l__coffin_x_dim=\dimen125
+\l__coffin_y_dim=\dimen126
+\l__coffin_x_prime_dim=\dimen127
+\l__coffin_y_prime_dim=\dimen128
 \c_empty_coffin=\box35
 \l__coffin_aligned_coffin=\box36
 \l__coffin_aligned_internal_coffin=\box37
@@ -333,42 +310,42 @@ L3 Module: l3coffins 2016/05/17 v6508 L3 Coffin code layer
 \l__coffin_display_coffin=\box40
 \l__coffin_display_coord_coffin=\box41
 \l__coffin_display_pole_coffin=\box42
-\l__coffin_display_offset_dim=\dimen136
-\l__coffin_display_x_dim=\dimen137
-\l__coffin_display_y_dim=\dimen138
+\l__coffin_display_offset_dim=\dimen129
+\l__coffin_display_x_dim=\dimen130
+\l__coffin_display_y_dim=\dimen131
 L3 Module: l3color 2014/08/23 v5354 L3 Experimental color support
 L3 Module: l3sys 2015/09/25 v6087 L3 Experimental system/runtime functions
 L3 Module: l3candidates 2016/05/13 v6484 L3 Experimental additions to l3kernel
-\l__box_top_dim=\dimen139
-\l__box_bottom_dim=\dimen140
-\l__box_left_dim=\dimen141
-\l__box_right_dim=\dimen142
-\l__box_top_new_dim=\dimen143
-\l__box_bottom_new_dim=\dimen144
-\l__box_left_new_dim=\dimen145
-\l__box_right_new_dim=\dimen146
+\l__box_top_dim=\dimen132
+\l__box_bottom_dim=\dimen133
+\l__box_left_dim=\dimen134
+\l__box_right_dim=\dimen135
+\l__box_top_new_dim=\dimen136
+\l__box_bottom_new_dim=\dimen137
+\l__box_left_new_dim=\dimen138
+\l__box_right_new_dim=\dimen139
 \l__box_internal_box=\box43
-\l__coffin_bounding_shift_dim=\dimen147
-\l__coffin_left_corner_dim=\dimen148
-\l__coffin_right_corner_dim=\dimen149
-\l__coffin_bottom_corner_dim=\dimen150
-\l__coffin_top_corner_dim=\dimen151
-\l__coffin_scaled_total_height_dim=\dimen152
-\l__coffin_scaled_width_dim=\dimen153
+\l__coffin_bounding_shift_dim=\dimen140
+\l__coffin_left_corner_dim=\dimen141
+\l__coffin_right_corner_dim=\dimen142
+\l__coffin_bottom_corner_dim=\dimen143
+\l__coffin_top_corner_dim=\dimen144
+\l__coffin_scaled_total_height_dim=\dimen145
+\l__coffin_scaled_width_dim=\dimen146
 L3 Module: l3luatex 2016/03/26 v6465 L3 Experimental LuaTeX-specific functions
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
 File: l3pdfmode.def 2016/03/26 v6465 L3 Experimental driver: PDF mode
-\l__driver_color_stack_int=\count118
+\l__driver_color_stack_int=\count115
 \l__driver_tmp_box=\box44
 ))
 (/usr/local/texlive/2016/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2016/05/18 v6512 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count119
-\l__xparse_m_args_int=\count120
-\l__xparse_mandatory_args_int=\count121
-\l__xparse_processor_int=\count122
-\l__xparse_v_nesting_int=\count123
+\l__xparse_current_arg_int=\count116
+\l__xparse_m_args_int=\count117
+\l__xparse_mandatory_args_int=\count118
+\l__xparse_processor_int=\count119
+\l__xparse_v_nesting_int=\count120
 )
 Package: siunitx 2016/03/01 v2.6q A comprehensive (SI) units package
 
@@ -378,45 +355,45 @@ Package: amstext 2000/06/29 v2.01 AMS text
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks19
-\ex@=\dimen154
+\ex@=\dimen147
 ))
 (/usr/local/texlive/2016/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 Package: l3keys2e 2016/05/18 v6512 LaTeX2e option processing using LaTeX3 keys
 )
 \l__siunitx_tmp_box=\box45
-\l__siunitx_tmp_dim=\dimen155
-\l__siunitx_tmp_int=\count124
-\l__siunitx_number_mantissa_length_int=\count125
-\l__siunitx_number_uncert_length_int=\count126
-\l__siunitx_round_int=\count127
-\l__siunitx_process_decimal_int=\count128
-\l__siunitx_process_uncertainty_int=\count129
-\l__siunitx_process_fixed_int=\count130
-\l__siunitx_process_integer_min_int=\count131
-\l__siunitx_process_precision_int=\count132
-\l__siunitx_group_min_int=\count133
+\l__siunitx_tmp_dim=\dimen148
+\l__siunitx_tmp_int=\count121
+\l__siunitx_number_mantissa_length_int=\count122
+\l__siunitx_number_uncert_length_int=\count123
+\l__siunitx_round_int=\count124
+\l__siunitx_process_decimal_int=\count125
+\l__siunitx_process_uncertainty_int=\count126
+\l__siunitx_process_fixed_int=\count127
+\l__siunitx_process_integer_min_int=\count128
+\l__siunitx_process_precision_int=\count129
+\l__siunitx_group_min_int=\count130
 \l__siunitx_angle_marker_box=\box46
 \l__siunitx_angle_unit_box=\box47
-\l__siunitx_angle_marker_dim=\dimen156
-\l__siunitx_angle_unit_dim=\dimen157
-\l__siunitx_unit_int=\count134
-\l__siunitx_unit_denominator_int=\count135
-\l__siunitx_unit_numerator_int=\count136
-\l__siunitx_unit_prefix_int=\count137
-\l__siunitx_unit_prefix_base_int=\count138
-\l__siunitx_unit_prefix_gram_int=\count139
-\l__siunitx_number_product_int=\count140
+\l__siunitx_angle_marker_dim=\dimen149
+\l__siunitx_angle_unit_dim=\dimen150
+\l__siunitx_unit_int=\count131
+\l__siunitx_unit_denominator_int=\count132
+\l__siunitx_unit_numerator_int=\count133
+\l__siunitx_unit_prefix_int=\count134
+\l__siunitx_unit_prefix_base_int=\count135
+\l__siunitx_unit_prefix_gram_int=\count136
+\l__siunitx_number_product_int=\count137
 \c__siunitx_one_fill_skip=\skip52
 \l__siunitx_table_unit_align_skip=\skip53
-\l__siunitx_table_exponent_dim=\dimen158
-\l__siunitx_table_integer_dim=\dimen159
-\l__siunitx_table_mantissa_dim=\dimen160
-\l__siunitx_table_marker_dim=\dimen161
-\l__siunitx_table_result_dim=\dimen162
-\l__siunitx_table_uncert_dim=\dimen163
-\l__siunitx_table_fill_pre_dim=\dimen164
-\l__siunitx_table_fill_post_dim=\dimen165
-\l__siunitx_table_fill_mid_dim=\dimen166
+\l__siunitx_table_exponent_dim=\dimen151
+\l__siunitx_table_integer_dim=\dimen152
+\l__siunitx_table_mantissa_dim=\dimen153
+\l__siunitx_table_marker_dim=\dimen154
+\l__siunitx_table_result_dim=\dimen155
+\l__siunitx_table_uncert_dim=\dimen156
+\l__siunitx_table_fill_pre_dim=\dimen157
+\l__siunitx_table_fill_post_dim=\dimen158
+\l__siunitx_table_fill_mid_dim=\dimen159
 \l__siunitx_table_pre_box=\box48
 \l__siunitx_table_post_box=\box49
 \l__siunitx_table_mantissa_box=\box50
@@ -546,68 +523,39 @@ Package: translator 2010/06/12 ver 1.10
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/beamer/translator/translator-lang
 uage-mappings.tex)))
-(/usr/local/texlive/2016/texmf-dist/tex/latex/multirow/multirow.sty
-\bigstrutjot=\dimen167
-)
-(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(/usr/local/texlive/2016/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/03/10 v2.15b AMS math features
-\@mathmargin=\skip56
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count138
+\Gm@cntv=\count139
+\c@Gm@tempcnt=\count140
+\Gm@bindingoffset=\dimen160
+\Gm@wd@mp=\dimen161
+\Gm@odd@mp=\dimen162
+\Gm@even@mp=\dimen163
+\Gm@layoutwidth=\dimen164
+\Gm@layoutheight=\dimen165
+\Gm@layouthoffset=\dimen166
+\Gm@layoutvoffset=\dimen167
+\Gm@dimlist=\toks20
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
 
-For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen168
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
-(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2016/03/08 v2.02 operator names
-)
-\inf@bad=\count141
-LaTeX Info: Redefining \frac on input line 199.
-\uproot@=\count142
-\leftroot@=\count143
-LaTeX Info: Redefining \overline on input line 297.
-\classnum@=\count144
-\DOTSCASE@=\count145
-LaTeX Info: Redefining \ldots on input line 394.
-LaTeX Info: Redefining \dots on input line 397.
-LaTeX Info: Redefining \cdots on input line 518.
-\Mathstrutbox@=\box52
-\strutbox@=\box53
-\big@size=\dimen169
-LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
-\macc@depth=\count146
-\c@MaxMatrixCols=\count147
-\dotsspace@=\muskip16
-\c@parentequation=\count148
-\dspbrk@lvl=\count149
-\tag@help=\toks20
-\row@=\count150
-\column@=\count151
-\maxfields@=\count152
-\andhelp@=\toks21
-\eqnshift@=\dimen170
-\alignsep@=\dimen171
-\tagshift@=\dimen172
-\tagwidth@=\dimen173
-\totwidth@=\dimen174
-\lineht@=\dimen175
-\@envbody=\toks22
-\multlinegap=\skip57
-\multlinetaggap=\skip58
-\mathdisplay@stack=\toks23
-LaTeX Info: Redefining \[ on input line 2739.
-LaTeX Info: Redefining \] on input line 2740.
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/mdframed/mdframed.sty
 Package: mdframed 2013/07/01 1.9b: mdframed
@@ -632,7 +580,7 @@ Package etexcmds Info: Could not find \expanded.
 )))
 (/usr/local/texlive/2016/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count153
+\etb@tempcnta=\count141
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/zref-abspage.sty
 Package: zref-abspage 2016/05/16 v2.25 Module abspage for zref (HO)
@@ -645,10 +593,6 @@ Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 )
 (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -665,90 +609,90 @@ Package zref Info: New property: page on input line 761.
 (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2016/05/16 v1.17 At begin shipout hook (HO)
 )
-\c@abspage=\count154
+\c@abspage=\count142
 Package zref Info: New property: abspage on input line 62.
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/needspace/needspace.sty
 Package: needspace 2010/09/12 v1.3d reserve vertical space
 )
-\mdf@templength=\skip59
-\c@mdf@globalstyle@cnt=\count155
-\mdf@skipabove@length=\skip60
-\mdf@skipbelow@length=\skip61
-\mdf@leftmargin@length=\skip62
-\mdf@rightmargin@length=\skip63
-\mdf@innerleftmargin@length=\skip64
-\mdf@innerrightmargin@length=\skip65
-\mdf@innertopmargin@length=\skip66
-\mdf@innerbottommargin@length=\skip67
-\mdf@splittopskip@length=\skip68
-\mdf@splitbottomskip@length=\skip69
-\mdf@outermargin@length=\skip70
-\mdf@innermargin@length=\skip71
-\mdf@linewidth@length=\skip72
-\mdf@innerlinewidth@length=\skip73
-\mdf@middlelinewidth@length=\skip74
-\mdf@outerlinewidth@length=\skip75
-\mdf@roundcorner@length=\skip76
-\mdf@footenotedistance@length=\skip77
-\mdf@userdefinedwidth@length=\skip78
-\mdf@needspace@length=\skip79
-\mdf@frametitleaboveskip@length=\skip80
-\mdf@frametitlebelowskip@length=\skip81
-\mdf@frametitlerulewidth@length=\skip82
-\mdf@frametitleleftmargin@length=\skip83
-\mdf@frametitlerightmargin@length=\skip84
-\mdf@shadowsize@length=\skip85
-\mdf@extratopheight@length=\skip86
-\mdf@subtitleabovelinewidth@length=\skip87
-\mdf@subtitlebelowlinewidth@length=\skip88
-\mdf@subtitleaboveskip@length=\skip89
-\mdf@subtitlebelowskip@length=\skip90
-\mdf@subtitleinneraboveskip@length=\skip91
-\mdf@subtitleinnerbelowskip@length=\skip92
-\mdf@subsubtitleabovelinewidth@length=\skip93
-\mdf@subsubtitlebelowlinewidth@length=\skip94
-\mdf@subsubtitleaboveskip@length=\skip95
-\mdf@subsubtitlebelowskip@length=\skip96
-\mdf@subsubtitleinneraboveskip@length=\skip97
-\mdf@subsubtitleinnerbelowskip@length=\skip98
+\mdf@templength=\skip56
+\c@mdf@globalstyle@cnt=\count143
+\mdf@skipabove@length=\skip57
+\mdf@skipbelow@length=\skip58
+\mdf@leftmargin@length=\skip59
+\mdf@rightmargin@length=\skip60
+\mdf@innerleftmargin@length=\skip61
+\mdf@innerrightmargin@length=\skip62
+\mdf@innertopmargin@length=\skip63
+\mdf@innerbottommargin@length=\skip64
+\mdf@splittopskip@length=\skip65
+\mdf@splitbottomskip@length=\skip66
+\mdf@outermargin@length=\skip67
+\mdf@innermargin@length=\skip68
+\mdf@linewidth@length=\skip69
+\mdf@innerlinewidth@length=\skip70
+\mdf@middlelinewidth@length=\skip71
+\mdf@outerlinewidth@length=\skip72
+\mdf@roundcorner@length=\skip73
+\mdf@footenotedistance@length=\skip74
+\mdf@userdefinedwidth@length=\skip75
+\mdf@needspace@length=\skip76
+\mdf@frametitleaboveskip@length=\skip77
+\mdf@frametitlebelowskip@length=\skip78
+\mdf@frametitlerulewidth@length=\skip79
+\mdf@frametitleleftmargin@length=\skip80
+\mdf@frametitlerightmargin@length=\skip81
+\mdf@shadowsize@length=\skip82
+\mdf@extratopheight@length=\skip83
+\mdf@subtitleabovelinewidth@length=\skip84
+\mdf@subtitlebelowlinewidth@length=\skip85
+\mdf@subtitleaboveskip@length=\skip86
+\mdf@subtitlebelowskip@length=\skip87
+\mdf@subtitleinneraboveskip@length=\skip88
+\mdf@subtitleinnerbelowskip@length=\skip89
+\mdf@subsubtitleabovelinewidth@length=\skip90
+\mdf@subsubtitlebelowlinewidth@length=\skip91
+\mdf@subsubtitleaboveskip@length=\skip92
+\mdf@subsubtitlebelowskip@length=\skip93
+\mdf@subsubtitleinneraboveskip@length=\skip94
+\mdf@subsubtitleinnerbelowskip@length=\skip95
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/mdframed/md-frame-0.mdf
 File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
 )
-\mdf@frametitlebox=\box54
-\mdf@footnotebox=\box55
-\mdf@splitbox@one=\box56
-\mdf@splitbox@two=\box57
-\mdf@splitbox@save=\box58
-\mdfsplitboxwidth=\skip99
-\mdfsplitboxtotalwidth=\skip100
-\mdfsplitboxheight=\skip101
-\mdfsplitboxdepth=\skip102
-\mdfsplitboxtotalheight=\skip103
-\mdfframetitleboxwidth=\skip104
-\mdfframetitleboxtotalwidth=\skip105
-\mdfframetitleboxheight=\skip106
-\mdfframetitleboxdepth=\skip107
-\mdfframetitleboxtotalheight=\skip108
-\mdffootnoteboxwidth=\skip109
-\mdffootnoteboxtotalwidth=\skip110
-\mdffootnoteboxheight=\skip111
-\mdffootnoteboxdepth=\skip112
-\mdffootnoteboxtotalheight=\skip113
-\mdftotallinewidth=\skip114
-\mdfboundingboxwidth=\skip115
-\mdfboundingboxtotalwidth=\skip116
-\mdfboundingboxheight=\skip117
-\mdfboundingboxdepth=\skip118
-\mdfboundingboxtotalheight=\skip119
-\mdf@freevspace@length=\skip120
-\mdf@horizontalwidthofbox@length=\skip121
-\mdf@verticalmarginwhole@length=\skip122
-\mdf@horizontalspaceofbox=\skip123
-\mdfsubtitleheight=\skip124
-\mdfsubsubtitleheight=\skip125
-\c@mdfcountframes=\count156
+\mdf@frametitlebox=\box52
+\mdf@footnotebox=\box53
+\mdf@splitbox@one=\box54
+\mdf@splitbox@two=\box55
+\mdf@splitbox@save=\box56
+\mdfsplitboxwidth=\skip96
+\mdfsplitboxtotalwidth=\skip97
+\mdfsplitboxheight=\skip98
+\mdfsplitboxdepth=\skip99
+\mdfsplitboxtotalheight=\skip100
+\mdfframetitleboxwidth=\skip101
+\mdfframetitleboxtotalwidth=\skip102
+\mdfframetitleboxheight=\skip103
+\mdfframetitleboxdepth=\skip104
+\mdfframetitleboxtotalheight=\skip105
+\mdffootnoteboxwidth=\skip106
+\mdffootnoteboxtotalwidth=\skip107
+\mdffootnoteboxheight=\skip108
+\mdffootnoteboxdepth=\skip109
+\mdffootnoteboxtotalheight=\skip110
+\mdftotallinewidth=\skip111
+\mdfboundingboxwidth=\skip112
+\mdfboundingboxtotalwidth=\skip113
+\mdfboundingboxheight=\skip114
+\mdfboundingboxdepth=\skip115
+\mdfboundingboxtotalheight=\skip116
+\mdf@freevspace@length=\skip117
+\mdf@horizontalwidthofbox@length=\skip118
+\mdf@verticalmarginwhole@length=\skip119
+\mdf@horizontalspaceofbox=\skip120
+\mdfsubtitleheight=\skip121
+\mdfsubsubtitleheight=\skip122
+\c@mdfcountframes=\count144
 
 ****** mdframed patching \endmdf@trivlist
 
@@ -764,77 +708,97 @@ File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
 . 
 . Defining command \mdtheorem with sig. ' O{} m o m o ' on line 701.
 .................................................
-\mdf@envdepth=\count157
-\c@mdf@env@i=\count158
-\c@mdf@env@ii=\count159
-\c@mdf@zref@counter=\count160
+\mdf@envdepth=\count145
+\c@mdf@env@i=\count146
+\c@mdf@env@ii=\count147
+\c@mdf@zref@counter=\count148
 Package zref Info: New property: mdf@pagevalue on input line 895.
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip126
-\bibsep=\skip127
+\bibhang=\skip123
+\bibsep=\skip124
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count161
+\c@NAT@ctr=\count149
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/natbib/bibentry.sty
+Package: bibentry 2007/10/30 1.5 (PWD)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen168
+\captionmargin@=\dimen169
+\captionwidth=\dimen170
+\caption@tempdima=\dimen171
+\caption@indent=\dimen172
+\caption@parindent=\dimen173
+\caption@hangindent=\dimen174
+)
+\c@ContinuedFloat=\count150
+Package caption Info: float package is loaded.
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count162
-\output=\toks24
-\linenoprevgraf=\count163
-\linenumbersep=\dimen176
-\linenumberwidth=\dimen177
-\c@linenumber=\count164
-\c@pagewiselinenumber=\count165
-\c@LN@truepage=\count166
-\c@internallinenumber=\count167
-\c@internallinenumbers=\count168
-\quotelinenumbersep=\dimen178
-\bframerule=\dimen179
-\bframesep=\dimen180
-\bframebox=\box59
+\linenopenalty=\count151
+\output=\toks21
+\linenoprevgraf=\count152
+\linenumbersep=\dimen175
+\linenumberwidth=\dimen176
+\c@linenumber=\count153
+\c@pagewiselinenumber=\count154
+\c@LN@truepage=\count155
+\c@internallinenumber=\count156
+\c@internallinenumbers=\count157
+\quotelinenumbersep=\dimen177
+\bframerule=\dimen178
+\bframesep=\dimen179
+\bframebox=\box57
 LaTeX Info: Redefining \\ on input line 3056.
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(./regrisk_supp.aux)
-\openout1 = `regrisk_supp.aux'.
+(./submissionquestions_gcb.aux)
+\openout1 = `submissionquestions_gcb.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 94.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 94.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 86.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 86.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    ... okay on input line 86.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count169
-\scratchdimen=\dimen181
-\scratchbox=\box60
-\nofMPsegments=\count170
-\nofMParguments=\count171
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count172
-\MPscratchDim=\dimen182
-\MPnumerator=\count173
-\makeMPintoPDFobject=\count174
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count158
+\scratchdimen=\dimen180
+\scratchbox=\box58
+\nofMPsegments=\count159
+\nofMParguments=\count160
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count161
+\MPscratchDim=\dimen181
+\MPnumerator=\count162
+\makeMPintoPDFobject=\count163
+\everyMPtoPDFconversion=\toks23
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -850,9 +814,6 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: End \AtBeginDocument code.
-
 (/usr/local/texlive/2016/texmf-dist/tex/latex/beamer/translator/dicts/translato
 r-basic-dictionary/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
@@ -860,127 +821,135 @@ Dictionary: translator-basic-dictionary, Language: English
 (/usr/local/texlive/2016/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2016/03/01 v2.6q siunitx: Abbreviated units
 )
-\AtBeginShipoutBox=\box61
-\c__siunitx_mathsf_int=\count175
-LaTeX Font Info:    Try loading font information for U+msa on input line 94.
- (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 94.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=472.03111pt
+* \textheight=624.25352pt
+* \oddsidemargin=-1.13791pt
+* \evensidemargin=-1.13791pt
+* \topmargin=-42.67912pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-\c__siunitx_mathtt_int=\count176
-LaTeX Font Info:    Try loading font information for T1+aess on input line 101.
-
+\AtBeginShipoutBox=\box59
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+\c__siunitx_mathsf_int=\count164
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 86.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 86.
+\c__siunitx_mathtt_int=\count165
+(./submissionquestions_gcb.bbl)
+LaTeX Font Info:    Try loading font information for T1+aess on input line 90.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aess.fd
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 103--115
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
 
  []
 
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3] (./regrisk_supp.bbl
-LaTeX Font Info:    Try loading font information for T1+aett on input line 26.
+Underfull \hbox (badness 10000) in paragraph at lines 109--112
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aett.fd
-File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-)
-Underfull \hbox (badness 1107) in paragraph at lines 21--27
-\T1/aer/m/n/10 se-lec-tion of spa-tial or phy-lo-ge-netic eigen-vec-tors.  \T1/
-aer/m/it/10 Ecog-ra-phy\T1/aer/m/n/10 , \T1/aer/bx/n/10 0\T1/aer/m/n/10 .  doi:
-10.1111/ecog.03380.  URL
  []
 
 
-Underfull \hbox (badness 2529) in paragraph at lines 55--60
-[]\T1/aer/m/n/10 Flynn DFB, Wolkovich EM (2018) Tem-per-a-ture and pho-tope-rio
-d drive spring phe-nol-ogy across
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 55--60
-\T1/aer/m/n/10 all species in a tem-per-ate for-est com-mu-nity.  \T1/aer/m/it/
-10 New Phy-tol-o-gist\T1/aer/m/n/10 .  doi:10.1111/nph.15232.  URL
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
  []
 
-[4]
-Underfull \hbox (badness 2057) in paragraph at lines 98--102
-[]\T1/aer/m/n/10 USA-NPN (2019) Plant and an-i-mal phe-nol-ogy data.  \T1/aer/m
-/it/10 USA Na-tional Phe-nol-ogy Net-work\T1/aer/m/n/10 .  doi:
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
+
  []
 
-) [5]
-Overfull \hbox (11.4847pt too wide) in paragraph at lines 168--180
- [] 
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
+
  []
 
-[6]
-<..//analyses/figures/APC_allpred_allspp_baseR.pdf, id=33, 631.00943pt x 399.87
-274pt>
-File: ..//analyses/figures/APC_allpred_allspp_baseR.pdf Graphic file (type pdf)
-
- <use ..//analyses/figures/APC_allpred_allspp_baseR.pdf>
-Package pdftex.def Info: ..//analyses/figures/APC_allpred_allspp_baseR.pdf used
- on input line 258.
-(pdftex.def)             Requested size: 455.24408pt x 288.4878pt.
- [7]
-<..//analyses/figures/model_output_dvr_90.pdf, id=38, 505.89pt x 505.89pt>
-File: ..//analyses/figures/model_output_dvr_90.pdf Graphic file (type pdf)
-
-<use ..//analyses/figures/model_output_dvr_90.pdf>
-Package pdftex.def Info: ..//analyses/figures/model_output_dvr_90.pdf used on i
-nput line 265.
-(pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
- [8 <..//analyses/figures/APC_allpred_allspp_baseR.pdf>] [9 <..//analyses/figur
-es/model_output_dvr_90.pdf>]
-<..//analyses/figures/model_output_five_90.pdf, id=386, 505.89pt x 505.89pt>
-File: ..//analyses/figures/model_output_five_90.pdf Graphic file (type pdf)
-
-<use ..//analyses/figures/model_output_five_90.pdf>
-Package pdftex.def Info: ..//analyses/figures/model_output_five_90.pdf used on 
-input line 301.
-(pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
- [10] [11 <..//analyses/figures/model_output_five_90.pdf>] [12] (./regrisk_supp
-.aux) )
-(\end occurred inside a group at level 1)
-
-### simple group (level 1) entered at line 96 ({)
-### bottom level 
+(./submissionquestions_gcb.bbl) [2] (./submissionquestions_gcb.aux) ) 
 Here is how much of TeX's memory you used:
- 16085 strings out of 493014
- 314513 string characters out of 6133351
- 334846 words of memory out of 5000000
- 19419 multiletter control sequences out of 15000+600000
- 24073 words of font info for 54 fonts, out of 8000000 for 9000
+ 15629 strings out of 493014
+ 310237 string characters out of 6133351
+ 339050 words of memory out of 5000000
+ 18985 multiletter control sequences out of 15000+600000
+ 22053 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,9n,42p,10384b,656s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on regrisk_supp.pdf (12 pages, 982143 bytes).
+ 37i,5n,42p,10395b,275s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on submissionquestions_gcb.pdf (2 pages, 79262 bytes).
 PDF statistics:
- 542 PDF objects out of 1000 (max. 8388607)
- 402 compressed objects within 5 object streams
+ 31 PDF objects out of 1000 (max. 8388607)
+ 21 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

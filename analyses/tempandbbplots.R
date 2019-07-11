@@ -46,7 +46,7 @@ postf$numfs<-ave(postf$fs.count, postf$species, FUN=sum)
 
 aeship<-subset(xx, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("Aesculus hippocastanum \n(Avg Day of Budburst = 99.24)")))) + 
+  ggtitle(expression(paste(italic("B. Aesculus hippocastanum \n(Avg Day of Budburst = 99.2)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
   axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -56,7 +56,7 @@ ahip<-ggplot(aeship, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
 
 alnglu<-subset(xx, species=="ALNGLU")
 aglu<-ggplot(alnglu, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("Alnus glutinosa \n(Avg Day of Budburst = 98.91)")))) + 
+  ggtitle(expression(paste(italic("C. Alnus glutinosa \n(Avg Day of Budburst = 98.9)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -66,7 +66,7 @@ aglu<-ggplot(alnglu, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
 
 betpen<-subset(xx, species=="BETPEN")
 bpen<-ggplot(betpen, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("Betula pendula \n(Avg Day of Budburst = 98.76)")))) + 
+  ggtitle(expression(paste(italic("A. Betula pendula \n(Avg Day of Budburst = 98.8)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),
@@ -76,7 +76,7 @@ bpen<-ggplot(betpen, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
 
 fagsyl<-subset(xx, species=="FAGSYL")
 fsyl<-ggplot(fagsyl, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("Fagus sylvatica \n(Avg Day of Budburst = 106.7)")))) + 
+  ggtitle(expression(paste(italic("D. Fagus sylvatica \n(Avg Day of Budburst = 106.7)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -86,7 +86,7 @@ fsyl<-ggplot(fagsyl, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
 
 fraexc<-subset(xx, species=="FRAEXC")
 fexc<-ggplot(fraexc, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("Fraxinus excelsior \n(Avg Day of Budburst = 116.34)")))) + 
+  ggtitle(expression(paste(italic("F. Fraxinus excelsior \n(Avg Day of Budburst = 116.3)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
@@ -96,7 +96,7 @@ fexc<-ggplot(fraexc, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year")
 
 querob<-subset(xx, species=="QUEROB")
 qrob<-ggplot(querob, aes(x=year, y=mst)) + geom_point(alpha=0.08) + xlab("Year") + ylab("Mean Spring Temperature") + 
-  ggtitle(expression(paste(italic("Quercus robur \n(Avg Day of Budburst = 113.0)")))) + 
+  ggtitle(expression(paste(italic("E. Quercus robur \n(Avg Day of Budburst = 113.0)")))) + 
   coord_cartesian(ylim=c(-5,15)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), legend.key=element_blank(),plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),

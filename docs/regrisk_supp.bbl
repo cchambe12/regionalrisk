@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{15}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
@@ -50,12 +50,6 @@ Donnelly A, Yu R, Caffarra A, \emph{et~al.} (2017) Interspecific and
   interannual variation in the duration of spring phenophases in a northern
   mixed forest.
 \newblock \emph{Agricultural and Forest Meteorology}, \textbf{243}, 55--67.
-
-\bibitem[{Finn \emph{et~al.}(2007)Finn, Straszewski, \& Peterson}]{Finn2007}
-Finn GA, Straszewski AE, Peterson V (2007) A general growth stage key for
-  describing trees and woody plants.
-\newblock \emph{Annals of Applied Biology}, \textbf{151}, 127--131.
-\newblock \doi{10.1111/j.1744-7348.2007.00159.x}.
 
 \bibitem[{Flynn \& Wolkovich(2018)}]{Flynn2018}
 Flynn DFB, Wolkovich EM (2018) Temperature and photoperiod drive spring
