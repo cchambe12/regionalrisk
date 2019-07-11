@@ -73,6 +73,7 @@ dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 dxx<-na.omit(dxx)
 
+write.csv(df, file="~/Documents/git/regionalrisk/analyses/output/bb_fullleaf.csv", row.names=FALSE)
 write.csv(dxx, file="~/Desktop/allspp_climateprep_fullleaf.csv", row.names=FALSE)
 
 

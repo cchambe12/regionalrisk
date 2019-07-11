@@ -18,6 +18,7 @@ library(RColorBrewer)
 setwd("~/Documents/git/regionalrisk/analyses/")
 
 bb <- read.csv("output/fs_newspace_orig.csv", header=TRUE)
+#bb <- read.csv("output/fs_newspace_fullleaf.csv", header=TRUE)
 
 sites <- subset(bb, select=c("lat.long", "cc"))
 sites <- sites[!duplicated(sites),]
@@ -31,6 +32,7 @@ goodsites <- unique(tt$Var1)
 #### get the data
 mat<-read.csv("output/BBdata.csv", header=TRUE) #### mean day of budburst is 104.88
 #mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
+#mat<-read.csv("output/bb_fullleaf.csv", header=TRUE)
 #mat$lat.long <- paste(mat$lat, mat$long)
 #mat <- mat[(mat$lat.long%in%goodsites),]
 
@@ -75,7 +77,7 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "cQUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Day of Budburst") + coord_cartesian(ylim=c(50,165)) + 
-  geom_hline(yintercept=104.88, linetype="dotted", col="black") +
+  geom_hline(yintercept=mean(mat$bb), linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                        labels=c("0"="1951-1983", "1"="1984-2016")) +
@@ -87,6 +89,7 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
 
 ###### Tmin boxplots now...
 tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE) #### mean tmin is 7.54
+#tm<-read.csv("output/tminprep_boxplots_fullleaf.csv", header=TRUE) 
 #tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
 #tm$lat.long <- paste(tm$lat, tm$long)
 #tm <- tm[(tm$lat.long%in%goodsites),]
@@ -132,7 +135,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Minimum Temperature \nfrom Budburst to Leafout") + coord_cartesian(ylim=c(0,15)) + 
-  geom_hline(yintercept=7.54, linetype="dotted", col="black") +
+  geom_hline(yintercept=mean(plust$Tmin), linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                      labels=c("0"="1951-1983", "1"="1984-2016")) +
@@ -143,6 +146,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
 f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
+#f<-read.csv("output/fs_newspace_fullleaf.csv", header=TRUE)
 
 f <- f[(f$lat.long%in%goodsites),]
 

@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{amssymb} % for math symbols
+\usepackage{amsmath} % for aligning equations
+%\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{mdframed}
+\usepackage{natbib}
+\bibliographystyle{..//bib/styles/gcb}
+%\usepackage[hyphens]{url}
+\usepackage{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{1.5}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+%% R Script
+<<label=libraries, echo=FALSE, results="asis", message=FALSE, warning=FALSE>>=
+  options(stringsAsFactors=FALSE)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(xtable)
+@
+
+\begin{document}
+<<label=suppmodfullleaf, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("~/Documents/git/regionalrisk/analyses/")
+
+modoutput <- read.csv("output/fullleaf_full_modeloutput.csv", header=TRUE)
+modoutput <- modoutput[c(2:7,43:47),]
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
+# add multicolumn later for BB and LO headers above these column names
+
+modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
+modoutput$Term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$Term)
+modoutput$Term <- gsub("b_elev.z", "Elevation", modoutput$Term)
+modoutput$Term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$Term)
+modoutput$Term <- gsub("b_space.z", "Space Parameter", modoutput$Term)
+modoutput$Term <- gsub("b_cc.z", "Climate Change", modoutput$Term)
+modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
+
+
+print(xtable(modoutput, 
+             caption = "Summary of Bernouilli model of false spring risk for new definition of budburst (i.e., BBCH 11) without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
+             align = c("l", "l", "r","r","r", "r","r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+@
+
+\end{document}

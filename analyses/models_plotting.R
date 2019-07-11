@@ -269,6 +269,7 @@ setwd("~/Documents/git/regionalrisk")
 load("orig_full.Rdata")
 load("dvr_full.Rdata")
 load("five_full.Rdata")
+load("fullleaf_full.Rdata")
 modorig<-as.data.frame(tidy(orig.full, prob=0.9))
 names(modorig)<-c("term", "estimate", "error", "10%", "90%")
 modorig50<-as.data.frame(tidy(orig.full, prob=0.5))
@@ -305,9 +306,21 @@ modfive <- subset(modfive, select=c("term", "estimate", "10%", "25%", "75%", "90
 
 #write.csv(modfive, file="analyses/output/five_full_modeloutput.csv", row.names=FALSE)
 
+modfullleaf<-as.data.frame(tidy(fullleaf.full, prob=0.9))
+names(modfullleaf)<-c("term", "estimate", "error", "10%", "90%")
+modfullleaf50<-as.data.frame(tidy(fullleaf.full, prob=0.5))
+names(modfullleaf50)<-c("term", "estimate", "error", "25%", "75%")
+modfullleaf <- full_join(modfullleaf, modfullleaf50)
+#modfive25<-as.data.frame(tidy(five.full, prob=0.25))
+#names(modfive25)<-c("term", "estimate", "error", "25%", "75%")
+#modfive <- full_join(modfive, modfive25)
+modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
+
+#write.csv(modfullleaf, file="analyses/output/fullleaf_full_modeloutput.csv", row.names=FALSE)
+
 
 ### Now to make the plots
-modoutput <- moddvr #modelhere
+modoutput <- modfullleaf #modelhere
 
 modoutput<-modoutput[2:47,]
 modoutput$term<-gsub(".*b_","",modoutput$term)
@@ -348,7 +361,7 @@ regrisk<-ggplot(modoutput, aes(x=`10%`, xend=`90%`, y=Jvar, yend=Jvar)) +
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1.2, 1.2), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
+  coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
   annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   annotate("text", x = 0.5, y = 12, colour = "black", size=3, label="More False Spring Risk") +
