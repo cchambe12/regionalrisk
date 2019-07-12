@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 JUL 2019 11:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  12 JUL 2019 13:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -891,42 +891,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2] [3] (./regrisk_supp.bbl
-LaTeX Font Info:    Try loading font information for T1+aett on input line 26.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 98.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-Underfull \hbox (badness 1107) in paragraph at lines 21--27
-\T1/aer/m/n/10 se-lec-tion of spa-tial or phy-lo-ge-netic eigen-vec-tors.  \T1/
-aer/m/it/10 Ecog-ra-phy\T1/aer/m/n/10 , \T1/aer/bx/n/10 0\T1/aer/m/n/10 .  doi:
-10.1111/ecog.03380.  URL
- []
-
-
-Underfull \hbox (badness 2529) in paragraph at lines 55--60
-[]\T1/aer/m/n/10 Flynn DFB, Wolkovich EM (2018) Tem-per-a-ture and pho-tope-rio
-d drive spring phe-nol-ogy across
- []
-
-
-Underfull \hbox (badness 1281) in paragraph at lines 55--60
-\T1/aer/m/n/10 all species in a tem-per-ate for-est com-mu-nity.  \T1/aer/m/it/
-10 New Phy-tol-o-gist\T1/aer/m/n/10 .  doi:10.1111/nph.15232.  URL
- []
-
-[4]
-Underfull \hbox (badness 2057) in paragraph at lines 98--102
+Underfull \hbox (badness 2057) in paragraph at lines 95--99
 []\T1/aer/m/n/10 USA-NPN (2019) Plant and an-i-mal phe-nol-ogy data.  \T1/aer/m
 /it/10 USA Na-tional Phe-nol-ogy Net-work\T1/aer/m/n/10 .  doi:
  []
 
-) [5]
+[4]) [5]
 Overfull \hbox (11.4847pt too wide) in paragraph at lines 168--180
  [] 
  []
 
 [6]
-<..//analyses/figures/APC_allpred_allspp_baseR.pdf, id=33, 631.00943pt x 399.87
+<..//analyses/figures/APC_allpred_allspp_baseR.pdf, id=34, 631.00943pt x 399.87
 274pt>
 File: ..//analyses/figures/APC_allpred_allspp_baseR.pdf Graphic file (type pdf)
 
@@ -935,34 +916,34 @@ Package pdftex.def Info: ..//analyses/figures/APC_allpred_allspp_baseR.pdf used
  on input line 258.
 (pdftex.def)             Requested size: 455.24408pt x 288.4878pt.
  [7]
-<..//analyses/figures/model_output_dvr_90.pdf, id=38, 505.89pt x 505.89pt>
-File: ..//analyses/figures/model_output_dvr_90.pdf Graphic file (type pdf)
+<..//analyses/figures/model_output_90_dvr.png, id=39, 2107.875pt x 2107.875pt>
+File: ..//analyses/figures/model_output_90_dvr.png Graphic file (type png)
 
-<use ..//analyses/figures/model_output_dvr_90.pdf>
-Package pdftex.def Info: ..//analyses/figures/model_output_dvr_90.pdf used on i
+<use ..//analyses/figures/model_output_90_dvr.png>
+Package pdftex.def Info: ..//analyses/figures/model_output_90_dvr.png used on i
 nput line 265.
-(pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
+(pdftex.def)             Requested size: 341.43306pt x 341.41599pt.
  [8 <..//analyses/figures/APC_allpred_allspp_baseR.pdf>] [9 <..//analyses/figur
-es/model_output_dvr_90.pdf>]
-<..//analyses/figures/model_output_five_90.pdf, id=386, 505.89pt x 505.89pt>
-File: ..//analyses/figures/model_output_five_90.pdf Graphic file (type pdf)
-
-<use ..//analyses/figures/model_output_five_90.pdf>
-Package pdftex.def Info: ..//analyses/figures/model_output_five_90.pdf used on 
+es/model_output_90_dvr.png>]
+<..//analyses/figures/model_output_90_five.png, id=283, 2107.875pt x 2107.875pt
+>
+File: ..//analyses/figures/model_output_90_five.png Graphic file (type png)
+ <use ..//analyses/figures/model_output_90_five.png>
+Package pdftex.def Info: ..//analyses/figures/model_output_90_five.png used on 
 input line 301.
-(pdftex.def)             Requested size: 341.43306pt x 341.43785pt.
- [10] [11 <..//analyses/figures/model_output_five_90.pdf>] [12] (./regrisk_supp
+(pdftex.def)             Requested size: 341.43306pt x 341.41599pt.
+ [10] [11 <..//analyses/figures/model_output_90_five.png>] [12] (./regrisk_supp
 .aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 96 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 16085 strings out of 493014
- 314513 string characters out of 6133351
- 334846 words of memory out of 5000000
- 19419 multiletter control sequences out of 15000+600000
- 24073 words of font info for 54 fonts, out of 8000000 for 9000
+ 16091 strings out of 493014
+ 314550 string characters out of 6133351
+ 334845 words of memory out of 5000000
+ 19420 multiletter control sequences out of 15000+600000
+ 26920 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,9n,42p,10384b,656s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
@@ -976,11 +957,12 @@ pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
 sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on regrisk_supp.pdf (12 pages, 982143 bytes).
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on regrisk_supp.pdf (12 pages, 997170 bytes).
 PDF statistics:
- 542 PDF objects out of 1000 (max. 8388607)
- 402 compressed objects within 5 object streams
+ 337 PDF objects out of 1000 (max. 8388607)
+ 246 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

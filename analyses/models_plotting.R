@@ -320,7 +320,7 @@ modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "7
 
 
 ### Now to make the plots
-modoutput <- modfullleaf #modelhere
+modoutput <- modfive #modelhere
 
 modoutput<-modoutput[2:47,]
 modoutput$term<-gsub(".*b_","",modoutput$term)
@@ -361,7 +361,7 @@ regrisk<-ggplot(modoutput, aes(x=`10%`, xend=`90%`, y=Jvar, yend=Jvar)) +
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
+  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
   annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   annotate("text", x = 0.5, y = 12, colour = "black", size=3, label="More False Spring Risk") +
@@ -370,3 +370,10 @@ regrisk<-ggplot(modoutput, aes(x=`10%`, xend=`90%`, y=Jvar, yend=Jvar)) +
 
 quartz()
 regrisk
+
+
+png("analyses/figures/model_output_90_five.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=6,
+    height=6, units="in", res = 350 )
+grid.draw(regrisk)
+dev.off()

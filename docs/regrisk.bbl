@@ -25,6 +25,13 @@ Basler D, K{\"{o}}rner C (2012) {Photoperiod sensitivity of bud burst in 14
 \newblock \emph{Agricultural and Forest Meteorology}, \textbf{165}, 73--81.
 \newblock \doi{10.1016/j.agrformet.2012.06.001}.
 
+\bibitem[{Bauman \emph{et~al.}(2017)Bauman, Drouet, Dray, \&
+  Vleminckx}]{Baumen2017}
+Bauman D, Drouet T, Dray S, Vleminckx J (2017) Disentangling good from bad
+  practices in the selection of spatial or phylogenetic eigenvectors.
+\newblock \emph{Ecography}, \textbf{0}.
+\newblock \doi{10.1111/ecog.03380}.
+
 \bibitem[{Bennett \emph{et~al.}(2018)Bennett, Calosi, Clusella-Trullas
   \emph{et~al.}}]{bennett2018globtherm}
 Bennett JM, Calosi P, Clusella-Trullas S, \emph{et~al.} (2018) Globtherm, a
@@ -50,8 +57,6 @@ Chamberlain CJ, Cook BI, de~Cortazar~Atauri IG, Wolkovich EM (2019) Rethinking
   false spring risk.
 \newblock \emph{Global Change Biology}, \textbf{25}, 2209--2220.
 \newblock \doi{10.1111/gcb.14642}.
-\newblock
-  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/gcb.14642}.
 
 \bibitem[{Chen \emph{et~al.}(2005)Chen, Hu, \& Yu}]{Chen2005}
 Chen X, Hu B, Yu R (2005) {Spatial and temporal variation of phenological
@@ -71,15 +76,6 @@ Cleland EE, Chuine I, Menzel A, Mooney HA, Schwartz MD (2007) {Shifting plant
   phenology in response to global change}.
 \newblock \emph{Trends in Ecology and Evolution}, \textbf{22}, 357--365.
 \newblock \doi{10.1016/j.tree.2007.04.003}.
-
-\bibitem[{David \emph{et~al.}(2017)David, Thomas, St{\'e}phane, \&
-  Jason}]{Baumen2017}
-David B, Thomas D, St{\'e}phane D, Jason V (2017) Disentangling good from bad
-  practices in the selection of spatial or phylogenetic eigenvectors.
-\newblock \emph{Ecography}, \textbf{0}.
-\newblock \doi{10.1111/ecog.03380}.
-\newblock
-  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/ecog.03380}.
 
 \bibitem[{Diniz-Filho \emph{et~al.}(2012)Diniz-Filho, Bini, Rangel,
   Morales-Castilla, Olalla-T{\'a}rraga, Rodr{\'\i}guez, \&
@@ -101,7 +97,6 @@ Flynn DFB, Wolkovich EM (2018) Temperature and photoperiod drive spring
   phenology across all species in a temperate forest community.
 \newblock \emph{New Phytologist}.
 \newblock \doi{10.1111/nph.15232}.
-\newblock \urlprefix\url{http://dx.doi.org/10.1111/nph.15232}.
 
 \bibitem[{Gelman \& Hill(2006)}]{Gelman2006}
 Gelman A, Hill J (2006) \emph{Data analysis using regression and
@@ -124,8 +119,6 @@ H{\"a}nninen H (1991) Does climatic warming increase the risk of frost damage
   in northern trees?
 \newblock \emph{Plant, Cell \& Environment}, \textbf{14}, 449--454.
 \newblock \doi{10.1111/j.1365-3040.1991.tb01514.x}.
-\newblock
-  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1365-3040.1991.tb01514.x}.
 
 \bibitem[{Hipp \emph{et~al.}(2017)Hipp, S.~Manos, Gonz{\'a}lez-Rodr{\'\i}guez
   \emph{et~al.}}]{Hipp2017}
@@ -160,7 +153,6 @@ Kharouba HM, Ehrl{\'e}n J, Gelman A, Bolmgren K, Allen JM, Travers SE,
 \newblock \emph{Proceedings of the National Academy of Sciences}, \textbf{115},
   5211--5216.
 \newblock \doi{10.1073/pnas.1714511115}.
-\newblock \urlprefix\url{http://www.pnas.org/content/115/20/5211}.
 
 \bibitem[{Klosterman \emph{et~al.}(2018)Klosterman, Hufkens, \&
   Richardson}]{Klosterman2018}
@@ -191,13 +183,11 @@ K{\"o}rner C, Basler D, Hoch G, \emph{et~al.} (2016) {Where, why and how?
 \newblock \urlprefix\url{http://dx.doi.org/10.1111/1365-2745.12574}.
 
 \bibitem[{Kramer(1994)}]{Kramer1994}
-Kramer K (1994) A modelling analysis of the effects of climatic warming on the
-  probability of spring frost damage to tree species in the netherlands and
-  germany.
+Kramer K (1994) {A modelling analysis of the effects of climatic warming on the
+  probability of spring frost damage to tree species in The Netherlands and
+  Germany}.
 \newblock \emph{Plant, Cell \& Environment}, \textbf{17}, 367--377.
 \newblock \doi{10.1111/j.1365-3040.1994.tb00305.x}.
-\newblock
-  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1365-3040.1994.tb00305.x}.
 
 \bibitem[{Kukal \& Irmak(2018)}]{Kukal2018}
 Kukal MS, Irmak S (2018) {U.S. Agro-Climate in 20th century: growing degree
@@ -232,7 +222,6 @@ Liu Q, Piao S, Janssens IA, \emph{et~al.} (2018) Extension of the growing
   season increases vegetation exposure to frost.
 \newblock \emph{Nature Communications}, \textbf{9}.
 \newblock \doi{10.1038/s41467-017-02690-y}.
-\newblock \urlprefix\url{http://dx.doi.org/10.1038/s41467-017-02690-y}.
 
 \bibitem[{Liu \emph{et~al.}(2006)Liu, Yin, Shao, \& Qin}]{Liu2006}
 Liu X, Yin Z, Shao X, Qin N (2006) {Temporal trends and variability of daily
@@ -246,8 +235,6 @@ Ma Q, Huang JG, H{\"a}nninen H, Berninger F (2018) Divergent trends in the risk
   of spring frost damage to trees in europe with recent warming.
 \newblock \emph{Global Change Biology}, \textbf{0}.
 \newblock \doi{10.1111/gcb.14479}.
-\newblock
-  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/gcb.14479}.
 
 \bibitem[{Martin \emph{et~al.}(2010)Martin, Gavazov, K{\"{o}}rner,
   Hattenschwiler, \& Rixen}]{Martin2010}
@@ -264,8 +251,6 @@ Meier U (2001) {Growth stages of mono-and dicotyledonous plants BBCH Monograph
 \newblock \emph{Agriculture}, \textbf{12}, 141----147 ST ---- Geochemical study
   of the organic mat.
 \newblock \doi{10.5073/bbch0515}.
-\newblock
-  \urlprefix\url{http://pub.jki.bund.de/index.php/BBCH/article/view/515/464}.
 
 \bibitem[{Menzel \emph{et~al.}(2015)Menzel, Helm, \& Zang}]{Menzel2015}
 Menzel A, Helm R, Zang C (2015) {Patterns of late spring frost leaf damage and
@@ -304,7 +289,6 @@ Scheifinger H, Menzel A, Koch E, Peter C (2003) {Trends of spring time frost
   events and phenological dates in Central Europe}.
 \newblock \emph{Theoretical and Applied Climatology}, \textbf{74}, 41--51.
 \newblock \doi{10.1007/s00704-002-0704-6}.
-\newblock \urlprefix\url{http://dx.doi.org/10.1007/s00704-002-0704-6}.
 
 \bibitem[{Schwartz(1993)}]{Schwartz1993}
 Schwartz MD (1993) Assessing the onset of spring: A climatological perspective.
@@ -346,7 +330,6 @@ Vitasse Y, Lenz A, K{\"{o}}rner C (2014) The interaction between freezing
   tolerance and phenology in temperate deciduous trees.
 \newblock \emph{Frontiers in Plant Science}, \textbf{5}.
 \newblock \doi{10.3389/fpls.2014.00541}.
-\newblock \urlprefix\url{http://dx.doi.org/10.3389/fpls.2014.00541}.
 
 \bibitem[{Vitasse \emph{et~al.}(2018)Vitasse, Schneider, Rixen, Christen, \&
   Rebetez}]{Vitasse2018}
@@ -355,15 +338,12 @@ Vitasse Y, Schneider L, Rixen C, Christen D, Rebetez M (2018) {Increase in the
   elevations in Switzerland over the last four decades}.
 \newblock \emph{Agricultural and Forest Meteorology}, \textbf{248}, 60 -- 69.
 \newblock \doi{https://doi.org/10.1016/j.agrformet.2017.09.005}.
-\newblock
-  \urlprefix\url{http://www.sciencedirect.com/science/article/pii/S0168192317303003}.
 
 \bibitem[{Vitra \emph{et~al.}(2017)Vitra, Lenz, \& Vitasse}]{Vitra2017}
 Vitra A, Lenz A, Vitasse Y (2017) Frost hardening and dehardening potential in
   temperate trees from winter to budburst.
 \newblock \emph{New Phytologist}, \textbf{216}, 113--123.
 \newblock \doi{10.1111/nph.14698}.
-\newblock \urlprefix\url{http://dx.doi.org/10.1111/nph.14698}.
 
 \bibitem[{Wang \emph{et~al.}(2016)Wang, McAllister, Bartlett, \&
   Buggs}]{Wang2016}
@@ -371,7 +351,6 @@ Wang N, McAllister HA, Bartlett PR, Buggs RJA (2016) {Molecular phylogeny and
   genome size evolution of the genus \textit{Betula} (Betulaceae)}.
 \newblock \emph{Annals of Botany}, \textbf{117}, 1023--1035.
 \newblock \doi{10.1093/aob/mcw048}.
-\newblock \urlprefix\url{http://dx.doi.org/10.1093/aob/mcw048}.
 
 \bibitem[{Wolkovich \emph{et~al.}(2012)Wolkovich, Cook, Allen
   \emph{et~al.}}]{Wolkovich2012}
@@ -403,7 +382,6 @@ Zhuo X, Zheng T, Zhang Z, \emph{et~al.} (2018) {Genome-wide analysis of the NAC
   cold-stress responses in the woody plant \textit{Prunus mume}}.
 \newblock \emph{Genes}, \textbf{9}.
 \newblock \doi{10.3390/genes9100494}.
-\newblock \urlprefix\url{http://www.mdpi.com/2073-4425/9/10/494}.
 
 \bibitem[{Zohner \emph{et~al.}(2016)Zohner, Benito, Svenning, \&
   Renner}]{Zohner2016}
