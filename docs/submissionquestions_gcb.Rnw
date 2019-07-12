@@ -34,24 +34,25 @@
 ]{siderules}
 \begin{document}
 \nobibliography*
-\noindent \textbf{\Large{Regional Risk: Submission Questions}}\\
+\noindent \textbf{\Large{Regional Risk: Submission Questions (max 50 words per answer)}}\\
 \vspace{3ex}
 
 \noindent \textbf{What is the scientific question you are addressing?} \\
 
-\noindent With climate change, there is growing interest in false spring events, which can affect both plant performance and survival. By better understanding the influence of known spatial and climatic factors for predicting false spring risk, we will be able to advance forecasting in the field.  %% 58 words
+\noindent With climate change, there is growing interest in false spring events, which can affect both plant performance and survival. By better understanding the influence of known spatial and climatic factors for predicting false spring risk, we will be able to advance forecasting in the field.  (45 words) \\
 
 \noindent \textbf{What is/are the key finding(s) that answers this question?} \\
 
-\noindent False spring risk is influenced by multiple climatic and geographic factors, all of which must be incorporated into models to best predict spatiotemporal, species-specific shifts in false springs. Some factors are better at predicting risk than others, however it is essential to include all factors, which contribute to an individual's risk of false spring and also increase the prediction accuracy of the overall model. We found there is a heightened risk of false springs with climate change, which could in turn, have escalating impacts on plant community dynamics and further amplify climatic shifts.  
+\noindent There is a heightened risk of false springs with climate change and that false spring risk is influenced by multiple climatic and geographic factors. Some factors are better at predicting risk than others, however it is essential to include all factors to increase the prediction accuracy of the overall model. (50 words) \\
 
 \noindent \textbf{Why is this work important and timely?}\\
 
-\noindent Recent studies have documented how climate change is reshaping false springs, with cascading ecological and economic impacts but few studies agree on how false spring risk will shift with climate change. New models, such as ours, are essential to predict the effects of climate change on false spring risk across different spatial and climatic regimes. \\
+\noindent Recent studies have documented the impacts of false springs but few have agreed on how risk will shift with climate change. New models, such as ours, are essential to best predict spatiotemporal, species-specific shifts in false springs, which could have escalating effects on temperate forests and ultimately augment climatic shifts. (50 words) \\
+
 
 \noindent \textbf{ Does your paper fall within the scope of GCB; what biological AND global change aspects does it address?}\\
 
-\noindent The manuscript will unravel the effects of multiple spatial and climatic factors on false spring risk in the face of climate change. We found that false spring events consistently increased with climate change across species, which could have cascading effects on temperate forest communities across Central Europe. \\ % 50 words
+\noindent By investigating budburst observations of six temperate, deciduous tree species from Central Europe, we unravel the species-specific effects and multiple spatial and climatic factors on false spring risk in the face of climate change. We found that false spring events consistently increased with climate change across species. (50 words) \\ 
 
 \noindent \textbf{What are the three most recently published papers that are relevant to this question?} \\
 
@@ -67,7 +68,7 @@
 
 \noindent N/A \\
 
-\bibliography{..//bib/RegionalRisk.bib}
+\nobibliography{..//bib/RegionalRisk.bib}
 
 
 \end{document}

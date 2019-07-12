@@ -98,6 +98,8 @@ int = coef(m1)[1]
 testnonz <- function(coef, pred) {(invlogit(int + coef*mean(pred)) -   ### combination of Gelman-Hill, 2007 and https://stats.stackexchange.com/questions/185509/convert-standardized-beta-coefficient-estimates-to-raw-data-scale-to-interpret-o
                                           invlogit(int + coef*(mean(pred)-1)))*100}
 
+(coef(m1)[2]/4)*100 ## -11.7
+
 testnonz((coef(m1)[2]), agri) ## -10.55498
 
 ## Now for a z-scored model
@@ -109,6 +111,9 @@ m2 <- glm(y ~ agri.z + cc.z + agri.z:cc.z, family = "binomial")
 int = coef(m2)[1]
 testz <- function(coef, pred) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
                                         invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-1)))*100}
+
+((coef(m1)[2]/4)*2*sd(agri)) *100 # -234.0
+
 testz(coef(m2)[2], agri) # -10.95105
 
 ### Divide by 4 rule: need to multiply by 100 to convert to percent as above
