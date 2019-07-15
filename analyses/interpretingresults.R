@@ -79,6 +79,8 @@ linpreddiff(mean(fixef(orig.full, pars="cc.z", summary=FALSE)), fs$cc, 1) # 7.22
 
 
 #### Now try and make fake data to really tease this apart and test
+## Let's also try McElreath's Rethinking package..
+
 set.seed(1234)
 ndata <- 1000
 agri <- rnorm(ndata, 0, 10)
@@ -112,7 +114,8 @@ int = coef(m2)[1]
 testz <- function(coef, pred) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
                                         invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-1)))*100}
 
-((coef(m1)[2]/4)*2*sd(agri)) *100 # -234.0
+coef(m1)[2]/(4*2*sd(agri)) *100# -0.59
+(coef(m1)[2]/4)*2*sd(agri) *100# -234.0
 
 testz(coef(m2)[2], agri) # -10.95105
 
@@ -120,3 +123,6 @@ testz(coef(m2)[2], agri) # -10.95105
 (coef(m1)[2]/4)*100 # -11.73362 (vs. -10.55498)
 (coef(m2)[2]/4)/(sd(agri)*2)*100 # -11.73134 (vs. -10.95105)
 
+coef(m2)[2]/4/(2*sd(agri))*100
+
+             
