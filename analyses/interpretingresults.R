@@ -81,7 +81,7 @@ linpreddiff(mean(fixef(orig.full, pars="cc.z", summary=FALSE)), fs$cc, 1) # 7.22
 #### Now try and make fake data to really tease this apart and test
 ## Let's also try McElreath's Rethinking package..
 
-set.seed(1234)
+set.seed(7777)
 ndata <- 1000
 agri <- rnorm(ndata, 0, 10)
 cc <- rnorm(ndata, 0, 1)
@@ -100,7 +100,7 @@ int = coef(m1)[1]
 testnonz <- function(coef, pred) {(invlogit(int + coef*mean(pred)) -   ### combination of Gelman-Hill, 2007 and https://stats.stackexchange.com/questions/185509/convert-standardized-beta-coefficient-estimates-to-raw-data-scale-to-interpret-o
                                           invlogit(int + coef*(mean(pred)-1)))*100}
 
-(coef(m1)[2]/4)*100 ## -11.7
+(coef(m1)[2]/4)*100 ## -12.95
 
 testnonz((coef(m1)[2]), agri) ## -10.55498
 
@@ -114,14 +114,13 @@ int = coef(m2)[1]
 testz <- function(coef, pred) {(invlogit(int + (coef/(sd(pred)*2))*mean(pred)) - 
                                         invlogit(int + (coef/(sd(pred)*2))*(mean(pred)-1)))*100}
 
-coef(m1)[2]/(4*2*sd(agri)) *100# -0.59
-(coef(m1)[2]/4)*2*sd(agri) *100# -234.0
+coef(m2)[2]/(4*2*sd(agri)) *100# -12.95
 
 testz(coef(m2)[2], agri) # -10.95105
 
 ### Divide by 4 rule: need to multiply by 100 to convert to percent as above
-(coef(m1)[2]/4)*100 # -11.73362 (vs. -10.55498)
-(coef(m2)[2]/4)/(sd(agri)*2)*100 # -11.73134 (vs. -10.95105)
+(coef(m1)[2]/4)*100 # -12.95 
+(coef(m2)[2]/4)/(sd(agri)*2)*100 # -12.95 
 
 coef(m2)[2]/4/(2*sd(agri))*100
 
