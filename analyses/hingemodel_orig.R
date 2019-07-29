@@ -64,14 +64,16 @@ outcome$spsitenum <- seq(1, to=sppxsite, by=1)
 #fs.glm <-subset(fs.cleansites, select=c("fs", "spsitenum", "hinge"))
 #fs.glm <- fs.glm[!duplicated(fs.glm),]
 
-for(i in 1:sppxsite){ #i=1
-  #mod <- glm(fs ~ hinge, data=fs.cleansites[(fs.cleansites$spsitenum==i),], family=binomial(link="logit"))
-  mod <- lm(fs ~ hinge, data=fs.cleansites[(fs.cleansites$spsitenum==i),])
+fs.cleansites=fs.cleansites[complete.cases(fs.cleansites),]
+
+for(i in 1:sppxsite){ #i=160
+  mod <- glm(fs ~ hinge, data=fs.cleansites[(fs.cleansites$spsitenum==i),], family=binomial(link="logit"))
+  #mod <- lm(fs ~ hinge, data=fs.cleansites[(fs.cleansites$spsitenum==i),])
   
   outcome[which(outcome$spsitenum==i),2] <- coef(mod)[1]
-  outcome[which(outcome$spsitenum==i),3] <- confint(mod)[1]
+  outcome[which(outcome$spsitenum==i),3] <- confint.default(mod)[1]
   outcome[which(outcome$spsitenum==i),4] <- coef(mod)[2]
-  outcome[which(outcome$spsitenum==i),5] <- confint(mod)[2]
+  outcome[which(outcome$spsitenum==i),5] <- confint.default(mod)[2]
   
 }
 
@@ -84,4 +86,4 @@ outcome <- outcome[!duplicated(outcome),]
 hingeoutput <- subset(outcome, select=c("species", "lat", "long", "elev",
                                         "intercept", "confint", "slope", "confslope"))
 
-write.csv(hingeoutput, file="output/hingemodel_orig.csv", row.names = FALSE)
+write.csv(hingeoutput, file="output/hingemodel_orig_10years.csv", row.names = FALSE)
