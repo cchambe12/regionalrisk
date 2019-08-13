@@ -1,0 +1,82 @@
+\documentclass{article}[12pt]
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{amssymb} % for math symbols
+\usepackage{amsmath} % for aligning equations
+\usepackage{mdframed}
+\usepackage{natbib}
+%\bibliographystyle{..//bib/styles/gcb}
+\usepackage[hyphens]{url}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{2}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+\usepackage{setspace}
+\doublespacing
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+\begin{document}
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\labelitemi}{$-$}
+
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand\thesubsection{\arabic{section}.\arabic{subsection}} 
+
+\begin{center}
+\begin{tabular}{l c c c | c c c}
+\cline{2-7}
+& \multicolumn{3}{ c| }{1951-1983}
+& \multicolumn{3}{ c }{1984-2016} \\ \cline{2-7}
+& mean & 10\% & 90\% & mean & 10\% & 90\% \\
+\hline
+\textit{Aesculus hippocastanum} & 0.260 & 0.257 & 0.263 & 0.333 & 0.330 & 0.337  \\
+\textit{Alnus glutinosa} & 0.265 & 0.261 & 0.268 & 0.352 & 0.348 & 0.357 \\
+\textit{Betula pendula} & 0.265 & 0.263 & 0.268 & 0.353 & 0.349 & 0.356 \\
+\textit{Fagus sylvatica} & 0.223 & 0.220 & 0.225 & 0.228 & 0.225 & 0.231 \\
+\textit{Fraxinus excelsior} & 0.096 & 0.094 & 0.099 & 0.083 & 0.080 & 0.085 \\
+\textit{Quercus robur} & 0.132 & 0.129 & 0.134 & 0.126 & 0.123 & 0.128 \\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//analyses/figures/InteractionPlots/ccxspecies_dots.pdf}
+  -\caption{Marginal effects of climate change for each species}\label{fig:spp}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12
+  cm]{..//analyses/figures/InteractionPlots/ccxspecies_lines.pdf}
+  -\caption{Marginal effects of climate change for each species}\label{fig:spp}
+  -\end{center}
+  -\end{figure}}
+
+
+\end{document}

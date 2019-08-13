@@ -37,7 +37,7 @@ orig.short<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
             prior = prior(normal(0,1), class = "b"))
 
 save(orig.short, file="/n/wolkovich_lab/Lab/Cat/orig_short.Rdata")
-}
+
 
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/FinalModels/fs_newspace_orig.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", header=TRUE)
@@ -64,7 +64,7 @@ orig.full<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                 prior = prior(normal(0,1), class = "b"))
 
 save(orig.full, file="/n/wolkovich_lab/Lab/Cat/orig_full.Rdata")
-
+}
 if(FALSE){
 orig.bigpriors.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                  cc.z + species + nao.z:species + 
@@ -74,5 +74,38 @@ orig.bigpriors.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
                prior = prior(normal(0,5), class = "b"))
 
 save(orig.bigpriors.fagus, file="/n/wolkovich_lab/Lab/Cat/orig_bigpriors_fagus.Rdata")
+}
+
+
+if(FALSE){
+#### Now adding some very simple models...
+# 30 July 2019 - Cat
+
+lstfrz <- read.csv("/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv", header=TRUE)
+
+lstfrz.mod.simple <- brm(lastfreeze~year, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+                     iter=4000, warmup = 2500, chains=4, cores=4)
+
+save(lstfrz.mod.simple, file="/n/wolkovich_lab/Lab/Cat/lstfrz.simple.Rdata")
+
+lstfrz.mod.species <- brm(lastfreeze~year*species, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+                     iter=4000, warmup = 2500, chains=4, cores=4)
+
+save(lstfrz.mod.species, file="/n/wolkovich_lab/Lab/Cat/lstfrz.species.Rdata")
+}
+
+if(TRUE){
+bbdata <- read.csv("/n/wolkovich_lab/Lab/Cat/BBdata.csv")
+
+bb.mod.simple <- brm(bb~year, data=bbdata, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+                     iter=4000, warmup = 2500, chains=4, cores=4)
+
+save(bb.mod.simple, file="/n/wolkovich_lab/Lab/Cat/bbmod.simple.Rdata")
+
+
+#bb.mod.species <- brm(bb~year*species, data=bb, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+ #                    iter=4000, warmup = 2500, chains=4, cores=4)
+
+#save(bb.mod.species, file="/n/wolkovich_lab/Lab/Cat/bbmod.species.Rdata")
 }
 

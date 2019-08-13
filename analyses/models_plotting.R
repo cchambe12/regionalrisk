@@ -140,10 +140,11 @@ ccsp$group<-ifelse(ccsp$group=="BETPEN", "aaBETPEN", ccsp$group)
 ccsp$group<-ifelse(ccsp$group=="FRAEXC", "zFRAEXC", ccsp$group)
 ccsp <- ccsp[(ccsp$x==-0.5 | ccsp$x==0.5),]
 ccsp$x <- (ccsp$x)*sd(bb$cc)*2 + mean(bb$cc)
-ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ #geom_point(aes(col=group))+ #geom_line(aes(col=group)) + 
+ccsp$x <- ifelse(ccsp$x <0, 0, 1)
+ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ #geom_line(aes(col=group)) + 
   xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("E.") + 
   scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1)) +
-  geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
+  #geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,0.4))  + theme(legend.key = element_rect(fill="transparent")) +
   theme_classic() + theme(legend.position = "none") + 
   theme(legend.text.align = 0) +

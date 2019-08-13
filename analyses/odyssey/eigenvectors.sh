@@ -23,4 +23,4 @@ module load gcc/7.1.0-fasrc01 R_core/3.5.1-fasrc02
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/fixautocorrelation_fullleaf.R eigenvector
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/fixautocorrelation.R eigenvector

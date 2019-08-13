@@ -24,4 +24,4 @@ module load gcc/7.1.0-fasrc01 R_core/3.5.1-fasrc02
 module load R_packages
 
 
-R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/FinalModels/Bern_original.R rndslopes
+R CMD BATCH --quiet --no-restore --save /n/wolkovich_lab/Lab/Cat/bern_original.R rndslopes

@@ -8,6 +8,7 @@ library(raster)
 library(reshape2)
 library(data.table)
 
+if(FALSE){
 dxx<-read.csv("/n/wolkovich_lab/Lab/Cat/allspp_climateprep.csv", header=TRUE)
 #dxx<-read.csv("~/Desktop/allspp_climateprep.csv", header=TRUE)
 
@@ -48,11 +49,28 @@ x<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 
 write.csv(x, file="/n/wolkovich_lab/Lab/Cat/allspp_data.csv", row.names=FALSE)
 #write.csv(x, file="~/Desktop/allspp_data.csv", row.names=FALSE)
+}
 
+x <- read.csv("/n/wolkovich_lab/Lab/Cat/allspp_data.csv", header=TRUE)
+x <-read.csv("~/Desktop/allspp_data.csv")
+
+if(FALSE){
+x$fs <- ifelse(x$Tmin <= -2.2, 1, 0)
+x <- x[!(x$doy>250),]
+x$lastfreeze <- ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last)
+x$lastfreezemax <- ave(x$doy, x$PEP_ID, x$year, x$species, FUN=max)
+lastfrz <- subset(x, select=c("lat", "long", "PEP_ID", "year", "species", "lastfreeze","lastfreezemax"))
+lastfrz <- lastfrz[!duplicated(lastfrz),]
+lastfrz <- na.omit(lastfrz)
+
+write.csv(lastfrz, file="/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv", row.names = FALSE)
+}
+
+if(TRUE){
 x$fs<- ifelse(x$Tmin<=-2.2, 1, 0)
 x$lo<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last)
 x$bb<-x$lo-12 # Based on Danf's ACESAC - most closely related. Choose WL0 based on keeping all species consistent
-x<-x[!(x$doy<x$bb),]
+x<-x[!(x$doy<x$bb),] ## double check no early freezes sneak in
 x<-x[!duplicated(x),]
 x$fs.count<- ave(x$fs, x$PEP_ID, x$year, x$species, FUN=sum)
 allspp<-x%>%dplyr::select(lat, long, PEP_ID, fs.count, year, species)
@@ -60,5 +78,7 @@ allspp<-allspp[!duplicated(allspp),]
 allspp<-na.omit(allspp)
 allspp$fs<-ifelse(allspp$fs.count>=1, 1, 0)
 
-write.csv(allspp, file="/n/wolkovich_lab/Lab/Cat/fs_allspp_original.csv", row.names = FALSE)
+#write.csv(allspp, file="/n/wolkovich_lab/Lab/Cat/fs_allspp_original.csv", row.names = FALSE)
+write.csv(allspp, file="/n/wolkovich_lab/Lab/Cat/fs_checkallspp.csv", row.names=FALSE)
 #write.csv(allspp, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_original.csv", row.names = FALSE)
+}

@@ -7,8 +7,10 @@ library(vegan)
 
 #setwd("~/Documents/git/regionalrisk/analyses/output")
 
-#bb<-read.csv("fs_allspp_orig_allpred.csv", header=TRUE)
+#bb<-read.csv("fs_checkallspp_fullleaf_allpred.csv", header=TRUE)
+#bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_orig_allpred.csv", header=TRUE)
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_orig_allpred.csv", header=TRUE)
+bb <- na.omit(bb)
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 
@@ -59,6 +61,6 @@ eigen<-cbind(eigen, falsies)
 library(dplyr)
 prep_space<-full_join(bb, eigen)
 
-write.csv(prep_space, file="/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv", row.names=FALSE)
+write.csv(prep_space, file="/n/wolkovich_lab/Lab/Cat/fs_newspace_check.csv", row.names=FALSE)
 #write.csv(prep_space, file="~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", row.names=FALSE)
 
