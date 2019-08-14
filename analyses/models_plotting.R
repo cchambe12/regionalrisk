@@ -11,8 +11,8 @@ library(brms)
 library(ggplot2)
 library(egg)
 library(RColorBrewer)
-library(sjmisc)
-library(sjPlot)
+#library(sjmisc)
+#library(sjPlot)
 library(ggeffects)
 library(broom)
 
@@ -20,6 +20,8 @@ setwd("~/Documents/git/regionalrisk/analyses/output")
 bb <- read.csv("fs_newspace_orig.csv", header=TRUE)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+
+load("~/Documents/git/regionalrisk/orig_full.Rdata")
 
 ##### Interaction Plots code
 
@@ -53,7 +55,7 @@ naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur")))))
 
-elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.9) 
+#elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.9) 
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_90.csv", row.names = FALSE)
 elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_90.csv", header=TRUE)
@@ -105,8 +107,8 @@ matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab(
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-load("~/Documents/git/regionalrisk/orig_full.Rdata")
-spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.9) 
+#load("~/Documents/git/regionalrisk/orig_full.Rdata")
+#spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.9) 
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_90.csv", row.names = FALSE)
 spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_90.csv", header=TRUE)
@@ -132,16 +134,14 @@ spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + x
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-#ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.5) 
-#write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted.csv", row.names = FALSE)
+#ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.9) 
+#write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_90.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_50.csv", row.names = FALSE)
 ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_90.csv", header=TRUE)
 ccsp$group<-ifelse(ccsp$group=="BETPEN", "aaBETPEN", ccsp$group)
 ccsp$group<-ifelse(ccsp$group=="FRAEXC", "zFRAEXC", ccsp$group)
-ccsp <- ccsp[(ccsp$x==-0.5 | ccsp$x==0.5),]
-ccsp$x <- (ccsp$x)*sd(bb$cc)*2 + mean(bb$cc)
 ccsp$x <- ifelse(ccsp$x <0, 0, 1)
-ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ #geom_line(aes(col=group)) + 
+ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ geom_line(aes(col=group), linetype="dotted") + 
   xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("E.") + 
   scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1)) +
   #geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +

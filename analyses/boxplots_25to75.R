@@ -20,13 +20,14 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 bb <- read.csv("output/fs_newspace_orig.csv", header=TRUE)
 #bb <- read.csv("output/fs_newspace_fullleaf.csv", header=TRUE)
 
+if(FALSE){
 sites <- subset(bb, select=c("lat.long", "cc"))
 sites <- sites[!duplicated(sites),]
 tt <- as.data.frame(table(sites$lat.long))
 tt <- tt[(tt$Freq==2),]
 
 goodsites <- unique(tt$Var1)
-
+}
 
 ########################
 #### get the data
@@ -143,12 +144,16 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 
 ### And finally... False springs!
+###### 14 August 2019 - Cat
+# Adding to final panel model results to help reader interpret differences between raw data and considering all climatic and geographical factors
+modoutput <- read.csv("output/ccsp_predicted_90.csv", header=TRUE)
+
 f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_fullleaf.csv", header=TRUE)
 
-f <- f[(f$lat.long%in%goodsites),]
+#f <- f[(f$lat.long%in%goodsites),]
 
 #f$cc<-ifelse(f$year<1980, 0, 1)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
@@ -157,9 +162,24 @@ f<-f[!is.na(f$fs),]
 #f$fs<-ifelse(f$fs.count>0, 1, 0)
 f$fs<-ave(f$fs,f$lat.long, f$species, f$cc, FUN=sum)
 
+modoutput$est.conv <-  (modoutput$predicted/4)/(2) * 100
+modoutput$low.conv <-  (modoutput$conf.low/4)/(2) * 100
+modoutput$up.conv <-  (modoutput$conf.high/4)/(2) * 100
+modoutput$x <- ifelse(modoutput$x<0, 0, 1)
+
+
+modoutput<-subset(modoutput, select=c("x", "group", "est.conv", "low.conv", "up.conv"))
+colnames(modoutput) <- c("cc", "species", "est", "lower", "upper")
+
+modoutput$species<-ifelse(modoutput$species=="BETPEN", "aaBETPEN", modoutput$species)
+modoutput$species<-ifelse(modoutput$species=="FRAEXC", "zFRAEXC", modoutput$species)
+
 
 plusf<-subset(f, select=c(species, cc, fs))
 plusf<-plusf[!duplicated(plusf),]
+
+plusf <- full_join(plusf, modoutput)
+
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=16) +
   scale_fill_manual(name="Species", values=cols,
@@ -194,6 +214,9 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                      labels=c("0"="1951-1983", "1"="1984-2016")) +
+  geom_point(aes(x=as.factor(species), alpha=as.factor(cc), y=est, group=cc), 
+             col="black", position = position_dodge(width=0.75), size=1) + 
+  geom_linerange(aes(x=as.factor(species), alpha=as.factor(cc), ymin=lower, ymax=upper, group=cc), col="black", position = position_dodge(width=0.75)) +
   ggtitle("C.") +
   guides(alpha=guide_legend(override.aes=list(fill=hcl(c(15,195),100,0,alpha=c(0.2,0.7)))), col=FALSE, fill=FALSE)
 

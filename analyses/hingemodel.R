@@ -6,6 +6,7 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 
 # Load libraries
+library(dplyr)
 
 
 ## Set Working Directory
@@ -64,14 +65,14 @@ outcome$spsitenum <- seq(1, to=sppxsite, by=1)
 #fs.glm <- fs.glm[!duplicated(fs.glm),]
 
 for(i in 1:sppxsite){ #i=1
-  #mod <- glm(fs ~ hinge, data=fs.cleansites[(fs.cleansites$spsitenum==i),], family=binomial(link="logit"))
-  mod <- lm(fs ~ hinge, data=fs.cleansites[(fs.cleansites$spsitenum==i),])
+  mod <- glm(fs ~ hinge, data=fs.cleansites[(fs.cleansites$spsitenum==i),], family=binomial(link="logit"))
+  #mod <- lm(fs ~ hinge, data=fs.cleansites[(fs.cleansites$spsitenum==i),])
 
   #outcome[which(outcome$spsite==i),1] <- i
   outcome[which(outcome$spsitenum==i),2] <- coef(mod)[1]
-  outcome[which(outcome$spsitenum==i),3] <- confint(mod)[1]
+  outcome[which(outcome$spsitenum==i),3] <- confint.default(mod)[1]
   outcome[which(outcome$spsitenum==i),4] <- coef(mod)[2]
-  outcome[which(outcome$spsitenum==i),5] <- confint(mod)[2]
+  outcome[which(outcome$spsitenum==i),5] <- confint.default(mod)[2]
 
 }
 
