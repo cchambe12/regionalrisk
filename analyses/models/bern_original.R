@@ -77,31 +77,49 @@ save(orig.bigpriors.fagus, file="/n/wolkovich_lab/Lab/Cat/orig_bigpriors_fagus.R
 }
 
 
-if(FALSE){
+if(TRUE){
 #### Now adding some very simple models...
 # 30 July 2019 - Cat
 
 lstfrz <- read.csv("/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv", header=TRUE)
+lstfrz$cc <- ifelse(lstfrz$year<=1983, 0, 1)
+lstfrz$cc.z <- (lstfrz$cc-mean(lstfrz$cc,na.rm=TRUE))/(2*sd(lstfrz$cc,na.rm=TRUE))
 
-lstfrz.mod.simple <- brm(lastfreeze~year, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+lstfrz.mod.scaled <- brm(lastfreeze~cc.z, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                      iter=4000, warmup = 2500, chains=4, cores=4)
 
-save(lstfrz.mod.simple, file="/n/wolkovich_lab/Lab/Cat/lstfrz.simple.Rdata")
+save(lstfrz.mod.scaled, file="/n/wolkovich_lab/Lab/Cat/lstfrz.scaled.Rdata")
 
-lstfrz.mod.species <- brm(lastfreeze~year*species, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
-                     iter=4000, warmup = 2500, chains=4, cores=4)
+#lstfrz.mod.species <- brm(lastfreeze~year*species, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+ #                    iter=4000, warmup = 2500, chains=4, cores=4)
 
-save(lstfrz.mod.species, file="/n/wolkovich_lab/Lab/Cat/lstfrz.species.Rdata")
+#save(lstfrz.mod.species, file="/n/wolkovich_lab/Lab/Cat/lstfrz.species.Rdata")
 }
 
 if(TRUE){
 bbdata <- read.csv("/n/wolkovich_lab/Lab/Cat/BBdata.csv")
+bbdata$cc <- ifelse(bbdata$year<=1983, 0, 1)
+bbdata$cc.z <- (bbdata$cc-mean(bbdata$cc,na.rm=TRUE))/(2*sd(bbdata$cc,na.rm=TRUE))
 
-bb.mod.simple <- brm(bb~year, data=bbdata, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+bb.mod.scaled <- brm(bb~cc.z, data=bbdata, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+                     iter=4000, warmup = 2500, chains=4, cores=4)
+
+save(bb.mod.scaled, file="/n/wolkovich_lab/Lab/Cat/bbmod.scaled.Rdata")
+
+bb.mod.simple <- brm(bb~cc, data=bbdata, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                      iter=4000, warmup = 2500, chains=4, cores=4)
 
 save(bb.mod.simple, file="/n/wolkovich_lab/Lab/Cat/bbmod.simple.Rdata")
 
+
+tmin <- read.csv("/n/wolkovich_lab/Lab/Cat/tminprep_boxplots.csv")
+tmin$cc <- ifelse(tmin$year<=1983, 0, 1)
+tmin$cc.z <- (tmin$cc-mean(tmin$cc,na.rm=TRUE))/(2*sd(tmin$cc,na.rm=TRUE))
+
+tmin.simple <- brm(Tmin~cc, data=tmin, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+                     iter=4000, warmup = 2500, chains=4, cores=4)
+
+save(tmin.simple, file="/n/wolkovich_lab/Lab/Cat/tmin.simple.Rdata")
 
 #bb.mod.species <- brm(bb~year*species, data=bb, control=list(max_treedepth = 15,adapt_delta = 0.99), 
  #                    iter=4000, warmup = 2500, chains=4, cores=4)
