@@ -85,10 +85,10 @@ lstfrz <- read.csv("/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv", header=TRUE)
 lstfrz$cc <- ifelse(lstfrz$year<=1983, 0, 1)
 lstfrz$cc.z <- (lstfrz$cc-mean(lstfrz$cc,na.rm=TRUE))/(2*sd(lstfrz$cc,na.rm=TRUE))
 
-lstfrz.mod.scaled <- brm(lastfreeze~cc.z, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+lstfrz.mod.simplecc <- brm(lastfreeze~cc, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                      iter=4000, warmup = 2500, chains=4, cores=4)
 
-save(lstfrz.mod.scaled, file="/n/wolkovich_lab/Lab/Cat/lstfrz.scaled.Rdata")
+save(lstfrz.mod.simplecc, file="/n/wolkovich_lab/Lab/Cat/lstfrz.simplecc.Rdata")
 
 #lstfrz.mod.species <- brm(lastfreeze~year*species, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
  #                    iter=4000, warmup = 2500, chains=4, cores=4)
@@ -96,7 +96,7 @@ save(lstfrz.mod.scaled, file="/n/wolkovich_lab/Lab/Cat/lstfrz.scaled.Rdata")
 #save(lstfrz.mod.species, file="/n/wolkovich_lab/Lab/Cat/lstfrz.species.Rdata")
 }
 
-if(TRUE){
+if(FALSE){
 bbdata <- read.csv("/n/wolkovich_lab/Lab/Cat/BBdata.csv")
 bbdata$cc <- ifelse(bbdata$year<=1983, 0, 1)
 bbdata$cc.z <- (bbdata$cc-mean(bbdata$cc,na.rm=TRUE))/(2*sd(bbdata$cc,na.rm=TRUE))
