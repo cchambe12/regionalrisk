@@ -1,0 +1,287 @@
+\documentclass{article}[12pt]
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{amssymb} % for math symbols
+\usepackage{amsmath} % for aligning equations
+\usepackage{mdframed}
+\usepackage{natbib}
+\bibliographystyle{..//bib/styles/gcb}
+\usepackage[hyphens]{url}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{2}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+\usepackage{setspace}
+\doublespacing
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+%% R Script
+<<label=libraries, echo=FALSE, results="asis", message=FALSE, warning=FALSE>>=
+  options(stringsAsFactors=FALSE)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+@
+
+\begin{document}
+\noindent \textbf{\Large{Climate change increases the risk of false springs in European trees}} \\ % Lizzie votes for the first title! Reviewers can ask you to make it more narrow so I would start here and shift to Ben's if requested ... (goal 1: get paper out for review)
+OR \\
+\textbf{\Large{False spring risk increases across European trees in the face of climate change}} \\
+OR \\
+\textbf{\Large{Heightened risk of false springs with climate change across six European tree species}}
+
+\noindent Authors:\\
+C. J. Chamberlain $^{1,2}$, B. I. Cook $^{3}$, I. Morales-Castilla $^{4,5}$ \& E. M. Wolkovich $^{1,2,6}$
+\vspace{2ex}\\
+\emph{Author affiliations:}\\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
+$^{3}$NASA Goddard Institute for Space Studies, New York, New York, USA; \\
+$^{4}$GloCEE - Global Change Ecology and Evolution Group, Department of Life Sciences, Universidad de Alcal\'{a}, Alcal\'{a} de Henares, 28805, Spain \\
+$^{5}$Department of Environmental Science and Policy, George Mason University, Fairfax, VA 22030; \\
+$^{6}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
+\vspace{2ex}
+$^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\labelitemi}{$-$}
+\setkeys{Gin}{width=0.8\textwidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%% 9 May 2019 - Cat - Made a lot of updates. Need to reread entirely but start back up at line 168 first %%%%%%%%%%%%%%%%%%
+
+\section*{Abstract}
+% I just found out elevation (point on ground) and altitude (point in the atmosphere) are different, and we should use elevation mostly I think. 
+Temperate and boreal forests are at risk of late spring freezing events---also known as false springs. Research to date has generated conflicting results of whether climate change will decrease false springs, and thus reshape a fundamental factor that shapes species' ranges. Conflicting results may be due to the myriad spatial and environmental factors that contribute to a plants risk of a false spring, which---to date---no study has compared at once. Here, we assessed the effects of the North Atlantic Oscillation (NAO), mean spring temperature, elevation and distance from the coast, using PEP725 leafout data for six tree species across 11,648 sites in Europe, to determine which were the strongest predictors of false spring risk and how these predictors shifted with climate change. False spring risk varied across the six species but, overall, false spring risk is increasing with climate change across both early and late bud bursting species. [Across species?] Mean spring temperature and distance from the coast were the strongest predictors of false spring risk, with higher mean spring temperatures having fewer false springs (-7.6\% for every 2$^{\circ}$C increase) and sites further from the coast experiencing more false springs (5.3\% for every 150km from the coast), however elevation (2.2\% for every 200m increase in elevation) and NAO index (1.9\% for every 0.3 increase) also contributed to false spring risk. Our results suggest that considering multiple spatial and climatic factors is essential for predicting false spring risk---especially as these events are increasing with climate change.
+
+\section*{Introduction}
+% We had two very similar sentences -- I think we were trying to get at two different points though so I adjusted as such. See what you think. 
+Temperate tree and shrub species are at risk of damage from late spring freezing events, also known as false springs, and this risk may shift with climate change. With earlier springs due to warming \citep{IPCC2014, Wolkovich2012}, the growing season is lengthening across many regions in the northern hemisphere \citep{Chen2005, Kukal2018, Liu2006}. Longer growing seasons could translate into increased plant growth, assuming such increases are not offset by tissue losses due to false springs. Last spring freeze dates, however, are not predicted to advance at the same rate as warming \citep{Inouye2008, Labe2016, Martin2010,Wypych2016a,Sgubin2018}, potentially amplifying the effects of false spring events in some regions. In Germany, for example, the last freeze date has advanced by 2.6 days per decade since 1955 \citep{Zohner2016}, but budburst has advanced around twice as fast. Major false spring events have been recorded in recent years and studies have found it can take 16-38 days for trees to refoliate after a freeze \citep{Augspurger2009, Augspurger2013, Gu2008, Menzel2015}, which can detrimentally affect crucial processes such as carbon uptake and nutrient cycling \citep{Hufkens2012, Klosterman2018, Richardson2013}. % Nice ending!
+
+Spring frosts are one of the largest limiting factors to species ranges and have greatly shaped plant life history strategies \citep{Kollas2014}. Temperate plants are exposed to freezing temperatures numerous times throughout the year, however, individuals are most at risk to damage in the spring, when frost tolerance is lowest \citep{Sakai1987}. Plants have adapted to these early spring risks through various mechanisms with one common strategy being avoidance \citep{Vitasse2014}. %(i.e., delayed leafout when temperatures are more consistent) 
+Many temperate species minimize frost risk and optimize growth by using a complex mix of cues to initiate budburst: low winter temperatures (i.e., chilling), warm spring temperatures (i.e., forcing), and increasing spring daylengths (i.e., photoperiod). With climate change advancing, the interaction of these cues may shift spring phenologies both across and within species and sites, making some species less---or more---vulnerable to false springs than before. Species that leaf out first each spring are always especially at risk of false springs, as their budburst occurs during times of year when the occurrence of freeze events is relatively high. To date these species also appear to advance the most with warming  \citep{Wolkovich2012}, thus, if climate change is increases the prevalence of late spring frosts, we would expect these species to see major increases in false spring risk. If, however, climate change has restructured the timing and prevalence of false-springs to later in the spring, then later-leafout species may experience major increases in false spring risk with climate change. 
+ 
+% We switch below from talking about resistance to tolerance, probably best to stick with one term (you would know best which!) unless we need the reader to know both for some reason (whatever you do, please check the language on this throughout rest of the paper). 
+Frost resistance varies across the year, with frost resistance being especially low during early-season phenophases, such as budburst and leafout. In the winter plants are generally the most frost resistaelevationnt in the winter, but this frost resistance greatly diminishes once individuals exit the dormancy phase (i.e. processes leading to budburst) through full leaf expansion \citep{Lenz2016, Vitasse2014}. Thus, for most species individuals that initiate budburst and have not fully leafed out before the last spring freeze risk leaf tissue loss, damage to the xylem, and slowed canopy development \citep{Gu2008, Hufkens2012}. 
+% I like the below, but it does not feel like the focus of this paper so I suggest removing it and keeping this topic for the discussion. I don't actually think you need to use the term 'duration of vegetative risk' in this paper, while I like the term we only use it twice more in the text ... that's not really enough to ask people to learn a new term. You'll really need it for your experimental paper, but I think we're stretching to fit it in here.
+% Thus, it is essential to consider the length of time between budburst and leafout---when individuals are most at risk to spring freeze damage \citep{Lenz2016}---in order to better predict false spring risk. We will refer to this timing between budburst and leafout as the duration of vegetative risk \citep{Chamberlain2019}.
+
+% Cat, please check my changes below for accuracy related to citations (elevation and distance from coast)!
+Given its importance to plant performance and survival, understanding how false spring is shifting with climate change has been a major focus of research recently. Studies have variously found that spring freeze damage may increase \citep{Augspurger2013, Hannenin1991, Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994, Vitra2017} with climate change. % and there is also great variation within studies. 
+Some research suggests false spring incidence has already begun to decline in many regions (i.e. across parts of North America and Asia), however the prevalence of spring frosts has consistently increased across Europe since 1982 \citep{Liu2018}. Furthermore, recent studies have demonstrated site-specific effects may be more closely related to false spring risk: whether via elevation, where higher elevations appear at higher risk \citep{Ma2018, Vitasse2018, Vitra2017}, or distance from the coast, where inland areas  appear at higher risk \citep{ Ma2018, Wypych2016a}. Improved understanding of which regional climatic factors impact false spring risk, including which factors are most crucial for predicting risk, we may be able to determine which regions are at risk currently and which regions will be more at risk in the future.
+
+The majority of false spring studies assess the effects of one predictor (e.g. temperature, elevation or distance from the coast) on false spring prevalence, thus failing to compare how multiple factors may together shape risk. False spring risk is influenced by multiple climatic and geographic factors, which may vary across species and time. Further, because predictors can co-vary---for example, higher elevation sites are often more distant from the coast---the best predictions of false springs should examine all predictors at once. 
+
+% We mention Europe here so I moved up the data part of below ...
+Here we investigate the influence of known spatial and climatic factors on false spring risk \citep[defined here as when fell temperatures below -2.2$^{\circ}$ between estimated budburst and leafout][]{Schwartz1993} and compare the effect of these predictors across species and if they shift with climate change. We assessed the number of false springs that occurred across 11,648 sites around Europe using observed phenological data (754,786 observations) for six temperate, deciduous trees and combined that with daily gridded climate data for each site that extended from 1951-2016. We focus on the major factors shown or hypothesized to influence false spring risk: mean spring temperature, elevation, distance from the coast, and a major climatic oscillation that structures European climate---the North Atlantic Oscillation (NAO). The NAO  is tied to winter and spring circulation across Europe, with more positive NAO phases tending to result in higher than average winter and spring temperatures. With climate-change induced shifts, higher NAO phases have correlated to even earlier budburst dates since the late 1980s in some regions \citep{Chmielewski2001}, however little research has tested if more positive NAO phases also translate into more false springs. We aimed to understand which factors are the strongest predictors of false spring risk, and how the major predictors have shifted with climate change. 
+%% IM-C: I'm not so sure about referring to climatic-environmental variables as regional factors. The alternatives I am thinking about are not great either: spatially structured environmental predictors, environmental predictors/factors, geo-environmental factors. %% Cat: how about spatial and climatic factors?
+
+% We have said the below three times in the last two paragraphs, I think we need a new point (see my suggested edits below)
+% By refining and identifying budburst and climate trends in recent years, we could improve future projections in false springs.  
+% I also cut a line that felt more like methods and was already in the methods. We also need these predictions to be much more specific *or* you can switch to questions or state what you'll do (which you do above). When I don't have very specific hypotheses I usually just say what questions we aimed to address.... IMy suggestion would be to cut the whole below paragraph, given the current version of the previous paragraph. 
+We expected major differences in false spring risk across species and spatio-climatic factors. We expected the greatest differences due to species, with the earliest-leafout species having the greatest risk, and that environmental predictors (i.e. mean spring temperature, NAO index, elevation, distance from the coast) would differ in how they influence false spring incidence. Specifically, we expected climatic variables such as mean spring temperature and the NAO index to be the major drivers of risk, and purely geographical proxies such as elevation and continentality to be less important. Finally, we expected climate change to alter the influence of the predictors on false spring by, for example, reducing the influence of spring temperature as climate warms up.   
+
+
+
+\section*{Methods} % Generally in very nice shape!
+\subsection*{Phenological Data and Calculating Vegetative Risk}
+We obtained phenological data from the Pan European Phenology network (PEP725, www.pep725.edu), which provides open access phenology records across Europe \citep{Templ2018}. Since plants are most susceptible to damage from frost between budburst and full leafout, we selected leafout data \citep[i.e., in][BBCH 11, which is defined as the point of leaf unfolding and the first visible leaf stalk]{Meier2001} from the PEP725 dataset. The species used in the study were \textit{Aesculus hippocastanum} Poir., \textit{Alnus glutinosa} (L.) Gaertn., \textit{Betula pendula} Roth., \textit{Fagus sylvatica} Ehrh., \textit{Fraxinus excelsior} L., and \textit{Quercus robur} L. Selection criteria for the species were as follows: (1) to be temperate, deciduous species that were not cultivars or used as crops, (2) there were at least 90,000 observations of BBCH 11 (leafout), (3) to represent over half of the total number of sites available (11,684), and (4) there were observations for at least 65 out of the 66 years of the study (1951-2016) (Table S1). We then subtracted 12 days from the leafout date to establish a standardized estimate for day of budburst \citep{Donnelly2017, Flynn2018, NPN2019} since the majority of the individuals were missing budburst observations. 
+% “Data were provided by the USA National Phenology Network and the many participants who contribute to its Nature’s Notebook program.”
+We additionally considered a model that altered the durations of vegetative risk for each species. For this alternate budburst to leafout length model, we calculated budburst by subtracting 11 days from leafout for \textit{Aesculus hippocastanum} and \textit{Betula pendula}, 12 days for \textit{Alnus glutinosa}, 5 days for \textit{Fagus sylvatica}, and 7 days for both \textit{Fraxinus excelsior} and \textit{Quercus robur} based on growth chamber experiment data from phylogenetically related species \citep{Buerki2010, Wang2016, Hipp2017, Flynn2018}.
+
+\subsection*{Climate Data}
+We collected daily gridded climate data from the European Climate Assessment \& Dataset (ECA\&D) and used the E-OBS 0.25 degree regular latitude-longitude grid from version 16. We used the daily minimum temperature dataset to determine if a false spring occurred. False springs in this study were defined as temperatures at or below -2.2$^{\circ}$C \citep{Schwartz1993} during the duration of vegetative risk. We additionally tested this model by changing the definition of a freezing temperature from -2.2$^{\circ}$C \citep{Schwartz1993} to -5$^{\circ}$C \citep{Lenz2013, Sakai1987} in an alternative model. In order to assess regional climatic effects we calculated the mean spring temperature by using the daily mean temperature from March 1 through May 31. We used this date range to best capture temperatures likely after chilling had accumulated %-- in an attempt to incorporate the general effects of spring forcing temperatures in our model and 
+to compare differences in spring forcing temperatures across sites \citep{Basler2012, Korner2016}. We collected NAO-index data from the KNMI Climate Explorer CPC daily NAO time series and selected the NAO indices from November until April to capture the effects of NAO on budburst for each region and then took the mean NAO index during these months \citep{NAOdata}. Since the primary aim of the study is to predict false spring incidence in a changing climate, we split the data: before temperature trends increased (1951-1983) and after trends increased \citep[1984-2016,][]{Kharouba2018, Stocker2013} to represent climate change.
+
+\subsection*{Data Analysis} % nice!
+%A false spring was determined if temperatures fell below -2.2$^{\circ}$C at least once between budburst and leafout. % this sentence is repeated below. Do we need it here?
+To best compare across the effects of each climate variable, we scaled all of the predictors and used a z-score following the binary predictor approach \citep{Gelman2006}. To control for spatial autocorrelation and to account for spatially structured processes independent from our regional predictors of false springs, we generate an additional spatial predictor for the model. To generate our spatial predictor we first extracted spatial eigenvectors corresponding to our analyses' units and selected the subset that minimizes spatial autocorrelation of the residuals of a model including all predictors except for the spatial predictor \citep{diniz2012selection,Baumen2017} (see supplement `Methods: Spatial parameter' for more details). We then took the eigenvector subset determined from the minimization of Moran's I in the residuals (MIR approach) and regressed them against the above residuals---i.e. number of false springs \emph{vs.} regional factors. Finally we used the fitted values of that regression as our spatial predictor, which, by definition, represents the portion of the variation in false springs that is both spatially structured and independent from all other predictors in the model \citep[e.g. average spring temperature, elevation, etc.][]{griffith2006spatial,morales2012imprint}. % get citation from Nacho regarding regression %% IMC- you may delete the reference to my paper, but I think the logic is explained plainly in the supplement of that paper
+
+
+To estimate the number of false springs across species and across our multivariate predictors we used a Bayesian modeling approach. By including all parameters in the model, as well as species levels groups, we were able to distinguish the strongest contributing factors to false spring risk while eliminating artifacts due to data availability or data distribution for specific species. We fit a Bernoulli distribution model (also know as a logistic regression) using mean spring temperature, NAO, elevation, distance from the coast, space, and climate change as predictors and all two-way interactions (fixed effects) and species as two-way interactions to simulate modeled groups on the main effects (Equation 1), using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows:
+
+\begin{align*}
+y_i &= Bernoulli(\alpha_{[i]} +  \beta_{NAO_{[i]}} + \beta_{MST_{[i]}} + \beta_{Elevation_{[i]}} + \beta_{DistanceCoast_{[i]}} + \beta_{Space_{[i]}} \\ 
+  &+ \beta_{ClimateChange_{[i]}} + \beta_{NAO \times Species_{[i]}} + \beta_{MST \times Species_{[i]}} + \beta_{Elevation \times Species_{[i]}} + \beta_{DistanceCoast \times Species_{[i]}}\\
+  &+ \beta_{Space \times Species_{[i]}} + \beta_{ClimateChange \times Species_{[i]}} + \beta_{NAO \times ClimateChange_{[i]}} + \beta_{MST \times ClimateChange_{[i]}}\\
+  &+ \beta_{Elevation \times ClimateChange_{[i]}} + \beta_{DistanceCoast \times ClimateChange_{[i]}} + \beta_{Space \times ClimateChange_{[i]}} + \epsilon_{[i]},\nonumber\\
+  & \epsilon_i \sim Bernoulli(0,\sigma^2_y))\tag{1}
+\end{align*}
+
+We ran four chains, each with 2,500 warm-up iterations and 4,000 sampling iterations for a total of 6,000 posterior samples for each predictor. We evaluated our model performance based on $\hat{R}$ values that were close to one and low ratios of effective sample size estimates to total sample size (most parameters were below 1.05, with two parameters above 1.1). We additionally assessed chain convergence visually and posterior predictive checks.% (Figure SXX) and through leave-one-out cross-validation \citep{Gelman2006}.
+
+%\subsection*{Testing the duration of vegetative risk on false spring incidence}
+%The definition of a false spring has been established to be freezing temperatures of -2.2$^{\circ}$C \citep{Schwartz1993} after budburst but plants are most susceptible to damage during the duration of vegetative risk \citep{Augspurger2013, Lenz2016}. Different species have different durations of vegetative risk, which is also shifting with climate change \citep{Cleland2006, Fu2015, Xin2016}.
+
+%\subsection*{Testing the temperature threshold on false spring incidence}
+%Plants have varying temperature thresholds in frost tolerance during the duration of vegetative risk \citep{Lenz2013}. 
+
+\section*{Results}
+% Okay, here and in the discussion I think we need to step back, re-look at results and make sure we're presenting them in the most digestable format. I would open before your first section with an overview given your new models along the lines of ... (I made the below up while waiting on your models). 
+Simple regressions show budburst dates (doy~cc.z or year model) have advance more than the last date of false spring temperatures (-2.2$^{\circ}$C), suggesting false spring risk has increased with climate change. These simple models, however, mask how consistent these changes are across species, and which climatic and geographical factors underlie this change. 
+
+\subsection*{Species variation in budburst and false spring incidence}
+There was variation in day of budburst across the six species and across geographical gradients (Figure \ref{fig:bbmap}). \textit{Betula pendula}, \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} (Figure \ref{fig:bbmap}A-C) generally initiated budburst earlier than \textit{Fagus sylvatica}, \textit{Quercus robur}, \textit{Fraxinus excelsior} (Figure \ref{fig:bbmap}D-F). Across all six species, higher latitude sites and sites closer to the coast tended to initiate budburst later in the season. Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure \ref{fig:mst}). 
+% Given that Ben is always complainig about Figure 2, how about moving it to the supp? We have plenty of good figures. 
+
+% We need to be careful here to point out when we are *not* using the full model ... you might clarify here and then point out here (or somewhere) that species differences *are* some of the biggest effects in the main model, that's important I think. 
+After 1983, all species initiated budburst \~ six days earlier (Figure \ref{fig:boxfs}A and Table S2) and the minimum temperature between budburst and leafout was higher.  The average minimum temperature between budburst and leafout, however, varied across the six species with \textit{Betula pendula} and \textit{Aesculus hippocastanum} experiencing the lowest minimum temperatures (Figure \ref{fig:boxfs}B) and with \textit{Fraxinus excelsior} experiencing the greatest variation (Figure \ref{fig:boxfs}B). There was wide variation across sites in false spring risk for each species but all species were more at risk of false springs after 1983 (Figure \ref{fig:boxfs}C). False spring risk for \textit{Fraxinus excelsior} increased the most (Figure \ref{fig:boxfs}C), likely due to data availability and data distribution for \textit{Fraxinus excelsior} across the study years. 
+% The below feels like a sentence for the discussion, not the results. Also, *how* have you shown that species alone is not a good predictor? Just based on Fraxinus? The link here is not clear to me. 
+% Thus, species alone is not a sufficient predictor for false spring risk. Spatial and climatic effects must additionally be included to understand what drives false spring risk and to eliminate influence from data availability for specific species. 
+
+\subsection*{The effects of climatic and spatial variation on false spring incidence}
+% The below section I think needs the most work. Some main points to me that are missing were:
+% The main effect of climate change versus its summed effect in how it influences predictors. 
+% Remind the readers that you standardized variables so that they *are* directly comparable. I might give the standardized coefs in parentheses then the converted ones (similar to the budburst ms). 
+% The biggest changes in climatic/geographical effects post-cc are NAO and MST, MST I think stops mattering so much (but still very species dependent MST*Species) and NAO flips, no? These are big and important changes to make sure the reader gets. 
+
+% The below is reporting pre-cc effects, no? We should be clear. 
+The effects of the spatial and climatic predictors varied in both direction and magnitude (Figure \ref{fig:maineffects} and Table S3) for the main model testing climatic and spatial variation in false spring risk. Mean spring temperature had the strongest effect on false springs, with warmer spring temperatures resulting is fewer false springs (Figure \ref{fig:maineffects} and Table S3). For every 2$^{\circ}$C increase in mean spring temperature there was a 7.6\% decreased risk in the number of false springs. Distance from the coast had the second biggest effect on false spring incidence. Individuals at sites further from the coast tend to have earlier budburst dates, which corresponded to an increased risk in false springs (Figure \ref{fig:maineffects} and Table S3). For every 150km away from the coast there was a 5.3\% increase in risk in false springs. Sites at higher elevations also had higher risks of false spring incidence---likely due to more frequent colder temperatures---with a 2.2\% increase in risk for every 200m increase in elevation (Figure \ref{fig:maineffects} and Table S3). More positive NAO indices, which generally advance budburst, slightly heightened the risk of false spring, with every 0.3 unit increase in NAO index there was a 1.9\% increased risk in false spring (Figure \ref{fig:maineffects} and Table S3). Overall, there were more false springs after 1983 (8.8\% increased risk, Figure \ref{fig:maineffects} and Table S3). 
+
+After climate change, the effects of these spatial and climatic factors on false spring risk shifted (Figure \ref{fig:maineffects}).
+%Most of the interactions with increasing temperatures (i.e., the climate change predictor) exhibit a reduced effect of the predictor after climate change on false spring risk (Figure \ref{fig:maineffects}). 
+% Are you sure about the below regarding MST? The rest of the paragraph jives with what I think the model says. The end about NAO is super interesting, you should engage Ben on it and try to better understand it.  
+Warmer sites tended to have lower risks of false springs but with climate change, warmer sites were at a higher risk of false springs than before (Figure \ref{fig:maineffects} and Figure S1A). This is likely due to advancing budburst with a warming climate but late spring freezes are not advancing at the same rate. There was a slightly reduced risk in false springs further from the coast after climate change (Figure \ref{fig:maineffects} and Figure S1B). The level of risk remained consistent before and after 1983 across elevations (Figure \ref{fig:maineffects} and Figure S1C), with false spring risk being higher at higher elevations. After climate change, the rate of false spring incidence largely decreased with increasing NAO indices (Figure \ref{fig:maineffects} and Figure S1D)---likely due to a large advancement in budburst and warmer temperatures overall for those years. 
+
+% For Fraxinus given direction of elevation effect, also instead of saying 'as is evident from the differing slopes of the lines' give an example from this figure. I would also consider moving this up ... since we don't test the differences below against climate change and because I think the shifts with climate change are the most interesting ... so then you would review the pre-cc effects overall, how they vary by species, and how they shifted with cc. 
+The rate of false spring incidence varied across species and site location (Figure \ref{fig:spp}). Species respond similarly in direction (i.e., positive or negative trends along each predictor), except for \textit{Fraxinus excelsior} with elevation (Figure \ref{fig:spp}C), but the magnitude of the effects varied (i.e., as is evident from the differing slopes of the lines, Figure \ref{fig:spp}). With increasing mean spring temperatures, there were fewer false springs for each species, however \textit{Betula pendula} had the greatest risk of false springs and \textit{Fraxinus excelsior} had the lowest risk (Figure \ref{fig:spp}A). There was an increased risk of false spring for all species at sites further from the coast (Figure \ref{fig:spp}B), with a sharp increase in risk for \textit{Fraxinus excelsior} at sites further from the coast. With increasing elevation, all species had a greater risk of a false spring occurring except for \textit{Fraxinus excelsior}---which had a slightly decreased risk at higher elevations (Figure \ref{fig:spp}C)---demonstrating inconsistent effects of elevation on a species' risk.  With increasing NAO indices, the risk of false spring remained consistent for most species except \textit{Fagus sylvatica} experienced more with higher NAO indices (Figure \ref{fig:spp}D). \textit{Betula pendula}, \textit{Aesculus hippocastanum} and \textit{Alnus glutinosa} all experienced more false springs after 1983 (Figure \ref{fig:spp}E). % IMC - should we remark that all species follow the same increasing-decreasing pattern along each environmental gradient, but with differing slopes? Not sure we need to.
+
+\subsection*{Sensitivity analyses}
+% Change 'Mean spring temperature had a slightly stronger positive interaction effect with climate change' from explaining the stats to explaining the biology.
+% Also, note that this suggests the duration of risk really didn't influence our findings. 
+1. \underline{Model varying the lengths of budburst to leafout:} By applying different durations of vegetative risk for each species, the magnitude and direction of the predictors remained consistent with the main model (Figure S2 and Table S4). There were more false springs after 1983 (8.6\% increase, Figure S2 and Table S4) and mean spring temperature (-8.1\% for every 2 $^\circ$C) and distance from the coast (5.4\% increase for every 150km) were the strongest predictors for false spring risk (Figure Figure S2 and Table S4). Mean spring temperature had a slightly stronger positive interaction effect with climate change as compared to the original model and there was a slight increase in false spring risk after climate change at higher elevations (Figure S2 and Table S4). Thus, the results did not largely vary from the main model. 
+
+% Seems like the temperature at which damage happens is more important than the duration of vegetative risk ... this is not very clear in our discussion
+2. \underline{Model with lower temperature threshold for false spring definition}: With a lower temperature threshold for defining a false spring (i.e., -5$^{\circ}$C), the magnitude and direction of the predictors again remained consistent with the original model (Figure S3 and Table S5), though less consistent than the model with varying durations of vegetative risk. Mean spring temperature (-11.6\% for every 2$^\circ$) and elevation (7.4\% increase in risk for every 200m) were the strongest predictors, with a weaker effect of distance from the coast (2.8\% for every 150km). There was much higher risk of false springs after 1983 (14.6\% increase). Overall, the results remained consistent with the main model, with some differences. %There were a lot more zeros in this temperature threshold model, rendering the model less stable. 
+
+\section*{Discussion}
+% Re-work this to help reader understand main effect versus summed effect of climate change on predictors. 
+% Also, are there any more major trends across species you can mention? When I glance at the model coefficients for species: AESHIP, BETPEN and ALNGLU seem similar in their overall risk, with risk declines for FAGSYL and a lot for QUEROB and FRAX, so it does look like the earliest have the greatest risk and the later ones the lowest, but we don't clearly say this. 
+% Somewhere in the discussion we should be sure to clearly say if climatic and geographical predictors had a similar response across species. 
+Climate change has increased false spring risk by 8.8\% across the European distribution of our species. This average, however, hides many important complexities, as we found that false spring risks vary across both species \textit{and} climate gradients. While all six study species are at risk of false springs, they show marked differences in their probability of risk. \textit{Fraxinus excelsior} had the lowest number of false springs across our data and generally had the latest budburst dates but, regardless of budburst time, all species still had a risk of damage after 1983 and some ---i.e., \textit{Betula pendula}, \textit{Aesculus hippocastanum} and \textit{Alnus glutinosa}---had an even higher risk than before. % Ending here is good!
+
+Past studies using single predictors for false spring events \citep{Liu2018, Ma2018, Vitasse2018, Vitra2017, Wypych2016a} have led to contradicting predictions in future false spring risk. By integrating climate gradients and spatial factors, we were able to disentangle the major predictors of false spring risk and merge these with species differences to determine which factors have the strongest effects on false spring risk. Mean spring temperature, distance from the coast and climate change were the strongest predictors for false springs, however, NAO and elevation also affected the risk of false spring incidence, further emphasizing the need to incorporate all predictors. The strength of these effects have changed---with significantly fewer false springs with higher NAO indices and more false springs with warmer mean spring temperature sites---since the major onset of climate change, thus studying these predictors over time is also essential to forecast false spring risk. % Nice ending here too!
+
+\subsection*{Species differences}
+% Re-work below to make it clear how our results compare ... and I would start with our findings, then compare them to the literature. 
+Some studies have found earlier budburst species are more at risk of false spring damage \citep{Ma2018}. After 1983, all of our species initiated budburst earlier in the spring but some of the early bursting species were more susceptible to false springs (i.e. \textit{Betula pendula} and \textit{Aesuculus hippocastanum}) but all species were still susceptible to risk. 
+% Careful of the below ... I think knowing which species had the biggest increase after CC requires adding up coefs in the model, not just looking at cc*FRAX alone. I would think through this more, maybe we can do away with this example, I think we have a lot else to tall about given species effects. 
+% Simply looking at number of false springs for species suggests that \textit{Fraxinus excelsior} had the biggest increase in false spring risk after climate change (Figure \ref{fig:boxfs}C), however this conflicts with the overall model output (Figure \ref{fig:spp}E). 
+% We probably need to back up the below statement somehow, or re-work to focus more on what we *have* shown. 
+The distribution of \textit{Fraxinus excelsior} data is likely influencing the results seen in Figure \ref{fig:boxfs}C, thus, simply looking at budburst time is not a sufficient proxy to forecast false spring risk. Additional climatic and regional factors ---e.g., elevation, continentality--- must be evaluated to more thoroughly assess false spring risk across species.
+
+% This is good! I think we just need to refine the language a little and re-work within the improved discussion. 
+Habitat preference and range differences among the species could also explain some of the species-specific variation in the results. Within our species, \textit{Betula pendula} has the largest global distribution, extending the furthest north and east into Asia. The distribution of \textit{Fraxinus excelsior} extends the furthest south (into the northern region of Iran). Looking at our data distribution alone, the overall ranges of the predictors are similar across species but \textit{Betula pendula} extends to the highest elevation and latitude and spans the greatest range of distances from the coast, while \textit{Quercus robur} experiences the greatest range of mean spring temperatures. However, we would need more species to investigate inter-specific differences in traits in order to explain the variation seen in the results.  
+  
+\subsection*{Climatic and spatial effects}
+% I like the term multivariate, but need to introduce sooner (I have tried to do this)> 
+Through our multivariate approach, we were able to assess the myriad climatic and regional effects moderating false spring risk and how the magnitude of these effects compare to one another. Further, incorporating a spatial predictor let us simultaneously control for autocorrelation issues and account for spatially structured latent processes that were not represented by other predictors \citep{griffith2006spatial,diniz2012selection,morales2012imprint,Baumen2017}. Approaches such as ours may provide more robust forecasts of false spring risk and more clearly elucidate species level differences in risk versus strong spatial and climatic predictors (i.e., mean spring temperature and continentality). % I would move down or rm the bit about the spatial predictor, it *is* definitely important to deal with spatial autocorrelation but does not seem the most amazing part of this work (and  we should acknowledge there are several ways to do it -- it's more important to account for spatial autocorrelation than *how* you do it IMHO. 
+
+% First sentence below is important, maybe move up to opening of discussion ... something like 'we find this in support of previous work, but we show how it's more complex than previously noted by showing z, y, ...'
+Our study supports findings from previous studies: higher elevations tend to experience more false springs \citep{Vitasse2018, Vitra2017}, sites that are generally warmer have lower risks of false springs \citep{Wypych2016}, and risk across Central Europe increases with climate change \citep{Liu2018}. However, we also discovered that effects of elevation and distance from the coast cannot be assumed to be the same (i.e., sites close to the coast does not necessarily correspond to sites at low elevations), which contradicts previous studies \citep{Ma2018}. This is evident given our results, which show that sites further from the coast had a stronger effect on false spring risk than sites at higher elevations. And the relationship of these predictors shifted after 1983. With shifts in climate, sites further from the coast experienced fewer false springs, whereas there was little change for sites at higher elevations.
+% IMC - could we specify how the effects of continentality/elevation differ against those in Ma et al. 2018? Perhaps just give a little example.
+ 
+%Overall, mean spring temperature and distance from the coast are the best predictors for false spring risk: sites that are warmer generally have fewer false springs and sites that are at further from the coast generally have more false springs. Across our study sites, budburst initiated earlier after 1983 due to warming temperatures. 
+% Below feels out of place and I think we can better answer what is going on from the model as opposed to hypothesizing too much as we do below. 
+In summary, false spring risk is increasing across our study species, even with increasing minimum temperatures during the period most risky for tissue damage---from budburst to leafout (Figure \ref{fig:boxfs}B). This may suggest a shifting relationship among spring warming, budburst and false spring risk. Individuals could be responding more strongly to increased spring warming with climate change, which results in an increased risk of exposure to false springs. Additionally, our results indicate that higher NAO indices---which typically leads to earlier budburst---slightly increased the risk of false springs but that risk diminished significantly after climate change. The compounding effect of high NAO with climate-change induced warming could decrease the risk of freezing temperatures occurring in those years.%, however, this interplay should be investigated further. % IMC - why should the NAO-freezing be investigated further?
+
+\subsection*{Forecasting false springs}
+Our study does not assess the intensity or severity of the false spring events observed nor does it record the amount of damage to individuals. It is possible that with increasing false spring risk, false spring events coupled with climate change could be lasting longer or could reach lower temperatures. Additionally, there is sufficient evidence that species vary in their tolerance to minimum temperature extremes \citep{Korner2016, Lenz2013, Zhuo2018,bennett2018globtherm}. Some species or individuals may be less frost tolerant (i.e., are damaged from higher temperatures than -2.2$^{\circ}$C), whereas other species or individuals may be able to tolerate temperatures as low as -8.5$^{\circ}$C \citep{Lenz2016}. %Species that are typically found in low risk sites but have early budburst (i.e. \textit{Alnus glutinosa}) may be less tolerant of low temperatures and they may be at sites that are experiencing an increased risk with climate change. 
+For this reason, future models should ideally incorporate species-specific temperature thresholds to best capture the shifts in false spring risk of damage over time and space. 
+
+% I don't think our findings support the below. While I totally agree with it, it doesn't feel true to our findings and thus feels a little biased. We have a lot of importangt things that you've found in this work, I suggest we focus on those. I would trim the below to be a sentence or two focused on your alternative models, which to me say that the duration did not matter so much here, but temperature might and species does ... so what does that all mean? And how can that inform forecasting? What are the big next steps *based on findings in this paper.*
+Similarly, shifts in phenological cues with climate change may impact individuals and species differently. Biological spring is advancing with climate change-induced shifts but few studies have assessed the effects of climate change on the duration of vegetative risk: is leafout advancing at the same rate or is the duration of vegetative risk lengthening? For false spring studies, it is important to consider the effects of climate change on both budburst and leafout, the timing when individuals are most at risk to spring freeze damage \citep{Chamberlain2019,Lenz2016}. With less chilling, shorter photoperiods but warmer spring temperatures, the duration of vegetative risk could change, thus altering the predicted outcome of false spring risk. And with changing durations of vegetative risk, the spatial and climatic effects will impact the number of false springs an individual experiences differently. Incorporating observed durations of vegetative risk across sites, years and species would greatly enhance model predictions. 
+
+\section*{Conclusion}
+% Where do we show that 'false spring events consistently increased with climate change across species'?
+False spring events consistently increased with climate change across species, thus we need a better understanding of the major drivers of false spring risk, how these events are changing in duration and intensity and if there are shifts in the level of damage to individuals. Our integrated approach may help direct future modelling advancements in false spring research. We show here the importance of using multiple environmental factors in predicting false spring risk and how that risk varies across species. By using phenology data to provide a better estimate for budburst and leafout, predictions for false springs will be more accurate for inter-specific risk. Additionally, we demonstrate that incorporating all regional effects is more important than simply assessing budburst timing across species. Individuals that initiate budburst earlier in the season are not necessarily exposed to more false springs, thus, investigating site effects is a more consistent proxy for false spring risk than budburst time. Our results suggest there is a heightened risk of false springs with climate change and that there will be complex responses to warming in the future, which could in turn, have escalating impacts on plant community dynamics and further augment climatic shifts.  
+%Range studies and management regimes will benefit from the integration of false spring risk in a changing climate. 
+% IMC- Just as a suggestion, perhaps reporting how model accuracy increases when we account for multiple factors vs. model accuracy for any single factor would help supporting the first claim of the paragraph (e.g. through pseudo-R² or RMSE?). Nevermind if doing this is too much of a pain. Also I would give some example of how would range studies and management practices benefit from better regarding FS.
+
+\iffalse 
+\section*{Conclusion}
+ Some factors are better at predicting risk than others (i.e., mean spring temperature and distance from the coast), however it is essential to additionally assess the effects of NAO and elevation, which contribute to an individual's risk of false spring and also increase the prediction accuracy of the overall model.  %Overall, the frequency of false spring events is increasing with climate change so it is essential to additionally understand how the intensity and duration of these events are shifting. 
+Furthermore, incorporating both budburst and leafout data as well as species-specific temperature thresholds will advance our knowledge of false spring risk in a changing climate. 
+%IMC - I would consider starting this paragraph by emphasizing how false spring events consistently increase with climate change across species, thus we need better understanding of FS major drivers, duration of events, their intensity and if there are shifts in received damage too (e.g. perhaps we'll have more events but less harmful per unit?). We show how there are multiple drivers of FS with varying explanatory power but even the weaker predictors should be accounted for as they increase prediction accuracy. And then emphasize how integrating spatial and temporal data allows us to better account for the variation in FS experienced by the different populations of a given species. 
+% just a suggestion. 
+\fi
+
+
+\bibliography{..//bib/regionalrisk.bib}
+
+\section*{Tables and Figures} 
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=14cm]{..//analyses/figures/BB_base.png}
+  -\caption{The average day of budburst is mapped by site for each species. Species are ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}. Earlier budburst dates are yellow and later budburst dates are in red. Species names are color-coded to match figures throughout the text. }\label{fig:bbmap}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/MSTBB_bySpp.png}
+  -\caption{Mean spring temperatures are plotted for each site and year (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior} and species names are color-coded to match the other figures. }\label{fig:mst}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=14cm]{..//analyses/figures/Boxplot_BBTminFS_noDots.pdf}
+  -\caption{Budburst (A.), minimum temperatures between budburst and leafout (B.) and number of false spring years (C.) were compared before and after 1983 for each species across all sites. Species are ordered by day of budburst and are color-coded to match the other figures.  }\label{fig:boxfs}
+  -\end{center}
+  -\end{figure}}
+  
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90.png}
+  % Effects of species, climatic and geographical predictors on false spring risk maybe? 
+  -\caption{Model output with standardized durations of vegetative risk for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 90\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 582,211 zeros and 172,877 ones for false springs in the data.}\label{fig:maineffects}
+  -\end{center}
+  -\end{figure}}
+
+
+%{\begin{figure} [H]
+ % -\begin{center}
+  %-\includegraphics[width=16cm]{..//figures/InteractionPlots/IntrxnPlots_orig.pdf}
+  %-\caption{Plots showing the interaction effects on false spring risk for each predictor coupled with climate change. (A.) As mean spring temperature increases, there were fewer false springs but there were fewer false springs after 1983 at sites with lower mean spring temperatures.  (B.) There were more false springs further from the coast and the rate of increase was consistent, however, there were fewer false springs in total after 1983. (C.) As elevation increased, false spring risk increased but the relationship remained consistent after 1983. (D.) As NAO indices increased, there were more false springs before 1983 but fewer after 1983. Since we found the z-score for each predictor, the x-axis for each panel does not reflect the raw data.}\label{fig:intrxns}
+  %-\end{center}
+  %-\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/InteractionPlots/Species_orig.pdf}
+  -\caption{Interactions of the main effects with species (i.e., mean spring temperature (A.), distance from the coast (B.), elevation (C.), and NAO index (D.)). Lines and shading are the mean and 10\% uncertainty intervals for each species. To reflect the raw data, we converted the model output back to the original scale for the x-axis in each panel. }\label{fig:spp}
+  -\end{center}
+  -\end{figure}}
+
+
+  
+
+
+
+\end{document}
