@@ -12,14 +12,15 @@ library(dplyr)
 ## Set Working Directory
 setwd("~/Documents/git/regionalrisk/analyses")
 
-fs <- read.csv("output/fs_newspace_fullleaf.csv", header=TRUE)
+fs <- read.csv("output/fs_allspp_fullleaf_allpred.csv", header=TRUE)
+fs$fs <- ifelse(fs$fs.count>0, 1, 0)
 
 ## Clean up dataframe
 fs <- subset(fs, select=c("fs", "species", "lat", "long", "elev", "lat.long", "year", 
                           "cc"))
 
-fs$fs.count <- ave(fs$fs, fs$species, fs$lat.long, fs$year, FUN=sum)
-fs$fs <- ifelse(fs$fs.count>0, 1, 0)
+#fs$fs.count <- ave(fs$fs, fs$species, fs$lat.long, fs$year, FUN=sum)
+#fs$fs <- ifelse(fs$fs.count>0, 1, 0)
 
 fs <- fs[!duplicated(fs),]
 

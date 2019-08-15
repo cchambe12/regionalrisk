@@ -50,8 +50,8 @@ write.csv(x, file="/n/wolkovich_lab/Lab/Cat/allspp_data.csv", row.names=FALSE)
 #write.csv(x, file="~/Desktop/allspp_data.csv", row.names=FALSE)
 
 x$fs<- ifelse(x$Tmin<=-2.2, 1, 0)
-x$bb<-(ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last))-7
-x$lo<-212 # Based on Danf's ACESAC - most closely related. Choose WL0 based on keeping all species consistent
+x$bb<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=first)
+x$lo<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last) # Based on Danf's ACESAC - most closely related. Choose WL0 based on keeping all species consistent
 x<-x[!(x$doy<x$bb),]
 x<-x[!(x$doy>x$lo),]
 x<-x[!duplicated(x),]

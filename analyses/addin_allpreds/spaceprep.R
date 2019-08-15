@@ -20,8 +20,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #fs<-read.csv("output/fs_allspp_dvr.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_five.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_original.csv", header=TRUE)
-#fs<-read.csv("output/fs_allspp_fullleaf.csv", header=TRUE)
-fs <- read.csv("output/fs_checkallspp.csv", header=TRU)
+fs<-read.csv("output/fs_allspp_fullleaf.csv", header=TRUE)
 
 
 fs<-subset(fs, select=c("lat", "long", "fs.count", "year", "species", "fs"))
@@ -68,5 +67,5 @@ fspreds<-full_join(fspreds, dist)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_orig_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_five_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_fullleaf_allpred.csv", row.names = FALSE)
-write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_checkallspp_fullleaf_allpred.csv", row.names = FALSE)
+
 

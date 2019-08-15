@@ -14,7 +14,7 @@ library(lubridate)
 library(ncdf4)
 library(raster)
 library(reshape2)
-library(data.table)
+#library(data.table)
 
 setwd("~/Documents/git/regionalrisk/analyses")
 aes<-read.csv("output/bbch_region_aesculus.csv", header=TRUE)
@@ -40,8 +40,8 @@ df<-d%>%
   rename(long=LON)
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df$bb<-df$bb-7
-df$lo<-212
-df <- df[!(df$bb>212),]
+df$lo<-df$bb + 30
+df$lo <- ifelse(df$lo>=212, 212, df$lo)
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, bb, lo, species)
 df$pep.year<-paste(df$year, df$PEP_ID, df$species)
 
@@ -52,6 +52,7 @@ days.btw<-array()
 #foo<-df[sample(nrow(df), 20), ]
 df<-df[(df$bb>=0),]
 df<-na.omit(df)
+df <- df[!(df$lo<df$bb),]
 
 days.btw <- Map(seq, df$bb, df$lo, by = 1)
 
