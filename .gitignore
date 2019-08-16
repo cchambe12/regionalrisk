@@ -1,7 +1,8 @@
 *.Rdata
-*DS-store*.Rdata
 *.DS_Store
 *.aux
+*.log
+*.bbl
 *.synctex.gz
 *-concordance.tex
 analyses/input/tn_0.25deg_reg_v15.0.nc
