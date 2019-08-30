@@ -93,6 +93,9 @@ We took the mean number of days between budburst and leafout for the entire expe
 Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
 
 \section*{Results: The effects of climatic and spatial variation on false spring incidence}
+Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S\ref{fig:mst}). 
+% Given that Ben is always complainig about Figure 2, how about moving it to the supp? We have plenty of good figures. 
+
 The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. The model estimates on the logit scale were converted to probability percentages for easier interpretation by using the `divide by 4' rule \citep{Gelman2006} and then back converted to the original scale. %To convert we used the equations below \citep{Gelman2006}:
 
 \iffalse
@@ -161,6 +164,12 @@ library(xtable)
 \end{tabular}
 \end{center}
 
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/MSTBB_bySpp.png}
+  -\caption{Mean spring temperatures are plotted for each site and year (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior} and species names are color-coded to match the other figures. }\label{fig:mst}
+  -\end{center}
+  -\end{figure}}
 
 
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
