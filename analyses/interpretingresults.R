@@ -47,7 +47,8 @@ linpreddiff(mean(fixef(orig.full, pars="dist.z", summary=FALSE)), fs$distkm, 150
 sd(fs$elev) # 214.193
 linpreddiff(mean(fixef(orig.full, pars="elev.z", summary=FALSE)), fs$elev, 200) # 1.89% for every 200m
 2*sd(fs$cc) # before vs after
-linpreddiff(mean(fixef(orig.full, pars="cc.z", summary=FALSE)), fs$cc, 1) # 7.225%
+linpreddiff(mean(fixef(orig.full, pars="cc.z", summary=FALSE)), fs$cc, 1) # 7.225% (For AESHIP)
+linpreddiff(.41, fs$cc, 1) ### 8.435 for ALNGLU
 
 ### Versus the Divide by 4 Rule, using just intervals of 1:
 (mean(fixef(orig.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100 ## -3.819176 (vs -1.562206)
@@ -61,7 +62,13 @@ linpreddiff(mean(fixef(orig.full, pars="cc.z", summary=FALSE)), fs$cc, 1) # 7.22
 (mean(fixef(orig.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3 ## 1.915104 (vs 1.54)
 (mean(fixef(orig.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150 ## 5.320474 (vs 4.83)
 (mean(fixef(orig.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200 ## 2.235522 (vs 1.89)
-(mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.842486 (vs 7.225)
+(mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.842486 (vs 7.225) - For AESHIP
+(0.42/4)/(sd(fs$cc)*2)*100 ## 10.538 for ALNGLU - compared to 8.8 from APCs
+(0.41/4)/(sd(fs$cc)*2)*100 ## 10.287 for BETPEN - compared to 8.7 from APCs
+(.03/4)/(sd(fs$cc)*2)*100 ## 0.753 for FAGSYL - compared to 0.54 from APCs
+(-.17/4)/(sd(fs$cc)*2)*100 ## -4.265 for FRAEXC - compared to -1.34 from APCs
+(-.07/4)/(sd(fs$cc)*2)*100 ## -1.756 for QUEROB - compared to -.609 from APCs
+
 
 ### Same rule but for DVR:
 (mean(fixef(dvr.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2 ## -8.078 

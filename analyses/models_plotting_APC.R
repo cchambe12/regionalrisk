@@ -889,7 +889,85 @@ fraexc.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(),
 querob.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
 querob.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
 
+for(i in 1:length(newcc)){ #i=2
+  
+  ## AESHIP here..
+  aeship.cc.precc.onecc <- orig_sum$b_Intercept + 
+    orig_sum[["b_cc.z"]]*(sort(unique(bb$cc.z))[1]) 
+  aeship.cc.postcc.onecc <-orig_sum$b_Intercept + 
+    orig_sum[["b_cc.z"]]*(sort(unique(bb$cc.z))[2]) 
+  precc.df.here <-  data.frame(cc=sort(unique(bb$cc.z))[1], fs.mean=mean(aeship.cc.precc.onecc),
+                               fs.25=quantile(aeship.cc.precc.onecc, 0.25), fs.75=quantile(aeship.cc.precc.onecc, 0.75))
+  postcc.df.here <-  data.frame(cc=sort(unique(bb$cc.z))[2], fs.mean=mean(aeship.cc.postcc.onecc),
+                                fs.25=quantile(aeship.cc.postcc.onecc, 0.25), fs.75=quantile(aeship.cc.postcc.onecc, 0.75))
+  aeship.cc.precc <- rbind(aeship.cc.precc, precc.df.here)
+  aeship.cc.postcc <- rbind(aeship.cc.postcc, postcc.df.here)
+  
+  ## ALNGLU...
+  alnglu.cc.precc.onecc <- (orig_sum$b_Intercept + orig_sum$b_speciesALNGLU) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[1] 
+  alnglu.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesALNGLU) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[2] 
+  precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(alnglu.cc.precc.onecc),
+                               fs.25=quantile(alnglu.cc.precc.onecc, 0.25), fs.75=quantile(alnglu.cc.precc.onecc, 0.75))
+  postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(alnglu.cc.postcc.onecc),
+                                fs.25=quantile(alnglu.cc.postcc.onecc, 0.25), fs.75=quantile(alnglu.cc.postcc.onecc, 0.75))
+  alnglu.cc.precc <- rbind(alnglu.cc.precc, precc.df.here)
+  alnglu.cc.postcc <- rbind(alnglu.cc.postcc, postcc.df.here)
+  
+  ## BETPEN...
+  betpen.cc.precc.onecc <- (orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] 
+  betpen.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] 
+  precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(betpen.cc.precc.onecc),
+                               fs.25=quantile(betpen.cc.precc.onecc, 0.25), fs.75=quantile(betpen.cc.precc.onecc, 0.75))
+  postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(betpen.cc.postcc.onecc),
+                                fs.25=quantile(betpen.cc.postcc.onecc, 0.25), fs.75=quantile(betpen.cc.postcc.onecc, 0.75))
+  betpen.cc.precc <- rbind(betpen.cc.precc, precc.df.here)
+  betpen.cc.postcc <- rbind(betpen.cc.postcc, postcc.df.here)
+  
+  ## FAGSYL...
+  fagsyl.cc.precc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[1] 
+  fagsyl.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] 
+  precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(fagsyl.cc.precc.onecc),
+                               fs.25=quantile(fagsyl.cc.precc.onecc, 0.25), fs.75=quantile(fagsyl.cc.precc.onecc, 0.75))
+  postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(fagsyl.cc.postcc.onecc),
+                                fs.25=quantile(fagsyl.cc.postcc.onecc, 0.25), fs.75=quantile(fagsyl.cc.postcc.onecc, 0.75))
+  fagsyl.cc.precc <- rbind(fagsyl.cc.precc, precc.df.here)
+  fagsyl.cc.postcc <- rbind(fagsyl.cc.postcc, postcc.df.here)
+  
+  ## FRAEXC...
+  fraexc.cc.precc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] 
+  fraexc.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] 
+  precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(fraexc.cc.precc.onecc),
+                               fs.25=quantile(fraexc.cc.precc.onecc, 0.25), fs.75=quantile(fraexc.cc.precc.onecc, 0.75))
+  postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(fraexc.cc.postcc.onecc),
+                                fs.25=quantile(fraexc.cc.postcc.onecc, 0.25), fs.75=quantile(fraexc.cc.postcc.onecc, 0.75))
+  fraexc.cc.precc <- rbind(fraexc.cc.precc, precc.df.here)
+  fraexc.cc.postcc <- rbind(fraexc.cc.postcc, postcc.df.here)
+  
+  ## QUEROB...
+  querob.cc.precc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesQUEROB) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[1] 
+  querob.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesQUEROB) + 
+    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[2] 
+  precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(querob.cc.precc.onecc),
+                               fs.25=quantile(querob.cc.precc.onecc, 0.25), fs.75=quantile(querob.cc.precc.onecc, 0.75))
+  postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(querob.cc.postcc.onecc),
+                                fs.25=quantile(querob.cc.postcc.onecc, 0.25), fs.75=quantile(querob.cc.postcc.onecc, 0.75))
+  querob.cc.precc <- rbind(querob.cc.precc, precc.df.here)
+  querob.cc.postcc <- rbind(querob.cc.postcc, postcc.df.here)
+}
 
+
+
+
+if(FALSE){
 for(i in 1:length(newcc)){ #i=2
   
   ## AESHIP here..
@@ -1040,6 +1118,7 @@ for(i in 1:length(newcc)){ #i=2
   querob.nao.precc <- rbind(querob.nao.precc, precc.df.here)
   querob.nao.postcc <- rbind(querob.nao.postcc, postcc.df.here)
 }
+}
 
 aeship.cc.postcc$cc <- "1"
 aeship.cc.precc$cc <- "0"
@@ -1078,9 +1157,11 @@ ccxcc <- rbind(aeship.cc, alnglu.cc, betpen.cc, fagsyl.cc, fraexc.cc, querob.cc)
 ccxcc$fsmean_trans <- inverselogit(ccxcc$fs.mean)
 ccxcc$fs25_trans <- inverselogit(ccxcc$fs.25)
 ccxcc$fs75_trans <- inverselogit(ccxcc$fs.75)
-ccxcc$cc_trans <- (ccxcc$cc)*sd(bb$mst)*2 + mean(bb$mst)
+#ccxcc$cc_trans <- (ccxcc$cc)*sd(bb$cc)*2 + mean(bb$cc)
+ccxcc$cc_trans <- as.numeric(ccxcc$cc)
 
-
+ccapcs <- ccxcc[!duplicated(ccxcc),]
+#write.csv(ccapcs, file="~/Documents/git/regionalrisk/analyses/output/cc_apcoutput.csv", row.names=FALSE)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 quartz()
