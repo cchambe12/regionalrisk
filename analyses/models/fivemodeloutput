@@ -1,0 +1,85 @@
+Family: bernoulli 
+  Links: mu = logit 
+Formula: fs ~ nao.z + mat.z + dist.z + elev.z + space.z + cc.z + species + nao.z:species + mat.z:species + dist.z:species + elev.z:species + space.z:species + cc.z:species + nao.z:cc.z + mat.z:cc.z + dist.z:cc.z + elev.z:cc.z + space.z:cc.z + nao.z:cc.z:species + mat.z:cc.z:species + dist.z:cc.z:species + elev.z:cc.z:species + space.z:cc.z:species 
+   Data: bb (Number of observations: 754851) 
+Samples: 4 chains, each with iter = 4000; warmup = 2500; thin = 1;
+         total post-warmup samples = 6000
+
+Population-Level Effects: 
+                           Estimate Est.Error l-95% CI u-95% CI Eff.Sample Rhat
+Intercept                     -3.35      0.02    -3.38    -3.31       5269 1.00
+nao.z                          0.09      0.03     0.04     0.15       4870 1.00
+mat.z                         -0.72      0.03    -0.78    -0.66       3203 1.00
+dist.z                         0.21      0.04     0.14     0.28       3981 1.00
+elev.z                         0.63      0.03     0.56     0.70       3238 1.00
+space.z                       -0.02      0.03    -0.07     0.04       5416 1.00
+cc.z                           0.58      0.03     0.52     0.64       4467 1.00
+speciesALNGLU                  0.33      0.02     0.28     0.37       5534 1.00
+speciesBETPEN                  0.08      0.02     0.03     0.12       6268 1.00
+speciesFAGSYL                 -0.45      0.03    -0.50    -0.39       6551 1.00
+speciesFRAEXC                 -1.58      0.05    -1.68    -1.49       8163 1.00
+speciesQUEROB                 -1.26      0.04    -1.33    -1.19       7514 1.00
+nao.z:speciesALNGLU           -0.16      0.05    -0.25    -0.06       5945 1.00
+nao.z:speciesBETPEN           -0.21      0.04    -0.29    -0.13       5534 1.00
+nao.z:speciesFAGSYL            0.36      0.05     0.26     0.46       5808 1.00
+nao.z:speciesFRAEXC            0.54      0.09     0.36     0.72       8217 1.00
+nao.z:speciesQUEROB            0.59      0.06     0.46     0.72       6925 1.00
+mat.z:speciesALNGLU            0.28      0.05     0.17     0.38       4451 1.00
+mat.z:speciesBETPEN            0.01      0.04    -0.07     0.09       4214 1.00
+mat.z:speciesFAGSYL           -0.31      0.05    -0.41    -0.21       4644 1.00
+mat.z:speciesFRAEXC           -0.21      0.11    -0.42    -0.00       6163 1.00
+mat.z:speciesQUEROB           -0.67      0.06    -0.79    -0.56       5084 1.00
+dist.z:speciesALNGLU           0.10      0.06    -0.01     0.21       5245 1.00
+dist.z:speciesBETPEN           0.14      0.05     0.04     0.23       4579 1.00
+dist.z:speciesFAGSYL           0.19      0.06     0.07     0.30       5501 1.00
+dist.z:speciesFRAEXC           0.44      0.11     0.22     0.66       7176 1.00
+dist.z:speciesQUEROB           0.01      0.07    -0.14     0.16       5546 1.00
+elev.z:speciesALNGLU          -0.13      0.06    -0.24    -0.02       4329 1.00
+elev.z:speciesBETPEN          -0.04      0.04    -0.13     0.04       4139 1.00
+elev.z:speciesFAGSYL          -0.12      0.05    -0.22    -0.01       4584 1.00
+elev.z:speciesFRAEXC          -0.68      0.12    -0.90    -0.45       6939 1.00
+elev.z:speciesQUEROB          -0.34      0.07    -0.47    -0.20       5176 1.00
+space.z:speciesALNGLU         -0.04      0.04    -0.12     0.05       6609 1.00
+space.z:speciesBETPEN          0.01      0.04    -0.07     0.08       6009 1.00
+space.z:speciesFAGSYL         -0.10      0.05    -0.19    -0.01       6983 1.00
+space.z:speciesFRAEXC         -0.04      0.09    -0.22     0.13       9208 1.00
+space.z:speciesQUEROB         -0.03      0.06    -0.15     0.09       7836 1.00
+cc.z:speciesALNGLU             0.10      0.05    -0.00     0.19       4927 1.00
+cc.z:speciesBETPEN             0.07      0.04    -0.02     0.16       5300 1.00
+cc.z:speciesFAGSYL            -0.34      0.05    -0.44    -0.23       5920 1.00
+cc.z:speciesFRAEXC            -0.47      0.10    -0.66    -0.28       7578 1.00
+cc.z:speciesQUEROB            -0.35      0.07    -0.48    -0.21       6572 1.00
+nao.z:cc.z                    -0.92      0.06    -1.04    -0.81       5445 1.00
+mat.z:cc.z                     0.64      0.06     0.53     0.76       3367 1.00
+dist.z:cc.z                    0.01      0.07    -0.12     0.15       3448 1.00
+elev.z:cc.z                   -0.24      0.07    -0.38    -0.12       3212 1.00
+space.z:cc.z                  -0.04      0.05    -0.15     0.06       5152 1.00
+nao.z:cc.z:speciesALNGLU       0.13      0.09    -0.05     0.31       6493 1.00
+nao.z:cc.z:speciesBETPEN       0.09      0.08    -0.07     0.25       6109 1.00
+nao.z:cc.z:speciesFAGSYL      -0.66      0.10    -0.84    -0.47       6558 1.00
+nao.z:cc.z:speciesFRAEXC      -1.23      0.18    -1.58    -0.88       9117 1.00
+nao.z:cc.z:speciesQUEROB      -0.87      0.13    -1.12    -0.61       7462 1.00
+mat.z:cc.z:speciesALNGLU      -0.26      0.10    -0.45    -0.06       5076 1.00
+mat.z:cc.z:speciesBETPEN      -0.04      0.08    -0.19     0.12       3887 1.00
+mat.z:cc.z:speciesFAGSYL      -0.30      0.10    -0.49    -0.10       4680 1.00
+mat.z:cc.z:speciesFRAEXC       0.03      0.20    -0.37     0.42       7477 1.00
+mat.z:cc.z:speciesQUEROB       0.02      0.11    -0.20     0.24       4316 1.00
+dist.z:cc.z:speciesALNGLU      0.08      0.11    -0.14     0.30       4337 1.00
+dist.z:cc.z:speciesBETPEN     -0.00      0.10    -0.19     0.19       4230 1.00
+dist.z:cc.z:speciesFAGSYL      0.10      0.11    -0.12     0.33       4599 1.00
+dist.z:cc.z:speciesFRAEXC     -0.40      0.21    -0.82     0.01       6793 1.00
+dist.z:cc.z:speciesQUEROB     -0.20      0.15    -0.49     0.10       5726 1.00
+elev.z:cc.z:speciesALNGLU     -0.25      0.11    -0.46    -0.03       4087 1.00
+elev.z:cc.z:speciesBETPEN     -0.02      0.09    -0.19     0.16       3935 1.00
+elev.z:cc.z:speciesFAGSYL     -0.12      0.11    -0.33     0.09       4963 1.00
+elev.z:cc.z:speciesFRAEXC      0.09      0.22    -0.35     0.52       6925 1.00
+elev.z:cc.z:speciesQUEROB      0.10      0.13    -0.16     0.36       5527 1.00
+space.z:cc.z:speciesALNGLU    -0.05      0.08    -0.22     0.12       6373 1.00
+space.z:cc.z:speciesBETPEN     0.02      0.07    -0.13     0.16       5739 1.00
+space.z:cc.z:speciesFAGSYL    -0.13      0.09    -0.32     0.05       6457 1.00
+space.z:cc.z:speciesFRAEXC    -0.08      0.17    -0.40     0.26       9449 1.00
+space.z:cc.z:speciesQUEROB     0.09      0.12    -0.14     0.33       8285 1.00
+
+Samples were drawn using sampling(NUTS). For each parameter, Eff.Sample 
+is a crude measure of effective sample size, and Rhat is the potential 
+scale reduction factor on split chains (at convergence, Rhat = 1).

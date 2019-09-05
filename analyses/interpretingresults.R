@@ -68,6 +68,13 @@ linpreddiff(.41, fs$cc, 1) ### 8.435 for ALNGLU
 (.03/4)/(sd(fs$cc)*2)*100 ## 0.753 for FAGSYL - compared to 0.54 from APCs
 (-.17/4)/(sd(fs$cc)*2)*100 ## -4.265 for FRAEXC - compared to -1.34 from APCs
 (-.07/4)/(sd(fs$cc)*2)*100 ## -1.756 for QUEROB - compared to -.609 from APCs
+(.16/4)/(sd(fs$cc)*2)*100 ## 4.0145 for average of all species
+
+### Okay now, we can calculate the interaction effects:
+(-0.69/4)/(sd(fs$nao)*2)*100 ## -30.8 NAOxCC ?
+(-0.06/4)/(sd(fs$mat)*2)*100 ## -1.5 MATxCC ?
+(0.28/4)/(sd(fs$distkm)*2)*100 ## 0.02 DISTxCC ?
+(0.19/4)/(sd(fs$elev)*2)*100 ## -11.1 NAOxCC ?
 
 
 ### Same rule but for DVR:

@@ -15,6 +15,7 @@ options(stringsAsFactors = FALSE)
 library(rstan)
 library(brms)
 library(ggplot2)
+library(dplyr)
 library(egg) 
 library(RColorBrewer)
 
@@ -128,7 +129,7 @@ for(i in 1:length(newdist)){
   fagsyl.dist.precc.onedist <- (orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFAGSYL`)*newdist[i] + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[1] +
     orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newdist[i])
-  fagsyl.dist.postcc.onedist <-(orig_sum$b_Intercept + orig_sum$b_speciesfagsyl) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFAGSYL`)*newdist[i] + 
+  fagsyl.dist.postcc.onedist <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFAGSYL`)*newdist[i] + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(fagsyl.dist.precc.onedist),
@@ -206,7 +207,14 @@ distxcc$fs25_trans <- inverselogit(distxcc$fs.25)
 distxcc$fs75_trans <- inverselogit(distxcc$fs.75)
 distxcc$dist_trans <- (distxcc$dist)*sd(bb$distkm)*2 + mean(bb$distkm)
 
+distxcc$fsavg_sp <- ave(distxcc$fsmean_trans, distxcc$species, distxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+distxcc$fs_sp <- ave(distxcc$fs.mean, distxcc$species, distxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+distxcc$fsavg_all <- ave(distxcc$fsmean_trans, distxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+distxcc$fs_all <- ave(distxcc$fs.mean, distxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+distapc <- dplyr::select(distxcc, cc, species, fsavg_sp, fs_sp, fsavg_all, fs_all)
+distapc <- distapc[!duplicated(distapc),]
 
+#write.csv(distapc, file="~/Documents/git/regionalrisk/analyses/output/dist_apcoutput.csv", row.names=FALSE)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 distances <- ggplot(distxcc, aes(x=dist_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
@@ -304,7 +312,7 @@ for(i in 1:length(newmat)){
   fagsyl.mat.precc.onemat <- (orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFAGSYL`)*newmat[i] + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[1] +
     orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newmat[i])
-  fagsyl.mat.postcc.onemat <-(orig_sum$b_Intercept + orig_sum$b_speciesfagsyl) + (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFAGSYL`)*newmat[i] + 
+  fagsyl.mat.postcc.onemat <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFAGSYL`)*newmat[i] + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(fagsyl.mat.precc.onemat),
@@ -382,7 +390,13 @@ matxcc$fs25_trans <- inverselogit(matxcc$fs.25)
 matxcc$fs75_trans <- inverselogit(matxcc$fs.75)
 matxcc$mat_trans <- (matxcc$mat)*sd(bb$mst)*2 + mean(bb$mst)
 
-
+matxcc$fsavg_sp <- ave(matxcc$fsmean_trans, matxcc$species, matxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+matxcc$fs_sp <- ave(matxcc$fs.mean, matxcc$species, matxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+matxcc$fsavg_all <- ave(matxcc$fsmean_trans, matxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+matxcc$fs_all <- ave(matxcc$fs.mean, matxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+matapc <- dplyr::select(matxcc, cc, species, fsavg_sp, fs_sp, fsavg_all, fs_all)
+matapc <- matapc[!duplicated(matapc),]
+#write.csv(matapc, file="~/Documents/git/regionalrisk/analyses/output/mat_apcoutput.csv", row.names=FALSE)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 meantemp <- ggplot(matxcc, aes(x=mat_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
@@ -479,7 +493,7 @@ for(i in 1:length(newelev)){
   fagsyl.elev.precc.oneelev <- (orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFAGSYL`)*newelev[i] + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[1] +
     orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newelev[i])
-  fagsyl.elev.postcc.oneelev <-(orig_sum$b_Intercept + orig_sum$b_speciesfagsyl) + (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFAGSYL`)*newelev[i] + 
+  fagsyl.elev.postcc.oneelev <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFAGSYL`)*newelev[i] + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(fagsyl.elev.precc.oneelev),
@@ -557,7 +571,13 @@ elevxcc$fs25_trans <- inverselogit(elevxcc$fs.25)
 elevxcc$fs75_trans <- inverselogit(elevxcc$fs.75)
 elevxcc$elev_trans <- (elevxcc$elev)*sd(bb$mst)*2 + mean(bb$mst)
 
-
+elevxcc$fsavg_sp <- ave(elevxcc$fsmean_trans, elevxcc$species, elevxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+elevxcc$fs_sp <- ave(elevxcc$fs.mean, elevxcc$species, elevxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+elevxcc$fsavg_all <- ave(elevxcc$fsmean_trans, elevxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+elevxcc$fs_all <- ave(elevxcc$fs.mean, elevxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+elevapc <- dplyr::select(elevxcc, cc, species, fsavg_sp, fs_sp, fsavg_all, fs_all)
+elevapc <- elevapc[!duplicated(elevapc),]
+#write.csv(elevapc, file="~/Documents/git/regionalrisk/analyses/output/elev_apcoutput.csv", row.names=FALSE)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 elevations <- ggplot(elevxcc, aes(x=elev_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
@@ -654,7 +674,7 @@ for(i in 1:length(newnao)){
   fagsyl.nao.precc.onenao <- (orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFAGSYL`)*newnao[i] + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[1] +
     orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newnao[i])
-  fagsyl.nao.postcc.onenao <-(orig_sum$b_Intercept + orig_sum$b_speciesfagsyl) + (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFAGSYL`)*newnao[i] + 
+  fagsyl.nao.postcc.onenao <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFAGSYL`)*newnao[i] + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fagsyl.nao.precc.onenao),
@@ -732,7 +752,13 @@ naoxcc$fs25_trans <- inverselogit(naoxcc$fs.25)
 naoxcc$fs75_trans <- inverselogit(naoxcc$fs.75)
 naoxcc$nao_trans <- (naoxcc$nao)*sd(bb$mst)*2 + mean(bb$mst)
 
-
+naoxcc$fsavg_sp <- ave(naoxcc$fsmean_trans, naoxcc$species, naoxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+naoxcc$fs_sp <- ave(naoxcc$fs.mean, naoxcc$species, naoxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+naoxcc$fsavg_all <- ave(naoxcc$fsmean_trans, naoxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+naoxcc$fs_all <- ave(naoxcc$fs.mean, naoxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
+naoapc <- dplyr::select(naoxcc, cc, species, fsavg_sp, fs_sp, fsavg_all, fs_all)
+naoapc <- naoapc[!duplicated(naoapc),]
+#write.csv(naoapc, file="~/Documents/git/regionalrisk/analyses/output/nao_apcoutput.csv", row.names=FALSE)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 quartz()
@@ -964,161 +990,6 @@ for(i in 1:length(newcc)){ #i=2
   querob.cc.postcc <- rbind(querob.cc.postcc, postcc.df.here)
 }
 
-
-
-
-if(FALSE){
-for(i in 1:length(newcc)){ #i=2
-  
-  ## AESHIP here..
-  aeship.cc.precc.onecc <- orig_sum$b_Intercept + orig_sum$b_dist.z + orig_sum$`b_dist.z:cc.z`*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_cc.z"]]*(sort(unique(bb$cc.z))[1]) +
-    orig_sum$b_elev.z + orig_sum$`b_elev.z:cc.z`*sort(unique(bb$cc.z))[1] +
-    orig_sum$b_nao.z + orig_sum$`b_nao.z:cc.z`*sort(unique(bb$cc.z))[1] +
-    orig_sum$b_mat.z + orig_sum$`b_mat.z:cc.z`*sort(unique(bb$cc.z))[1] 
-  aeship.cc.postcc.onecc <-orig_sum$b_Intercept + orig_sum$b_dist.z + orig_sum$`b_dist.z:cc.z`*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_cc.z"]]*(sort(unique(bb$cc.z))[2]) +
-    orig_sum$b_elev.z + orig_sum$`b_elev.z:cc.z`*sort(unique(bb$cc.z))[2] +
-    orig_sum$b_nao.z[i] + orig_sum$`b_nao.z:cc.z`*sort(unique(bb$cc.z))[2] +
-    orig_sum$b_mat.z[i] + orig_sum$`b_mat.z:cc.z`*sort(unique(bb$cc.z))[2] 
-  precc.df.here <-  data.frame(cc=sort(unique(bb$cc.z))[1], fs.mean=mean(aeship.cc.precc.onecc),
-                               fs.25=quantile(aeship.cc.precc.onecc, 0.25), fs.75=quantile(aeship.cc.precc.onecc, 0.75))
-  postcc.df.here <-  data.frame(cc=sort(unique(bb$cc.z))[2], fs.mean=mean(aeship.cc.postcc.onecc),
-                                fs.25=quantile(aeship.cc.postcc.onecc, 0.25), fs.75=quantile(aeship.cc.postcc.onecc, 0.75))
-  aeship.cc.precc <- rbind(aeship.cc.precc, precc.df.here)
-  aeship.cc.postcc <- rbind(aeship.cc.postcc, postcc.df.here)
-  
-  ## ALNGLU...
-  alnglu.cc.precc.onecc <- (orig_sum$b_Intercept + orig_sum$b_speciesALNGLU) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesALNGLU`) + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesALNGLU`) + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesALNGLU`) + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesALNGLU`) + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]) 
-  alnglu.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesALNGLU) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesALNGLU`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesALNGLU`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesALNGLU`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesALNGLU`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i])
-  precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(alnglu.cc.precc.onecc),
-                               fs.25=quantile(alnglu.cc.precc.onecc, 0.25), fs.75=quantile(alnglu.cc.precc.onecc, 0.75))
-  postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(alnglu.cc.postcc.onecc),
-                                fs.25=quantile(alnglu.cc.postcc.onecc, 0.25), fs.75=quantile(alnglu.cc.postcc.onecc, 0.75))
-  alnglu.cc.precc <- rbind(alnglu.cc.precc, precc.df.here)
-  alnglu.cc.postcc <- rbind(alnglu.cc.postcc, postcc.df.here)
-  
-  ## BETPEN...
-  betpen.cc.precc.onecc <- (orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesBETPEN`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesBETPEN`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesBETPEN`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesBETPEN`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) 
-  betpen.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesBETPEN`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesBETPEN`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesBETPEN`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesBETPEN`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i])
-  precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(betpen.nao.precc.onenao),
-                               fs.25=quantile(betpen.nao.precc.onenao, 0.25), fs.75=quantile(betpen.nao.precc.onenao, 0.75))
-  postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(betpen.nao.postcc.onenao),
-                                fs.25=quantile(betpen.nao.postcc.onenao, 0.25), fs.75=quantile(betpen.nao.postcc.onenao, 0.75))
-  betpen.nao.precc <- rbind(betpen.nao.precc, precc.df.here)
-  betpen.nao.postcc <- rbind(betpen.nao.postcc, postcc.df.here)
-  
-  ## FAGSYL...
-  fagsyl.nao.precc.onenao <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFAGSYL`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFAGSYL`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFAGSYL`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFAGSYL`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) 
-  fagsyl.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFAGSYL`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFAGSYL`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFAGSYL`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFAGSYL`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i])
-  precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fagsyl.nao.precc.onenao),
-                               fs.25=quantile(fagsyl.nao.precc.onenao, 0.25), fs.75=quantile(fagsyl.nao.precc.onenao, 0.75))
-  postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fagsyl.nao.postcc.onenao),
-                                fs.25=quantile(fagsyl.nao.postcc.onenao, 0.25), fs.75=quantile(fagsyl.nao.postcc.onenao, 0.75))
-  fagsyl.nao.precc <- rbind(fagsyl.nao.precc, precc.df.here)
-  fagsyl.nao.postcc <- rbind(fagsyl.nao.postcc, postcc.df.here)
-  
-  ## FRAEXC...
-  fraexc.nao.precc.onenao <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFRAEXC`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFRAEXC`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFRAEXC`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFRAEXC`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) 
-  fraexc.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesFRAEXC`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesFRAEXC`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesFRAEXC`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesFRAEXC`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i])
-  precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fraexc.nao.precc.onenao),
-                               fs.25=quantile(fraexc.nao.precc.onenao, 0.25), fs.75=quantile(fraexc.nao.precc.onenao, 0.75))
-  postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fraexc.nao.postcc.onenao),
-                                fs.25=quantile(fraexc.nao.postcc.onenao, 0.25), fs.75=quantile(fraexc.nao.postcc.onenao, 0.75))
-  fraexc.nao.precc <- rbind(fraexc.nao.precc, precc.df.here)
-  fraexc.nao.postcc <- rbind(fraexc.nao.postcc, postcc.df.here)
-  
-  ## QUEROB...
-  querob.nao.precc.onenao <-(orig_sum$b_Intercept + orig_sum$b_speciesQUEROB) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesQUEROB`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[1] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesQUEROB`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesQUEROB`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesQUEROB`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[1]*newcc[i]) 
-  querob.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesQUEROB) + (orig_sum$b_dist.z + orig_sum$`b_dist.z:speciesQUEROB`)*newcc[i] + 
-    (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[2] +
-    orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_elev.z + orig_sum$`b_elev.z:speciesQUEROB`)*newcc[i] + 
-    orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_mat.z + orig_sum$`b_mat.z:speciesQUEROB`)*newcc[i] + 
-    orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i]) +
-    (orig_sum$b_nao.z + orig_sum$`b_nao.z:speciesQUEROB`)*newcc[i] + 
-    orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newcc[i])
-  precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(querob.nao.precc.onenao),
-                               fs.25=quantile(querob.nao.precc.onenao, 0.25), fs.75=quantile(querob.nao.precc.onenao, 0.75))
-  postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(querob.nao.postcc.onenao),
-                                fs.25=quantile(querob.nao.postcc.onenao, 0.25), fs.75=quantile(querob.nao.postcc.onenao, 0.75))
-  querob.nao.precc <- rbind(querob.nao.precc, precc.df.here)
-  querob.nao.postcc <- rbind(querob.nao.postcc, postcc.df.here)
-}
-}
 
 aeship.cc.postcc$cc <- "1"
 aeship.cc.precc$cc <- "0"
