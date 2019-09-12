@@ -77,7 +77,7 @@ save(orig.bigpriors.fagus, file="/n/wolkovich_lab/Lab/Cat/orig_bigpriors_fagus.R
 }
 
 
-if(TRUE){
+if(FALSE){
 #### Now adding some very simple models...
 # 30 July 2019 - Cat
 
@@ -110,7 +110,7 @@ bb.mod.simple <- brm(bb~cc, data=bbdata, control=list(max_treedepth = 15,adapt_d
                      iter=4000, warmup = 2500, chains=4, cores=4)
 
 save(bb.mod.simple, file="/n/wolkovich_lab/Lab/Cat/bbmod.simple.Rdata")
-
+}
 
 tmin <- read.csv("/n/wolkovich_lab/Lab/Cat/tminprep_boxplots.csv")
 tmin$cc <- ifelse(tmin$year<=1983, 0, 1)
@@ -125,5 +125,5 @@ save(tmin.simple, file="/n/wolkovich_lab/Lab/Cat/tmin.simple.Rdata")
  #                    iter=4000, warmup = 2500, chains=4, cores=4)
 
 #save(bb.mod.species, file="/n/wolkovich_lab/Lab/Cat/bbmod.species.Rdata")
-}
+
 

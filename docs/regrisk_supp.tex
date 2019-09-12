@@ -139,6 +139,9 @@ We took the mean number of days between budburst and leafout for the entire expe
 Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
 
 \section*{Results: The effects of climatic and spatial variation on false spring incidence}
+Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S\ref{fig:mst}). 
+% Given that Ben is always complainig about Figure 2, how about moving it to the supp? We have plenty of good figures. 
+
 The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. The model estimates on the logit scale were converted to probability percentages for easier interpretation by using the `divide by 4' rule \citep{Gelman2006} and then back converted to the original scale. %To convert we used the equations below \citep{Gelman2006}:
 
 \iffalse
@@ -202,16 +205,82 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 \end{tabular}
 \end{center}
 
+\iffalse
+\begin{equation} \label{eq:1}
+lm(\text{Day of Year} (Budburst) $\sim$ \text{Climate Change} (scaled))
+\end{equation}
+
+\begin{equation} \label{eq:2}
+lm(\text{Day of Year} (Last Freeze Date) $\sim$ \text{Climate Change} (scaled))
+\end{equation}
+\fi 
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/MSTBB_bySpp.png}
+  -\caption{Mean spring temperatures are plotted for each site and year (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior} and species names are color-coded to match the other figures. }\label{fig:mst}
+  -\end{center}
+  -\end{figure}}
+
+\iffalse
+\begin{equation} \label{eq:3}
+lm(\text{Minimum Temperature \degree{C}} $\sim$ \text{Climate Change} (scaled))
+\end{equation}
+\fi
+
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Thu Sep 12 11:26:22 2019
+\begin{table}[H]
+\centering
+\caption{Summary of simple linear regression model of day of budburst before and after climate change.} 
+\begin{tabular}{lrrr}
+  \hline
+ & Estimate & 10\% & 90\% \\ 
+  \hline
+Intercept & 104.88 & 104.85 & 104.90 \\ 
+  Climate Change & -5.88 & -5.93 & -5.83 \\ 
+   \hline
+\end{tabular}
+\end{table}
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Thu Sep 12 11:26:23 2019
+\begin{table}[H]
+\centering
+\caption{Summary of simple linear regression model of day of year of last freeze (-2.2°C) before and after climate change.} 
+\begin{tabular}{lrrr}
+  \hline
+ & Estimate & 10\% & 90\% \\ 
+  \hline
+Intercept & 128.87 & 128.84 & 128.89 \\ 
+  Climate Change & -5.86 & -5.92 & -5.81 \\ 
+   \hline
+\end{tabular}
+\end{table}
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Thu Sep 12 11:26:23 2019
+\begin{table}[H]
+\centering
+\caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change.} 
+\begin{tabular}{lrrr}
+  \hline
+ & Estimate & 10\% & 90\% \\ 
+  \hline
+Intercept & 7.17 & 7.16 & 7.17 \\ 
+  Climate Change & 0.81 & 0.80 & 0.82 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 12 13:16:06 2019
+% Thu Sep 12 11:26:23 2019
 \begin{table}[H]
 \centering
 \caption{Summary of main Bernouilli model of false spring risk without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
 \begin{tabular}{lrrrrr}
   \hline
-Term & Model Estimate & 10\% & 25\% & 75\% & 90\% \\ 
+ & Estimate & 10\% & 25\% & 75\% & 90\% \\ 
   \hline
 NAO Index & 0.14 & 0.12 & 0.13 & 0.15 & 0.16 \\ 
   Mean Spring 
@@ -268,13 +337,13 @@ Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.11 & -0.10 \\
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 12 13:16:06 2019
+% Thu Sep 12 11:26:23 2019
 \begin{table}[H]
 \centering
 \caption{Summary of Bernouilli model of false spring risk with varying durations of vegetative risk for each species without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
 \begin{tabular}{lrrrrr}
   \hline
-Term & Model Estimate & 10\% & 25\% & 75\% & 90\% \\ 
+ & Estimate & 10\% & 25\% & 75\% & 90\% \\ 
   \hline
 NAO Index & 0.15 & 0.13 & 0.14 & 0.16 & 0.17 \\ 
   Mean Spring 
@@ -304,13 +373,13 @@ Coast by Climate Change & -0.17 & -0.22 & -0.19 & -0.14 & -0.11 \\
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 12 13:16:06 2019
+% Thu Sep 12 11:26:23 2019
 \begin{table}[H]
 \centering
 \caption{Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
 \begin{tabular}{lrrrrr}
   \hline
-Term & Model Estimate & 10\% & 25\% & 75\% & 90\% \\ 
+ & Estimate & 10\% & 25\% & 75\% & 90\% \\ 
   \hline
 NAO Index & 0.09 & 0.05 & 0.07 & 0.11 & 0.14 \\ 
   Mean Spring 

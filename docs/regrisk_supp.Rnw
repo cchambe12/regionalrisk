@@ -141,6 +141,7 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 <<echo=FALSE>>=
 
 library(xtable)
+library(broom)
 
 
 @
@@ -164,12 +165,63 @@ library(xtable)
 \end{tabular}
 \end{center}
 
+\iffalse
+\begin{equation} \label{eq:1}
+lm(\text{Day of Year} (Budburst) $\sim$ \text{Climate Change} (scaled))
+\end{equation}
+
+\begin{equation} \label{eq:2}
+lm(\text{Day of Year} (Last Freeze Date) $\sim$ \text{Climate Change} (scaled))
+\end{equation}
+\fi 
+
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//analyses/figures/MSTBB_bySpp.png}
   -\caption{Mean spring temperatures are plotted for each site and year (from 1951-2016) for each species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior} and species names are color-coded to match the other figures. }\label{fig:mst}
   -\end{center}
   -\end{figure}}
+
+\iffalse
+\begin{equation} \label{eq:3}
+lm(\text{Minimum Temperature \degree{C}} $\sim$ \text{Climate Change} (scaled))
+\end{equation}
+\fi
+
+<<label=simpregmods, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("~/Documents/git/regionalrisk")
+
+load("bbmod.scaled.Rdata")
+bb <- as.data.frame(tidy(bb.mod.scaled, prob=0.9))
+bb$term <- ifelse(bb$term=="b_Intercept", "Intercept", "Climate Change")
+colnames(bb) <- c("", "Estimate", "std.err", "10\\%", "90\\%")
+print(xtable(bb[1:2,c(1:2,4:5)], caption = "Summary of simple linear regression model of day of budburst before and after climate change.",
+             align = c("l", "l", "r","r","r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+
+load("lstfrz.scaled.Rdata")
+lstfrz <- as.data.frame(tidy(lstfrz.mod.scaled, prob=0.9))
+lstfrz$term <- ifelse(lstfrz$term=="b_Intercept", "Intercept", "Climate Change")
+colnames(lstfrz) <- c("", "Estimate", "std.err", "10\\%", "90\\%")
+print(xtable(lstfrz[1:2,c(1:2,4:5)], caption = "Summary of simple linear regression model of day of year of last freeze (-2.2°C) before and after climate change.",
+             align = c("l", "l", "r","r","r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+
+load("tmin.simple.Rdata")
+tmin <- as.data.frame(tidy(tmin.simple, prob=0.9))
+tmin$term <- ifelse(tmin$term=="b_Intercept", "Intercept", "Climate Change")
+colnames(tmin) <- c("", "Estimate", "std.err", "10\\%", "90\\%")
+print(xtable(tmin[1:2,c(1:2, 4:5)], caption = "Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change.",
+             align = c("l", "l", "r","r","r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+
+@
 
 
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
@@ -178,16 +230,17 @@ setwd("..//analyses/")
 modoutput <- read.csv("output/orig_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 # add multicolumn later for BB and LO headers above these column names
 
-modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
-modoutput$Term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$Term)
-modoutput$Term <- gsub("b_elev.z", "Elevation", modoutput$Term)
-modoutput$Term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$Term)
-modoutput$Term <- gsub("b_space.z", "Space Parameter", modoutput$Term)
-modoutput$Term <- gsub("b_cc.z", "Climate Change", modoutput$Term)
-modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
+modoutput$term <- gsub("b_nao.z", "NAO Index", modoutput$term)
+modoutput$term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$term)
+modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
+modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
+modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
+modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
+modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+
+colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 
 
 print(xtable(modoutput, 
@@ -238,16 +291,17 @@ setwd("..//analyses/")
 modoutput <- read.csv("output/dvr_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 # add multicolumn later for BB and LO headers above these column names
 
-modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
-modoutput$Term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$Term)
-modoutput$Term <- gsub("b_elev.z", "Elevation", modoutput$Term)
-modoutput$Term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$Term)
-modoutput$Term <- gsub("b_space.z", "Space Parameter", modoutput$Term)
-modoutput$Term <- gsub("b_cc.z", "Climate Change", modoutput$Term)
-modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
+modoutput$term <- gsub("b_nao.z", "NAO Index", modoutput$term)
+modoutput$term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$term)
+modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
+modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
+modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
+modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
+modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+
+colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 
 
 print(xtable(modoutput, 
@@ -271,17 +325,17 @@ setwd("..//analyses/")
 modoutput <- read.csv("output/five_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(2:7,43:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-colnames(modoutput) = c("Term", "Model Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 # add multicolumn later for BB and LO headers above these column names
 
-modoutput$Term <- gsub("b_nao.z", "NAO Index", modoutput$Term)
-modoutput$Term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$Term)
-modoutput$Term <- gsub("b_elev.z", "Elevation", modoutput$Term)
-modoutput$Term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$Term)
-modoutput$Term <- gsub("b_space.z", "Space Parameter", modoutput$Term)
-modoutput$Term <- gsub("b_cc.z", "Climate Change", modoutput$Term)
-modoutput$Term <- gsub(":cc.z", " by Climate Change", modoutput$Term)
+modoutput$term <- gsub("b_nao.z", "NAO Index", modoutput$term)
+modoutput$term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$term)
+modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
+modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
+modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
+modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
+modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
 
+colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 
 print(xtable(modoutput, 
              caption = "Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
