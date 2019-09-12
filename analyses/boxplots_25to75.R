@@ -160,16 +160,17 @@ f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs),]
 #f$fs<-ifelse(f$fs.count>0, 1, 0)
-f$fs<-ave(f$fs,f$lat.long, f$species, f$cc, FUN=sum)
+#f$fs<-ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
+f$fs<-ave(f$fs, f$lat.long, f$species, f$cc)
 
-modoutput$est.conv <-  (modoutput$predicted/4)/(2) * 100
-modoutput$low.conv <-  (modoutput$conf.low/4)/(2) * 100
-modoutput$up.conv <-  (modoutput$conf.high/4)/(2) * 100
+modoutput$est.conv <-  (modoutput$predicted/4)/(2)
+modoutput$low.conv <-  (modoutput$conf.low/4)/(2)
+modoutput$up.conv <-  (modoutput$conf.high/4)/(2)
 modoutput$x <- ifelse(modoutput$x<0, 0, 1)
 
 
-modoutput<-subset(modoutput, select=c("x", "group", "est.conv", "low.conv", "up.conv"))
-colnames(modoutput) <- c("cc", "species", "est", "lower", "upper")
+#modoutput<-subset(modoutput, select=c("x", "group", "est.conv", "low.conv", "up.conv"))
+colnames(modoutput) <- c("cc", "est", "lower", "upper",  "species", "est.conv", "low.conv", "up.conv")
 
 modoutput$species<-ifelse(modoutput$species=="BETPEN", "aaBETPEN", modoutput$species)
 modoutput$species<-ifelse(modoutput$species=="FRAEXC", "zFRAEXC", modoutput$species)
@@ -209,7 +210,7 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Probability of \nFalse Spring Risk") + coord_cartesian(ylim=c(0, 31)) + 
+  ylab("Probability of \nFalse Spring Risk") + coord_cartesian(ylim=c(0, 1)) + 
   #geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
@@ -237,7 +238,7 @@ grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
 
 ## Budburst: took the average day of budburst for each individual and condensed to the 25th-75th quartile
 ## Tmin: same thing as budburst
-## False Spring: counted the number of false spring years from 1951-1983 and for 1984-2016 for each individual
+## False Spring: took the average probability of risk for each site, species and cc
 
 
 

@@ -265,12 +265,13 @@ grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 ########################################################################################
 ###################### NOW FOR THE MODEL Plots #########################################
 ########################################################################################
-library(broom)
 setwd("~/Documents/git/regionalrisk")
 load("orig_full.Rdata")
 load("dvr_full.Rdata")
 load("five_full.Rdata")
 load("fullleaf_full.Rdata")
+
+if(FALSE){
 modorig<-as.data.frame(tidy(orig.full, prob=0.9))
 names(modorig)<-c("term", "estimate", "error", "10%", "90%")
 modorig50<-as.data.frame(tidy(orig.full, prob=0.5))
@@ -280,9 +281,11 @@ modorig <- full_join(modorig, modorig50)
 #names(modorig25)<-c("term", "estimate", "error", "25%", "75%")
 #modorig <- full_join(modorig, modorig25)
 modorig <- subset(modorig, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
-
 #write.csv(modorig, file="analyses/output/orig_full_modeloutput.csv", row.names=FALSE)
+}
+modorig <- read.csv("analyses/output/orig_full_modeloutput.csv", header=TRUE)
 
+if(FALSE){
 moddvr<-as.data.frame(tidy(dvr.full, prob=0.9))
 names(moddvr)<-c("term", "estimate", "error", "10%", "90%")
 moddvr50<-as.data.frame(tidy(dvr.full, prob=0.5))
@@ -292,9 +295,11 @@ moddvr <- full_join(moddvr, moddvr50)
 #names(moddvr25)<-c("term", "estimate", "error", "25%", "75%")
 #moddvr <- full_join(moddvr, moddvr25)
 moddvr <- subset(moddvr, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
-
 #write.csv(moddvr, file="analyses/output/dvr_full_modeloutput.csv", row.names=FALSE)
+}
+moddvr <- read.csv("analyses/output/dvr_full_modeloutput.csv", header=TRUE)
 
+if(FALSE){
 modfive<-as.data.frame(tidy(five.full, prob=0.9))
 names(modfive)<-c("term", "estimate", "error", "10%", "90%")
 modfive50<-as.data.frame(tidy(five.full, prob=0.5))
@@ -304,9 +309,11 @@ modfive <- full_join(modfive, modfive50)
 #names(modfive25)<-c("term", "estimate", "error", "25%", "75%")
 #modfive <- full_join(modfive, modfive25)
 modfive <- subset(modfive, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
-
 #write.csv(modfive, file="analyses/output/five_full_modeloutput.csv", row.names=FALSE)
+}
+modfive <- read.csv("analyses/output/five_full_modeloutput.csv", header=TRUE)
 
+if(FALSE){
 modfullleaf<-as.data.frame(tidy(fullleaf.full, prob=0.9))
 names(modfullleaf)<-c("term", "estimate", "error", "10%", "90%")
 modfullleaf50<-as.data.frame(tidy(fullleaf.full, prob=0.5))
@@ -316,45 +323,127 @@ modfullleaf <- full_join(modfullleaf, modfullleaf50)
 #names(modfive25)<-c("term", "estimate", "error", "25%", "75%")
 #modfive <- full_join(modfive, modfive25)
 modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
-
 #write.csv(modfullleaf, file="analyses/output/fullleaf_full_modeloutput.csv", row.names=FALSE)
+}
 
 
 ### Now to make the plots
-modoutput <- modfive #modelhere
+modoutput <- modorig #modelhere
 
-modoutput<-modoutput[2:47,]
+modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
+modoutput<-modoutput[1:47,]
 modoutput$term<-gsub(".*b_","",modoutput$term)
+#modoutput$term <- gsub(".*species", "", modoutput$term)
 
 modoutput<-modoutput[!(modoutput$term=="sd_species__nao.z" | modoutput$term=="sd_species__mat.z" | modoutput$term=="sd_species__elev.z"
-                       | modoutput$term=="sd_species__dist.z" | modoutput$term=="sd_species__space.z" | modoutput$term=="sd_species__cc.z" | modoutput$term=="sigma"
-                       | modoutput$term=="speciesALNGLU" | modoutput$term=="speciesBETPEN" | modoutput$term=="speciesFAGSYL"
-                       | modoutput$term=="speciesFRAEXC" | modoutput$term=="speciesQUEROB"),]
+                       | modoutput$term=="sd_species__dist.z" | modoutput$term=="sd_species__space.z" | modoutput$term=="sd_species__cc.z" | 
+                         modoutput$term=="sigma"),]
 
+
+modoutput$species <- ifelse(grepl("species",modoutput$term),gsub(".*species", "", modoutput$term), modoutput$term)
+makeaeship <- c("nao.z", "mat.z", "dist.z", "elev.z", "space.z", "cc.z")
+modoutput$species <- ifelse(modoutput$term%in%makeaeship, "AESHIP", modoutput$species)
+
+modoutput$termclean <- gsub(":species.*", "", modoutput$term)
+
+modoutput$estclean <- NA
+modoutput$estclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="mat.z")]+
+                               modoutput$estimate, modoutput$estimate)
+modoutput$estclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="nao.z")]+
+                               modoutput$estimate, modoutput$estclean)
+modoutput$estclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="dist.z")]+
+                               modoutput$estimate, modoutput$estclean)
+modoutput$estclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="elev.z")]+
+                               modoutput$estimate, modoutput$estclean)
+modoutput$estclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="space.z")]+
+                               modoutput$estimate, modoutput$estclean)
+modoutput$estclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="cc.z")]+
+                               modoutput$estimate, modoutput$estclean)
+
+modoutput$lowclean <- NA
+modoutput$lowclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
+                             modoutput$X10.[(modoutput$term=="mat.z")]+
+                               modoutput$X10., modoutput$X10.)
+modoutput$lowclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
+                             modoutput$X10.[(modoutput$term=="nao.z")]+
+                               modoutput$X10., modoutput$lowclean)
+modoutput$lowclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
+                             modoutput$X10.[(modoutput$term=="dist.z")]+
+                               modoutput$X10., modoutput$lowclean)
+modoutput$lowclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
+                             modoutput$X10.[(modoutput$term=="elev.z")]+
+                               modoutput$X10., modoutput$lowclean)
+modoutput$lowclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
+                             modoutput$X10.[(modoutput$term=="space.z")]+
+                               modoutput$X10., modoutput$X10.)
+modoutput$lowclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
+                             modoutput$X10.[(modoutput$term=="cc.z")]+
+                               modoutput$X10., modoutput$lowclean)
+
+modoutput$highclean <- NA
+modoutput$highclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
+                             modoutput$X90.[(modoutput$term=="mat.z")]+
+                               modoutput$X90., modoutput$X90.)
+modoutput$highclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
+                             modoutput$X90.[(modoutput$term=="nao.z")]+
+                               modoutput$X90., modoutput$highclean)
+modoutput$highclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
+                             modoutput$X90.[(modoutput$term=="dist.z")]+
+                               modoutput$X90., modoutput$highclean)
+modoutput$highclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
+                             modoutput$X90.[(modoutput$term=="elev.z")]+
+                               modoutput$X90., modoutput$highclean)
+modoutput$highclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
+                             modoutput$X90.[(modoutput$term=="space.z")]+
+                               modoutput$X90., modoutput$highclean)
+modoutput$highclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
+                             modoutput$X90.[(modoutput$term=="cc.z")]+
+                               modoutput$X90., modoutput$highclean)
+
+modoutput$estavg <- ave(modoutput$estclean, modoutput$termclean)
+modoutput$lowavg <- ave(modoutput$lowclean, modoutput$termclean)
+modoutput$highavg <- ave(modoutput$highclean, modoutput$termclean)
+
+                    
 modoutput$Jvar<-NA
-modoutput$Jvar<-ifelse(modoutput$term=="nao.z", 8, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="mat.z", 11, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="elev.z", 9, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="dist.z", 10, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="space.z", 7, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="cc.z", 6, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="nao.z:cc.z", 2, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="mat.z:cc.z", 5, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="elev.z:cc.z", 3, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="dist.z:cc.z", 4, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="space.z:cc.z", 1, modoutput$Jvar)
-modoutput$species<-as.character(modoutput$species)
+modoutput$Jvar<-ifelse(modoutput$termclean=="nao.z", 8, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="mat.z", 11, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="elev.z", 9, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="dist.z", 10, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="space.z", 7, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="cc.z", 6, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="nao.z:cc.z", 2, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="mat.z:cc.z", 5, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="elev.z:cc.z", 3, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="dist.z:cc.z", 4, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="space.z:cc.z", 1, modoutput$Jvar)
+
+modoutput$Jvar <- ifelse(modoutput$species=="ALNGLU", modoutput$Jvar - 0.1, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="BETPEN", modoutput$Jvar - 0.2, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="FAGSYL", modoutput$Jvar - 0.3, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="FRAEXC", modoutput$Jvar - 0.4, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="QUEROB", modoutput$Jvar - 0.5, modoutput$Jvar)
+
 
 estimates<-c("Mean Spring Temperature", "Distance from Coast", "Elevation", "NAO Index", "Space Parameter", "Climate Change",
              "Mean Spring Temperature \nx Climate Change", "Distance from Coast \nx Climate Change",
              "Elevation x \nClimate Change", "NAO Index x \nClimate Change", "Space Parameter \nx Climate Change")
 estimates<-rev(estimates)
 modoutput <- modoutput[!is.na(modoutput$Jvar),]
-regrisk<-ggplot(modoutput, aes(x=`10%`, xend=`90%`, y=Jvar, yend=Jvar)) +
-  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar), col="black") +
+
+
+###### VERY CLOSE! NEED TO MAKE MAIN DOTS BIGGER FOR ESTAVG AND THEN SMALLER DIFF COL DOTS FOR EACH SPECIES (ESTCLEAN)#####
+regrisk<-ggplot(modoutput, aes(x=X10., xend=X90., y=Jvar, yend=Jvar)) +
+  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estavg, y=Jvar), col="black") +
   geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
   guides(size=FALSE) +
-  scale_y_discrete(limits = sort(unique(modoutput$term)), labels=estimates) +
+  scale_y_discrete(limits = sort(unique(modoutput$termclean)), labels=estimates) +
   xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=5), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 

@@ -8,7 +8,7 @@ options(stringsAsFactors = FALSE)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-if(FALSE){
+if(TRUE){
 bb<-read.csv("/n/wolkovich_lab/Lab/Cat/FinalModels/fs_newspace_orig.csv", header=TRUE)
 #bb<-read.csv("~/Documents/git/regionalrisk/analyses/output/fs_newspace_orig.csv", header=TRUE)
 #check<-read.csv("~/Desktop/fs_newspace_orig.csv", header=TRUE)
@@ -75,55 +75,4 @@ orig.bigpriors.fagus<-brm(fs ~ nao.z + mat.z + dist.z + elev.z + space.z +
 
 save(orig.bigpriors.fagus, file="/n/wolkovich_lab/Lab/Cat/orig_bigpriors_fagus.Rdata")
 }
-
-
-if(FALSE){
-#### Now adding some very simple models...
-# 30 July 2019 - Cat
-
-lstfrz <- read.csv("/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv", header=TRUE)
-lstfrz$cc <- ifelse(lstfrz$year<=1983, 0, 1)
-lstfrz$cc.z <- (lstfrz$cc-mean(lstfrz$cc,na.rm=TRUE))/(2*sd(lstfrz$cc,na.rm=TRUE))
-
-lstfrz.mod.simplecc <- brm(lastfreeze~cc, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
-                     iter=4000, warmup = 2500, chains=4, cores=4)
-
-save(lstfrz.mod.simplecc, file="/n/wolkovich_lab/Lab/Cat/lstfrz.simplecc.Rdata")
-
-#lstfrz.mod.species <- brm(lastfreeze~year*species, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
- #                    iter=4000, warmup = 2500, chains=4, cores=4)
-
-#save(lstfrz.mod.species, file="/n/wolkovich_lab/Lab/Cat/lstfrz.species.Rdata")
-}
-
-if(FALSE){
-bbdata <- read.csv("/n/wolkovich_lab/Lab/Cat/BBdata.csv")
-bbdata$cc <- ifelse(bbdata$year<=1983, 0, 1)
-bbdata$cc.z <- (bbdata$cc-mean(bbdata$cc,na.rm=TRUE))/(2*sd(bbdata$cc,na.rm=TRUE))
-
-bb.mod.scaled <- brm(bb~cc.z, data=bbdata, control=list(max_treedepth = 15,adapt_delta = 0.99), 
-                     iter=4000, warmup = 2500, chains=4, cores=4)
-
-save(bb.mod.scaled, file="/n/wolkovich_lab/Lab/Cat/bbmod.scaled.Rdata")
-
-bb.mod.simple <- brm(bb~cc, data=bbdata, control=list(max_treedepth = 15,adapt_delta = 0.99), 
-                     iter=4000, warmup = 2500, chains=4, cores=4)
-
-save(bb.mod.simple, file="/n/wolkovich_lab/Lab/Cat/bbmod.simple.Rdata")
-}
-
-tmin <- read.csv("/n/wolkovich_lab/Lab/Cat/tminprep_boxplots.csv")
-tmin$cc <- ifelse(tmin$year<=1983, 0, 1)
-tmin$cc.z <- (tmin$cc-mean(tmin$cc,na.rm=TRUE))/(2*sd(tmin$cc,na.rm=TRUE))
-
-tmin.simple <- brm(Tmin~cc, data=tmin, control=list(max_treedepth = 15,adapt_delta = 0.99), 
-                     iter=4000, warmup = 2500, chains=4, cores=4)
-
-save(tmin.simple, file="/n/wolkovich_lab/Lab/Cat/tmin.simple.Rdata")
-
-#bb.mod.species <- brm(bb~year*species, data=bb, control=list(max_treedepth = 15,adapt_delta = 0.99), 
- #                    iter=4000, warmup = 2500, chains=4, cores=4)
-
-#save(bb.mod.species, file="/n/wolkovich_lab/Lab/Cat/bbmod.species.Rdata")
-
 
