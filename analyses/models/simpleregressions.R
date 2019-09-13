@@ -18,18 +18,18 @@ if(FALSE){
   
   #save(bb.mod.scaled, file="/n/wolkovich_lab/Lab/Cat/bbmod.scaled.Rdata")
   
-  bb.mod <- brm(bb~cc:species, data=bbdata, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+  bb.mod <- brm(bb ~ cc + species + cc:species, data=bbdata, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                        iter=4000, warmup = 2500, chains=4, cores=4)
   
   save(bb.mod, file="/n/wolkovich_lab/Lab/Cat/bbmod.Rdata")
 }
 
-if(FALSE)
+if(FALSE){
 tmin <- read.csv("/n/wolkovich_lab/Lab/Cat/tminprep_boxplots.csv")
 tmin$cc <- ifelse(tmin$year<=1983, 0, 1)
 #tmin$cc.z <- (tmin$cc-mean(tmin$cc,na.rm=TRUE))/(2*sd(tmin$cc,na.rm=TRUE))
 
-tmin.mod<- brm(Tmin~cc:species, data=tmin, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+tmin.mod<- brm(Tmin ~ cc + species + cc:species, data=tmin, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                    iter=4000, warmup = 2500, chains=4, cores=4)
 
 save(tmin.mod, file="/n/wolkovich_lab/Lab/Cat/tminmod.Rdata")
@@ -38,19 +38,17 @@ save(tmin.mod, file="/n/wolkovich_lab/Lab/Cat/tminmod.Rdata")
 #                    iter=4000, warmup = 2500, chains=4, cores=4)
 
 #save(bb.mod.species, file="/n/wolkovich_lab/Lab/Cat/bbmod.species.Rdata")
+}
 
 if(TRUE){
-  #### Now adding some very simple models...
-  # 30 July 2019 - Cat
+lstfrz <- read.csv("/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv")
+lstfrz$cc <- ifelse(lstfrz$year<=1983, 0, 1)
+#lstfrz$cc.z <- (lstfrz$cc-mean(lstfrz$cc,na.rm=TRUE))/(2*sd(lstfrz$cc,na.rm=TRUE))
   
-  lstfrz <- read.csv("/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv", header=TRUE)
-  lstfrz$cc <- ifelse(lstfrz$year<=1983, 0, 1)
-  lstfrz$cc.z <- (lstfrz$cc-mean(lstfrz$cc,na.rm=TRUE))/(2*sd(lstfrz$cc,na.rm=TRUE))
-  
-  lstfrz.mod <- brm(lastfreeze~cc:species, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+lstfrz.mod <- brm(lastfreeze ~ cc + species + cc:species, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                              iter=4000, warmup = 2500, chains=4, cores=4)
   
-  save(lstfrz.mod, file="/n/wolkovich_lab/Lab/Cat/lstfrzmod.Rdata")
+save(lstfrz.mod, file="/n/wolkovich_lab/Lab/Cat/lstfrzmod.Rdata")
   
   #lstfrz.mod.species <- brm(lastfreeze~year*species, data=lstfrz, control=list(max_treedepth = 15,adapt_delta = 0.99), 
   #                    iter=4000, warmup = 2500, chains=4, cores=4)
