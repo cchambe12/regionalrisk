@@ -78,7 +78,7 @@ budburst<- ggplot(mat, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "cQUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Day of Budburst") + coord_cartesian(ylim=c(50,165)) + 
-  geom_hline(yintercept=mean(mat$bb), linetype="dotted", col="black") +
+  #geom_hline(yintercept=mean(mat$bb), linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                        labels=c("0"="1951-1983", "1"="1984-2016")) +
@@ -136,7 +136,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
   ylab("Minimum Temperature \nfrom Budburst to Leafout") + coord_cartesian(ylim=c(0,15)) + 
-  geom_hline(yintercept=mean(plust$Tmin), linetype="dotted", col="black") +
+  #geom_hline(yintercept=mean(plust$Tmin), linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
                      labels=c("0"="1951-1983", "1"="1984-2016")) +

@@ -40,7 +40,7 @@ save(tmin.mod, file="/n/wolkovich_lab/Lab/Cat/tminmod.Rdata")
 #save(bb.mod.species, file="/n/wolkovich_lab/Lab/Cat/bbmod.species.Rdata")
 }
 
-if(TRUE){
+if(FALSE){
 lstfrz <- read.csv("/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv")
 lstfrz$cc <- ifelse(lstfrz$year<=1983, 0, 1)
 #lstfrz$cc.z <- (lstfrz$cc-mean(lstfrz$cc,na.rm=TRUE))/(2*sd(lstfrz$cc,na.rm=TRUE))
@@ -56,3 +56,13 @@ save(lstfrz.mod, file="/n/wolkovich_lab/Lab/Cat/lstfrzmod.Rdata")
   #save(lstfrz.mod.species, file="/n/wolkovich_lab/Lab/Cat/lstfrz.species.Rdata")
 }
 
+
+if(TRUE){
+  fssimp <- read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv")
+  fssimp$cc <- ifelse(fssimp$year<=1983, 0, 1)
+  
+  fssimp.mod <- brm(fs ~ cc + species + cc:species, data=fssimp, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+                    iter=4000, warmup = 2500, chains=4, cores=4)
+  
+  save(fssimp.mod, file="/n/wolkovich_lab/Lab/Cat/fssimpmod.Rdata")
+}

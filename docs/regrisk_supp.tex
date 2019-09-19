@@ -229,7 +229,7 @@ lm(\text{Minimum Temperature \degree{C}} $\sim$ \text{Climate Change} (scaled))
 \fi
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Sep 12 11:26:22 2019
+% Thu Sep 19 17:09:41 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of budburst before and after climate change.} 
@@ -243,7 +243,7 @@ Intercept & 104.88 & 104.85 & 104.90 \\
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Sep 12 11:26:23 2019
+% Thu Sep 19 17:09:41 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of year of last freeze (-2.2°C) before and after climate change.} 
@@ -257,7 +257,7 @@ Intercept & 128.87 & 128.84 & 128.89 \\
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Sep 12 11:26:23 2019
+% Thu Sep 19 17:09:42 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change.} 
@@ -273,30 +273,81 @@ Intercept & 7.17 & 7.16 & 7.17 \\
 
 
 
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Sep 12 11:26:23 2019
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in `[.data.frame`(x, r, vars, drop = drop): undefined columns selected}}\end{kframe}% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Thu Sep 19 17:09:42 2019
 \begin{table}[H]
 \centering
 \caption{Summary of main Bernouilli model of false spring risk without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
 \begin{tabular}{lrrrrr}
   \hline
- & Estimate & 10\% & 25\% & 75\% & 90\% \\ 
+ & Estimate & 10\% & 90\% & Species & NA \\ 
   \hline
-NAO Index & 0.14 & 0.12 & 0.13 & 0.15 & 0.16 \\ 
-  Mean Spring 
-Temperature & -0.48 & -0.50 & -0.49 & -0.47 & -0.45 \\ 
-  Distance from 
-Coast & 0.40 & 0.38 & 0.39 & 0.41 & 0.43 \\ 
-  Elevation & 0.19 & 0.16 & 0.18 & 0.20 & 0.22 \\ 
-  Space Parameter & -0.06 & -0.08 & -0.07 & -0.06 & -0.05 \\ 
-  Climate Change & 0.35 & 0.33 & 0.34 & 0.36 & 0.37 \\ 
-  NAO Index by Climate Change & -0.83 & -0.85 & -0.84 & -0.82 & -0.81 \\ 
-  Mean Spring 
-Temperature by Climate Change & 0.42 & 0.40 & 0.41 & 0.43 & 0.44 \\ 
-  Distance from 
-Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.11 & -0.10 \\ 
-  Elevation by Climate Change & -0.00 & -0.03 & -0.01 & 0.01 & 0.03 \\ 
-  Space Parameter by Climate Change & -0.05 & -0.07 & -0.05 & -0.04 & -0.03 \\ 
+Aesculus hippocastanum & 0.12 & 0.16 & 0.14 & 7.80 & NAO Index \\ 
+  Aesculus hippocastanum & -0.50 & -0.45 & -0.48 & 10.80 & Mean Spring 
+Temperature \\ 
+  Aesculus hippocastanum & 0.38 & 0.43 & 0.40 & 9.80 & Distance from 
+Coast \\ 
+  Aesculus hippocastanum & 0.16 & 0.22 & 0.19 & 8.80 & Elevation \\ 
+  Aesculus hippocastanum & -0.08 & -0.05 & -0.06 & 6.80 & Space Parameter \\ 
+  Aesculus hippocastanum & 0.33 & 0.37 & 0.35 & 5.80 & Climate Change \\ 
+  Alnus glutinosa & 0.01 & 0.13 & 0.07 & 7.75 & NAO Index \\ 
+  Betula pendula & 0.01 & 0.11 & 0.06 & 7.70 & NAO Index \\ 
+  Fagus sylvatica & 0.21 & 0.32 & 0.26 & 7.65 & NAO Index \\ 
+  Fraxinus excelsior & 0.10 & 0.24 & 0.17 & 7.60 & NAO Index \\ 
+  Quercus robur & 0.16 & 0.28 & 0.22 & 7.55 & NAO Index \\ 
+  Alnus glutinosa & -0.40 & -0.27 & -0.33 & 10.75 & Mean Spring 
+Temperature \\ 
+  Betula pendula & -0.55 & -0.44 & -0.50 & 10.70 & Mean Spring 
+Temperature \\ 
+  Fagus sylvatica & -0.60 & -0.48 & -0.54 & 10.65 & Mean Spring 
+Temperature \\ 
+  Fraxinus excelsior & -0.24 & -0.07 & -0.16 & 10.60 & Mean Spring 
+Temperature \\ 
+  Quercus robur & -0.44 & -0.31 & -0.37 & 10.55 & Mean Spring 
+Temperature \\ 
+  Alnus glutinosa & 0.27 & 0.40 & 0.33 & 9.75 & Distance from 
+Coast \\ 
+  Betula pendula & 0.35 & 0.47 & 0.41 & 9.70 & Distance from 
+Coast \\ 
+  Fagus sylvatica & 0.34 & 0.46 & 0.40 & 9.65 & Distance from 
+Coast \\ 
+  Fraxinus excelsior & 0.58 & 0.74 & 0.66 & 9.60 & Distance from 
+Coast \\ 
+  Quercus robur & 0.23 & 0.37 & 0.30 & 9.55 & Distance from 
+Coast \\ 
+  Alnus glutinosa & 0.14 & 0.29 & 0.21 & 8.75 & Elevation \\ 
+  Betula pendula & 0.16 & 0.29 & 0.22 & 8.70 & Elevation \\ 
+  Fagus sylvatica & 0.12 & 0.26 & 0.19 & 8.65 & Elevation \\ 
+  Fraxinus excelsior & -0.27 & -0.09 & -0.18 & 8.60 & Elevation \\ 
+  Quercus robur & 0.03 & 0.19 & 0.11 & 8.55 & Elevation \\ 
+  Alnus glutinosa & -0.10 & 0.00 & -0.05 & 6.75 & Space Parameter \\ 
+  Betula pendula & -0.12 & -0.03 & -0.07 & 6.70 & Space Parameter \\ 
+  Fagus sylvatica & -0.16 & -0.06 & -0.11 & 6.65 & Space Parameter \\ 
+  Fraxinus excelsior & -0.08 & 0.05 & -0.01 & 6.60 & Space Parameter \\ 
+  Quercus robur & -0.10 & 0.01 & -0.05 & 6.55 & Space Parameter \\ 
+  Alnus glutinosa & 0.36 & 0.47 & 0.41 & 5.75 & Climate Change \\ 
+  Betula pendula & 0.36 & 0.46 & 0.41 & 5.70 & Climate Change \\ 
+  Fagus sylvatica & -0.02 & 0.08 & 0.03 & 5.65 & Climate Change \\ 
+  Fraxinus excelsior & -0.23 & -0.10 & -0.17 & 5.60 & Climate Change \\ 
+  Quercus robur & -0.11 & 0.00 & -0.05 & 5.55 & Climate Change \\ 
+  Overall Estimate & 0.10 & 0.21 & 0.15 & 8.00 & NAO Index \\ 
+  Overall Estimate & -0.45 & -0.34 & -0.40 & 11.00 & Mean Spring 
+Temperature \\ 
+  Overall Estimate & 0.36 & 0.48 & 0.42 & 10.00 & Distance from 
+Coast \\ 
+  Overall Estimate & 0.06 & 0.19 & 0.13 & 9.00 & Elevation \\ 
+  Overall Estimate & -0.11 & -0.01 & -0.06 & 7.00 & Space Parameter \\ 
+  Overall Estimate & 0.11 & 0.21 & 0.16 & 6.00 & Climate Change \\ 
+  Overall Estimate & -0.85 & -0.81 & -0.83 & 2.00 & NAO Index:Climate Change \\ 
+  Overall Estimate & 0.40 & 0.44 & 0.42 & 5.00 & Mean Spring 
+Temperature:Climate Change \\ 
+  Overall Estimate & -0.15 & -0.10 & -0.12 & 4.00 & Distance from 
+Coast:Climate Change \\ 
+  Overall Estimate & -0.03 & 0.03 & -0.00 & 3.00 & Elevation:Climate Change \\ 
+  Overall Estimate & -0.07 & -0.03 & -0.05 & 1.00 & Space Parameter:Climate Change \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -337,7 +388,7 @@ Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.11 & -0.10 \\
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Sep 12 11:26:23 2019
+% Thu Sep 19 17:09:42 2019
 \begin{table}[H]
 \centering
 \caption{Summary of Bernouilli model of false spring risk with varying durations of vegetative risk for each species without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
@@ -373,7 +424,7 @@ Coast by Climate Change & -0.17 & -0.22 & -0.19 & -0.14 & -0.11 \\
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Sep 12 11:26:23 2019
+% Thu Sep 19 17:09:42 2019
 \begin{table}[H]
 \centering
 \caption{Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 

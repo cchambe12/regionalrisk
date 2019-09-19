@@ -227,20 +227,31 @@ print(xtable(tmin[1:2,c(1:2, 4:5)], caption = "Summary of simple linear regressi
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
-modoutput <- read.csv("output/orig_full_modeloutput.csv", header=TRUE)
-modoutput <- modoutput[c(2:7,43:47),]
-#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-# add multicolumn later for BB and LO headers above these column names
+modoutput <- read.csv("output/modoutput_90_origspp.csv", header=TRUE)
+modoutput <- subset(modoutput, select=c("termclean", "estclean", "lowclean", "highclean", "species"))
 
-modoutput$term <- gsub("b_nao.z", "NAO Index", modoutput$term)
-modoutput$term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$term)
-modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
-modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
-modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
-modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
-modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+##### VERY CLOSE JUST NEED TO REORDER EVERYTHING! EITHER THE TABLE OR THE FIGURE! #####
+modoutput <- modoutput[
+  order( modoutput$termclean, modoutput$species ),
+] 
 
-colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
+modoutput$termclean <- gsub("nao.z", "NAO Index", modoutput$termclean)
+modoutput$termclean <- gsub("mat.z", "Mean Spring \nTemperature", modoutput$termclean)
+modoutput$termclean <- gsub("elev.z", "Elevation", modoutput$termclean)
+modoutput$termclean <- gsub("dist.z", "Distance from \nCoast", modoutput$termclean)
+modoutput$termclean <- gsub("space.z", "Space Parameter", modoutput$termclean)
+modoutput$termclean <- gsub("cc.z", "Climate Change", modoutput$termclean)
+modoutput$termclean <- gsub(":cc.z", " by Climate Change", modoutput$termclean)
+
+modoutput$species <- gsub("aaall", "Overall Estimate", modoutput$species)
+modoutput$species <- gsub("AESHIP", "Aesculus hippocastanum", modoutput$species)
+modoutput$species <- gsub("ALNGLU", "Alnus glutinosa", modoutput$species)
+modoutput$species <- gsub("aaBETPEN", "Betula pendula", modoutput$species)
+modoutput$species <- gsub("FAGSYL", "Fagus sylvatica", modoutput$species)
+modoutput$species <- gsub("zFRAEXC", "Fraxinus excelsior", modoutput$species)
+modoutput$species <- gsub("QUEROB", "Quercus robur", modoutput$species)
+
+colnames(modoutput) = c("", "Estimate", "10\\%", "90\\%", "Species")
 
 
 print(xtable(modoutput, 

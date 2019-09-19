@@ -328,7 +328,7 @@ modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "7
 
 
 ### Now to make the plots
-modoutput <- modorig #modelhere
+modoutput <- moddvr #modelhere
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
 modoutput<-modoutput[1:47,]
@@ -381,7 +381,7 @@ modoutput$lowclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species !
                                modoutput$X10., modoutput$lowclean)
 modoutput$lowclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
                              modoutput$X10.[(modoutput$term=="space.z")]+
-                               modoutput$X10., modoutput$X10.)
+                               modoutput$X10., modoutput$lowclean)
 modoutput$lowclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
                              modoutput$X10.[(modoutput$term=="cc.z")]+
                                modoutput$X10., modoutput$lowclean)
@@ -424,12 +424,6 @@ modoutput$Jvar<-ifelse(modoutput$termclean=="elev.z:cc.z", 3, modoutput$Jvar)
 modoutput$Jvar<-ifelse(modoutput$termclean=="dist.z:cc.z", 4, modoutput$Jvar)
 modoutput$Jvar<-ifelse(modoutput$termclean=="space.z:cc.z", 1, modoutput$Jvar)
 
-modoutput$Jvar <- ifelse(modoutput$species=="ALNGLU", modoutput$Jvar - 0.1, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="BETPEN", modoutput$Jvar - 0.2, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="FAGSYL", modoutput$Jvar - 0.3, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="FRAEXC", modoutput$Jvar - 0.4, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="QUEROB", modoutput$Jvar - 0.5, modoutput$Jvar)
-
 
 estimates<-c("Mean Spring Temperature", "Distance from Coast", "Elevation", "NAO Index", "Space Parameter", "Climate Change",
              "Mean Spring Temperature \nx Climate Change", "Distance from Coast \nx Climate Change",
@@ -437,32 +431,89 @@ estimates<-c("Mean Spring Temperature", "Distance from Coast", "Elevation", "NAO
 estimates<-rev(estimates)
 modoutput <- modoutput[!is.na(modoutput$Jvar),]
 
+allspp <- c("nao.z:cc.z", "mat.z:cc.z", "elev.z:cc.z", "dist.z:cc.z", "space.z:cc.z")
+modoutput$species<-ifelse(modoutput$species%in%allspp, "all", modoutput$species)
+
+indspp <- subset(modoutput, select=c("species", "lowclean", "highclean", "estclean", "Jvar", "termclean"))
+indspp <- indspp[indspp$species!="all",]
+indspp <- indspp[!duplicated(indspp),]
+
+allspp <- subset(modoutput, select=c("species", "lowavg", "highavg", "estavg", "Jvar", "termclean"))
+allspp <- allspp[(allspp$species=="all" | (allspp$species=="AESHIP")),]
+allspp <- allspp[!duplicated(allspp),]
+allspp$species <- "aaall"
+
+names(allspp)<-c("species", "lowclean", "highclean", "estclean", "Jvar", "termclean")
+
+modoutput <- full_join(indspp, allspp)
+
+modoutput$Jvar <- ifelse(modoutput$species=="AESHIP", modoutput$Jvar - 0.2, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="ALNGLU", modoutput$Jvar - 0.25, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="BETPEN", modoutput$Jvar - 0.3, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="FAGSYL", modoutput$Jvar - 0.35, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="FRAEXC", modoutput$Jvar - 0.4, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="QUEROB", modoutput$Jvar - 0.45, modoutput$Jvar)
+
+modoutput$species<-ifelse(modoutput$species=="BETPEN", "aaBETPEN", modoutput$species)
+modoutput$species<-ifelse(modoutput$species=="FRAEXC", "zFRAEXC", modoutput$species)
+
+
+#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_origspp.csv", row.names=FALSE)
+#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_dvrspp.csv", row.names=FALSE)
+#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_fivespp.csv", row.names=FALSE)
 
 ###### VERY CLOSE! NEED TO MAKE MAIN DOTS BIGGER FOR ESTAVG AND THEN SMALLER DIFF COL DOTS FOR EACH SPECIES (ESTCLEAN)#####
-regrisk<-ggplot(modoutput, aes(x=X10., xend=X90., y=Jvar, yend=Jvar)) +
-  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estavg, y=Jvar), col="black") +
-  geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
+my.pal <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+my.pal <- c("black", my.pal)
+
+regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
+  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estclean, y=Jvar, col=species, size=species, alpha=species)) +
+  geom_segment(arrow = arrow(length = unit(0.00, "npc")), aes(col=species, alpha=species)) +
   guides(size=FALSE) +
   scale_y_discrete(limits = sort(unique(modoutput$termclean)), labels=estimates) +
   xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=5), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
-        text=element_text(family="sans"), legend.position = "none",
+        text=element_text(family="sans"), #legend.position = "none",
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
+  coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
   annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
-  annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
-  annotate("text", x = 0.5, y = 12, colour = "black", size=3, label="More False Spring Risk") +
-  annotate("text", x = -0.5, y = 12, colour = "black", size=3, label="Less False Spring Risk") 
+  annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
+  #annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
+  annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
+  #annotate("text", x = 0.5, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
+  annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR FIVE
+  #annotate("text", x = -0.5, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR DVR AND ORIG
+  scale_color_manual(name="Species", values=c("black", cols), labels=c("aaall"="Overall estimate",
+                                                              "aaBETPEN"=expression(paste(italic("Betula pendula"))),
+                                                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
+                                                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                                                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                                                              "QUEROB"=expression(paste(italic("Quercus robur"))),
+                                                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) +
+  scale_size_manual(name="Species", values=c(2, 1,1,1,1,1,1), labels=c("aaall"="Overall estimate",
+                                                       "aaBETPEN"=expression(paste(italic("Betula pendula"))),
+                                                       "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
+                                                       "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                                                       "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                                                       "QUEROB"=expression(paste(italic("Quercus robur"))),
+                                                       "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) +
+  scale_alpha_manual(name="Species", values=c(1,.5,.5,.5,.5,.5,.5), labels=c("aaall"="Overall estimate",
+                                                                       "aaBETPEN"=expression(paste(italic("Betula pendula"))),
+                                                                       "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
+                                                                       "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
+                                                                       "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
+                                                                       "QUEROB"=expression(paste(italic("Quercus robur"))),
+                                                                       "zFRAEXC"=expression(paste(italic("Fraxinus excelsior")))))
 
 
 quartz()
 regrisk
 
 
-png("analyses/figures/model_output_90_five.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("analyses/figures/model_output_90_fivespp.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=6,
     height=6, units="in", res = 350 )
 grid.draw(regrisk)
