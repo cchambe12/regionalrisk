@@ -126,6 +126,8 @@ tm$x<-scale((tm$bb.yr)^2, center = FALSE, scale = TRUE)
 
 cols <- rep(viridis_pal(option="viridis")(3), times=2)
 
+
+##### NEED TO CHANGE SCALE OF SECOND Y AXIS!!! ### IDEALLY FROM 80-120 ##########
 aeship<-subset(tm, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + 
@@ -142,8 +144,8 @@ ahip<-ggplot(aeship, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, 
         axis.text.y.left = element_text(color=cols[1]),
         axis.line.y.left = element_line(color=cols[1]),
         axis.ticks.y.left = element_line(color=cols[1])) +
-  geom_smooth(aes(y=x/.143), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
-  scale_y_continuous(sec.axis = sec_axis(~.*.143, name="Avg day of budburst", labels=c(75,100,125))) + ## Error in f(..., self = self) : Breaks and labels are different lengths
+  geom_smooth(aes(y=bb.yr/15), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
+  scale_y_continuous(sec.axis = sec_axis(~.*15, name="Avg day of budburst")) + 
   scale_x_continuous(breaks=seq(1950, 2015, by = 10))
 
 alnglu<-subset(tm, species=="ALNGLU")
