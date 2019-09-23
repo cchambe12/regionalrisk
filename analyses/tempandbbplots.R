@@ -122,7 +122,7 @@ tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE)
 tm<-full_join(xx, tm)
 tm<-na.omit(tm)
 
-tm$x<-scale((tm$bb.yr)^2, center = FALSE, scale = TRUE)
+tm$x<-scale((tm$bb.yr)-20)
 
 cols <- rep(viridis_pal(option="viridis")(3), times=2)
 
@@ -132,9 +132,9 @@ aeship<-subset(tm, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + 
   ylab("Minimum temperature \nfrom budburst to leafout (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(4, 10)) +
+  coord_cartesian(ylim=c(4, 11)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
-        axis.line = element_line(colour = "black"), plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
+        axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
@@ -144,17 +144,17 @@ ahip<-ggplot(aeship, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, 
         axis.text.y.left = element_text(color=cols[1]),
         axis.line.y.left = element_line(color=cols[1]),
         axis.ticks.y.left = element_line(color=cols[1])) +
-  geom_smooth(aes(y=bb.yr/15), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
-  scale_y_continuous(sec.axis = sec_axis(~.*15, name="Avg day of budburst")) + 
-  scale_x_continuous(breaks=seq(1950, 2015, by = 10))
+  geom_smooth(aes(y=(bb.yr-40)/8), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
+  scale_y_continuous(sec.axis = sec_axis(~.*8, name="Avg day of budburst", labels=c(75, 90, 105, 120), breaks=c(35, 50, 65, 80))) + 
+  scale_x_continuous(breaks=seq(1950, 2015, by = 20))
 
 alnglu<-subset(tm, species=="ALNGLU")
 aglu<-ggplot(alnglu, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Alnus glutinosa")))) + 
   ylab("Minimum temperature \nfrom budburst to leafout (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(4, 10)) +
+  coord_cartesian(ylim=c(4, 11)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
-        axis.line = element_line(colour = "black"), plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
+        axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
@@ -164,17 +164,17 @@ aglu<-ggplot(alnglu, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, 
         axis.text.y.left = element_text(color=cols[1]),
         axis.line.y.left = element_line(color=cols[1]),
         axis.ticks.y.left = element_line(color=cols[1])) +
-  geom_smooth(aes(y=bb.yr/12), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
-  scale_y_continuous(sec.axis = sec_axis(~.*12, name="Avg day of budburst")) +
-  scale_x_continuous(breaks=seq(1950, 2015, by = 10))
+  geom_smooth(aes(y=(bb.yr-40)/8), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
+  scale_y_continuous(sec.axis = sec_axis(~.*8, name="Avg day of budburst", labels=c(75, 90, 105, 120), breaks=c(35, 50, 65, 80))) +
+  scale_x_continuous(breaks=seq(1950, 2015, by = 20))
 
 betpen<-subset(tm, species=="BETPEN")
 bpen<-ggplot(betpen, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Betula pendula")))) + 
   ylab("Minimum temperature \nfrom budburst to leafout (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(4, 10)) +
+  coord_cartesian(ylim=c(4, 11)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
-        axis.line = element_line(colour = "black"), plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
+        axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
@@ -184,17 +184,17 @@ bpen<-ggplot(betpen, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, 
         axis.text.y.left = element_text(color=cols[1]),
         axis.line.y.left = element_line(color=cols[1]),
         axis.ticks.y.left = element_line(color=cols[1])) +
-  geom_smooth(aes(y=bb.yr/12), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
-  scale_y_continuous(sec.axis = sec_axis(~.*12, name="Avg day of budburst")) +
-  scale_x_continuous(breaks=seq(1950, 2015, by = 10))
+  geom_smooth(aes(y=(bb.yr-40)/8), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
+  scale_y_continuous(sec.axis = sec_axis(~.*8, name="Avg day of budburst", labels=c(75, 90, 105, 120), breaks=c(35, 50, 65, 80))) +
+  scale_x_continuous(breaks=seq(1950, 2015, by = 20))
 
 fagsyl<-subset(tm, species=="FAGSYL")
 fsyl<-ggplot(fagsyl, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Fagus sylvatica")))) + 
   ylab("Minimum temperature \nfrom budburst to leafout (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(4, 10)) +
+  coord_cartesian(ylim=c(4, 11)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
-        axis.line = element_line(colour = "black"), plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
+        axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
@@ -204,17 +204,17 @@ fsyl<-ggplot(fagsyl, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, 
         axis.text.y.left = element_text(color=cols[1]),
         axis.line.y.left = element_line(color=cols[1]),
         axis.ticks.y.left = element_line(color=cols[1])) +
-  geom_smooth(aes(y=bb.yr/12), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
-  scale_y_continuous(sec.axis = sec_axis(~.*12, name="Avg day of budburst"))  +
-  scale_x_continuous(breaks=seq(1950, 2015, by = 10))
+  geom_smooth(aes(y=(bb.yr-40)/8), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
+  scale_y_continuous(sec.axis = sec_axis(~.*8, name="Avg day of budburst", labels=c(75, 90, 105, 120), breaks=c(35, 50, 65, 80)))  +
+  scale_x_continuous(breaks=seq(1950, 2015, by = 20))
 
 fraexc<-subset(tm, species=="FRAEXC")
 fexc<-ggplot(fraexc, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Fraxinus excelsior")))) + 
   ylab("Minimum temperature \nfrom budburst to leafout (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(4, 10)) +
+  coord_cartesian(ylim=c(4, 11)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
-        axis.line = element_line(colour = "black"), plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
+        axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
@@ -224,17 +224,17 @@ fexc<-ggplot(fraexc, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, 
         axis.text.y.left = element_text(color=cols[1]),
         axis.line.y.left = element_line(color=cols[1]),
         axis.ticks.y.left = element_line(color=cols[1])) +
-  geom_smooth(aes(y=bb.yr/12), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
-  scale_y_continuous(sec.axis = sec_axis(~.*12, name="Avg day of budburst"))  +
-  scale_x_continuous(breaks=seq(1950, 2015, by = 10))
+  geom_smooth(aes(y=(bb.yr-40)/8), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
+  scale_y_continuous(sec.axis = sec_axis(~.*8, name="Avg day of budburst", labels=c(75, 90, 105, 120), breaks=c(35, 50, 65, 80)))  +
+  scale_x_continuous(breaks=seq(1950, 2015, by = 20))
 
 querob<-subset(tm, species=="QUEROB")
 qrob<-ggplot(querob, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Quercus robur")))) + 
   ylab("Minimum temperature \nfrom budburst to leafout (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(4, 10)) +
+  coord_cartesian(ylim=c(4, 11)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
-        axis.line = element_line(colour = "black"), plot.margin = unit(c(1.5,1.5,1.5,1.5), "lines"),
+        axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
@@ -244,9 +244,9 @@ qrob<-ggplot(querob, aes(x=year, y=Tmin)) + geom_smooth(method="auto", se=TRUE, 
         axis.text.y.left = element_text(color=cols[1]),
         axis.line.y.left = element_line(color=cols[1]),
         axis.ticks.y.left = element_line(color=cols[1])) +
-  geom_smooth(aes(y=bb.yr/12), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
-  scale_y_continuous(sec.axis = sec_axis(~.*12, name="Avg day of budburst"))  +
-  scale_x_continuous(breaks=seq(1950, 2015, by = 10))
+  geom_smooth(aes(y=(bb.yr-40)/8), method="auto", se=TRUE, level=0.9,  col=cols[2]) +
+  scale_y_continuous(sec.axis = sec_axis(~.*8, name="Avg day of budburst", labels=c(75, 90, 105, 120), breaks=c(35, 50, 65, 80)))  +
+  scale_x_continuous(breaks=seq(1950, 2015, by = 20))
 
 
 quartz()
