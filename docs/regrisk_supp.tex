@@ -61,6 +61,7 @@
 %\usepackage{hyperref}
 \usepackage{textcomp}
 \usepackage{mdframed}
+\usepackage{longtable}
 \usepackage{natbib}
 \bibliographystyle{..//bib/styles/gcb}
 %\usepackage[hyphens]{url}
@@ -92,12 +93,13 @@
 
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
-\noindent \textbf{\Large{Supplemental materials:}}\\
-{\textbf{\Large{Climate change increases the risk of false springs in European trees}} \\
-OR \\
-\textbf{\Large{False spring risk increases across European trees in the face of climate change}} \\
-OR \\
-\textbf{\Large{Heightened risk of false springs with climate change across six European tree species}}
+\noindent 
+\textbf{\LARGE{Climate change reshapes the drivers of false spring risk across European trees}} 
+%\\
+%OR \\
+%\textbf{\Large{Climate change increases the risk of false springs in European trees}} \\ % Lizzie votes for the first title! Reviewers can ask you to make it more narrow so I would start here and shift to Ben's if requested ... (goal 1: get paper out for review)
+%\textbf{\Large{False spring risk increases across European trees in the face of climate change}}
+
 
 
 \noindent Authors:\\
@@ -113,8 +115,8 @@ $^{6}$Forest \& Conservation Sciences, Faculty of Forestry, University of Britis
 \vspace{2ex}
 $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 
-\renewcommand{\thetable}{\arabic{table}}
-\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
 \renewcommand{\labelitemi}{$-$}
 \setkeys{Gin}{width=0.8\textwidth}
 
@@ -133,13 +135,12 @@ y_i = \alpha_{[i]} +&  \beta_{NAO_{[i]}} + \beta_{MST_{[i]}} + \beta_{Elevation_
 
 
 \section*{Species rate of budburst calculations}
-Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to use observations for both budburst and leafout to determine the durations of vegetative risk. Instead, we used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. %Cuttings for the experiment were made in January 2015 from two field sites: Harvard Forest (HF, 42.5$^{\circ}$N, 72.2$^{\circ}$W) and the Station de Biologie des Laurentides in St-Hippolyte, Qu\'ebec (SH, 45.9$^{\circ}$N, 74.0$^{\circ}$W). The experiment examined budburst and leafout for \textit{Acer saccharum} (Marshall), \textit{Alnus incana} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus nigra} (Marshall), and \textit{Quercus alba} (L.) in a fully crossed design of three levels of chilling (field chilling, field chilling plus 30 days at either 1 or 4 $^{\circ}$C), two levels of forcing (20$^{\circ}$C/10$^{\circ}$C or 15$^{\circ}$C/5$^{\circ}$C day/night temperatures, such that thermoperiodicity followed photoperiod) and two levels of photoperiod (8 versus 12 hour days) resulting in 12 treatment combinations. Phenological observations of each cutting were made every 2-3 days over 82 days. Phenology was assessed using a BBCH scale that was modified for trees \citep{Finn2007}. 
-We took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, we assessed data that were provided by the USA National Phenology Network and the many participants who contribute to its Nature's Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average number of days between budburst and leafout was approximately 12 days.  
+Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to use observations for both budburst and leafout to determine the durations of vegetative risk. Instead, we used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. We took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, we assessed data that were provided by the USA National Phenology Network and the many participants who contribute to its Nature's Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average number of days between budburst and leafout was approximately 12 days.  
 
 Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
 
 \section*{Results: The effects of climatic and spatial variation on false spring incidence}
-Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S\ref{fig:mst}). 
+Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure \ref{fig:mst}). 
 
 The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. For the model estimate of change plots (Figure 3, Figure \ref{fig:dvr} and Figure \ref{fig:five}), we used average predictive comparisons to calculate the mean estimates and the posteriors for each species and then took the average to find the overall effect for each predictor. The model estimates on the logit scale were converted to probability percentages for easier interpretation by using the `divide by 4' rule \citep{Gelman2006} and then back converted to the original scale. %To convert we used the equations below \citep{Gelman2006}:
 
@@ -158,12 +159,6 @@ inverselogit(Intercept &+ (Model Estimate/(sd(Raw Data Predictor)*2))*mean(Raw D
 
 \newpage
 \section*{Supplement: Tables and Figures}
-%{\begin{figure} [H]
-%  -\begin{center}
-%  -\includegraphics[width=12cm]{..//figures/FS_Diff.pdf}
-%  -\caption{Number of years with freezing events that occured before temperature shifts related to climate change began (1951-1983) as compared to after reported climate shifts (1984-2016). If temperatures fell below -2$^{\circ}$C between March 1 and June 30, a year with a spring freeze was tallied. Some regions experienced more years with spring freezes after climate change began, whereas other years experienced the same number or even fewer years with spring freezes. Regions that had more years with spring freezes after climate change began are blue and green and regions that had fewer freezes are depicted in red.}\label{fig:region}
-%  -\end{center}
-%  -\end{figure}}
   
 \begin{center}
 \captionof{table}{Data collected from PEP725 for each species and the calculated number of false spring years} \label{tab:spp} 
@@ -204,16 +199,6 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 \end{tabular}
 \end{center}
 
-\iffalse
-\begin{equation} \label{eq:1}
-lm(\text{Day of Year} (Budburst) $\sim$ \text{Climate Change} (scaled))
-\end{equation}
-
-\begin{equation} \label{eq:2}
-lm(\text{Day of Year} (Last Freeze Date) $\sim$ \text{Climate Change} (scaled))
-\end{equation}
-\fi 
-
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//analyses/figures/MSTBB_bySpp_lines.png}
@@ -221,52 +206,89 @@ lm(\text{Day of Year} (Last Freeze Date) $\sim$ \text{Climate Change} (scaled))
   -\end{center}
   -\end{figure}}
 
-\iffalse
-\begin{equation} \label{eq:3}
-lm(\text{Minimum Temperature \degree{C}} $\sim$ \text{Climate Change} (scaled))
-\end{equation}
-\fi
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Mon Sep 23 16:39:41 2019
+% Mon Sep 23 18:14:13 2019
 \begin{table}[H]
 \centering
-\caption{Summary of simple linear regression model of day of budburst before and after climate change.} 
+\caption{Summary of simple linear regression model of day of budburst before and after climate change across species.} 
 \begin{tabular}{lrrr}
   \hline
  & Estimate & 10\% & 90\% \\ 
   \hline
 Intercept & 102.27 & 102.20 & 102.33 \\ 
   Climate Change & -6.98 & -7.08 & -6.89 \\ 
+  Alnus glutinosa & 0.61 & 0.50 & 0.72 \\ 
+  Betula pendula & -0.89 & -0.98 & -0.80 \\ 
+  Fagus sylvatica & 6.85 & 6.75 & 6.94 \\ 
+  Fraxinus excelsior & 17.16 & 17.05 & 17.28 \\ 
+  Quercus robur & 13.67 & 13.57 & 13.77 \\ 
+  Climate Change by Alnus glutinosa & -0.97 & -1.13 & -0.81 \\ 
+  Climate Change by Betula pendula & 1.06 & 0.92 & 1.21 \\ 
+  Climate Change by Fagus sylvatica & 1.61 & 1.47 & 1.76 \\ 
+  Climate Change by Fraxinus excelsior & 1.07 & 0.91 & 1.24 \\ 
+  Climate Change by Quercus robur & 0.67 & 0.52 & 0.81 \\ 
    \hline
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Mon Sep 23 16:39:42 2019
+% Mon Sep 23 18:14:13 2019
 \begin{table}[H]
 \centering
-\caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change.} 
+\caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.} 
 \begin{tabular}{lrrr}
   \hline
  & Estimate & 10\% & 90\% \\ 
   \hline
 Intercept & 5.99 & 5.97 & 6.00 \\ 
   Climate Change & 0.83 & 0.81 & 0.85 \\ 
+  Alnus glutinosa & 1.65 & 1.63 & 1.67 \\ 
+  Betula pendula & 0.50 & 0.48 & 0.52 \\ 
+  Fagus sylvatica & 1.50 & 1.48 & 1.51 \\ 
+  Fraxinus excelsior & 2.76 & 2.74 & 2.78 \\ 
+  Quercus robur & 1.88 & 1.87 & 1.90 \\ 
+  Climate Change by Alnus glutinosa & -0.04 & -0.07 & -0.01 \\ 
+  Climate Change by Betula pendula & -0.31 & -0.34 & -0.29 \\ 
+  Climate Change by Fagus sylvatica & 0.08 & 0.05 & 0.10 \\ 
+  Climate Change by Fraxinus excelsior & -0.26 & -0.29 & -0.23 \\ 
+  Climate Change by Quercus robur & -0.10 & -0.13 & -0.07 \\ 
+   \hline
+\end{tabular}
+\end{table}
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Mon Sep 23 18:14:14 2019
+\begin{table}[H]
+\centering
+\caption{Summary of simple linear regression model of probability of false spring before and after climate change across species.} 
+\begin{tabular}{lrrr}
+  \hline
+ & Estimate & 10\% & 90\% \\ 
+  \hline
+Intercept & 0.27 & 0.27 & 0.27 \\ 
+  Climate Change & 0.04 & 0.03 & 0.04 \\ 
+  Alnus glutinosa & 0.00 & -0.00 & 0.00 \\ 
+  Betula pendula & 0.01 & 0.01 & 0.02 \\ 
+  Fagus sylvatica & -0.03 & -0.04 & -0.03 \\ 
+  Fraxinus excelsior & -0.17 & -0.17 & -0.17 \\ 
+  Quercus robur & -0.14 & -0.14 & -0.13 \\ 
+  Climate Change by Alnus glutinosa & 0.02 & 0.02 & 0.03 \\ 
+  Climate Change by Betula pendula & 0.00 & -0.00 & 0.01 \\ 
+  Climate Change by Fagus sylvatica & -0.06 & -0.06 & -0.05 \\ 
+  Climate Change by Fraxinus excelsior & -0.06 & -0.06 & -0.05 \\ 
+  Climate Change by Quercus robur & -0.05 & -0.06 & -0.05 \\ 
    \hline
 \end{tabular}
 \end{table}
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Mon Sep 23 16:39:42 2019
-\begin{table}[H]
-\centering
-\caption{Summary of Bernouilli model of false spring risk with varying rates of budburst for each species without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum} as the intercept).} 
-\begin{tabular}{lrrrrr}
+% Mon Sep 23 18:14:14 2019
+\begin{longtable}{lrrrrr}
+\caption{Summary of Bernouilli model of false spring risk with varying rates of budburst for each species without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum} as the intercept).} \\ 
   \hline
  & Estimate & 10\% & 25\% & 75\% & 90\% \\ 
-  \hline
-b_Intercept & -0.88 & -0.89 & -0.89 & -0.88 & -0.88 \\ 
+  \hline \endhead  \hline
+Intercept & -0.88 & -0.89 & -0.89 & -0.88 & -0.88 \\ 
   NAO Index & 0.14 & 0.12 & 0.13 & 0.15 & 0.16 \\ 
   Mean Spring 
 Temperature & -0.48 & -0.50 & -0.49 & -0.47 & -0.45 \\ 
@@ -275,51 +297,81 @@ Coast & 0.40 & 0.38 & 0.39 & 0.41 & 0.43 \\
   Elevation & 0.19 & 0.16 & 0.18 & 0.20 & 0.22 \\ 
   Space Parameter & -0.06 & -0.08 & -0.07 & -0.06 & -0.05 \\ 
   Climate Change & 0.35 & 0.33 & 0.34 & 0.36 & 0.37 \\ 
-  b_speciesALNGLU & 0.05 & 0.04 & 0.05 & 0.06 & 0.07 \\ 
-  b_speciesBETPEN & 0.06 & 0.04 & 0.05 & 0.06 & 0.07 \\ 
-  b_speciesFAGSYL & -0.35 & -0.37 & -0.36 & -0.35 & -0.34 \\ 
-  b_speciesFRAEXC & -1.43 & -1.45 & -1.44 & -1.42 & -1.41 \\ 
-  b_speciesQUEROB & -1.03 & -1.04 & -1.03 & -1.02 & -1.01 \\ 
-  NAO Index by Alnus glutinosa & -0.07 & -0.11 & -0.09 & -0.06 & -0.04 \\ 
-  NAO Index by Betula pendula & -0.08 & -0.11 & -0.10 & -0.07 & -0.05 \\ 
-  NAO Index by Fagus sylvatica & 0.12 & 0.09 & 0.11 & 0.13 & 0.15 \\ 
-  NAO Index by Fraxinus excelsior & 0.03 & -0.02 & 0.01 & 0.05 & 0.08 \\ 
-  NAO Index by Quercus robur & 0.08 & 0.04 & 0.06 & 0.09 & 0.12 \\ 
+  Alnus glutinosa & 0.05 & 0.04 & 0.05 & 0.06 & 0.07 \\ 
+  Betula pendula & 0.06 & 0.04 & 0.05 & 0.06 & 0.07 \\ 
+  Fagus sylvatica & -0.35 & -0.37 & -0.36 & -0.35 & -0.34 \\ 
+  Fraxinus excelsior & -1.43 & -1.45 & -1.44 & -1.42 & -1.41 \\ 
+  Quercus robur & -1.03 & -1.04 & -1.03 & -1.02 & -1.01 \\ 
+  NAO Index
+by Alnus glutinosa & -0.07 & -0.11 & -0.09 & -0.06 & -0.04 \\ 
+  NAO Index
+by Betula pendula & -0.08 & -0.11 & -0.10 & -0.07 & -0.05 \\ 
+  NAO Index
+by Fagus sylvatica & 0.12 & 0.09 & 0.11 & 0.13 & 0.15 \\ 
+  NAO Index
+by Fraxinus excelsior & 0.03 & -0.02 & 0.01 & 0.05 & 0.08 \\ 
+  NAO Index
+by Quercus robur & 0.08 & 0.04 & 0.06 & 0.09 & 0.12 \\ 
   Mean Spring 
-Temperature by Alnus glutinosa & 0.14 & 0.10 & 0.13 & 0.16 & 0.18 \\ 
+Temperature
+by Alnus glutinosa & 0.14 & 0.10 & 0.13 & 0.16 & 0.18 \\ 
   Mean Spring 
-Temperature by Betula pendula & -0.02 & -0.05 & -0.03 & -0.01 & 0.01 \\ 
+Temperature
+by Betula pendula & -0.02 & -0.05 & -0.03 & -0.01 & 0.01 \\ 
   Mean Spring 
-Temperature by Fagus sylvatica & -0.06 & -0.10 & -0.08 & -0.05 & -0.02 \\ 
+Temperature
+by Fagus sylvatica & -0.06 & -0.10 & -0.08 & -0.05 & -0.02 \\ 
   Mean Spring 
-Temperature by Fraxinus excelsior & 0.32 & 0.26 & 0.30 & 0.34 & 0.38 \\ 
+Temperature
+by Fraxinus excelsior & 0.32 & 0.26 & 0.30 & 0.34 & 0.38 \\ 
   Mean Spring 
-Temperature by Quercus robur & 0.10 & 0.06 & 0.09 & 0.12 & 0.15 \\ 
+Temperature
+by Quercus robur & 0.10 & 0.06 & 0.09 & 0.12 & 0.15 \\ 
   Distance from 
-Coast by Alnus glutinosa & -0.07 & -0.11 & -0.08 & -0.05 & -0.03 \\ 
+Coast
+by Alnus glutinosa & -0.07 & -0.11 & -0.08 & -0.05 & -0.03 \\ 
   Distance from 
-Coast by Betula pendula & 0.01 & -0.02 & -0.00 & 0.03 & 0.05 \\ 
+Coast
+by Betula pendula & 0.01 & -0.02 & -0.00 & 0.03 & 0.05 \\ 
   Distance from 
-Coast by Fagus sylvatica & -0.00 & -0.04 & -0.02 & 0.01 & 0.04 \\ 
+Coast
+by Fagus sylvatica & -0.00 & -0.04 & -0.02 & 0.01 & 0.04 \\ 
   Distance from 
-Coast by Fraxinus excelsior & 0.26 & 0.20 & 0.23 & 0.28 & 0.31 \\ 
+Coast
+by Fraxinus excelsior & 0.26 & 0.20 & 0.23 & 0.28 & 0.31 \\ 
   Distance from 
-Coast by Quercus robur & -0.10 & -0.14 & -0.12 & -0.08 & -0.05 \\ 
-  Elevation by Alnus glutinosa & 0.02 & -0.02 & 0.00 & 0.04 & 0.07 \\ 
-  Elevation by Betula pendula & 0.03 & -0.01 & 0.02 & 0.05 & 0.07 \\ 
-  Elevation by Fagus sylvatica & 0.00 & -0.04 & -0.02 & 0.02 & 0.04 \\ 
-  Elevation by Fraxinus excelsior & -0.37 & -0.43 & -0.39 & -0.34 & -0.31 \\ 
-  Elevation by Quercus robur & -0.08 & -0.13 & -0.10 & -0.06 & -0.03 \\ 
-  Space Parameter by Alnus glutinosa & 0.01 & -0.02 & 0.00 & 0.03 & 0.05 \\ 
-  Space Parameter by Betula pendula & -0.01 & -0.03 & -0.02 & 0.00 & 0.02 \\ 
-  Space Parameter by Fagus sylvatica & -0.04 & -0.07 & -0.05 & -0.03 & -0.01 \\ 
-  Space Parameter by Fraxinus excelsior & 0.05 & 0.01 & 0.03 & 0.07 & 0.09 \\ 
-  Space Parameter by Quercus robur & 0.02 & -0.02 & 0.00 & 0.03 & 0.05 \\ 
-  Climate Change by Alnus glutinosa & 0.06 & 0.03 & 0.05 & 0.07 & 0.09 \\ 
-  Climate Change by Betula pendula & 0.06 & 0.03 & 0.04 & 0.07 & 0.09 \\ 
-  Climate Change by Fagus sylvatica & -0.32 & -0.35 & -0.34 & -0.31 & -0.29 \\ 
-  Climate Change by Fraxinus excelsior & -0.52 & -0.57 & -0.54 & -0.50 & -0.47 \\ 
-  Climate Change by Quercus robur & -0.41 & -0.44 & -0.42 & -0.39 & -0.37 \\ 
+Coast
+by Quercus robur & -0.10 & -0.14 & -0.12 & -0.08 & -0.05 \\ 
+  Elevation
+by Alnus glutinosa & 0.02 & -0.02 & 0.00 & 0.04 & 0.07 \\ 
+  Elevation
+by Betula pendula & 0.03 & -0.01 & 0.02 & 0.05 & 0.07 \\ 
+  Elevation
+by Fagus sylvatica & 0.00 & -0.04 & -0.02 & 0.02 & 0.04 \\ 
+  Elevation
+by Fraxinus excelsior & -0.37 & -0.43 & -0.39 & -0.34 & -0.31 \\ 
+  Elevation
+by Quercus robur & -0.08 & -0.13 & -0.10 & -0.06 & -0.03 \\ 
+  Space Parameter
+by Alnus glutinosa & 0.01 & -0.02 & 0.00 & 0.03 & 0.05 \\ 
+  Space Parameter
+by Betula pendula & -0.01 & -0.03 & -0.02 & 0.00 & 0.02 \\ 
+  Space Parameter
+by Fagus sylvatica & -0.04 & -0.07 & -0.05 & -0.03 & -0.01 \\ 
+  Space Parameter
+by Fraxinus excelsior & 0.05 & 0.01 & 0.03 & 0.07 & 0.09 \\ 
+  Space Parameter
+by Quercus robur & 0.02 & -0.02 & 0.00 & 0.03 & 0.05 \\ 
+  Climate Change
+by Alnus glutinosa & 0.06 & 0.03 & 0.05 & 0.07 & 0.09 \\ 
+  Climate Change
+by Betula pendula & 0.06 & 0.03 & 0.04 & 0.07 & 0.09 \\ 
+  Climate Change
+by Fagus sylvatica & -0.32 & -0.35 & -0.34 & -0.31 & -0.29 \\ 
+  Climate Change
+by Fraxinus excelsior & -0.52 & -0.57 & -0.54 & -0.50 & -0.47 \\ 
+  Climate Change
+by Quercus robur & -0.41 & -0.44 & -0.42 & -0.39 & -0.37 \\ 
   NAO Index by Climate Change & -0.83 & -0.85 & -0.84 & -0.82 & -0.81 \\ 
   Mean Spring 
 Temperature by Climate Change & 0.42 & 0.40 & 0.41 & 0.43 & 0.44 \\ 
@@ -328,29 +380,10 @@ Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.11 & -0.10 \\
   Elevation by Climate Change & -0.00 & -0.03 & -0.01 & 0.01 & 0.03 \\ 
   Space Parameter by Climate Change & -0.05 & -0.07 & -0.05 & -0.04 & -0.03 \\ 
    \hline
-\end{tabular}
-\end{table}
+\hline
+\end{longtable}
 
 
-
-\iffalse
-{\begin{figure} [H]
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=6cm]{..//analyses/figures/PPCs/orig_ppc.png}
-  \caption{}
-  \label{fig:sfig1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=6cm]{..//analyses/figures/PPCs/ppc_sd.png}
-  \caption{}
-  \label{fig:sfig2}
-\end{subfigure}
-\caption{(a) Posterior predictive check comparing the simulated model estimates to the raw data. The curves overlap greatly, which suggests our model is valid and fit the data. (b) Posterior predictive check comparing the standard deviation from our model output to the data. The model fits our data well, which suggests our model is valid.} %IMC: the fit between data and predictions is pretty tight so I'm aware that perhaps this is not necessary, but as a reviewer I would like to see some quantification of that model accuracy (pseudo-R² is an alternative, but any other could work too). 
-\label{fig:suppppc}
-\end{figure}}
-\fi
 
 {\begin{figure} [H]
   -\begin{center}
@@ -361,21 +394,20 @@ Coast by Climate Change & -0.12 & -0.15 & -0.13 & -0.11 & -0.10 \\
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_dvr.png}
-  -\caption{Model output with different durations of vegetative risk for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 10\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data.}\label{fig:dvr}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_dvrspp.png}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 90\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Mon Sep 23 16:39:42 2019
-\begin{table}[H]
-\centering
-\caption{Summary of Bernouilli model of false spring risk with varying durations of vegetative risk for each species without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
-\begin{tabular}{lrrrrr}
+% Mon Sep 23 18:14:14 2019
+\begin{longtable}{lrrrrr}
+\caption{Summary of Bernouilli model of false spring risk with varying rates of leafout for each species without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}.} \\ 
   \hline
  & Estimate & 10\% & 25\% & 75\% & 90\% \\ 
-  \hline
-NAO Index & 0.15 & 0.13 & 0.14 & 0.16 & 0.17 \\ 
+  \hline \endhead  \hline
+Intercept & -1.04 & -1.05 & -1.04 & -1.03 & -1.03 \\ 
+  NAO Index & 0.15 & 0.13 & 0.14 & 0.16 & 0.17 \\ 
   Mean Spring 
 Temperature & -0.50 & -0.53 & -0.51 & -0.49 & -0.48 \\ 
   Distance from 
@@ -383,6 +415,81 @@ Coast & 0.40 & 0.38 & 0.39 & 0.42 & 0.43 \\
   Elevation & 0.15 & 0.12 & 0.14 & 0.16 & 0.18 \\ 
   Space Parameter & -0.06 & -0.08 & -0.07 & -0.06 & -0.04 \\ 
   Climate Change & 0.34 & 0.32 & 0.34 & 0.35 & 0.37 \\ 
+  Alnus glutinosa & 0.20 & 0.18 & 0.19 & 0.21 & 0.22 \\ 
+  Betula pendula & 0.04 & 0.03 & 0.04 & 0.05 & 0.06 \\ 
+  Fagus sylvatica & -1.38 & -1.40 & -1.39 & -1.37 & -1.36 \\ 
+  Fraxinus excelsior & -2.11 & -2.14 & -2.12 & -2.10 & -2.08 \\ 
+  Quercus robur & -1.75 & -1.78 & -1.76 & -1.74 & -1.73 \\ 
+  NAO Index
+by Alnus glutinosa & -0.10 & -0.14 & -0.12 & -0.09 & -0.07 \\ 
+  NAO Index
+by Betula pendula & -0.10 & -0.13 & -0.11 & -0.08 & -0.07 \\ 
+  NAO Index
+by Fagus sylvatica & 0.33 & 0.28 & 0.31 & 0.35 & 0.38 \\ 
+  NAO Index
+by Fraxinus excelsior & 0.08 & 0.02 & 0.06 & 0.11 & 0.15 \\ 
+  NAO Index
+by Quercus robur & 0.19 & 0.14 & 0.17 & 0.21 & 0.24 \\ 
+  Mean Spring 
+Temperature
+by Alnus glutinosa & 0.18 & 0.14 & 0.16 & 0.19 & 0.22 \\ 
+  Mean Spring 
+Temperature
+by Betula pendula & -0.03 & -0.06 & -0.04 & -0.01 & 0.01 \\ 
+  Mean Spring 
+Temperature
+by Fagus sylvatica & -0.04 & -0.08 & -0.06 & -0.02 & 0.01 \\ 
+  Mean Spring 
+Temperature
+by Fraxinus excelsior & 0.51 & 0.43 & 0.48 & 0.54 & 0.59 \\ 
+  Mean Spring 
+Temperature
+by Quercus robur & 0.10 & 0.04 & 0.07 & 0.12 & 0.15 \\ 
+  Distance from 
+Coast
+by Alnus glutinosa & -0.08 & -0.12 & -0.10 & -0.07 & -0.04 \\ 
+  Distance from 
+Coast
+by Betula pendula & 0.02 & -0.02 & 0.00 & 0.03 & 0.05 \\ 
+  Distance from 
+Coast
+by Fagus sylvatica & -0.06 & -0.11 & -0.08 & -0.04 & -0.01 \\ 
+  Distance from 
+Coast
+by Fraxinus excelsior & 0.21 & 0.14 & 0.18 & 0.25 & 0.29 \\ 
+  Distance from 
+Coast
+by Quercus robur & -0.19 & -0.25 & -0.21 & -0.16 & -0.13 \\ 
+  Elevation
+by Alnus glutinosa & 0.07 & 0.02 & 0.05 & 0.08 & 0.11 \\ 
+  Elevation
+by Betula pendula & 0.02 & -0.02 & 0.01 & 0.04 & 0.06 \\ 
+  Elevation
+by Fagus sylvatica & -0.05 & -0.10 & -0.07 & -0.03 & 0.01 \\ 
+  Elevation
+by Fraxinus excelsior & -0.21 & -0.30 & -0.25 & -0.18 & -0.12 \\ 
+  Elevation
+by Quercus robur & 0.06 & -0.00 & 0.03 & 0.08 & 0.12 \\ 
+  Space Parameter
+by Alnus glutinosa & 0.02 & -0.01 & 0.01 & 0.03 & 0.05 \\ 
+  Space Parameter
+by Betula pendula & -0.01 & -0.04 & -0.02 & 0.00 & 0.02 \\ 
+  Space Parameter
+by Fagus sylvatica & -0.09 & -0.13 & -0.11 & -0.08 & -0.05 \\ 
+  Space Parameter
+by Fraxinus excelsior & -0.01 & -0.07 & -0.04 & 0.01 & 0.05 \\ 
+  Space Parameter
+by Quercus robur & -0.00 & -0.05 & -0.02 & 0.01 & 0.04 \\ 
+  Climate Change
+by Alnus glutinosa & 0.06 & 0.03 & 0.05 & 0.08 & 0.10 \\ 
+  Climate Change
+by Betula pendula & 0.07 & 0.04 & 0.06 & 0.08 & 0.10 \\ 
+  Climate Change
+by Fagus sylvatica & -0.47 & -0.52 & -0.49 & -0.45 & -0.43 \\ 
+  Climate Change
+by Fraxinus excelsior & -0.49 & -0.55 & -0.51 & -0.46 & -0.42 \\ 
+  Climate Change
+by Quercus robur & -0.42 & -0.47 & -0.45 & -0.40 & -0.38 \\ 
   NAO Index by Climate Change & -0.64 & -0.68 & -0.65 & -0.62 & -0.59 \\ 
   Mean Spring 
 Temperature by Climate Change & 0.59 & 0.54 & 0.57 & 0.61 & 0.64 \\ 
@@ -391,27 +498,26 @@ Coast by Climate Change & -0.17 & -0.22 & -0.19 & -0.14 & -0.11 \\
   Elevation by Climate Change & 0.13 & 0.08 & 0.11 & 0.15 & 0.19 \\ 
   Space Parameter by Climate Change & -0.07 & -0.11 & -0.09 & -0.06 & -0.04 \\ 
    \hline
-\end{tabular}
-\end{table}
+\hline
+\end{longtable}
 
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_five.png}
-  -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 10\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data.}\label{fig:five}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_fivespp.png}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 90\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data.}\label{fig:five}
   -\end{center}
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Mon Sep 23 16:39:42 2019
-\begin{table}[H]
-\centering
-\caption{Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} 
-\begin{tabular}{lrrrrr}
+% Mon Sep 23 18:14:14 2019
+\begin{longtable}{lrrrrr}
+\caption{Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \textit{Aesculus hippocastanum}).} \\ 
   \hline
  & Estimate & 10\% & 25\% & 75\% & 90\% \\ 
-  \hline
-NAO Index & 0.09 & 0.05 & 0.07 & 0.11 & 0.14 \\ 
+  \hline \endhead  \hline
+Intercept & -3.35 & -3.37 & -3.36 & -3.34 & -3.32 \\ 
+  NAO Index & 0.09 & 0.05 & 0.07 & 0.11 & 0.14 \\ 
   Mean Spring 
 Temperature & -0.72 & -0.77 & -0.74 & -0.70 & -0.67 \\ 
   Distance from 
@@ -419,6 +525,81 @@ Coast & 0.21 & 0.15 & 0.18 & 0.23 & 0.27 \\
   Elevation & 0.63 & 0.58 & 0.61 & 0.65 & 0.68 \\ 
   Space Parameter & -0.02 & -0.06 & -0.04 & 0.00 & 0.03 \\ 
   Climate Change & 0.58 & 0.53 & 0.56 & 0.60 & 0.63 \\ 
+  Alnus glutinosa & 0.33 & 0.28 & 0.31 & 0.34 & 0.37 \\ 
+  Betula pendula & 0.08 & 0.04 & 0.06 & 0.09 & 0.12 \\ 
+  Fagus sylvatica & -0.45 & -0.49 & -0.46 & -0.43 & -0.40 \\ 
+  Fraxinus excelsior & -1.58 & -1.66 & -1.61 & -1.55 & -1.50 \\ 
+  Quercus robur & -1.26 & -1.32 & -1.28 & -1.24 & -1.20 \\ 
+  NAO Index
+by Alnus glutinosa & -0.16 & -0.23 & -0.19 & -0.12 & -0.08 \\ 
+  NAO Index
+by Betula pendula & -0.21 & -0.28 & -0.24 & -0.19 & -0.15 \\ 
+  NAO Index
+by Fagus sylvatica & 0.36 & 0.28 & 0.33 & 0.39 & 0.44 \\ 
+  NAO Index
+by Fraxinus excelsior & 0.54 & 0.39 & 0.48 & 0.60 & 0.69 \\ 
+  NAO Index
+by Quercus robur & 0.59 & 0.49 & 0.55 & 0.63 & 0.70 \\ 
+  Mean Spring 
+Temperature
+by Alnus glutinosa & 0.28 & 0.19 & 0.24 & 0.31 & 0.36 \\ 
+  Mean Spring 
+Temperature
+by Betula pendula & 0.01 & -0.06 & -0.02 & 0.03 & 0.07 \\ 
+  Mean Spring 
+Temperature
+by Fagus sylvatica & -0.31 & -0.39 & -0.35 & -0.28 & -0.23 \\ 
+  Mean Spring 
+Temperature
+by Fraxinus excelsior & -0.21 & -0.39 & -0.28 & -0.14 & -0.04 \\ 
+  Mean Spring 
+Temperature
+by Quercus robur & -0.67 & -0.77 & -0.71 & -0.63 & -0.58 \\ 
+  Distance from 
+Coast
+by Alnus glutinosa & 0.10 & 0.01 & 0.06 & 0.14 & 0.19 \\ 
+  Distance from 
+Coast
+by Betula pendula & 0.14 & 0.06 & 0.10 & 0.17 & 0.22 \\ 
+  Distance from 
+Coast
+by Fagus sylvatica & 0.19 & 0.09 & 0.15 & 0.23 & 0.29 \\ 
+  Distance from 
+Coast
+by Fraxinus excelsior & 0.44 & 0.26 & 0.37 & 0.52 & 0.62 \\ 
+  Distance from 
+Coast
+by Quercus robur & 0.01 & -0.11 & -0.04 & 0.06 & 0.14 \\ 
+  Elevation
+by Alnus glutinosa & -0.13 & -0.23 & -0.17 & -0.10 & -0.04 \\ 
+  Elevation
+by Betula pendula & -0.04 & -0.11 & -0.07 & -0.01 & 0.03 \\ 
+  Elevation
+by Fagus sylvatica & -0.12 & -0.21 & -0.16 & -0.08 & -0.03 \\ 
+  Elevation
+by Fraxinus excelsior & -0.68 & -0.87 & -0.75 & -0.60 & -0.49 \\ 
+  Elevation
+by Quercus robur & -0.34 & -0.45 & -0.39 & -0.29 & -0.22 \\ 
+  Space Parameter
+by Alnus glutinosa & -0.04 & -0.11 & -0.07 & -0.01 & 0.03 \\ 
+  Space Parameter
+by Betula pendula & 0.01 & -0.05 & -0.02 & 0.03 & 0.07 \\ 
+  Space Parameter
+by Fagus sylvatica & -0.10 & -0.18 & -0.13 & -0.07 & -0.02 \\ 
+  Space Parameter
+by Fraxinus excelsior & -0.04 & -0.19 & -0.10 & 0.02 & 0.10 \\ 
+  Space Parameter
+by Quercus robur & -0.03 & -0.13 & -0.07 & 0.01 & 0.07 \\ 
+  Climate Change
+by Alnus glutinosa & 0.10 & 0.02 & 0.06 & 0.13 & 0.17 \\ 
+  Climate Change
+by Betula pendula & 0.07 & -0.00 & 0.04 & 0.10 & 0.14 \\ 
+  Climate Change
+by Fagus sylvatica & -0.34 & -0.43 & -0.37 & -0.30 & -0.25 \\ 
+  Climate Change
+by Fraxinus excelsior & -0.47 & -0.63 & -0.54 & -0.41 & -0.31 \\ 
+  Climate Change
+by Quercus robur & -0.35 & -0.46 & -0.40 & -0.30 & -0.23 \\ 
   NAO Index by Climate Change & -0.92 & -1.02 & -0.96 & -0.88 & -0.83 \\ 
   Mean Spring 
 Temperature by Climate Change & 0.64 & 0.55 & 0.60 & 0.69 & 0.74 \\ 
@@ -427,16 +608,8 @@ Coast by Climate Change & 0.01 & -0.10 & -0.03 & 0.06 & 0.13 \\
   Elevation by Climate Change & -0.24 & -0.35 & -0.29 & -0.20 & -0.14 \\ 
   Space Parameter by Climate Change & -0.04 & -0.13 & -0.08 & -0.01 & 0.05 \\ 
    \hline
-\end{tabular}
-\end{table}
+\hline
+\end{longtable}
 
-  
-
-%{\begin{figure} [H]
-%  -\begin{center}
-%  -\includegraphics[width=16cm]{..//figures/PropSitesbyYrwBB.png}
-%  -\caption{The black line indicates the proportion of sites that had false spring conditions for each year across all species. The blue line is a smoothing spline, indicating the trend of average day of budburst for each year for each species. Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}.}\label{fig:fsprop}
-%  -\end{center}
-%  -\end{figure}}
 
 \end{document}

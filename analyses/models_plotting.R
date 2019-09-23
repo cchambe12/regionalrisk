@@ -269,7 +269,7 @@ setwd("~/Documents/git/regionalrisk")
 load("orig_full.Rdata")
 load("dvr_full.Rdata")
 load("five_full.Rdata")
-load("fullleaf_full.Rdata")
+#load("fullleaf_full.Rdata")
 
 if(FALSE){
 modorig<-as.data.frame(tidy(orig.full, prob=0.9))
@@ -479,7 +479,7 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
   coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
-  #annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
+  annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
   #annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
   annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
