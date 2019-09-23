@@ -244,7 +244,7 @@ plusf<-plusf[!duplicated(plusf),]
 plusf <- full_join(plusf, fsccsp)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=16) +
+falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -301,8 +301,8 @@ g2<-grid.arrange(mylegend)
 grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
 
 png("figures/Boxplot_BBTminFS_noDots_modests.png", 
-    width=5,
-    height=8, units="in", res = 350 )
+    width=6,
+    height=6, units="in", res = 350 )
 grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
 dev.off()
 
