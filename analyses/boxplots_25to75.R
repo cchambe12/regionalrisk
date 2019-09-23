@@ -39,7 +39,7 @@ mat<-read.csv("output/BBdata.csv", header=TRUE) #### mean day of budburst is 104
 #mat <- mat[(mat$lat.long%in%goodsites),]
 
 load("~/Documents/git/regionalrisk/bbmod.Rdata")
-bbccsp<- ggpredict(bb.mod, terms = c("cc", "species"), ci.lvl=0.5) 
+bbccsp<- ggpredict(bb.mod, terms = c("cc", "species"), ci.lvl=0.9) 
 
 bbccsp$group <- as.character(bbccsp$group)
 
@@ -122,7 +122,7 @@ tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE) #### mean tmin is 7.54
 #tm <- tm[(tm$lat.long%in%goodsites),]
 
 load("~/Documents/git/regionalrisk/tminmod.Rdata")
-tmccsp<- ggpredict(tmin.mod, terms = c("cc", "species"), ci.lvl=0.5) 
+tmccsp<- ggpredict(tmin.mod, terms = c("cc", "species"), ci.lvl=0.9) 
 
 tmccsp$group <- as.character(tmccsp$group)
 
@@ -206,7 +206,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
 #modoutput <- read.csv("output/ccsp_predicted_90.csv", header=TRUE)
 
 load("~/Documents/git/regionalrisk/fssimpmod.Rdata")
-fsccsp<- ggpredict(fssimp.mod, terms = c("cc", "species"), ci.lvl=0.5) 
+fsccsp<- ggpredict(fssimp.mod, terms = c("cc", "species"), ci.lvl=0.9) 
 
 fsccsp$group <- as.character(fsccsp$group)
 

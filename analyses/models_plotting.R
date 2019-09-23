@@ -328,7 +328,7 @@ modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "7
 
 
 ### Now to make the plots
-modoutput <- moddvr #modelhere
+modoutput <- modfive #modelhere
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
 modoutput<-modoutput[1:47,]
@@ -472,20 +472,20 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
   guides(size=FALSE) +
   scale_y_discrete(limits = sort(unique(modoutput$termclean)), labels=estimates) +
   xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
-  theme(legend.text=element_text(size=5), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
+  theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), #legend.position = "none",
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
   coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
-  annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
+  #annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
   #annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
   annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
-  #annotate("text", x = 0.5, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
+  #annotate("text", x = 0.55, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
   annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR FIVE
-  #annotate("text", x = -0.5, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR DVR AND ORIG
+  #annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR DVR AND ORIG
   scale_color_manual(name="Species", values=c("black", cols), labels=c("aaall"="Overall estimate",
                                                               "aaBETPEN"=expression(paste(italic("Betula pendula"))),
                                                               "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -509,12 +509,12 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
                                                                        "zFRAEXC"=expression(paste(italic("Fraxinus excelsior")))))
 
 
-quartz()
-regrisk
+#quartz()
+#regrisk
 
 
 png("analyses/figures/model_output_90_fivespp.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
-    width=6,
+    width=7,
     height=6, units="in", res = 350 )
 grid.draw(regrisk)
 dev.off()
