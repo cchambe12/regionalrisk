@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: regrisk_supp.aux
+The style file: ..//bib/styles/gcb.bst
+Database file #1: ..//bib/regionalrisk.bib.bib
+You've used 15 entries,
+            2914 wiz_defined-function locations,
+            708 strings with 8477 characters,
+and the built_in function-call counts, 15530 in all, are:
+= -- 1425
+> -- 556
+< -- 6
++ -- 278
+- -- 153
+* -- 1317
+:= -- 2132
+add.period$ -- 37
+call.type$ -- 15
+change.case$ -- 122
+chr.to.int$ -- 15
+cite$ -- 15
+duplicate$ -- 1266
+empty$ -- 1316
+format.name$ -- 202
+if$ -- 3244
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 150
+newline$ -- 76
+num.names$ -- 60
+pop$ -- 384
+preamble$ -- 1
+purify$ -- 108
+quote$ -- 0
+skip$ -- 328
+stack$ -- 0
+substring$ -- 1527
+swap$ -- 351
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 132
+warning$ -- 0
+while$ -- 113
+width$ -- 0
+write$ -- 199

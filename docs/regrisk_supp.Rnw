@@ -95,7 +95,7 @@ Again, due to a lack of BBCH 7 data, we were unable to determine species-specifi
 \section*{Results: The effects of climatic and spatial variation on false spring incidence}
 Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S\ref{fig:mst}). 
 
-The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. The model estimates on the logit scale were converted to probability percentages for easier interpretation by using the `divide by 4' rule \citep{Gelman2006} and then back converted to the original scale. %To convert we used the equations below \citep{Gelman2006}:
+The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. For the model estimate of change plots (Figure 3, Figure \ref{fig:dvr} and Figure \ref{fig:five}), we used average predictive comparisons to calculate the mean estimates and the posteriors for each species and then took the average to find the overall effect for each predictor. The model estimates on the logit scale were converted to probability percentages for easier interpretation by using the `divide by 4' rule \citep{Gelman2006} and then back converted to the original scale. %To convert we used the equations below \citep{Gelman2006}:
 
 \iffalse
 \begin{align*}
@@ -190,8 +190,8 @@ lm(\text{Minimum Temperature \degree{C}} $\sim$ \text{Climate Change} (scaled))
 <<label=simpregmods, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk")
 
-load("bbmod.scaled.Rdata")
-bb <- as.data.frame(tidy(bb.mod.scaled, prob=0.9))
+load("bbmod.Rdata")
+bb <- as.data.frame(tidy(bb.mod, prob=0.9))
 bb$term <- ifelse(bb$term=="b_Intercept", "Intercept", "Climate Change")
 colnames(bb) <- c("", "Estimate", "std.err", "10\\%", "90\\%")
 print(xtable(bb[1:2,c(1:2,4:5)], caption = "Summary of simple linear regression model of day of budburst before and after climate change.",
@@ -200,6 +200,7 @@ print(xtable(bb[1:2,c(1:2,4:5)], caption = "Summary of simple linear regression 
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
 
+if(FALSE){
 load("lstfrz.scaled.Rdata")
 lstfrz <- as.data.frame(tidy(lstfrz.mod.scaled, prob=0.9))
 lstfrz$term <- ifelse(lstfrz$term=="b_Intercept", "Intercept", "Climate Change")
@@ -209,9 +210,10 @@ print(xtable(lstfrz[1:2,c(1:2,4:5)], caption = "Summary of simple linear regress
       include.rownames=F, 
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
+}
 
-load("tmin.simple.Rdata")
-tmin <- as.data.frame(tidy(tmin.simple, prob=0.9))
+load("tminmod.Rdata")
+tmin <- as.data.frame(tidy(tmin.mod, prob=0.9))
 tmin$term <- ifelse(tmin$term=="b_Intercept", "Intercept", "Climate Change")
 colnames(tmin) <- c("", "Estimate", "std.err", "10\\%", "90\\%")
 print(xtable(tmin[1:2,c(1:2, 4:5)], caption = "Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change.",
@@ -222,43 +224,40 @@ print(xtable(tmin[1:2,c(1:2, 4:5)], caption = "Summary of simple linear regressi
 
 @
 
-
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
-modoutput <- read.csv("output/modoutput_90_origspp.csv", header=TRUE)
-modoutput <- subset(modoutput, select=c("termclean", "estclean", "lowclean", "highclean", "species"))
+modoutput <- read.csv("output/orig_full_modeloutput.csv", header=TRUE)
+modoutput <- modoutput[c(1:47),]
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+# add multicolumn later for BB and LO headers above these column names
 
-##### VERY CLOSE JUST NEED TO REORDER EVERYTHING! EITHER THE TABLE OR THE FIGURE! #####
-modoutput <- modoutput[
-  order( modoutput$termclean, modoutput$species ),
-] 
+modoutput$term <- gsub("b_nao.z", "NAO Index", modoutput$term)
+modoutput$term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$term)
+modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
+modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
+modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
+modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
+modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
 
-modoutput$termclean <- gsub("nao.z", "NAO Index", modoutput$termclean)
-modoutput$termclean <- gsub("mat.z", "Mean Spring \nTemperature", modoutput$termclean)
-modoutput$termclean <- gsub("elev.z", "Elevation", modoutput$termclean)
-modoutput$termclean <- gsub("dist.z", "Distance from \nCoast", modoutput$termclean)
-modoutput$termclean <- gsub("space.z", "Space Parameter", modoutput$termclean)
-modoutput$termclean <- gsub("cc.z", "Climate Change", modoutput$termclean)
-modoutput$termclean <- gsub(":cc.z", " by Climate Change", modoutput$termclean)
+modoutput$term <- gsub(":speciesALNGLU", " by Alnus glutinosa", modoutput$term)
+modoutput$term <- gsub(":speciesBETPEN", " by Betula pendula", modoutput$term)
+modoutput$term <- gsub(":speciesFAGSYL", " by Fagus sylvatica", modoutput$term)
+modoutput$term <- gsub(":speciesFRAEXC", " by Fraxinus excelsior", modoutput$term)
+modoutput$term <- gsub(":speciesQUEROB", " by Quercus robur", modoutput$term)
 
-modoutput$species <- gsub("aaall", "Overall Estimate", modoutput$species)
-modoutput$species <- gsub("AESHIP", "Aesculus hippocastanum", modoutput$species)
-modoutput$species <- gsub("ALNGLU", "Alnus glutinosa", modoutput$species)
-modoutput$species <- gsub("aaBETPEN", "Betula pendula", modoutput$species)
-modoutput$species <- gsub("FAGSYL", "Fagus sylvatica", modoutput$species)
-modoutput$species <- gsub("zFRAEXC", "Fraxinus excelsior", modoutput$species)
-modoutput$species <- gsub("QUEROB", "Quercus robur", modoutput$species)
-
-colnames(modoutput) = c("", "Estimate", "10\\%", "90\\%", "Species")
+colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 
 
 print(xtable(modoutput, 
-             caption = "Summary of main Bernouilli model of false spring risk without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
-             align = c("l", "l", "r","r","r","r","r")), #>{\\textit}l
+             caption = "Summary of Bernouilli model of false spring risk with varying rates of budburst for each species without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum} as the intercept).",
+             align = c("l", "l", "r","r","r", "r","r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
+
+
+
 @
 
 
@@ -290,8 +289,8 @@ print(xtable(modoutput,
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_dvr.png}
-  -\caption{Model output with different durations of vegetative risk for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 10\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data.}\label{fig:dvr}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_dvrspp.png}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 10\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
@@ -315,7 +314,7 @@ colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernouilli model of false spring risk with varying durations of vegetative risk for each species without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
+             caption = "Summary of Bernouilli model of false spring risk with varying rates of leafout for each species without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
              align = c("l", "l", "r","r","r", "r","r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -325,7 +324,7 @@ print(xtable(modoutput,
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_five.png}
-  -\caption{Model output with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 10\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data.}\label{fig:five}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 10\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data.}\label{fig:five}
   -\end{center}
   -\end{figure}}
   
