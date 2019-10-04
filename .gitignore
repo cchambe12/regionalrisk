@@ -1,4 +1,4 @@
-analyses/.Rhistory
+*analyses/.Rhistory
 *.Rdata
 *.DS_Store
 *.aux
@@ -18,3 +18,5 @@ analyses/output/fs_newspace_five.csv
 analyses/output/fs_newspace_fullleaf.csv
 analyses/output/regrisk.nov.csv
 analyses/output/tminfull.csv
+*docs/regrisk_supp-concordance.tex
+*docs/regrisk-concordance.tex
