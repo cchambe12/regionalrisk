@@ -64,23 +64,23 @@ inverselogit <- function(x){ exp(x) / (1+exp(x) ) }
 
 
 ### Repeat for each species... Now let's do the same thing but combine all into one loop
-aeship.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-aeship.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+aeship.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+aeship.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-alnglu.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-alnglu.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+alnglu.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+alnglu.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-betpen.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-betpen.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+betpen.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+betpen.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fagsyl.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fagsyl.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fagsyl.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fagsyl.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fraexc.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fraexc.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fraexc.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fraexc.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-querob.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-querob.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+querob.dist.precc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+querob.dist.postcc <- data.frame(dist=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
 
 for(i in 1:length(newdist)){
@@ -91,9 +91,9 @@ for(i in 1:length(newdist)){
   aeship.dist.postcc.onedist <-orig_sum$b_Intercept + orig_sum$b_dist.z*newdist[i] + orig_sum$b_cc.z*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(aeship.dist.precc.onedist),
-                               fs.25=quantile(aeship.dist.precc.onedist, 0.25), fs.75=quantile(aeship.dist.precc.onedist, 0.75))
+                               fs.2=quantile(aeship.dist.precc.onedist, 0.2), fs.98=quantile(aeship.dist.precc.onedist, 0.98))
   postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(aeship.dist.postcc.onedist),
-                                fs.25=quantile(aeship.dist.postcc.onedist, 0.25), fs.75=quantile(aeship.dist.postcc.onedist, 0.75))
+                                fs.2=quantile(aeship.dist.postcc.onedist, 0.2), fs.98=quantile(aeship.dist.postcc.onedist, 0.98))
   aeship.dist.precc <- rbind(aeship.dist.precc, precc.df.here)
   aeship.dist.postcc <- rbind(aeship.dist.postcc, postcc.df.here)
   
@@ -105,9 +105,9 @@ for(i in 1:length(newdist)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(alnglu.dist.precc.onedist),
-                               fs.25=quantile(alnglu.dist.precc.onedist, 0.25), fs.75=quantile(alnglu.dist.precc.onedist, 0.75))
+                               fs.2=quantile(alnglu.dist.precc.onedist, 0.2), fs.98=quantile(alnglu.dist.precc.onedist, 0.98))
   postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(alnglu.dist.postcc.onedist),
-                                fs.25=quantile(alnglu.dist.postcc.onedist, 0.25), fs.75=quantile(alnglu.dist.postcc.onedist, 0.75))
+                                fs.2=quantile(alnglu.dist.postcc.onedist, 0.2), fs.98=quantile(alnglu.dist.postcc.onedist, 0.98))
   alnglu.dist.precc <- rbind(alnglu.dist.precc, precc.df.here)
   alnglu.dist.postcc <- rbind(alnglu.dist.postcc, postcc.df.here)
   
@@ -119,9 +119,9 @@ for(i in 1:length(newdist)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(betpen.dist.precc.onedist),
-                               fs.25=quantile(betpen.dist.precc.onedist, 0.25), fs.75=quantile(betpen.dist.precc.onedist, 0.75))
+                               fs.2=quantile(betpen.dist.precc.onedist, 0.2), fs.98=quantile(betpen.dist.precc.onedist, 0.98))
   postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(betpen.dist.postcc.onedist),
-                                fs.25=quantile(betpen.dist.postcc.onedist, 0.25), fs.75=quantile(betpen.dist.postcc.onedist, 0.75))
+                                fs.2=quantile(betpen.dist.postcc.onedist, 0.2), fs.98=quantile(betpen.dist.postcc.onedist, 0.98))
   betpen.dist.precc <- rbind(betpen.dist.precc, precc.df.here)
   betpen.dist.postcc <- rbind(betpen.dist.postcc, postcc.df.here)
   
@@ -133,9 +133,9 @@ for(i in 1:length(newdist)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(fagsyl.dist.precc.onedist),
-                               fs.25=quantile(fagsyl.dist.precc.onedist, 0.25), fs.75=quantile(fagsyl.dist.precc.onedist, 0.75))
+                               fs.2=quantile(fagsyl.dist.precc.onedist, 0.2), fs.98=quantile(fagsyl.dist.precc.onedist, 0.98))
   postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(fagsyl.dist.postcc.onedist),
-                                fs.25=quantile(fagsyl.dist.postcc.onedist, 0.25), fs.75=quantile(fagsyl.dist.postcc.onedist, 0.75))
+                                fs.2=quantile(fagsyl.dist.postcc.onedist, 0.2), fs.98=quantile(fagsyl.dist.postcc.onedist, 0.98))
   fagsyl.dist.precc <- rbind(fagsyl.dist.precc, precc.df.here)
   fagsyl.dist.postcc <- rbind(fagsyl.dist.postcc, postcc.df.here)
   
@@ -147,9 +147,9 @@ for(i in 1:length(newdist)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(fraexc.dist.precc.onedist),
-                               fs.25=quantile(fraexc.dist.precc.onedist, 0.25), fs.75=quantile(fraexc.dist.precc.onedist, 0.75))
+                               fs.2=quantile(fraexc.dist.precc.onedist, 0.2), fs.98=quantile(fraexc.dist.precc.onedist, 0.98))
   postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(fraexc.dist.postcc.onedist),
-                                fs.25=quantile(fraexc.dist.postcc.onedist, 0.25), fs.75=quantile(fraexc.dist.postcc.onedist, 0.75))
+                                fs.2=quantile(fraexc.dist.postcc.onedist, 0.2), fs.98=quantile(fraexc.dist.postcc.onedist, 0.98))
   fraexc.dist.precc <- rbind(fraexc.dist.precc, precc.df.here)
   fraexc.dist.postcc <- rbind(fraexc.dist.postcc, postcc.df.here)
   
@@ -161,9 +161,9 @@ for(i in 1:length(newdist)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_dist.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newdist[i])
   precc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(querob.dist.precc.onedist),
-                               fs.25=quantile(querob.dist.precc.onedist, 0.25), fs.75=quantile(querob.dist.precc.onedist, 0.75))
+                               fs.2=quantile(querob.dist.precc.onedist, 0.2), fs.98=quantile(querob.dist.precc.onedist, 0.98))
   postcc.df.here <-  data.frame(dist=newdist[i], fs.mean=mean(querob.dist.postcc.onedist),
-                                fs.25=quantile(querob.dist.postcc.onedist, 0.25), fs.75=quantile(querob.dist.postcc.onedist, 0.75))
+                                fs.2=quantile(querob.dist.postcc.onedist, 0.2), fs.98=quantile(querob.dist.postcc.onedist, 0.98))
   querob.dist.precc <- rbind(querob.dist.precc, precc.df.here)
   querob.dist.postcc <- rbind(querob.dist.postcc, postcc.df.here)
 }
@@ -203,8 +203,8 @@ distxcc <- rbind(aeship.dist, alnglu.dist, betpen.dist, fagsyl.dist, fraexc.dist
 
 # To use any of these values we convert to log-odds scales
 distxcc$fsmean_trans <- inverselogit(distxcc$fs.mean)
-distxcc$fs25_trans <- inverselogit(distxcc$fs.25)
-distxcc$fs75_trans <- inverselogit(distxcc$fs.75)
+distxcc$fs2_trans <- inverselogit(distxcc$fs.2)
+distxcc$fs98_trans <- inverselogit(distxcc$fs.98)
 distxcc$dist_trans <- (distxcc$dist)*sd(bb$distkm)*2 + mean(bb$distkm)
 
 distxcc$fsavg_sp <- ave(distxcc$fsmean_trans, distxcc$species, distxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
@@ -218,7 +218,7 @@ distapc <- distapc[!duplicated(distapc),]
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 distances <- ggplot(distxcc, aes(x=dist_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                      labels=c("0"="1950-1983",
                               "1"="1984-2016")) +
@@ -247,23 +247,23 @@ distances <- ggplot(distxcc, aes(x=dist_trans, y=fsmean_trans)) + geom_line(aes(
 newmat <- seq(from=range(bb$mat.z)[1], to=range(bb$mat.z)[2], length.out=200)  
 
 ### Repeat for each species... Now let's do the same thing but combine all into one loop
-aeship.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-aeship.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+aeship.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+aeship.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-alnglu.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-alnglu.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+alnglu.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+alnglu.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-betpen.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-betpen.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+betpen.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+betpen.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fagsyl.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fagsyl.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fagsyl.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fagsyl.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fraexc.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fraexc.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fraexc.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fraexc.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-querob.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-querob.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+querob.mat.precc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+querob.mat.postcc <- data.frame(mat=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
 
 for(i in 1:length(newmat)){
@@ -274,9 +274,9 @@ for(i in 1:length(newmat)){
   aeship.mat.postcc.onemat <-orig_sum$b_Intercept + orig_sum$b_mat.z*newmat[i] + orig_sum$b_cc.z*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(aeship.mat.precc.onemat),
-                               fs.25=quantile(aeship.mat.precc.onemat, 0.25), fs.75=quantile(aeship.mat.precc.onemat, 0.75))
+                               fs.2=quantile(aeship.mat.precc.onemat, 0.2), fs.98=quantile(aeship.mat.precc.onemat, 0.98))
   postcc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(aeship.mat.postcc.onemat),
-                                fs.25=quantile(aeship.mat.postcc.onemat, 0.25), fs.75=quantile(aeship.mat.postcc.onemat, 0.75))
+                                fs.2=quantile(aeship.mat.postcc.onemat, 0.2), fs.98=quantile(aeship.mat.postcc.onemat, 0.98))
   aeship.mat.precc <- rbind(aeship.mat.precc, precc.df.here)
   aeship.mat.postcc <- rbind(aeship.mat.postcc, postcc.df.here)
   
@@ -288,9 +288,9 @@ for(i in 1:length(newmat)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(alnglu.mat.precc.onemat),
-                               fs.25=quantile(alnglu.mat.precc.onemat, 0.25), fs.75=quantile(alnglu.mat.precc.onemat, 0.75))
+                               fs.2=quantile(alnglu.mat.precc.onemat, 0.2), fs.98=quantile(alnglu.mat.precc.onemat, 0.98))
   postcc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(alnglu.mat.postcc.onemat),
-                                fs.25=quantile(alnglu.mat.postcc.onemat, 0.25), fs.75=quantile(alnglu.mat.postcc.onemat, 0.75))
+                                fs.2=quantile(alnglu.mat.postcc.onemat, 0.2), fs.98=quantile(alnglu.mat.postcc.onemat, 0.98))
   alnglu.mat.precc <- rbind(alnglu.mat.precc, precc.df.here)
   alnglu.mat.postcc <- rbind(alnglu.mat.postcc, postcc.df.here)
   
@@ -302,9 +302,9 @@ for(i in 1:length(newmat)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(betpen.mat.precc.onemat),
-                               fs.25=quantile(betpen.mat.precc.onemat, 0.25), fs.75=quantile(betpen.mat.precc.onemat, 0.75))
+                               fs.2=quantile(betpen.mat.precc.onemat, 0.2), fs.98=quantile(betpen.mat.precc.onemat, 0.98))
   postcc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(betpen.mat.postcc.onemat),
-                                fs.25=quantile(betpen.mat.postcc.onemat, 0.25), fs.75=quantile(betpen.mat.postcc.onemat, 0.75))
+                                fs.2=quantile(betpen.mat.postcc.onemat, 0.2), fs.98=quantile(betpen.mat.postcc.onemat, 0.98))
   betpen.mat.precc <- rbind(betpen.mat.precc, precc.df.here)
   betpen.mat.postcc <- rbind(betpen.mat.postcc, postcc.df.here)
   
@@ -316,9 +316,9 @@ for(i in 1:length(newmat)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(fagsyl.mat.precc.onemat),
-                               fs.25=quantile(fagsyl.mat.precc.onemat, 0.25), fs.75=quantile(fagsyl.mat.precc.onemat, 0.75))
+                               fs.2=quantile(fagsyl.mat.precc.onemat, 0.2), fs.98=quantile(fagsyl.mat.precc.onemat, 0.98))
   postcc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(fagsyl.mat.postcc.onemat),
-                                fs.25=quantile(fagsyl.mat.postcc.onemat, 0.25), fs.75=quantile(fagsyl.mat.postcc.onemat, 0.75))
+                                fs.2=quantile(fagsyl.mat.postcc.onemat, 0.2), fs.98=quantile(fagsyl.mat.postcc.onemat, 0.98))
   fagsyl.mat.precc <- rbind(fagsyl.mat.precc, precc.df.here)
   fagsyl.mat.postcc <- rbind(fagsyl.mat.postcc, postcc.df.here)
   
@@ -330,9 +330,9 @@ for(i in 1:length(newmat)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(fraexc.mat.precc.onemat),
-                               fs.25=quantile(fraexc.mat.precc.onemat, 0.25), fs.75=quantile(fraexc.mat.precc.onemat, 0.75))
+                               fs.2=quantile(fraexc.mat.precc.onemat, 0.2), fs.98=quantile(fraexc.mat.precc.onemat, 0.98))
   postcc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(fraexc.mat.postcc.onemat),
-                                fs.25=quantile(fraexc.mat.postcc.onemat, 0.25), fs.75=quantile(fraexc.mat.postcc.onemat, 0.75))
+                                fs.2=quantile(fraexc.mat.postcc.onemat, 0.2), fs.98=quantile(fraexc.mat.postcc.onemat, 0.98))
   fraexc.mat.precc <- rbind(fraexc.mat.precc, precc.df.here)
   fraexc.mat.postcc <- rbind(fraexc.mat.postcc, postcc.df.here)
   
@@ -344,9 +344,9 @@ for(i in 1:length(newmat)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_mat.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newmat[i])
   precc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(querob.mat.precc.onemat),
-                               fs.25=quantile(querob.mat.precc.onemat, 0.25), fs.75=quantile(querob.mat.precc.onemat, 0.75))
+                               fs.2=quantile(querob.mat.precc.onemat, 0.2), fs.98=quantile(querob.mat.precc.onemat, 0.98))
   postcc.df.here <-  data.frame(mat=newmat[i], fs.mean=mean(querob.mat.postcc.onemat),
-                                fs.25=quantile(querob.mat.postcc.onemat, 0.25), fs.75=quantile(querob.mat.postcc.onemat, 0.75))
+                                fs.2=quantile(querob.mat.postcc.onemat, 0.2), fs.98=quantile(querob.mat.postcc.onemat, 0.98))
   querob.mat.precc <- rbind(querob.mat.precc, precc.df.here)
   querob.mat.postcc <- rbind(querob.mat.postcc, postcc.df.here)
 }
@@ -386,8 +386,8 @@ matxcc <- rbind(aeship.mat, alnglu.mat, betpen.mat, fagsyl.mat, fraexc.mat, quer
 
 # To use any of these values we convert to log-odds scales
 matxcc$fsmean_trans <- inverselogit(matxcc$fs.mean)
-matxcc$fs25_trans <- inverselogit(matxcc$fs.25)
-matxcc$fs75_trans <- inverselogit(matxcc$fs.75)
+matxcc$fs2_trans <- inverselogit(matxcc$fs.2)
+matxcc$fs98_trans <- inverselogit(matxcc$fs.98)
 matxcc$mat_trans <- (matxcc$mat)*sd(bb$mst)*2 + mean(bb$mst)
 
 matxcc$fsavg_sp <- ave(matxcc$fsmean_trans, matxcc$species, matxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
@@ -400,7 +400,7 @@ matapc <- matapc[!duplicated(matapc),]
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 meantemp <- ggplot(matxcc, aes(x=mat_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                         labels=c("0"="1950-1983",
                                  "1"="1984-2016")) +
@@ -428,23 +428,23 @@ meantemp <- ggplot(matxcc, aes(x=mat_trans, y=fsmean_trans)) + geom_line(aes(lin
 newelev <- seq(from=range(bb$elev.z)[1], to=range(bb$elev.z)[2], length.out=200)  
 
 ### Repeat for each species... Now let's do the same thing but combine all into one loop
-aeship.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-aeship.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+aeship.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+aeship.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-alnglu.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-alnglu.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+alnglu.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+alnglu.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-betpen.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-betpen.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+betpen.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+betpen.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fagsyl.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fagsyl.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fagsyl.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fagsyl.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fraexc.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fraexc.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fraexc.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fraexc.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-querob.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-querob.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+querob.elev.precc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+querob.elev.postcc <- data.frame(elev=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
 
 for(i in 1:length(newelev)){
@@ -455,9 +455,9 @@ for(i in 1:length(newelev)){
   aeship.elev.postcc.oneelev <-orig_sum$b_Intercept + orig_sum$b_elev.z*newelev[i] + orig_sum$b_cc.z*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(aeship.elev.precc.oneelev),
-                               fs.25=quantile(aeship.elev.precc.oneelev, 0.25), fs.75=quantile(aeship.elev.precc.oneelev, 0.75))
+                               fs.2=quantile(aeship.elev.precc.oneelev, 0.2), fs.98=quantile(aeship.elev.precc.oneelev, 0.98))
   postcc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(aeship.elev.postcc.oneelev),
-                                fs.25=quantile(aeship.elev.postcc.oneelev, 0.25), fs.75=quantile(aeship.elev.postcc.oneelev, 0.75))
+                                fs.2=quantile(aeship.elev.postcc.oneelev, 0.2), fs.98=quantile(aeship.elev.postcc.oneelev, 0.98))
   aeship.elev.precc <- rbind(aeship.elev.precc, precc.df.here)
   aeship.elev.postcc <- rbind(aeship.elev.postcc, postcc.df.here)
   
@@ -469,9 +469,9 @@ for(i in 1:length(newelev)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(alnglu.elev.precc.oneelev),
-                               fs.25=quantile(alnglu.elev.precc.oneelev, 0.25), fs.75=quantile(alnglu.elev.precc.oneelev, 0.75))
+                               fs.2=quantile(alnglu.elev.precc.oneelev, 0.2), fs.98=quantile(alnglu.elev.precc.oneelev, 0.98))
   postcc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(alnglu.elev.postcc.oneelev),
-                                fs.25=quantile(alnglu.elev.postcc.oneelev, 0.25), fs.75=quantile(alnglu.elev.postcc.oneelev, 0.75))
+                                fs.2=quantile(alnglu.elev.postcc.oneelev, 0.2), fs.98=quantile(alnglu.elev.postcc.oneelev, 0.98))
   alnglu.elev.precc <- rbind(alnglu.elev.precc, precc.df.here)
   alnglu.elev.postcc <- rbind(alnglu.elev.postcc, postcc.df.here)
   
@@ -483,9 +483,9 @@ for(i in 1:length(newelev)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(betpen.elev.precc.oneelev),
-                               fs.25=quantile(betpen.elev.precc.oneelev, 0.25), fs.75=quantile(betpen.elev.precc.oneelev, 0.75))
+                               fs.2=quantile(betpen.elev.precc.oneelev, 0.2), fs.98=quantile(betpen.elev.precc.oneelev, 0.98))
   postcc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(betpen.elev.postcc.oneelev),
-                                fs.25=quantile(betpen.elev.postcc.oneelev, 0.25), fs.75=quantile(betpen.elev.postcc.oneelev, 0.75))
+                                fs.2=quantile(betpen.elev.postcc.oneelev, 0.2), fs.98=quantile(betpen.elev.postcc.oneelev, 0.98))
   betpen.elev.precc <- rbind(betpen.elev.precc, precc.df.here)
   betpen.elev.postcc <- rbind(betpen.elev.postcc, postcc.df.here)
   
@@ -497,9 +497,9 @@ for(i in 1:length(newelev)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(fagsyl.elev.precc.oneelev),
-                               fs.25=quantile(fagsyl.elev.precc.oneelev, 0.25), fs.75=quantile(fagsyl.elev.precc.oneelev, 0.75))
+                               fs.2=quantile(fagsyl.elev.precc.oneelev, 0.2), fs.98=quantile(fagsyl.elev.precc.oneelev, 0.98))
   postcc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(fagsyl.elev.postcc.oneelev),
-                                fs.25=quantile(fagsyl.elev.postcc.oneelev, 0.25), fs.75=quantile(fagsyl.elev.postcc.oneelev, 0.75))
+                                fs.2=quantile(fagsyl.elev.postcc.oneelev, 0.2), fs.98=quantile(fagsyl.elev.postcc.oneelev, 0.98))
   fagsyl.elev.precc <- rbind(fagsyl.elev.precc, precc.df.here)
   fagsyl.elev.postcc <- rbind(fagsyl.elev.postcc, postcc.df.here)
   
@@ -511,9 +511,9 @@ for(i in 1:length(newelev)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(fraexc.elev.precc.oneelev),
-                               fs.25=quantile(fraexc.elev.precc.oneelev, 0.25), fs.75=quantile(fraexc.elev.precc.oneelev, 0.75))
+                               fs.2=quantile(fraexc.elev.precc.oneelev, 0.2), fs.98=quantile(fraexc.elev.precc.oneelev, 0.98))
   postcc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(fraexc.elev.postcc.oneelev),
-                                fs.25=quantile(fraexc.elev.postcc.oneelev, 0.25), fs.75=quantile(fraexc.elev.postcc.oneelev, 0.75))
+                                fs.2=quantile(fraexc.elev.postcc.oneelev, 0.2), fs.98=quantile(fraexc.elev.postcc.oneelev, 0.98))
   fraexc.elev.precc <- rbind(fraexc.elev.precc, precc.df.here)
   fraexc.elev.postcc <- rbind(fraexc.elev.postcc, postcc.df.here)
   
@@ -525,9 +525,9 @@ for(i in 1:length(newelev)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_elev.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newelev[i])
   precc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(querob.elev.precc.oneelev),
-                               fs.25=quantile(querob.elev.precc.oneelev, 0.25), fs.75=quantile(querob.elev.precc.oneelev, 0.75))
+                               fs.2=quantile(querob.elev.precc.oneelev, 0.2), fs.98=quantile(querob.elev.precc.oneelev, 0.98))
   postcc.df.here <-  data.frame(elev=newelev[i], fs.mean=mean(querob.elev.postcc.oneelev),
-                                fs.25=quantile(querob.elev.postcc.oneelev, 0.25), fs.75=quantile(querob.elev.postcc.oneelev, 0.75))
+                                fs.2=quantile(querob.elev.postcc.oneelev, 0.2), fs.98=quantile(querob.elev.postcc.oneelev, 0.98))
   querob.elev.precc <- rbind(querob.elev.precc, precc.df.here)
   querob.elev.postcc <- rbind(querob.elev.postcc, postcc.df.here)
 }
@@ -567,8 +567,8 @@ elevxcc <- rbind(aeship.elev, alnglu.elev, betpen.elev, fagsyl.elev, fraexc.elev
 
 # To use any of these values we convert to log-odds scales
 elevxcc$fsmean_trans <- inverselogit(elevxcc$fs.mean)
-elevxcc$fs25_trans <- inverselogit(elevxcc$fs.25)
-elevxcc$fs75_trans <- inverselogit(elevxcc$fs.75)
+elevxcc$fs2_trans <- inverselogit(elevxcc$fs.2)
+elevxcc$fs98_trans <- inverselogit(elevxcc$fs.98)
 elevxcc$elev_trans <- (elevxcc$elev)*sd(bb$mst)*2 + mean(bb$mst)
 
 elevxcc$fsavg_sp <- ave(elevxcc$fsmean_trans, elevxcc$species, elevxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
@@ -581,7 +581,7 @@ elevapc <- elevapc[!duplicated(elevapc),]
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 elevations <- ggplot(elevxcc, aes(x=elev_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                         labels=c("0"="1950-1983",
                                  "1"="1984-2016")) +
@@ -609,23 +609,23 @@ elevations <- ggplot(elevxcc, aes(x=elev_trans, y=fsmean_trans)) + geom_line(aes
 newnao <- seq(from=range(bb$nao.z)[1], to=range(bb$nao.z)[2], length.out=200)  
 
 ### Repeat for each species... Now let's do the same thing but combine all into one loop
-aeship.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-aeship.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+aeship.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+aeship.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-alnglu.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-alnglu.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+alnglu.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+alnglu.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-betpen.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-betpen.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+betpen.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+betpen.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fagsyl.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fagsyl.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fagsyl.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fagsyl.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fraexc.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fraexc.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fraexc.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fraexc.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-querob.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-querob.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+querob.nao.precc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+querob.nao.postcc <- data.frame(nao=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
 
 for(i in 1:length(newnao)){
@@ -636,9 +636,9 @@ for(i in 1:length(newnao)){
   aeship.nao.postcc.onenao <-orig_sum$b_Intercept + orig_sum$b_nao.z*newnao[i] + orig_sum$b_cc.z*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(aeship.nao.precc.onenao),
-                               fs.25=quantile(aeship.nao.precc.onenao, 0.25), fs.75=quantile(aeship.nao.precc.onenao, 0.75))
+                               fs.2=quantile(aeship.nao.precc.onenao, 0.2), fs.98=quantile(aeship.nao.precc.onenao, 0.98))
   postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(aeship.nao.postcc.onenao),
-                                fs.25=quantile(aeship.nao.postcc.onenao, 0.25), fs.75=quantile(aeship.nao.postcc.onenao, 0.75))
+                                fs.2=quantile(aeship.nao.postcc.onenao, 0.2), fs.98=quantile(aeship.nao.postcc.onenao, 0.98))
   aeship.nao.precc <- rbind(aeship.nao.precc, precc.df.here)
   aeship.nao.postcc <- rbind(aeship.nao.postcc, postcc.df.here)
   
@@ -650,9 +650,9 @@ for(i in 1:length(newnao)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(alnglu.nao.precc.onenao),
-                               fs.25=quantile(alnglu.nao.precc.onenao, 0.25), fs.75=quantile(alnglu.nao.precc.onenao, 0.75))
+                               fs.2=quantile(alnglu.nao.precc.onenao, 0.2), fs.98=quantile(alnglu.nao.precc.onenao, 0.98))
   postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(alnglu.nao.postcc.onenao),
-                                fs.25=quantile(alnglu.nao.postcc.onenao, 0.25), fs.75=quantile(alnglu.nao.postcc.onenao, 0.75))
+                                fs.2=quantile(alnglu.nao.postcc.onenao, 0.2), fs.98=quantile(alnglu.nao.postcc.onenao, 0.98))
   alnglu.nao.precc <- rbind(alnglu.nao.precc, precc.df.here)
   alnglu.nao.postcc <- rbind(alnglu.nao.postcc, postcc.df.here)
   
@@ -664,9 +664,9 @@ for(i in 1:length(newnao)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(betpen.nao.precc.onenao),
-                               fs.25=quantile(betpen.nao.precc.onenao, 0.25), fs.75=quantile(betpen.nao.precc.onenao, 0.75))
+                               fs.2=quantile(betpen.nao.precc.onenao, 0.2), fs.98=quantile(betpen.nao.precc.onenao, 0.98))
   postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(betpen.nao.postcc.onenao),
-                                fs.25=quantile(betpen.nao.postcc.onenao, 0.25), fs.75=quantile(betpen.nao.postcc.onenao, 0.75))
+                                fs.2=quantile(betpen.nao.postcc.onenao, 0.2), fs.98=quantile(betpen.nao.postcc.onenao, 0.98))
   betpen.nao.precc <- rbind(betpen.nao.precc, precc.df.here)
   betpen.nao.postcc <- rbind(betpen.nao.postcc, postcc.df.here)
   
@@ -678,9 +678,9 @@ for(i in 1:length(newnao)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fagsyl.nao.precc.onenao),
-                               fs.25=quantile(fagsyl.nao.precc.onenao, 0.25), fs.75=quantile(fagsyl.nao.precc.onenao, 0.75))
+                               fs.2=quantile(fagsyl.nao.precc.onenao, 0.2), fs.98=quantile(fagsyl.nao.precc.onenao, 0.98))
   postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fagsyl.nao.postcc.onenao),
-                                fs.25=quantile(fagsyl.nao.postcc.onenao, 0.25), fs.75=quantile(fagsyl.nao.postcc.onenao, 0.75))
+                                fs.2=quantile(fagsyl.nao.postcc.onenao, 0.2), fs.98=quantile(fagsyl.nao.postcc.onenao, 0.98))
   fagsyl.nao.precc <- rbind(fagsyl.nao.precc, precc.df.here)
   fagsyl.nao.postcc <- rbind(fagsyl.nao.postcc, postcc.df.here)
   
@@ -692,9 +692,9 @@ for(i in 1:length(newnao)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFRAEXC`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fraexc.nao.precc.onenao),
-                               fs.25=quantile(fraexc.nao.precc.onenao, 0.25), fs.75=quantile(fraexc.nao.precc.onenao, 0.75))
+                               fs.2=quantile(fraexc.nao.precc.onenao, 0.2), fs.98=quantile(fraexc.nao.precc.onenao, 0.98))
   postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(fraexc.nao.postcc.onenao),
-                                fs.25=quantile(fraexc.nao.postcc.onenao, 0.25), fs.75=quantile(fraexc.nao.postcc.onenao, 0.75))
+                                fs.2=quantile(fraexc.nao.postcc.onenao, 0.2), fs.98=quantile(fraexc.nao.postcc.onenao, 0.98))
   fraexc.nao.precc <- rbind(fraexc.nao.precc, precc.df.here)
   fraexc.nao.postcc <- rbind(fraexc.nao.postcc, postcc.df.here)
   
@@ -706,9 +706,9 @@ for(i in 1:length(newnao)){
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[2] +
     orig_sum[["b_nao.z:cc.z"]]*(sort(unique(bb$cc.z))[2]*newnao[i])
   precc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(querob.nao.precc.onenao),
-                               fs.25=quantile(querob.nao.precc.onenao, 0.25), fs.75=quantile(querob.nao.precc.onenao, 0.75))
+                               fs.2=quantile(querob.nao.precc.onenao, 0.2), fs.98=quantile(querob.nao.precc.onenao, 0.98))
   postcc.df.here <-  data.frame(nao=newnao[i], fs.mean=mean(querob.nao.postcc.onenao),
-                                fs.25=quantile(querob.nao.postcc.onenao, 0.25), fs.75=quantile(querob.nao.postcc.onenao, 0.75))
+                                fs.2=quantile(querob.nao.postcc.onenao, 0.2), fs.98=quantile(querob.nao.postcc.onenao, 0.98))
   querob.nao.precc <- rbind(querob.nao.precc, precc.df.here)
   querob.nao.postcc <- rbind(querob.nao.postcc, postcc.df.here)
 }
@@ -748,8 +748,8 @@ naoxcc <- rbind(aeship.nao, alnglu.nao, betpen.nao, fagsyl.nao, fraexc.nao, quer
 
 # To use any of these values we convert to log-odds scales
 naoxcc$fsmean_trans <- inverselogit(naoxcc$fs.mean)
-naoxcc$fs25_trans <- inverselogit(naoxcc$fs.25)
-naoxcc$fs75_trans <- inverselogit(naoxcc$fs.75)
+naoxcc$fs2_trans <- inverselogit(naoxcc$fs.2)
+naoxcc$fs98_trans <- inverselogit(naoxcc$fs.98)
 naoxcc$nao_trans <- (naoxcc$nao)*sd(bb$mst)*2 + mean(bb$mst)
 
 naoxcc$fsavg_sp <- ave(naoxcc$fsmean_trans, naoxcc$species, naoxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
@@ -763,7 +763,7 @@ naoapc <- naoapc[!duplicated(naoapc),]
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 quartz()
 naoindex <- ggplot(naoxcc, aes(x=nao_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                         labels=c("0"="1950-1983",
                                  "1"="1984-2016")) +
@@ -785,9 +785,10 @@ naoindex <- ggplot(naoxcc, aes(x=nao_trans, y=fsmean_trans)) + geom_line(aes(lin
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   ylab("Probability of False Spring") + coord_cartesian(ylim = c(0, 1), expand=c(0, 0)) + guides(fill=FALSE, linetype=FALSE, alpha=FALSE) +
-  theme(legend.text.align = 0, legend.position = "none") + ggtitle("D.")
+  theme(legend.text.align = 0, legend.position = "none") + 
+  ggtitle("D.")
 
-
+if(TRUE){
 g_legend<-function(a.gplot){
   tmp <- ggplot_gtable(ggplot_build(a.gplot))
   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
@@ -796,7 +797,7 @@ g_legend<-function(a.gplot){
 
 spplegend<-g_legend(naoindex)
 #cclegend<-g_legend(naoindex)
-
+}
 
 quartz()
 g1 <- grid.arrange(meantemp, distances, ncol=2)
@@ -804,12 +805,24 @@ g2 <- grid.arrange(elevations, naoindex, spplegend, ncol=3, widths=c(1, 1, 0.55)
 grid.arrange(g1, g2, heights=c(2, 1.5))
 
 
+png("~/Documents/git/regionalrisk/analyses/figures/APC_allpred_allspp_baseR_98.png", 
+    width=8.5,
+    height=6, units="in", res = 350 )
+grid.arrange(g1, g2, heights=c(2, 1.5))
+dev.off()
+
+
+
+######################################################################
+######################################################################
+######################################################################
+### FOR ONLY TWO SPECIES BELOW - NOT CURRENTLY USED IN MANUSCRIPT ####
 ###### Now let's compare the species extremes
 #cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 ext_spp <- c("aaBETPEN", "zFRAEXC")
 matxcc_sm <- matxcc[(matxcc$species %in% ext_spp),]
 meantemp_sm <- ggplot(matxcc_sm, aes(x=mat_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                         labels=c("0"="1950-1983",
                                  "1"="1984-2016")) +
@@ -827,7 +840,7 @@ meantemp_sm <- ggplot(matxcc_sm, aes(x=mat_trans, y=fsmean_trans)) + geom_line(a
 
 distxcc_sm <- distxcc[(distxcc$species %in% ext_spp),]
 distances_sm <- ggplot(distxcc_sm, aes(x=dist_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                         labels=c("0"="1950-1983",
                                  "1"="1984-2016")) +
@@ -845,7 +858,7 @@ distances_sm <- ggplot(distxcc_sm, aes(x=dist_trans, y=fsmean_trans)) + geom_lin
 
 elevxcc_sm <- elevxcc[(elevxcc$species %in% ext_spp),]
 elevations_sm <- ggplot(elevxcc_sm, aes(x=elev_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                         labels=c("0"="1950-1983",
                                  "1"="1984-2016")) +
@@ -864,7 +877,7 @@ elevations_sm <- ggplot(elevxcc_sm, aes(x=elev_trans, y=fsmean_trans)) + geom_li
 
 naoxcc_sm <- naoxcc[(naoxcc$species %in% ext_spp),]
 naoindex_sm <- ggplot(naoxcc_sm, aes(x=nao_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                         labels=c("0"="1950-1983",
                                  "1"="1984-2016")) +
@@ -897,23 +910,23 @@ grid.arrange(g1, g2, heights=c(2, 2), nrow=2)
 newcc <- seq(from=range(bb$cc.z)[1], to=range(bb$cc.z)[2], length.out=200)  
 
 ### Repeat for each species... Now let's do the same thing but combine all into one loop
-aeship.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-aeship.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+aeship.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+aeship.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-alnglu.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-alnglu.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+alnglu.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+alnglu.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-betpen.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-betpen.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+betpen.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+betpen.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fagsyl.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fagsyl.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fagsyl.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fagsyl.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-fraexc.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-fraexc.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+fraexc.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+fraexc.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
-querob.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
-querob.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.25=numeric(), fs.75=numeric())
+querob.cc.precc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
+querob.cc.postcc <- data.frame(cc=numeric(), fs.mean=numeric(), fs.2=numeric(), fs.98=numeric())
 
 for(i in 1:length(newcc)){ #i=2
   
@@ -923,9 +936,9 @@ for(i in 1:length(newcc)){ #i=2
   aeship.cc.postcc.onecc <-orig_sum$b_Intercept + 
     orig_sum[["b_cc.z"]]*(sort(unique(bb$cc.z))[2]) 
   precc.df.here <-  data.frame(cc=sort(unique(bb$cc.z))[1], fs.mean=mean(aeship.cc.precc.onecc),
-                               fs.25=quantile(aeship.cc.precc.onecc, 0.25), fs.75=quantile(aeship.cc.precc.onecc, 0.75))
+                               fs.2=quantile(aeship.cc.precc.onecc, 0.2), fs.98=quantile(aeship.cc.precc.onecc, 0.98))
   postcc.df.here <-  data.frame(cc=sort(unique(bb$cc.z))[2], fs.mean=mean(aeship.cc.postcc.onecc),
-                                fs.25=quantile(aeship.cc.postcc.onecc, 0.25), fs.75=quantile(aeship.cc.postcc.onecc, 0.75))
+                                fs.2=quantile(aeship.cc.postcc.onecc, 0.2), fs.98=quantile(aeship.cc.postcc.onecc, 0.98))
   aeship.cc.precc <- rbind(aeship.cc.precc, precc.df.here)
   aeship.cc.postcc <- rbind(aeship.cc.postcc, postcc.df.here)
   
@@ -935,9 +948,9 @@ for(i in 1:length(newcc)){ #i=2
   alnglu.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesALNGLU) + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesALNGLU`)*sort(unique(bb$cc.z))[2] 
   precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(alnglu.cc.precc.onecc),
-                               fs.25=quantile(alnglu.cc.precc.onecc, 0.25), fs.75=quantile(alnglu.cc.precc.onecc, 0.75))
+                               fs.2=quantile(alnglu.cc.precc.onecc, 0.2), fs.98=quantile(alnglu.cc.precc.onecc, 0.98))
   postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(alnglu.cc.postcc.onecc),
-                                fs.25=quantile(alnglu.cc.postcc.onecc, 0.25), fs.75=quantile(alnglu.cc.postcc.onecc, 0.75))
+                                fs.2=quantile(alnglu.cc.postcc.onecc, 0.2), fs.98=quantile(alnglu.cc.postcc.onecc, 0.98))
   alnglu.cc.precc <- rbind(alnglu.cc.precc, precc.df.here)
   alnglu.cc.postcc <- rbind(alnglu.cc.postcc, postcc.df.here)
   
@@ -947,9 +960,9 @@ for(i in 1:length(newcc)){ #i=2
   betpen.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesBETPEN) + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesBETPEN`)*sort(unique(bb$cc.z))[2] 
   precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(betpen.cc.precc.onecc),
-                               fs.25=quantile(betpen.cc.precc.onecc, 0.25), fs.75=quantile(betpen.cc.precc.onecc, 0.75))
+                               fs.2=quantile(betpen.cc.precc.onecc, 0.2), fs.98=quantile(betpen.cc.precc.onecc, 0.98))
   postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(betpen.cc.postcc.onecc),
-                                fs.25=quantile(betpen.cc.postcc.onecc, 0.25), fs.75=quantile(betpen.cc.postcc.onecc, 0.75))
+                                fs.2=quantile(betpen.cc.postcc.onecc, 0.2), fs.98=quantile(betpen.cc.postcc.onecc, 0.98))
   betpen.cc.precc <- rbind(betpen.cc.precc, precc.df.here)
   betpen.cc.postcc <- rbind(betpen.cc.postcc, postcc.df.here)
   
@@ -959,9 +972,9 @@ for(i in 1:length(newcc)){ #i=2
   fagsyl.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesFAGSYL) + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] 
   precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(fagsyl.cc.precc.onecc),
-                               fs.25=quantile(fagsyl.cc.precc.onecc, 0.25), fs.75=quantile(fagsyl.cc.precc.onecc, 0.75))
+                               fs.2=quantile(fagsyl.cc.precc.onecc, 0.2), fs.98=quantile(fagsyl.cc.precc.onecc, 0.98))
   postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(fagsyl.cc.postcc.onecc),
-                                fs.25=quantile(fagsyl.cc.postcc.onecc, 0.25), fs.75=quantile(fagsyl.cc.postcc.onecc, 0.75))
+                                fs.2=quantile(fagsyl.cc.postcc.onecc, 0.2), fs.98=quantile(fagsyl.cc.postcc.onecc, 0.98))
   fagsyl.cc.precc <- rbind(fagsyl.cc.precc, precc.df.here)
   fagsyl.cc.postcc <- rbind(fagsyl.cc.postcc, postcc.df.here)
   
@@ -971,9 +984,9 @@ for(i in 1:length(newcc)){ #i=2
   fraexc.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesFRAEXC) + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesFAGSYL`)*sort(unique(bb$cc.z))[2] 
   precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(fraexc.cc.precc.onecc),
-                               fs.25=quantile(fraexc.cc.precc.onecc, 0.25), fs.75=quantile(fraexc.cc.precc.onecc, 0.75))
+                               fs.2=quantile(fraexc.cc.precc.onecc, 0.2), fs.98=quantile(fraexc.cc.precc.onecc, 0.98))
   postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(fraexc.cc.postcc.onecc),
-                                fs.25=quantile(fraexc.cc.postcc.onecc, 0.25), fs.75=quantile(fraexc.cc.postcc.onecc, 0.75))
+                                fs.2=quantile(fraexc.cc.postcc.onecc, 0.2), fs.98=quantile(fraexc.cc.postcc.onecc, 0.98))
   fraexc.cc.precc <- rbind(fraexc.cc.precc, precc.df.here)
   fraexc.cc.postcc <- rbind(fraexc.cc.postcc, postcc.df.here)
   
@@ -983,9 +996,9 @@ for(i in 1:length(newcc)){ #i=2
   querob.cc.postcc.onecc <-(orig_sum$b_Intercept + orig_sum$b_speciesQUEROB) + 
     (orig_sum$b_cc.z + orig_sum$`b_cc.z:speciesQUEROB`)*sort(unique(bb$cc.z))[2] 
   precc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(querob.cc.precc.onecc),
-                               fs.25=quantile(querob.cc.precc.onecc, 0.25), fs.75=quantile(querob.cc.precc.onecc, 0.75))
+                               fs.2=quantile(querob.cc.precc.onecc, 0.2), fs.98=quantile(querob.cc.precc.onecc, 0.98))
   postcc.df.here <-  data.frame(cc=newcc[i], fs.mean=mean(querob.cc.postcc.onecc),
-                                fs.25=quantile(querob.cc.postcc.onecc, 0.25), fs.75=quantile(querob.cc.postcc.onecc, 0.75))
+                                fs.2=quantile(querob.cc.postcc.onecc, 0.2), fs.98=quantile(querob.cc.postcc.onecc, 0.98))
   querob.cc.precc <- rbind(querob.cc.precc, precc.df.here)
   querob.cc.postcc <- rbind(querob.cc.postcc, postcc.df.here)
 }
@@ -1026,8 +1039,8 @@ ccxcc <- rbind(aeship.cc, alnglu.cc, betpen.cc, fagsyl.cc, fraexc.cc, querob.cc)
 
 # To use any of these values we convert to log-odds scales
 ccxcc$fsmean_trans <- inverselogit(ccxcc$fs.mean)
-ccxcc$fs25_trans <- inverselogit(ccxcc$fs.25)
-ccxcc$fs75_trans <- inverselogit(ccxcc$fs.75)
+ccxcc$fs2_trans <- inverselogit(ccxcc$fs.2)
+ccxcc$fs98_trans <- inverselogit(ccxcc$fs.98)
 #ccxcc$cc_trans <- (ccxcc$cc)*sd(bb$cc)*2 + mean(bb$cc)
 ccxcc$cc_trans <- as.numeric(ccxcc$cc)
 
@@ -1037,7 +1050,7 @@ ccapcs <- ccxcc[!duplicated(ccxcc),]
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 quartz()
 ccindex <- ggplot(ccxcc, aes(x=cc_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
-  geom_ribbon(aes(ymin=fs25_trans, ymax=fs75_trans, alpha=cc, fill=species)) + theme_classic() +
+  geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
                         labels=c("0"="1950-1983",
                                  "1"="1984-2016")) +
@@ -1069,7 +1082,7 @@ nocc <- ccsp[1,1]
 ccsp$cc <- ifelse(ccsp$x==nocc, 0, 1)
 
 ccsp$x <- NULL
-names(ccsp) <- c("risk", "25%", "75%", "species", "cc")
+names(ccsp) <- c("risk", "2%", "98%", "species", "cc")
 
 
 library(xtable)

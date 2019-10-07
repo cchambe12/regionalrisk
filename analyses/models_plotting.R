@@ -28,10 +28,11 @@ load("~/Documents/git/regionalrisk/orig_full.Rdata")
 #####################################################################################################
 ################### Original - predictors with species ##############################################
 
-#naosp<- ggpredict(orig.full, terms = c("nao.z", "species"), ci.lvl=0.5) 
-#write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted.csv", row.names = FALSE)
+#naosp<- ggpredict(orig.full, terms = c("nao.z", "species"), ci.lvl=0.98) 
+#write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_90.csv", row.names = FALSE)
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_50.csv", row.names = FALSE)
-naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_90.csv", header=TRUE)
+#write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98.csv", row.names = FALSE)
+naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98.csv", header=TRUE)
 naosp0$group<-ifelse(naosp0$group=="BETPEN", "aaBETPEN", naosp0$group)
 naosp0$group<-ifelse(naosp0$group=="FRAEXC", "zFRAEXC", naosp0$group)
 naosp0$x <- (naosp0$x)*sd(bb$nao)*2 + mean(bb$nao)
@@ -55,10 +56,11 @@ naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur")))))
 
-#elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.9) 
+#elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.98) 
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_90.csv", row.names = FALSE)
-elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_90.csv", header=TRUE)
+#write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98.csv", row.names = FALSE)
+elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98.csv", header=TRUE)
 elevsp$group<-ifelse(elevsp$group=="BETPEN", "aaBETPEN", elevsp$group)
 elevsp$group<-ifelse(elevsp$group=="FRAEXC", "zFRAEXC", elevsp$group)
 elevsp$x <- ((elevsp$x)*sd(bb$elev)*2) + mean(bb$elev)
@@ -81,10 +83,11 @@ elevsp.p<-ggplot(elevsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xla
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-#matsp<- ggpredict(orig.full, terms = c("mat.z", "species"), ci.lvl = 0.5) 
+#matsp<- ggpredict(orig.full, terms = c("mat.z", "species"), ci.lvl = 0.98) 
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted.csv", row.names = FALSE)
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_50.csv", row.names = FALSE)
-matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_90.csv", header=TRUE)
+#write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98.csv", row.names = FALSE)
+matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98.csv", header=TRUE)
 matsp$group<-ifelse(matsp$group=="BETPEN", "aaBETPEN", matsp$group)
 matsp$group<-ifelse(matsp$group=="FRAEXC", "zFRAEXC", matsp$group)
 matsp$x <- (matsp$x)*sd(bb$mst)*2 + mean(bb$mst)
@@ -108,10 +111,11 @@ matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab(
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 #load("~/Documents/git/regionalrisk/orig_full.Rdata")
-#spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.9) 
+#spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.98) 
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_90.csv", row.names = FALSE)
-spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_90.csv", header=TRUE)
+#write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98.csv", row.names = FALSE)
+spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98.csv", header=TRUE)
 spacesp$group<-ifelse(spacesp$group=="BETPEN", "aaBETPEN", spacesp$group)
 spacesp$group<-ifelse(spacesp$group=="FRAEXC", "zFRAEXC", spacesp$group)
 spacesp$x <- (spacesp$x)*sd(bb$distkm)*2 + mean(bb$distkm)
@@ -134,10 +138,11 @@ spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + x
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-#ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.9) 
+#ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.98) 
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_90.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_50.csv", row.names = FALSE)
-ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_90.csv", header=TRUE)
+#write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98.csv", row.names = FALSE)
+ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98.csv", header=TRUE)
 ccsp$group<-ifelse(ccsp$group=="BETPEN", "aaBETPEN", ccsp$group)
 ccsp$group<-ifelse(ccsp$group=="FRAEXC", "zFRAEXC", ccsp$group)
 ccsp$x <- ifelse(ccsp$x <0, 0, 1)
@@ -180,10 +185,11 @@ grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 ############################# Now interaction plots with CC ##################################
 colz <- colorRampPalette(brewer.pal(9,"Set1"))(2)
 colz<-rev(colz)
-#nao<-ggpredict(orig.full, terms=c("nao.z", "cc.z"), ci.lvl = 0.5)
+#nao<-ggpredict(orig.full, terms=c("nao.z", "cc.z"), ci.lvl = 0.98)
 #write.csv(nao, file="naopredict.csv", row.names=FALSE)
 #write.csv(nao, file="naopredict_50.csv", row.names=FALSE)
-nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict_50.csv", header=TRUE)
+#write.csv(nao, file="naopredict_98.csv", row.names=FALSE)
+nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict_98.csv", header=TRUE)
 nao$group<-as.character(nao$group)
 nao$x <- (nao$x)*sd(bb$nao)*2 + mean(bb$nao)
 nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("NAO") + 
@@ -197,10 +203,11 @@ nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)
   scale_fill_manual(name="Climate Change", values=colz,
                     labels=c("-0.459191120180519"="1950-1983",
                              "0.544434894155798"="1984-2016"))
-#elev<-ggpredict(orig.full, terms=c("elev.z", "cc.z"), ci.lvl=0.5)
+#elev<-ggpredict(orig.full, terms=c("elev.z", "cc.z"), ci.lvl=0.98)
 #write.csv(elev, file="elevpredict.csv", row.names=FALSE)
 #write.csv(elev, file="elevpredict_50.csv", row.names=FALSE)
-elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict_50.csv", header=TRUE)
+#write.csv(elev, file="elevpredict_98.csv", row.names=FALSE)
+elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict_98.csv", header=TRUE)
 elev$group<-as.character(elev$group)
 elev$x <- (elev$x)*sd(bb$elev)*2 + mean(bb$elev)
 elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation (m)") + 
@@ -214,10 +221,11 @@ elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=grou
   scale_fill_manual(name="Climate Change", values=colz,
                     labels=c("-0.459191120180519"="1950-1983",
                              "0.544434894155798"="1984-2016"))
-#mat<-ggpredict(orig.full, terms=c("mat.z", "cc.z"), ci.lvl=0.5)
+#mat<-ggpredict(orig.full, terms=c("mat.z", "cc.z"), ci.lvl=0.98)
 #write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/matpredict.csv", row.names=FALSE)
 #write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/matpredict_50.csv", row.names=FALSE)
-mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict_50.csv", header=TRUE)
+#write.csv(mat, file="~/Documents/git/regionalrisk/analyses/output/matpredict_98.csv", row.names=FALSE)
+mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict_98.csv", header=TRUE)
 mat$group<-as.character(mat$group)
 mat$x <- (mat$x)*sd(bb$mst)*2 + mean(bb$mst)
 mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature (°C)") + 
@@ -231,10 +239,11 @@ mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)
   scale_fill_manual(name="Climate Change", values=colz,
                     labels=c("-0.459191120180519"="1950-1983",
                              "0.544434894155798"="1984-2016"))
-#dist<-ggpredict(orig.full, terms=c("dist.z", "cc.z"), ci.lvl=0.5)
+#dist<-ggpredict(orig.full, terms=c("dist.z", "cc.z"), ci.lvl=0.98)
 #write.csv(dist, file="~/Documents/git/regionalrisk/analyses/output/distpredict.csv", row.names=FALSE)
 #write.csv(dist, file="~/Documents/git/regionalrisk/analyses/output/distpredict_50.csv", row.names=FALSE)
-dist<-read.csv("~/Documents/git/regionalrisk/analyses/output/distpredict_50.csv", header=TRUE)
+#write.csv(dist, file="~/Documents/git/regionalrisk/analyses/output/distpredict_98.csv", row.names=FALSE)
+dist<-read.csv("~/Documents/git/regionalrisk/analyses/output/distpredict_98.csv", header=TRUE)
 dist$group<-as.character(dist$group)
 dist$x <- (dist$x)*sd(bb$distkm)*2 + mean(bb$distkm)
 dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast (km)") + ylab("Probability of \nFalse Spring") + 
@@ -277,11 +286,11 @@ names(modorig)<-c("term", "estimate", "error", "10%", "90%")
 modorig50<-as.data.frame(tidy(orig.full, prob=0.5))
 names(modorig50)<-c("term", "estimate", "error", "25%", "75%")
 modorig <- full_join(modorig, modorig50)
-#modorig25<-as.data.frame(tidy(orig.full, prob=0.25))
-#names(modorig25)<-c("term", "estimate", "error", "25%", "75%")
-#modorig <- full_join(modorig, modorig25)
-modorig <- subset(modorig, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
-#write.csv(modorig, file="analyses/output/orig_full_modeloutput.csv", row.names=FALSE)
+modorig98<-as.data.frame(tidy(orig.full, prob=0.98))
+names(modorig98)<-c("term", "estimate", "error", "2%", "98%")
+modorig <- full_join(modorig, modorig98)
+modorig <- subset(modorig, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+write.csv(modorig, file="analyses/output/orig_full_modeloutput.csv", row.names=FALSE)
 }
 modorig <- read.csv("analyses/output/orig_full_modeloutput.csv", header=TRUE)
 
@@ -291,11 +300,11 @@ names(moddvr)<-c("term", "estimate", "error", "10%", "90%")
 moddvr50<-as.data.frame(tidy(dvr.full, prob=0.5))
 names(moddvr50)<-c("term", "estimate", "error", "25%", "75%")
 moddvr <- full_join(moddvr, moddvr50)
-#moddvr25<-as.data.frame(tidy(dvr.full, prob=0.25))
-#names(moddvr25)<-c("term", "estimate", "error", "25%", "75%")
-#moddvr <- full_join(moddvr, moddvr25)
-moddvr <- subset(moddvr, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
-#write.csv(moddvr, file="analyses/output/dvr_full_modeloutput.csv", row.names=FALSE)
+moddvr98<-as.data.frame(tidy(dvr.full, prob=0.98))
+names(moddvr98)<-c("term", "estimate", "error", "2%", "98%")
+moddvr <- full_join(moddvr, moddvr98)
+moddvr <- subset(moddvr, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+write.csv(moddvr, file="analyses/output/dvr_full_modeloutput.csv", row.names=FALSE)
 }
 moddvr <- read.csv("analyses/output/dvr_full_modeloutput.csv", header=TRUE)
 
@@ -305,11 +314,11 @@ names(modfive)<-c("term", "estimate", "error", "10%", "90%")
 modfive50<-as.data.frame(tidy(five.full, prob=0.5))
 names(modfive50)<-c("term", "estimate", "error", "25%", "75%")
 modfive <- full_join(modfive, modfive50)
-#modfive25<-as.data.frame(tidy(five.full, prob=0.25))
-#names(modfive25)<-c("term", "estimate", "error", "25%", "75%")
-#modfive <- full_join(modfive, modfive25)
-modfive <- subset(modfive, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
-#write.csv(modfive, file="analyses/output/five_full_modeloutput.csv", row.names=FALSE)
+modfive98<-as.data.frame(tidy(five.full, prob=0.98))
+names(modfive98)<-c("term", "estimate", "error", "2%", "98%")
+modfive <- full_join(modfive, modfive98)
+modfive <- subset(modfive, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+write.csv(modfive, file="analyses/output/five_full_modeloutput.csv", row.names=FALSE)
 }
 modfive <- read.csv("analyses/output/five_full_modeloutput.csv", header=TRUE)
 
@@ -328,7 +337,7 @@ modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "7
 
 
 ### Now to make the plots
-modoutput <- modfive #modelhere
+modoutput <- modfive98 #modelhere
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
 modoutput<-modoutput[1:47,]
@@ -368,43 +377,43 @@ modoutput$estclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != 
 
 modoutput$lowclean <- NA
 modoutput$lowclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
-                             modoutput$X10.[(modoutput$term=="mat.z")]+
-                               modoutput$X10., modoutput$X10.)
+                             modoutput$'2%'[(modoutput$term=="mat.z")]+
+                               modoutput$'2%', modoutput$'2%')
 modoutput$lowclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
-                             modoutput$X10.[(modoutput$term=="nao.z")]+
-                               modoutput$X10., modoutput$lowclean)
+                             modoutput$'2%'[(modoutput$term=="nao.z")]+
+                               modoutput$'2%', modoutput$lowclean)
 modoutput$lowclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
-                             modoutput$X10.[(modoutput$term=="dist.z")]+
-                               modoutput$X10., modoutput$lowclean)
+                             modoutput$'2%'[(modoutput$term=="dist.z")]+
+                               modoutput$'2%', modoutput$lowclean)
 modoutput$lowclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
-                             modoutput$X10.[(modoutput$term=="elev.z")]+
-                               modoutput$X10., modoutput$lowclean)
+                             modoutput$'2%'[(modoutput$term=="elev.z")]+
+                               modoutput$'2%', modoutput$lowclean)
 modoutput$lowclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
-                             modoutput$X10.[(modoutput$term=="space.z")]+
-                               modoutput$X10., modoutput$lowclean)
+                             modoutput$'2%'[(modoutput$term=="space.z")]+
+                               modoutput$'2%', modoutput$lowclean)
 modoutput$lowclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
-                             modoutput$X10.[(modoutput$term=="cc.z")]+
-                               modoutput$X10., modoutput$lowclean)
+                             modoutput$'2%'[(modoutput$term=="cc.z")]+
+                               modoutput$'2%', modoutput$lowclean)
 
 modoutput$highclean <- NA
 modoutput$highclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
-                             modoutput$X90.[(modoutput$term=="mat.z")]+
-                               modoutput$X90., modoutput$X90.)
+                             modoutput$'98%'[(modoutput$term=="mat.z")]+
+                               modoutput$'98%', modoutput$'98%')
 modoutput$highclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
-                             modoutput$X90.[(modoutput$term=="nao.z")]+
-                               modoutput$X90., modoutput$highclean)
+                             modoutput$'98%'[(modoutput$term=="nao.z")]+
+                               modoutput$'98%', modoutput$highclean)
 modoutput$highclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
-                             modoutput$X90.[(modoutput$term=="dist.z")]+
-                               modoutput$X90., modoutput$highclean)
+                             modoutput$'98%'[(modoutput$term=="dist.z")]+
+                               modoutput$'98%', modoutput$highclean)
 modoutput$highclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
-                             modoutput$X90.[(modoutput$term=="elev.z")]+
-                               modoutput$X90., modoutput$highclean)
+                             modoutput$'98%'[(modoutput$term=="elev.z")]+
+                               modoutput$'98%', modoutput$highclean)
 modoutput$highclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
-                             modoutput$X90.[(modoutput$term=="space.z")]+
-                               modoutput$X90., modoutput$highclean)
+                             modoutput$'98%'[(modoutput$term=="space.z")]+
+                               modoutput$'98%', modoutput$highclean)
 modoutput$highclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
-                             modoutput$X90.[(modoutput$term=="cc.z")]+
-                               modoutput$X90., modoutput$highclean)
+                             modoutput$'98%'[(modoutput$term=="cc.z")]+
+                               modoutput$'98%', modoutput$highclean)
 
 modoutput$estavg <- ave(modoutput$estclean, modoutput$termclean)
 modoutput$lowavg <- ave(modoutput$lowclean, modoutput$termclean)
@@ -466,6 +475,7 @@ modoutput$species<-ifelse(modoutput$species=="FRAEXC", "zFRAEXC", modoutput$spec
 my.pal <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 my.pal <- c("black", my.pal)
 
+modoutput <- modoutput[(modoutput$species=="aaall"),]
 regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
   geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estclean, y=Jvar, col=species, size=species, alpha=species)) +
   geom_segment(arrow = arrow(length = unit(0.00, "npc")), aes(col=species, alpha=species)) +
@@ -475,7 +485,7 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
-        text=element_text(family="sans"), #legend.position = "none",
+        text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
   coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
@@ -513,8 +523,8 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
 #regrisk
 
 
-png("analyses/figures/model_output_90_fivespp.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("analyses/figures/model_output_98_five.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
-grid.draw(regrisk)
+grid.arrange(regrisk)
 dev.off()

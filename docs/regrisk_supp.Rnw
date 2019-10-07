@@ -171,7 +171,7 @@ library(broom)
 setwd("~/Documents/git/regionalrisk")
 
 load("bbmod.Rdata")
-bb <- as.data.frame(tidy(bb.mod, prob=0.9))
+bb <- as.data.frame(tidy(bb.mod, prob=0.98))
 bb$term <- gsub("b_", "", bb$term)
 bb$term <- gsub("Intercept", "Intercept", bb$term)
 bb$term <- gsub("cc", "Climate Change", bb$term)
@@ -182,7 +182,7 @@ bb$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", bb$term)
 bb$term <- gsub("speciesQUEROB", "Quercus robur", bb$term)
 bb$term <- gsub(":", " by ", bb$term)
 
-colnames(bb) <- c("", "Estimate", "std.err", "10\\%", "90\\%")
+colnames(bb) <- c("", "mean", "std.err", "2\\%", "98\\%")
 print(xtable(bb[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of day of budburst before and after climate change across species.",
              align = c("l", "l", "r","r","r")), #>{\\textit}l
       include.rownames=F, 
@@ -190,7 +190,7 @@ print(xtable(bb[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression
       sanitize.text.function = function(x) {x}, table.placement="H")
 
 load("tminmod.Rdata")
-tmin <- as.data.frame(tidy(tmin.mod, prob=0.9))
+tmin <- as.data.frame(tidy(tmin.mod, prob=0.98))
 
 tmin$term <- gsub("b_", "", tmin$term)
 tmin$term <- gsub("Intercept", "Intercept", tmin$term)
@@ -202,7 +202,7 @@ tmin$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", tmin$term)
 tmin$term <- gsub("speciesQUEROB", "Quercus robur", tmin$term)
 tmin$term <- gsub(":", " by ", tmin$term)
 
-colnames(tmin) <- c("", "Estimate", "std.err", "10\\%", "90\\%")
+colnames(tmin) <- c("", "mean", "std.err", "2\\%", "98\\%")
 print(xtable(tmin[1:12,c(1:2, 4:5)], caption = "Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.",
              align = c("l", "l", "r","r","r")), #>{\\textit}l
       include.rownames=F, 
@@ -211,7 +211,7 @@ print(xtable(tmin[1:12,c(1:2, 4:5)], caption = "Summary of simple linear regress
 
 if(TRUE){
 load("fssimpmod.Rdata")
-lstfrz <- as.data.frame(tidy(fssimp.mod, prob=0.9))
+lstfrz <- as.data.frame(tidy(fssimp.mod, prob=0.98))
 lstfrz$term <- gsub("b_", "", lstfrz$term)
 lstfrz$term <- gsub("Intercept", "Intercept", lstfrz$term)
 lstfrz$term <- gsub("cc", "Climate Change", lstfrz$term)
@@ -221,7 +221,7 @@ lstfrz$term <- gsub("speciesFAGSYL", "Fagus sylvatica", lstfrz$term)
 lstfrz$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", lstfrz$term)
 lstfrz$term <- gsub("speciesQUEROB", "Quercus robur", lstfrz$term)
 lstfrz$term <- gsub(":", " by ", lstfrz$term)
-colnames(lstfrz) <- c("", "Estimate", "std.err", "10\\%", "90\\%")
+colnames(lstfrz) <- c("", "mean", "std.err", "2\\%", "98\\%")
 print(xtable(lstfrz[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of probability of false spring before and after climate change across species.",
              align = c("l", "l", "r","r","r")), #>{\\textit}l
       include.rownames=F, 
@@ -246,13 +246,13 @@ modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
 modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
 modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
 modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
-modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+modoutput$term <- gsub(":cc.z", " x Climate Change", modoutput$term)
 
-modoutput$term <- gsub(":speciesALNGLU", "\nby Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub(":speciesBETPEN", "\nby Betula pendula", modoutput$term)
-modoutput$term <- gsub(":speciesFAGSYL", "\nby Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub(":speciesFRAEXC", "\nby Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub(":speciesQUEROB", "\nby Quercus robur", modoutput$term)
+modoutput$term <- gsub(":speciesALNGLU", "\nx Alnus glutinosa", modoutput$term)
+modoutput$term <- gsub(":speciesBETPEN", "\nx Betula pendula", modoutput$term)
+modoutput$term <- gsub(":speciesFAGSYL", "\nx Fagus sylvatica", modoutput$term)
+modoutput$term <- gsub(":speciesFRAEXC", "\nx Fraxinus excelsior", modoutput$term)
+modoutput$term <- gsub(":speciesQUEROB", "\nx Quercus robur", modoutput$term)
 
 modoutput$term <- gsub("b_speciesALNGLU", "Alnus glutinosa", modoutput$term)
 modoutput$term <- gsub("b_speciesBETPEN", "Betula pendula", modoutput$term)
@@ -260,12 +260,12 @@ modoutput$term <- gsub("b_speciesFAGSYL", "Fagus sylvatica", modoutput$term)
 modoutput$term <- gsub("b_speciesFRAEXC", "Fraxinus excelsior", modoutput$term)
 modoutput$term <- gsub("b_speciesQUEROB", "Quercus robur", modoutput$term)
 
-colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
+colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernouilli model of false spring risk with varying rates of budburst for each species without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum} as the intercept).",
-             align = c("l", "l", "r","r","r", "r","r")), #>{\\textit}l
+             caption = "Summary of Bernoulli model of false spring risk with the effects of species, climatic and geographical predictors on false spring risk.",
+             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       #sanitize.text.function = function(x) {x}, table.placement="H",
@@ -279,15 +279,15 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/APC_allpred_allspp_baseR.pdf}
+  -\includegraphics[width=16cm]{..//analyses/figures/APC_allpred_allspp_baseR_98.png}
   -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. }\label{fig:suppapc}
   -\end{center}
   -\end{figure}}
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_dvrspp.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 90\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data.}\label{fig:dvr}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_dvr.png}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data.}\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
@@ -306,13 +306,13 @@ modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
 modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
 modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
 modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
-modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+modoutput$term <- gsub(":cc.z", " x Climate Change", modoutput$term)
 
-modoutput$term <- gsub(":speciesALNGLU", "\nby Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub(":speciesBETPEN", "\nby Betula pendula", modoutput$term)
-modoutput$term <- gsub(":speciesFAGSYL", "\nby Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub(":speciesFRAEXC", "\nby Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub(":speciesQUEROB", "\nby Quercus robur", modoutput$term)
+modoutput$term <- gsub(":speciesALNGLU", "\nx Alnus glutinosa", modoutput$term)
+modoutput$term <- gsub(":speciesBETPEN", "\nx Betula pendula", modoutput$term)
+modoutput$term <- gsub(":speciesFAGSYL", "\nx Fagus sylvatica", modoutput$term)
+modoutput$term <- gsub(":speciesFRAEXC", "\nx Fraxinus excelsior", modoutput$term)
+modoutput$term <- gsub(":speciesQUEROB", "\nx Quercus robur", modoutput$term)
 
 modoutput$term <- gsub("b_speciesALNGLU", "Alnus glutinosa", modoutput$term)
 modoutput$term <- gsub("b_speciesBETPEN", "Betula pendula", modoutput$term)
@@ -320,12 +320,12 @@ modoutput$term <- gsub("b_speciesFAGSYL", "Fagus sylvatica", modoutput$term)
 modoutput$term <- gsub("b_speciesFRAEXC", "Fraxinus excelsior", modoutput$term)
 modoutput$term <- gsub("b_speciesQUEROB", "Quercus robur", modoutput$term)
 
-colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
+colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernouilli model of false spring risk with varying rates of leafout for each species without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}.",
-             align = c("l", "l", "r","r","r", "r","r")), #>{\\textit}l
+             caption = "Summary of Bernoulli model of false spring risk with varying rates of leafout for each species.",
+             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       #sanitize.text.function = function(x) {x}, table.placement="H",
@@ -335,8 +335,8 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_90_fivespp.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 90\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data.}\label{fig:five}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_five.png}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data.}\label{fig:five}
   -\end{center}
   -\end{figure}}
   
@@ -355,13 +355,13 @@ modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
 modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
 modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
 modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
-modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+modoutput$term <- gsub(":cc.z", " x Climate Change", modoutput$term)
 
-modoutput$term <- gsub(":speciesALNGLU", "\nby Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub(":speciesBETPEN", "\nby Betula pendula", modoutput$term)
-modoutput$term <- gsub(":speciesFAGSYL", "\nby Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub(":speciesFRAEXC", "\nby Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub(":speciesQUEROB", "\nby Quercus robur", modoutput$term)
+modoutput$term <- gsub(":speciesALNGLU", "\nx Alnus glutinosa", modoutput$term)
+modoutput$term <- gsub(":speciesBETPEN", "\nx Betula pendula", modoutput$term)
+modoutput$term <- gsub(":speciesFAGSYL", "\nx Fagus sylvatica", modoutput$term)
+modoutput$term <- gsub(":speciesFRAEXC", "\nx Fraxinus excelsior", modoutput$term)
+modoutput$term <- gsub(":speciesQUEROB", "\nx Quercus robur", modoutput$term)
 
 modoutput$term <- gsub("b_speciesALNGLU", "Alnus glutinosa", modoutput$term)
 modoutput$term <- gsub("b_speciesBETPEN", "Betula pendula", modoutput$term)
@@ -369,12 +369,12 @@ modoutput$term <- gsub("b_speciesFAGSYL", "Fagus sylvatica", modoutput$term)
 modoutput$term <- gsub("b_speciesFRAEXC", "Fraxinus excelsior", modoutput$term)
 modoutput$term <- gsub("b_speciesQUEROB", "Quercus robur", modoutput$term)
 
-colnames(modoutput) = c("", "Estimate", "10\\%", "25\\%", "75\\%", "90\\%")
+colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernouilli model of false spring risk with a lower temperature threshold (-5$^{\\circ}$C) for defining a false spring without the species interactions (estimates presented on logit scale for \\textit{Aesculus hippocastanum}).",
-             align = c("l", "l", "r","r","r", "r","r")), #>{\\textit}l
+             caption = "Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\\circ}$C) for defining a false spring.",
+             align = c("l", "l", "r","r","r","r", "r","r","r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       #sanitize.text.function = function(x) {x}, table.placement="H",
