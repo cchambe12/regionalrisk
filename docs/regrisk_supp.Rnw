@@ -48,7 +48,7 @@ library(ggplot2)
 
 \begin{document}
 \noindent 
-\textbf{\LARGE{Climate change reshapes the drivers of false spring risk across European trees}} 
+\textbf{\LARGE{Supplement: Climate change reshapes the drivers of false spring risk across European trees}} 
 %\\
 %OR \\
 %\textbf{\Large{Climate change increases the risk of false springs in European trees}} \\ % Lizzie votes for the first title! Reviewers can ask you to make it more narrow so I would start here and shift to Ben's if requested ... (goal 1: get paper out for review)
@@ -93,10 +93,8 @@ Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to u
 
 Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
 
-\section*{Results: The effects of climatic and spatial variation on false spring incidence}
-Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure \ref{fig:mst}). 
-
-The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. For the model estimate of change plots (Figure 3, Figure \ref{fig:dvr} and Figure \ref{fig:five}), we used average predictive comparisons to calculate the mean estimates and the posteriors for each species and then took the average to find the overall effect for each predictor. The model estimates on the logit scale were converted to probability percentages for easier interpretation by using the `divide by 4' rule \citep{Gelman2006} and then back converted to the original scale. %To convert we used the equations below \citep{Gelman2006}:
+%NOT SURE WHERE TO PUT THIS!!
+Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S1). 
 
 \iffalse
 \begin{align*}
@@ -280,7 +278,7 @@ print(xtable(modoutput,
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//analyses/figures/APC_allpred_allspp_baseR_98.png}
-  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. }\label{fig:suppapc}
+  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
   -\end{center}
   -\end{figure}}
   

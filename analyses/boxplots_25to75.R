@@ -226,8 +226,8 @@ f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs),]
 #f$fs<-ifelse(f$fs.count>0, 1, 0)
-#f$fs<-ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
-f$fs<-ave(f$fs, f$lat.long, f$species, f$cc)
+f$fstot<-ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
+
 
 fsccsp$est.conv <-  (fsccsp$predicted/4)/(2)
 fsccsp$low.conv <-  (fsccsp$conf.low/4)/(2)
@@ -238,13 +238,13 @@ fsccsp$x <- ifelse(fsccsp$x<=0, 0, 1)
 fsccsp<-subset(fsccsp, select=c("x", "predicted", "conf.low", "conf.high","species", "est.conv", "low.conv", "up.conv"))
 colnames(fsccsp) <- c("cc", "est", "lower", "upper",  "species", "est.conv", "low.conv", "up.conv")
 
-plusf<-subset(f, select=c(species, cc, fs))
+plusf<-subset(f, select=c(species, cc, fstot))
 plusf<-plusf[!duplicated(plusf),]
 
 plusf <- full_join(plusf, fsccsp)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
-falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
+falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fstot)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -273,7 +273,7 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fs)) + geom_boxplot(aes(al
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Probability of \nFalse Spring Risk") + coord_cartesian(ylim=c(0, 1)) + 
+  ylab("Number of false springs \nbefore and after climate change") + coord_cartesian(ylim=c(0, 33)) + 
   #geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
