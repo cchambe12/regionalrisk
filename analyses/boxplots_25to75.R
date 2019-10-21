@@ -205,8 +205,8 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
 # Adding to final panel model results to help reader interpret differences between raw data and considering all climatic and geographical factors
 #modoutput <- read.csv("output/ccsp_predicted_90.csv", header=TRUE)
 
-load("~/Documents/git/regionalrisk/fssimpmod.Rdata")
-fsccsp<- ggpredict(fssimp.mod, terms = c("cc", "species"), ci.lvl=0.98) 
+load("~/Documents/git/regionalrisk/fslogmod.Rdata")
+fsccsp<- ggpredict(fslog.mod, terms = c("cc", "species"), ci.lvl=0.98) 
 
 fsccsp$group <- as.character(fsccsp$group)
 
@@ -273,7 +273,7 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fstot)) + geom_boxplot(aes
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Number of false springs \nbefore and after climate change") + coord_cartesian(ylim=c(0, 33)) + 
+  ylab("Number of false springs") + coord_cartesian(ylim=c(0, 33)) + 
   #geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
