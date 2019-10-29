@@ -60,10 +60,10 @@ save(lstfrz.mod, file="/n/wolkovich_lab/Lab/Cat/lstfrzmod.Rdata")
 if(TRUE){
   fssimp <- read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv")
   fssimp$cc <- ifelse(fssimp$year<=1983, 0, 1)
-  fssimp$fstot <- ave(fssimp$fs, fssimp$species, fssimp$lat.long, fssimp$cc, FUN=sum)
+  fssimp$fstot <- ave(fssimp$fs, fssimp$lat.long, FUN=sum)
   
-  fslog.mod <- brm(fstot ~ cc + species + cc:species, data=fssimp, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+  fstot.mod <- brm(fstot ~ cc + species + cc:species, data=fssimp, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                     iter=4000, warmup = 2500, chains=4, cores=4)
   
-  save(fslog.mod, file="/n/wolkovich_lab/Lab/Cat/fslogmod.Rdata")
+  save(fstot.mod, file="/n/wolkovich_lab/Lab/Cat/fstotmod.Rdata")
 }
