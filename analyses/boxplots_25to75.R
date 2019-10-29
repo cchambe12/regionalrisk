@@ -205,7 +205,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
 # Adding to final panel model results to help reader interpret differences between raw data and considering all climatic and geographical factors
 #modoutput <- read.csv("output/ccsp_predicted_90.csv", header=TRUE)
 
-load("~/Documents/git/regionalrisk/fstotmod.Rdata")
+load("~/Documents/git/regionalrisk/fslogmod.Rdata")
 fsccsp<- ggpredict(fslog.mod, terms = c("cc", "species"), ci.lvl=0.98) 
 
 fsccsp$group <- as.character(fsccsp$group)
@@ -225,8 +225,9 @@ f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs),]
-#f$fs<-ifelse(f$fs.count>0, 1, 0)
-f$fstot<-ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
+f$fsall<-ave(f$fs.count, f$lat.long, f$species, FUN=sum)
+f$fstot<-ave(f$fsall, f$species, f$lat.long, f$cc )
+
 
 
 fsccsp$est.conv <-  (fsccsp$predicted/4)/(2)
@@ -234,9 +235,8 @@ fsccsp$low.conv <-  (fsccsp$conf.low/4)/(2)
 fsccsp$up.conv <-  (fsccsp$conf.high/4)/(2)
 fsccsp$x <- ifelse(fsccsp$x<=0, 0, 1)
 
-
-fsccsp<-subset(fsccsp, select=c("x", "predicted", "conf.low", "conf.high","species", "est.conv", "low.conv", "up.conv"))
-colnames(fsccsp) <- c("cc", "est", "lower", "upper",  "species", "est.conv", "low.conv", "up.conv")
+fsccsp<-subset(fsccsp, select=c("x", "predicted", "conf.low", "conf.high","species", "est.conv", "low.conv", "up.conv")) # 
+colnames(fsccsp) <- c("cc", "est", "lower", "upper",  "species","est.conv", "low.conv", "up.conv") # , 
 
 plusf<-subset(f, select=c(species, cc, fstot))
 plusf<-plusf[!duplicated(plusf),]
@@ -273,7 +273,7 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fstot)) + geom_boxplot(aes
   scale_x_discrete(labels=c("aaBETPEN" = "Betula pendula", "AESHIP" = "Aesculus \nhippocastanum",
                             "ALNGLU" = "Alnus glutinosa", "FAGSYL"="Fagus sylvatica",
                             "QUEROB"="Quercus robur", "zFRAEXC"="Fraxinus \nexcelsior")) +
-  ylab("Number of false springs") + coord_cartesian(ylim=c(0, 33)) + 
+  ylab("Number of false springs") + #coord_cartesian(ylim=c(0, 33)) + 
   #geom_hline(yintercept=7.66, linetype="dotted", col="black") +
   #annotate("text", x = 5.75, y = 245, label = "Before 1984", family="Helvetica", size=3, fontface="bold") +
   scale_alpha_manual(name="Climate Change", values=c(0.2, 0.7),
