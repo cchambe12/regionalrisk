@@ -205,8 +205,8 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
 # Adding to final panel model results to help reader interpret differences between raw data and considering all climatic and geographical factors
 #modoutput <- read.csv("output/ccsp_predicted_90.csv", header=TRUE)
 
-load("~/Documents/git/regionalrisk/fslogmod.Rdata")
-fsccsp<- ggpredict(fslog.mod, terms = c("cc", "species"), ci.lvl=0.98) 
+load("~/Documents/git/regionalrisk/fstotmod.Rdata")
+fsccsp<- ggpredict(fstot.mod, terms = c("cc", "species"), ci.lvl=0.98) 
 
 fsccsp$group <- as.character(fsccsp$group)
 
