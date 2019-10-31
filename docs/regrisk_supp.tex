@@ -139,10 +139,8 @@ Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to u
 
 Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
 
-\section*{Results: The effects of climatic and spatial variation on false spring incidence}
-Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure \ref{fig:mst}). 
-
-The overall model output estimates are for \textit{Aesculus hippocastanum} as species were used as two-way interactions to simulate modeled groups on the main effects. For the model estimate of change plots (Figure 3, Figure \ref{fig:dvr} and Figure \ref{fig:five}), we used average predictive comparisons to calculate the mean estimates and the posteriors for each species and then took the average to find the overall effect for each predictor. The model estimates on the logit scale were converted to probability percentages for easier interpretation by using the `divide by 4' rule \citep{Gelman2006} and then back converted to the original scale. %To convert we used the equations below \citep{Gelman2006}:
+%NOT SURE WHERE TO PUT THIS!!
+Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S1). 
 
 \iffalse
 \begin{align*}
@@ -208,7 +206,7 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 17 11:13:50 2019
+% Thu Oct 31 16:48:13 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of budburst before and after climate change across species.} 
@@ -232,7 +230,7 @@ Intercept & 102.27 & 102.18 & 102.36 \\
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 17 11:13:51 2019
+% Thu Oct 31 16:48:14 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.} 
@@ -256,7 +254,7 @@ Intercept & 5.99 & 5.97 & 6.00 \\
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 17 11:13:51 2019
+% Thu Oct 31 16:48:15 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of probability of false spring before and after climate change across species.} 
@@ -264,25 +262,25 @@ Intercept & 5.99 & 5.97 & 6.00 \\
   \hline
  & mean & 2\% & 98\% \\ 
   \hline
-Intercept & 0.27 & 0.27 & 0.27 \\ 
-  Climate Change & 0.04 & 0.03 & 0.04 \\ 
-  Alnus glutinosa & 0.00 & -0.00 & 0.01 \\ 
-  Betula pendula & 0.01 & 0.01 & 0.02 \\ 
-  Fagus sylvatica & -0.03 & -0.04 & -0.03 \\ 
-  Fraxinus excelsior & -0.17 & -0.18 & -0.16 \\ 
-  Quercus robur & -0.14 & -0.14 & -0.13 \\ 
-  Climate Change by Alnus glutinosa & 0.02 & 0.01 & 0.03 \\ 
-  Climate Change by Betula pendula & 0.00 & -0.00 & 0.01 \\ 
-  Climate Change by Fagus sylvatica & -0.06 & -0.07 & -0.05 \\ 
-  Climate Change by Fraxinus excelsior & -0.06 & -0.07 & -0.05 \\ 
-  Climate Change by Quercus robur & -0.05 & -0.06 & -0.05 \\ 
+Intercept & 5.56 & 5.52 & 5.59 \\ 
+  Climate Change & 1.26 & 1.21 & 1.30 \\ 
+  Alnus glutinosa & -1.22 & -1.27 & -1.17 \\ 
+  Betula pendula & 0.13 & 0.09 & 0.17 \\ 
+  Fagus sylvatica & -0.94 & -0.98 & -0.89 \\ 
+  Fraxinus excelsior & -3.73 & -3.78 & -3.68 \\ 
+  Quercus robur & -2.98 & -3.03 & -2.94 \\ 
+  Climate Change by Alnus glutinosa & 1.21 & 1.14 & 1.28 \\ 
+  Climate Change by Betula pendula & 0.08 & 0.01 & 0.15 \\ 
+  Climate Change by Fagus sylvatica & -1.41 & -1.48 & -1.34 \\ 
+  Climate Change by Fraxinus excelsior & -1.56 & -1.64 & -1.49 \\ 
+  Climate Change by Quercus robur & -1.43 & -1.50 & -1.36 \\ 
    \hline
 \end{tabular}
 \end{table}
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 17 11:13:52 2019
+% Thu Oct 31 16:48:15 2019
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with the effects of species, climatic and geographical predictors on false spring risk.} \\ 
   \hline
@@ -400,7 +398,7 @@ Coast x Climate Change & -0.12 & -0.16 & -0.15 & -0.13 & -0.11 & -0.10 & -0.09 \
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 17 11:13:52 2019
+% Thu Oct 31 16:48:15 2019
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with varying rates of leafout for each species.} \\ 
   \hline
@@ -510,7 +508,7 @@ Coast x Climate Change & -0.17 & -0.24 & -0.22 & -0.19 & -0.14 & -0.11 & -0.09 \
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 17 11:13:52 2019
+% Thu Oct 31 16:48:15 2019
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.} \\ 
   \hline
