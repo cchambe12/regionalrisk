@@ -52,7 +52,7 @@ aeship<-subset(xx, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(6, 10)) +
+  coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
@@ -72,7 +72,7 @@ alnglu<-subset(xx, species=="ALNGLU")
 aglu<-ggplot(alnglu, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Alnus glutinosa")))) + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(6, 10)) +
+  coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
@@ -92,7 +92,7 @@ betpen<-subset(xx, species=="BETPEN")
 bpen<-ggplot(betpen, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Betula pendula")))) + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(6, 10)) +
+  coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
@@ -112,7 +112,7 @@ fagsyl<-subset(xx, species=="FAGSYL")
 fsyl<-ggplot(fagsyl, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Fagus sylvatica")))) + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(6, 10)) +
+  coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
@@ -132,7 +132,7 @@ fraexc<-subset(xx, species=="FRAEXC")
 fexc<-ggplot(fraexc, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Fraxinus excelsior")))) + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(6, 10)) +
+  coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),
@@ -152,7 +152,7 @@ querob<-subset(xx, species=="QUEROB")
 qrob<-ggplot(querob, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
   ggtitle(expression(paste(italic("Quercus robur")))) + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
-  coord_cartesian(ylim=c(6, 10)) +
+  coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
         plot.title=element_text(size = 9),axis.title = element_text(size=9),

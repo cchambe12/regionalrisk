@@ -206,7 +206,7 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 31 16:48:13 2019
+% Mon Nov  4 17:42:08 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of budburst before and after climate change across species.} 
@@ -221,16 +221,16 @@ Intercept & 102.27 & 102.18 & 102.36 \\
   Fagus sylvatica & 6.85 & 6.71 & 6.98 \\ 
   Fraxinus excelsior & 17.16 & 17.01 & 17.33 \\ 
   Quercus robur & 13.67 & 13.53 & 13.81 \\ 
-  Climate Change by Alnus glutinosa & -0.97 & -1.20 & -0.74 \\ 
-  Climate Change by Betula pendula & 1.06 & 0.86 & 1.26 \\ 
-  Climate Change by Fagus sylvatica & 1.61 & 1.41 & 1.82 \\ 
-  Climate Change by Fraxinus excelsior & 1.07 & 0.84 & 1.30 \\ 
-  Climate Change by Quercus robur & 0.67 & 0.46 & 0.88 \\ 
+  Climate Change x Alnus glutinosa & -0.97 & -1.20 & -0.74 \\ 
+  Climate Change x Betula pendula & 1.06 & 0.86 & 1.26 \\ 
+  Climate Change x Fagus sylvatica & 1.61 & 1.41 & 1.82 \\ 
+  Climate Change x Fraxinus excelsior & 1.07 & 0.84 & 1.30 \\ 
+  Climate Change x Quercus robur & 0.67 & 0.46 & 0.88 \\ 
    \hline
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 31 16:48:14 2019
+% Mon Nov  4 17:42:09 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.} 
@@ -245,16 +245,16 @@ Intercept & 5.99 & 5.97 & 6.00 \\
   Fagus sylvatica & 1.50 & 1.47 & 1.52 \\ 
   Fraxinus excelsior & 2.76 & 2.73 & 2.79 \\ 
   Quercus robur & 1.88 & 1.86 & 1.91 \\ 
-  Climate Change by Alnus glutinosa & -0.04 & -0.08 & 0.01 \\ 
-  Climate Change by Betula pendula & -0.31 & -0.35 & -0.27 \\ 
-  Climate Change by Fagus sylvatica & 0.08 & 0.04 & 0.11 \\ 
-  Climate Change by Fraxinus excelsior & -0.26 & -0.30 & -0.22 \\ 
-  Climate Change by Quercus robur & -0.10 & -0.14 & -0.06 \\ 
+  Climate Change x Alnus glutinosa & -0.04 & -0.08 & 0.01 \\ 
+  Climate Change x Betula pendula & -0.31 & -0.35 & -0.27 \\ 
+  Climate Change x Fagus sylvatica & 0.08 & 0.04 & 0.11 \\ 
+  Climate Change x Fraxinus excelsior & -0.26 & -0.30 & -0.22 \\ 
+  Climate Change x Quercus robur & -0.10 & -0.14 & -0.06 \\ 
    \hline
 \end{tabular}
 \end{table}
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 31 16:48:15 2019
+% Mon Nov  4 17:42:10 2019
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of probability of false spring before and after climate change across species.} 
@@ -269,20 +269,21 @@ Intercept & 5.56 & 5.52 & 5.59 \\
   Fagus sylvatica & -0.94 & -0.98 & -0.89 \\ 
   Fraxinus excelsior & -3.73 & -3.78 & -3.68 \\ 
   Quercus robur & -2.98 & -3.03 & -2.94 \\ 
-  Climate Change by Alnus glutinosa & 1.21 & 1.14 & 1.28 \\ 
-  Climate Change by Betula pendula & 0.08 & 0.01 & 0.15 \\ 
-  Climate Change by Fagus sylvatica & -1.41 & -1.48 & -1.34 \\ 
-  Climate Change by Fraxinus excelsior & -1.56 & -1.64 & -1.49 \\ 
-  Climate Change by Quercus robur & -1.43 & -1.50 & -1.36 \\ 
+  Climate Change x Alnus glutinosa & 1.21 & 1.14 & 1.28 \\ 
+  Climate Change x Betula pendula & 0.08 & 0.01 & 0.15 \\ 
+  Climate Change x Fagus sylvatica & -1.41 & -1.48 & -1.34 \\ 
+  Climate Change x Fraxinus excelsior & -1.56 & -1.64 & -1.49 \\ 
+  Climate Change x Quercus robur & -1.43 & -1.50 & -1.36 \\ 
    \hline
 \end{tabular}
 \end{table}
 
 
+
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 31 16:48:15 2019
+% Mon Nov  4 17:42:10 2019
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of Bernoulli model of false spring risk with the effects of species, climatic and geographical predictors on false spring risk.} \\ 
+\caption{Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.} \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -295,81 +296,81 @@ Coast & 0.40 & 0.37 & 0.38 & 0.39 & 0.41 & 0.43 & 0.44 \\
   Elevation & 0.19 & 0.15 & 0.16 & 0.18 & 0.20 & 0.22 & 0.23 \\ 
   Space Parameter & -0.06 & -0.09 & -0.08 & -0.07 & -0.06 & -0.05 & -0.04 \\ 
   Climate Change & 0.35 & 0.32 & 0.33 & 0.34 & 0.36 & 0.37 & 0.38 \\ 
-  Alnus glutinosa & 0.05 & 0.03 & 0.04 & 0.05 & 0.06 & 0.07 & 0.07 \\ 
-  Betula pendula & 0.06 & 0.04 & 0.04 & 0.05 & 0.06 & 0.07 & 0.07 \\ 
-  Fagus sylvatica & -0.35 & -0.37 & -0.37 & -0.36 & -0.35 & -0.34 & -0.33 \\ 
-  Fraxinus excelsior & -1.43 & -1.46 & -1.45 & -1.44 & -1.42 & -1.41 & -1.40 \\ 
-  Quercus robur & -1.03 & -1.05 & -1.04 & -1.03 & -1.02 & -1.01 & -1.00 \\ 
+  \textit{Alnus glutinosa} & 0.05 & 0.03 & 0.04 & 0.05 & 0.06 & 0.07 & 0.07 \\ 
+  \textit{Betula pendula} & 0.06 & 0.04 & 0.04 & 0.05 & 0.06 & 0.07 & 0.07 \\ 
+  \textit{Fagus sylvatica} & -0.35 & -0.37 & -0.37 & -0.36 & -0.35 & -0.34 & -0.33 \\ 
+  \textit{Fraxinus excelsior} & -1.43 & -1.46 & -1.45 & -1.44 & -1.42 & -1.41 & -1.40 \\ 
+  \textit{Quercus robur} & -1.03 & -1.05 & -1.04 & -1.03 & -1.02 & -1.01 & -1.00 \\ 
   NAO Index
-x Alnus glutinosa & -0.07 & -0.12 & -0.11 & -0.09 & -0.06 & -0.04 & -0.02 \\ 
+x\textit{ Alnus glutinosa} & -0.07 & -0.12 & -0.11 & -0.09 & -0.06 & -0.04 & -0.02 \\ 
   NAO Index
-x Betula pendula & -0.08 & -0.13 & -0.11 & -0.10 & -0.07 & -0.05 & -0.04 \\ 
+x\textit{ Betula pendula} & -0.08 & -0.13 & -0.11 & -0.10 & -0.07 & -0.05 & -0.04 \\ 
   NAO Index
-x Fagus sylvatica & 0.12 & 0.07 & 0.09 & 0.11 & 0.13 & 0.15 & 0.17 \\ 
+x\textit{ Fagus sylvatica} & 0.12 & 0.07 & 0.09 & 0.11 & 0.13 & 0.15 & 0.17 \\ 
   NAO Index
-x Fraxinus excelsior & 0.03 & -0.04 & -0.02 & 0.01 & 0.05 & 0.08 & 0.10 \\ 
+x\textit{ Fraxinus excelsior} & 0.03 & -0.04 & -0.02 & 0.01 & 0.05 & 0.08 & 0.10 \\ 
   NAO Index
-x Quercus robur & 0.08 & 0.02 & 0.04 & 0.06 & 0.09 & 0.12 & 0.13 \\ 
+x\textit{ Quercus robur} & 0.08 & 0.02 & 0.04 & 0.06 & 0.09 & 0.12 & 0.13 \\ 
   Mean Spring 
 Temperature
-x Alnus glutinosa & 0.14 & 0.09 & 0.10 & 0.13 & 0.16 & 0.18 & 0.20 \\ 
+x\textit{ Alnus glutinosa} & 0.14 & 0.09 & 0.10 & 0.13 & 0.16 & 0.18 & 0.20 \\ 
   Mean Spring 
 Temperature
-x Betula pendula & -0.02 & -0.07 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 \\ 
+x\textit{ Betula pendula} & -0.02 & -0.07 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 \\ 
   Mean Spring 
 Temperature
-x Fagus sylvatica & -0.06 & -0.11 & -0.10 & -0.08 & -0.05 & -0.02 & -0.01 \\ 
+x\textit{ Fagus sylvatica} & -0.06 & -0.11 & -0.10 & -0.08 & -0.05 & -0.02 & -0.01 \\ 
   Mean Spring 
 Temperature
-x Fraxinus excelsior & 0.32 & 0.24 & 0.26 & 0.30 & 0.34 & 0.38 & 0.40 \\ 
+x\textit{ Fraxinus excelsior} & 0.32 & 0.24 & 0.26 & 0.30 & 0.34 & 0.38 & 0.40 \\ 
   Mean Spring 
 Temperature
-x Quercus robur & 0.10 & 0.05 & 0.06 & 0.09 & 0.12 & 0.15 & 0.16 \\ 
+x\textit{ Quercus robur} & 0.10 & 0.05 & 0.06 & 0.09 & 0.12 & 0.15 & 0.16 \\ 
   Distance from 
 Coast
-x Alnus glutinosa & -0.07 & -0.13 & -0.11 & -0.08 & -0.05 & -0.03 & -0.01 \\ 
+x\textit{ Alnus glutinosa} & -0.07 & -0.13 & -0.11 & -0.08 & -0.05 & -0.03 & -0.01 \\ 
   Distance from 
 Coast
-x Betula pendula & 0.01 & -0.04 & -0.02 & -0.00 & 0.03 & 0.05 & 0.06 \\ 
+x\textit{ Betula pendula} & 0.01 & -0.04 & -0.02 & -0.00 & 0.03 & 0.05 & 0.06 \\ 
   Distance from 
 Coast
-x Fagus sylvatica & -0.00 & -0.06 & -0.04 & -0.02 & 0.01 & 0.04 & 0.05 \\ 
+x\textit{ Fagus sylvatica} & -0.00 & -0.06 & -0.04 & -0.02 & 0.01 & 0.04 & 0.05 \\ 
   Distance from 
 Coast
-x Fraxinus excelsior & 0.26 & 0.18 & 0.20 & 0.23 & 0.28 & 0.31 & 0.34 \\ 
+x\textit{ Fraxinus excelsior} & 0.26 & 0.18 & 0.20 & 0.23 & 0.28 & 0.31 & 0.34 \\ 
   Distance from 
 Coast
-x Quercus robur & -0.10 & -0.16 & -0.14 & -0.12 & -0.08 & -0.05 & -0.03 \\ 
+x\textit{ Quercus robur} & -0.10 & -0.16 & -0.14 & -0.12 & -0.08 & -0.05 & -0.03 \\ 
   Elevation
-x Alnus glutinosa & 0.02 & -0.04 & -0.02 & 0.00 & 0.04 & 0.07 & 0.09 \\ 
+x\textit{ Alnus glutinosa} & 0.02 & -0.04 & -0.02 & 0.00 & 0.04 & 0.07 & 0.09 \\ 
   Elevation
-x Betula pendula & 0.03 & -0.02 & -0.01 & 0.02 & 0.05 & 0.07 & 0.08 \\ 
+x\textit{ Betula pendula} & 0.03 & -0.02 & -0.01 & 0.02 & 0.05 & 0.07 & 0.08 \\ 
   Elevation
-x Fagus sylvatica & 0.00 & -0.06 & -0.04 & -0.02 & 0.02 & 0.04 & 0.06 \\ 
+x\textit{ Fagus sylvatica} & 0.00 & -0.06 & -0.04 & -0.02 & 0.02 & 0.04 & 0.06 \\ 
   Elevation
-x Fraxinus excelsior & -0.37 & -0.46 & -0.43 & -0.39 & -0.34 & -0.31 & -0.28 \\ 
+x\textit{ Fraxinus excelsior} & -0.37 & -0.46 & -0.43 & -0.39 & -0.34 & -0.31 & -0.28 \\ 
   Elevation
-x Quercus robur & -0.08 & -0.15 & -0.13 & -0.10 & -0.06 & -0.03 & -0.01 \\ 
+x\textit{ Quercus robur} & -0.08 & -0.15 & -0.13 & -0.10 & -0.06 & -0.03 & -0.01 \\ 
   Space Parameter
-x Alnus glutinosa & 0.01 & -0.03 & -0.02 & 0.00 & 0.03 & 0.05 & 0.06 \\ 
+x\textit{ Alnus glutinosa} & 0.01 & -0.03 & -0.02 & 0.00 & 0.03 & 0.05 & 0.06 \\ 
   Space Parameter
-x Betula pendula & -0.01 & -0.05 & -0.03 & -0.02 & 0.00 & 0.02 & 0.03 \\ 
+x\textit{ Betula pendula} & -0.01 & -0.05 & -0.03 & -0.02 & 0.00 & 0.02 & 0.03 \\ 
   Space Parameter
-x Fagus sylvatica & -0.04 & -0.08 & -0.07 & -0.05 & -0.03 & -0.01 & 0.00 \\ 
+x\textit{ Fagus sylvatica} & -0.04 & -0.08 & -0.07 & -0.05 & -0.03 & -0.01 & 0.00 \\ 
   Space Parameter
-x Fraxinus excelsior & 0.05 & -0.01 & 0.01 & 0.03 & 0.07 & 0.09 & 0.11 \\ 
+x\textit{ Fraxinus excelsior} & 0.05 & -0.01 & 0.01 & 0.03 & 0.07 & 0.09 & 0.11 \\ 
   Space Parameter
-x Quercus robur & 0.02 & -0.03 & -0.02 & 0.00 & 0.03 & 0.05 & 0.06 \\ 
+x\textit{ Quercus robur} & 0.02 & -0.03 & -0.02 & 0.00 & 0.03 & 0.05 & 0.06 \\ 
   Climate Change
-x Alnus glutinosa & 0.06 & 0.01 & 0.03 & 0.05 & 0.07 & 0.09 & 0.11 \\ 
+x\textit{ Alnus glutinosa} & 0.06 & 0.01 & 0.03 & 0.05 & 0.07 & 0.09 & 0.11 \\ 
   Climate Change
-x Betula pendula & 0.06 & 0.01 & 0.03 & 0.04 & 0.07 & 0.09 & 0.10 \\ 
+x\textit{ Betula pendula} & 0.06 & 0.01 & 0.03 & 0.04 & 0.07 & 0.09 & 0.10 \\ 
   Climate Change
-x Fagus sylvatica & -0.32 & -0.37 & -0.35 & -0.34 & -0.31 & -0.29 & -0.28 \\ 
+x\textit{ Fagus sylvatica} & -0.32 & -0.37 & -0.35 & -0.34 & -0.31 & -0.29 & -0.28 \\ 
   Climate Change
-x Fraxinus excelsior & -0.52 & -0.59 & -0.57 & -0.54 & -0.50 & -0.47 & -0.45 \\ 
+x\textit{ Fraxinus excelsior} & -0.52 & -0.59 & -0.57 & -0.54 & -0.50 & -0.47 & -0.45 \\ 
   Climate Change
-x Quercus robur & -0.41 & -0.46 & -0.44 & -0.42 & -0.39 & -0.37 & -0.36 \\ 
+x\textit{ Quercus robur} & -0.41 & -0.46 & -0.44 & -0.42 & -0.39 & -0.37 & -0.36 \\ 
   NAO Index x Climate Change & -0.83 & -0.86 & -0.85 & -0.84 & -0.82 & -0.81 & -0.80 \\ 
   Mean Spring 
 Temperature x Climate Change & 0.42 & 0.39 & 0.40 & 0.41 & 0.43 & 0.44 & 0.45 \\ 
@@ -398,7 +399,7 @@ Coast x Climate Change & -0.12 & -0.16 & -0.15 & -0.13 & -0.11 & -0.10 & -0.09 \
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 31 16:48:15 2019
+% Mon Nov  4 17:42:10 2019
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with varying rates of leafout for each species.} \\ 
   \hline
@@ -413,81 +414,81 @@ Coast & 0.40 & 0.37 & 0.38 & 0.39 & 0.42 & 0.43 & 0.44 \\
   Elevation & 0.15 & 0.11 & 0.12 & 0.14 & 0.16 & 0.18 & 0.19 \\ 
   Space Parameter & -0.06 & -0.09 & -0.08 & -0.07 & -0.06 & -0.04 & -0.04 \\ 
   Climate Change & 0.34 & 0.31 & 0.32 & 0.34 & 0.35 & 0.37 & 0.38 \\ 
-  Alnus glutinosa & 0.20 & 0.18 & 0.18 & 0.19 & 0.21 & 0.22 & 0.23 \\ 
-  Betula pendula & 0.04 & 0.02 & 0.03 & 0.04 & 0.05 & 0.06 & 0.06 \\ 
-  Fagus sylvatica & -1.38 & -1.41 & -1.40 & -1.39 & -1.37 & -1.36 & -1.35 \\ 
-  Fraxinus excelsior & -2.11 & -2.16 & -2.14 & -2.12 & -2.10 & -2.08 & -2.06 \\ 
-  Quercus robur & -1.75 & -1.79 & -1.78 & -1.76 & -1.74 & -1.73 & -1.72 \\ 
+  \textit{Alnus glutinosa} & 0.20 & 0.18 & 0.18 & 0.19 & 0.21 & 0.22 & 0.23 \\ 
+  \textit{Betula pendula} & 0.04 & 0.02 & 0.03 & 0.04 & 0.05 & 0.06 & 0.06 \\ 
+  \textit{Fagus sylvatica} & -1.38 & -1.41 & -1.40 & -1.39 & -1.37 & -1.36 & -1.35 \\ 
+  \textit{Fraxinus excelsior} & -2.11 & -2.16 & -2.14 & -2.12 & -2.10 & -2.08 & -2.06 \\ 
+  \textit{Quercus robur} & -1.75 & -1.79 & -1.78 & -1.76 & -1.74 & -1.73 & -1.72 \\ 
   NAO Index
-x Alnus glutinosa & -0.10 & -0.16 & -0.14 & -0.12 & -0.09 & -0.07 & -0.05 \\ 
+x\textit{ Alnus glutinosa} & -0.10 & -0.16 & -0.14 & -0.12 & -0.09 & -0.07 & -0.05 \\ 
   NAO Index
-x Betula pendula & -0.10 & -0.14 & -0.13 & -0.11 & -0.08 & -0.07 & -0.05 \\ 
+x\textit{ Betula pendula} & -0.10 & -0.14 & -0.13 & -0.11 & -0.08 & -0.07 & -0.05 \\ 
   NAO Index
-x Fagus sylvatica & 0.33 & 0.27 & 0.28 & 0.31 & 0.35 & 0.38 & 0.39 \\ 
+x\textit{ Fagus sylvatica} & 0.33 & 0.27 & 0.28 & 0.31 & 0.35 & 0.38 & 0.39 \\ 
   NAO Index
-x Fraxinus excelsior & 0.08 & -0.01 & 0.02 & 0.06 & 0.11 & 0.15 & 0.18 \\ 
+x\textit{ Fraxinus excelsior} & 0.08 & -0.01 & 0.02 & 0.06 & 0.11 & 0.15 & 0.18 \\ 
   NAO Index
-x Quercus robur & 0.19 & 0.12 & 0.14 & 0.17 & 0.21 & 0.24 & 0.26 \\ 
+x\textit{ Quercus robur} & 0.19 & 0.12 & 0.14 & 0.17 & 0.21 & 0.24 & 0.26 \\ 
   Mean Spring 
 Temperature
-x Alnus glutinosa & 0.18 & 0.12 & 0.14 & 0.16 & 0.19 & 0.22 & 0.24 \\ 
+x\textit{ Alnus glutinosa} & 0.18 & 0.12 & 0.14 & 0.16 & 0.19 & 0.22 & 0.24 \\ 
   Mean Spring 
 Temperature
-x Betula pendula & -0.03 & -0.07 & -0.06 & -0.04 & -0.01 & 0.01 & 0.02 \\ 
+x\textit{ Betula pendula} & -0.03 & -0.07 & -0.06 & -0.04 & -0.01 & 0.01 & 0.02 \\ 
   Mean Spring 
 Temperature
-x Fagus sylvatica & -0.04 & -0.11 & -0.08 & -0.06 & -0.02 & 0.01 & 0.03 \\ 
+x\textit{ Fagus sylvatica} & -0.04 & -0.11 & -0.08 & -0.06 & -0.02 & 0.01 & 0.03 \\ 
   Mean Spring 
 Temperature
-x Fraxinus excelsior & 0.51 & 0.40 & 0.43 & 0.48 & 0.54 & 0.59 & 0.63 \\ 
+x\textit{ Fraxinus excelsior} & 0.51 & 0.40 & 0.43 & 0.48 & 0.54 & 0.59 & 0.63 \\ 
   Mean Spring 
 Temperature
-x Quercus robur & 0.10 & 0.02 & 0.04 & 0.07 & 0.12 & 0.15 & 0.17 \\ 
+x\textit{ Quercus robur} & 0.10 & 0.02 & 0.04 & 0.07 & 0.12 & 0.15 & 0.17 \\ 
   Distance from 
 Coast
-x Alnus glutinosa & -0.08 & -0.14 & -0.12 & -0.10 & -0.07 & -0.04 & -0.02 \\ 
+x\textit{ Alnus glutinosa} & -0.08 & -0.14 & -0.12 & -0.10 & -0.07 & -0.04 & -0.02 \\ 
   Distance from 
 Coast
-x Betula pendula & 0.02 & -0.03 & -0.02 & 0.00 & 0.03 & 0.05 & 0.07 \\ 
+x\textit{ Betula pendula} & 0.02 & -0.03 & -0.02 & 0.00 & 0.03 & 0.05 & 0.07 \\ 
   Distance from 
 Coast
-x Fagus sylvatica & -0.06 & -0.13 & -0.11 & -0.08 & -0.04 & -0.01 & 0.02 \\ 
+x\textit{ Fagus sylvatica} & -0.06 & -0.13 & -0.11 & -0.08 & -0.04 & -0.01 & 0.02 \\ 
   Distance from 
 Coast
-x Fraxinus excelsior & 0.21 & 0.10 & 0.14 & 0.18 & 0.25 & 0.29 & 0.33 \\ 
+x\textit{ Fraxinus excelsior} & 0.21 & 0.10 & 0.14 & 0.18 & 0.25 & 0.29 & 0.33 \\ 
   Distance from 
 Coast
-x Quercus robur & -0.19 & -0.27 & -0.25 & -0.21 & -0.16 & -0.13 & -0.10 \\ 
+x\textit{ Quercus robur} & -0.19 & -0.27 & -0.25 & -0.21 & -0.16 & -0.13 & -0.10 \\ 
   Elevation
-x Alnus glutinosa & 0.07 & -0.00 & 0.02 & 0.05 & 0.08 & 0.11 & 0.13 \\ 
+x\textit{ Alnus glutinosa} & 0.07 & -0.00 & 0.02 & 0.05 & 0.08 & 0.11 & 0.13 \\ 
   Elevation
-x Betula pendula & 0.02 & -0.03 & -0.02 & 0.01 & 0.04 & 0.06 & 0.07 \\ 
+x\textit{ Betula pendula} & 0.02 & -0.03 & -0.02 & 0.01 & 0.04 & 0.06 & 0.07 \\ 
   Elevation
-x Fagus sylvatica & -0.05 & -0.13 & -0.10 & -0.07 & -0.03 & 0.01 & 0.03 \\ 
+x\textit{ Fagus sylvatica} & -0.05 & -0.13 & -0.10 & -0.07 & -0.03 & 0.01 & 0.03 \\ 
   Elevation
-x Fraxinus excelsior & -0.21 & -0.34 & -0.30 & -0.25 & -0.18 & -0.12 & -0.09 \\ 
+x\textit{ Fraxinus excelsior} & -0.21 & -0.34 & -0.30 & -0.25 & -0.18 & -0.12 & -0.09 \\ 
   Elevation
-x Quercus robur & 0.06 & -0.03 & -0.00 & 0.03 & 0.08 & 0.12 & 0.14 \\ 
+x\textit{ Quercus robur} & 0.06 & -0.03 & -0.00 & 0.03 & 0.08 & 0.12 & 0.14 \\ 
   Space Parameter
-x Alnus glutinosa & 0.02 & -0.02 & -0.01 & 0.01 & 0.03 & 0.05 & 0.07 \\ 
+x\textit{ Alnus glutinosa} & 0.02 & -0.02 & -0.01 & 0.01 & 0.03 & 0.05 & 0.07 \\ 
   Space Parameter
-x Betula pendula & -0.01 & -0.05 & -0.04 & -0.02 & 0.00 & 0.02 & 0.03 \\ 
+x\textit{ Betula pendula} & -0.01 & -0.05 & -0.04 & -0.02 & 0.00 & 0.02 & 0.03 \\ 
   Space Parameter
-x Fagus sylvatica & -0.09 & -0.15 & -0.13 & -0.11 & -0.08 & -0.05 & -0.04 \\ 
+x\textit{ Fagus sylvatica} & -0.09 & -0.15 & -0.13 & -0.11 & -0.08 & -0.05 & -0.04 \\ 
   Space Parameter
-x Fraxinus excelsior & -0.01 & -0.10 & -0.07 & -0.04 & 0.01 & 0.05 & 0.08 \\ 
+x\textit{ Fraxinus excelsior} & -0.01 & -0.10 & -0.07 & -0.04 & 0.01 & 0.05 & 0.08 \\ 
   Space Parameter
-x Quercus robur & -0.00 & -0.07 & -0.05 & -0.02 & 0.01 & 0.04 & 0.06 \\ 
+x\textit{ Quercus robur} & -0.00 & -0.07 & -0.05 & -0.02 & 0.01 & 0.04 & 0.06 \\ 
   Climate Change
-x Alnus glutinosa & 0.06 & 0.01 & 0.03 & 0.05 & 0.08 & 0.10 & 0.11 \\ 
+x\textit{ Alnus glutinosa} & 0.06 & 0.01 & 0.03 & 0.05 & 0.08 & 0.10 & 0.11 \\ 
   Climate Change
-x Betula pendula & 0.07 & 0.02 & 0.04 & 0.06 & 0.08 & 0.10 & 0.11 \\ 
+x\textit{ Betula pendula} & 0.07 & 0.02 & 0.04 & 0.06 & 0.08 & 0.10 & 0.11 \\ 
   Climate Change
-x Fagus sylvatica & -0.47 & -0.53 & -0.52 & -0.49 & -0.45 & -0.43 & -0.41 \\ 
+x\textit{ Fagus sylvatica} & -0.47 & -0.53 & -0.52 & -0.49 & -0.45 & -0.43 & -0.41 \\ 
   Climate Change
-x Fraxinus excelsior & -0.49 & -0.58 & -0.55 & -0.51 & -0.46 & -0.42 & -0.39 \\ 
+x\textit{ Fraxinus excelsior} & -0.49 & -0.58 & -0.55 & -0.51 & -0.46 & -0.42 & -0.39 \\ 
   Climate Change
-x Quercus robur & -0.42 & -0.49 & -0.47 & -0.45 & -0.40 & -0.38 & -0.36 \\ 
+x\textit{ Quercus robur} & -0.42 & -0.49 & -0.47 & -0.45 & -0.40 & -0.38 & -0.36 \\ 
   NAO Index x Climate Change & -0.64 & -0.70 & -0.68 & -0.65 & -0.62 & -0.59 & -0.57 \\ 
   Mean Spring 
 Temperature x Climate Change & 0.59 & 0.52 & 0.54 & 0.57 & 0.61 & 0.64 & 0.66 \\ 
@@ -508,7 +509,7 @@ Coast x Climate Change & -0.17 & -0.24 & -0.22 & -0.19 & -0.14 & -0.11 & -0.09 \
   -\end{figure}}
   
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Oct 31 16:48:15 2019
+% Mon Nov  4 17:42:10 2019
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.} \\ 
   \hline
@@ -523,81 +524,81 @@ Coast & 0.21 & 0.13 & 0.15 & 0.18 & 0.23 & 0.27 & 0.29 \\
   Elevation & 0.63 & 0.55 & 0.58 & 0.61 & 0.65 & 0.68 & 0.71 \\ 
   Space Parameter & -0.02 & -0.09 & -0.06 & -0.04 & 0.00 & 0.03 & 0.05 \\ 
   Climate Change & 0.58 & 0.51 & 0.53 & 0.56 & 0.60 & 0.63 & 0.65 \\ 
-  Alnus glutinosa & 0.33 & 0.27 & 0.28 & 0.31 & 0.34 & 0.37 & 0.38 \\ 
-  Betula pendula & 0.08 & 0.02 & 0.04 & 0.06 & 0.09 & 0.12 & 0.13 \\ 
-  Fagus sylvatica & -0.45 & -0.51 & -0.49 & -0.46 & -0.43 & -0.40 & -0.38 \\ 
-  Fraxinus excelsior & -1.58 & -1.70 & -1.66 & -1.61 & -1.55 & -1.50 & -1.47 \\ 
-  Quercus robur & -1.26 & -1.34 & -1.32 & -1.28 & -1.24 & -1.20 & -1.18 \\ 
+  \textit{Alnus glutinosa} & 0.33 & 0.27 & 0.28 & 0.31 & 0.34 & 0.37 & 0.38 \\ 
+  \textit{Betula pendula} & 0.08 & 0.02 & 0.04 & 0.06 & 0.09 & 0.12 & 0.13 \\ 
+  \textit{Fagus sylvatica} & -0.45 & -0.51 & -0.49 & -0.46 & -0.43 & -0.40 & -0.38 \\ 
+  \textit{Fraxinus excelsior} & -1.58 & -1.70 & -1.66 & -1.61 & -1.55 & -1.50 & -1.47 \\ 
+  \textit{Quercus robur} & -1.26 & -1.34 & -1.32 & -1.28 & -1.24 & -1.20 & -1.18 \\ 
   NAO Index
-x Alnus glutinosa & -0.16 & -0.26 & -0.23 & -0.19 & -0.12 & -0.08 & -0.05 \\ 
+x\textit{ Alnus glutinosa} & -0.16 & -0.26 & -0.23 & -0.19 & -0.12 & -0.08 & -0.05 \\ 
   NAO Index
-x Betula pendula & -0.21 & -0.31 & -0.28 & -0.24 & -0.19 & -0.15 & -0.12 \\ 
+x\textit{ Betula pendula} & -0.21 & -0.31 & -0.28 & -0.24 & -0.19 & -0.15 & -0.12 \\ 
   NAO Index
-x Fagus sylvatica & 0.36 & 0.24 & 0.28 & 0.33 & 0.39 & 0.44 & 0.48 \\ 
+x\textit{ Fagus sylvatica} & 0.36 & 0.24 & 0.28 & 0.33 & 0.39 & 0.44 & 0.48 \\ 
   NAO Index
-x Fraxinus excelsior & 0.54 & 0.34 & 0.39 & 0.48 & 0.60 & 0.69 & 0.76 \\ 
+x\textit{ Fraxinus excelsior} & 0.54 & 0.34 & 0.39 & 0.48 & 0.60 & 0.69 & 0.76 \\ 
   NAO Index
-x Quercus robur & 0.59 & 0.44 & 0.49 & 0.55 & 0.63 & 0.70 & 0.74 \\ 
+x\textit{ Quercus robur} & 0.59 & 0.44 & 0.49 & 0.55 & 0.63 & 0.70 & 0.74 \\ 
   Mean Spring 
 Temperature
-x Alnus glutinosa & 0.28 & 0.15 & 0.19 & 0.24 & 0.31 & 0.36 & 0.40 \\ 
+x\textit{ Alnus glutinosa} & 0.28 & 0.15 & 0.19 & 0.24 & 0.31 & 0.36 & 0.40 \\ 
   Mean Spring 
 Temperature
-x Betula pendula & 0.01 & -0.09 & -0.06 & -0.02 & 0.03 & 0.07 & 0.10 \\ 
+x\textit{ Betula pendula} & 0.01 & -0.09 & -0.06 & -0.02 & 0.03 & 0.07 & 0.10 \\ 
   Mean Spring 
 Temperature
-x Fagus sylvatica & -0.31 & -0.43 & -0.39 & -0.35 & -0.28 & -0.23 & -0.20 \\ 
+x\textit{ Fagus sylvatica} & -0.31 & -0.43 & -0.39 & -0.35 & -0.28 & -0.23 & -0.20 \\ 
   Mean Spring 
 Temperature
-x Fraxinus excelsior & -0.21 & -0.46 & -0.39 & -0.28 & -0.14 & -0.04 & 0.04 \\ 
+x\textit{ Fraxinus excelsior} & -0.21 & -0.46 & -0.39 & -0.28 & -0.14 & -0.04 & 0.04 \\ 
   Mean Spring 
 Temperature
-x Quercus robur & -0.67 & -0.81 & -0.77 & -0.71 & -0.63 & -0.58 & -0.53 \\ 
+x\textit{ Quercus robur} & -0.67 & -0.81 & -0.77 & -0.71 & -0.63 & -0.58 & -0.53 \\ 
   Distance from 
 Coast
-x Alnus glutinosa & 0.10 & -0.03 & 0.01 & 0.06 & 0.14 & 0.19 & 0.23 \\ 
+x\textit{ Alnus glutinosa} & 0.10 & -0.03 & 0.01 & 0.06 & 0.14 & 0.19 & 0.23 \\ 
   Distance from 
 Coast
-x Betula pendula & 0.14 & 0.02 & 0.06 & 0.10 & 0.17 & 0.22 & 0.25 \\ 
+x\textit{ Betula pendula} & 0.14 & 0.02 & 0.06 & 0.10 & 0.17 & 0.22 & 0.25 \\ 
   Distance from 
 Coast
-x Fagus sylvatica & 0.19 & 0.05 & 0.09 & 0.15 & 0.23 & 0.29 & 0.32 \\ 
+x\textit{ Fagus sylvatica} & 0.19 & 0.05 & 0.09 & 0.15 & 0.23 & 0.29 & 0.32 \\ 
   Distance from 
 Coast
-x Fraxinus excelsior & 0.44 & 0.19 & 0.26 & 0.37 & 0.52 & 0.62 & 0.70 \\ 
+x\textit{ Fraxinus excelsior} & 0.44 & 0.19 & 0.26 & 0.37 & 0.52 & 0.62 & 0.70 \\ 
   Distance from 
 Coast
-x Quercus robur & 0.01 & -0.17 & -0.11 & -0.04 & 0.06 & 0.14 & 0.19 \\ 
+x\textit{ Quercus robur} & 0.01 & -0.17 & -0.11 & -0.04 & 0.06 & 0.14 & 0.19 \\ 
   Elevation
-x Alnus glutinosa & -0.13 & -0.26 & -0.23 & -0.17 & -0.10 & -0.04 & -0.01 \\ 
+x\textit{ Alnus glutinosa} & -0.13 & -0.26 & -0.23 & -0.17 & -0.10 & -0.04 & -0.01 \\ 
   Elevation
-x Betula pendula & -0.04 & -0.15 & -0.11 & -0.07 & -0.01 & 0.03 & 0.06 \\ 
+x\textit{ Betula pendula} & -0.04 & -0.15 & -0.11 & -0.07 & -0.01 & 0.03 & 0.06 \\ 
   Elevation
-x Fagus sylvatica & -0.12 & -0.24 & -0.21 & -0.16 & -0.08 & -0.03 & 0.01 \\ 
+x\textit{ Fagus sylvatica} & -0.12 & -0.24 & -0.21 & -0.16 & -0.08 & -0.03 & 0.01 \\ 
   Elevation
-x Fraxinus excelsior & -0.68 & -0.95 & -0.87 & -0.75 & -0.60 & -0.49 & -0.42 \\ 
+x\textit{ Fraxinus excelsior} & -0.68 & -0.95 & -0.87 & -0.75 & -0.60 & -0.49 & -0.42 \\ 
   Elevation
-x Quercus robur & -0.34 & -0.50 & -0.45 & -0.39 & -0.29 & -0.22 & -0.18 \\ 
+x\textit{ Quercus robur} & -0.34 & -0.50 & -0.45 & -0.39 & -0.29 & -0.22 & -0.18 \\ 
   Space Parameter
-x Alnus glutinosa & -0.04 & -0.14 & -0.11 & -0.07 & -0.01 & 0.03 & 0.06 \\ 
+x\textit{ Alnus glutinosa} & -0.04 & -0.14 & -0.11 & -0.07 & -0.01 & 0.03 & 0.06 \\ 
   Space Parameter
-x Betula pendula & 0.01 & -0.08 & -0.05 & -0.02 & 0.03 & 0.07 & 0.10 \\ 
+x\textit{ Betula pendula} & 0.01 & -0.08 & -0.05 & -0.02 & 0.03 & 0.07 & 0.10 \\ 
   Space Parameter
-x Fagus sylvatica & -0.10 & -0.21 & -0.18 & -0.13 & -0.07 & -0.02 & 0.01 \\ 
+x\textit{ Fagus sylvatica} & -0.10 & -0.21 & -0.18 & -0.13 & -0.07 & -0.02 & 0.01 \\ 
   Space Parameter
-x Fraxinus excelsior & -0.04 & -0.25 & -0.19 & -0.10 & 0.02 & 0.10 & 0.17 \\ 
+x\textit{ Fraxinus excelsior} & -0.04 & -0.25 & -0.19 & -0.10 & 0.02 & 0.10 & 0.17 \\ 
   Space Parameter
-x Quercus robur & -0.03 & -0.17 & -0.13 & -0.07 & 0.01 & 0.07 & 0.11 \\ 
+x\textit{ Quercus robur} & -0.03 & -0.17 & -0.13 & -0.07 & 0.01 & 0.07 & 0.11 \\ 
   Climate Change
-x Alnus glutinosa & 0.10 & -0.02 & 0.02 & 0.06 & 0.13 & 0.17 & 0.21 \\ 
+x\textit{ Alnus glutinosa} & 0.10 & -0.02 & 0.02 & 0.06 & 0.13 & 0.17 & 0.21 \\ 
   Climate Change
-x Betula pendula & 0.07 & -0.03 & -0.00 & 0.04 & 0.10 & 0.14 & 0.17 \\ 
+x\textit{ Betula pendula} & 0.07 & -0.03 & -0.00 & 0.04 & 0.10 & 0.14 & 0.17 \\ 
   Climate Change
-x Fagus sylvatica & -0.34 & -0.46 & -0.43 & -0.37 & -0.30 & -0.25 & -0.21 \\ 
+x\textit{ Fagus sylvatica} & -0.34 & -0.46 & -0.43 & -0.37 & -0.30 & -0.25 & -0.21 \\ 
   Climate Change
-x Fraxinus excelsior & -0.47 & -0.69 & -0.63 & -0.54 & -0.41 & -0.31 & -0.25 \\ 
+x\textit{ Fraxinus excelsior} & -0.47 & -0.69 & -0.63 & -0.54 & -0.41 & -0.31 & -0.25 \\ 
   Climate Change
-x Quercus robur & -0.35 & -0.51 & -0.46 & -0.40 & -0.30 & -0.23 & -0.18 \\ 
+x\textit{ Quercus robur} & -0.35 & -0.51 & -0.46 & -0.40 & -0.30 & -0.23 & -0.18 \\ 
   NAO Index x Climate Change & -0.92 & -1.06 & -1.02 & -0.96 & -0.88 & -0.83 & -0.79 \\ 
   Mean Spring 
 Temperature x Climate Change & 0.64 & 0.51 & 0.55 & 0.60 & 0.69 & 0.74 & 0.79 \\ 

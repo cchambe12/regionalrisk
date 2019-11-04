@@ -130,10 +130,11 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 
 \vspace{15ex}
 
-<<echo=FALSE>>=
+<<echo=FALSE, warning==FALSE, message=FALSE>>=
 
 library(xtable)
 library(broom)
+library(Hmisc)
 
 
 @
@@ -178,7 +179,7 @@ bb$term <- gsub("speciesBETPEN", "Betula pendula", bb$term)
 bb$term <- gsub("speciesFAGSYL", "Fagus sylvatica", bb$term)
 bb$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", bb$term)
 bb$term <- gsub("speciesQUEROB", "Quercus robur", bb$term)
-bb$term <- gsub(":", " by ", bb$term)
+bb$term <- gsub(":", " x ", bb$term)
 
 colnames(bb) <- c("", "mean", "std.err", "2\\%", "98\\%")
 print(xtable(bb[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of day of budburst before and after climate change across species.",
@@ -198,7 +199,7 @@ tmin$term <- gsub("speciesBETPEN", "Betula pendula", tmin$term)
 tmin$term <- gsub("speciesFAGSYL", "Fagus sylvatica", tmin$term)
 tmin$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", tmin$term)
 tmin$term <- gsub("speciesQUEROB", "Quercus robur", tmin$term)
-tmin$term <- gsub(":", " by ", tmin$term)
+tmin$term <- gsub(":", " x ", tmin$term)
 
 colnames(tmin) <- c("", "mean", "std.err", "2\\%", "98\\%")
 print(xtable(tmin[1:12,c(1:2, 4:5)], caption = "Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.",
@@ -218,7 +219,7 @@ lstfrz$term <- gsub("speciesBETPEN", "Betula pendula", lstfrz$term)
 lstfrz$term <- gsub("speciesFAGSYL", "Fagus sylvatica", lstfrz$term)
 lstfrz$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", lstfrz$term)
 lstfrz$term <- gsub("speciesQUEROB", "Quercus robur", lstfrz$term)
-lstfrz$term <- gsub(":", " by ", lstfrz$term)
+lstfrz$term <- gsub(":", " x ", lstfrz$term)
 colnames(lstfrz) <- c("", "mean", "std.err", "2\\%", "98\\%")
 print(xtable(lstfrz[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of probability of false spring before and after climate change across species.",
              align = c("l", "l", "r","r","r")), #>{\\textit}l
@@ -229,6 +230,7 @@ print(xtable(lstfrz[1:12,c(1:2,4:5)], caption = "Summary of simple linear regres
 
 @
 
+
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk/analyses")
 
@@ -237,38 +239,41 @@ modoutput <- modoutput[c(1:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
 
-modoutput$term <- gsub("b_Intercept", "Intercept", modoutput$term)
-modoutput$term <- gsub("b_nao.z", "NAO Index", modoutput$term)
-modoutput$term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$term)
-modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
-modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
-modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
-modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
-modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+modoutput$term <- gsub("b_", "", modoutput$term)
+modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
+modoutput$term <- gsub("nao.z", "NAO Index", modoutput$term)
+modoutput$term <- gsub("mat.z", "Mean Spring \nTemperature", modoutput$term)
+modoutput$term <- gsub("elev.z", "Elevation", modoutput$term)
+modoutput$term <- gsub("dist.z", "Distance from \nCoast", modoutput$term)
+modoutput$term <- gsub("space.z", "Space Parameter", modoutput$term)
+modoutput$term <- gsub("cc.z", "Climate Change", modoutput$term)
+modoutput$term <- gsub(":Climate Change", " x Climate Change", modoutput$term)
+#modoutput$term <- gsub(":", " x ", modoutput$term)
 
-modoutput$term <- gsub(":speciesALNGLU", "\nby Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub(":speciesBETPEN", "\nby Betula pendula", modoutput$term)
-modoutput$term <- gsub(":speciesFAGSYL", "\nby Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub(":speciesFRAEXC", "\nby Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub(":speciesQUEROB", "\nby Quercus robur", modoutput$term)
+modoutput$term <- gsub(":speciesALNGLU", paste0("\nx","\\\\textit{", " Alnus glutinosa","}"), modoutput$term)
+modoutput$term <- gsub(":speciesBETPEN", paste0("\nx","\\\\textit{"," Betula pendula","}"), modoutput$term)
+modoutput$term <- gsub(":speciesFAGSYL", paste0("\nx","\\\\textit{"," Fagus sylvatica","}"), modoutput$term)
+modoutput$term <- gsub(":speciesFRAEXC", paste0("\nx","\\\\textit{"," Fraxinus excelsior","}"), modoutput$term)
+modoutput$term <- gsub(":speciesQUEROB", paste0("\nx","\\\\textit{"," Quercus robur","}"), modoutput$term)
 
-modoutput$term <- gsub("b_speciesALNGLU", "Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub("b_speciesBETPEN", "Betula pendula", modoutput$term)
-modoutput$term <- gsub("b_speciesFAGSYL", "Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub("b_speciesFRAEXC", "Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub("b_speciesQUEROB", "Quercus robur", modoutput$term)
+modoutput$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), modoutput$term)
+modoutput$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), modoutput$term)
+modoutput$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), modoutput$term)
+modoutput$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), modoutput$term)
+modoutput$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), modoutput$term)
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
-
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model of false spring risk with the effects of species, climatic and geographical predictors on false spring risk.",
+             caption = "Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
       #sanitize.text.function = function(x) {x}, table.placement="H",
       tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
-      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
+      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "), 
+      sanitize.text.function = identity
+    )
 
 
 
@@ -297,26 +302,29 @@ modoutput <- modoutput[c(1:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
 
-modoutput$term <- gsub("b_Intercept", "Intercept", modoutput$term)
-modoutput$term <- gsub("b_nao.z", "NAO Index", modoutput$term)
-modoutput$term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$term)
-modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
-modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
-modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
-modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
-modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+modoutput$term <- gsub("b_", "", modoutput$term)
+modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
+modoutput$term <- gsub("nao.z", "NAO Index", modoutput$term)
+modoutput$term <- gsub("mat.z", "Mean Spring \nTemperature", modoutput$term)
+modoutput$term <- gsub("elev.z", "Elevation", modoutput$term)
+modoutput$term <- gsub("dist.z", "Distance from \nCoast", modoutput$term)
+modoutput$term <- gsub("space.z", "Space Parameter", modoutput$term)
+modoutput$term <- gsub("cc.z", "Climate Change", modoutput$term)
+modoutput$term <- gsub(":Climate Change", " x Climate Change", modoutput$term)
+#modoutput$term <- gsub(":", " x ", modoutput$term)
 
-modoutput$term <- gsub(":speciesALNGLU", "\nby Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub(":speciesBETPEN", "\nby Betula pendula", modoutput$term)
-modoutput$term <- gsub(":speciesFAGSYL", "\nby Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub(":speciesFRAEXC", "\nby Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub(":speciesQUEROB", "\nby Quercus robur", modoutput$term)
+modoutput$term <- gsub(":speciesALNGLU", paste0("\nx","\\\\textit{", " Alnus glutinosa","}"), modoutput$term)
+modoutput$term <- gsub(":speciesBETPEN", paste0("\nx","\\\\textit{"," Betula pendula","}"), modoutput$term)
+modoutput$term <- gsub(":speciesFAGSYL", paste0("\nx","\\\\textit{"," Fagus sylvatica","}"), modoutput$term)
+modoutput$term <- gsub(":speciesFRAEXC", paste0("\nx","\\\\textit{"," Fraxinus excelsior","}"), modoutput$term)
+modoutput$term <- gsub(":speciesQUEROB", paste0("\nx","\\\\textit{"," Quercus robur","}"), modoutput$term)
 
-modoutput$term <- gsub("b_speciesALNGLU", "Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub("b_speciesBETPEN", "Betula pendula", modoutput$term)
-modoutput$term <- gsub("b_speciesFAGSYL", "Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub("b_speciesFRAEXC", "Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub("b_speciesQUEROB", "Quercus robur", modoutput$term)
+modoutput$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), modoutput$term)
+modoutput$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), modoutput$term)
+modoutput$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), modoutput$term)
+modoutput$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), modoutput$term)
+modoutput$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), modoutput$term)
+
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
@@ -346,26 +354,29 @@ modoutput <- modoutput[c(1:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
 
-modoutput$term <- gsub("b_Intercept", "Intercept", modoutput$term)
-modoutput$term <- gsub("b_nao.z", "NAO Index", modoutput$term)
-modoutput$term <- gsub("b_mat.z", "Mean Spring \nTemperature", modoutput$term)
-modoutput$term <- gsub("b_elev.z", "Elevation", modoutput$term)
-modoutput$term <- gsub("b_dist.z", "Distance from \nCoast", modoutput$term)
-modoutput$term <- gsub("b_space.z", "Space Parameter", modoutput$term)
-modoutput$term <- gsub("b_cc.z", "Climate Change", modoutput$term)
-modoutput$term <- gsub(":cc.z", " by Climate Change", modoutput$term)
+modoutput$term <- gsub("b_", "", modoutput$term)
+modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
+modoutput$term <- gsub("nao.z", "NAO Index", modoutput$term)
+modoutput$term <- gsub("mat.z", "Mean Spring \nTemperature", modoutput$term)
+modoutput$term <- gsub("elev.z", "Elevation", modoutput$term)
+modoutput$term <- gsub("dist.z", "Distance from \nCoast", modoutput$term)
+modoutput$term <- gsub("space.z", "Space Parameter", modoutput$term)
+modoutput$term <- gsub("cc.z", "Climate Change", modoutput$term)
+modoutput$term <- gsub(":Climate Change", " x Climate Change", modoutput$term)
+#modoutput$term <- gsub(":", " x ", modoutput$term)
 
-modoutput$term <- gsub(":speciesALNGLU", "\nby Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub(":speciesBETPEN", "\nby Betula pendula", modoutput$term)
-modoutput$term <- gsub(":speciesFAGSYL", "\nby Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub(":speciesFRAEXC", "\nby Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub(":speciesQUEROB", "\nby Quercus robur", modoutput$term)
+modoutput$term <- gsub(":speciesALNGLU", paste0("\nx","\\\\textit{", " Alnus glutinosa","}"), modoutput$term)
+modoutput$term <- gsub(":speciesBETPEN", paste0("\nx","\\\\textit{"," Betula pendula","}"), modoutput$term)
+modoutput$term <- gsub(":speciesFAGSYL", paste0("\nx","\\\\textit{"," Fagus sylvatica","}"), modoutput$term)
+modoutput$term <- gsub(":speciesFRAEXC", paste0("\nx","\\\\textit{"," Fraxinus excelsior","}"), modoutput$term)
+modoutput$term <- gsub(":speciesQUEROB", paste0("\nx","\\\\textit{"," Quercus robur","}"), modoutput$term)
 
-modoutput$term <- gsub("b_speciesALNGLU", "Alnus glutinosa", modoutput$term)
-modoutput$term <- gsub("b_speciesBETPEN", "Betula pendula", modoutput$term)
-modoutput$term <- gsub("b_speciesFAGSYL", "Fagus sylvatica", modoutput$term)
-modoutput$term <- gsub("b_speciesFRAEXC", "Fraxinus excelsior", modoutput$term)
-modoutput$term <- gsub("b_speciesQUEROB", "Quercus robur", modoutput$term)
+modoutput$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), modoutput$term)
+modoutput$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), modoutput$term)
+modoutput$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), modoutput$term)
+modoutput$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), modoutput$term)
+modoutput$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), modoutput$term)
+
 
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
