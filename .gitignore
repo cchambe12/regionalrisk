@@ -1,4 +1,5 @@
 *analyses/.Rhistory
+*analyses/output/.Rhistory
 *.Rdata
 *.DS_Store
 *.aux
