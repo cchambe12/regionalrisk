@@ -62,7 +62,7 @@ linpreddiff(.41, fs$cc, 1) ### 8.435 for ALNGLU
 (mean(fixef(orig.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3 ## 1.915104 (vs 1.54)
 (mean(fixef(orig.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150 ## 5.320474 (vs 4.83)
 (mean(fixef(orig.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200 ## 2.235522 (vs 1.89)
-(mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.842486 (vs 7.225) - For AESHIP
+(mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100 ## 8.842486 (vs 7.225) - For AESHIP (residual not explained by regional/climatic factors)
 (0.42/4)/(sd(fs$cc)*2)*100 ## 10.538 for ALNGLU - compared to 8.8 from APCs
 (0.41/4)/(sd(fs$cc)*2)*100 ## 10.287 for BETPEN - compared to 8.7 from APCs
 (.03/4)/(sd(fs$cc)*2)*100 ## 0.753 for FAGSYL - compared to 0.54 from APCs
@@ -70,11 +70,22 @@ linpreddiff(.41, fs$cc, 1) ### 8.435 for ALNGLU
 (-.07/4)/(sd(fs$cc)*2)*100 ## -1.756 for QUEROB - compared to -.609 from APCs
 (.16/4)/(sd(fs$cc)*2)*100 ## 4.0145 for average of all species
 
+
+### Now for the combined effects for each species:
+(-0.23/4)/(sd(fs$cc)*2)*100 ## -5.77 for AESHIP 
+(-0.17/4)/(sd(fs$cc)*2)*100 ## -4.27 for ALNGLU
+(-0.17/4)/(sd(fs$cc)*2)*100 ## -4.27 for BETPEN
+(-.55/4)/(sd(fs$cc)*2)*100 ## -13.8 for FAGSYL 
+(-.75/4)/(sd(fs$cc)*2)*100 ## -18.8 for FRAEXC 
+(-.64/4)/(sd(fs$cc)*2)*100 ## -16.1 for QUEROB 
+(-.42/4)/(sd(fs$cc)*2)*100 ## -10.5 for average of all species
+(-.58/4)/(sd(fs$cc)*2)*100 ## -14.6 for combined effects after cc of regional/climatic factors
+
 ### Okay now, we can calculate the interaction effects:
 (-0.69/4)/(sd(fs$nao)*2)*100 ## -30.8 NAOxCC ?
 (-0.06/4)/(sd(fs$mat)*2)*100 ## -1.5 MATxCC ?
 (0.28/4)/(sd(fs$distkm)*2)*100 ## 0.02 DISTxCC ?
-(0.19/4)/(sd(fs$elev)*2)*100 ## -11.1 NAOxCC ?
+(0.19/4)/(sd(fs$elev)*2)*100 ## -11.1 ELEVxCC ?
 
 
 ### Same rule but for DVR:

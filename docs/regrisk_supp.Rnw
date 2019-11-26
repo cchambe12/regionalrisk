@@ -26,7 +26,7 @@
 \textheight 21.94cm 
 %\pagestyle{empty} %comment if want page numbers
 \parskip 7.2pt
-\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\baselinestretch}{1}
 \parindent 0pt
 \usepackage{lineno}
 \linenumbers
@@ -134,7 +134,6 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 
 library(xtable)
 library(broom)
-library(Hmisc)
 
 
 @
@@ -174,11 +173,11 @@ bb <- as.data.frame(tidy(bb.mod, prob=0.98))
 bb$term <- gsub("b_", "", bb$term)
 bb$term <- gsub("Intercept", "Intercept", bb$term)
 bb$term <- gsub("cc", "Climate Change", bb$term)
-bb$term <- gsub("speciesALNGLU", "Alnus glutinosa", bb$term)
-bb$term <- gsub("speciesBETPEN", "Betula pendula", bb$term)
-bb$term <- gsub("speciesFAGSYL", "Fagus sylvatica", bb$term)
-bb$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", bb$term)
-bb$term <- gsub("speciesQUEROB", "Quercus robur", bb$term)
+bb$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), bb$term)
+bb$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), bb$term)
+bb$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), bb$term)
+bb$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), bb$term)
+bb$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), bb$term)
 bb$term <- gsub(":", " x ", bb$term)
 
 colnames(bb) <- c("", "mean", "std.err", "2\\%", "98\\%")
@@ -194,17 +193,18 @@ tmin <- as.data.frame(tidy(tmin.mod, prob=0.98))
 tmin$term <- gsub("b_", "", tmin$term)
 tmin$term <- gsub("Intercept", "Intercept", tmin$term)
 tmin$term <- gsub("cc", "Climate Change", tmin$term)
-tmin$term <- gsub("speciesALNGLU", "Alnus glutinosa", tmin$term)
-tmin$term <- gsub("speciesBETPEN", "Betula pendula", tmin$term)
-tmin$term <- gsub("speciesFAGSYL", "Fagus sylvatica", tmin$term)
-tmin$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", tmin$term)
-tmin$term <- gsub("speciesQUEROB", "Quercus robur", tmin$term)
+tmin$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), tmin$term)
+tmin$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), tmin$term)
+tmin$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"),tmin$term)
+tmin$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), tmin$term)
+tmin$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), tmin$term)
 tmin$term <- gsub(":", " x ", tmin$term)
+
 
 colnames(tmin) <- c("", "mean", "std.err", "2\\%", "98\\%")
 print(xtable(tmin[1:12,c(1:2, 4:5)], caption = "Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.",
              align = c("l", "l", "r","r","r")), #>{\\textit}l
-      include.rownames=F, 
+      include.rownames=F,
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
 
@@ -214,11 +214,11 @@ lstfrz <- as.data.frame(tidy(fstot.mod, prob=0.98))
 lstfrz$term <- gsub("b_", "", lstfrz$term)
 lstfrz$term <- gsub("Intercept", "Intercept", lstfrz$term)
 lstfrz$term <- gsub("cc", "Climate Change", lstfrz$term)
-lstfrz$term <- gsub("speciesALNGLU", "Alnus glutinosa", lstfrz$term)
-lstfrz$term <- gsub("speciesBETPEN", "Betula pendula", lstfrz$term)
-lstfrz$term <- gsub("speciesFAGSYL", "Fagus sylvatica", lstfrz$term)
-lstfrz$term <- gsub("speciesFRAEXC", "Fraxinus excelsior", lstfrz$term)
-lstfrz$term <- gsub("speciesQUEROB", "Quercus robur", lstfrz$term)
+lstfrz$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), lstfrz$term)
+lstfrz$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), lstfrz$term)
+lstfrz$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), lstfrz$term)
+lstfrz$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), lstfrz$term)
+lstfrz$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), lstfrz$term)
 lstfrz$term <- gsub(":", " x ", lstfrz$term)
 colnames(lstfrz) <- c("", "mean", "std.err", "2\\%", "98\\%")
 print(xtable(lstfrz[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of probability of false spring before and after climate change across species.",
@@ -230,7 +230,7 @@ print(xtable(lstfrz[1:12,c(1:2,4:5)], caption = "Summary of simple linear regres
 
 @
 
-
+\newpage
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk/analyses")
 
@@ -294,6 +294,7 @@ print(xtable(modoutput,
   -\end{center}
   -\end{figure}}
   
+\newpage
 <<label=suppmoddvr, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
@@ -345,7 +346,8 @@ print(xtable(modoutput,
   -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data.}\label{fig:five}
   -\end{center}
   -\end{figure}}
-  
+ 
+\newpage 
 <<label=suppmodfive, results="asis", echo=FALSE, warning=FALSE, message=FALSE, , fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
