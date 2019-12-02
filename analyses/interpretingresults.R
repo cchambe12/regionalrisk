@@ -82,10 +82,10 @@ linpreddiff(.41, fs$cc, 1) ### 8.435 for ALNGLU
 (-.58/4)/(sd(fs$cc)*2)*100 ## -14.6 for combined effects after cc of regional/climatic factors
 
 ### Okay now, we can calculate the interaction effects:
-(-0.69/4)/(sd(fs$nao)*2)*100 ## -30.8 NAOxCC ?
-(-0.06/4)/(sd(fs$mat)*2)*100 ## -1.5 MATxCC ?
-(0.28/4)/(sd(fs$distkm)*2)*100 ## 0.02 DISTxCC ?
-(0.19/4)/(sd(fs$elev)*2)*100 ## -11.1 ELEVxCC ?
+(-0.69/4)/(sd(fs$nao)*2)*100*0.3 ## -9.23 NAOxCC ?
+(-0.06/4)/(sd(fs$mat)*2)*100*2 ## -3.00 MATxCC ?
+(0.28/4)/(sd(fs$distkm)*2)*100*150 ## 3.71 DISTxCC ?
+(0.19/4)/(sd(fs$elev)*2)*100*200 ## 2.22 ELEVxCC ?
 
 
 ### Same rule but for DVR:
