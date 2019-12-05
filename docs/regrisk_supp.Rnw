@@ -296,7 +296,7 @@ print(xtable(modoutput,
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_dvr.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data.}\label{fig:dvr}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data. See Table \ref{fig:suppmoddvr} for full model output. }\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
@@ -349,7 +349,7 @@ print(xtable(modoutput,
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_five.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data.}\label{fig:five}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data. See Table \ref{fig:suppmodfive} for full model output. }\label{fig:five}
   -\end{center}
   -\end{figure}}
  
