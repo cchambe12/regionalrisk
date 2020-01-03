@@ -35,6 +35,10 @@
   skipbelow=\topsep
 ]{siderules}
 
+%cross referencing:
+\usepackage{xr}
+\externaldocument{regrisk_supp}
+
 %% R Script
 <<label=libraries, echo=FALSE, results="asis", message=FALSE, warning=FALSE>>=
   options(stringsAsFactors=FALSE)
@@ -51,26 +55,137 @@ library(ggplot2)
 \setkeys{Gin}{width=0.8\textwidth}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<<label=numbers, echo=FALSE, results="asis", warning=FALSE, message=FALSE,>>=
+#load models and data to report numbers of things
+options(stringsAsFactors = FALSE)
+library(brms)
+
+## Set Working Directory
+setwd("~/Documents/git/regionalrisk")
+
+load("orig_full.Rdata")
+load("dvr_full.Rdata")
+load("five_full.Rdata")
+
+fs <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
+
+numyrs<-length(unique(fs$year))
+numsites<-length(unique(fs$lat.long))
+
+### So if we multiply by the sd used above to change intervals and use the Divide by 4 rule:
+mat<-round((mean(fixef(orig.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2, digits=2) ## -7.638351 (vs -3.331)
+nao<-round((mean(fixef(orig.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) ## 1.915104 (vs 1.54)
+dist<-round((mean(fixef(orig.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150, digits=2) ## 5.320474 (vs 4.83)
+elev<-round((mean(fixef(orig.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200, digits=2)## 2.235522 (vs 1.89)
+
+matz<-round((mean(fixef(orig.full, pars="mat.z", summary=FALSE))), digits=2)
+naoz<-round((mean(fixef(orig.full, pars="nao.z", summary=FALSE))), digits=2)
+distz<-round((mean(fixef(orig.full, pars="dist.z", summary=FALSE))), digits=2)
+elevz<-round((mean(fixef(orig.full, pars="elev.z", summary=FALSE))), digits=2)
+
+
+aescc<-round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100,digits=2) ## 8.842486 (vs 7.225) - For AESHIP (residual not explained by regional/climatic factors)
+alncc<-round((0.42/4)/(sd(fs$cc)*2)*100, digits=2) ## 10.538 for ALNGLU - compared to 8.8 from APCs
+betcc<-round((0.41/4)/(sd(fs$cc)*2)*100, digits=2) ## 10.287 for BETPEN - compared to 8.7 from APCs
+fagcc<-round((.03/4)/(sd(fs$cc)*2)*100, digits=2) ## 0.753 for FAGSYL - compared to 0.54 from APCs
+fracc<-round((-.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.265 for FRAEXC - compared to -1.34 from APCs
+quecc<-round((-.07/4)/(sd(fs$cc)*2)*100, digits=2) ## -1.756 for QUEROB - compared to -.609 from APCs
+allcc<-round((.16/4)/(sd(fs$cc)*2)*100, digits=2) ## 4.0145 for average of all species
+
+aesccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))), digits=2)
+alnccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesALNGLU", summary=FALSE))), digits=2)
+betccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesBETPEN", summary=FALSE))), digits=2)
+fagccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesFAGSYL", summary=FALSE))), digits=3)
+fraccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesFRAEXC", summary=FALSE))), digits=2)
+queccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesQUEROB", summary=FALSE))), digits=2)
+
+#### Total combined cc
+aescomb<-round((-0.23/4)/(sd(fs$cc)*2)*100, digits=2) ## -5.77 for AESHIP 
+alncomb<-round((-0.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.27 for ALNGLU
+betcomb<-round((-0.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.27 for BETPEN
+fagcomb<-round((-.55/4)/(sd(fs$cc)*2)*100, digits=2) ## -13.8 for FAGSYL 
+fracomb<-round((-.75/4)/(sd(fs$cc)*2)*100, digits=2) ## -18.8 for FRAEXC 
+quecomb<-round((-.64/4)/(sd(fs$cc)*2)*100, digits=2) ## -16.1 for QUEROB 
+avgcomb<-round((-.42/4)/(sd(fs$cc)*2)*100, digits=2)  ## -10.5 for average of all species
+regcc<-round((-.58/4)/(sd(fs$cc)*2)*100, digits=2) ## -14.6 for combined effects after cc of regional/climatic factors
+
+### Okay now, we can calculate the interaction effects:
+naocc<-round((mean(fixef(orig.full, pars="nao.z", summary=FALSE)+mean(fixef(orig.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) 
+matcc<-round((mean(fixef(orig.full, pars="mat.z", summary=FALSE)+mean(fixef(orig.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fs$mat)*2)*100*2, digits=2) 
+distcc<-round((mean(fixef(orig.full, pars="dist.z", summary=FALSE)+mean(fixef(orig.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fs$distkm)*2)*100*150, digits=2) 
+elevcc<-round((mean(fixef(orig.full, pars="elev.z", summary=FALSE)+mean(fixef(orig.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fs$elev)*2)*100*200, digits=2)
+
+### Same rule but for DVR:
+matdvr<-round((mean(fixef(dvr.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2, digits=2) ## -8.078 
+naodvr<-round((mean(fixef(dvr.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3, digits=2)## 2.04 
+distdvr<-round((mean(fixef(dvr.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150, digits=2) ## 5.36
+elevdvr<-round((mean(fixef(dvr.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200, digits=2) ## 1.77 
+ccdvr<-round((mean(fixef(dvr.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100, digits=2) ## 8.6
+
+### Okay now, we can calculate the interaction effects:
+naoccdvr<-round((mean(fixef(dvr.full, pars="nao.z", summary=FALSE)+mean(fixef(dvr.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fs$nao)*2)*100*0.3, digits=2)
+matccdvr<-round((mean(fixef(dvr.full, pars="mat.z", summary=FALSE)+mean(fixef(dvr.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fs$mat)*2)*100*2, digits=2) 
+distccdvr<-round((mean(fixef(dvr.full, pars="dist.z", summary=FALSE)+mean(fixef(dvr.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fs$distkm)*2)*100*150, digits=2)
+elevccdvr<-round((mean(fixef(dvr.full, pars="elev.z", summary=FALSE)+mean(fixef(dvr.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fs$elev)*2)*100*200, digits=2) 
+
+
+### Same rule but for Five model:
+matfive<-round((mean(fixef(five.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2, digits=2) ## -11.56
+naofive<-round((mean(fixef(five.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) ## 1.26
+distfive<-round((mean(fixef(five.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150, digits=2) ## 2.75
+elevfive<-round((mean(fixef(five.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200, digits=2) ## 7.35
+ccfive<-round((mean(fixef(five.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100, digits=2) ## 14.55
+
+### Okay now, we can calculate the interaction effects:
+naoccfive<-round((mean(fixef(five.full, pars="nao.z", summary=FALSE)+mean(fixef(five.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) 
+matccfive<-round((mean(fixef(five.full, pars="mat.z", summary=FALSE)+mean(fixef(five.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fs$mat)*2)*100*2, digits=2)
+distccfive<-round((mean(fixef(five.full, pars="dist.z", summary=FALSE)+mean(fixef(five.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fs$distkm)*2)*100*150, digits=2)
+elevccfive<-round((mean(fixef(five.full, pars="elev.z", summary=FALSE)+mean(fixef(five.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fs$elev)*2)*100*200, digits=2)
+
+
+#### Simple model summaries
+setwd("~/Documents/git/regionalrisk")
+
+load("bbmod.Rdata")
+simpbb <- round(mean(fixef(bb.mod, pars="cc"), summary=FALSE), digits=2)
+
+load("tminmod.Rdata")
+simptmin <- round(mean(fixef(tmin.mod, pars="cc"), summary=FALSE), digits=2)
+
+load("fssimpmod.Rdata")
+simpfs <- round(mean(fixef(fssimp.mod, pars="cc"), summary=FALSE), digits=2)
+
+@
+
+
 \section*{Discussion}
-Overall, we found that climate change has decreased risk for all species across Central Europe, contrary to other studies \citep{Liu2018}. We did find support for how higher elevations tend to experience more false springs \citep{Vitasse2018, Vitra2017} and sites that are generally warmer have lower risks of false springs \citep{Wypych2016}. Outside of the geographic and climatic factors considered in our study, we how found a residual effect of climate change that has increased false spring risk by 8.8\% for \textit{Aesculus hippocastanum}, 10.5\% for \textit{Alnus glutinosa}, 10.3\% for \textit{Betula pendula} and by 0.8\% for \textit{Fagus sylvatica} and has decreased false spring risk by -4.3\% for \textit{Fraxinus excelsior} and -1.8\% for \textit{Quercus robur}, rendering an overall 4.0\% increased risk on average. But these average effects hide important complexities of how climatic and geographic factors that underlie false spring risk have been reshaped by climate change. Across species, we find that NAO and mean spring temperature have shifted the most after 1983, resulting in different effects of climate change on species, though there has been a consistent decrease in false spring risk for each species given the combined effects of all climatic and geographic factors that contribute to false spring risk, with a 14.6\% decrease in false spring risk on average. Thus, it is crucial for future studies to understand and report the combined effects of climate change with known climatic and geographic factors, plus begin to disentangle the residual effects of climate change on species-level risk not yet understood. %% Lizzie, I'm struggling to communicate the difference in combined versus residual effects biologically. Please let me know if this does not make sense! Or if I should present the combined effects first... 
+% EMWDec: update XX below ... 
+Integrating over \Sexpr{numyrs} years of data and \Sexpr{numsites} sites across Central Europe and major climatic and geographic factors known to influence false spring risk, our results suggest climate change has decreased false spring risk for all six studied species. In line with previous work, our results support that higher elevations tend to experience more false springs \citep{Vitasse2018, Vitra2017} and sites that are generally warmer have lower risks of false springs \citep{Wypych2016}. Individuals further from the coast typically initiated leafout earlier in the season, which subsequently lead to an increase in risk and, similarly, years with higher NAO indices experienced a slight increase in risk. But many of these factors have been re-shaped by climate change, in particular the effect of climatic factors have shifted dramatically compare to shifts in geographical factors. Across species, we find that NAO and mean spring temperature have shifted the most after 1983, while the effect of distance from the coast has only shifted slightly and the effect of elevation has not shifted (Figure \ref{fig:suppapc}.) % EMWDec IMPT! check my 'in particular' point ... is it correct? CJC: Yes!! Great point!
+
+These shifts in the influence of climatic and geographic factors in turn result in different effects of climate change on species. Though there has been a consistent decrease in false spring risk for all species we studied---given the combined effects of all factors that contribute to false spring risk---some species (e.g. \textit{Fraxinus excelsior} and \textit{Quercus robur}) have experienced total decreases while others have experienced smaller shifts in risk (e.g., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}.) These species-specific effects integrate over shifts in the influence of climatic and geographic factors on false spring risk, as well as residual variation not explained by these factors, suggesting for which species we have a robust understanding of what drivers underlie shifts in false spring risk with climate change, versus those species where more understanding is most critically needed. 
 
 \subsection*{Climatic and geographic effects on false spring risk}
-Past studies using single parameters for false spring events \citep{Liu2018, Ma2018, Vitasse2018, Vitra2017, Wypych2016a} have led to contradicting predictions in future false spring risk. By integrating both climate gradients and geographical factors, we were able to disentangle the major predictors of false spring risk and merge these with species differences to determine which factors have the strongest effects on false spring risk. Mean spring temperature, distance from the coast and climate change were the strongest predictors for false spring risk, however, NAO and elevation also affected risk, further emphasizing the need to incorporate multiple predictors. 
+%EMWDec: Can you add 1-3 sentences after your first sentence here that review some of these papers? For example, would be great if you can give a contrasting set of studies. 
+Past studies using single parameters for false spring events \citep{Liu2018,  Vitasse2018, Ma2019, Wypych2016a} have led to contradicting predictions in future false spring risk. Some studies are finding an increased risk at higher elevations after climate change \citep{Vitasse2018}, others are finding an increase in risk only in Europe but not in other regions \citep{Liu2018}, while still others found a decrease in false spring risk across Central Europe \citep{Wypch2016a}. Research to date has also found variation in false spring risk after climate change across species \citep{Ma2019}. By integrating both climate gradients and geographical factors, we were able to disentangle the major predictors of false spring risk and merge these with species differences to determine which factors have the strongest effects on false spring risk. Mean spring temperature, distance from the coast and climate change were the strongest predictors for false spring risk, however, NAO and elevation also affected risk, emphasizing the need to incorporate multiple predictors. Further, climatic and geographic factors varied in how consistent, or not, they were across species. % EMWDec, add 'demonstrating inconsistent effects of elevation on a species' risk' from results here and an overview of which effects were consistent (magnitude/direction) or not ... e.g., XX factors were fairly/sort-of/etc. across species *and* what that may mean...
 
-\subsection*{Climate change shifts climatic and geographic effects on risk}
-The strength of these effects have changed---with a significantly decreased risk of false spring with higher NAO indices and an increased risk with warmer mean spring temperatures---since the major onset of climate change, thus studying these predictors over time is essential. These changes in the effects of NAO and mean spring temperatures suggest a shifting relationship among spring warming, budburst and false spring risk. The compounding effect of high NAO with climate-change induced warming could decrease the risk of freezing temperatures occurring in those years. Whereas with warming mean spring temperatures, individuals seem to be responding more strongly to increased spring warming with climate change (Figure S1), which results in an increased risk of exposure to false springs at these locations. 
+Since the onset of recent major climate change, the strength of these climatic and geographic effects have changed, highlighting the need to better understand and model shifting drivers of false spring. After climate change, our results show a large decrease in risk of false spring with higher NAO indices. This could be because high NAO conditions no longer lead to temperatures low enough to trigger a false spring---that is, with climate-change induced warming high NAO conditions may no longer produce the freezing temperatures needed for false springs. Conversely, we found an increased risk with warmer mean spring temperatures after climate change, which may be driven by our studied plant species responding very strongly to increased spring warming with climate change (i.e., large advances in spring phenology, Figure \ref{fig:mst}), resulting in an increased risk of exposure to false springs at these locations. Improved mechanistic models of how warming temperatures affect budburst \citep{Gauzere2017,Chuine2016} could improve our understanding of how NAO and mean spring temperatures contribute to false spring risk.  
 
-\subsection*{Variation in risk across species} %% How are we doing here?? I'm not sure how to report these findings now or I suppose, it which order. 
-Climate change resulted in marked differences in risk between the early-leafout species versus the late-leafout species. Before 1983, false spring risk was slightly higher for species initiating leafout earlier in the spring but overall the risk was more consistent across species (Figure \ref{fig:spp}E). After climate change, however, the early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}) had an increased risk, the middle-leafout species---i.e. \textit{Fagus sylvatica}---had a similar level of risk as before and the later-leafout species (i.e., \textit{Fraxinus excelsior} and \textit{Quercus robur}) had a slightly decreased risk (Figure \ref{fig:spp}E). However, this variation is simply considering the residual effects of climate change not captured by the other factors included in our model (i.e., mean spring temperature, elevation, distance from the coast and NAO indices.) Further exploration of the possible climatic factors not included in the model (e.g., over-winter chilling temperature shifts) influencing this effect are necessary for forecasting. 
+\subsection*{Variation in risk across species} 
+By integrating climatic and regional factors---e.g., elevation, distance from the coast---we can unravel phenological effects on the probability risk from the climatic and geographic factors that contribute to an individual's level of false spring risk. Due to the prominent shifts in the geographic and climatic factors (i.e., mean spring temperature, elevation, distance from the coast and NAO indices) with climate-change induced warming, we estimated a combined decrease in risk of false springs across all species after 1983, though residual (unexplained by climatic and geographic) effects of climate change resulted in marked differences in risk between early- and late-leafout species. Before 1983, false spring risk was slightly higher for species initiating leafout earlier in the spring but overall the risk was more consistent across species (Figure \ref{fig:spp}E). After climate change, however, species differences in risk amplified: the early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}) had an increased risk, the middle-leafout species---i.e. \textit{Fagus sylvatica}---had a similar level of risk as before and the later-leafout species (i.e., \textit{Fraxinus excelsior} and \textit{Quercus robur}) had a decreased risk (Figure \ref{fig:spp}E). % EMWDec: I think here is your point about magnifying species differences? If so, we need to state this more clearly for the reader. 
 
-As seen by Figure \ref{fig:boxfs}C species alone is not a sufficient predictor for false spring risk, especially when considering the combined effects of all climatic and geographic factors coupled with climate change. Simply looking at the raw number of false springs for species suggests that \textit{Fraxinus excelsior} and \textit{Quercus robur} both had similar levels of false spring risk after climate change as before (Figure \ref{fig:boxfs}C), however this conflicts with the overall model output (Figure \ref{fig:spp}E). By additionally integrating climatic and regional factors---e.g., elevation, distance from the coast---we can unravel phenological effects on the probability risk from the climatic and geographic factors that contribute to an individual's level of false spring risk, which consistently decreases across species after climate change.
+%EMWDec: Please check if my text below is correct
+Our combined estimates suggest all species have experienced a decline in false spring risk, in contrast with simple estimates of absolute changes in number of false springs across species (\ref{fig:boxfs}C).  These simple estimates, which suggested an increase in risk for early-leafout species and a decline or no change for later-leafout species, correlated more closely with estimated effects of climate change on species unexplained by climatic or geographic factors. The three early species (\textit{Betula pendula, Aesculus hippocastanum, Alnus glutinosa}) had much higher unexplained shifts in false spring with climate change than the later species (\textit{Fagus sylvatica, Quercus robur, Fraxinus excelsior}), suggesting the climatic and geographic factors we examined are better capturing variation in false spring risk for later species---and that we still fundamentally lack information on what drives false spring risk for the early-species, which are also fundamentally the species with highest risk. While our model examines the major factors expected to influence false spring risk \citep{Liu2019,Ma2019,Vitasse2018,Wypych2016a}, these results highlight the need to explore other climatic factors to improve forecasting. We expect factors that affect budburst timing, such as shifts in over-winter chilling temperature, may help explain these discrepancies, but progress will require improved models of chilling beyond the current models, which have been mainly developed for crops \citep{Luedeling2011,Dennis2003}. 
 
-Looking at our data distribution, the overall ranges of the predictors are similar across species but \textit{Betula pendula} extends to the highest elevation and latitude and spans the greatest range of distances from the coast, while \textit{Quercus robur} experiences the greatest range of mean spring temperatures. Habitat preference and range differences among the species could also explain some of the species-specific variation in the results. Within our species, \textit{Betula pendula} has the largest global distribution, extending the furthest north and east into Asia. The distribution of \textit{Fraxinus excelsior} extends the furthest south (into the northern region of Iran). Due to the limited number of species available to include in the study, we were not able to investigate inter-specific differences in traits---and explain the variation seen in the results---without introducing statisitical artefacts into such an analysis.   
+% As seen by Figure \ref{fig:boxfs}C species alone is not a sufficient predictor for false spring risk, especially when considering the combined effects of all climatic and geographic factors coupled with climate change. Simply looking at the raw number of false springs for species suggests that \textit{Fraxinus excelsior} and \textit{Quercus robur} both had similar levels of false spring risk after climate change as before (Figure \ref{fig:boxfs}C), however this conflicts with the overall model output (Figure \ref{fig:spp}E).
+
+Habitat preference and range differences among the species could also explain some of the species-specific variation in the results, but would require data on more species---and species that vary strongly in their climatic and geographic ranges---for robust analyses. The overall ranges of the predictors are similar across species, but \textit{Betula pendula} extends to the highest elevation and latitude and spans the greatest range of distances from the coast, while \textit{Quercus robur} experiences the greatest range of mean spring temperatures. Within our species, \textit{Betula pendula} has the largest global distribution, extending the furthest north and east into Asia. The distribution of \textit{Fraxinus excelsior} extends the furthest south (into the northern region of Iran). These range differences could potentially underlie the unexplained effect of climate change seen in our results and why the shifts in climatic and geographic factors did not explain much of the variation in false spring risk across species. \textit{Fagus sylvatica}) was better explained by the model and this species has a smaller range, more confined to Central Europe. Future research that captures these spatial, temporal and climatic differences across myriad of species could greatly enhance predictions and help us understand these residual effects of climate change.  
 
 \subsection*{Forecasting false springs}
-Our study does not assess the intensity or severity of the false spring events observed nor does it record the amount of damage to individuals. Additionally, there is sufficient evidence that species vary in their tolerance to minimum temperature extremes \citep{Korner2016, Lenz2013, Zhuo2018,bennett2018globtherm}. Some species or individuals may be less freeze tolerant (i.e., are damaged from higher temperatures than -2.2$^{\circ}$C), whereas other species or individuals may be able to tolerate temperatures as low as -8.5$^{\circ}$C \citep{Lenz2016}. For this reason, future models should ideally incorporate species-specific temperature thresholds to best capture the shifts in false spring risk of damage over time and space. 
+Our study shows how robust forecasting must integrate across major climatic and geographic factors that underlie false spring, and allow for variation in these factors across species and over time as warming continues. Of the five climatic and geographic factors we examined, only the effect of elevation remained constant before and after climate change. This is perhaps not surprising as climate change is shifting critical spring temperatures and reshaping the temporal and spatial dynamics of how climate effects budburst, leafout and freezing temperatures, yet it highlights the complexity that robust forecasting will require. Further, the differences we found across species suggest we can forecast some species better than others---such as \textit{Fagus sylvatica}---which experienced almost zero unexplained climate change effects, thus, risk was likely determined by the climatic and geographic factors already included in the model. % Thus, it is crucial for future studies to understand and report the combined effects of climate change with known climatic and geographic factors, to disentangle the residual effects of climate change on species-level risk not yet understood. 
 
-In general, it is important to consider the effects of climate change on both budburst and leafout, the timing when individuals are most at risk to spring freeze damage \citep{Chamberlain2019,Lenz2016} though we found that differing rates of leafout across species had minimal effects on predicting risk whereas a lower temperature threshold may have a broader impact on forecasts, with lower temperature thresholds (i.e., -5$^{\circ}$C versus -2.2$^{\circ}$C) predicting increased risk across all six study species. It is also essential to include numerous species since differences in leafout date did change the level of risk with climate change. Climate change is complicating the influence of both climatic and geographic factors and additionally magnifying species-level variation in false spring risk, plus we are still missing key components that explain this interspecific variation. Integrating these findings into future models will provide more robust forecasts and help us begin to unravel the complexities of climate change effects across species.
+Moving forward, more data on more species will be critical for estimates at community or ecosystem scales (at least in species-rich ecosystems). Related to this, more research on the effects of climate change on both budburst and leafout, the timing when individuals are most at risk to spring freeze damage \citep{Chamberlain2019,Lenz2016} and on what temperatures cause leaf damage will help better understand differences across species. Though we found that differing rates of leafout across species had minimal effects on predicting risk, we did find that the lower temperature threshold can have an impact on model estimates (and thus forecasts), with lower temperature thresholds (i.e., -5$^{\circ}$C versus -2.2$^{\circ}$C) predicting increased risk across all six study species. Our study uses an index of false spring risk, to estimate when damage may have occurred; it does not assess the intensity or severity of the false spring events observed, nor does it record the amount of damage to individuals. Other research has shown that this temperature threshold may vary importantly by species \citep{Korner2016, Lenz2013, Zhuo2018,bennett2018globtherm}. Some species or individuals may be less freeze tolerant (i.e., are damaged from higher temperatures than -2.2$^{\circ}$C), whereas other species or individuals may be able to tolerate temperatures as low as -8.5$^{\circ}$C \citep{Lenz2016}. Further, cold tolerance can be highly influenced by fall and winter climatic dynamics that influence tissue hardiness \citep{Hofmann2015, Vitasse2014, Charrier2011} and can also influence budburst timing (Morin2007). Thus, we expect these effects are likely integrated and that useful forecasting will require far better species-specific models of budburst, leafout and hardiness---including whether budburst and hardiness may be inter-related. 
+
+Our results highlight how climate change complicates forecasting through multiple levels. It has shifted the influence of climatic and geographic factors, fundamentally reshaping relationships with major climatic factors such that relationships before climate change no longer hold. It has also magnified species-level variation in false spring risk. Layered onto this complexity is unexplained variation that suggests we are missing key factors that drive interspecific variation in false spring risk. Our study focuses on one region (i.e., Central Europe) with high-quality and abundant data and we hope that our results can be applied to other systems as more and more data becomes available. Integrating these findings into future models will provide more robust forecasts and help us begin to unravel the complexities of climate change effects across species.
 
 \bibliography{..//bib/regionalrisk.bib}
 \end{document}

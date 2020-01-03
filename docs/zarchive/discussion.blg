@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: discussion_emw.aux
+The style file: ..//bib/styles/gcb.bst
+Database file #1: ..//bib/regionalrisk.bib.bib
+Warning--I didn't find a database entry for "Hofmann2015"
+You've used 16 entries,
+            2914 wiz_defined-function locations,
+            736 strings with 9657 characters,
+and the built_in function-call counts, 18992 in all, are:
+= -- 1745
+> -- 755
+< -- 1
++ -- 385
+- -- 207
+* -- 1671
+:= -- 2569
+add.period$ -- 50
+call.type$ -- 16
+change.case$ -- 145
+chr.to.int$ -- 15
+cite$ -- 16
+duplicate$ -- 1505
+empty$ -- 1557
+format.name$ -- 255
+if$ -- 3973
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 176
+newline$ -- 91
+num.names$ -- 64
+pop$ -- 452
+preamble$ -- 1
+purify$ -- 129
+quote$ -- 0
+skip$ -- 386
+stack$ -- 0
+substring$ -- 1860
+swap$ -- 446
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 144
+warning$ -- 0
+while$ -- 138
+width$ -- 0
+write$ -- 236
+(There was 1 warning)
