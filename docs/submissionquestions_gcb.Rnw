@@ -43,9 +43,18 @@
 
 \noindent \textbf{What is/are the key finding(s) that answers this question?} \\
 
+Our results highlight how climate
+change complicates forecasting through multiple levels. It has shifted
+the influence of climatic and geographic factors, fundamentally
+reshaping relationships with major climatic factors such that
+relationships before climate change no longer hold. It has also
+magnified species-level variation in false spring risk.
+
 \noindent False spring risk is changing in the face of climate change, resulting in early-leafout species having a heightened risk since the early 1980s. Some factors are better at predicting risk than others, however it is essential to include all factors to increase the accuracy of the overall model. (48 words) \\
 
 \noindent \textbf{Why is this work important and timely?}\\
+
+False spring events increased with climate change, though it was more pronounced in species that initiated budburst earlier in the season. Thus we need a better understanding of the major drivers of false spring risk, how these events are changing in duration and intensity and if there are shifts in the level of damage to individuals. Our integrated approach may help direct future modelling advancements in false spring research. We show here the importance of using multiple geographic and climatic factors in predicting false spring risk and how that risk varies across species. By using phenology data to provide a better estimate for budburst and leafout, predictions for false springs will be more accurate for inter-specific risk. Additionally, we demonstrate that incorporating all regional effects is more important than simply assessing budburst timing across species. Individuals that initiate budburst earlier in the season are not necessarily exposed to more false springs, thus, investigating site effects is essential for false spring risk in addition to day of budburst. Our results suggest there is a heightened risk of false springs with climate change for some species and that there will be complex responses to warming in the future, which could in turn, have escalating impacts on plant community dynamics and further augment climatic shifts. 
 
 \noindent Recent studies have documented the impacts of false springs but few have agreed on how risk will shift with climate change. New models, such as ours, are essential to best predict spatiotemporal, species-specific shifts in false springs, which could have escalating effects on temperate forests and ultimately augment climatic shifts. (50 words) \\
 
