@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: submissionquestions_gcb.aux
+The style file: ..//bib/styles/besjournals.bst.bst
+Database file #1: ..//bib/RegionalRisk.bib.bib
+You've used 3 entries,
+            2805 wiz_defined-function locations,
+            1061 strings with 12640 characters,
+and the built_in function-call counts, 2239 in all, are:
+= -- 160
+> -- 158
+< -- 0
++ -- 60
+- -- 58
+* -- 203
+:= -- 375
+add.period$ -- 6
+call.type$ -- 3
+change.case$ -- 34
+chr.to.int$ -- 4
+cite$ -- 3
+duplicate$ -- 143
+empty$ -- 126
+format.name$ -- 66
+if$ -- 414
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 35
+newline$ -- 13
+num.names$ -- 12
+pop$ -- 68
+preamble$ -- 1
+purify$ -- 31
+quote$ -- 0
+skip$ -- 53
+stack$ -- 0
+substring$ -- 54
+swap$ -- 84
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 27
+warning$ -- 0
+while$ -- 10
+width$ -- 0
+write$ -- 36

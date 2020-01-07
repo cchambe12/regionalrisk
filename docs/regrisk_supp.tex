@@ -81,6 +81,10 @@
 \usepackage{lineno}
 \linenumbers
 
+%cross referencing:
+\usepackage{xr}
+\externaldocument{regrisk}
+
 \newmdenv[
   topline=true,
   bottomline=true,
@@ -94,7 +98,7 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 \noindent 
-\textbf{\LARGE{Supplement: Climate change reshapes the drivers of false spring risk across European trees}} 
+\textbf{\LARGE{Supplemental Materials: Climate change reshapes the drivers of false spring risk across European trees}} 
 %\\
 %OR \\
 %\textbf{\Large{Climate change increases the risk of false springs in European trees}} \\ % Lizzie votes for the first title! Reviewers can ask you to make it more narrow so I would start here and shift to Ben's if requested ... (goal 1: get paper out for review)
@@ -120,11 +124,11 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \renewcommand{\labelitemi}{$-$}
 \setkeys{Gin}{width=0.8\textwidth}
 
-\section*{Methods: Spatial predictor} %I'm not too sure about the 'space parameter' terminology, I'd rather use either spatial or geographic predictor or proxy. I'm using spatial predictor, but all our predictors are spatial, so please feel free to change.
+\section*{Methods: Space predictor} %I'm not too sure about the 'space parameter' terminology, I'd rather use either spatial or geographic predictor or proxy. I'm using spatial predictor, but all our predictors are spatial, so please feel free to change.
 
 Spatial autocorrelation (SA) is a common issue in spatial ecology given that nearby spatial units tend to be more similar than units far apart, and thus, cannot be considered as independent units, which is a frequent assumption in statistical tests \citep{diniz2003spatial}. If model residuals are spatially autocorrelated, and thus, non-independent then model coefficients and errors may be biased in a hard-to-predict way \citep{mauricio2009coefficient}. On the contrary, if model residuals are not autocorrelated, then SA should not be of concern \citep{hawkins2012eight}.\\
 
-To control for spatial autocorrelation and to account for spatially structured processes independent from our environmental predictors of false springs, we generated an additional spatial predictor for the model. To avoid collinearity, we computed our spatial predictor from the residuals of a linear model of false springs as a function (Equation S1) of all other factors that are also spatially structured (e.g. spring temperature, altitude, distance to the coast), following the logic of spatial filter modelling \citep{diniz2005modelling}. The calculation of the spatial predictor followed the next steps: (a) we fit a linear model of false spring versus environmental factors, (b) we extracted the residuals of the regression Equation S1, which represent the portion of the variation in the number of false springs that is independent from the predictors in the model and (c) we utilized the residuals as our \textit{y\textsubscript{i}} values in a selection of spatial eigenvectors to retain only the minimal subset of spatial eigenvectors that are able to remove SA from model residuals. Specifically, we selected eigenvectors following the the minimization of Moran's \textit{I} of the residuals (MIR) approach \citep{griffith2006spatial,diniz2012selection,Baumen2017}. (d) Next, we fit a linear model between the residuals of Equation S1 and the subset of selected eigenvectors. And, finally, (e) we took the fitted values from this regression as our spatial predictor in our final model (see equation from main text, Equation 1), which can be interpreted as a latent variable summarizing the spatial structure in false springs that is unaccounted for by the rest of the environmental factors in our model \citep{morales2012imprint}. A spatial predictor generated in this way has three major advantages. First, it ensures that no SA is left in model residuals. Second, it avoids introducing collinearity issues with other predictors in the model. And third, it can be interpreted as a latent variable summarizing spatial processes (e.g. local adaptation, plasticity, etc.) occurring at multiple scales.
+To control for spatial autocorrelation and to account for spatially structured processes independent from our environmental predictors of false springs, we generated an additional spatial predictor for the model. To avoid collinearity, we computed our spatial predictor from the residuals of a linear model of false springs as a function (Equation S1) of all other factors that are also spatially structured (e.g. spring temperature, altitude, distance to the coast), following the logic of spatial filter modelling \citep{diniz2005modelling}. The calculation of the spatial predictor followed the next steps: (a) we fit a linear model of false spring versus environmental factors, (b) we extracted the residuals of the regression Equation S1, which represent the portion of the variation in the number of false springs that is independent from the predictors in the model and (c) we utilized the residuals as our \textit{y\textsubscript{i}} values in a selection of spatial eigenvectors to retain only the minimal subset of spatial eigenvectors that are able to remove SA from model residuals. Specifically, we selected eigenvectors following the the minimization of Moran's \textit{I} of the residuals (MIR) approach \citep{griffith2006spatial,diniz2012selection,Baumen2017}. (d) Next, we fit a linear model between the residuals of Equation S1 and the subset of selected eigenvectors. And, finally, (e) we took the fitted values from this regression as our spatial predictor in our final model (see equation from main text, Equation 1), which can be interpreted as a latent variable summarizing the spatial structure in false springs that is unaccounted for by the rest of the environmental factors in our model \citep{morales2012imprint}. 
 
 \begin{align*}
 y_i = \alpha_{[i]} +&  \beta_{NAO_{[i]}} + \beta_{MST_{[i]}} + \beta_{Elevation_{[i]}} + \beta_{DistanceCoast_{[i]}} \\ +& \beta_{ClimateChange_{[i]}}
@@ -140,7 +144,7 @@ Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to u
 Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
 
 %NOT SURE WHERE TO PUT THIS!!
-Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S1). 
+%Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S1). 
 
 \iffalse
 \begin{align*}
@@ -180,7 +184,7 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 
 
 \begin{center}
-\captionof{table}{Mean day of budburst and standard deviation for each species for before (1951-1983) and after climate change (1984-2016).} \label{tab:bbspp}
+\captionof{table}{Mean day of budburst and standard deviation for each species for before (1951-1983) and after recent climate change (1984-2016).} \label{tab:bbspp}
 \begin{tabular}{l c c| c c}
 \cline{2-5}
 & \multicolumn{2}{ c| }{1951-1983}
@@ -206,7 +210,7 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Dec  5 14:22:23 2019
+% Tue Jan  7 11:42:42 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of budburst before and after climate change across species.} 
@@ -233,7 +237,7 @@ Intercept & 102.27 & 102.18 & 102.36 \\
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Dec  5 14:22:24 2019
+% Tue Jan  7 11:42:43 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.} 
@@ -260,10 +264,10 @@ Intercept & 5.99 & 5.97 & 6.00 \\
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Dec  5 14:22:25 2019
+% Tue Jan  7 11:42:44 2020
 \begin{table}[H]
 \centering
-\caption{Summary of simple linear regression model of probability of false spring before and after climate change across species.} 
+\caption{Summary of simple linear regression model of the number of false springs before and after climate change across species.} 
 \label{tab:simpfs}
 \begin{tabular}{lrrr}
   \hline
@@ -288,7 +292,7 @@ Intercept & 35.76 & 35.50 & 36.00 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Dec  5 14:22:25 2019
+% Tue Jan  7 11:42:44 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.} \\ 
   \hline
@@ -402,13 +406,13 @@ Coast x Climate Change & -0.12 & -0.16 & -0.15 & -0.13 & -0.11 & -0.10 & -0.09 \
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_dvr.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 622,565 zeros and 132,463 ones for false springs in the data. See Table \ref{fig:suppmoddvr} for full model output. }\label{fig:dvr}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmoddvr} for full model output. }\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Dec  5 14:22:25 2019
+% Tue Jan  7 11:42:44 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with varying rates of leafout for each species.} \\ 
   \hline
@@ -514,13 +518,13 @@ Coast x Climate Change & -0.17 & -0.24 & -0.22 & -0.19 & -0.14 & -0.11 & -0.09 \
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_five.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. Values closer to zero have less of an effect on false springs. There were 730,996 zeros and 23,855 ones for false springs in the data. See Table \ref{fig:suppmodfive} for full model output. }\label{fig:five}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. There were 730,996 zeros and 23,855 ones for false springs in the data. See Table \ref{tab:suppmodfive} for full model output. }\label{fig:five}
   -\end{center}
   -\end{figure}}
  
 \newpage 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu Dec  5 14:22:25 2019
+% Tue Jan  7 11:42:44 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.} \\ 
   \hline

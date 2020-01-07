@@ -39,7 +39,7 @@
 
 \noindent \textbf{What is the scientific question you are addressing?} \\
 
-\noindent With climate change, there is growing interest in false spring events, which can affect both plant performance and survival. By better understanding the influence of known geographic and climatic factors for predicting false spring risk, we will be able to advance forecasting in the field.  (45 words) \\
+\noindent Since the onset of recent major climate change, there is growing interest in false spring events, which can affect both plant performance and survival. By better understanding the influence of known climatic and geographic factors for predicting false spring risk, we will be able to advance forecasting in the field.  (45 words) \\
 
 \noindent \textbf{What is/are the key finding(s) that answers this question?} \\
 
@@ -54,7 +54,7 @@
 
 \noindent \textbf{ Does your paper fall within the scope of GCB; what biological AND global change aspects does it address?}\\
 
-\noindent By investigating leafout observations of six temperate, deciduous tree species from Central Europe, we unravel the species-specific effects and multiple geographic and climatic factors on false spring risk in the face of climate change. We found that false spring events increased with climate change, especially in early-leafout species. (48 words) \\ 
+\noindent By investigating leafout observations of six temperate, deciduous tree species from Europe, we unravel the species-specific effects and multiple climatic and geographic factors on false spring risk in the face of climate change. We found that climate change reshaped the influence of these factors and magnified species-level variation in risk. (50 words) \\ 
 
 \noindent \textbf{What are the three most recently published papers that are relevant to this question?} \\
 
