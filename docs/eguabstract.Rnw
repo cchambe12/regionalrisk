@@ -1,0 +1,179 @@
+\documentclass{article}[12pt]
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{amssymb} % for math symbols
+\usepackage{amsmath} % for aligning equations
+\usepackage{mdframed}
+\usepackage{natbib}
+\bibliographystyle{..//bib/styles/gcb}
+\usepackage[hyphens]{url}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{2}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+\usepackage{setspace}
+\doublespacing
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+%cross referencing:
+\usepackage{xr}
+\externaldocument{regrisk_supp}
+
+%% R Script
+<<label=libraries, echo=FALSE, results="asis", message=FALSE, warning=FALSE>>=
+  options(stringsAsFactors=FALSE)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+@
+
+<<label=numbers, echo=FALSE, results="asis", warning=FALSE, message=FALSE,>>=
+#load models and data to report numbers of things
+options(stringsAsFactors = FALSE)
+library(brms)
+
+## Set Working Directory
+setwd("~/Documents/git/regionalrisk")
+
+load("orig_full.Rdata")
+load("dvr_full.Rdata")
+load("five_full.Rdata")
+
+fs <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
+fsfive <- read.csv("analyses/output/fs_newspace_five.csv", header=TRUE)
+
+numyrs<-length(unique(fs$year))
+numsites<-length(unique(fs$lat.long))
+
+### So if we multiply by the sd used above to change intervals and use the Divide by 4 rule:
+mat<-round((mean(fixef(orig.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2, digits=2) ## -7.638351 (vs -3.331)
+nao<-round((mean(fixef(orig.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) ## 1.915104 (vs 1.54)
+dist<-round((mean(fixef(orig.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150, digits=2) ## 5.320474 (vs 4.83)
+elev<-round((mean(fixef(orig.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200, digits=2)## 2.235522 (vs 1.89)
+
+matz<-round((mean(fixef(orig.full, pars="mat.z", summary=FALSE))), digits=2)
+naoz<-round((mean(fixef(orig.full, pars="nao.z", summary=FALSE))), digits=2)
+distz<-round((mean(fixef(orig.full, pars="dist.z", summary=FALSE))), digits=2)
+elevz<-round((mean(fixef(orig.full, pars="elev.z", summary=FALSE))), digits=2)
+
+
+aescc<-round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100,digits=2) ## 8.842486 (vs 7.225) - For AESHIP (residual not explained by regional/climatic factors)
+alncc<-round((0.42/4)/(sd(fs$cc)*2)*100, digits=2) ## 10.538 for ALNGLU - compared to 8.8 from APCs
+betcc<-round((0.41/4)/(sd(fs$cc)*2)*100, digits=2) ## 10.287 for BETPEN - compared to 8.7 from APCs
+fagcc<-round((.03/4)/(sd(fs$cc)*2)*100, digits=2) ## 0.753 for FAGSYL - compared to 0.54 from APCs
+fracc<-round((-.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.265 for FRAEXC - compared to -1.34 from APCs
+quecc<-round((-.07/4)/(sd(fs$cc)*2)*100, digits=2) ## -1.756 for QUEROB - compared to -.609 from APCs
+allcc<-round((.16/4)/(sd(fs$cc)*2)*100, digits=2) ## 4.0145 for average of all species
+allccstand<-0.16
+
+aesccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))), digits=2)
+alnccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesALNGLU", summary=FALSE))), digits=2)
+betccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesBETPEN", summary=FALSE))), digits=2)
+fagccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesFAGSYL", summary=FALSE))), digits=3)
+fraccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesFRAEXC", summary=FALSE))), digits=2)
+queccz <- round((mean(fixef(orig.full, pars="cc.z", summary=FALSE))+mean(fixef(orig.full, pars="speciesQUEROB", summary=FALSE))), digits=2)
+
+#### Total combined cc
+aescomb<-round((-0.23/4)/(sd(fs$cc)*2)*100, digits=2) ## -5.77 for AESHIP 
+alncomb<-round((-0.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.27 for ALNGLU
+betcomb<-round((-0.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.27 for BETPEN
+fagcomb<-round((-.55/4)/(sd(fs$cc)*2)*100, digits=2) ## -13.8 for FAGSYL 
+fracomb<-round((-.75/4)/(sd(fs$cc)*2)*100, digits=2) ## -18.8 for FRAEXC 
+quecomb<-round((-.64/4)/(sd(fs$cc)*2)*100, digits=2) ## -16.1 for QUEROB 
+avgcomb<-round((-.42/4)/(sd(fs$cc)*2)*100, digits=2)  ## -10.5 for average of all species
+regcc<-round((-.58/4)/(sd(fs$cc)*2)*100, digits=2) ## -14.6 for combined effects after cc of regional/climatic factors
+
+### Okay now, we can calculate the interaction effects:
+naocc<-round((mean(fixef(orig.full, pars="nao.z", summary=FALSE)+mean(fixef(orig.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) 
+matcc<-round((mean(fixef(orig.full, pars="mat.z", summary=FALSE)+mean(fixef(orig.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fs$mat)*2)*100*2, digits=2) 
+distcc<-round((mean(fixef(orig.full, pars="dist.z", summary=FALSE)+mean(fixef(orig.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fs$distkm)*2)*100*150, digits=2) 
+elevcc<-round((mean(fixef(orig.full, pars="elev.z", summary=FALSE)+mean(fixef(orig.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fs$elev)*2)*100*200, digits=2)
+
+### Same rule but for DVR:
+matdvr<-round((mean(fixef(dvr.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2, digits=2) ## -8.078 
+naodvr<-round((mean(fixef(dvr.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3, digits=2)## 2.04 
+distdvr<-round((mean(fixef(dvr.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150, digits=2) ## 5.36
+elevdvr<-round((mean(fixef(dvr.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200, digits=2) ## 1.77 
+ccdvr<-round((mean(fixef(dvr.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100, digits=2) ## 8.6
+
+### Okay now, we can calculate the interaction effects:
+naoccdvr<-round((mean(fixef(dvr.full, pars="nao.z", summary=FALSE)+mean(fixef(dvr.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fs$nao)*2)*100*0.3, digits=2)
+matccdvr<-round((mean(fixef(dvr.full, pars="mat.z", summary=FALSE)+mean(fixef(dvr.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fs$mat)*2)*100*2, digits=2) 
+distccdvr<-round((mean(fixef(dvr.full, pars="dist.z", summary=FALSE)+mean(fixef(dvr.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fs$distkm)*2)*100*150, digits=2)
+elevccdvr<-round((mean(fixef(dvr.full, pars="elev.z", summary=FALSE)+mean(fixef(dvr.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fs$elev)*2)*100*200, digits=2) 
+
+
+### Same rule but for Five model:
+matfive<-round((mean(fixef(five.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2, digits=2) ## -11.56
+naofive<-round((mean(fixef(five.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) ## 1.26
+distfive<-round((mean(fixef(five.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150, digits=2) ## 2.75
+elevfive<-round((mean(fixef(five.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200, digits=2) ## 7.35
+ccfive<-round((mean(fixef(five.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100, digits=2) ## 14.55
+allfiveccstand<-((0.58)+(0.58+0.1)+(0.58+0.07)+(0.58-0.34)+(0.58-0.47)+(0.58-0.35))/6
+allfivecc<-round((allfiveccstand/4)/(sd(fsfive$cc)*2)*100, digits=2)
+
+### Okay now, we can calculate the interaction effects:
+naoccfive<-round((mean(fixef(five.full, pars="nao.z", summary=FALSE)+mean(fixef(five.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) 
+matccfive<-round((mean(fixef(five.full, pars="mat.z", summary=FALSE)+mean(fixef(five.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fs$mat)*2)*100*2, digits=2)
+distccfive<-round((mean(fixef(five.full, pars="dist.z", summary=FALSE)+mean(fixef(five.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fs$distkm)*2)*100*150, digits=2)
+elevccfive<-round((mean(fixef(five.full, pars="elev.z", summary=FALSE)+mean(fixef(five.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fs$elev)*2)*100*200, digits=2)
+
+
+#### Simple model summaries
+setwd("~/Documents/git/regionalrisk")
+
+load("bbmod.Rdata")
+simpbb <- round(mean(fixef(bb.mod, pars="cc"), summary=FALSE), digits=2)
+
+load("tminmod.Rdata")
+simptmin <- round(mean(fixef(tmin.mod, pars="cc"), summary=FALSE), digits=2)
+
+load("fssimpmod.Rdata")
+simpfs <- round(mean(fixef(fssimp.mod, pars="cc"), summary=FALSE), digits=2)
+
+@
+
+
+\begin{document}
+
+\iffalse
+benjamin.i.cook@nasa.gov
+ignacio.moralesc@uah.es
+e.wolkovich@ubc.ca
+
+Arnold Arboretum of Harvard University, Boston, Massachusetts, United States of America (cchamberlain@g.harvard.edu)
+Organismic and Evolutionary Biology, Harvard University, Cambridge, Massachusetts, United States of America (cchamberlain@g.harvard.edu)
+NASA Goddard Institute for Space Studies, New York, New York, United States of America
+GloCEE - Global Change Ecology and Evolution Group, Department of Life Sciences, Universidad de Alcalá, Alcalá de Henares, Spain
+Department of Environmental Science and Policy, George Mason University, Fairfax, Virginia, United States of America
+Forest and Conservation Sciences, Faculty of Forestry, University of British Columbia, Vancouver, British Columbia, Canada
+\fi
+
+Temperate and boreal forests are shaped by late spring freezing events after budburst, which are also known as false springs. Research has generated conflicting results on whether or not these events will change with climate change, potentially because---to date---no study has compared the myriad climatic and geographic factors that contribute to a plant's risk of a false spring. We assessed and compared the strength of the effects of mean spring temperature, distance from the coast, elevation and the North Atlantic Oscillation (NAO) using PEP725 leafout data for six temperate, decidious tree species across 11,648 sites in Central Europe and how these predictors shifted with climate change. Across species before recent warming, mean spring temperature and distance from the coast were the strongest predictors, with higher mean spring temperatures associated with decreased risk in false springs (-\Sexpr{mat}\% per 2$^{\circ}$C increase) and sites further from the coast experiencing an increased risk (\Sexpr{dist}\% per 150km from the coast). Elevation (\Sexpr{elev}\% per 200m increase in elevation) and NAO index (\Sexpr{nao}\% per 0.3 increase) also increased false spring risk. 
+
+With climate change, elevation and distance from coast---i.e., the geographic factors---remain relatively stable, while climatic factors shifted in magnitude for mean spring temperature (down to \Sexpr{matcc}\% decrease in risk per 2$^{\circ}$C), and in direction, with positive NAO phases leading to lower risk (\Sexpr{naocc}\% decrease per 0.3). The residual effects of climate change---unexplained by the climatic and geographic factors already included in the model---magnified the species-level variation in risk, with risk increasing among early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}) but a decline or no change in risk among late-leafout species (i.e., \textit{Fagus sylvatica}, \textit{Fraxinus excelsior} and \textit{Quercus robur}). Our results show that climate change has reshaped the major drivers of false spring risk and highlight how considering multiple factors can yield a better understanding of the complexities of climate change.
+
+`We emphasize phenology informed applications for decision-making and environmental assessment, public health, agriculture and forest management, mechanistic understanding of the phenological processes, and effects of changing phenology on biomass production and carbon budgets. We also welcome contributions addressing international collaboration and program-building initiatives including citizen science networks and data analyses.'
+
+
+\end{document}
