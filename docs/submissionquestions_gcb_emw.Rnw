@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{geometry}
+\usepackage{pdflscape}
+\usepackage{mdframed}
+\usepackage{natbib}
+\usepackage{bibentry}
+\bibliographystyle{..//bib/styles/besjournals.bst}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{1.5}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+\begin{document}
+\nobibliography*
+\noindent \textbf{\Large{Climate change reshapes the drivers of false spring risk across European trees: Submission Questions (max 50 words per answer)}}\\
+\vspace{3ex}
+
+\noindent \textbf{What is the scientific question you are addressing?} \\
+
+\noindent  Recent major climate change has increased interest in false spring events, which affect both plant performance, survival and shape species distributions. We ask which climatic and geographic factors are the strongest predictors of false springs across 6 tree species, and how these predictors have shifted with climate change.  (48 words) \\
+
+\noindent \textbf{What is/are the key finding(s) that answers this question?} \\
+
+\noindent We find that climate change has fundamentally reshaped the relationships of climatic and geographic factors with false spring risk, while also magnifying species-level variation.  Our results show that a major driver of risk before recent warming---mean spring temperature---has weakened, while the effect of other drivers has reversed. (49 words) \\ % Cat -- is this correct?
+
+%\noindent False spring risk is changing in the face of climate change, resulting in early-leafout species having a heightened risk since the early 1980s. Some factors are better at predicting risk than others, however it is essential to include all factors to increase the accuracy of the overall model. (48 words) \\
+
+\noindent \textbf{Why is this work important and timely?}\\
+
+\noindent Recent studies assess the effects of one predictor (e.g. temperature, elevation or distance from the coast), rendering inconsistent predictions for false springs. Our study shows how robust forecasting must integrate major climatic and geographic factors that underlie false spring, and allow for variation across species and time as warming continues.  (50 words) \\ % nice!
+
+
+\noindent \textbf{ Does your paper fall within the scope of GCB; what biological AND global change aspects does it address?}\\
+
+\noindent By investigating leafout observations of six deciduous tree species from Europe, we unravel the species-specific effects, spring temperature, elevation, distance from the coast and NAO index on false spring risk with climate change. We found that climate-induced warming reshaped the influence of these factors. (50 words) \\ 
+
+\noindent \textbf{What are the three most recently published papers that are relevant to this question?} \\
+
+\bibentry{Ma2018}\\
+\bibentry{Liu2018}\\ 
+\bibentry{Vitasse2018}\\
+
+\noindent \textbf{ If you listed non-preferred reviewers, please provide a justification for each.} \\
+
+\noindent N/A \\
+
+\noindent \textbf{ If your manuscript does not conform to author or formatting guidelines (e.g. exceeding word limit), please provide a justification.} \\
+
+\noindent N/A \\
+
+\nobibliography{..//bib/RegionalRisk.bib}
+
+%% Additional, unused text that might be helpful:
+%False spring events increased with climate change, though it was more pronounced in species that initiated budburst earlier in the season. Thus we need a better understanding of the major drivers of false spring risk, how these events are changing in duration and intensity and if there are shifts in the level of damage to individuals. Our integrated approach may help direct future modelling advancements in false spring research. We show here the importance of using multiple geographic and climatic factors in predicting false spring risk and how that risk varies across species. By using phenology data to provide a better estimate for budburst and leafout, predictions for false springs will be more accurate for inter-specific risk. Additionally, we demonstrate that incorporating all regional effects is more important than simply assessing budburst timing across species. Individuals that initiate budburst earlier in the season are not necessarily exposed to more false springs, thus, investigating site effects is essential for false spring risk in addition to day of budburst. Our results suggest there is a heightened risk of false springs with climate change for some species and that there will be complex responses to warming in the future, which could in turn, have escalating impacts on plant community dynamics and further augment climatic shifts. 
+
+
+\end{document}
