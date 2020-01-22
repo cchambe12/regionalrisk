@@ -1,4 +1,54 @@
-\documentclass{article}
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 \usepackage{Sweave}
 \usepackage{float}
 \usepackage{graphicx}
@@ -32,6 +82,7 @@
   skipabove=\topsep,
   skipbelow=\topsep
 ]{siderules}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 \nobibliography*
 \noindent \textbf{\Large{Climate change reshapes the drivers of false spring risk across European trees: Submission Questions (max 50 words per answer)}}\\
@@ -39,17 +90,17 @@
 
 \noindent \textbf{What is the scientific question you are addressing?} \\
 
-\noindent  Recent major climate change has increased interest in false spring events, which affect plant performance, survival and shape species distributions. We ask which climatic and geographic factors are the strongest predictors of false springs across six tree species, and how these predictors have shifted with climate change.  (48 words) \\
+\noindent Since the onset of recent major climate change, there is growing interest in false spring events, which can affect both plant performance and survival. We ask which climatic and geographic factors are the strongest for predicting false springs, and how these have shifted with climate change across species.  (48 words) \\
 
 \noindent \textbf{What is/are the key finding(s) that answers this question?} \\
 
-\noindent We find that climate change has fundamentally reshaped the relationships of climatic and geographic factors with false spring risk, while also magnifying species-level variation.  Our results show that a major driver of risk before recent warming---mean spring temperature---has weakened, while the effect of other drivers has reversed. (49 words) \\ % Cat -- is this correct? Yes!
+\noindent Our results show that climate change complicates forecasting through multiple levels. It has shifted the influence of climatic and geographic factors, fundamentally reshaping relationships with major climatic factors such that relationships before climate change no longer hold. It has also magnified species-level variation in false spring risk. (47 words) \\ 
 
 %\noindent False spring risk is changing in the face of climate change, resulting in early-leafout species having a heightened risk since the early 1980s. Some factors are better at predicting risk than others, however it is essential to include all factors to increase the accuracy of the overall model. (48 words) \\
 
 \noindent \textbf{Why is this work important and timely?}\\
 
-\noindent Recent studies assess the effects of one predictor (e.g. temperature, elevation or distance from the coast), rendering inconsistent predictions for false springs. Our study shows how robust forecasting must integrate major climatic and geographic factors that underlie false spring, and allow for variation across species and time as warming continues.  (50 words) \\ % nice!
+\noindent Recent studies assess the effects of one predictor (e.g. temperature, elevation or distance from the coast), rendering inconsistent predictions for false springs. Our study shows how robust forecasting must integrate major climatic and geographic factors that underlie false spring, and allow for variation across species and time as warming continues.  (50 words) \\
 
 
 \noindent \textbf{ Does your paper fall within the scope of GCB; what biological AND global change aspects does it address?}\\
