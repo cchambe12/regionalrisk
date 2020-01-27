@@ -1,0 +1,112 @@
+\documentclass{article}[12pt]
+\usepackage{Sweave}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{amssymb} % for math symbols
+\usepackage{amsmath} % for aligning equations
+\usepackage{mdframed}
+\usepackage{natbib}
+\bibliographystyle{..//bib/styles/gcb}
+\usepackage[hyphens]{url}
+\usepackage[small]{caption}
+\setlength{\captionmargin}{30pt}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{10pt}
+\topmargin -1.5cm        
+\oddsidemargin -0.04cm   
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 21.94cm 
+%\pagestyle{empty} %comment if want page numbers
+\parskip 7.2pt
+\renewcommand{\baselinestretch}{2}
+\parindent 0pt
+\usepackage{lineno}
+\linenumbers
+\usepackage{setspace}
+\doublespacing
+
+\newmdenv[
+  topline=true,
+  bottomline=true,
+  skipabove=\topsep,
+  skipbelow=\topsep
+]{siderules}
+
+%cross referencing:
+\usepackage{xr}
+\externaldocument{regrisk_supp}
+
+%% R Script
+<<label=libraries, echo=FALSE, results="asis", message=FALSE, warning=FALSE>>=
+  options(stringsAsFactors=FALSE)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+@
+
+\begin{document}
+\noindent 
+\textbf{\LARGE{Climate change reshapes the drivers of false spring risk across European trees}} 
+%\\
+%OR \\
+%\textbf{\Large{Climate change increases the risk of false springs in European trees}} \\ % Lizzie votes for the first title! Reviewers can ask you to make it more narrow so I would start here and shift to Ben's if requested ... (goal 1: get paper out for review)
+%\textbf{\Large{False spring risk increases across European trees in the face of climate change}}
+
+
+\noindent Authors:\\
+C. J. Chamberlain $^{1,2}$, B. I. Cook $^{3}$, I. Morales-Castilla $^{4,5}$ \& E. M. Wolkovich $^{1,2,6}$
+\vspace{2ex}\\
+\emph{Author affiliations:}\\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
+$^{3}$NASA Goddard Institute for Space Studies, New York, New York, USA; \\
+$^{4}$GloCEE - Global Change Ecology and Evolution Group, Department of Life Sciences, Universidad de Alcal\'{a}, Alcal\'{a} de Henares, 28805, Spain \\
+$^{5}$Department of Environmental Science and Policy, George Mason University, Fairfax, VA 22030; \\
+$^{6}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
+\vspace{2ex}
+$^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
+
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\labelitemi}{$-$}
+\setkeys{Gin}{width=0.8\textwidth}
+
+\section*{Tables and Figures} 
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=14cm]{..//analyses/figures/BB_base.png}
+  -\caption{The average day of budburst mapped by site for each species (ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}). Species names are color-coded to match figures throughout the text. }\label{fig:bbmap}
+  -\end{center}
+  -\end{figure}}
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=14cm]{..//analyses/figures/Boxplot_BBTminFS_noDots_modests.png}
+  -\caption{Day of budburst (A.), minimum temperatures between budburst and leafout (B.) and number of false springs (C.) before and after 1983 across species for all sites. Box and whisker plots show the 25th and 75th percentiles (i.e., the interquartile range) with notches indicating 95\% uncertainty intervals. Dots and error bars overlaid on the box and whisker plots represent the model regression outputs (Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Error bars from the model regressions indicate 98\% uncertainty intervals but, given the number of sites, are quite small and thus not easily visible (see Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Species are ordered by day of budburst and are color-coded to match the other figures.  }\label{fig:boxfs}
+  % Are you sure the 'notches indicate 95\% uncertainty intervals'? If these are just plots of the RAW data then I am not sure how the box and whisker plots can generate uncertainty.... You generally need a model for that. CJC: These are the error bars from the simple models on top of the box and whisker plots. I can update the language if this is confusing!
+  -\end{center}
+  -\end{figure}}
+  
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_orig.png}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. There were 582,211 zeros and 172,877 ones for false springs in the data. See Table \ref{tab:suppmodorig} for full model output.}\label{fig:maineffects}
+  -\end{center}
+  -\end{figure}}
+
+  
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//analyses/figures/InteractionPlots/Species_orig_98.pdf}
+  -\caption{Species-level variation across geographic and spatial predictors (i.e., mean spring temperature (A.), distance from the coast (B.), elevation (C.), and NAO index (D.)). Lines and shading are the mean and 98\% uncertainty intervals for each species. To reflect the raw data, we converted the model output back to the original scale for the x-axis in each panel. See Table \ref{tab:suppmodorig} for full model output. }\label{fig:spp}
+  -\end{center}
+  -\end{figure}}
+
+
+
+\end{document}
