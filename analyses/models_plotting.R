@@ -15,6 +15,7 @@ library(RColorBrewer)
 #library(sjPlot)
 library(ggeffects)
 library(broom)
+library(dplyr)
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
 bb <- read.csv("fs_newspace_orig.csv", header=TRUE)
@@ -148,7 +149,7 @@ ccsp$group<-ifelse(ccsp$group=="FRAEXC", "zFRAEXC", ccsp$group)
 ccsp$x <- ifelse(ccsp$x <0, 0, 1)
 ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ geom_line(aes(col=group), linetype="dotted") + 
   xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("E.") + 
-  scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1)) +
+  scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1),labels=c("1951-1983","1984-2016")) +
   #geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,0.4))  + theme(legend.key = element_rect(fill="transparent")) +
   theme_classic() + theme(legend.position = "none") + 
@@ -338,6 +339,7 @@ modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "7
 
 ### Now to make the plots
 modoutput <- modfive98 #modelhere
+cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
 modoutput<-modoutput[1:47,]
@@ -481,7 +483,7 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
   geom_segment(arrow = arrow(length = unit(0.00, "npc")), aes(col=species, alpha=species)) +
   guides(size=FALSE) +
   scale_y_discrete(limits = sort(unique(modoutput$termclean)), labels=estimates) +
-  xlab("Change in Number of False Springs") + ylab("") + theme_linedraw() +
+  xlab("Change in Probability of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
