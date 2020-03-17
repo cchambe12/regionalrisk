@@ -240,7 +240,8 @@ distances <- ggplot(distxcc, aes(x=dist_trans, y=fsmean_trans)) + geom_line(aes(
                                "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   ylab("Probability of False Spring") + coord_cartesian(ylim = c(0, 1), expand=c(0, 0)) + guides(fill=FALSE, col=FALSE) +
-  theme(legend.text.align = 0, legend.position = c(0.85, 0.85)) + ggtitle("B.")
+  theme(legend.text.align = 0, legend.position = c(0.85, 0.85),
+        plot.title = element_text(face="bold")) + ggtitle("(b)")
 
 
 ####################### Now for MEAN SPRING TEMPERATURE ###################
@@ -422,7 +423,8 @@ meantemp <- ggplot(matxcc, aes(x=mat_trans, y=fsmean_trans)) + geom_line(aes(lin
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   ylab("Probability of False Spring") + coord_cartesian(ylim = c(0, 1), expand=c(0, 0)) + guides(fill=FALSE) +
-  theme(legend.text.align = 0, legend.position="none") + ggtitle("A.")
+  theme(legend.text.align = 0, plot.title = element_text(face="bold"),
+        legend.position="none") + ggtitle("(a)")
 
 ####################### Now for ELEVATION ###################
 newelev <- seq(from=range(bb$elev.z)[1], to=range(bb$elev.z)[2], length.out=200)  
@@ -603,7 +605,8 @@ elevations <- ggplot(elevxcc, aes(x=elev_trans, y=fsmean_trans)) + geom_line(aes
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   ylab("Probability of False Spring") + coord_cartesian(ylim = c(0, 1), expand=c(0, 0)) + guides(fill=FALSE) +
-  theme(legend.text.align = 0, legend.position = "none") + ggtitle("C.")
+  theme(legend.text.align = 0, plot.title = element_text(face="bold"),
+        legend.position = "none") + ggtitle("(c)")
 
 ####################### Now for NAO ###################
 newnao <- seq(from=range(bb$nao.z)[1], to=range(bb$nao.z)[2], length.out=200)  
@@ -784,9 +787,11 @@ naoindex <- ggplot(naoxcc, aes(x=nao_trans, y=fsmean_trans)) + geom_line(aes(lin
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) +
+  ggtitle("(d)") +
   ylab("Probability of False Spring") + coord_cartesian(ylim = c(0, 1), expand=c(0, 0)) + guides(fill=FALSE, linetype=FALSE, alpha=FALSE) +
-  theme(legend.text.align = 0, legend.position = "none") + 
-  ggtitle("D.")
+  theme(legend.text.align = 0,
+        legend.position = "none",
+        plot.title = element_text(face="bold")) 
 
 if(TRUE){
 g_legend<-function(a.gplot){

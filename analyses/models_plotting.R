@@ -38,7 +38,8 @@ naosp0$group<-ifelse(naosp0$group=="BETPEN", "aaBETPEN", naosp0$group)
 naosp0$group<-ifelse(naosp0$group=="FRAEXC", "zFRAEXC", naosp0$group)
 naosp0$x <- (naosp0$x)*sd(bb$nao)*2 + mean(bb$nao)
 naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("NAO Index") + 
-  ylab("Probability of False Spring") + ggtitle("D.") + theme_classic() + theme(legend.position = "none") + 
+  ylab("Probability of False Spring") + ggtitle("(d)") + theme_classic() + theme(legend.position = "none",
+                                                                                              plot.title = element_text(face="bold")) + 
   scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,0.4)) +
@@ -66,7 +67,8 @@ elevsp$group<-ifelse(elevsp$group=="BETPEN", "aaBETPEN", elevsp$group)
 elevsp$group<-ifelse(elevsp$group=="FRAEXC", "zFRAEXC", elevsp$group)
 elevsp$x <- ((elevsp$x)*sd(bb$elev)*2) + mean(bb$elev)
 elevsp.p<-ggplot(elevsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Elevation (m)") + 
-  ylab("Probability of False Spring") + ggtitle("C.") + theme_classic() + theme(legend.position = "none") + 
+  ylab("Probability of False Spring") + ggtitle("(c)") + theme_classic() + theme(legend.position = "none",
+                                                                                              plot.title = element_text(face="bold")) + 
   scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) +
@@ -93,7 +95,8 @@ matsp$group<-ifelse(matsp$group=="BETPEN", "aaBETPEN", matsp$group)
 matsp$group<-ifelse(matsp$group=="FRAEXC", "zFRAEXC", matsp$group)
 matsp$x <- (matsp$x)*sd(bb$mst)*2 + mean(bb$mst)
 matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Mean Spring \nTemperature (°C)") + 
-  ylab("Probability of False Spring") + ggtitle("A.") + theme_classic()+ theme(legend.position = "none") + 
+  ylab("Probability of False Spring") + ggtitle("(a)") + theme_classic()+ theme(legend.position = "none",
+                                                                                             plot.title = element_text(face="bold")) + 
   scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) +
@@ -121,10 +124,11 @@ spacesp$group<-ifelse(spacesp$group=="BETPEN", "aaBETPEN", spacesp$group)
 spacesp$group<-ifelse(spacesp$group=="FRAEXC", "zFRAEXC", spacesp$group)
 spacesp$x <- (spacesp$x)*sd(bb$distkm)*2 + mean(bb$distkm)
 spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Distance from Coast (km)") + ylab("Probability of False Spring") + 
-  ggtitle("B.") + scale_y_continuous(expand = c(0, 0)) + 
+  ggtitle("(b)") + scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) + 
-  theme_classic() + theme(legend.position = "none") + 
+  theme_classic() + theme(legend.position = "none",
+                          plot.title = element_text(face="bold")) + 
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
@@ -148,11 +152,12 @@ ccsp$group<-ifelse(ccsp$group=="BETPEN", "aaBETPEN", ccsp$group)
 ccsp$group<-ifelse(ccsp$group=="FRAEXC", "zFRAEXC", ccsp$group)
 ccsp$x <- ifelse(ccsp$x <0, 0, 1)
 ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ geom_line(aes(col=group), linetype="dotted") + 
-  xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("E.") + 
+  xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("(e)") + 
   scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1),labels=c("1951-1983","1984-2016")) +
   #geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,0.4))  + theme(legend.key = element_rect(fill="transparent")) +
-  theme_classic() + theme(legend.position = "none") + 
+  theme_classic() + theme(legend.position = "none",
+                          plot.title = element_text(face="bold")) + 
   theme(legend.text.align = 0) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -180,7 +185,19 @@ mylegend<-g_legend(ccsp.p)
 quartz()
 g1<-grid.arrange(matsp.p, spacesp.p, elevsp.p, ncol=3, widths=c(1.5, 1.5, 1.5))
 g2<-grid.arrange(naosp.p, ccsp.p, mylegend, ncol=3, widths=c(1.5,1.5,1))
+spplot<-grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
+
+png("~/Documents/git/regionalrisk/analyses/figures/InteractionPlots/Species_orig.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=7,
+    height=6, units="in", res = 350 )
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
+dev.off()
+
+png("~/Documents/git/regionalrisk/analyses/figures/Figure4.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=7,
+    height=6, units="in", res = 350 )
+grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
+dev.off()
 
 
 ############################# Now interaction plots with CC ##################################
@@ -194,10 +211,11 @@ nao<-read.csv("~/Documents/git/regionalrisk/analyses/output/naopredict_98.csv", 
 nao$group<-as.character(nao$group)
 nao$x <- (nao$x)*sd(bb$nao)*2 + mean(bb$nao)
 nao.p<- ggplot(nao, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("NAO") + 
-  ylab("Probability of \nFalse Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
+  ylab("Probability of \nFalse Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none",
+                                                                                plot.title = element_text(face="bold")) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   #scale_y_continuous(expand = c(0, 0)) + 
-  coord_cartesian(ylim=c(0,1)) + ggtitle("D.") +
+  coord_cartesian(ylim=c(0,1)) + ggtitle("(d)") +
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459191120180519"="1950-1983",
                               "0.544434894155798"="1984-2016")) +
@@ -212,10 +230,11 @@ elev<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevpredict_98.csv"
 elev$group<-as.character(elev$group)
 elev$x <- (elev$x)*sd(bb$elev)*2 + mean(bb$elev)
 elev.p<- ggplot(elev, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Elevation (m)") + 
-  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") +
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none",
+                                                                              plot.title = element_text(face="bold")) +
   #scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
-  coord_cartesian(ylim=c(0,1)) + ggtitle("C.") +
+  coord_cartesian(ylim=c(0,1)) + ggtitle("(c)") +
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459191120180519"="1950-1983",
                               "0.544434894155798"="1984-2016")) +
@@ -230,10 +249,11 @@ mat<-read.csv("~/Documents/git/regionalrisk/analyses/output/matpredict_98.csv", 
 mat$group<-as.character(mat$group)
 mat$x <- (mat$x)*sd(bb$mst)*2 + mean(bb$mst)
 mat.p<- ggplot(mat, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Mean Spring Temperature (°C)") + 
-  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none") + 
+  ylab("Probability of False Spring") + ggtitle("") + theme_classic() + theme(legend.position = "none",
+                                                                              plot.title = element_text(face="bold")) + 
   #scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
-  coord_cartesian(ylim=c(0,1)) + ggtitle("A.") +
+  coord_cartesian(ylim=c(0,1)) + ggtitle("(a)") +
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459191120180519"="1950-1983",
                               "0.544434894155798"="1984-2016")) +
@@ -248,9 +268,10 @@ dist<-read.csv("~/Documents/git/regionalrisk/analyses/output/distpredict_98.csv"
 dist$group<-as.character(dist$group)
 dist$x <- (dist$x)*sd(bb$distkm)*2 + mean(bb$distkm)
 dist.p<- ggplot(dist, aes(x=x, y=predicted, col=group)) + geom_line(aes(col=group)) + xlab("Distance from Coast (km)") + ylab("Probability of \nFalse Spring") + 
-  ggtitle("B.") + theme_classic() + #scale_y_continuous(expand = c(0, 0)) + 
+  ggtitle("(b)") + theme_classic() + #scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
-  coord_cartesian(ylim=c(0,1)) + theme(legend.position = "none") +
+  coord_cartesian(ylim=c(0,1)) + theme(legend.position = "none",
+                                       plot.title = element_text(face="bold")) +
   scale_color_manual(name="Climate Change", values=colz,
                      labels=c("-0.459191120180519"="1950-1983",
                               "0.544434894155798"="1984-2016")) +
@@ -270,6 +291,18 @@ quartz()
 g1<-ggarrange(mat.p, dist.p, ncol=2, widths=c(1.5,1.5))
 g2<-grid.arrange(elev.p, nao.p, mylegend, ncol=3, widths=c(1, 1, 0.5))
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
+
+png("~/Documents/git/regionalrisk/analyses/figures/InteractionPlots/Species_orig.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=7,
+    height=6, units="in", res = 350 )
+grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
+dev.off()
+
+png("~/Documents/git/regionalrisk/analyses/figures/Figure4.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=7,
+    height=6, units="in", res = 350 )
+grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
+dev.off()
 
 
 ########################################################################################

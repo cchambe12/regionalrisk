@@ -86,7 +86,7 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=14cm]{..//analyses/figures/Boxplot_BBTminFS_noDots_modests.png}
-  -\caption{Day of budburst (A.), minimum temperatures between budburst and leafout (B.) and number of false springs (C.) before and after 1983 across species for all sites. Box and whisker plots show the 25th and 75th percentiles (i.e., the interquartile range) with notches indicating 95\% uncertainty intervals. Dots and error bars overlaid on the box and whisker plots represent the model regression outputs (Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Error bars from the model regressions indicate 98\% uncertainty intervals but, given the number of sites, are quite small and thus not easily visible (see Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Species are ordered by day of budburst and are color-coded to match the other figures.  }\label{fig:boxfs}
+  -\caption{Day of budburst (\textbf{a}), minimum temperatures between budburst and leafout (\textbf{b}) and number of false springs (\textbf{c}) before and after 1983 across species for all sites. Box and whisker plots show the 25th and 75th percentiles (i.e., the interquartile range) with notches indicating 95\% uncertainty intervals. Dots and error bars overlaid on the box and whisker plots represent the model regression outputs (Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Error bars from the model regressions indicate 98\% uncertainty intervals but, given the number of sites, are quite small and thus not easily visible (see Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Species are ordered by day of budburst and are color-coded to match the other figures.  }\label{fig:boxfs}
   % Are you sure the 'notches indicate 95\% uncertainty intervals'? If these are just plots of the RAW data then I am not sure how the box and whisker plots can generate uncertainty.... You generally need a model for that. CJC: These are the error bars from the simple models on top of the box and whisker plots. I can update the language if this is confusing!
   -\end{center}
   -\end{figure}}
@@ -102,8 +102,8 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/InteractionPlots/Species_orig_98.pdf}
-  -\caption{Species-level variation across geographic and spatial predictors (i.e., mean spring temperature (A.), distance from the coast (B.), elevation (C.), and NAO index (D.)). Lines and shading are the mean and 98\% uncertainty intervals for each species. To reflect the raw data, we converted the model output back to the original scale for the x-axis in each panel. See Table \ref{tab:suppmodorig} for full model output. }\label{fig:spp}
+  -\includegraphics[width=16cm]{..//analyses/figures/InteractionPlots/Species_orig.png}
+  -\caption{Species-level variation across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), and NAO index (\textbf{d})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To reflect the raw data, we converted the model output back to the original scale for the x-axis in each panel. See Table \ref{tab:suppmodorig} for full model output. }\label{fig:spp}
   -\end{center}
   -\end{figure}}
 
