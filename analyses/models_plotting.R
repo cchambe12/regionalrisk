@@ -188,13 +188,13 @@ g2<-grid.arrange(naosp.p, ccsp.p, mylegend, ncol=3, widths=c(1.5,1.5,1))
 spplot<-grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 
 png("~/Documents/git/regionalrisk/analyses/figures/InteractionPlots/Species_orig.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
-    width=7,
+    width=9,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 dev.off()
 
-png("~/Documents/git/regionalrisk/analyses/figures/Figure4.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
-    width=7,
+png("~/Documents/git/regionalrisk/analyses/figures/Figure5.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=9,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 dev.off()
@@ -293,13 +293,13 @@ g2<-grid.arrange(elev.p, nao.p, mylegend, ncol=3, widths=c(1, 1, 0.5))
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 
 png("~/Documents/git/regionalrisk/analyses/figures/InteractionPlots/Species_orig.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
-    width=7,
+    width=8,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 dev.off()
 
-png("~/Documents/git/regionalrisk/analyses/figures/Figure4.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
-    width=7,
+tiff("~/Documents/git/regionalrisk/analyses/figures/Figure5.tiff", ### makes it a nice tiff and saves it so it doesn't take forever to load as a pdf!
+    width=8,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 dev.off()
@@ -371,7 +371,7 @@ modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "7
 
 
 ### Now to make the plots
-modoutput <- modfive98 #modelhere
+modoutput <- moddvr98 #modelhere
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
@@ -523,14 +523,14 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
+  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
   annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
-  annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
-  #annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
-  annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
-  #annotate("text", x = 0.55, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
-  annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR FIVE
-  #annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR DVR AND ORIG
+  #annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
+  annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
+  #annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
+  annotate("text", x = 0.55, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
+  #annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR FIVE
+  annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR DVR AND ORIG
   scale_color_manual(name="Species", values=c("black", cols), labels=c("aaall"="Overall estimate",
                                                               "aaBETPEN"=expression(paste(italic("Betula pendula"))),
                                                               "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
@@ -558,7 +558,7 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
 #regrisk
 
 
-png("analyses/figures/model_output_98_five.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("analyses/figures/model_output_98_dvr.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
 grid.arrange(regrisk)
