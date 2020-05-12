@@ -46,7 +46,7 @@ dx<-dplyr::select(dx, -date)
 
 x<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 
-write.csv(x, file="/n/wolkovich_lab/Lab/Cat/allspp_data.csv", row.names=FALSE)
+write.csv(x, file="/n/wolkovich_lab/Lab/Cat/allspp_data_fullleaf.csv", row.names=FALSE)
 #write.csv(x, file="~/Desktop/allspp_data.csv", row.names=FALSE)
 
 x$fs<- ifelse(x$Tmin<=-2.2, 1, 0)

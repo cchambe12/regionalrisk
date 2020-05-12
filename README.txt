@@ -20,15 +20,19 @@ https://github.com/cchambe12/regionalrisk
 
 ** Step 3: analyses/countfalsesprings
 	* Again, choose script that matches model of interest
+	* This takes a long time and should be run in cluster
 
 ** Step 4: analyses/addin_allpreds
 	** First, must run gdistance.R, meanspringtemp.R, and nao.R
-	** Then, run spaceprep.R
+		******** NOTE! ggdistance.R, meanspringtemp.R and nao.R are already prepared and do not have to be rerun, regardless of new model, unless you decide to 				use different months for MST!
+	** Then, run spaceprep.R 
 	** Then, go to the `mir' folder
 		* run whichever model you are interested in
+		* This takes a long time and should be run in cluster
 
 ** Step 5: analyses/models
 	* Now you can run your model
+	* This takes a long time and should be run in cluster
 
 <><><><><><><><><><><><><><><><
 Details on files for model prep

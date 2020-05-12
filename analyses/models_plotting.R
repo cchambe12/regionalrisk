@@ -18,11 +18,13 @@ library(broom)
 library(dplyr)
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
-bb <- read.csv("fs_newspace_orig.csv", header=TRUE)
+#bb <- read.csv("fs_newspace_orig.csv", header=TRUE)
+bb <- read.csv("fs_newspace_fullleaf.csv", header=TRUE)
 
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
-load("~/Documents/git/regionalrisk/orig_full.Rdata")
+#load("~/Documents/git/regionalrisk/orig_full.Rdata")
+load("~/Documents/git/regionalrisk/fullleaf_full.Rdata")
 
 ##### Interaction Plots code
 
@@ -30,10 +32,13 @@ load("~/Documents/git/regionalrisk/orig_full.Rdata")
 ################### Original - predictors with species ##############################################
 
 #naosp<- ggpredict(orig.full, terms = c("nao.z", "species"), ci.lvl=0.98) 
+#naosp<- ggpredict(fullleaf.full, terms = c("nao.z", "species"), ci.lvl=0.98) 
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_90.csv", row.names = FALSE)
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_50.csv", row.names = FALSE)
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98.csv", row.names = FALSE)
-naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98.csv", header=TRUE)
+#write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98_fullleaf.csv", row.names = FALSE)
+#naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98.csv", header=TRUE)
+naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98_fullleaf.csv", header=TRUE)
 naosp0$group<-ifelse(naosp0$group=="BETPEN", "aaBETPEN", naosp0$group)
 naosp0$group<-ifelse(naosp0$group=="FRAEXC", "zFRAEXC", naosp0$group)
 naosp0$x <- (naosp0$x)*sd(bb$nao)*2 + mean(bb$nao)
@@ -59,10 +64,13 @@ naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab
                              "QUEROB"=expression(paste(italic("Quercus robur")))))
 
 #elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.98) 
+elevsp<- ggpredict(fullleaf.full, terms = c("elev.z", "species"), ci.lvl=0.98) 
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_90.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98.csv", row.names = FALSE)
-elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98.csv", header=TRUE)
+#write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98_fullleaf.csv", row.names = FALSE)
+#elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98.csv", header=TRUE)
+elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98_fullleaf.csv", header=TRUE)
 elevsp$group<-ifelse(elevsp$group=="BETPEN", "aaBETPEN", elevsp$group)
 elevsp$group<-ifelse(elevsp$group=="FRAEXC", "zFRAEXC", elevsp$group)
 elevsp$x <- ((elevsp$x)*sd(bb$elev)*2) + mean(bb$elev)
@@ -87,10 +95,13 @@ elevsp.p<-ggplot(elevsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xla
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 #matsp<- ggpredict(orig.full, terms = c("mat.z", "species"), ci.lvl = 0.98) 
+#matsp<- ggpredict(fullleaf.full, terms = c("mat.z", "species"), ci.lvl = 0.98) 
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted.csv", row.names = FALSE)
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_50.csv", row.names = FALSE)
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98.csv", row.names = FALSE)
-matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98.csv", header=TRUE)
+#write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98_fullleaf.csv", row.names = FALSE)
+#matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98.csv", header=TRUE)
+matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98_fullleaf.csv", header=TRUE)
 matsp$group<-ifelse(matsp$group=="BETPEN", "aaBETPEN", matsp$group)
 matsp$group<-ifelse(matsp$group=="FRAEXC", "zFRAEXC", matsp$group)
 matsp$x <- (matsp$x)*sd(bb$mst)*2 + mean(bb$mst)
@@ -114,12 +125,15 @@ matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab(
                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
-#load("~/Documents/git/regionalrisk/orig_full.Rdata")
+
 #spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.98) 
+#spacesp<- ggpredict(fullleaf.full, terms = c("dist.z", "species"), ci.lvl = 0.98) 
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_90.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98.csv", row.names = FALSE)
-spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98.csv", header=TRUE)
+#write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98_fullleaf.csv", row.names = FALSE)
+#spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98.csv", header=TRUE)
+spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98_fullleaf.csv", header=TRUE)
 spacesp$group<-ifelse(spacesp$group=="BETPEN", "aaBETPEN", spacesp$group)
 spacesp$group<-ifelse(spacesp$group=="FRAEXC", "zFRAEXC", spacesp$group)
 spacesp$x <- (spacesp$x)*sd(bb$distkm)*2 + mean(bb$distkm)
@@ -144,10 +158,13 @@ spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + x
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 #ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.98) 
+#ccsp<- ggpredict(fullleaf.full, terms = c("cc.z", "species"), ci.lvl = 0.98) 
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_90.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_50.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98.csv", row.names = FALSE)
-ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98.csv", header=TRUE)
+#write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98_fullleaf.csv", row.names = FALSE)
+#ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98.csv", header=TRUE)
+ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98_fullleaf.csv", header=TRUE)
 ccsp$group<-ifelse(ccsp$group=="BETPEN", "aaBETPEN", ccsp$group)
 ccsp$group<-ifelse(ccsp$group=="FRAEXC", "zFRAEXC", ccsp$group)
 ccsp$x <- ifelse(ccsp$x <0, 0, 1)
@@ -187,7 +204,7 @@ g1<-grid.arrange(matsp.p, spacesp.p, elevsp.p, ncol=3, widths=c(1.5, 1.5, 1.5))
 g2<-grid.arrange(naosp.p, ccsp.p, mylegend, ncol=3, widths=c(1.5,1.5,1))
 spplot<-grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 
-png("~/Documents/git/regionalrisk/analyses/figures/InteractionPlots/Species_orig.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("~/Documents/git/regionalrisk/analyses/figures/InteractionPlots/Species_fullleaf.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=9,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))

@@ -39,9 +39,9 @@ df<-d%>%
   rename(lat=LAT)%>%
   rename(long=LON)
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
-df$bb<-df$bb-7
-df$lo<-df$bb + 30
-df$lo <- ifelse(df$lo>=212, 212, df$lo)
+#df$bb<-df$bb-7
+df$lo<-df$bb + 12 ## was + 30 for Yann and Frederick 
+#df$lo <- ifelse(df$lo>=212, 212, df$lo)
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, bb, lo, species)
 df$pep.year<-paste(df$year, df$PEP_ID, df$species)
 
