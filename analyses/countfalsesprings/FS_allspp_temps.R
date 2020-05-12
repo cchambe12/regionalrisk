@@ -8,7 +8,7 @@ library(raster)
 library(reshape2)
 library(data.table)
 
-if(FALSE){
+
 dxx<-read.csv("/n/wolkovich_lab/Lab/Cat/allspp_climateprep.csv", header=TRUE)
 #dxx<-read.csv("~/Desktop/allspp_climateprep.csv", header=TRUE)
 
@@ -47,12 +47,11 @@ dx<-dplyr::select(dx, -date)
 
 x<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 
-write.csv(x, file="/n/wolkovich_lab/Lab/Cat/allspp_data_origtemps.csv", row.names=FALSE)
+#write.csv(x, file="/n/wolkovich_lab/Lab/Cat/allspp_data_origtemps.csv", row.names=FALSE)
 #write.csv(x, file="~/Desktop/allspp_data.csv", row.names=FALSE)
-}
 
-x <- read.csv("/n/wolkovich_lab/Lab/Cat/allspp_data.csv", header=TRUE)
-x <-read.csv("~/Desktop/allspp_data.csv")
+#x <- read.csv("/n/wolkovich_lab/Lab/Cat/allspp_data.csv", header=TRUE)
+#x <-read.csv("~/Desktop/allspp_data.csv")
 
 if(FALSE){
 x$fs <- ifelse(x$Tmin <= -2.2, 1, 0)
