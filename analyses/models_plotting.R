@@ -21,7 +21,7 @@ setwd("~/Documents/git/regionalrisk/analyses/output")
 #bb <- read.csv("fs_newspace_orig.csv", header=TRUE)
 bb <- read.csv("fs_newspace_fullleaf.csv", header=TRUE)
 
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <- colorRampPalette(brewer.pal(8,"Dark2"))(6)
 
 #load("~/Documents/git/regionalrisk/orig_full.Rdata")
 load("~/Documents/git/regionalrisk/fullleaf_full.Rdata")
@@ -32,7 +32,7 @@ load("~/Documents/git/regionalrisk/fullleaf_full.Rdata")
 ################### Original - predictors with species ##############################################
 
 #naosp<- ggpredict(orig.full, terms = c("nao.z", "species"), ci.lvl=0.98) 
-#naosp<- ggpredict(fullleaf.full, terms = c("nao.z", "species"), ci.lvl=0.98) 
+#naosp<- ggpredict(fullleaf.full, terms = c("nao.z [all]", "species"), ci.lvl=0.98) 
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_90.csv", row.names = FALSE)
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_50.csv", row.names = FALSE)
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98.csv", row.names = FALSE)
@@ -64,7 +64,7 @@ naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab
                              "QUEROB"=expression(paste(italic("Quercus robur")))))
 
 #elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.98) 
-elevsp<- ggpredict(fullleaf.full, terms = c("elev.z", "species"), ci.lvl=0.98) 
+elevsp<- ggpredict(fullleaf.full, terms = c("elev.z [all]", "species"), ci.lvl=0.98) 
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_90.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98.csv", row.names = FALSE)
@@ -95,7 +95,7 @@ elevsp.p<-ggplot(elevsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xla
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 #matsp<- ggpredict(orig.full, terms = c("mat.z", "species"), ci.lvl = 0.98) 
-#matsp<- ggpredict(fullleaf.full, terms = c("mat.z", "species"), ci.lvl = 0.98) 
+#matsp<- ggpredict(fullleaf.full, terms = c("mat.z [all]", "species"), ci.lvl = 0.98) 
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted.csv", row.names = FALSE)
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_50.csv", row.names = FALSE)
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98.csv", row.names = FALSE)
@@ -127,7 +127,7 @@ matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab(
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 
 #spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.98) 
-#spacesp<- ggpredict(fullleaf.full, terms = c("dist.z", "species"), ci.lvl = 0.98) 
+#spacesp<- ggpredict(fullleaf.full, terms = c("dist.z [all]", "species"), ci.lvl = 0.98) 
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_90.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98.csv", row.names = FALSE)
@@ -158,7 +158,7 @@ spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + x
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 #ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.98) 
-#ccsp<- ggpredict(fullleaf.full, terms = c("cc.z", "species"), ci.lvl = 0.98) 
+#ccsp<- ggpredict(fullleaf.full, terms = c("cc.z [all]", "species"), ci.lvl = 0.98) 
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_90.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_50.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98.csv", row.names = FALSE)
@@ -379,17 +379,16 @@ names(modfullleaf)<-c("term", "estimate", "error", "10%", "90%")
 modfullleaf50<-as.data.frame(tidy(fullleaf.full, prob=0.5))
 names(modfullleaf50)<-c("term", "estimate", "error", "25%", "75%")
 modfullleaf <- full_join(modfullleaf, modfullleaf50)
-#modfive25<-as.data.frame(tidy(five.full, prob=0.25))
-#names(modfive25)<-c("term", "estimate", "error", "25%", "75%")
-#modfive <- full_join(modfive, modfive25)
-modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "10%", "25%", "75%", "90%"))
-#write.csv(modfullleaf, file="analyses/output/fullleaf_full_modeloutput.csv", row.names=FALSE)
+modfullleaf98<-as.data.frame(tidy(fullleaf.full, prob=0.98))
+names(modfullleaf98)<-c("term", "estimate", "error", "2%", "98%")
+modfullleaf <- full_join(modfullleaf, modfullleaf98)
+modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+write.csv(modfullleaf, file="~/Documents/git/regionalrisk/analyses/output/fullleaf_full_modeloutput.csv", row.names=FALSE)
 }
 
 
 ### Now to make the plots
 modoutput <- moddvr98 #modelhere
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
 modoutput<-modoutput[1:47,]
@@ -402,88 +401,26 @@ modoutput<-modoutput[!(modoutput$term=="sd_species__nao.z" | modoutput$term=="sd
 
 
 modoutput$species <- ifelse(grepl("species",modoutput$term),gsub(".*species", "", modoutput$term), modoutput$term)
-makeaeship <- c("nao.z", "mat.z", "dist.z", "elev.z", "space.z", "cc.z")
+makeaeship <- c("nao.z", "mat.z", "dist.z", "elev.z", "space.z", "cc.z", "nao.z:cc.z", "mat.z:cc.z", "dist.z:cc.z", "elev.z:cc.z", "space.z:cc.z")
 modoutput$species <- ifelse(modoutput$term%in%makeaeship, "AESHIP", modoutput$species)
 
-modoutput$termclean <- gsub(":species.*", "", modoutput$term)
+modoutput <- modoutput[(modoutput$species=="AESHIP"),]
 
-modoutput$estclean <- NA
-modoutput$estclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
-                             modoutput$estimate[(modoutput$term=="mat.z")]+
-                               modoutput$estimate, modoutput$estimate)
-modoutput$estclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
-                             modoutput$estimate[(modoutput$term=="nao.z")]+
-                               modoutput$estimate, modoutput$estclean)
-modoutput$estclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
-                             modoutput$estimate[(modoutput$term=="dist.z")]+
-                               modoutput$estimate, modoutput$estclean)
-modoutput$estclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
-                             modoutput$estimate[(modoutput$term=="elev.z")]+
-                               modoutput$estimate, modoutput$estclean)
-modoutput$estclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
-                             modoutput$estimate[(modoutput$term=="space.z")]+
-                               modoutput$estimate, modoutput$estclean)
-modoutput$estclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
-                             modoutput$estimate[(modoutput$term=="cc.z")]+
-                               modoutput$estimate, modoutput$estclean)
 
-modoutput$lowclean <- NA
-modoutput$lowclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
-                             modoutput$'2%'[(modoutput$term=="mat.z")]+
-                               modoutput$'2%', modoutput$'2%')
-modoutput$lowclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
-                             modoutput$'2%'[(modoutput$term=="nao.z")]+
-                               modoutput$'2%', modoutput$lowclean)
-modoutput$lowclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
-                             modoutput$'2%'[(modoutput$term=="dist.z")]+
-                               modoutput$'2%', modoutput$lowclean)
-modoutput$lowclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
-                             modoutput$'2%'[(modoutput$term=="elev.z")]+
-                               modoutput$'2%', modoutput$lowclean)
-modoutput$lowclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
-                             modoutput$'2%'[(modoutput$term=="space.z")]+
-                               modoutput$'2%', modoutput$lowclean)
-modoutput$lowclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
-                             modoutput$'2%'[(modoutput$term=="cc.z")]+
-                               modoutput$'2%', modoutput$lowclean)
-
-modoutput$highclean <- NA
-modoutput$highclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
-                             modoutput$'98%'[(modoutput$term=="mat.z")]+
-                               modoutput$'98%', modoutput$'98%')
-modoutput$highclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
-                             modoutput$'98%'[(modoutput$term=="nao.z")]+
-                               modoutput$'98%', modoutput$highclean)
-modoutput$highclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
-                             modoutput$'98%'[(modoutput$term=="dist.z")]+
-                               modoutput$'98%', modoutput$highclean)
-modoutput$highclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
-                             modoutput$'98%'[(modoutput$term=="elev.z")]+
-                               modoutput$'98%', modoutput$highclean)
-modoutput$highclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
-                             modoutput$'98%'[(modoutput$term=="space.z")]+
-                               modoutput$'98%', modoutput$highclean)
-modoutput$highclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
-                             modoutput$'98%'[(modoutput$term=="cc.z")]+
-                               modoutput$'98%', modoutput$highclean)
-
-modoutput$estavg <- ave(modoutput$estclean, modoutput$termclean)
-modoutput$lowavg <- ave(modoutput$lowclean, modoutput$termclean)
-modoutput$highavg <- ave(modoutput$highclean, modoutput$termclean)
-
-                    
 modoutput$Jvar<-NA
-modoutput$Jvar<-ifelse(modoutput$termclean=="nao.z", 8, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="mat.z", 11, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="elev.z", 9, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="dist.z", 10, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="space.z", 7, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="cc.z", 6, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="nao.z:cc.z", 2, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="mat.z:cc.z", 5, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="elev.z:cc.z", 3, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="dist.z:cc.z", 4, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$termclean=="space.z:cc.z", 1, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="nao.z", 8, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="mat.z", 11, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="elev.z", 9, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="dist.z", 10, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="space.z", 7, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="cc.z", 6, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="nao.z:cc.z", 2, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="mat.z:cc.z", 5, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="elev.z:cc.z", 3, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="dist.z:cc.z", 4, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$term=="space.z:cc.z", 1, modoutput$Jvar)
+
+
 
 
 estimates<-c("Mean Spring Temperature", "Distance from Coast", "Elevation", "NAO Index", "Space Parameter", "Climate Change",
@@ -492,90 +429,36 @@ estimates<-c("Mean Spring Temperature", "Distance from Coast", "Elevation", "NAO
 estimates<-rev(estimates)
 modoutput <- modoutput[!is.na(modoutput$Jvar),]
 
-allspp <- c("nao.z:cc.z", "mat.z:cc.z", "elev.z:cc.z", "dist.z:cc.z", "space.z:cc.z")
-modoutput$species<-ifelse(modoutput$species%in%allspp, "all", modoutput$species)
-
-indspp <- subset(modoutput, select=c("species", "lowclean", "highclean", "estclean", "Jvar", "termclean"))
-indspp <- indspp[indspp$species!="all",]
-indspp <- indspp[!duplicated(indspp),]
-
-allspp <- subset(modoutput, select=c("species", "lowavg", "highavg", "estavg", "Jvar", "termclean"))
-allspp <- allspp[(allspp$species=="all" | (allspp$species=="AESHIP")),]
-allspp <- allspp[!duplicated(allspp),]
-allspp$species <- "aaall"
-
-names(allspp)<-c("species", "lowclean", "highclean", "estclean", "Jvar", "termclean")
-
-modoutput <- full_join(indspp, allspp)
-
-modoutput$Jvar <- ifelse(modoutput$species=="AESHIP", modoutput$Jvar - 0.2, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="ALNGLU", modoutput$Jvar - 0.25, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="BETPEN", modoutput$Jvar - 0.3, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="FAGSYL", modoutput$Jvar - 0.35, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="FRAEXC", modoutput$Jvar - 0.4, modoutput$Jvar)
-modoutput$Jvar <- ifelse(modoutput$species=="QUEROB", modoutput$Jvar - 0.45, modoutput$Jvar)
-
-modoutput$species<-ifelse(modoutput$species=="BETPEN", "aaBETPEN", modoutput$species)
-modoutput$species<-ifelse(modoutput$species=="FRAEXC", "zFRAEXC", modoutput$species)
-
-
-#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_origspp.csv", row.names=FALSE)
-#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_dvrspp.csv", row.names=FALSE)
-#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_fivespp.csv", row.names=FALSE)
-
-###### VERY CLOSE! NEED TO MAKE MAIN DOTS BIGGER FOR ESTAVG AND THEN SMALLER DIFF COL DOTS FOR EACH SPECIES (ESTCLEAN)#####
-my.pal <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+my.pal <- colorRampPalette(brewer.pal(8,"Dark2"))(6)
 my.pal <- c("black", my.pal)
 
-modoutput <- modoutput[(modoutput$species=="aaall"),]
-regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
-  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estclean, y=Jvar, col=species, size=species, alpha=species)) +
-  geom_segment(arrow = arrow(length = unit(0.00, "npc")), aes(col=species, alpha=species)) +
+regrisk<-ggplot(modoutput, aes(x=`2%`, xend=`98%`, y=Jvar, yend=Jvar)) +
+  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar)) +
+  geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
   guides(size=FALSE) +
-  scale_y_discrete(limits = sort(unique(modoutput$termclean)), labels=estimates) +
+  scale_y_discrete(limits = sort(unique(modoutput$term)), labels=estimates) +
   xlab("Change in Probability of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0,
-        plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
+        plot.margin = unit(c(3,3,1,1), "lines")) + 
+  coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + 
   annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   #annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
   annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
   #annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
   annotate("text", x = 0.55, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
-  #annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR FIVE
-  annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR DVR AND ORIG
-  scale_color_manual(name="Species", values=c("black", cols), labels=c("aaall"="Overall estimate",
-                                                              "aaBETPEN"=expression(paste(italic("Betula pendula"))),
-                                                              "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                                                              "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
-                                                              "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
-                                                              "QUEROB"=expression(paste(italic("Quercus robur"))),
-                                                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) +
-  scale_size_manual(name="Species", values=c(2, 1,1,1,1,1,1), labels=c("aaall"="Overall estimate",
-                                                       "aaBETPEN"=expression(paste(italic("Betula pendula"))),
-                                                       "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                                                       "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
-                                                       "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
-                                                       "QUEROB"=expression(paste(italic("Quercus robur"))),
-                                                       "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))))) +
-  scale_alpha_manual(name="Species", values=c(1,.5,.5,.5,.5,.5,.5), labels=c("aaall"="Overall estimate",
-                                                                       "aaBETPEN"=expression(paste(italic("Betula pendula"))),
-                                                                       "AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
-                                                                       "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
-                                                                       "FAGSYL"=expression(paste(italic("Fagus sylvatica"))),
-                                                                       "QUEROB"=expression(paste(italic("Quercus robur"))),
-                                                                       "zFRAEXC"=expression(paste(italic("Fraxinus excelsior")))))
+  #annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") ## FOR FIVE
+  annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk")  ## FOR DVR AND ORIG
 
 
 #quartz()
 #regrisk
 
 
-png("analyses/figures/model_output_98_dvr.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_dvr.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
 grid.arrange(regrisk)

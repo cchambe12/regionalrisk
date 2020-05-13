@@ -21,7 +21,9 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #fs<-read.csv("output/fs_allspp_five.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_original.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_fullleaf.csv", header=TRUE)
-fs<-read.csv("output/fs_allspp_midleaf.csv", header=TRUE)
+#fs<-read.csv("output/fs_allspp_midleaf.csv", header=TRUE)
+#fs<-read.csv("output/fs_allspp_midleaf_temps.csv", header=TRUE)
+fs<-read.csv("output/fs_allspp_origtemps.csv", header=TRUE)
 
 
 fs<-subset(fs, select=c("lat", "long", "fs.count", "year", "species", "fs"))
@@ -33,7 +35,7 @@ nao<-read.csv("output/nao_NovApr.csv", header=TRUE)
 nao<-subset(nao, year>1950)
 
 elev<-dplyr::select(elev, species, LAT, LON, ALT)
-elev<-elev%>%rename(lat=LAT)%>%rename(long=LON)%>%rename(elev=ALT)
+elev<-elev%>%dplyr::rename(lat=LAT)%>%dplyr::rename(long=LON)%>%dplyr::rename(elev=ALT)
 elev$lat.long<-paste(elev$lat, elev$long)
 elev<-elev[!duplicated(elev),]
 matelev<-full_join(elev, mat)
@@ -59,7 +61,7 @@ nao<-nao[!duplicated(nao),]
 fspreds<-full_join(fspreds, nao)
 
 dist<-read.csv("output/dist_wgs.csv", header=TRUE)
-dist<-dist%>%rename(long=LONG)%>%rename(lat=LAT)
+dist<-dist%>%dplyr::rename(long=LONG)%>%dplyr::rename(lat=LAT)
 
 fspreds<-full_join(fspreds, dist)
 
@@ -69,5 +71,7 @@ fspreds<-full_join(fspreds, dist)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_five_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_fullleaf_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_midleaf_allpred.csv", row.names = FALSE)
+#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_midleaftemps_allpred.csv", row.names = FALSE)
+write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_origtemps_allpred.csv", row.names = FALSE)
 
 

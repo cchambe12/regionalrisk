@@ -290,6 +290,59 @@ print(xtable(modoutput,
   -\end{center}
   -\end{figure}}
   
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_fullleaf.png}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk during the first leaf to full leafout interval. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmodfullleaf} for full model output. }\label{fig:dvr}
+  -\end{center}
+  -\end{figure}}
+  
+\newpage
+<<label=suppmodfullleaf, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("..//analyses/")
+
+modoutput <- read.csv("output/fullleaf_full_modeloutput.csv", header=TRUE)
+modoutput <- modoutput[c(1:47),]
+#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
+# add multicolumn later for BB and LO headers above these column names
+
+modoutput$term <- gsub("b_", "", modoutput$term)
+modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
+modoutput$term <- gsub("nao.z", "NAO Index", modoutput$term)
+modoutput$term <- gsub("mat.z", "Mean Spring \nTemperature", modoutput$term)
+modoutput$term <- gsub("elev.z", "Elevation", modoutput$term)
+modoutput$term <- gsub("dist.z", "Distance from \nCoast", modoutput$term)
+modoutput$term <- gsub("space.z", "Space Parameter", modoutput$term)
+modoutput$term <- gsub("cc.z", "Climate Change", modoutput$term)
+modoutput$term <- gsub(":Climate Change", " x Climate Change", modoutput$term)
+#modoutput$term <- gsub(":", " x ", modoutput$term)
+
+modoutput$term <- gsub(":speciesALNGLU", paste0("\nx","\\\\textit{", " Alnus glutinosa","}"), modoutput$term)
+modoutput$term <- gsub(":speciesBETPEN", paste0("\nx","\\\\textit{"," Betula pendula","}"), modoutput$term)
+modoutput$term <- gsub(":speciesFAGSYL", paste0("\nx","\\\\textit{"," Fagus sylvatica","}"), modoutput$term)
+modoutput$term <- gsub(":speciesFRAEXC", paste0("\nx","\\\\textit{"," Fraxinus excelsior","}"), modoutput$term)
+modoutput$term <- gsub(":speciesQUEROB", paste0("\nx","\\\\textit{"," Quercus robur","}"), modoutput$term)
+
+modoutput$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), modoutput$term)
+modoutput$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), modoutput$term)
+modoutput$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), modoutput$term)
+modoutput$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), modoutput$term)
+modoutput$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), modoutput$term)
+
+
+colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
+
+
+print(xtable(modoutput, 
+             caption = "Summary of Bernoulli model of false spring risk during the first leaf to full leafout interval.", label="tab:suppmodfullleaf",
+             align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      #sanitize.text.function = function(x) {x}, table.placement="H",
+      tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
+      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
+@
+  
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_dvr.png}
