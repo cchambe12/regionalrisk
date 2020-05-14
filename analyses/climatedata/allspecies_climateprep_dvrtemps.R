@@ -35,22 +35,23 @@ df<-d%>%
   filter(YEAR>=1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON, species)%>%
   rename(year=YEAR)%>%
-  rename(lo=DAY)%>%
+  rename(mid=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
 df$bb<-NA
-df$bb<-ifelse(df$species=="AESHIP", df$lo-11, df$bb)
-df$lo<-ifelse(df$species=="AESHIP", df$bb+22, df$bb)
-df$bb<-ifelse(df$species=="ALNGLU", df$lo-12, df$bb)
-df$lo<-ifelse(df$species=="ALNGLU", df$bb+24, df$bb)
-df$bb<-ifelse(df$species=="BETPEN", df$lo-11, df$bb)
-df$lo<-ifelse(df$species=="BETPEN", df$bb+22, df$bb)
-df$bb<-ifelse(df$species=="FAGSYL", df$lo-5, df$bb)
-df$lo<-ifelse(df$species=="FAGSYL", df$bb+10, df$bb)
-df$bb<-ifelse(df$species=="FRAEXC", df$lo-7, df$bb)
-df$lo<-ifelse(df$species=="FRAEXC", df$bb+14, df$bb)
-df$bb<-ifelse(df$species=="QUEROB", df$lo-7, df$bb)
-df$lo<-ifelse(df$species=="QUEROB", df$bb+14, df$bb)
+df$lo <- NA
+df$bb<-ifelse(df$species=="AESHIP", df$mid-11, df$bb)
+df$lo<-ifelse(df$species=="AESHIP", df$mid+11, df$lo)
+df$bb<-ifelse(df$species=="ALNGLU", df$mid-12, df$bb)
+df$lo<-ifelse(df$species=="ALNGLU", df$mid+12, df$lo)
+df$bb<-ifelse(df$species=="BETPEN", df$mid-11, df$bb)
+df$lo<-ifelse(df$species=="BETPEN", df$mid+11, df$lo)
+df$bb<-ifelse(df$species=="FAGSYL", df$mid-5, df$bb)
+df$lo<-ifelse(df$species=="FAGSYL", df$mid+5, df$lo)
+df$bb<-ifelse(df$species=="FRAEXC", df$mid-7, df$bb)
+df$lo<-ifelse(df$species=="FRAEXC", df$mid+7, df$lo)
+df$bb<-ifelse(df$species=="QUEROB", df$mid-7, df$bb)
+df$lo<-ifelse(df$species=="QUEROB", df$mid+7, df$lo)
 
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo, species)
