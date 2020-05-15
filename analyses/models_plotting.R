@@ -389,6 +389,7 @@ write.csv(modfullleaf, file="~/Documents/git/regionalrisk/analyses/output/fullle
 
 ### Now to make the plots
 modoutput <- moddvr98 #modelhere
+cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
 modoutput<-modoutput[1:47,]
@@ -401,26 +402,88 @@ modoutput<-modoutput[!(modoutput$term=="sd_species__nao.z" | modoutput$term=="sd
 
 
 modoutput$species <- ifelse(grepl("species",modoutput$term),gsub(".*species", "", modoutput$term), modoutput$term)
-makeaeship <- c("nao.z", "mat.z", "dist.z", "elev.z", "space.z", "cc.z", "nao.z:cc.z", "mat.z:cc.z", "dist.z:cc.z", "elev.z:cc.z", "space.z:cc.z")
+makeaeship <- c("nao.z", "mat.z", "dist.z", "elev.z", "space.z", "cc.z")
 modoutput$species <- ifelse(modoutput$term%in%makeaeship, "AESHIP", modoutput$species)
 
-modoutput <- modoutput[(modoutput$species=="AESHIP"),]
+modoutput$termclean <- gsub(":species.*", "", modoutput$term)
+
+modoutput$estclean <- NA
+modoutput$estclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="mat.z")]+
+                               modoutput$estimate, modoutput$estimate)
+modoutput$estclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="nao.z")]+
+                               modoutput$estimate, modoutput$estclean)
+modoutput$estclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="dist.z")]+
+                               modoutput$estimate, modoutput$estclean)
+modoutput$estclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="elev.z")]+
+                               modoutput$estimate, modoutput$estclean)
+modoutput$estclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="space.z")]+
+                               modoutput$estimate, modoutput$estclean)
+modoutput$estclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
+                             modoutput$estimate[(modoutput$term=="cc.z")]+
+                               modoutput$estimate, modoutput$estclean)
+
+modoutput$lowclean <- NA
+modoutput$lowclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
+                             modoutput$'2%'[(modoutput$term=="mat.z")]+
+                               modoutput$'2%', modoutput$'2%')
+modoutput$lowclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
+                             modoutput$'2%'[(modoutput$term=="nao.z")]+
+                               modoutput$'2%', modoutput$lowclean)
+modoutput$lowclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
+                             modoutput$'2%'[(modoutput$term=="dist.z")]+
+                               modoutput$'2%', modoutput$lowclean)
+modoutput$lowclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
+                             modoutput$'2%'[(modoutput$term=="elev.z")]+
+                               modoutput$'2%', modoutput$lowclean)
+modoutput$lowclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
+                             modoutput$'2%'[(modoutput$term=="space.z")]+
+                               modoutput$'2%', modoutput$lowclean)
+modoutput$lowclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
+                             modoutput$'2%'[(modoutput$term=="cc.z")]+
+                               modoutput$'2%', modoutput$lowclean)
+
+modoutput$highclean <- NA
+modoutput$highclean <- ifelse(modoutput$termclean=="mat.z" & modoutput$species != "AESHIP",
+                              modoutput$'98%'[(modoutput$term=="mat.z")]+
+                                modoutput$'98%', modoutput$'98%')
+modoutput$highclean <- ifelse(modoutput$termclean=="nao.z" & modoutput$species != "AESHIP",
+                              modoutput$'98%'[(modoutput$term=="nao.z")]+
+                                modoutput$'98%', modoutput$highclean)
+modoutput$highclean <- ifelse(modoutput$termclean=="dist.z" & modoutput$species != "AESHIP",
+                              modoutput$'98%'[(modoutput$term=="dist.z")]+
+                                modoutput$'98%', modoutput$highclean)
+modoutput$highclean <- ifelse(modoutput$termclean=="elev.z" & modoutput$species != "AESHIP",
+                              modoutput$'98%'[(modoutput$term=="elev.z")]+
+                                modoutput$'98%', modoutput$highclean)
+modoutput$highclean <- ifelse(modoutput$termclean=="space.z" & modoutput$species != "AESHIP",
+                              modoutput$'98%'[(modoutput$term=="space.z")]+
+                                modoutput$'98%', modoutput$highclean)
+modoutput$highclean <- ifelse(modoutput$termclean=="cc.z" & modoutput$species != "AESHIP",
+                              modoutput$'98%'[(modoutput$term=="cc.z")]+
+                                modoutput$'98%', modoutput$highclean)
+
+modoutput$estavg <- ave(modoutput$estclean, modoutput$termclean)
+modoutput$lowavg <- ave(modoutput$lowclean, modoutput$termclean)
+modoutput$highavg <- ave(modoutput$highclean, modoutput$termclean)
 
 
 modoutput$Jvar<-NA
-modoutput$Jvar<-ifelse(modoutput$term=="nao.z", 8, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="mat.z", 11, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="elev.z", 9, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="dist.z", 10, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="space.z", 7, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="cc.z", 6, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="nao.z:cc.z", 2, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="mat.z:cc.z", 5, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="elev.z:cc.z", 3, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="dist.z:cc.z", 4, modoutput$Jvar)
-modoutput$Jvar<-ifelse(modoutput$term=="space.z:cc.z", 1, modoutput$Jvar)
-
-
+modoutput$Jvar<-ifelse(modoutput$termclean=="nao.z", 8, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="mat.z", 11, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="elev.z", 9, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="dist.z", 10, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="space.z", 7, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="cc.z", 6, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="nao.z:cc.z", 2, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="mat.z:cc.z", 5, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="elev.z:cc.z", 3, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="dist.z:cc.z", 4, modoutput$Jvar)
+modoutput$Jvar<-ifelse(modoutput$termclean=="space.z:cc.z", 1, modoutput$Jvar)
 
 
 estimates<-c("Mean Spring Temperature", "Distance from Coast", "Elevation", "NAO Index", "Space Parameter", "Climate Change",
@@ -429,6 +492,38 @@ estimates<-c("Mean Spring Temperature", "Distance from Coast", "Elevation", "NAO
 estimates<-rev(estimates)
 modoutput <- modoutput[!is.na(modoutput$Jvar),]
 
+allspp <- c("nao.z:cc.z", "mat.z:cc.z", "elev.z:cc.z", "dist.z:cc.z", "space.z:cc.z")
+modoutput$species<-ifelse(modoutput$species%in%allspp, "all", modoutput$species)
+
+indspp <- subset(modoutput, select=c("species", "lowclean", "highclean", "estclean", "Jvar", "termclean"))
+indspp <- indspp[indspp$species!="all",]
+indspp <- indspp[!duplicated(indspp),]
+
+allspp <- subset(modoutput, select=c("species", "lowavg", "highavg", "estavg", "Jvar", "termclean"))
+allspp <- allspp[(allspp$species=="all" | (allspp$species=="AESHIP")),]
+allspp <- allspp[!duplicated(allspp),]
+allspp$species <- "aaall"
+
+names(allspp)<-c("species", "lowclean", "highclean", "estclean", "Jvar", "termclean")
+
+modoutput <- full_join(indspp, allspp)
+
+modoutput$Jvar <- ifelse(modoutput$species=="AESHIP", modoutput$Jvar - 0.2, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="ALNGLU", modoutput$Jvar - 0.25, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="BETPEN", modoutput$Jvar - 0.3, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="FAGSYL", modoutput$Jvar - 0.35, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="FRAEXC", modoutput$Jvar - 0.4, modoutput$Jvar)
+modoutput$Jvar <- ifelse(modoutput$species=="QUEROB", modoutput$Jvar - 0.45, modoutput$Jvar)
+
+modoutput$species<-ifelse(modoutput$species=="BETPEN", "aaBETPEN", modoutput$species)
+modoutput$species<-ifelse(modoutput$species=="FRAEXC", "zFRAEXC", modoutput$species)
+
+
+#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_origspp.csv", row.names=FALSE)
+#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_dvrspp.csv", row.names=FALSE)
+#write.csv(modoutput, file="~/Documents/git/regionalrisk/analyses/output/modoutput_90_fivespp.csv", row.names=FALSE)
+
+###### VERY CLOSE! NEED TO MAKE MAIN DOTS BIGGER FOR ESTAVG AND THEN SMALLER DIFF COL DOTS FOR EACH SPECIES (ESTCLEAN)#####
 my.pal <- colorRampPalette(brewer.pal(8,"Dark2"))(6)
 my.pal <- c("black", my.pal)
 
