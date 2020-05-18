@@ -70,7 +70,13 @@ x$fs <- 0
 x$fs<- ifelse(x$Tmin<=-2.2 & x$species%in%c("FAGSYL", "FRAEXC", "QUEROB"), 1, x$fs)
 x$fs<- ifelse(x$Tmin<=-5 & x$species%in%c("AESHIP", "BETPEN", "ALNRUG"), 1, x$fs)
 x$lo<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last)
-x$bb<-x$lo-12 # Based on Danf's ACESAC - most closely related. Choose WL0 based on keeping all species consistent
+x$bb<-NA
+x$bb<-ifelse(x$species=="AESHIP", x$lo-22, x$bb)
+x$bb<-ifelse(x$species=="ALNGLU", x$lo-24, x$bb)
+x$bb<-ifelse(x$species=="BETPEN", x$lo-22, x$bb) 
+x$bb<-ifelse(x$species=="FAGSYL", x$lo-10, x$bb)
+x$bb<-ifelse(x$species=="FRAEXC", x$lo-14, x$bb)
+x$bb<-ifelse(x$species=="QUEROB", x$lo-14, x$bb)
 x<-x[!(x$doy<x$bb),] ## double check no early freezes sneak in
 x<-x[!duplicated(x),]
 x$fs.count<- ave(x$fs, x$PEP_ID, x$year, x$species, FUN=sum)

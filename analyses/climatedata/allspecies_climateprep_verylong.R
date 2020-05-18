@@ -16,13 +16,13 @@ library(raster)
 library(reshape2)
 library(data.table)
 
-setwd("~/Documents/git/regionalrisk/analyses")
-aes<-read.csv("output/bbch_region_aesculus.csv", header=TRUE)
-aln<-read.csv("output/bbch_region_alnus.csv", header=TRUE)
-bet<-read.csv("output/bbch_region_betula.csv", header=TRUE)
-fsyl<-read.csv("output/bbch_region_fagus.csv", header=TRUE)
-fra<-read.csv("output/bbch_region_fraxinus.csv", header=TRUE)
-que<-read.csv("output/bbch_region_quercus.csv", header=TRUE)
+#setwd("~/Documents/git/regionalrisk/analyses")
+aes<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_aesculus.csv", header=TRUE)
+aln<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_alnus.csv", header=TRUE)
+bet<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_betula.csv", header=TRUE)
+fsyl<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_fagus.csv", header=TRUE)
+fra<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_fraxinus.csv", header=TRUE)
+que<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_quercus.csv", header=TRUE)
 
 d<-full_join(aes, aln)
 d<-full_join(d, bet)
@@ -40,7 +40,7 @@ df<-d%>%
   rename(long=LON)
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df$bb<-df$mid-12
-df$lo<-df$mid+20
+df$lo<-df$mid+24
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo, species)
 df$pep.year<-paste(df$year, df$PEP_ID, df$species)
 
@@ -74,6 +74,6 @@ dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 dxx<-na.omit(dxx)
 
-write.csv(dxx, file="~/Desktop/allspp_climateprep_long.csv", row.names=FALSE)
+write.csv(dxx, file="/n/wolkovich_lab/Lab/Cat/allspp_climateprep_long.csv", row.names=FALSE)
 
 

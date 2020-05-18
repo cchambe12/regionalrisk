@@ -330,6 +330,7 @@ load("orig_full.Rdata")
 load("dvr_full.Rdata")
 load("five_full.Rdata")
 #load("fullleaf_full.Rdata")
+load("longtemps_full.Rdata")
 
 if(FALSE){
 modorig<-as.data.frame(tidy(orig.full, prob=0.9))
@@ -386,9 +387,22 @@ modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "2%", "10%", "25
 write.csv(modfullleaf, file="~/Documents/git/regionalrisk/analyses/output/fullleaf_full_modeloutput.csv", row.names=FALSE)
 }
 
+if(FALSE){
+  modlongtemps<-as.data.frame(tidy(longtemps.full, prob=0.9))
+  names(modlongtemps)<-c("term", "estimate", "error", "10%", "90%")
+  modlongtemps50<-as.data.frame(tidy(longtemps.full, prob=0.5))
+  names(modlongtemps50)<-c("term", "estimate", "error", "25%", "75%")
+  modlongtemps <- full_join(modlongtemps, modlongtemps50)
+  modlongtemps98<-as.data.frame(tidy(longtemps.full, prob=0.98))
+  names(modlongtemps98)<-c("term", "estimate", "error", "2%", "98%")
+  modlongtemps <- full_join(modlongtemps, modlongtemps98)
+  modlongtemps <- subset(modlongtemps, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+  write.csv(modlongtemps, file="~/Documents/git/regionalrisk/analyses/output/longtemps_full_modeloutput.csv", row.names=FALSE)
+}
+
 
 ### Now to make the plots
-modoutput <- moddvr98 #modelhere
+modoutput <- modlongtemps98 #modelhere
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
@@ -527,25 +541,26 @@ modoutput$species<-ifelse(modoutput$species=="FRAEXC", "zFRAEXC", modoutput$spec
 my.pal <- colorRampPalette(brewer.pal(8,"Dark2"))(6)
 my.pal <- c("black", my.pal)
 
-regrisk<-ggplot(modoutput, aes(x=`2%`, xend=`98%`, y=Jvar, yend=Jvar)) +
-  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estimate, y=Jvar)) +
-  geom_segment(arrow = arrow(length = unit(0.00, "npc"))) +
+modoutput <- modoutput[(modoutput$species=="aaall"),]
+regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
+  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estclean, y=Jvar, col=species, size=species, alpha=species)) +
+  geom_segment(arrow = arrow(length = unit(0.00, "npc")), aes(col=species, alpha=species)) +
   guides(size=FALSE) +
-  scale_y_discrete(limits = sort(unique(modoutput$term)), labels=estimates) +
+  scale_y_discrete(limits = sort(unique(modoutput$termclean)), labels=estimates) +
   xlab("Change in Probability of False Springs") + ylab("") + theme_linedraw() +
   theme(legend.text=element_text(size=7), legend.title = element_text(size=9), legend.background = element_rect(linetype="solid", color="grey", size=0.5),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0,
-        plot.margin = unit(c(3,3,1,1), "lines")) + 
-  coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + 
+        plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
+  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
   annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   #annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
   annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
   #annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
   annotate("text", x = 0.55, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
-  #annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") ## FOR FIVE
+  #annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR FIVE
   annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk")  ## FOR DVR AND ORIG
 
 
