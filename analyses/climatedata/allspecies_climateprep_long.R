@@ -35,12 +35,12 @@ df<-d%>%
   filter(YEAR>=1950)%>%
   dplyr::select(YEAR, DAY, BBCH, PEP_ID, LAT, LON, species)%>%
   rename(year=YEAR)%>%
-  rename(lo=DAY)%>%
+  rename(mid=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
-df$bb<-df$lo-12
-df$lo<-df$bb+24
+df$bb<-df$mid-12
+df$lo<-df$mid+12
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo, species)
 df$pep.year<-paste(df$year, df$PEP_ID, df$species)
 

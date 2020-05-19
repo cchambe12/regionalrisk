@@ -331,6 +331,7 @@ load("dvr_full.Rdata")
 load("five_full.Rdata")
 #load("fullleaf_full.Rdata")
 load("longtemps_full.Rdata")
+load("long_full.Rdata")
 
 if(FALSE){
 modorig<-as.data.frame(tidy(orig.full, prob=0.9))
@@ -375,16 +376,16 @@ write.csv(modfive, file="analyses/output/five_full_modeloutput.csv", row.names=F
 modfive <- read.csv("analyses/output/five_full_modeloutput.csv", header=TRUE)
 
 if(FALSE){
-modfullleaf<-as.data.frame(tidy(fullleaf.full, prob=0.9))
-names(modfullleaf)<-c("term", "estimate", "error", "10%", "90%")
-modfullleaf50<-as.data.frame(tidy(fullleaf.full, prob=0.5))
-names(modfullleaf50)<-c("term", "estimate", "error", "25%", "75%")
-modfullleaf <- full_join(modfullleaf, modfullleaf50)
-modfullleaf98<-as.data.frame(tidy(fullleaf.full, prob=0.98))
-names(modfullleaf98)<-c("term", "estimate", "error", "2%", "98%")
-modfullleaf <- full_join(modfullleaf, modfullleaf98)
-modfullleaf <- subset(modfullleaf, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
-write.csv(modfullleaf, file="~/Documents/git/regionalrisk/analyses/output/fullleaf_full_modeloutput.csv", row.names=FALSE)
+modlong<-as.data.frame(tidy(long.full, prob=0.9))
+names(modlong)<-c("term", "estimate", "error", "10%", "90%")
+modlong50<-as.data.frame(tidy(long.full, prob=0.5))
+names(modlong50)<-c("term", "estimate", "error", "25%", "75%")
+modlong <- full_join(modlong, modlong50)
+modlong98<-as.data.frame(tidy(long.full, prob=0.98))
+names(modlong98)<-c("term", "estimate", "error", "2%", "98%")
+modlong <- full_join(modlong, modlong98)
+modlong <- subset(modlong, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+write.csv(modlong, file="~/Documents/git/regionalrisk/analyses/output/long_full_modeloutput.csv", row.names=FALSE)
 }
 
 if(FALSE){
@@ -402,7 +403,7 @@ if(FALSE){
 
 
 ### Now to make the plots
-modoutput <- modlongtemps98 #modelhere
+modoutput <- modlong98 #modelhere
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
