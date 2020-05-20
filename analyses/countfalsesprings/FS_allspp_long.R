@@ -69,7 +69,6 @@ if(TRUE){
 x$fs<- ifelse(x$Tmin<=-2.2, 1, 0)
 x$lo<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last)
 x$bb<-x$lo-24 # Based on Danf's ACESAC - most closely related. Choose WL0 based on keeping all species consistent
-x<-x[!(x$doy<x$bb),] ## double check no early freezes sneak in
 x<-x[!duplicated(x),]
 x$fs.count<- ave(x$fs, x$PEP_ID, x$year, x$species, FUN=sum)
 allspp<-x%>%dplyr::select(lat, long, PEP_ID, fs.count, year, species)

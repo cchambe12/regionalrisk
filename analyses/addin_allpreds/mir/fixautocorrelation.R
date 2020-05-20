@@ -9,7 +9,8 @@ library(vegan)
 
 #bb<-read.csv("fs_checkallspp_fullleaf_allpred.csv", header=TRUE)
 #bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_orig_allpred.csv", header=TRUE)
-bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_orig_allpred.csv", header=TRUE)
+#bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_orig_allpred.csv", header=TRUE)
+bb<-read.csv("/n/wolkovich_lab/Lab/Cat/fs_allspp_check_allpred.csv", header=TRUE)
 bb <- na.omit(bb)
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
