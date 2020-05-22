@@ -74,6 +74,6 @@ dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 dxx<-na.omit(dxx)
 
-write.csv(dxx, file="/n/wolkovich_lab/Lab/Cat/allspp_climateprep_long.csv", row.names=FALSE)
+write.csv(dxx, file="/n/wolkovich_lab/Lab/Cat/allspp_climateprep_verylong.csv", row.names=FALSE)
 
 

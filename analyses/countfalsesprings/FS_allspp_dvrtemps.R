@@ -68,7 +68,7 @@ write.csv(lastfrz, file="/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv", row.name
 if(TRUE){
 x$fs <- 0
 x$fs<- ifelse(x$Tmin<=-2.2 & x$species%in%c("FAGSYL", "FRAEXC", "QUEROB"), 1, x$fs)
-x$fs<- ifelse(x$Tmin<=-5 & x$species%in%c("AESHIP", "BETPEN", "ALNRUG"), 1, x$fs)
+x$fs<- ifelse(x$Tmin<=-5 & x$species%in%c("AESHIP", "BETPEN", "ALNGLU"), 1, x$fs)
 x$lo<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last)
 x$bb<-NA
 x$bb<-ifelse(x$species=="AESHIP", x$lo-22, x$bb)
@@ -77,7 +77,6 @@ x$bb<-ifelse(x$species=="BETPEN", x$lo-22, x$bb)
 x$bb<-ifelse(x$species=="FAGSYL", x$lo-10, x$bb)
 x$bb<-ifelse(x$species=="FRAEXC", x$lo-14, x$bb)
 x$bb<-ifelse(x$species=="QUEROB", x$lo-14, x$bb)
-x<-x[!(x$doy<x$bb),] ## double check no early freezes sneak in
 x<-x[!duplicated(x),]
 x$fs.count<- ave(x$fs, x$PEP_ID, x$year, x$species, FUN=sum)
 allspp<-x%>%dplyr::select(lat, long, PEP_ID, fs.count, year, species)

@@ -19,7 +19,7 @@ library(dplyr)
 
 setwd("~/Documents/git/regionalrisk/analyses/output")
 #bb <- read.csv("fs_newspace_orig.csv", header=TRUE)
-bb <- read.csv("fs_newspace_fullleaf.csv", header=TRUE)
+#bb <- read.csv("fs_newspace_fullleaf.csv", header=TRUE)
 
 cols <- colorRampPalette(brewer.pal(8,"Dark2"))(6)
 
@@ -332,6 +332,8 @@ load("five_full.Rdata")
 #load("fullleaf_full.Rdata")
 load("longtemps_full.Rdata")
 load("long_full.Rdata")
+load("verylong_full.Rdata")
+load("long_full.Rdata")
 
 if(FALSE){
 modorig<-as.data.frame(tidy(orig.full, prob=0.9))
@@ -401,9 +403,22 @@ if(FALSE){
   write.csv(modlongtemps, file="~/Documents/git/regionalrisk/analyses/output/longtemps_full_modeloutput.csv", row.names=FALSE)
 }
 
+if(FALSE){
+  modvlong<-as.data.frame(tidy(verylong.full, prob=0.9))
+  names(modvlong)<-c("term", "estimate", "error", "10%", "90%")
+  modvlong50<-as.data.frame(tidy(verylong.full, prob=0.5))
+  names(modvlong50)<-c("term", "estimate", "error", "25%", "75%")
+  modvlong <- full_join(modvlong, modvlong50)
+  modvlong98<-as.data.frame(tidy(verylong.full, prob=0.98))
+  names(modvlong98)<-c("term", "estimate", "error", "2%", "98%")
+  modvlong <- full_join(modvlong, modvlong98)
+  modvlong <- subset(modvlong, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+  write.csv(modvlong, file="~/Documents/git/regionalrisk/analyses/output/verylong_full_modeloutput.csv", row.names=FALSE)
+}
+
 
 ### Now to make the plots
-modoutput <- modlong98 #modelhere
+modoutput <- modvlong98 #modelhere
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
@@ -544,8 +559,8 @@ my.pal <- c("black", my.pal)
 
 modoutput <- modoutput[(modoutput$species=="aaall"),]
 regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
-  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estclean, y=Jvar, col=species, size=species, alpha=species)) +
-  geom_segment(arrow = arrow(length = unit(0.00, "npc")), aes(col=species, alpha=species)) +
+  geom_vline(xintercept=0, linetype="dotted") + geom_point(aes(x=estclean, y=Jvar), col="black") +
+  geom_segment(arrow = arrow(length = unit(0.00, "npc")), col="black") +
   guides(size=FALSE) +
   scale_y_discrete(limits = sort(unique(modoutput$termclean)), labels=estimates) +
   xlab("Change in Probability of False Springs") + ylab("") + theme_linedraw() +
@@ -555,21 +570,21 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
         text=element_text(family="sans"), legend.position = "none",
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
-  coord_cartesian(xlim=c(-1, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
+  coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
   annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
-  #annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
-  annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
-  #annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
-  annotate("text", x = 0.55, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
-  #annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk") + ## FOR FIVE
-  annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk")  ## FOR DVR AND ORIG
+  annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
+  #annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
+  annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
+  #annotate("text", x = 0.55, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
+  annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk")  ## FOR FIVE
+  #annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk")  ## FOR DVR AND ORIG
 
 
 #quartz()
 #regrisk
 
 
-png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_dvr.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_vlong.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
 grid.arrange(regrisk)

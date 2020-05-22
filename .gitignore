@@ -21,3 +21,5 @@ analyses/output/regrisk.nov.csv
 analyses/output/tminfull.csv
 *docs/regrisk_supp-concordance.tex
 *docs/regrisk-concordance.tex
+analyses/.Rhistory
+analyses/output/.Rhistory

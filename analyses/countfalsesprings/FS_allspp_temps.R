@@ -68,10 +68,9 @@ write.csv(lastfrz, file="/n/wolkovich_lab/Lab/Cat/lastfreezedates.csv", row.name
 if(TRUE){
 x$fs <- 0
 x$fs<- ifelse(x$Tmin<=-2.2 & x$species%in%c("FAGSYL", "FRAEXC", "QUEROB"), 1, x$fs)
-x$fs<- ifelse(x$Tmin<=-5 & x$species%in%c("AESHIP", "BETPEN", "ALNRUG"), 1, x$fs)
-x$lo<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=last)
+x$fs<- ifelse(x$Tmin<=-5 & x$species%in%c("AESHIP", "BETPEN", "ALNGLU"), 1, x$fs)
+x$lo<-ave(x$doy, x$PEP_ID, x$year, x$species, FUN=max)
 x$bb<-x$lo-12 # Based on Danf's ACESAC - most closely related. Choose WL0 based on keeping all species consistent
-x<-x[!(x$doy<x$bb),] ## double check no early freezes sneak in
 x<-x[!duplicated(x),]
 x$fs.count<- ave(x$fs, x$PEP_ID, x$year, x$species, FUN=sum)
 allspp<-x%>%dplyr::select(lat, long, PEP_ID, fs.count, year, species)

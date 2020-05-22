@@ -9,7 +9,7 @@ library(reshape2)
 library(data.table)
 
 
-dxx<-read.csv("/n/wolkovich_lab/Lab/Cat/allspp_climateprep_long.csv", header=TRUE)
+dxx<-read.csv("/n/wolkovich_lab/Lab/Cat/allspp_climateprep_verylong.csv", header=TRUE)
 #dxx<-read.csv("~/Desktop/allspp_climateprep.csv", header=TRUE)
 
 r<-brick("/n/wolkovich_lab/Lab/Cat/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")

@@ -79,6 +79,6 @@ fspreds<-full_join(fspreds, dist)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_longtemps_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_dvrtemps_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_long_allpred.csv", row.names = FALSE)
-write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_verylong_allpred.csv", row.names = FALSE)
+#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_verylong_allpred.csv", row.names = FALSE)
 
 
