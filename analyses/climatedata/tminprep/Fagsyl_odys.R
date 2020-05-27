@@ -16,7 +16,7 @@ library(raster)
 library(reshape2)
 library(data.table)
 
-d<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_fraxinus.csv", header=TRUE)
+d<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_fagus.csv", header=TRUE)
 
 ### Let's just start with the PEP data and do some cleaning
 df<-d%>%
@@ -24,10 +24,11 @@ df<-d%>%
   filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
-  rename(lo=DAY)%>%
+  rename(mid=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$bb<-df$lo-12
+df$bb<-df$mid-12
+df$lo<-df$mid+12
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo)
 df$pep.year<-paste(df$year, df$PEP_ID)
@@ -79,6 +80,6 @@ dx$Date<- gsub("[.]", "-", dx$date)
 dxx<-dplyr::select(dxx, -date)
 dx<-dplyr::select(dx, -date)
 
-fraexc<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
+fagsyl<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
 
-write.csv(fraexc, file="/n/wolkovich_lab/Lab/Cat/fraexc_data.csv", row.names=FALSE)
+write.csv(fagsyl, file="/n/wolkovich_lab/Lab/Cat/fagsyl_longdata.csv", row.names=FALSE)

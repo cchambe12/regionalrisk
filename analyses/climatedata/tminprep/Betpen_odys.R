@@ -1,4 +1,4 @@
-# Let's try again... Alnus glutinosa
+# Let's try again... Betula pendula
 ## The purpose of this script is to find the points of PEP data that look at BBCH stage 11 for leafout
 # then we will subtract 12 days (Donnelly2017) for budburst date to find a general idea for number of false springs across a range
 ## A GWR will likely be necessary since the distribution of points is smaller than desired
@@ -12,15 +12,11 @@ graphics.off()
 # Load libraries
 library(dplyr)
 library(tidyr)
-library(ggplot2)
-library(lubridate)
-library(ncdf4)
 library(raster)
 library(reshape2)
 library(data.table)
 
-setwd("~/Documents/git/regionalrisk/analyses")
-d<-read.csv("output/bbch_region_alnus.csv", header=TRUE)
+d<-read.csv("/n/wolkovich_lab/Lab/Cat/bbch_region_betula.csv", header=TRUE)
 
 ### Let's just start with the PEP data and do some cleaning
 df<-d%>%
@@ -28,10 +24,11 @@ df<-d%>%
   filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
-  rename(lo=DAY)%>%
+  rename(mid=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$bb<-df$lo-17 ## was 12; based on Danf's WL1 and CS0 data for Alnus incana
+df$bb<-df$mid-12
+df$lo<-df$mid+12
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo)
 df$pep.year<-paste(df$year, df$PEP_ID)
@@ -51,8 +48,7 @@ x<-paste(dxx$year, dxx$doy)
 dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 
-## Climate Data time...
-r<-brick("~/Desktop/Big Data Items/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
+r<-brick("/n/wolkovich_lab/Lab/Cat/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 
 bb<-dxx
 bb$lat.long<-paste(bb$lat, bb$long, sep=",")
@@ -61,6 +57,8 @@ lats <- bb$lat
 lons <- bb$long
 
 coords <- data.frame(x=lons,y=lats)
+
+coords<- na.omit(coords)
 
 points <- SpatialPoints(coords, proj4string = r@crs)
 
@@ -76,14 +74,13 @@ dx<-dx%>%
   rename(date=variable)%>%
   rename(Tmin=value)
 
-
 dx$date<-substr(dx$date, 2,11)
-dx$Date<-gsub("[.]","-", dx$date)
+dx$Date<- gsub("[.]", "-", dx$date)
 
 dxx<-dplyr::select(dxx, -date)
 dx<-dplyr::select(dx, -date)
 
-alnglu<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
-any.nas<-alnglu[is.na(alnglu$Tmin),]
+betpen<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
+any.nas<-betpen[is.na(betpen$Tmin),]
 
-write.csv(alnglu, file="~/Documents/git/regionalrisk/analyses/output/alnglu_data_dvr.csv", row.names=FALSE)
+write.csv(betpen, file="/n/wolkovich_lab/Lab/Cat/betpen_longdata.csv", row.names=FALSE)

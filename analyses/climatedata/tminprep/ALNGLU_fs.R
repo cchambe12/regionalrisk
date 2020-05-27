@@ -1,4 +1,4 @@
-# Let's try again... Aesculus hippocastanum
+# Let's try again... Alnus glutinosa
 ## The purpose of this script is to find the points of PEP data that look at BBCH stage 11 for leafout
 # then we will subtract 12 days (Donnelly2017) for budburst date to find a general idea for number of false springs across a range
 ## A GWR will likely be necessary since the distribution of points is smaller than desired
@@ -20,7 +20,7 @@ library(reshape2)
 library(data.table)
 
 setwd("~/Documents/git/regionalrisk/analyses")
-d<-read.csv("output/bbch_region_aesculus.csv", header=TRUE)
+d<-read.csv("output/bbch_region_alnus.csv", header=TRUE)
 
 ### Let's just start with the PEP data and do some cleaning
 df<-d%>%
@@ -28,10 +28,11 @@ df<-d%>%
   filter(YEAR>1950)%>%
   dplyr::select(YEAR, DAY, PEP_ID, LAT, LON)%>%
   rename(year=YEAR)%>%
-  rename(lo=DAY)%>%
+  rename(mid=DAY)%>%
   rename(lat=LAT)%>%
   rename(long=LON)
-df$bb<-df$lo-16 ## instead of 12; used Danf's data for Acer species WL1 and CS0 to find average 
+df$bb<-df$mid-12
+df$lo<-df$mid+12## was 12; based on Danf's WL1 and CS0 data for Alnus incana
 ## Hmm... can we sequence from budburst to leafout to find the number of freezes between?
 df<-dplyr::select(df, bb, year, PEP_ID, lat, long, lo)
 df$pep.year<-paste(df$year, df$PEP_ID)
@@ -41,8 +42,8 @@ days.btw<-array()
 for(i in length(df$pep.year)){
   days.btw[i] <- Map(seq, df$bb[i], df$lo[i], by = 1)
   dxx <- data.frame(PEP_ID=df$PEP_ID, year=df$year, lat=df$lat, long=df$long,
-    pep.year = rep.int(df$pep.year, vapply(days.btw[i], length, 1L)), 
-                  doy = do.call(c, days.btw[i]))
+                    pep.year = rep.int(df$pep.year, vapply(days.btw[i], length, 1L)), 
+                    doy = do.call(c, days.btw[i]))
 }
 
 dxx<-dxx[!duplicated(dxx),]
@@ -52,7 +53,7 @@ dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 
 ## Climate Data time...
-r<-brick("~/Desktop/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
+r<-brick("~/Desktop/Big Data Files/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 
 bb<-dxx
 bb$lat.long<-paste(bb$lat, bb$long, sep=",")
@@ -76,17 +77,14 @@ dx<-dx%>%
   rename(date=variable)%>%
   rename(Tmin=value)
 
-#dx<-read.csv("~/Desktop/tmin_aeship.csv", header=TRUE)
+
 dx$date<-substr(dx$date, 2,11)
-#dx<-dx[is.na(dx$Tmin),]
-#dx$Date<-ifelse(is.na(dx$Date), (gsub("[.]","-", dx$date)), dx$Date)
-dx$Date<-gsub("[.]", "-", dx$date)
-#write.csv(dx, file="~/Desktop/tmin_aeship.csv", row.names=FALSE)
+dx$Date<-gsub("[.]","-", dx$date)
 
 dxx<-dplyr::select(dxx, -date)
 dx<-dplyr::select(dx, -date)
 
-aeship<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
+alnglu<-inner_join(dx, dxx, by=c("Date", "lat", "long"))
+any.nas<-alnglu[is.na(alnglu$Tmin),]
 
-
-write.csv(aeship, file="~/Documents/git/regionalrisk/analyses/output/aeship_data_dvr.csv", row.names=FALSE)
+write.csv(alnglu, file="~/Documents/git/regionalrisk/analyses/output/alnglu_longdata.csv", row.names=FALSE)
