@@ -21,9 +21,9 @@ library(RColorBrewer)
 
 setwd("~/Documents/git/regionalrisk")
 
-load("orig_full.Rdata")
+load("longtemps_full.Rdata")
 
-bb <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
+bb <- read.csv("analyses/output/fs_newspace_longtemps.csv", header=TRUE)
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 
@@ -41,8 +41,8 @@ bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
 ## Let's just check out the model
 sort(unique(bb$species))
-summary(orig.full)
-orig_sum <- posterior_samples(orig.full)
+summary(longtemps.full)
+orig_sum <- posterior_samples(longtemps.full)
 #str(orig_sum)
 
 # Okay, I want to plot AESHIP's fs by distance from coast, pre and post climate change
@@ -216,7 +216,7 @@ distapc <- distapc[!duplicated(distapc),]
 
 #write.csv(distapc, file="~/Documents/git/regionalrisk/analyses/output/dist_apcoutput.csv", row.names=FALSE)
 
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <-viridis_pal(option="viridis")(6)
 distances <- ggplot(distxcc, aes(x=dist_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
   geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
@@ -399,7 +399,7 @@ matapc <- dplyr::select(matxcc, cc, species, fsavg_sp, fs_sp, fsavg_all, fs_all)
 matapc <- matapc[!duplicated(matapc),]
 #write.csv(matapc, file="~/Documents/git/regionalrisk/analyses/output/mat_apcoutput.csv", row.names=FALSE)
 
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <-viridis_pal(option="viridis")(6)
 meantemp <- ggplot(matxcc, aes(x=mat_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
   geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
@@ -581,7 +581,7 @@ elevapc <- dplyr::select(elevxcc, cc, species, fsavg_sp, fs_sp, fsavg_all, fs_al
 elevapc <- elevapc[!duplicated(elevapc),]
 #write.csv(elevapc, file="~/Documents/git/regionalrisk/analyses/output/elev_apcoutput.csv", row.names=FALSE)
 
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <-viridis_pal(option="viridis")(6)
 elevations <- ggplot(elevxcc, aes(x=elev_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
   geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
@@ -763,7 +763,7 @@ naoapc <- dplyr::select(naoxcc, cc, species, fsavg_sp, fs_sp, fsavg_all, fs_all)
 naoapc <- naoapc[!duplicated(naoapc),]
 #write.csv(naoapc, file="~/Documents/git/regionalrisk/analyses/output/nao_apcoutput.csv", row.names=FALSE)
 
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <-viridis_pal(option="viridis")(6)
 quartz()
 naoindex <- ggplot(naoxcc, aes(x=nao_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
   geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
@@ -810,7 +810,7 @@ g2 <- grid.arrange(elevations, naoindex, spplegend, ncol=3, widths=c(1, 1, 0.55)
 grid.arrange(g1, g2, heights=c(2, 1.5))
 
 
-png("~/Documents/git/regionalrisk/analyses/figures/APC_allpred_allspp_baseR_98.png", 
+png("~/Documents/git/regionalrisk/analyses/figures/APC_allpred_allspp_baseR_longtemps98.png", 
     width=8.5,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, heights=c(2, 1.5))
@@ -1053,7 +1053,7 @@ ccxcc$cc_trans <- as.numeric(ccxcc$cc)
 ccapcs <- ccxcc[!duplicated(ccxcc),]
 #write.csv(ccapcs, file="~/Documents/git/regionalrisk/analyses/output/cc_apcoutput.csv", row.names=FALSE)
 
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <-viridis_pal(option="viridis")(6)
 quartz()
 ccindex <- ggplot(ccxcc, aes(x=cc_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
   geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +

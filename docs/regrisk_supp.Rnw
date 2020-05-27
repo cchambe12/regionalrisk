@@ -93,7 +93,7 @@ y_i = \alpha_{[i]} +&  \beta_{NAO_{[i]}} + \beta_{MST_{[i]}} + \beta_{Elevation_
 
 
 \section*{Species rate of budburst calculations}
-Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to use observations for both budburst and leafout to determine the durations of vegetative risk. Instead, we used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. We took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, we assessed data that were provided by the USA National Phenology Network and the many participants who contribute to its Nature's Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average number of days between budburst and leafout was approximately 12 days.  
+Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to use observations for both budburst and leafout to determine the durations of vegetative risk. Instead, we used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. We took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, we assessed data that were provided by the USA National Phenology Network and the many participants who contribute to its Nature's Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average number of days between budburst and leafout was approximately 12 days. Thus, we expanded our rate of budburst through full leaf expansion by subtracting 12 days from the first leaf to find budburst and adding 12 days to the first leaf to find full leafout. 
 
 Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
 
@@ -237,7 +237,7 @@ print(xtable(lstfrz[1:12,c(1:2,4:5)], caption = "Summary of simple linear regres
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk/analyses")
 
-modoutput <- read.csv("output/orig_full_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("output/longtemps_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -268,7 +268,7 @@ modoutput$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.", label="tab:suppmodorig",
+             caption = "Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.", label="tab:suppmodlongtemps",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -285,23 +285,23 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/APC_allpred_allspp_baseR_98.png}
+  -\includegraphics[width=16cm]{..//analyses/figures/APC_allpred_allspp_baseR_longtemps98.png}
   -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_fullleaf.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk during the first leaf to full leafout interval. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmodfullleaf} for full model output. }\label{fig:dvr}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_long.png}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with -2.2$^{\circ}$C threshold for all species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
 \newpage
-<<label=suppmodfullleaf, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+<<label=suppmodlong, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
-modoutput <- read.csv("output/fullleaf_full_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("output/long_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -334,7 +334,7 @@ colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", 
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model of false spring risk during the first leaf to full leafout interval.", label="tab:suppmodfullleaf",
+             caption = "Summary of Bernoulli model of false spring risk with -2.2$^{\circ}$C threshold for all species.", label="tab:suppmodlong",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -345,16 +345,16 @@ print(xtable(modoutput,
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_dvr.png}
+  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_dvrtemps.png}
   -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmoddvr} for full model output. }\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
 \newpage
-<<label=suppmoddvr, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+<<label=suppmoddvrtemps, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
-modoutput <- read.csv("output/dvr_full_modeloutput.csv", header=TRUE)
+modoutput <- read.csv("output/dvrtemps_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:47),]
 #modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
 # add multicolumn later for BB and LO headers above these column names
@@ -387,7 +387,7 @@ colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", 
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model of false spring risk with varying rates of leafout for each species.", label="tab:suppmoddvr",
+             caption = "Summary of Bernoulli model of false spring risk with varying rates of leafout for each species.", label="tab:suppmoddvrtemps",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -396,57 +396,5 @@ print(xtable(modoutput,
       tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
 @
 
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_five.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. There were 730,996 zeros and 23,855 ones for false springs in the data. See Table \ref{tab:suppmodfive} for full model output. }\label{fig:five}
-  -\end{center}
-  -\end{figure}}
- 
-\newpage 
-<<label=suppmodfive, results="asis", echo=FALSE, warning=FALSE, message=FALSE,  fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("..//analyses/")
-
-modoutput <- read.csv("output/five_full_modeloutput.csv", header=TRUE)
-modoutput <- modoutput[c(1:47),]
-#modoutput <- subset(modoutput, select=c("term", "estimate", "10%", "50%", "90%"))
-# add multicolumn later for BB and LO headers above these column names
-
-modoutput$term <- gsub("b_", "", modoutput$term)
-modoutput$term <- gsub("Intercept", "Intercept", modoutput$term)
-modoutput$term <- gsub("nao.z", "NAO Index", modoutput$term)
-modoutput$term <- gsub("mat.z", "Mean Spring \nTemperature", modoutput$term)
-modoutput$term <- gsub("elev.z", "Elevation", modoutput$term)
-modoutput$term <- gsub("dist.z", "Distance from \nCoast", modoutput$term)
-modoutput$term <- gsub("space.z", "Space Parameter", modoutput$term)
-modoutput$term <- gsub("cc.z", "Climate Change", modoutput$term)
-modoutput$term <- gsub(":Climate Change", " x Climate Change", modoutput$term)
-#modoutput$term <- gsub(":", " x ", modoutput$term)
-
-modoutput$term <- gsub(":speciesALNGLU", paste0("\nx","\\\\textit{", " Alnus glutinosa","}"), modoutput$term)
-modoutput$term <- gsub(":speciesBETPEN", paste0("\nx","\\\\textit{"," Betula pendula","}"), modoutput$term)
-modoutput$term <- gsub(":speciesFAGSYL", paste0("\nx","\\\\textit{"," Fagus sylvatica","}"), modoutput$term)
-modoutput$term <- gsub(":speciesFRAEXC", paste0("\nx","\\\\textit{"," Fraxinus excelsior","}"), modoutput$term)
-modoutput$term <- gsub(":speciesQUEROB", paste0("\nx","\\\\textit{"," Quercus robur","}"), modoutput$term)
-
-modoutput$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), modoutput$term)
-modoutput$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), modoutput$term)
-modoutput$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), modoutput$term)
-modoutput$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), modoutput$term)
-modoutput$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), modoutput$term)
-
-
-colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
-
-
-print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\\circ}$C) for defining a false spring.", label="tab:suppmodfive",
-             align = c("l", "l", "r","r","r","r", "r","r","r")), #>{\\textit}l
-      include.rownames=F, 
-      caption.placement = "top", 
-      #sanitize.text.function = function(x) {x}, table.placement="H",
-      tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
-      tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
-@
 
 \end{document}
