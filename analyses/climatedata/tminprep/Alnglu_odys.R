@@ -49,7 +49,7 @@ dxx$date<-as.Date(strptime(x, format="%Y %j"))
 dxx$Date<- as.character(dxx$date)
 
 ## Climate Data time...
-r<-brick("~/Desktop/Big Data Files/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
+r<-brick("/n/wolkovich_lab/Lab/Cat/tn_0.25deg_reg_v16.0.nc", varname="tn", sep="")
 
 bb<-dxx
 bb$lat.long<-paste(bb$lat, bb$long, sep=",")

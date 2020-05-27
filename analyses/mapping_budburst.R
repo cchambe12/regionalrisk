@@ -66,7 +66,7 @@ aes <- ggplot() +
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) + ### to make sure the continent doesn't blend in with the ocean
-  annotate("text",label= "(b) Aesculus \n hippocastanum", col="#CAB1C4", x=-11, y=68.5,fontface="bold.italic", size=3,
+  annotate("text",label= "(b) Aesculus \n hippocastanum", x=-11, y=68.5,fontface="bold.italic", size=3,
            family="Helvetica", hjust=0) + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -94,7 +94,7 @@ aln <- ggplot() +
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95"),
         legend.position = "none") +
-  annotate("text",label= "(c) Alnus glutinosa", col="gold2", x=1.8, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "(c) Alnus glutinosa", x=1.8, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -122,7 +122,7 @@ bet <- ggplot() +
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "(a) Betula pendula", col="#7FC97F", x=1.4, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "(a) Betula pendula", x=1.4, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -151,7 +151,7 @@ syl <- ggplot() +
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "(d) Fagus sylvatica", col="#87A6A6", x=1.9, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "(d) Fagus sylvatica", x=1.9, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -179,7 +179,7 @@ fra <- ggplot() +
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95"),
         legend.position = "none") +
-  annotate("text",label= "(f) Fraxinus \n  excelsior", col="#BF5B17", x=-3, y=69,fontface="bold.italic", size=3,
+  annotate("text",label= "(f) Fraxinus \n  excelsior", x=-3, y=69,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
   labs(color="Day of Budburst") + ggtitle("")
 
@@ -210,7 +210,7 @@ que <- ggplot() +
           legend.position = "none", ##### Need to comment this line out to get the legend for the "g_legend" function, then remove comment to rerun the plot for arranging the grid
           axis.title = element_blank(),
           panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "(e) Quercus robur", col="#CB1788", x=1, y=70,fontface="bold.italic", size=3,
+  annotate("text",label= "(e) Quercus robur", x=1, y=70,fontface="bold.italic", size=3,
            family="Helvetica") + sc + 
     labs(color="Day of Budburst") + ggtitle("")
 
@@ -235,6 +235,12 @@ g2<-grid.arrange(mylegend)
 mappies<-grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75)) ### This places the two plots side by side but puts the legend in the middle
 
 png("figures/BB_base.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=8,
+    height=5, units="in", res = 350 )
+grid.draw(mappies)
+dev.off()
+
+tiff("figures/Figure1.tiff", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=8,
     height=5, units="in", res = 350 )
 grid.draw(mappies)

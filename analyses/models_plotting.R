@@ -316,9 +316,9 @@ dev.off()
 ###################### NOW FOR THE MODEL Plots #########################################
 ########################################################################################
 setwd("~/Documents/git/regionalrisk")
-load("orig_full.Rdata")
-load("dvr_full.Rdata")
-load("five_full.Rdata")
+#load("orig_full.Rdata")
+#load("dvr_full.Rdata")
+#load("five_full.Rdata")
 load("longtemps_full.Rdata")
 load("long_full.Rdata")
 #load("verylong_full.Rdata")
@@ -421,7 +421,7 @@ if(FALSE){
 
 ### Now to make the plots
 modoutput <- moddvrtemps98 #modelhere
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+#cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
 modoutput<-modoutput[1:47,]
@@ -586,7 +586,13 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
 #regrisk
 
 
-png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_longtemps.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_dvrtemps.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=7,
+    height=6, units="in", res = 350 )
+grid.arrange(regrisk)
+dev.off()
+
+tiff("~/Documents/git/regionalrisk/analyses/figures/Figure4.tiff", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
 grid.arrange(regrisk)
