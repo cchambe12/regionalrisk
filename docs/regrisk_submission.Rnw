@@ -96,89 +96,101 @@ library(brms)
 ## Set Working Directory
 setwd("~/Documents/git/regionalrisk")
 
-load("longtemps_full.Rdata")
 load("long_full.Rdata")
-load("dvrtemps_full.Rdata")
+load("dvrlong_full.Rdata")
+load("fivelong_full.Rdata")
+load("longtemps_full.Rdata")
+load("orig_full.Rdata")
 
-fs <- read.csv("analyses/output/fs_newspace_longtemps.csv", header=TRUE)
-fslong <- read.csv("analyses/output/fs_newspace_long.csv", header=TRUE)
-fsdvr <- read.csv("analyses/output/fs_newspace_dvrtemps.csv", header=TRUE)
+fs <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
+
+fs <- read.csv("analyses/output/fs_newspace_long.csv", header=TRUE)
+fsdvr <- read.csv("analyses/output/fs_newspace_dvrlong.csv", header=TRUE)
+fsfive <- read.csv("analyses/output/fs_newspace_fivelong.csv", header=TRUE)
+fstemps <- read.csv("analyses/output/fs_newspace_longtemps.csv", header=TRUE)
 
 numyrs<-length(unique(fs$year))
 numsites<-length(unique(fs$lat.long))
 
 ### So if we multiply by the sd used above to change intervals and use the Divide by 4 rule:
-mat<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2, digits=2) ## -7.638351 (vs -3.331)
-nao<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) ## 1.915104 (vs 1.54)
-dist<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150, digits=2) ## 5.320474 (vs 4.83)
-elev<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200, digits=2)## 2.235522 (vs 1.89)
+mat<-round((mean(fixef(long.full, pars="mat.z", summary=FALSE))/4)/(sd(fs$mst)*2)*100*2, digits=2) ## -7.638351 (vs -3.331)
+nao<-round((mean(fixef(long.full, pars="nao.z", summary=FALSE))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) ## 1.915104 (vs 1.54)
+dist<-round((mean(fixef(long.full, pars="dist.z", summary=FALSE))/4)/(sd(fs$distkm)*2)*100*150, digits=2) ## 5.320474 (vs 4.83)
+elev<-round((mean(fixef(long.full, pars="elev.z", summary=FALSE))/4)/(sd(fs$elev)*2)*100*200, digits=2)## 2.235522 (vs 1.89)
 
-matz<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE))), digits=2)
-naoz<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE))), digits=2)
-distz<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE))), digits=2)
-elevz<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE))), digits=2)
+matz<-round((mean(fixef(long.full, pars="mat.z", summary=FALSE))), digits=2)
+naoz<-round((mean(fixef(long.full, pars="nao.z", summary=FALSE))), digits=2)
+distz<-round((mean(fixef(long.full, pars="dist.z", summary=FALSE))), digits=2)
+elevz<-round((mean(fixef(long.full, pars="elev.z", summary=FALSE))), digits=2)
 
 
-aescc<-round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100,digits=2) ## 8.842486 (vs 7.225) - For AESHIP (residual not explained by regional/climatic factors)
-alncc<-round((0.42/4)/(sd(fs$cc)*2)*100, digits=2) ## 10.538 for ALNGLU - compared to 8.8 from APCs
-betcc<-round((0.41/4)/(sd(fs$cc)*2)*100, digits=2) ## 10.287 for BETPEN - compared to 8.7 from APCs
-fagcc<-round((.03/4)/(sd(fs$cc)*2)*100, digits=2) ## 0.753 for FAGSYL - compared to 0.54 from APCs
-fracc<-round((-.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.265 for FRAEXC - compared to -1.34 from APCs
-quecc<-round((-.07/4)/(sd(fs$cc)*2)*100, digits=2) ## -1.756 for QUEROB - compared to -.609 from APCs
-allcc<-round((.16/4)/(sd(fs$cc)*2)*100, digits=2) ## 4.0145 for average of all species
-allccstand<-0.16
+aescc<-round((mean(fixef(long.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100,digits=2) 
 
-aesccz <- round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))), digits=2)
-alnccz <- round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesALNGLU", summary=FALSE))), digits=2)
-betccz <- round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesBETPEN", summary=FALSE))), digits=2)
-fagccz <- round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesFAGSYL", summary=FALSE))), digits=3)
-fraccz <- round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesFRAEXC", summary=FALSE))), digits=2)
-queccz <- round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesQUEROB", summary=FALSE))), digits=2)
+alncc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesALNGLU", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2) 
+
+betcc<-roundround(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesBETPEN", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2) 
+
+fagcc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesFAGSYL", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
+
+fracc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesFRAEXC", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
+
+quecc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesQUEROB", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
+
+allcc<- (aescc+alncc+betcc+fagcc+fracc+quecc)/6
+
+aesccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))), digits=2)
+alnccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesALNGLU", summary=FALSE))), digits=2)
+betccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesBETPEN", summary=FALSE))), digits=2)
+fagccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesFAGSYL", summary=FALSE))), digits=3)
+fraccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesFRAEXC", summary=FALSE))), digits=2)
+queccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesQUEROB", summary=FALSE))), digits=2)
+
+allccstand <- (aesccz+alnccz+betccz+fagccz+fraccz+queccz)/6   #0.16
 
 #### Total combined cc
-aescomb<-round((-0.23/4)/(sd(fs$cc)*2)*100, digits=2) ## -5.77 for AESHIP 
-alncomb<-round((-0.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.27 for ALNGLU
-betcomb<-round((-0.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.27 for BETPEN
-fagcomb<-round((-.55/4)/(sd(fs$cc)*2)*100, digits=2) ## -13.8 for FAGSYL 
-fracomb<-round((-.75/4)/(sd(fs$cc)*2)*100, digits=2) ## -18.8 for FRAEXC 
-quecomb<-round((-.64/4)/(sd(fs$cc)*2)*100, digits=2) ## -16.1 for QUEROB 
-avgcomb<-round((-.42/4)/(sd(fs$cc)*2)*100, digits=2)  ## -10.5 for average of all species
-regcc<-round((-.58/4)/(sd(fs$cc)*2)*100, digits=2) ## -14.6 for combined effects after cc of regional/climatic factors
+#aescomb<-round((-0.23/4)/(sd(fs$cc)*2)*100, digits=2) ## -5.77 for AESHIP 
+#alncomb<-round((-0.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.27 for ALNGLU
+#betcomb<-round((-0.17/4)/(sd(fs$cc)*2)*100, digits=2) ## -4.27 for BETPEN
+#fagcomb<-round((-.55/4)/(sd(fs$cc)*2)*100, digits=2) ## -13.8 for FAGSYL 
+#fracomb<-round((-.75/4)/(sd(fs$cc)*2)*100, digits=2) ## -18.8 for FRAEXC 
+#quecomb<-round((-.64/4)/(sd(fs$cc)*2)*100, digits=2) ## -16.1 for QUEROB 
+#avgcomb<-round((-.42/4)/(sd(fs$cc)*2)*100, digits=2)  ## -10.5 for average of all species
+#regcc<-round((-.58/4)/(sd(fs$cc)*2)*100, digits=2) ## -14.6 for combined effects after cc of regional/climatic factors
 
 ### Okay now, we can calculate the interaction effects:
-naocc<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE)+mean(fixef(longtemps.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) 
-matcc<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE)+mean(fixef(longtemps.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fs$mat)*2)*100*2, digits=2) 
-distcc<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE)+mean(fixef(longtemps.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fs$distkm)*2)*100*150, digits=2) 
-elevcc<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE)+mean(fixef(longtemps.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fs$elev)*2)*100*200, digits=2)
+naocc<-round((mean(fixef(long.full, pars="nao.z", summary=FALSE)+mean(fixef(long.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fs$nao)*2)*100*0.3, digits=2) 
+matcc<-round((mean(fixef(long.full, pars="mat.z", summary=FALSE)+mean(fixef(long.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fs$mat)*2)*100*2, digits=2) 
+distcc<-round((mean(fixef(long.full, pars="dist.z", summary=FALSE)+mean(fixef(long.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fs$distkm)*2)*100*150, digits=2) 
+elevcc<-round((mean(fixef(long.full, pars="elev.z", summary=FALSE)+mean(fixef(long.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fs$elev)*2)*100*200, digits=2)
 
 ### Same rule but for DVR:
-matdvr<-round((mean(fixef(dvrtemps.full, pars="mat.z", summary=FALSE))/4)/(sd(fsdvr$mst)*2)*100*2, digits=2) ## -8.078 
-naodvr<-round((mean(fixef(dvrtemps.full, pars="nao.z", summary=FALSE))/4)/(sd(fsdvr$nao)*2)*100*0.3, digits=2)## 2.04 
-distdvr<-round((mean(fixef(dvrtemps.full, pars="dist.z", summary=FALSE))/4)/(sd(fsdvr$distkm)*2)*100*150, digits=2) ## 5.36
-elevdvr<-round((mean(fixef(dvrtemps.full, pars="elev.z", summary=FALSE))/4)/(sd(fsdvr$elev)*2)*100*200, digits=2) ## 1.77 
-ccdvr<-round((mean(fixef(dvrtemps.full, pars="cc.z", summary=FALSE))/4)/(sd(fsdvr$cc)*2)*100, digits=2) ## 8.6
+matdvr<-round((mean(fixef(dvrlong.full, pars="mat.z", summary=FALSE))/4)/(sd(fsdvr$mst)*2)*100*2, digits=2) ## -8.078 
+naodvr<-round((mean(fixef(dvrlong.full, pars="nao.z", summary=FALSE))/4)/(sd(fsdvr$nao)*2)*100*0.3, digits=2)## 2.04 
+distdvr<-round((mean(fixef(dvrlong.full, pars="dist.z", summary=FALSE))/4)/(sd(fsdvr$distkm)*2)*100*150, digits=2) ## 5.36
+elevdvr<-round((mean(fixef(dvrlong.full, pars="elev.z", summary=FALSE))/4)/(sd(fsdvr$elev)*2)*100*200, digits=2) ## 1.77 
+ccdvr<-round((mean(fixef(dvrlong.full, pars="cc.z", summary=FALSE))/4)/(sd(fsdvr$cc)*2)*100, digits=2) ## 8.6
 
 ### Okay now, we can calculate the interaction effects:
-naoccdvr<-round((mean(fixef(dvrtemps.full, pars="nao.z", summary=FALSE)+mean(fixef(dvrtemps.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fsdvr$nao)*2)*100*0.3, digits=2)
-matccdvr<-round((mean(fixef(dvrtemps.full, pars="mat.z", summary=FALSE)+mean(fixef(dvrtemps.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fsdvr$mat)*2)*100*2, digits=2) 
-distccdvr<-round((mean(fixef(dvrtemps.full, pars="dist.z", summary=FALSE)+mean(fixef(dvrtemps.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fsdvr$distkm)*2)*100*150, digits=2)
-elevccdvr<-round((mean(fixef(dvrtemps.full, pars="elev.z", summary=FALSE)+mean(fixef(dvrtemps.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fsdvr$elev)*2)*100*200, digits=2) 
+naoccdvr<-round((mean(fixef(dvrlong.full, pars="nao.z", summary=FALSE)+mean(fixef(dvrlong.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fsdvr$nao)*2)*100*0.3, digits=2)
+matccdvr<-round((mean(fixef(dvrlong.full, pars="mat.z", summary=FALSE)+mean(fixef(dvrlong.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fsdvr$mat)*2)*100*2, digits=2) 
+distccdvr<-round((mean(fixef(dvrlong.full, pars="dist.z", summary=FALSE)+mean(fixef(dvrlong.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fsdvr$distkm)*2)*100*150, digits=2)
+elevccdvr<-round((mean(fixef(dvrlong.full, pars="elev.z", summary=FALSE)+mean(fixef(dvrlong.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fsdvr$elev)*2)*100*200, digits=2) 
 
 
 ### Same rule but for Five model:
-matlong<-round((mean(fixef(long.full, pars="mat.z", summary=FALSE))/4)/(sd(fslong$mst)*2)*100*2, digits=2) ## -11.56
-naolong<-round((mean(fixef(long.full, pars="nao.z", summary=FALSE))/4)/(sd(fslong$nao)*2)*100*0.3, digits=2) ## 1.26
-distlong<-round((mean(fixef(long.full, pars="dist.z", summary=FALSE))/4)/(sd(fslong$distkm)*2)*100*150, digits=2) ## 2.75
-elevlong<-round((mean(fixef(long.full, pars="elev.z", summary=FALSE))/4)/(sd(fslong$elev)*2)*100*200, digits=2) ## 7.35
-cclong<-round((mean(fixef(long.full, pars="cc.z", summary=FALSE))/4)/(sd(fslong$cc)*2)*100, digits=2) ## 14.55
-alllongccstand<-((0.58)+(0.58+0.1)+(0.58+0.07)+(0.58-0.34)+(0.58-0.47)+(0.58-0.35))/6
-alllongcc<-round((alllongccstand/4)/(sd(fslong$cc)*2)*100, digits=2)
+matfivelong<-round((mean(fixef(fivelong.full, pars="mat.z", summary=FALSE))/4)/(sd(fsfivelong$mst)*2)*100*2, digits=2) ## -11.56
+naofivelong<-round((mean(fixef(fivelong.full, pars="nao.z", summary=FALSE))/4)/(sd(fsfivelong$nao)*2)*100*0.3, digits=2) ## 1.26
+distfivelong<-round((mean(fixef(fivelong.full, pars="dist.z", summary=FALSE))/4)/(sd(fsfivelong$distkm)*2)*100*150, digits=2) ## 2.75
+elevfivelong<-round((mean(fixef(fivelong.full, pars="elev.z", summary=FALSE))/4)/(sd(fsfivelong$elev)*2)*100*200, digits=2) ## 7.35
+ccfivelong<-round((mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))/4)/(sd(fsfivelong$cc)*2)*100, digits=2) ## 14.55
+allfivelongccstand<-((0.58)+(0.58+0.1)+(0.58+0.07)+(0.58-0.34)+(0.58-0.47)+(0.58-0.35))/6
+allfivelongcc<-round((allfivelongccstand/4)/(sd(fsfivelong$cc)*2)*100, digits=2)
 
 ### Okay now, we can calculate the interaction effects:
-naocclong<-round((mean(fixef(long.full, pars="nao.z", summary=FALSE)+mean(fixef(long.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fslong$nao)*2)*100*0.3, digits=2) 
-matcclong<-round((mean(fixef(long.full, pars="mat.z", summary=FALSE)+mean(fixef(long.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fslong$mat)*2)*100*2, digits=2)
-distcclong<-round((mean(fixef(long.full, pars="dist.z", summary=FALSE)+mean(fixef(long.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fslong$distkm)*2)*100*150, digits=2)
-elevcclong<-round((mean(fixef(long.full, pars="elev.z", summary=FALSE)+mean(fixef(long.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fslong$elev)*2)*100*200, digits=2)
+naoccfivelong<-round((mean(fixef(fivelong.full, pars="nao.z", summary=FALSE)+mean(fixef(fivelong.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$nao)*2)*100*0.3, digits=2) 
+matccfivelong<-round((mean(fixef(fivelong.full, pars="mat.z", summary=FALSE)+mean(fixef(fivelong.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$mat)*2)*100*2, digits=2)
+distccfivelong<-round((mean(fixef(fivelong.full, pars="dist.z", summary=FALSE)+mean(fixef(fivelong.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$distkm)*2)*100*150, digits=2)
+elevccfivelong<-round((mean(fixef(fivelong.full, pars="elev.z", summary=FALSE)+mean(fixef(fivelong.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$elev)*2)*100*200, digits=2)
 
 
 #### Simple model summaries
