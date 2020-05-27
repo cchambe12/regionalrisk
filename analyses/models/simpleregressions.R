@@ -58,7 +58,7 @@ save(lstfrz.mod, file="/n/wolkovich_lab/Lab/Cat/lstfrzmod.Rdata")
 
 
 if(TRUE){
-  fssimp <- read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_orig.csv")
+  fssimp <- read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_longtemps.csv")
   fssimp$cc <- ifelse(fssimp$year<=1983, 0, 1)
   fssimp$fstot <- ave(fssimp$fs, fssimp$lat.long, fssimp$species, fssimp$cc, FUN=sum)
   

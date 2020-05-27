@@ -23,3 +23,8 @@ analyses/output/tminfull.csv
 *docs/regrisk-concordance.tex
 analyses/.Rhistory
 analyses/output/.Rhistory
+
+analyses/output/fs_newspace_long.csv
+analyses/output/fs_newspace_longtemps.csv
+analyses/output/fs_newspace_dvrtemps.csv
+analyses/output/fs_newspace_verylong.csv
