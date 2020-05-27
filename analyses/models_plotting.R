@@ -405,9 +405,22 @@ if(FALSE){
   write.csv(modvlong, file="~/Documents/git/regionalrisk/analyses/output/verylong_full_modeloutput.csv", row.names=FALSE)
 }
 
+if(FALSE){
+  moddvrtemps<-as.data.frame(tidy(dvrtemps.full, prob=0.9))
+  names(moddvrtemps)<-c("term", "estimate", "error", "10%", "90%")
+  moddvrtemps50<-as.data.frame(tidy(dvrtemps.full, prob=0.5))
+  names(moddvrtemps50)<-c("term", "estimate", "error", "25%", "75%")
+  moddvrtemps <- full_join(moddvrtemps, moddvrtemps50)
+  moddvrtemps98<-as.data.frame(tidy(dvrtemps.full, prob=0.98))
+  names(moddvrtemps98)<-c("term", "estimate", "error", "2%", "98%")
+  moddvrtemps <- full_join(moddvrtemps, moddvrtemps98)
+  moddvrtemps <- subset(moddvrtemps, select=c("term", "estimate", "2%", "10%", "25%", "75%", "90%", "98%"))
+  write.csv(moddvrtemps, file="~/Documents/git/regionalrisk/analyses/output/dvrtemps_full_modeloutput.csv", row.names=FALSE)
+}
+
 
 ### Now to make the plots
-modoutput <- modlong98 #modelhere
+modoutput <- moddvrtemps98 #modelhere
 cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
