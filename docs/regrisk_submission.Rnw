@@ -354,21 +354,21 @@ C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W
 
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=16cm]{..//analyses/figures/MSTBB_bySpp_lines.png}
+  %-\includegraphics[width=16cm]{..//analyses/figures/mstbb_byspp_lines.png}
   -\caption{Mean spring temperatures are plotted for each site and year (from 1951-2016) for each species. The purple line shows the trend in mean spring temperatures from March 1 to May 31 and the green line represents the trend of average day of budburst for each year for each species. Both lines are cyclic penalized cubic regression spline smooths with basis dimensions equal to the number of years in the study (i.e., 66). Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:mst}
   -\end{center}
   -\end{figure}}
 
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=14cm]{..//analyses/figures/BB_base.png}
+  %-\includegraphics[width=14cm]{..//analyses/figures/bb_base.png}
   -\caption{The average day of budburst mapped by site for each species (ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}). Species names are color-coded to match figures throughout the text. }\label{fig:bbmap}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=14cm]{..//analyses/figures/Boxplot_BBTminFS_noDots_modests.png}
+  %-\includegraphics[width=14cm]{..//analyses/figures/Boxplot_BBTminFS_noDots_modestslong.png}
   -\caption{Day of budburst (\textbf{a}), minimum temperatures between budburst and leafout (\textbf{b}) and number of false springs (\textbf{c}) before and after 1983 across species for all sites. Box and whisker plots show the 25th and 75th percentiles (i.e., the interquartile range) with notches indicating 95\% uncertainty intervals. Dots and error bars overlaid on the box and whisker plots represent the model regression outputs (Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Error bars from the model regressions indicate 98\% uncertainty intervals but, given the number of sites, are quite small and thus not easily visible (see Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Species are ordered by day of budburst and are color-coded to match the other figures.  }\label{fig:boxfs}
   -\end{center}
   -\end{figure}}
@@ -376,7 +376,7 @@ C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W
   
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=12cm]{..//analyses/figures/model_output_98_orig.png}
+  %-\includegraphics[width=12cm]{..//analyses/figures/model_output_98_long.png}
   -\caption{Effects of species, climatic and geographical predictors on false spring risk. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. There were 582,211 zeros and 172,877 ones for false springs in the data. See Table \ref{tab:suppmodorig} for full model output.}\label{fig:maineffects}
   -\end{center}
   -\end{figure}}
@@ -384,7 +384,7 @@ C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W
   
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=16cm]{..//analyses/figures/InteractionPlots/Species_orig.png}
+  %-\includegraphics[width=16cm]{..//analyses/figures/InteractionPlots/Species_long.png}
   -\caption{Species-level variation across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodorig} for full model output. }\label{fig:spp}
   -\end{center}
   -\end{figure}}

@@ -13,12 +13,13 @@ library(dplyr)
 library(tidyr)
 library(egg)
 library(RColorBrewer)
+library(viridis)
 library(ggeffects)
 
 # Setting working directory
 setwd("~/Documents/git/regionalrisk/analyses/")
 
-bb <- read.csv("output/fs_newspace_orig.csv", header=TRUE)
+#bb <- read.csv("output/fs_newspace_long.csv", header=TRUE)
 #bb <- read.csv("output/fs_newspace_fullleaf.csv", header=TRUE)
 
 if(FALSE){
@@ -67,7 +68,7 @@ post<-subset(mat, mat$cc==1)
 
 plus<-full_join(pre, post)
 plus <- full_join(plus, bbccsp)
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <-viridis_pal(option="viridis")(6)
 budburst<- ggplot(plus, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   scale_fill_manual(name="Species", values=cols,
                       labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
@@ -116,14 +117,14 @@ budburst<- ggplot(plus, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha
 
 
 ###### Tmin boxplots now...
-tm<-read.csv("output/tminprep_boxplots.csv", header=TRUE) #### mean tmin is 7.54
+tm<-read.csv("output/tminprep_boxplots_long.csv", header=TRUE) #### mean tmin is 7.54
 #tm<-read.csv("output/tminprep_boxplots_fullleaf.csv", header=TRUE) 
 #tm<-read.csv("output/tminprep_boxplots_dvr.csv", header=TRUE)
 #tm$lat.long <- paste(tm$lat, tm$long)
 #tm <- tm[(tm$lat.long%in%goodsites),]
 
-load("~/Documents/git/regionalrisk/tminmod.Rdata")
-tmccsp<- ggpredict(tmin.mod, terms = c("cc", "species"), ci.lvl=0.98) 
+load("~/Documents/git/regionalrisk/tminmod_long.Rdata")
+tmccsp<- ggpredict(tminlong.mod, terms = c("cc", "species"), ci.lvl=0.98) 
 
 tmccsp$group <- as.character(tmccsp$group)
 
@@ -157,7 +158,7 @@ postt<-subset(tm, tm$cc==1)
 plust<-full_join(pret, postt)
 
 plust <- full_join(plust, tmccsp)
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <-viridis_pal(option="viridis")(6)
 tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
@@ -207,8 +208,8 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
 # Adding to final panel model results to help reader interpret differences between raw data and considering all climatic and geographical factors
 #modoutput <- read.csv("output/ccsp_predicted_90.csv", header=TRUE)
 
-load("~/Documents/git/regionalrisk/fstotmod.Rdata")
-fsccsp<- ggpredict(fstot.mod, terms = c("cc", "species"), ci.lvl=0.98) 
+load("~/Documents/git/regionalrisk/fstotmodlong.Rdata")
+fsccsp<- ggpredict(fstotlong.mod, terms = c("cc", "species"), ci.lvl=0.98) 
 
 fsccsp$group <- as.character(fsccsp$group)
 
@@ -216,7 +217,7 @@ fsccsp$species <- NA
 fsccsp$species<-ifelse(fsccsp$group=="BETPEN", "aaBETPEN", fsccsp$group)
 fsccsp$species<-ifelse(fsccsp$group=="FRAEXC", "zFRAEXC", fsccsp$species)
 
-f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
+f<-read.csv("output/fs_newspace_long.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
 #f<-read.csv("output/fs_newspace_fullleaf.csv", header=TRUE)
@@ -227,8 +228,8 @@ f<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs),]
-f$fsall<-ave(f$fs.count, f$lat.long, f$species, FUN=sum)
-f$fstot<-ave(f$fsall, f$species, f$lat.long, f$cc )
+#f$fsall<-ave(f$fs.count, f$lat.long, f$species, FUN=sum)
+f$fstot<-ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
 
 
 
@@ -245,7 +246,7 @@ plusf<-plusf[!duplicated(plusf),]
 
 plusf <- full_join(plusf, fsccsp)
 
-cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
+cols <-viridis_pal(option="viridis")(6)
 falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fstot)) + geom_boxplot(aes(alpha=as.factor(cc), fill=as.factor(species), col=as.factor(species)), outlier.shape=NA) +
   scale_fill_manual(name="Species", values=cols,
                     labels=c("aaBETPEN"=expression(paste(italic("Betula pendula"))),
@@ -303,7 +304,19 @@ g1<-ggarrange(budburst, tmin, falsespring, nrow=3)
 g2<-grid.arrange(mylegend)
 grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
 
-png("figures/Boxplot_BBTminFS_noDots_modests.png", 
+png("figures/Boxplot_BBTminFS_noDots_modestslong.png", 
+    width=6,
+    height=6, units="in", res = 350 )
+grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
+dev.off()
+
+png("figures/Figure3.png", 
+    width=6,
+    height=6, units="in", res = 350 )
+grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
+dev.off()
+
+tiff("figures/Figure3.tiff", 
     width=6,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, ncol=2, widths=c(2.5, 0.75))
