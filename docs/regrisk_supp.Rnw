@@ -187,8 +187,8 @@ print(xtable(bb[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression
 
 <<label=simtim, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk")
-load("tminmod.Rdata")
-tmin <- as.data.frame(tidy(tmin.mod, prob=0.98))
+load("tminmod_long.Rdata")
+tmin <- as.data.frame(tidy(tminlong.mod, prob=0.98))
 
 tmin$term <- gsub("b_", "", tmin$term)
 tmin$term <- gsub("Intercept", "Intercept", tmin$term)
@@ -212,8 +212,8 @@ print(xtable(tmin[1:12,c(1:2, 4:5)], caption = "Summary of simple linear regress
 <<label=simfs, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk")
 if(TRUE){
-load("fstotmod.Rdata")
-lstfrz <- as.data.frame(tidy(fstot.mod, prob=0.98))
+load("fstotmodlong.Rdata")
+lstfrz <- as.data.frame(tidy(fstotlong.mod, prob=0.98))
 lstfrz$term <- gsub("b_", "", lstfrz$term)
 lstfrz$term <- gsub("Intercept", "Intercept", lstfrz$term)
 lstfrz$term <- gsub("cc", "Climate Change", lstfrz$term)
