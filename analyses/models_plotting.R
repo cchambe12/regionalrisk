@@ -45,7 +45,7 @@ naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab
                                                                                               plot.title = element_text(face="bold")) + 
   scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
-  coord_cartesian(ylim=c(0,0.4)) +
+  coord_cartesian(ylim=c(0,0.6)) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
@@ -162,7 +162,7 @@ ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ geom_li
   xlab("Climate Change") + ylab("Probability of False Spring") + ggtitle("(e)") + 
   scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1),labels=c("1951-1983","1984-2016")) +
   #geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
-  coord_cartesian(ylim=c(0,0.4))  + theme(legend.key = element_rect(fill="transparent")) +
+  coord_cartesian(ylim=c(0,0.6))  + theme(legend.key = element_rect(fill="transparent")) +
   theme_classic() + theme(legend.position = "none",
                           plot.title = element_text(face="bold")) + 
   theme(legend.text.align = 0) +
@@ -201,6 +201,12 @@ grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
 dev.off()
 
 png("~/Documents/git/regionalrisk/analyses/figures/Figure5.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+    width=9,
+    height=6, units="in", res = 350 )
+grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
+dev.off()
+
+tiff("~/Documents/git/regionalrisk/analyses/figures/Figure5.tiff", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=9,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, nrow=2, heights=c(1.5, 1))
@@ -394,7 +400,7 @@ if(FALSE){
 
 
 ### Now to make the plots
-modoutput <- modlong98 #modelhere
+modoutput <- modfivelong98 #modelhere
 #cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
@@ -555,7 +561,7 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
 #regrisk
 
 
-png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_long.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_fivelong.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
 grid.arrange(regrisk)

@@ -293,12 +293,12 @@ print(xtable(modoutput,
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_dvrlong.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:dvr}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmoddvr} for full model output. }\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
 \newpage
-<<label=suppmodlong, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+<<label=suppmodvr, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
 modoutput <- read.csv("output/dvrlong_full_modeloutput.csv", header=TRUE)
@@ -334,7 +334,7 @@ colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", 
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model of false spring risk with different rates of leafout for each species.", label="tab:suppmoddvrlong",
+             caption = "Summary of Bernoulli model of false spring risk with different rates of leafout for each species.", label="tab:suppmoddvr",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -346,12 +346,12 @@ print(xtable(modoutput,
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_fivelong.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmoddvr} for full model output. }\label{fig:dvr}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmodfive} for full model output. }\label{fig:five}
   -\end{center}
   -\end{figure}}
   
 \newpage
-<<label=suppmoddvrtemps, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+<<label=suppmodfive, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
 modoutput <- read.csv("output/fivelong_full_modeloutput.csv", header=TRUE)
@@ -387,7 +387,7 @@ colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", 
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.", label="tab:suppmodfivelong",
+             caption = "Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.", label="tab:suppmodfive",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -399,12 +399,12 @@ print(xtable(modoutput,
   {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_longtemps.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}) and a higher temperature threshold (-2.2$^{\circ}$C) for late-leafout species (i.e., \textit{Fagus sylvatica}, \textit{Fraxinus excelsior} and \textit{Quercus robur}). More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmoddvr} for full model output. }\label{fig:dvr}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}) and a higher temperature threshold (-2.2$^{\circ}$C) for late-leafout species (i.e., \textit{Fagus sylvatica}, \textit{Fraxinus excelsior} and \textit{Quercus robur}). More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmodlongtemps} for full model output. }\label{fig:longtemps}
   -\end{center}
   -\end{figure}}
   
 \newpage
-<<label=suppmoddvrtemps, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+<<label=suppmodlongtemps, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
 modoutput <- read.csv("output/longtemps_full_modeloutput.csv", header=TRUE)

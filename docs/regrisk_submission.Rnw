@@ -183,7 +183,7 @@ naofivelong<-round((mean(fixef(fivelong.full, pars="nao.z", summary=FALSE))/4)/(
 distfivelong<-round((mean(fixef(fivelong.full, pars="dist.z", summary=FALSE))/4)/(sd(fsfivelong$distkm)*2)*100*150, digits=2) ## 2.75
 elevfivelong<-round((mean(fixef(fivelong.full, pars="elev.z", summary=FALSE))/4)/(sd(fsfivelong$elev)*2)*100*200, digits=2) ## 7.35
 ccfivelong<-round((mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))/4)/(sd(fsfivelong$cc)*2)*100, digits=2) ## 14.55
-allfivelongccstand<-((0.58)+(0.58+0.1)+(0.58+0.07)+(0.58-0.34)+(0.58-0.47)+(0.58-0.35))/6
+allfivelongccstand<-((mean(fixef(fivelong.full, pars="cc.z", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesALNGLU", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesBETPEN", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesFAGSYL", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesFRAEXC", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="QUEROB", summary=FALSE))))/6
 allfivelongcc<-round((allfivelongccstand/4)/(sd(fsfivelong$cc)*2)*100, digits=2)
 
 ### Okay now, we can calculate the interaction effects:
@@ -191,6 +191,22 @@ naoccfivelong<-round((mean(fixef(fivelong.full, pars="nao.z", summary=FALSE)+mea
 matccfivelong<-round((mean(fixef(fivelong.full, pars="mat.z", summary=FALSE)+mean(fixef(fivelong.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$mat)*2)*100*2, digits=2)
 distccfivelong<-round((mean(fixef(fivelong.full, pars="dist.z", summary=FALSE)+mean(fixef(fivelong.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$distkm)*2)*100*150, digits=2)
 elevccfivelong<-round((mean(fixef(fivelong.full, pars="elev.z", summary=FALSE)+mean(fixef(fivelong.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$elev)*2)*100*200, digits=2)
+
+
+### Lastly, we calculate the longtemps model
+matlongtemps<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE))/4)/(sd(fslongtemps$mst)*2)*100*2, digits=2) ## -11.56
+naolongtemps<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE))/4)/(sd(fslongtemps$nao)*2)*100*0.3, digits=2) ## 1.26
+distlongtemps<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE))/4)/(sd(fslongtemps$distkm)*2)*100*150, digits=2) ## 2.75
+elevlongtemps<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE))/4)/(sd(fslongtemps$elev)*2)*100*200, digits=2) ## 7.35
+cclongtemps<-round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))/4)/(sd(fslongtemps$cc)*2)*100, digits=2) ## 14.55
+alllongtempsccstand<-((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesALNGLU", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesBETPEN", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesFAGSYL", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesFRAEXC", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="QUEROB", summary=FALSE))))/6
+alllongtempscc<-round((alllongtempsccstand/4)/(sd(fslongtemps$cc)*2)*100, digits=2)
+
+### And now for the interaction effects
+naocclongtemps<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE)+mean(fixef(longtemps.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fslongtemps$nao)*2)*100*0.3, digits=2) 
+matcclongtemps<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE)+mean(fixef(longtemps.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fslongtemps$mat)*2)*100*2, digits=2)
+distcclongtemps<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE)+mean(fixef(longtemps.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fslongtemps$distkm)*2)*100*150, digits=2)
+elevcclongtemps<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE)+mean(fixef(longtemps.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fslongtemps$elev)*2)*100*200, digits=2)
 
 
 #### Simple model summaries

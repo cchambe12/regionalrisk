@@ -28,6 +28,8 @@ analyses/output/fs_newspace_long.csv
 analyses/output/fs_newspace_longtemps.csv
 analyses/output/fs_newspace_dvrtemps.csv
 analyses/output/fs_newspace_verylong.csv
+analyses/output/fs_newspace_fivelong.csv
+analyses/output/fs_newspace_dvrlong.csv
 
 
 *_longdata.csv

@@ -24,15 +24,15 @@ if(FALSE){
   save(bb.mod, file="/n/wolkovich_lab/Lab/Cat/bbmod.Rdata")
 }
 
-if(FALSE){
-tmin <- read.csv("/n/wolkovich_lab/Lab/Cat/tminprep_boxplots.csv")
+if(TRUE){
+tmin <- read.csv("/n/wolkovich_lab/Lab/Cat/tminprep_boxplots_long.csv")
 tmin$cc <- ifelse(tmin$year<=1983, 0, 1)
 #tmin$cc.z <- (tmin$cc-mean(tmin$cc,na.rm=TRUE))/(2*sd(tmin$cc,na.rm=TRUE))
 
-tmin.mod<- brm(Tmin ~ cc + species + cc:species, data=tmin, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+tminlong.mod<- brm(Tmin ~ cc + species + cc:species, data=tmin, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                    iter=4000, warmup = 2500, chains=4, cores=4)
 
-save(tmin.mod, file="/n/wolkovich_lab/Lab/Cat/tminmod.Rdata")
+save(tminlong.mod, file="/n/wolkovich_lab/Lab/Cat/tminmod_long.Rdata")
 
 #bb.mod.species <- brm(bb~year*species, data=bb, control=list(max_treedepth = 15,adapt_delta = 0.99), 
 #                    iter=4000, warmup = 2500, chains=4, cores=4)
@@ -58,12 +58,12 @@ save(lstfrz.mod, file="/n/wolkovich_lab/Lab/Cat/lstfrzmod.Rdata")
 
 
 if(TRUE){
-  fssimp <- read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_longtemps.csv")
+  fssimp <- read.csv("/n/wolkovich_lab/Lab/Cat/fs_newspace_long.csv")
   fssimp$cc <- ifelse(fssimp$year<=1983, 0, 1)
   fssimp$fstot <- ave(fssimp$fs, fssimp$lat.long, fssimp$species, fssimp$cc, FUN=sum)
   
-  fstot.mod <- brm(fstot ~ cc + species + cc:species, data=fssimp, control=list(max_treedepth = 15,adapt_delta = 0.99), 
+  fstotlong.mod <- brm(fstot ~ cc + species + cc:species, data=fssimp, control=list(max_treedepth = 15,adapt_delta = 0.99), 
                     iter=4000, warmup = 2500, chains=4, cores=4)
   
-  save(fstot.mod, file="/n/wolkovich_lab/Lab/Cat/fstotmod.Rdata")
+  save(fstotlong.mod, file="/n/wolkovich_lab/Lab/Cat/fstotmodlong.Rdata")
 }

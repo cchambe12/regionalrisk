@@ -571,7 +571,7 @@ elevxcc <- rbind(aeship.elev, alnglu.elev, betpen.elev, fagsyl.elev, fraexc.elev
 elevxcc$fsmean_trans <- inverselogit(elevxcc$fs.mean)
 elevxcc$fs2_trans <- inverselogit(elevxcc$fs.2)
 elevxcc$fs98_trans <- inverselogit(elevxcc$fs.98)
-elevxcc$elev_trans <- (elevxcc$elev)*sd(bb$mst)*2 + mean(bb$mst)
+elevxcc$elev_trans <- (elevxcc$elev)*sd(bb$elev)*2 + mean(bb$elev)
 
 elevxcc$fsavg_sp <- ave(elevxcc$fsmean_trans, elevxcc$species, elevxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
 elevxcc$fs_sp <- ave(elevxcc$fs.mean, elevxcc$species, elevxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
@@ -753,7 +753,7 @@ naoxcc <- rbind(aeship.nao, alnglu.nao, betpen.nao, fagsyl.nao, fraexc.nao, quer
 naoxcc$fsmean_trans <- inverselogit(naoxcc$fs.mean)
 naoxcc$fs2_trans <- inverselogit(naoxcc$fs.2)
 naoxcc$fs98_trans <- inverselogit(naoxcc$fs.98)
-naoxcc$nao_trans <- (naoxcc$nao)*sd(bb$mst)*2 + mean(bb$mst)
+naoxcc$nao_trans <- (naoxcc$nao)*sd(bb$nao)*2 + mean(bb$nao)
 
 naoxcc$fsavg_sp <- ave(naoxcc$fsmean_trans, naoxcc$species, naoxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
 naoxcc$fs_sp <- ave(naoxcc$fs.mean, naoxcc$species, naoxcc$cc, FUN=function(x) mean(x, na.rm=TRUE))
@@ -764,7 +764,6 @@ naoapc <- naoapc[!duplicated(naoapc),]
 #write.csv(naoapc, file="~/Documents/git/regionalrisk/analyses/output/nao_apcoutput.csv", row.names=FALSE)
 
 cols <-viridis_pal(option="viridis")(6)
-quartz()
 naoindex <- ggplot(naoxcc, aes(x=nao_trans, y=fsmean_trans)) + geom_line(aes(linetype=cc, alpha=cc, col=species)) +
   geom_ribbon(aes(ymin=fs2_trans, ymax=fs98_trans, alpha=cc, fill=species)) + theme_classic() +
   scale_linetype_manual(name="Climate Change", values=c("dashed", "solid"),
