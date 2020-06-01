@@ -387,7 +387,7 @@ colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", 
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.", label="tab:suppmodfive",
+             caption = "Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\\circ}$C) for defining a false spring.", label="tab:suppmodfive",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -404,7 +404,7 @@ print(xtable(modoutput,
   -\end{figure}}
   
 \newpage
-<<label=suppmodlongtemps, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+<<label=suppmodlongtemps, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=8, fig.height=4, fig.align='center'>>=
 setwd("..//analyses/")
 
 modoutput <- read.csv("output/longtemps_full_modeloutput.csv", header=TRUE)
@@ -440,7 +440,7 @@ colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", 
 
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model of false spring risk with with a lower temperature threshold (-5$^{\circ}$C) for early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}) and a higher temperature threshold (-2.2$^{\circ}$C) for late-leafout species (i.e., \textit{Fagus sylvatica}, \textit{Fraxinus excelsior} and \textit{Quercus robur}).", label="tab:suppmodlongtemps",
+             caption = "Summary of Bernoulli model of false spring risk with varying temperature thresholds for early- versus later-leafout species.", label="tab:suppmodlongtemps",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 

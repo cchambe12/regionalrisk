@@ -94,15 +94,12 @@ options(stringsAsFactors = FALSE)
 library(brms)
 
 ## Set Working Directory
-setwd("~/Documents/git/regionalrisk")
+setwd("..//..//regionalrisk")
 
 load("long_full.Rdata")
 load("dvrlong_full.Rdata")
 load("fivelong_full.Rdata")
 load("longtemps_full.Rdata")
-load("orig_full.Rdata")
-
-fs <- read.csv("analyses/output/fs_newspace_orig.csv", header=TRUE)
 
 fs <- read.csv("analyses/output/fs_newspace_long.csv", header=TRUE)
 fsdvr <- read.csv("analyses/output/fs_newspace_dvrlong.csv", header=TRUE)
@@ -126,24 +123,24 @@ elevz<-round((mean(fixef(long.full, pars="elev.z", summary=FALSE))), digits=2)
 
 aescc<-round((mean(fixef(long.full, pars="cc.z", summary=FALSE))/4)/(sd(fs$cc)*2)*100,digits=2) 
 
-alncc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesALNGLU", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2) 
+alncc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="cc.z:speciesALNGLU", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2) 
 
-betcc<-roundround(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesBETPEN", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2) 
+betcc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="cc.z:speciesBETPEN", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2) 
 
-fagcc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesFAGSYL", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
+fagcc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="cc.z:speciesFAGSYL", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
 
-fracc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesFRAEXC", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
+fracc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="cc.z:speciesFRAEXC", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
 
-quecc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="speciesQUEROB", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
+quecc<-round(((mean(fixef(long.full, pars="cc.z", summary=FALSE))+ mean(fixef(long.full, pars="cc.z:speciesQUEROB", summary=FALSE)))/4)/(sd(fs$cc)*2)*100, digits=2)
 
-allcc<- (aescc+alncc+betcc+fagcc+fracc+quecc)/6
+allcc <- (aescc+alncc+betcc+fagcc+fracc+quecc)/6
 
 aesccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))), digits=2)
-alnccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesALNGLU", summary=FALSE))), digits=2)
-betccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesBETPEN", summary=FALSE))), digits=2)
-fagccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesFAGSYL", summary=FALSE))), digits=3)
-fraccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesFRAEXC", summary=FALSE))), digits=2)
-queccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="speciesQUEROB", summary=FALSE))), digits=2)
+alnccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="cc.z:speciesALNGLU", summary=FALSE))), digits=2)
+betccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="cc.z:speciesBETPEN", summary=FALSE))), digits=2)
+fagccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="cc.z:speciesFAGSYL", summary=FALSE))), digits=3)
+fraccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="cc.z:speciesFRAEXC", summary=FALSE))), digits=2)
+queccz <- round((mean(fixef(long.full, pars="cc.z", summary=FALSE))+mean(fixef(long.full, pars="cc.z:speciesQUEROB", summary=FALSE))), digits=2)
 
 allccstand <- (aesccz+alnccz+betccz+fagccz+fraccz+queccz)/6   #0.16
 
@@ -178,39 +175,38 @@ elevccdvr<-round((mean(fixef(dvrlong.full, pars="elev.z", summary=FALSE)+mean(fi
 
 
 ### Same rule but for Five model:
-matfivelong<-round((mean(fixef(fivelong.full, pars="mat.z", summary=FALSE))/4)/(sd(fsfivelong$mst)*2)*100*2, digits=2) ## -11.56
-naofivelong<-round((mean(fixef(fivelong.full, pars="nao.z", summary=FALSE))/4)/(sd(fsfivelong$nao)*2)*100*0.3, digits=2) ## 1.26
-distfivelong<-round((mean(fixef(fivelong.full, pars="dist.z", summary=FALSE))/4)/(sd(fsfivelong$distkm)*2)*100*150, digits=2) ## 2.75
-elevfivelong<-round((mean(fixef(fivelong.full, pars="elev.z", summary=FALSE))/4)/(sd(fsfivelong$elev)*2)*100*200, digits=2) ## 7.35
-ccfivelong<-round((mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))/4)/(sd(fsfivelong$cc)*2)*100, digits=2) ## 14.55
-allfivelongccstand<-((mean(fixef(fivelong.full, pars="cc.z", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesALNGLU", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesBETPEN", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesFAGSYL", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesFRAEXC", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="QUEROB", summary=FALSE))))/6
-allfivelongcc<-round((allfivelongccstand/4)/(sd(fsfivelong$cc)*2)*100, digits=2)
+matfive<-round((mean(fixef(fivelong.full, pars="mat.z", summary=FALSE))/4)/(sd(fsfive$mst)*2)*100*2, digits=2) ## -11.56
+naofive<-round((mean(fixef(fivelong.full, pars="nao.z", summary=FALSE))/4)/(sd(fsfive$nao)*2)*100*0.3, digits=2) ## 1.26
+distfive<-round((mean(fixef(fivelong.full, pars="dist.z", summary=FALSE))/4)/(sd(fsfive$distkm)*2)*100*150, digits=2) ## 2.75
+elevfive<-round((mean(fixef(fivelong.full, pars="elev.z", summary=FALSE))/4)/(sd(fsfive$elev)*2)*100*200, digits=2) ## 7.35
+ccfive<-round((mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))/4)/(sd(fsfive$cc)*2)*100, digits=2) ## 14.55
+allfiveccstand<-((mean(fixef(fivelong.full, pars="cc.z", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesALNGLU", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesBETPEN", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesFAGSYL", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesFRAEXC", summary=FALSE)))+(mean(fixef(fivelong.full, pars="cc.z", summary=FALSE))+mean(fixef(fivelong.full, pars="speciesQUEROB", summary=FALSE))))/6
+allfivecc<-round((allfiveccstand/4)/(sd(fsfive$cc)*2)*100, digits=2)
 
 ### Okay now, we can calculate the interaction effects:
-naoccfivelong<-round((mean(fixef(fivelong.full, pars="nao.z", summary=FALSE)+mean(fixef(fivelong.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$nao)*2)*100*0.3, digits=2) 
-matccfivelong<-round((mean(fixef(fivelong.full, pars="mat.z", summary=FALSE)+mean(fixef(fivelong.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$mat)*2)*100*2, digits=2)
-distccfivelong<-round((mean(fixef(fivelong.full, pars="dist.z", summary=FALSE)+mean(fixef(fivelong.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$distkm)*2)*100*150, digits=2)
-elevccfivelong<-round((mean(fixef(fivelong.full, pars="elev.z", summary=FALSE)+mean(fixef(fivelong.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fsfivelong$elev)*2)*100*200, digits=2)
+naoccfive<-round((mean(fixef(fivelong.full, pars="nao.z", summary=FALSE)+mean(fixef(fivelong.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fsfive$nao)*2)*100*0.3, digits=2) 
+matccfive<-round((mean(fixef(fivelong.full, pars="mat.z", summary=FALSE)+mean(fixef(fivelong.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fsfive$mat)*2)*100*2, digits=2)
+distccfive<-round((mean(fixef(fivelong.full, pars="dist.z", summary=FALSE)+mean(fixef(fivelong.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fsfive$distkm)*2)*100*150, digits=2)
+elevccfive<-round((mean(fixef(fivelong.full, pars="elev.z", summary=FALSE)+mean(fixef(fivelong.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fsfive$elev)*2)*100*200, digits=2)
 
 
 ### Lastly, we calculate the longtemps model
-matlongtemps<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE))/4)/(sd(fslongtemps$mst)*2)*100*2, digits=2) ## -11.56
-naolongtemps<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE))/4)/(sd(fslongtemps$nao)*2)*100*0.3, digits=2) ## 1.26
-distlongtemps<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE))/4)/(sd(fslongtemps$distkm)*2)*100*150, digits=2) ## 2.75
-elevlongtemps<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE))/4)/(sd(fslongtemps$elev)*2)*100*200, digits=2) ## 7.35
-cclongtemps<-round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))/4)/(sd(fslongtemps$cc)*2)*100, digits=2) ## 14.55
-alllongtempsccstand<-((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesALNGLU", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesBETPEN", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesFAGSYL", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesFRAEXC", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="QUEROB", summary=FALSE))))/6
-alllongtempscc<-round((alllongtempsccstand/4)/(sd(fslongtemps$cc)*2)*100, digits=2)
+mattemps<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE))/4)/(sd(fstemps$mst)*2)*100*2, digits=2) ## -11.56
+naotemps<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE))/4)/(sd(fstemps$nao)*2)*100*0.3, digits=2) ## 1.26
+disttemps<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE))/4)/(sd(fstemps$distkm)*2)*100*150, digits=2) ## 2.75
+elevtemps<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE))/4)/(sd(fstemps$elev)*2)*100*200, digits=2) ## 7.35
+cctemps<-round((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))/4)/(sd(fstemps$cc)*2)*100, digits=2) ## 14.55
+alltempsccstand<-((mean(fixef(longtemps.full, pars="cc.z", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesALNGLU", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesBETPEN", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesFAGSYL", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesFRAEXC", summary=FALSE)))+(mean(fixef(longtemps.full, pars="cc.z", summary=FALSE))+mean(fixef(longtemps.full, pars="speciesQUEROB", summary=FALSE))))/6
+alltempscc<-round((alltempsccstand/4)/(sd(fstemps$cc)*2)*100, digits=2)
 
 ### And now for the interaction effects
-naocclongtemps<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE)+mean(fixef(longtemps.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fslongtemps$nao)*2)*100*0.3, digits=2) 
-matcclongtemps<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE)+mean(fixef(longtemps.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fslongtemps$mat)*2)*100*2, digits=2)
-distcclongtemps<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE)+mean(fixef(longtemps.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fslongtemps$distkm)*2)*100*150, digits=2)
-elevcclongtemps<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE)+mean(fixef(longtemps.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fslongtemps$elev)*2)*100*200, digits=2)
+naocctemps<-round((mean(fixef(longtemps.full, pars="nao.z", summary=FALSE)+mean(fixef(longtemps.full, pars="nao.z:cc.z", summary=FALSE)))/4)/(sd(fstemps$nao)*2)*100*0.3, digits=2) 
+matcctemps<-round((mean(fixef(longtemps.full, pars="mat.z", summary=FALSE)+mean(fixef(longtemps.full, pars="mat.z:cc.z", summary=FALSE)))/4)/(sd(fstemps$mat)*2)*100*2, digits=2)
+distcctemps<-round((mean(fixef(longtemps.full, pars="dist.z", summary=FALSE)+mean(fixef(longtemps.full, pars="dist.z:cc.z", summary=FALSE)))/4)/(sd(fstemps$distkm)*2)*100*150, digits=2)
+elevcctemps<-round((mean(fixef(longtemps.full, pars="elev.z", summary=FALSE)+mean(fixef(longtemps.full, pars="elev.z:cc.z", summary=FALSE)))/4)/(sd(fstemps$elev)*2)*100*200, digits=2)
 
 
 #### Simple model summaries
-setwd("~/Documents/git/regionalrisk")
 
 load("bbmod.Rdata")
 simpbb <- as.data.frame(fixef(bb.mod, pars=c("cc", "cc:speciesALNGLU", "cc:speciesBETPEN", "cc:speciesFAGSYL", "cc:speciesFRAEXC", "cc:speciesQUEROB")))
@@ -219,15 +215,15 @@ simpbb$parameter <- rownames(simpbb)
 simpbb$Estimate <- ifelse(simpbb$parameter=="cc", simpbb$Estimate, simpbb$Estimate + simpbb$Estimate[simpbb$parameter=="cc"])
 simpbb <- round(mean(simpbb$Estimate), digits=2)
 
-load("tminmod.Rdata")
-simptmin <- as.data.frame(fixef(tmin.mod, pars=c("cc", "cc:speciesALNGLU", "cc:speciesBETPEN", "cc:speciesFAGSYL", "cc:speciesFRAEXC", "cc:speciesQUEROB")))
+load("tminmod_long.Rdata")
+simptmin <- as.data.frame(fixef(tminlong.mod, pars=c("cc", "cc:speciesALNGLU", "cc:speciesBETPEN", "cc:speciesFAGSYL", "cc:speciesFRAEXC", "cc:speciesQUEROB")))
 simptmin$parameter <- rownames(simptmin)
 
 simptmin$Estimate <- ifelse(simptmin$parameter=="cc", simptmin$Estimate, simptmin$Estimate + simptmin$Estimate[simptmin$parameter=="cc"])
 simptmin <- round(mean(simptmin$Estimate), digits=2)
 
-load("fssimpmod.Rdata")
-simpfs <- as.data.frame(fixef(fssimp.mod, pars=c("cc", "cc:speciesALNGLU", "cc:speciesBETPEN", "cc:speciesFAGSYL", "cc:speciesFRAEXC", "cc:speciesQUEROB")))
+load("fstotmodlong.Rdata")
+simpfs <- as.data.frame(fixef(fstotlong.mod, pars=c("cc", "cc:speciesALNGLU", "cc:speciesBETPEN", "cc:speciesFAGSYL", "cc:speciesFRAEXC", "cc:speciesQUEROB")))
 simpfs$parameter <- rownames(simpfs)
 
 simpfs$Estimate <- ifelse(simpfs$parameter=="cc", simpfs$Estimate, simpfs$Estimate + simpfs$Estimate[simpfs$parameter=="cc"])
@@ -238,7 +234,7 @@ simpfs <- round(mean(simpfs$Estimate), digits=2)
 \section*{Summary} % 198 words
 (1) Temperate forests are shaped by late spring freezes after budburst---false springs---which may shift with climate change. Research to date has generated conflicting results, potentially because few studies focus on the multiple underlying drivers of false spring risk.  \\
 (2) Here, we assessed the effects of mean spring temperature, distance from the coast, elevation and the North Atlantic Oscillation (NAO) using PEP725 leafout data for six tree species across 11,648 sites in Europe, to determine which were the strongest predictors of false spring risk and how these predictors shifted with climate change. \\
-(3) Mean spring temperature and distance from the coast were the strongest predictors before recent warming, but their effects have shifted in both magnitude and direction with warming. These shifts have magnified the variation in false spring risk among species with an increase in risk for early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa}, \textit{Betula pendula}) versus a decline or no change in risk among late-leafout species (i.e., \textit{Fagus sylvatica}, \textit{Fraxinus excelsior}, \textit{Quercus robur}). \\
+(3) All predictors influenced false spring risk before recent warming, but their effects have shifted in both magnitude and direction with warming. These shifts have magnified the variation in false spring risk among species with an increase in risk for early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa}, \textit{Betula pendula}) versus a decline or no change in risk among late-leafout species (i.e., \textit{Fagus sylvatica}, \textit{Fraxinus excelsior}, \textit{Quercus robur}). \\
 (4) Our results show how climate change has reshaped the drivers of false spring risk, complicating forecasts of future false springs, and potentially reshaping plant community dynamics given uneven shifts in risk across species. \\
 
 \vspace{2ex}
@@ -348,7 +344,7 @@ We thank D. Buonaiuto, W. Daly, A. Ettinger, J. Gersony, D. Loughnan, A. Manandh
 \section*{Author Contribution}
 C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W., B.I.C conceived of many aspects of the study and analysis and identified climatic parameters and datasets; I.M.C enhanced the modelling parameters and controlled for spatial autocorrelation issues. All authors contributed to the study design and edited the manuscript.
 
-\bibliography{..//bib/regionalrisk.bib}
+\bibliography{bib/regionalrisk.bib}
 
 \section*{Tables and Figures} 
 
@@ -377,7 +373,7 @@ C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W
 {\begin{figure} [H]
   -\begin{center}
   %-\includegraphics[width=12cm]{..//analyses/figures/model_output_98_long.png}
-  -\caption{Effects of species, climatic and geographical predictors on false spring risk. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. There were 582,211 zeros and 172,877 ones for false springs in the data. See Table \ref{tab:suppmodorig} for full model output.}\label{fig:maineffects}
+  -\caption{Effects of species, climatic and geographical predictors on false spring risk. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. There were 582,211 zeros and 172,877 ones for false springs in the data. See Table \ref{tab:suppmodlong} for full model output.}\label{fig:maineffects}
   -\end{center}
   -\end{figure}}
 
@@ -385,7 +381,7 @@ C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W
 {\begin{figure} [H]
   -\begin{center}
   %-\includegraphics[width=16cm]{..//analyses/figures/InteractionPlots/Species_long.png}
-  -\caption{Species-level variation across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodorig} for full model output. }\label{fig:spp}
+  -\caption{Species-level variation across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:spp}
   -\end{center}
   -\end{figure}}
 
