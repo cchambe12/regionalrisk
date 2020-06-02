@@ -55,7 +55,7 @@ mapWorld<-fortify(boundars)
 aes <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray', fill="lightgrey", size = .2) + ### This creates the base map
-  geom_jitter(width=3,aes(x=a.site$long, y=a.site$lat, color=a.site$bb), size=0.8, alpha=0.4) + theme_classic() + ### this removes extra background features from ggplot2
+  geom_jitter(width=3,aes(x=a.site$long, y=a.site$lat, color=a.site$bb), size=0.6, alpha=0.4) + theme_classic() + ### this removes extra background features from ggplot2
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+  ### zooms in on Europe
   theme(panel.border = element_blank(), ### extra tweaks to background and plot to make sure it doesn't have grid lines, etc.
         panel.grid.major = element_blank(),
@@ -63,12 +63,12 @@ aes <- ggplot() +
         axis.line = element_blank(),
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
+        plot.title=element_text(size = 10, face="bold.italic"),
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) + ### to make sure the continent doesn't blend in with the ocean
-  annotate("text",label= "(b) Aesculus \n hippocastanum", x=-11, y=68.5,fontface="bold.italic", size=3,
-           family="Helvetica", hjust=0) + sc + 
-  labs(color="Day of Budburst") + ggtitle("")
+  ggtitle("(b) Aesculus hippocastanum") + sc + 
+  labs(color="Day of Budburst")
 
 ### These sections were used to download shapefiles in case I wanted to tweak the output in QGIS
 #spg<-a.site
@@ -83,20 +83,20 @@ mapWorld<-fortify(boundars)
 aln <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray', fill="lightgrey", size = .2) +
-  geom_jitter(width=3,aes(x=ag.site$long, y=ag.site$lat, color=ag.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  geom_jitter(width=3,aes(x=ag.site$long, y=ag.site$lat, color=ag.site$bb), size=0.6, alpha=0.4) + theme_classic() +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
+        plot.title=element_text(size = 10, face="bold.italic"),
         axis.line = element_blank(),
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95"),
         legend.position = "none") +
-  annotate("text",label= "(c) Alnus glutinosa", x=1.8, y=70,fontface="bold.italic", size=3,
-           family="Helvetica") + sc + 
-  labs(color="Day of Budburst") + ggtitle("")
+  ggtitle("(c) Alnus glutinosa") + sc + 
+  labs(color="Day of Budburst")
 
 ## For QGIS
 #spg<-ag.site
@@ -111,20 +111,20 @@ mapWorld<-fortify(boundars)
 bet <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray', fill="lightgrey", size = .2) +
-  geom_jitter(width=3,aes(x=b.site$long, y=b.site$lat, color=b.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  geom_jitter(width=3,aes(x=b.site$long, y=b.site$lat, color=b.site$bb), size=0.6, alpha=0.4) + theme_classic() +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
+        plot.title=element_text(size = 10, face="bold.italic"),
         axis.line = element_blank(),
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "(a) Betula pendula", x=1.4, y=70,fontface="bold.italic", size=3,
-           family="Helvetica") + sc + 
-  labs(color="Day of Budburst") + ggtitle("")
+  ggtitle("(a) Betula pendula") + sc + 
+  labs(color="Day of Budburst")
 
 # For QGIS
 #b.site<-na.omit(b.site)
@@ -140,20 +140,20 @@ mapWorld<-fortify(boundars)
 syl <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray', fill="lightgrey", size = .2) +
-  geom_jitter(width=3,aes(x=f.site$long, y=f.site$lat, color=f.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  geom_jitter(width=3,aes(x=f.site$long, y=f.site$lat, color=f.site$bb), size=0.6, alpha=0.4) + theme_classic() +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_blank(),
+        plot.title=element_text(size = 10, face="bold.italic"),
         axis.ticks = element_blank(),
         axis.text = element_blank(), 
         legend.position = "none",
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "(d) Fagus sylvatica", x=1.9, y=70,fontface="bold.italic", size=3,
-           family="Helvetica") + sc + 
-  labs(color="Day of Budburst") + ggtitle("")
+  ggtitle("(d) Fagus sylvatica") + sc + 
+  labs(color="Day of Budburst")
 
 ## For QGIS
 #spg<-f.site
@@ -168,20 +168,20 @@ mapWorld<-fortify(boundars)
 fra <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray', fill="lightgrey", size = .2) +
-  geom_jitter(width=3,aes(x=fe.site$long, y=fe.site$lat, color=fe.site$bb), size=0.8, alpha=0.4) + theme_classic() +
+  geom_jitter(width=3,aes(x=fe.site$long, y=fe.site$lat, color=fe.site$bb), size=0.6, alpha=0.4) + theme_classic() +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
   theme(panel.border = element_blank(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.line = element_blank(),
+        plot.title=element_text(size = 10, face="bold.italic"),
         axis.ticks = element_blank(),
         axis.text = element_blank(),
         axis.title = element_blank(),
         panel.background = element_rect(fill="grey95"),
         legend.position = "none") +
-  annotate("text",label= "(f) Fraxinus \n  excelsior", x=-3, y=69,fontface="bold.italic", size=3,
-           family="Helvetica") + sc + 
-  labs(color="Day of Budburst") + ggtitle("")
+  ggtitle("(f) Fraxinus excelsior") + sc + 
+  labs(color="Day of Budburst")
 
 ## For QGIS
 #spg<-fe.site
@@ -198,21 +198,21 @@ mapWorld<-fortify(boundars)
 que <- ggplot() +
   geom_polygon(aes(x = mapWorld$long, y = mapWorld$lat, group = mapWorld$group),
                color = 'gray', fill="lightgrey", size = .2) +
-  geom_jitter(width=3,aes(x=q.site$long, y=q.site$lat, color=q.site$bb), size=0.8, alpha=0.4) + 
+  geom_jitter(width=3,aes(x=q.site$long, y=q.site$lat, color=q.site$bb), size=0.6, alpha=0.4) + 
   theme_classic() +
   coord_cartesian(ylim=c(30,70),xlim=c(-10,35))+ 
     theme(panel.border = element_blank(), 
                   panel.grid.major = element_blank(),
                   panel.grid.minor = element_blank(),
+          plot.title=element_text(size = 10, face="bold.italic"),
                   axis.line = element_blank(),
                   axis.ticks = element_blank(),
                   axis.text = element_blank(), 
           legend.position = "none", ##### Need to comment this line out to get the legend for the "g_legend" function, then remove comment to rerun the plot for arranging the grid
           axis.title = element_blank(),
           panel.background = element_rect(fill="grey95")) +
-  annotate("text",label= "(e) Quercus robur", x=1, y=70,fontface="bold.italic", size=3,
-           family="Helvetica") + sc + 
-    labs(color="Day of Budburst") + ggtitle("")
+  ggtitle("(e) Quercus robur") + sc + 
+    labs(color="Day of Budburst")
 
 ## For QGIS
 #spg<-q.site
@@ -240,7 +240,13 @@ png("figures/BB_base.png", ### makes it a nice png and saves it so it doesn't ta
 grid.draw(mappies)
 dev.off()
 
-tiff("figures/Figure1.tiff", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("figures/Figure2.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+     width=8,
+     height=5, units="in", res = 350 )
+grid.draw(mappies)
+dev.off()
+
+tiff("figures/Figure2.tiff", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=8,
     height=5, units="in", res = 350 )
 grid.draw(mappies)

@@ -240,7 +240,7 @@ distances <- ggplot(distxcc, aes(x=dist_trans, y=fsmean_trans)) + geom_line(aes(
                                "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                                "QUEROB"=expression(paste(italic("Quercus robur"))))) +
   ylab("Probability of False Spring") + coord_cartesian(ylim = c(0, 1), expand=c(0, 0)) + guides(fill=FALSE, col=FALSE) +
-  theme(legend.text.align = 0, legend.position = c(0.85, 0.85),
+  theme(legend.text.align = 0, legend.position = c(0.85, 0.85), axis.text = element_text(size=9),
         plot.title = element_text(face="bold")) + ggtitle("(b)")
 
 

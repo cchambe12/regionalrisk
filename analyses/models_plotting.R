@@ -32,7 +32,7 @@ load("~/Documents/git/regionalrisk/long_full.Rdata")
 ################### Original - predictors with species ##############################################
 
 #naosp<- ggpredict(orig.full, terms = c("nao.z", "species"), ci.lvl=0.98) 
-naosp<- ggpredict(long.full, terms = c("nao.z [all]", "species"), ci.lvl=0.98) 
+#naosp<- ggpredict(long.full, terms = c("nao.z [all]", "species"), ci.lvl=0.98) 
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98.csv", row.names = FALSE)
 #write.csv(naosp, file="~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98_long.csv", row.names = FALSE)
 #naosp0<-read.csv("~/Documents/git/regionalrisk/analyses/output/naosp_predicted_98.csv", header=TRUE)
@@ -41,8 +41,9 @@ naosp0$group<-ifelse(naosp0$group=="BETPEN", "aaBETPEN", naosp0$group)
 naosp0$group<-ifelse(naosp0$group=="FRAEXC", "zFRAEXC", naosp0$group)
 naosp0$x <- (naosp0$x)*sd(bb$nao)*2 + mean(bb$nao)
 naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("NAO Index") + 
-  ylab("Probability of False Spring") + ggtitle("(d)") + theme_classic() + theme(legend.position = "none",
-                                                                                              plot.title = element_text(face="bold")) + 
+  ylab("Probability of False Spring") + ggtitle("(d)") + theme_classic() + 
+  theme(legend.position = "none", plot.title = element_text(size=10, face="bold"),
+        axis.text=element_text(size=9)) + 
   scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,0.6)) +
@@ -62,7 +63,7 @@ naosp.p<-ggplot(naosp0, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab
                              "QUEROB"=expression(paste(italic("Quercus robur")))))
 
 #elevsp<- ggpredict(orig.full, terms = c("elev.z", "species"), ci.lvl=0.98) 
-elevsp<- ggpredict(long.full, terms = c("elev.z [all]", "species"), ci.lvl=0.98) 
+#elevsp<- ggpredict(long.full, terms = c("elev.z [all]", "species"), ci.lvl=0.98) 
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98.csv", row.names = FALSE)
 #write.csv(elevsp, file="~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98_long.csv", row.names = FALSE)
 #elevsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/elevsp_predicted_98.csv", header=TRUE)
@@ -71,8 +72,9 @@ elevsp$group<-ifelse(elevsp$group=="BETPEN", "aaBETPEN", elevsp$group)
 elevsp$group<-ifelse(elevsp$group=="FRAEXC", "zFRAEXC", elevsp$group)
 elevsp$x <- ((elevsp$x)*sd(bb$elev)*2) + mean(bb$elev)
 elevsp.p<-ggplot(elevsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Elevation (m)") + 
-  ylab("Probability of False Spring") + ggtitle("(c)") + theme_classic() + theme(legend.position = "none",
-                                                                                              plot.title = element_text(face="bold")) + 
+  ylab("Probability of False Spring") + ggtitle("(c)") + theme_classic() + 
+  theme(legend.position = "none", plot.title = element_text(size=10, face="bold"),
+        axis.text=element_text(size=9)) + 
   scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) +
@@ -91,7 +93,7 @@ elevsp.p<-ggplot(elevsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xla
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 #matsp<- ggpredict(orig.full, terms = c("mat.z", "species"), ci.lvl = 0.98) 
-matsp<- ggpredict(long.full, terms = c("mat.z [all]", "species"), ci.lvl = 0.98) 
+#matsp<- ggpredict(long.full, terms = c("mat.z [all]", "species"), ci.lvl = 0.98) 
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98.csv", row.names = FALSE)
 #write.csv(matsp, file="~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98_long.csv", row.names = FALSE)
 #matsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/matsp_predicted_98.csv", header=TRUE)
@@ -100,8 +102,9 @@ matsp$group<-ifelse(matsp$group=="BETPEN", "aaBETPEN", matsp$group)
 matsp$group<-ifelse(matsp$group=="FRAEXC", "zFRAEXC", matsp$group)
 matsp$x <- (matsp$x)*sd(bb$mst)*2 + mean(bb$mst)
 matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab("Mean Spring \nTemperature (°C)") + 
-  ylab("Probability of False Spring") + ggtitle("(a)") + theme_classic()+ theme(legend.position = "none",
-                                                                                             plot.title = element_text(face="bold")) + 
+  ylab("Probability of False Spring") + ggtitle("(a)") + theme_classic()+ 
+  theme(legend.position = "none", plot.title = element_text(size=10, face="bold"),
+        axis.text=element_text(size=9)) + 
   scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) +
@@ -121,7 +124,7 @@ matsp.p<-ggplot(matsp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + xlab(
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 
 #spacesp<- ggpredict(orig.full, terms = c("dist.z", "species"), ci.lvl = 0.98) 
-spacesp<- ggpredict(long.full, terms = c("dist.z [all]", "species"), ci.lvl = 0.98) 
+#spacesp<- ggpredict(long.full, terms = c("dist.z [all]", "species"), ci.lvl = 0.98) 
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98.csv", row.names = FALSE)
 #write.csv(spacesp, file="~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98_long.csv", row.names = FALSE)
 #spacesp<-read.csv("~/Documents/git/regionalrisk/analyses/output/spacesp_predicted_98.csv", header=TRUE)
@@ -133,8 +136,9 @@ spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + x
   ggtitle("(b)") + scale_y_continuous(expand = c(0, 0)) + 
   geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,1)) + 
-  theme_classic() + theme(legend.position = "none",
-                          plot.title = element_text(face="bold")) + 
+  theme_classic() + 
+  theme(legend.position = "none", plot.title = element_text(size=10, face="bold"),
+        axis.text=element_text(size=9)) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
@@ -150,7 +154,7 @@ spacesp.p<-ggplot(spacesp, aes(x=x, y=predicted))+ geom_line(aes(col=group)) + x
                              "zFRAEXC"=expression(paste(italic("Fraxinus excelsior"))),
                              "QUEROB"=expression(paste(italic("Quercus robur"))))) 
 #ccsp<- ggpredict(orig.full, terms = c("cc.z", "species"), ci.lvl = 0.98) 
-ccsp<- ggpredict(long.full, terms = c("cc.z [all]", "species"), ci.lvl = 0.98) 
+#ccsp<- ggpredict(long.full, terms = c("cc.z [all]", "species"), ci.lvl = 0.98) 
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98.csv", row.names = FALSE)
 #write.csv(ccsp, file="~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98_long.csv", row.names = FALSE)
 #ccsp<-read.csv("~/Documents/git/regionalrisk/analyses/output/ccsp_predicted_98.csv", header=TRUE)
@@ -163,9 +167,11 @@ ccsp.p<-ggplot(ccsp, aes(x=x, y=predicted))+ geom_point(aes(col=group))+ geom_li
   scale_y_continuous(expand = c(0, 0)) + scale_x_continuous(breaks=c(0,1),labels=c("1951-1983","1984-2016")) +
   #geom_ribbon(aes(ymin=conf.low, ymax=conf.high, col=group, fill=group), linetype=0, alpha=0.4) +
   coord_cartesian(ylim=c(0,0.6))  + theme(legend.key = element_rect(fill="transparent")) +
-  theme_classic() + theme(legend.position = "none",
-                          plot.title = element_text(face="bold")) + 
-  theme(legend.text.align = 0) +
+  theme_classic() +
+  theme(legend.position = "none", 
+        plot.title = element_text(size=10, face="bold"),
+        axis.text=element_text(size=9), legend.text.align = 0,
+        legend.text = element_text(size=11)) +
   scale_colour_manual(name="Species", values=cols,
                       labels=c("AESHIP"=expression(paste(italic("Aesculus hippocastanum"))),
                                "ALNGLU"=expression(paste(italic("Alnus glutinosa"))),
@@ -400,7 +406,7 @@ if(FALSE){
 
 
 ### Now to make the plots
-modoutput <- modlongtemps98 #modelhere
+modoutput <- modlong98 #modelhere
 #cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
@@ -545,15 +551,16 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="sans"), legend.position = "none",
+        axis.text = element_text(size=9),
         legend.text.align = 0,
         plot.margin = unit(c(3,3,1,1), "lines")) +  #+ ggtitle("Original Parameters") +
   coord_cartesian(xlim=c(-1.5, 1), ylim=c(1,11), clip = 'off') + #ggtitle("A.") 
   annotate("segment", x = 0.05, xend = 1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) +
   annotate("segment", x = -0.1, xend = -1.6, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## FOR FIVE
   #annotate("segment", x = -0.05, xend = -1.1, y = 11.75, yend = 11.75, colour = "black", size=0.2, arrow=arrow(length=unit(0.20,"cm"))) + ## for DVR and ORIG
-  annotate("text", x = 0.6, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR FIVE
+  annotate("text", x = 0.6, y = 12, colour = "black", size=3.5, label="More False Spring Risk") + ## FOR FIVE
   #annotate("text", x = 0.55, y = 12, colour = "black", size=3, label="More False Spring Risk") + ## FOR DVR AND ORIG
-  annotate("text", x = -0.8, y = 12, colour = "black", size=3, label="Less False Spring Risk")  ## FOR FIVE
+  annotate("text", x = -0.8, y = 12, colour = "black", size=3.5, label="Less False Spring Risk")  ## FOR FIVE
   #annotate("text", x = -0.55, y = 12, colour = "black", size=3, label="Less False Spring Risk")  ## FOR DVR AND ORIG
 
 
@@ -561,7 +568,7 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
 #regrisk
 
 
-png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_longtemps.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_long.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
 grid.arrange(regrisk)
@@ -570,5 +577,11 @@ dev.off()
 tiff("~/Documents/git/regionalrisk/analyses/figures/Figure4.tiff", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
+grid.arrange(regrisk)
+dev.off()
+
+png("~/Documents/git/regionalrisk/analyses/figures/Figure4.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+     width=7,
+     height=6, units="in", res = 350 )
 grid.arrange(regrisk)
 dev.off()

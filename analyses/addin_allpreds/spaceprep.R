@@ -27,8 +27,8 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 #fs<-read.csv("output/fs_allspp_longtemps.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_dvrlong.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_long.csv", header=TRUE)
-#fs<-read.csv("output/fs_allspp_verylong.csv", header=TRUE)
-fs<-read.csv("output/fs_allspp_fivelong.csv", header=TRUE)
+fs<-read.csv("output/fs_allspp_verylong.csv", header=TRUE)
+#fs<-read.csv("output/fs_allspp_fivelong.csv", header=TRUE)
 
 
 fs<-subset(fs, select=c("lat", "long", "fs.count", "year", "species", "fs"))
@@ -80,7 +80,7 @@ fspreds<-full_join(fspreds, dist)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_longtemps_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_dvrlong_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_long_allpred.csv", row.names = FALSE)
-#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_verylong_allpred.csv", row.names = FALSE)
-write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_fivelong_allpred.csv", row.names = FALSE)
+write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_verylong_allpred.csv", row.names = FALSE)
+#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_fivelong_allpred.csv", row.names = FALSE)
 
 

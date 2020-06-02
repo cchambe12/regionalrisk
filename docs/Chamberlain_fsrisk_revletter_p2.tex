@@ -1,0 +1,101 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[top=1.00in, bottom=1.0in, left=1.1in, right=1.1in]{geometry}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{Sweave}
+
+\usepackage[hyphens]{url}
+\usepackage[small]{caption}
+
+\setlength\parindent{0pt}
+
+\begin{document}
+\bibliographystyle{..//bib/styles/gcb}
+
+\textbf {Reviewer 1 -- comments:} \\
+
+\textit{This manuscript addresses the risk of late spring frost damage to the leaves of temperate trees. The authors use long-term leaf-out phenology records of six European tree species to study the environmental factors that affect the severity of late spring freezes and how climate change is altering these patterns. The main finding is that spring temperature and distance to the coast are the main drivers of spring frost risk, but climate warming is currently altering these trends, complicating forecasts of future spring frost damage. In addition, early-leafing species are found to be more prone to spring freezes with warming, whereas no change or a decrease in spring frost risk was found for late-leafing species. The manuscript addresses an interesting, highly relevant question to better understand the consequences of climate change for plant growth.}
+
+We thank the reviewer for this positive feedback and for helping us improve the manuscript. Based on this review we have updated the methods and definitions for all of the models. We hope our current manuscript better addresses our questions and improves our understanding of the effects of climate change on plant growth.
+
+\textit{Yet, I have two major concerns with respect to the methodology of the manuscript.
+First, the relevant period during which the leaves of trees are susceptible to freezing events is defined as the 12 days before leaf unfolding (BBCH11). This makes no sense to me. I agree with the assumption that young leaves are more susceptible to freeze events than older leaves and the authors correctly state that “plants are most susceptible to
+damage from freezing temperatures between budburst and full leafout”. However, BBCH 11 is NOT full leafout, it is the stage where the first visible leaf stalk is visible, but not on all buds, only on the first opening buds. Plants are definitely still susceptible to frost after that event. In fact, they should even be more vulnerable to frosts after BBCH11 was reached because the number of buds opening will increase drastically only after BBCH11. The next phenophase available in the PEP725 database (BBCH 13) is the stage were 50\% of leaves are unfolded, which means that even at this later stage, 50\% of leaves are not yet unfolded. So, to me the only way of determining whether the results are robust is to use another approach of calculating the relevant freezing period. Spring freezes after BBCH11 should definitely be accounted for.}
+
+We appreciate the concern of Reviewer 1 and have worked to address it by modifying our methodology to include the 12 days before BBCH 11 through 12 days after BBCH 11 as the period of risk. We tested this timeframe with an additional model that looked at the 12 days before BBCH 11 through 24 days after but this did not change our results. We agree that BBCH 13 is more appropriate---though still not full leafout---but there were only 12,417 observations for BBCH 13 compared to 755,087 observations for BBCH 11 so we decided to continue using BBCH 11 as an indicator for individual phenology. \\
+
+\textit{Second, the study assumes that spring freeze damage will occur at -2.2 C for all species. Yet, leaf-killing temperatures are species-specific (Lenz et al., 2016; Muffler et al., 2016), which should be accounted for when testing for differences among species (Zohner et al., 2020b). Leaves of early-leafing species are usually more freezing resistant than those of late leafers (Muffler et al., 2016). I can see that this problem was partly solved by additionally using -5C as freeze threshold, but this additional analysis only changes the general freezing threshold and still doesn’t account for differences among species. The leaves of Aesculus, Alnus, and Betula are more resistant to frost than the leaves of Fagus, Fraxinus, and Quercus (data in Muffler et al., 2016; Zohner et al., 2020a, not yet published but attached to this review). It would therefore be interesting to see whether the species-level results still hold when using a freezing threshold of -2.2 C for the latter group and -5C for the first group of species.}
+
+We thank the reviewer for this insight and new idea to improve the manuscript. We have included a new model that uses varying thresholds for early- versus late-leafout species. We have included a new paragraph to the Results section \textit*{Sensitivity of results to duration of risk and temperature thresholds} (lines XX-XX) to address these results:
+
+\begin{quotation}
+\noindent  XXXXX
+\end{quotation}
+
+\textit{l. 53: reference needed for “but budburst has advanced roughly twice as fast”. You are saying budburst advanced by, on average, ~5 days per decade. From my own observations it’s more like 2–3 days per decade, which would then be similar to the last spring freeze advances.}
+
+We thank the reviewer for finding this error and have updated the sentence and have added citations (lines XX-XX):
+
+\begin{quotation}
+\noindent  In Germany, for example, the last freeze date has advanced by 2.6 days per decade since 1955 \citep{Zohner2016}, but budburst has advanced 4.3 days per decade in Central Europe \citep{Fu2014,Vitasse2018}.
+\end{quotation}
+
+
+\textit{l. 360–368: I don’t get the point of this discussion on species ranges. The phenological data used here came mostly from Germany and didn’t reflect species ranges at all.}
+
+We appreciate the reviewer's concern and have updated the language in the Discussion section \textit{Variation in risk across species} (lines XX-XX) to provide additional clarity. We hope that this modified section is easier to follow and understand: 
+
+\begin{quotation}
+\noindent  XXXXX
+\end{quotation}
+
+
+\textbf {Reviewer 2 -- comments:} \\
+
+
+\textit{The authors describe a statistical analysis on the probability of false springs for an extensive set of drivers, in this respect scaling beyond previous studies. The authors conclude that false spring risks are strongly associated with mean spring temperature and distance from coastal waters, with increased risks for early leaf-out species. \\
+
+I've appreciated the rather technical write-up, and in particular the future perspectives which were well defined and outline new research avenues. However, I would like to see some things clarified.}
+
+We thank the reviewer for this appreciation and for helping us clarify certain sections and improve our figures. Based on this review we have included data availability, updated the methods and definitions for all of the models and enhanced our figures to be more colorblind-friendly. 
+
+\textit{First and foremost a practical issue. Given the use of open data, open software I will insist on the open nature of the analysis executed and all source code to be shared. Given PEP725 redistribution rules data can't be distributed, however code to compile the data in the correct data format can. I suggest to use a repository such as github / gitlab / bitbucket to store your code (and revisions) in their native format (i.e. no copied code in txt files, but .R files). All this should ensure reproducibility, transparency and facilitate re-use of code within a research or educational setting.}
+
+We completely agree with the reviewer about this concern and issue and apologize for failing to include our data in the first submission. We have included a new section \textit{Data, Code \& Model Output:} (lines XX-XX) with this information:
+
+\begin{quotation}
+\noindent  Raw data will be available via KNB upon publication and are available to all reviewers upon request. Raw data, {Stan} model code and output are available on github at \url{https://github.com/cchambe12/regionalrisk} and provided upon request.
+\end{quotation}
+
+\textit{Furthermore, to what degree do you think the use of leafout instead of budburst influences the analysis? In particular, the data does not take into account delays in development / leafout due to prior false spring damage (e.g. Gu et al. 2008 / Hufkens et al. 2012 / Augspurger 2007). It could therefore be argued that a fixed offset could influence the results. Although acknowledged on lines 272 onward, using the varying offsets, the use of these undamaged developmental responses is a missing confounding factor which should be discussed.}
+
+We appreciate the reviewer's concern and have modified our methodology to include the 12 days before BBCH 11 through 12 days after BBCH 11 as the period of risk, which we hope will capture this possible delay in development due to prior false spring damage. We tested this timeframe with an additional model that looked at the 12 days before BBCH 11 through 24 days after but this did not change our results so we chosen to use the 12 days before through the 12 days after BBCH 11 as our model timeframe.
+
+\textit{Also, on line 140 - 145, it is mentioned E-OBS data is used but I see no mention of lapse rate corrections for altitude to correct for site by site differences (e.g. Basler 2016)? Given the absolute temperature thresholds I think this applies.}
+
+We thank the reviewer for this attention to detail and for pointing this out. We have included more information about our temperature data and a citation in Methods section \textit{Climate Datat} (lines XX-XX):
+
+\begin{quotation}
+\noindent  E-OBS version 16 incorporates station altitude in the interpolation scheme, thus spatially explicit information on day-to-day variability in the environmental lapse rate is captured \citep{Cornes2018}.
+\end{quotation}
+
+
+\textit{Finally, some smaller issues: \\
+
+I would increase readability of the figures by avoiding pastel colours. Although I'm not colorblind I'm not sure how well this would work for those who are. \\
+
+\begin{itemize}
+\item Use varying line styles instead of colour if possible (Figure 5)
+\item  Don't use colours where not needed (Figure 2 and 3 - species labels)
+\item  Make sure that points are properly scaled (smaller for Figure 2), or better regrid the data to show spatial trends more consistently
+\item Increase the font size on all figures (for axis labels etc)
+\end{itemize
+
+I think all of these issues are easily addressed, either in discussion (given data limitations) or with the necessary model / driver data adjustments. Good luck, stay safe !}
+
+We appreciate the reviewer's concerns about our figures and have updated the colors using the viridis package in R, which is colorblind-friendly. Addtionally, we have removed unnecessary colors, rescaled the points in Figure 2 and increased the font size on all figures.
+
+\newpage
+\bibliography{..//bib/RegionalRisk.bib}
+
+\end{document}

@@ -25,7 +25,7 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 
 #bb<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
-bb<-read.csv("output/fs_newspace_orig.csv", header=TRUE)
+bb<-read.csv("output/fs_newspace_long.csv", header=TRUE)
 
 xx<-read.csv("output/BBdata.csv", header=TRUE)
 
@@ -50,12 +50,12 @@ cols <- rep(viridis_pal(option="viridis")(3), times=2)
 
 aeship<-subset(xx, species=="AESHIP")
 ahip<-ggplot(aeship, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
-  ggtitle(expression(paste(italic("Aesculus hippocastanum")))) + 
+  ggtitle("(b) Aesculus hippocastanum") + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
   coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
-        plot.title=element_text(size = 9),axis.title = element_text(size=9),
+        plot.title=element_text(size = 10, face="bold.italic"),axis.title = element_text(size=10),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
         axis.line.y.right =  element_line(color = cols[2]),
@@ -70,12 +70,12 @@ ahip<-ggplot(aeship, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, l
 
 alnglu<-subset(xx, species=="ALNGLU")
 aglu<-ggplot(alnglu, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
-  ggtitle(expression(paste(italic("Alnus glutinosa")))) + 
+  ggtitle("(c) Alnus glutinosa") + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
   coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
-        plot.title=element_text(size = 9),axis.title = element_text(size=9),
+        plot.title=element_text(size = 10, face="bold.italic"),axis.title = element_text(size=10),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
         axis.line.y.right =  element_line(color = cols[2]),
@@ -90,12 +90,12 @@ aglu<-ggplot(alnglu, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, l
 
 betpen<-subset(xx, species=="BETPEN")
 bpen<-ggplot(betpen, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
-  ggtitle(expression(paste(italic("Betula pendula")))) + 
+  ggtitle("(a) Betula pendula") + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
   coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
-        plot.title=element_text(size = 9),axis.title = element_text(size=9),
+        plot.title=element_text(size = 10, face="bold.italic"),axis.title = element_text(size=10),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
         axis.line.y.right =  element_line(color = cols[2]),
@@ -110,12 +110,12 @@ bpen<-ggplot(betpen, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, l
 
 fagsyl<-subset(xx, species=="FAGSYL")
 fsyl<-ggplot(fagsyl, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
-  ggtitle(expression(paste(italic("Fagus sylvatica")))) + 
+  ggtitle("(d) Fagus sylvatica") + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
   coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
-        plot.title=element_text(size = 9),axis.title = element_text(size=9),
+        plot.title=element_text(size = 10, face="bold.italic"),axis.title = element_text(size=10),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
         axis.line.y.right =  element_line(color = cols[2]),
@@ -130,12 +130,12 @@ fsyl<-ggplot(fagsyl, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, l
 
 fraexc<-subset(xx, species=="FRAEXC")
 fexc<-ggplot(fraexc, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
-  ggtitle(expression(paste(italic("Fraxinus excelsior")))) + 
+  ggtitle("(f) Fraxinus excelsior") + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
   coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
-        plot.title=element_text(size = 9),axis.title = element_text(size=9),
+        plot.title=element_text(size = 10, face="bold.italic"),axis.title = element_text(size=10),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
         axis.line.y.right =  element_line(color = cols[2]),
@@ -150,12 +150,12 @@ fexc<-ggplot(fraexc, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, l
 
 querob<-subset(xx, species=="QUEROB")
 qrob<-ggplot(querob, aes(x=year, y=mst)) + geom_smooth(method="auto", se=TRUE, level=0.9, col=cols[1]) +  
-  ggtitle(expression(paste(italic("Quercus robur")))) + 
+  ggtitle("(e) Quercus robur") + 
   ylab("Mean spring temperature (°C)") + xlab("Year") +
   coord_cartesian(ylim=c(6, 10)) + geom_vline(xintercept =1983, linetype="dotted", col="grey") +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), 
         axis.line = element_line(colour = "black"), plot.margin = unit(c(0.5,0.5,0.5,0.5), "lines"),
-        plot.title=element_text(size = 9),axis.title = element_text(size=9),
+        plot.title=element_text(size = 10, face="bold.italic"),axis.title = element_text(size=10),
         axis.title.y.right = element_text(color = cols[2]),
         axis.text.y.right = element_text(color = cols[2]),
         axis.line.y.right =  element_line(color = cols[2]),
@@ -172,6 +172,18 @@ quartz()
 mstplots<-ggarrange(bpen, ahip, aglu, fsyl, qrob, fexc, ncol=3, nrow=2)
 
 png("figures/MSTBB_bySpp_lines.png", 
+    width=8,
+    height=5, units="in", res = 350 )
+grid.draw(mstplots)
+dev.off()
+
+png("figures/Figure1.png", 
+    width=8,
+    height=5, units="in", res = 350 )
+grid.draw(mstplots)
+dev.off()
+
+tiff("figures/Figure1.tiff", 
     width=8,
     height=5, units="in", res = 350 )
 grid.draw(mstplots)

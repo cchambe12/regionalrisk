@@ -344,6 +344,9 @@ We thank D. Buonaiuto, W. Daly, A. Ettinger, J. Gersony, D. Loughnan, A. Manandh
 \section*{Author Contribution}
 C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W., B.I.C conceived of many aspects of the study and analysis and identified climatic parameters and datasets; I.M.C enhanced the modelling parameters and controlled for spatial autocorrelation issues. All authors contributed to the study design and edited the manuscript.
 
+\section*{Data, Code \& Model Output:}
+Raw data will be available via KNB upon publication and are available to all reviewers upon request. Raw data, {Stan} model code and output are available on github at \url{https://github.com/cchambe12/regionalrisk} and provided upon request.
+
 \bibliography{..//regionalrisk.bib}
 
 \section*{Tables and Figures} 
