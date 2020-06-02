@@ -122,12 +122,12 @@ inverselogit(Intercept &+ (Model Estimate/(sd(Raw Data Predictor)*2))*mean(Raw D
 \hline
 Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of Years \\
 \hline
-\textit{Aesculus hippocastanum} & 156468 & 44746 & 10157 & 66  \\
-\textit{Alnus glutinosa} & 91094 & 27296 & 6775 & 65 \\
-\textit{Betula pendula} & 154897 & 46685 & 10139 & 66 \\
-\textit{Fagus sylvatica} & 129133 & 29237 & 9099 & 66 \\
-\textit{Fraxinus excelsior} & 92665 & 8256 & 7327 & 65 \\
-\textit{Quercus robur} & 131635 & 16657 & 8811 & 66 \\
+\textit{Aesculus hippocastanum} & 156470 & 58418 & 10157 & 66  \\
+\textit{Alnus glutinosa} & 91101 & 34712 & 6775 & 65 \\
+\textit{Betula pendula} & 154890 & 61163 & 10139 & 66 \\
+\textit{Fagus sylvatica} & 128798 & 34458 & 9099 & 66 \\
+\textit{Fraxinus excelsior} & 92513 & 9738 & 7327 & 65 \\
+\textit{Quercus robur} & 131315 & 19605 & 8811 & 66 \\
 \hline
 \end{tabular}
 \end{center}
@@ -448,4 +448,13 @@ print(xtable(modoutput,
       tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
       tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
 @
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//analyses/figures/InteractionPlots/Species_longtemps.png}
+  -\caption{Species-level variation under the varying temperature thresholds model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:spptemps}
+  -\end{center}
+  -\end{figure}}
+
+
 \end{document}

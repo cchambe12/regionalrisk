@@ -89,7 +89,7 @@ budburst<- ggplot(plus, aes(x=species, y=bb, alpha=cc)) + geom_boxplot(aes(alpha
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="Helvetica"),
-        plot.title = element_text(face="bold"),
+        plot.title = element_text(face="bold", size=10),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
         plot.margin = unit(c(1.5,1.5,1.0,1.5), "lines"), 
@@ -179,7 +179,7 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="Helvetica"),
-        plot.title = element_text(face="bold"),
+        plot.title = element_text(face="bold", size=10),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=45, hjust=1),
         legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
         plot.margin = unit(c(1.5,1.5,1.0,1.5), "lines"), 
@@ -229,7 +229,7 @@ f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs),]
 #f$fsall<-ave(f$fs.count, f$lat.long, f$species, FUN=sum)
-f$fstot<-ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
+f$fstot<-ave(f$fsall, f$lat.long, f$species, f$cc, FUN=sum)
 
 
 
@@ -267,9 +267,9 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fstot)) + geom_boxplot(aes
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black"), 
         text=element_text(family="Helvetica"),
-        plot.title = element_text(face="bold"),
+        plot.title = element_text(face="bold", size=10),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=35, hjust=1),
-        legend.key = element_rect(colour = "transparent", fill = "white"), legend.position = "none",
+        legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
         plot.margin = unit(c(1.5,1.5, 1.0, 1.5), "lines"),
         axis.title.x = element_blank()) + 
         #axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
