@@ -21,9 +21,9 @@ library(RColorBrewer)
 
 setwd("~/Documents/git/regionalrisk")
 
-load("long_full.Rdata")
+load("longtemps_full.Rdata")
 
-bb <- read.csv("analyses/output/fs_newspace_long.csv", header=TRUE)
+bb <- read.csv("analyses/output/fs_newspace_longtemps.csv", header=TRUE)
 
 bb$fs<-ifelse(bb$fs.count>0, 1, 0)
 
@@ -41,8 +41,8 @@ bb$space.z <-(bb$eigen-mean(bb$eigen,na.rm=TRUE))/(2*sd(bb$eigen,na.rm=TRUE))
 
 ## Let's just check out the model
 sort(unique(bb$species))
-summary(long.full)
-orig_sum <- posterior_samples(long.full)
+summary(longtemps.full)
+orig_sum <- posterior_samples(longtemps.full)
 #str(orig_sum)
 
 # Okay, I want to plot AESHIP's fs by distance from coast, pre and post climate change
@@ -809,7 +809,7 @@ g2 <- grid.arrange(elevations, naoindex, spplegend, ncol=3, widths=c(1, 1, 0.55)
 grid.arrange(g1, g2, heights=c(2, 1.5))
 
 
-png("~/Documents/git/regionalrisk/analyses/figures/APC_allpred_allspp_baseR_long98.png", 
+png("~/Documents/git/regionalrisk/analyses/figures/APC_allpred_allspp_baseR_longtemps98.png", 
     width=8.5,
     height=6, units="in", res = 350 )
 grid.arrange(g1, g2, heights=c(2, 1.5))

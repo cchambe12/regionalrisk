@@ -285,21 +285,21 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=16cm]{..//analyses/figures/APC_allpred_allspp_baseR_long98.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/APC_allpred_allspp_baseR_long98.png}
   -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_dvrlong.png}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/model_output_98_dvrlong.png}
   -\caption{Effects of species, climatic and geographical predictors on false spring risk with different rates of leafout for each species. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmoddvr} for full model output. }\label{fig:dvr}
   -\end{center}
   -\end{figure}}
   
 \newpage
 <<label=suppmodvr, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("..//analyses/")
+setwd("..//..//analyses/")
 
 modoutput <- read.csv("output/dvrlong_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:47),]
@@ -342,17 +342,25 @@ print(xtable(modoutput,
       tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
       tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
 @
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
+  -\caption{Species-level under the varying rates of leafout model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppdvr}
+  -\end{center}
+  -\end{figure}}
+
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_fivelong.png}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/model_output_98_fivelong.png}
   -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmodfive} for full model output. }\label{fig:five}
   -\end{center}
   -\end{figure}}
   
 \newpage
 <<label=suppmodfive, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("..//analyses/")
+setwd("..//..//analyses/")
 
 modoutput <- read.csv("output/fivelong_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:47),]
@@ -396,16 +404,24 @@ print(xtable(modoutput,
       tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
 @
 
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
+  -\caption{Species-level variation with a lower temperature threshold (-5$^{\\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
+  -\end{center}
+  -\end{figure}}
+
+
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/model_output_98_longtemps.png}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/model_output_98_longtemps.png}
   -\caption{Effects of species, climatic and geographical predictors on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for early-leafout species (i.e., \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}) and a higher temperature threshold (-2.2$^{\circ}$C) for late-leafout species (i.e., \textit{Fagus sylvatica}, \textit{Fraxinus excelsior} and \textit{Quercus robur}). More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. See Table \ref{tab:suppmodlongtemps} for full model output. }\label{fig:longtemps}
   -\end{center}
   -\end{figure}}
   
 \newpage
 <<label=suppmodlongtemps, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=8, fig.height=4, fig.align='center'>>=
-setwd("..//analyses/")
+setwd("..//..//analyses/")
 
 modoutput <- read.csv("output/longtemps_full_modeloutput.csv", header=TRUE)
 modoutput <- modoutput[c(1:47),]
@@ -451,7 +467,7 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//analyses/figures/InteractionPlots/Species_longtemps.png}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_longtemps.png}
   -\caption{Species-level variation under the varying temperature thresholds model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:spptemps}
   -\end{center}
   -\end{figure}}
