@@ -406,7 +406,7 @@ if(FALSE){
 
 
 ### Now to make the plots
-modoutput <- modlong98 #modelhere
+modoutput <- modvlong98 #modelhere
 #cols <- colorRampPalette(brewer.pal(7,"Accent"))(6)
 
 modoutput$term <- ifelse(modoutput$term=="b_Intercept", "b_speciesAESHIP", modoutput$term)
@@ -568,7 +568,7 @@ regrisk<-ggplot(modoutput, aes(x=lowclean, xend=highclean, y=Jvar, yend=Jvar)) +
 #regrisk
 
 
-png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_long.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
+png("~/Documents/git/regionalrisk/analyses/figures/model_output_98_verylong.png", ### makes it a nice png and saves it so it doesn't take forever to load as a pdf!
     width=7,
     height=6, units="in", res = 350 )
 grid.arrange(regrisk)

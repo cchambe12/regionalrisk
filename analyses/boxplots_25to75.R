@@ -229,7 +229,7 @@ f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs),]
 #f$fsall<-ave(f$fs.count, f$lat.long, f$species, FUN=sum)
-f$fstot<-ave(f$fsall, f$lat.long, f$species, f$cc, FUN=sum)
+f$fstot<-ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
 
 
 
