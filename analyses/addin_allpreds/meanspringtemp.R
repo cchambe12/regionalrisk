@@ -30,7 +30,7 @@ library(data.table)
 
 ### Load data
 setwd("~/Documents/git/regionalrisk/analyses/output")
-d<-read.csv("fs_matspspace_old.csv", header=TRUE)
+d<-read.csv("fs_allspp_long.csv", header=TRUE)
 #dx<-read.csv("mat.csv", header=TRUE)
 
 d<-d[!duplicated(d$lat.long),]
