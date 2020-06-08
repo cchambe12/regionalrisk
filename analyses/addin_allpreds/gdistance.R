@@ -1,5 +1,5 @@
 #### 20 Sept 2018 - Cat
-## using gDistance as it's faster and accurate as well
+## using gDistance as it's faster and more accurate
 
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
@@ -17,7 +17,7 @@ setwd("~/Documents/git/regionalrisk/analyses")
 
 #shapefile(coast, "output/coastline.shp")
 
-bb<-read.csv("output/fs_yearsitespp.csv", header=TRUE)
+bb<-read.csv("output/fs_allspp_long.csv", header=TRUE)
 bb<-subset(bb, select=c("long", "lat"))
 bb$LONG<-bb$long
 bb$LAT<-bb$lat
