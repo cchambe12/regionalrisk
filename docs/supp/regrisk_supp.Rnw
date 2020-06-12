@@ -166,7 +166,7 @@ library(broom)
 setwd("~/Documents/git/regionalrisk")
 
 load("bbmod.Rdata")
-bb <- as.data.frame(tidy(bb.mod, prob=0.98))
+bb <- as.data.frame(tidy(bb.mod, prob=0.90))
 bb$term <- gsub("b_", "", bb$term)
 bb$term <- gsub("Intercept", "Intercept", bb$term)
 bb$term <- gsub("cc", "Climate Change", bb$term)
@@ -177,7 +177,7 @@ bb$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"),
 bb$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), bb$term)
 bb$term <- gsub(":", " x ", bb$term)
 
-colnames(bb) <- c("", "mean", "std.err", "2\\%", "98\\%")
+colnames(bb) <- c("", "mean", "std.err", "10\\%", "90\\%")
 print(xtable(bb[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of day of budburst before and after climate change across species.", label="tab:simbbmod",
              align = c("l", "l", "r","r","r")), #>{\\textit}l
       include.rownames=F, 
@@ -188,7 +188,7 @@ print(xtable(bb[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression
 <<label=simtim, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk")
 load("tminmod_long.Rdata")
-tmin <- as.data.frame(tidy(tminlong.mod, prob=0.98))
+tmin <- as.data.frame(tidy(tminlong.mod, prob=0.90))
 
 tmin$term <- gsub("b_", "", tmin$term)
 tmin$term <- gsub("Intercept", "Intercept", tmin$term)
@@ -201,7 +201,7 @@ tmin$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), tm
 tmin$term <- gsub(":", " x ", tmin$term)
 
 
-colnames(tmin) <- c("", "mean", "std.err", "2\\%", "98\\%")
+colnames(tmin) <- c("", "mean", "std.err", "10\\%", "90\\%")
 print(xtable(tmin[1:12,c(1:2, 4:5)], caption = "Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.", label="tab:simptmin",
              align = c("l", "l", "r","r","r")),  #>{\\textit}l
       include.rownames=F,
@@ -213,7 +213,7 @@ print(xtable(tmin[1:12,c(1:2, 4:5)], caption = "Summary of simple linear regress
 setwd("~/Documents/git/regionalrisk")
 if(TRUE){
 load("fstotmodlong.Rdata")
-lstfrz <- as.data.frame(tidy(fstotlong.mod, prob=0.98))
+lstfrz <- as.data.frame(tidy(fstotlong.mod, prob=0.90))
 lstfrz$term <- gsub("b_", "", lstfrz$term)
 lstfrz$term <- gsub("Intercept", "Intercept", lstfrz$term)
 lstfrz$term <- gsub("cc", "Climate Change", lstfrz$term)
@@ -223,7 +223,7 @@ lstfrz$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}")
 lstfrz$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), lstfrz$term)
 lstfrz$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), lstfrz$term)
 lstfrz$term <- gsub(":", " x ", lstfrz$term)
-colnames(lstfrz) <- c("", "mean", "std.err", "2\\%", "98\\%")
+colnames(lstfrz) <- c("", "mean", "std.err", "10\\%", "90\\%")
 print(xtable(lstfrz[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of the number of false springs before and after climate change across species.", label="tab:simpfs",
              align = c("l", "l", "r","r","r")),  #>{\\textit}l
       include.rownames=F, 
@@ -407,7 +407,7 @@ print(xtable(modoutput,
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
-  -\caption{Species-level variation with a lower temperature threshold (-5$^{\\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
+  -\caption{Species-level variation with a lower temperature threshold (-5$^{\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
   -\end{center}
   -\end{figure}}
 

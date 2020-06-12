@@ -34,13 +34,11 @@ goodsites <- unique(tt$Var1)
 ########################
 #### get the data
 mat<-read.csv("output/BBdata.csv", header=TRUE) #### mean day of budburst is 104.88
-#mat<-read.csv("output/BBdata_dvr.csv", header=TRUE)
-#mat<-read.csv("output/bb_fullleaf.csv", header=TRUE)
-#mat$lat.long <- paste(mat$lat, mat$long)
+
 #mat <- mat[(mat$lat.long%in%goodsites),]
 
 load("~/Documents/git/regionalrisk/bbmod.Rdata")
-bbccsp<- ggpredict(bb.mod, terms = c("cc", "species"), ci.lvl=0.98) 
+bbccsp<- ggpredict(bb.mod, terms = c("cc", "species"), ci.lvl=0.90) 
 
 bbccsp$group <- as.character(bbccsp$group)
 
@@ -53,6 +51,10 @@ mat$bb.avg<-ave(mat$bb, mat$species)
 mat$cc<-ifelse(mat$year<1984, 0, 1)
 mat$species<-ifelse(mat$species=="BETPEN", "aaBETPEN", mat$species)
 mat$species<-ifelse(mat$species=="FRAEXC", "zFRAEXC", mat$species)
+mat$lat.long <- paste(mat$lat, mat$long)
+
+mat <- subset(mat, select=c("bb", "species", "lat.long", "cc"))
+mat <- mat[!duplicated(mat),]
 
 bbccsp$est.conv <-  (bbccsp$predicted/4)/(2)
 bbccsp$low.conv <-  (bbccsp$conf.low/4)/(2)
@@ -124,7 +126,7 @@ tm<-read.csv("output/tminprep_boxplots_long.csv", header=TRUE) #### mean tmin is
 #tm <- tm[(tm$lat.long%in%goodsites),]
 
 load("~/Documents/git/regionalrisk/tminmod_long.Rdata")
-tmccsp<- ggpredict(tminlong.mod, terms = c("cc", "species"), ci.lvl=0.98) 
+tmccsp<- ggpredict(tminlong.mod, terms = c("cc", "species"), ci.lvl=0.90) 
 
 tmccsp$group <- as.character(tmccsp$group)
 
@@ -135,7 +137,10 @@ tmccsp$species<-ifelse(tmccsp$group=="FRAEXC", "zFRAEXC", tmccsp$species)
 tm$cc<-ifelse(tm$year<1984, 0, 1)
 tm$species<-ifelse(tm$species=="BETPEN", "aaBETPEN", tm$species)
 tm$species<-ifelse(tm$species=="FRAEXC", "zFRAEXC", tm$species)
-#tm$species<-ifelse(tm$species=="ALNGLU", "abALNGLU", tm$species)
+tm$lat.long <- paste(tm$lat, tm$long)
+
+tm <- subset(tm, select=c("Tmin", "lat.long", "species", "cc"))
+tm <- tm[!duplicated(tm),]
 
 tmccsp$est.conv <-  (tmccsp$predicted/4)/(2)
 tmccsp$low.conv <-  (tmccsp$conf.low/4)/(2)
@@ -209,18 +214,20 @@ tmin<- ggplot(plust, aes(x=species, y=Tmin, alpha=cc)) + geom_boxplot(aes(alpha=
 #modoutput <- read.csv("output/ccsp_predicted_90.csv", header=TRUE)
 
 load("~/Documents/git/regionalrisk/fstotmodlong.Rdata")
-fsccsp<- ggpredict(fstotlong.mod, terms = c("cc", "species"), ci.lvl=0.98) 
+#load("~/Documents/git/regionalrisk/fstotmod.Rdata")
+#fsccsp<- ggpredict(fstot.mod, terms = c("cc", "species"), ci.lvl=0.98) 
+fsccsp<- ggpredict(fstotlong.mod, terms = c("cc", "species"), ci.lvl=0.90) 
 
 fsccsp$group <- as.character(fsccsp$group)
 
 fsccsp$species <- NA
-fsccsp$species<-ifelse(fsccsp$group=="BETPEN", "aaBETPEN", fsccsp$group)
+fsccsp$species<-ifelse(fsccsp$group=="BETPEN", "aaBETPEN", as.character(fsccsp$group))
 fsccsp$species<-ifelse(fsccsp$group=="FRAEXC", "zFRAEXC", fsccsp$species)
 
 f<-read.csv("output/fs_newspace_long.csv", header=TRUE)
-#f<-read.csv("output/fs_newspace_dvr.csv", header=TRUE)
-#f<-read.csv("output/fs_newspace_five.csv", header=TRUE)
-#f<-read.csv("output/fs_newspace_fullleaf.csv", header=TRUE)
+#f<-read.csv("output/fs_newspace_dvrlong.csv", header=TRUE)
+#f<-read.csv("output/fs_newspace_fivelong.csv", header=TRUE)
+#f<-read.csv("output/fs_newspace_longtemps.csv", header=TRUE)
 
 #f <- f[(f$lat.long%in%goodsites),]
 
@@ -228,9 +235,11 @@ f<-read.csv("output/fs_newspace_long.csv", header=TRUE)
 f$species<-ifelse(f$species=="BETPEN", "aaBETPEN", f$species)
 f$species<-ifelse(f$species=="FRAEXC", "zFRAEXC", f$species)
 f<-f[!is.na(f$fs),]
-#f$fsall<-ave(f$fs.count, f$lat.long, f$species, FUN=sum)
-f$fstot<-ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
 
+f$fstot <- ave(f$fs, f$lat.long, f$species, f$cc, FUN=sum)
+
+f <- subset(f, select=c("fstot", "cc", "lat.long", "species")) ## added lat.long to list
+f.sub <- f[!duplicated(f),]
 
 
 fsccsp$est.conv <-  (fsccsp$predicted/4)/(2)
@@ -241,7 +250,7 @@ fsccsp$x <- ifelse(fsccsp$x<=0, 0, 1)
 fsccsp<-subset(fsccsp, select=c("x", "predicted", "conf.low", "conf.high","species", "est.conv", "low.conv", "up.conv")) # 
 colnames(fsccsp) <- c("cc", "est", "lower", "upper",  "species","est.conv", "low.conv", "up.conv") # , 
 
-plusf<-subset(f, select=c(species, cc, fstot))
+plusf<-subset(f.sub, select=c(species, cc, fstot))
 plusf<-plusf[!duplicated(plusf),]
 
 plusf <- full_join(plusf, fsccsp)
@@ -269,7 +278,7 @@ falsespring<- ggplot(plusf, aes(x=species,alpha=cc, y=fstot)) + geom_boxplot(aes
         text=element_text(family="Helvetica"),
         plot.title = element_text(face="bold", size=10),
         legend.text.align = 0, axis.text.x = element_text(face = "italic", angle=35, hjust=1),
-        legend.key = element_rect(colour = "transparent", fill = "white"), #legend.position = "none",
+        legend.key = element_rect(colour = "transparent", fill = "white"), legend.position = "none",
         plot.margin = unit(c(1.5,1.5, 1.0, 1.5), "lines"),
         axis.title.x = element_blank()) + 
         #axis.text.x.bottom = element_blank(), axis.ticks.x = element_blank()) + # top, right, bottom, left
