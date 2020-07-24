@@ -63,7 +63,7 @@
 \usepackage{mdframed}
 \usepackage{longtable}
 \usepackage{natbib}
-\bibliographystyle{..//bib/styles/gcb}
+\bibliographystyle{..//..//bib/styles/gcb}
 %\usepackage[hyphens]{url}
 \usepackage{caption}
 \setlength{\captionmargin}{30pt}
@@ -78,8 +78,8 @@
 \parskip 7.2pt
 \renewcommand{\baselinestretch}{1}
 \parindent 0pt
-\usepackage{lineno}
-\linenumbers
+%\usepackage{lineno}
+%\linenumbers
 
 %cross referencing:
 \usepackage{xr}
@@ -157,7 +157,7 @@ inverselogit(Intercept &+ (Model Estimate/(sd(Raw Data Predictor)*2))*mean(Raw D
 
 \newpage
 \nocite{NPN2019}
-\bibliography{..//bib/regionalrisk.bib}
+\bibliography{..//..//bib/regionalrisk.bib}
 
 \newpage
 \section*{Supplement: Tables and Figures}
@@ -201,36 +201,8 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 \end{tabular}
 \end{center}
 
-
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jun 12 13:53:44 2020
-\begin{table}[H]
-\centering
-\caption{Summary of simple linear regression model of day of budburst before and after climate change across species.} 
-\label{tab:simbbmod}
-\begin{tabular}{lrrr}
-  \hline
- & mean & 10\% & 90\% \\ 
-  \hline
-Intercept & 102.27 & 102.20 & 102.33 \\ 
-  Climate Change & -6.98 & -7.08 & -6.89 \\ 
-  \textit{Alnus glutinosa} & 0.61 & 0.50 & 0.72 \\ 
-  \textit{Betula pendula} & -0.89 & -0.98 & -0.80 \\ 
-  \textit{Fagus sylvatica} & 6.85 & 6.75 & 6.94 \\ 
-  \textit{Fraxinus excelsior} & 17.16 & 17.05 & 17.28 \\ 
-  \textit{Quercus robur} & 13.67 & 13.57 & 13.77 \\ 
-  Climate Change x \textit{Alnus glutinosa} & -0.97 & -1.13 & -0.81 \\ 
-  Climate Change x \textit{Betula pendula} & 1.06 & 0.92 & 1.21 \\ 
-  Climate Change x \textit{Fagus sylvatica} & 1.61 & 1.47 & 1.76 \\ 
-  Climate Change x \textit{Fraxinus excelsior} & 1.07 & 0.91 & 1.24 \\ 
-  Climate Change x \textit{Quercus robur} & 0.67 & 0.52 & 0.81 \\ 
-   \hline
-\end{tabular}
-\end{table}
-
-
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jun 12 13:53:45 2020
+% Fri Jul 24 10:36:25 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.} 
@@ -257,7 +229,7 @@ Intercept & 6.59 & 6.58 & 6.60 \\
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jun 12 13:53:45 2020
+% Fri Jul 24 10:36:26 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of the number of false springs before and after climate change across species.} 
@@ -266,26 +238,54 @@ Intercept & 6.59 & 6.58 & 6.60 \\
   \hline
  & mean & 10\% & 90\% \\ 
   \hline
-Intercept & 14.19 & 11.71 & 16.69 \\ 
-  Climate Change & 0.40 & -3.08 & 3.87 \\ 
-  \textit{Alnus glutinosa} & -2.19 & -5.99 & 1.51 \\ 
-  \textit{Betula pendula} & 0.29 & -3.21 & 3.86 \\ 
-  \textit{Fagus sylvatica} & -0.92 & -4.61 & 2.61 \\ 
-  \textit{Fraxinus excelsior} & -7.63 & -12.05 & -3.36 \\ 
-  \textit{Quercus robur} & -3.02 & -6.86 & 0.85 \\ 
-  Climate Change x \textit{Alnus glutinosa} & 2.59 & -2.42 & 7.68 \\ 
-  Climate Change x \textit{Betula pendula} & -0.31 & -5.24 & 4.74 \\ 
-  Climate Change x \textit{Fagus sylvatica} & -2.14 & -7.31 & 3.00 \\ 
-  Climate Change x \textit{Fraxinus excelsior} & 1.90 & -3.92 & 7.95 \\ 
-  Climate Change x \textit{Quercus robur} & -1.42 & -6.84 & 4.01 \\ 
+Intercept & 7.53 & 7.51 & 7.56 \\ 
+  Climate Change & 0.82 & 0.78 & 0.86 \\ 
+  \textit{Alnus glutinosa} & -1.76 & -1.81 & -1.72 \\ 
+  \textit{Betula pendula} & 0.20 & 0.17 & 0.24 \\ 
+  \textit{Fagus sylvatica} & -1.86 & -1.90 & -1.82 \\ 
+  \textit{Fraxinus excelsior} & -5.32 & -5.36 & -5.28 \\ 
+  \textit{Quercus robur} & -4.44 & -4.47 & -4.40 \\ 
+  Climate Change x \textit{Alnus glutinosa} & 1.63 & 1.57 & 1.70 \\ 
+  Climate Change x \textit{Betula pendula} & 0.11 & 0.06 & 0.17 \\ 
+  Climate Change x \textit{Fagus sylvatica} & -1.53 & -1.58 & -1.47 \\ 
+  Climate Change x \textit{Fraxinus excelsior} & -1.31 & -1.37 & -1.25 \\ 
+  Climate Change x \textit{Quercus robur} & -1.19 & -1.25 & -1.13 \\ 
    \hline
 \end{tabular}
 \end{table}
 
 
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Fri Jul 24 10:36:26 2020
+\begin{table}[H]
+\centering
+\caption{Summary of simple linear regression model of day of budburst before and after climate change across species.} 
+\label{tab:simbbmod}
+\begin{tabular}{lrrr}
+  \hline
+ & mean & 10\% & 90\% \\ 
+  \hline
+Intercept & 102.27 & 102.20 & 102.33 \\ 
+  Climate Change & -6.98 & -7.08 & -6.89 \\ 
+  \textit{Alnus glutinosa} & 0.61 & 0.50 & 0.72 \\ 
+  \textit{Betula pendula} & -0.89 & -0.98 & -0.80 \\ 
+  \textit{Fagus sylvatica} & 6.85 & 6.75 & 6.94 \\ 
+  \textit{Fraxinus excelsior} & 17.16 & 17.05 & 17.28 \\ 
+  \textit{Quercus robur} & 13.67 & 13.57 & 13.77 \\ 
+  Climate Change x \textit{Alnus glutinosa} & -0.97 & -1.13 & -0.81 \\ 
+  Climate Change x \textit{Betula pendula} & 1.06 & 0.92 & 1.21 \\ 
+  Climate Change x \textit{Fagus sylvatica} & 1.61 & 1.47 & 1.76 \\ 
+  Climate Change x \textit{Fraxinus excelsior} & 1.07 & 0.91 & 1.24 \\ 
+  Climate Change x \textit{Quercus robur} & 0.67 & 0.52 & 0.81 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jun 12 13:53:46 2020
+% Fri Jul 24 10:36:27 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.} \\ 
   \hline
@@ -388,13 +388,6 @@ Coast x Climate Change & 0.00 & -0.03 & -0.02 & -0.01 & 0.01 & 0.03 & 0.03 \\
 \end{longtable}
 
 
-
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//..//analyses/figures/APC_allpred_allspp_baseR_long98.png}
-  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
-  -\end{center}
-  -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
@@ -405,7 +398,7 @@ Coast x Climate Change & 0.00 & -0.03 & -0.02 & -0.01 & 0.01 & 0.03 & 0.03 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jun 12 13:53:46 2020
+% Fri Jul 24 10:36:27 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with different rates of leafout for each species.} \\ 
   \hline
@@ -508,13 +501,6 @@ Coast x Climate Change & 0.00 & -0.03 & -0.02 & -0.01 & 0.01 & 0.03 & 0.04 \\
 \end{longtable}
 
 
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
-  -\caption{Species-level under the varying rates of leafout model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppdvr}
-  -\end{center}
-  -\end{figure}}
-
   
   {\begin{figure} [H]
   -\begin{center}
@@ -525,7 +511,7 @@ Coast x Climate Change & 0.00 & -0.03 & -0.02 & -0.01 & 0.01 & 0.03 & 0.04 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jun 12 13:53:46 2020
+% Fri Jul 24 10:36:27 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.} \\ 
   \hline
@@ -628,13 +614,6 @@ Coast x Climate Change & 0.05 & -0.02 & 0.00 & 0.03 & 0.08 & 0.11 & 0.13 \\
 \end{longtable}
 
 
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
-  -\caption{Species-level variation with a lower temperature threshold (-5$^{\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
-  -\end{center}
-  -\end{figure}}
-
 
   {\begin{figure} [H]
   -\begin{center}
@@ -645,7 +624,7 @@ Coast x Climate Change & 0.05 & -0.02 & 0.00 & 0.03 & 0.08 & 0.11 & 0.13 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jun 12 13:53:46 2020
+% Fri Jul 24 10:36:27 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with varying temperature thresholds for early- versus later-leafout species.} \\ 
   \hline
@@ -746,6 +725,29 @@ Coast x Climate Change & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.04 \\
 \hline
 \label{tab:suppmodlongtemps}
 \end{longtable}
+
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/APC_allpred_allspp_baseR_long98.png}
+  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
+  -\caption{Species-level under the varying rates of leafout model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppdvr}
+  -\end{center}
+  -\end{figure}}
+
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
+  -\caption{Species-level variation with a lower temperature threshold (-5$^{\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
+  -\end{center}
+  -\end{figure}}
 
 
 {\begin{figure} [H]

@@ -13,7 +13,7 @@
 \usepackage{mdframed}
 \usepackage{longtable}
 \usepackage{natbib}
-\bibliographystyle{..//bib/styles/gcb}
+\bibliographystyle{..//..//bib/styles/gcb}
 %\usepackage[hyphens]{url}
 \usepackage{caption}
 \setlength{\captionmargin}{30pt}
@@ -28,8 +28,8 @@
 \parskip 7.2pt
 \renewcommand{\baselinestretch}{1}
 \parindent 0pt
-\usepackage{lineno}
-\linenumbers
+%\usepackage{lineno}
+%\linenumbers
 
 %cross referencing:
 \usepackage{xr}
@@ -78,7 +78,12 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \renewcommand{\labelitemi}{$-$}
 \setkeys{Gin}{width=0.8\textwidth}
 
-\section*{Methods: Space predictor} %I'm not too sure about the 'space parameter' terminology, I'd rather use either spatial or geographic predictor or proxy. I'm using spatial predictor, but all our predictors are spatial, so please feel free to change.
+\section*{Supporting Information Methods S1: Species rate of budburst calculations}
+Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to use observations for both budburst and leafout to determine the durations of vegetative risk. Instead, we used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. We took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, we assessed data that were provided by the USA National Phenology Network and the many participants who contribute to its Nature's Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average number of days between budburst and leafout was approximately 12 days. Thus, we expanded our rate of budburst through full leaf expansion by subtracting 12 days from the first leaf to find budburst and adding 12 days to the first leaf to find full leafout. 
+
+Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
+
+\section*{Supporting Information Methods S2: Spatial parameter} %I'm not too sure about the 'space parameter' terminology, I'd rather use either spatial or geographic predictor or proxy. I'm using spatial predictor, but all our predictors are spatial, so please feel free to change.
 
 Spatial autocorrelation (SA) is a common issue in spatial ecology given that nearby spatial units tend to be more similar than units far apart, and thus, cannot be considered as independent units, which is a frequent assumption in statistical tests \citep{diniz2003spatial}. If model residuals are spatially autocorrelated, and thus, non-independent then model coefficients and errors may be biased in a hard-to-predict way \citep{mauricio2009coefficient}. On the contrary, if model residuals are not autocorrelated, then SA should not be of concern \citep{hawkins2012eight}.\\
 
@@ -91,15 +96,6 @@ y_i = \alpha_{[i]} +&  \beta_{NAO_{[i]}} + \beta_{MST_{[i]}} + \beta_{Elevation_
 + \beta_{Elevation \times ClimateChange_{[i]}} \\ +& \beta_{DistanceCoast \times ClimateChange_{[i]}} + \sigma_{[i]} \tag{S1}
 \end{align*}
 
-
-\section*{Species rate of budburst calculations}
-Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to use observations for both budburst and leafout to determine the durations of vegetative risk. Instead, we used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. We took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, we assessed data that were provided by the USA National Phenology Network and the many participants who contribute to its Nature's Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average number of days between budburst and leafout was approximately 12 days. Thus, we expanded our rate of budburst through full leaf expansion by subtracting 12 days from the first leaf to find budburst and adding 12 days to the first leaf to find full leafout. 
-
-Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
-
-%NOT SURE WHERE TO PUT THIS!!
-%Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S1). 
-
 \iffalse
 \begin{align*}
 inverselogit = & (1/(1+exp(-(Model Estimate)))) \tag{S2} 
@@ -111,7 +107,7 @@ inverselogit(Intercept &+ (Model Estimate/(sd(Raw Data Predictor)*2))*mean(Raw D
 
 \newpage
 \nocite{NPN2019}
-\bibliography{..//bib/regionalrisk.bib}
+\bibliography{..//..//bib/regionalrisk.bib}
 
 \newpage
 \section*{Supplement: Tables and Figures}
@@ -161,30 +157,6 @@ library(broom)
 \end{tabular}
 \end{center}
 
-
-<<label=simbbmod, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
-setwd("~/Documents/git/regionalrisk")
-
-load("bbmod.Rdata")
-bb <- as.data.frame(tidy(bb.mod, prob=0.90))
-bb$term <- gsub("b_", "", bb$term)
-bb$term <- gsub("Intercept", "Intercept", bb$term)
-bb$term <- gsub("cc", "Climate Change", bb$term)
-bb$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), bb$term)
-bb$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), bb$term)
-bb$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), bb$term)
-bb$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), bb$term)
-bb$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), bb$term)
-bb$term <- gsub(":", " x ", bb$term)
-
-colnames(bb) <- c("", "mean", "std.err", "10\\%", "90\\%")
-print(xtable(bb[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of day of budburst before and after climate change across species.", label="tab:simbbmod",
-             align = c("l", "l", "r","r","r")), #>{\\textit}l
-      include.rownames=F, 
-      caption.placement = "top", 
-      sanitize.text.function = function(x) {x}, table.placement="H")
-@
-
 <<label=simtim, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk")
 load("tminmod_long.Rdata")
@@ -211,7 +183,7 @@ print(xtable(tmin[1:12,c(1:2, 4:5)], caption = "Summary of simple linear regress
 
 <<label=simfs, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
 setwd("~/Documents/git/regionalrisk")
-if(TRUE){
+
 load("fstotmodlong.Rdata")
 lstfrz <- as.data.frame(tidy(fstotlong.mod, prob=0.90))
 lstfrz$term <- gsub("b_", "", lstfrz$term)
@@ -229,9 +201,33 @@ print(xtable(lstfrz[1:12,c(1:2,4:5)], caption = "Summary of simple linear regres
       include.rownames=F, 
       caption.placement = "top", 
       sanitize.text.function = function(x) {x}, table.placement="H")
-}
+
 
 @
+
+<<label=simbbmod, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
+setwd("~/Documents/git/regionalrisk")
+
+load("bbmod.Rdata")
+bb <- as.data.frame(tidy(bb.mod, prob=0.90))
+bb$term <- gsub("b_", "", bb$term)
+bb$term <- gsub("Intercept", "Intercept", bb$term)
+bb$term <- gsub("cc", "Climate Change", bb$term)
+bb$term <- gsub("speciesALNGLU", paste0("\\\\textit{","Alnus glutinosa","}"), bb$term)
+bb$term <- gsub("speciesBETPEN", paste0("\\\\textit{","Betula pendula","}"), bb$term)
+bb$term <- gsub("speciesFAGSYL", paste0("\\\\textit{","Fagus sylvatica","}"), bb$term)
+bb$term <- gsub("speciesFRAEXC", paste0("\\\\textit{","Fraxinus excelsior","}"), bb$term)
+bb$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"), bb$term)
+bb$term <- gsub(":", " x ", bb$term)
+
+colnames(bb) <- c("", "mean", "std.err", "10\\%", "90\\%")
+print(xtable(bb[1:12,c(1:2,4:5)], caption = "Summary of simple linear regression model of day of budburst before and after climate change across species.", label="tab:simbbmod",
+             align = c("l", "l", "r","r","r")), #>{\\textit}l
+      include.rownames=F, 
+      caption.placement = "top", 
+      sanitize.text.function = function(x) {x}, table.placement="H")
+@
+
 
 \newpage
 <<label=suppmodorig, results="asis", echo=FALSE, warning=FALSE, message=FALSE, fig.pos="H", fig.width=7, fig.height=4, fig.align='center'>>=
@@ -282,13 +278,6 @@ print(xtable(modoutput,
 
 @
 
-
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=16cm]{..//..//analyses/figures/APC_allpred_allspp_baseR_long98.png}
-  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
-  -\end{center}
-  -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
@@ -342,13 +331,6 @@ print(xtable(modoutput,
       tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
       tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
 @
-
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
-  -\caption{Species-level under the varying rates of leafout model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppdvr}
-  -\end{center}
-  -\end{figure}}
 
   
   {\begin{figure} [H]
@@ -404,13 +386,6 @@ print(xtable(modoutput,
       tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
 @
 
-{\begin{figure} [H]
-  -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
-  -\caption{Species-level variation with a lower temperature threshold (-5$^{\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
-  -\end{center}
-  -\end{figure}}
-
 
   {\begin{figure} [H]
   -\begin{center}
@@ -464,6 +439,29 @@ print(xtable(modoutput,
       tabular.environment = "longtable", floating = FALSE, #align=c(rep('|c', ncol(sp.table)),'p{4in}'), 
       tabular="\\textwidth",include.colnames = TRUE, add.to.row = list(pos = list(0),command = "\\hline \\endhead "),sanitize.text.function = identity)
 @
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/APC_allpred_allspp_baseR_long98.png}
+  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
+  -\end{center}
+  -\end{figure}}
+  
+  {\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
+  -\caption{Species-level under the varying rates of leafout model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppdvr}
+  -\end{center}
+  -\end{figure}}
+
+
+{\begin{figure} [H]
+  -\begin{center}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
+  -\caption{Species-level variation with a lower temperature threshold (-5$^{\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
+  -\end{center}
+  -\end{figure}}
+
 
 {\begin{figure} [H]
   -\begin{center}

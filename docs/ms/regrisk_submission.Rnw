@@ -8,7 +8,7 @@
 \usepackage{amsmath} % for aligning equations
 \usepackage{mdframed}
 \usepackage{natbib}
-\bibliographystyle{..//..//bib/styles/gcb}
+%\bibliographystyle{..//..//bib/styles/gcb}
 \usepackage[hyphens]{url}
 \usepackage[small]{caption}
 \setlength{\captionmargin}{30pt}
@@ -24,7 +24,7 @@
 \renewcommand{\baselinestretch}{2}
 \parindent 0pt
 \usepackage{lineno}
-\linenumbers
+%\linenumbers
 \usepackage{setspace}
 \doublespacing
 
@@ -62,14 +62,14 @@ library(ggplot2)
 
 
 \noindent Authors:\\
-C. J. Chamberlain $^{1,2}$, B. I. Cook $^{3}$, I. Morales-Castilla $^{4,5}$ \& E. M. Wolkovich $^{1,2,6}$
+Catherine J. Chamberlain, ORCHID: 0000-0001-5495-3219 $^{1,2}$, Benjamin I. Cook $^{3}$, Ignacio Morales-Castilla,  ORCID: 0000-0002-8570-9312 $^{4,5}$ \& Elizabeth M. Wolkovich $^{1,2,6}$
 \vspace{2ex}\\
 \emph{Author affiliations:}\\
-$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
-$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
-$^{3}$NASA Goddard Institute for Space Studies, New York, New York, USA; \\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, 02131 USA; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, 02138 USA; \\
+$^{3}$NASA Goddard Institute for Space Studies, New York, New York, 10025 USA; \\
 $^{4}$GloCEE - Global Change Ecology and Evolution Group, Department of Life Sciences, Universidad de Alcal\'{a}, Alcal\'{a} de Henares, 28805, Spain \\
-$^{5}$Department of Environmental Science and Policy, George Mason University, Fairfax, VA 22030; \\
+$^{5}$Department of Environmental Science and Policy, George Mason University, Fairfax, Virginia, 22030 USA; \\
 $^{6}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
 \vspace{2ex}
 $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
@@ -344,7 +344,7 @@ We obtained phenological data from the Pan European Phenology network (PEP725, w
 
 Individuals are most at risk to damage in the spring between budburst and leafout, when freeze tolerance is lowest \citep{Sakai1987}. To capture this `high-risk' timeframe, we subtracted 12 days from the first leaf date to find budburst---which is the average rate of budburst across multiple studies and species \citep{Donnelly2017,Flynn2018,NPN2019}---and then added 12 days from the first leaf date to find leafout to establish a standardized estimate for day of budburst, since the majority of the individuals were missing budburst and full leafout observations. 
 
-We additionally considered a model that altered the timing between budburst and leafout for each species. For this alternate model, we calculated budburst and leafout by subtracting and adding 11 days respectively from the first leaf date for \textit{Aesculus hippocastanum} and \textit{Betula pendula}, 12 days for \textit{Alnus glutinosa}, 5 days for \textit{Fagus sylvatica}, and 7 days for both \textit{Fraxinus excelsior} and \textit{Quercus robur} based on growth chamber experiment data from phylogenetically related species \citep{Buerki2010,Wang2016,Hipp2017,Flynn2018}.
+We additionally considered a model that altered the timing between budburst and leafout for each species. For this alternate model, we calculated budburst and leafout by subtracting and adding 11 days respectively from the first leaf date for \textit{Aesculus hippocastanum} and \textit{Betula pendula}, 12 days for \textit{Alnus glutinosa}, 5 days for \textit{Fagus sylvatica}, and 7 days for both \textit{Fraxinus excelsior} and \textit{Quercus robur} based on growth chamber experiment data from phylogenetically related species \citep[][ see supplemental materials `Supporting Information Methods S1: Species rate of budburst calculations' for more details]\citep{Buerki2010,Wang2016,Hipp2017,Flynn2018}.
 
 \subsection*{Climate Data} 
 We collected daily gridded climate data from the European Climate Assessment \& Dataset (ECA\&D) and used the E-OBS 0.25 degree regular latitude-longitude grid (version 16). \R{R2clim}E-OBS version 16 incorporates station altitude in the interpolation scheme, thus spatially explicit information on day-to-day variability in the environmental lapse rate is captured \citep{Cornes2018}\R{R2climend}. We used this daily minimum temperature dataset to determine if a false spring occurred. We defined false springs as temperatures at or below -2.2$^{\circ}$C \citep{Schwartz1993} between budburst to leafout. Decades of research has found that many species sustain damage between budburst and leafout when temperatures drop below -2.2$^{\circ}$C. However, as there is evidence of interspecific variation in spring freeze tolerance, we additionally performed our analyses considering a -5$^{\circ}$C \citep{Sakai1987,Lenz2013} threshold for one model and performed an additional model considering varying temperature thresholds for different species \citep{Lenz2016,Muffler2016,Zohner2020}: with -5$^{\circ}$C for early-leafout species (i.e,. \textit{Aesculus hippocastanum}, \textit{Alnus glutinosa} and \textit{Betula pendula}) and -2.2$^{\circ}$C for late-leafout species (i.e., \textit{Fagus sylvatica}, \textit{Fraxinus excelsior} and \textit{Quercus robur}). In order to assess climatic effects, we calculated the mean spring temperature by using the daily mean temperature from March 1 through May 31. We used this date range to best capture temperatures likely after chilling had accumulated to compare differences in spring forcing temperatures across sites \citep{Basler2012, Korner2016}. We collected NAO-index data from the KNMI Climate Explorer CPC daily NAO time series and selected the NAO indices from November until April to capture the effects of NAO on budburst for each region. We then took the mean NAO index during these months \citep{NAOdata}. More positive NAO indices typically result in higher than average winter and spring temperatures across Central Europe. Since the primary aim of the study is to predict false spring incidence in a changing climate, we split the data to create a binary `climate change' parameter: before temperature trends increased (1951-1983), reported as `0' in the model, and after trends increased \citep[1984-2016,][]{Stocker2013,Kharouba2018} to represent recent climate change, reported as `1' in the model.
@@ -359,7 +359,7 @@ y_i &= \alpha_{[i]} + \beta_{ClimateChange_{[i]}} + \beta_{Species_{[i]}} + \bet
 \end{align*}
 
 \subsubsection*{Main Model}
-To best compare across the effects of each climatic and geographic variable, we scaled all of the predictors to a z-score following the binary predictor approach \citep{Gelman2006}. To control for spatial autocorrelation and to account for spatially structured processes independent from our regional predictors of false springs, we generated an additional `space' parameter for the model. To generate our space parameter we first extracted spatial eigenvectors corresponding to our analyses' units and selected the subset that minimizes spatial autocorrelation of the residuals of a model including all predictors except for the space parameter \citep[][ see supplemental materials `Methods: Spatial parameter' for more details]{diniz2012selection,Baumen2017}. We then took the eigenvector subset determined from the minimization of Moran's \textit{I} in the residuals (MIR approach) and regressed them against the above residuals---i.e. number of false springs \emph{vs.} climatic and geographical factors. Finally we used the fitted values of that regression as our space parameter, which, by definition, represents the portion of the variation in false springs that is both spatially structured and independent from all other predictors in the model \citep[e.g. average spring temperature, elevation, etc.][]{griffith2006spatial,morales2012imprint}. A spatial predictor generated in this way has three major advantages. First, it ensures that no spatial autocorrelation is left in model residuals. Second, it avoids introducing collinearity issues with other predictors in the model. And third, it can be interpreted as a latent variable summarizing spatial processes (e.g. local adaptation, plasticity, etc.) occurring at multiple scales.
+To best compare across the effects of each climatic and geographic variable, we scaled all of the predictors to a z-score following the binary predictor approach \citep{Gelman2006}. To control for spatial autocorrelation and to account for spatially structured processes independent from our regional predictors of false springs, we generated an additional `space' parameter for the model. To generate our space parameter we first extracted spatial eigenvectors corresponding to our analyses' units and selected the subset that minimizes spatial autocorrelation of the residuals of a model including all predictors except for the space parameter \citep[][ see supplemental materials `Supporting Information Methods S2: Spatial parameter' for more details]{diniz2012selection,Baumen2017}. We then took the eigenvector subset determined from the minimization of Moran's \textit{I} in the residuals (MIR approach) and regressed them against the above residuals---i.e. number of false springs \emph{vs.} climatic and geographical factors. Finally we used the fitted values of that regression as our space parameter, which, by definition, represents the portion of the variation in false springs that is both spatially structured and independent from all other predictors in the model \citep[e.g. average spring temperature, elevation, etc.][]{griffith2006spatial,morales2012imprint}. A spatial predictor generated in this way has three major advantages. First, it ensures that no spatial autocorrelation is left in model residuals. Second, it avoids introducing collinearity issues with other predictors in the model. And third, it can be interpreted as a latent variable summarizing spatial processes (e.g. local adaptation, plasticity, etc.) occurring at multiple scales.
 
 To estimate the probability of false spring risk across species and our predictors we used a Bayesian modeling approach. By including all parameters in the model, as well as species, we were able to distinguish the strongest contributing factors to false spring risk. We fit a Bernoulli distribution model (also know as a logistic regression) using mean spring temperature (written as MST in the model equation), NAO, elevation, distance from the coast (written as DistanceCoast in the model equation), space, and climate change as predictors and all two-way interactions and species as two-way interactions (Equation 2), using the brms package \citep{brms}, version 2.3.1,  in R \citep{R}, version 3.3.1, and was written as follows:
 
@@ -374,7 +374,7 @@ logit(p) &= \alpha_{[i]} + \beta_{MST_{[i]}} + \beta_{DistanceCoast_{[i]}} + \be
 
 We ran four chains of 4 000 iterations, each with 2 500 warm-up iterations for a total of 6 000 posterior samples for each predictor using weakly informative priors. Increasing priors five-fold did not impact our results. We evaluated our model performance based on $\hat{R}$ values that were close to one. We also evaluated effective sample size estimates, which were 1 994 or above. We additionally assessed chain convergence visually and posterior predictive checks. Due to the large number of observations in the data we used the FASRC Cannon cluster (FAS Division of Science Research Computing Group at Harvard University) to run the model. 
 
-Model estimates were on the logit scale (shown in all tables) and were converted to probability percentages in all figures for easier interpretation by following \cite{Gelman2006}. These values were then back converted to the original scale by multiplying by two standard deviations. We calculated overall estimates (i.e., across species) of main effects in Figure 3, Figure S3 and Figure S4 from the average of the posteriors of each effect by species. We report all estimated values in-text as mean $\pm$ 98\% uncertainty intervals, unless otherwise noted. 
+Model estimates were on the logit scale (shown in all tables) and were converted to probability percentages in all figures for easier interpretation by following \cite{Gelman2006}. These values were then back converted to the original scale by multiplying by two standard deviations. We calculated overall estimates (i.e., across species) of main effects in Figure \ref{fig:orig}, Figure \ref{fig:dvr}, Figure \ref{fig:five} and \ref{fig:longtemps} from the average of the posteriors of each effect by species. We report all estimated values in-text as mean $\pm$ 98\% uncertainty intervals, unless otherwise noted. 
 
 \section*{Results} %% 1516 words
 \subsection*{Basic shifts in budburst and number of false springs}
@@ -447,13 +447,6 @@ C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W
 
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=16cm]{..//..//analyses/figures/mstbb_byspp_lines.png}
-  -\caption{Mean spring temperatures are plotted for each site and year (from 1951-2016) for each species. The purple line shows the trend in mean spring temperatures from March 1 to May 31 and the green line represents the trend of average day of budburst for each year for each species. Both lines are cyclic penalized cubic regression spline smooths with basis dimensions equal to the number of years in the study (i.e., 66). Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:mst}
-  -\end{center}
-  -\end{figure}}
-
-{\begin{figure} [H]
-  -\begin{center}
   %-\includegraphics[width=14cm]{..//..//analyses/figures/bb_base.png}
   -\caption{The average day of budburst mapped by site for each species (ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}). }\label{fig:bbmap}
   -\end{center}
@@ -463,6 +456,13 @@ C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W
   -\begin{center}
   %-\includegraphics[width=14cm]{..//..//analyses/figures/Boxplot_BBTminFS_noDots_modestslong.png}
   -\caption{Day of budburst (\textbf{a}), minimum temperatures between budburst and leafout (\textbf{b}) and number of false springs (\textbf{c}) before and after 1983 across species for all sites. Box and whisker plots show the 25th and 75th percentiles (i.e., the interquartile range) with notches indicating 95\% uncertainty intervals. Dots and error bars overlaid on the box and whisker plots represent the model regression outputs (Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Error bars from the model regressions indicate 90\% uncertainty intervals but, given the number of observations, are quite small for \textbf{a} and \textbf{b} and thus not easily visible (see Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Uncertainty intervals are more apparent for \textbf{c} since we are counting the total number of false spring years for each species and site before and after climate change.  }\label{fig:boxfs}
+  -\end{center}
+  -\end{figure}}
+
+{\begin{figure} [H]
+  -\begin{center}
+  %-\includegraphics[width=16cm]{..//..//analyses/figures/mstbb_byspp_lines.png}
+  -\caption{Mean spring temperatures are plotted for each site and year (from 1951-2016) for each species. The purple line shows the trend in mean spring temperatures from March 1 to May 31 and the green line represents the trend of average day of budburst for each year for each species. Both lines are cyclic penalized cubic regression spline smooths with basis dimensions equal to the number of years in the study (i.e., 66). Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:mst}
   -\end{center}
   -\end{figure}}
   
