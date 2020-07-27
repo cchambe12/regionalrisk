@@ -63,7 +63,7 @@
 \usepackage{mdframed}
 \usepackage{longtable}
 \usepackage{natbib}
-\bibliographystyle{..//..//bib/styles/gcb}
+\bibliographystyle{newphyto}
 %\usepackage[hyphens]{url}
 \usepackage{caption}
 \setlength{\captionmargin}{30pt}
@@ -98,7 +98,7 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 \noindent 
-\textbf{\LARGE{Supplemental Materials: Climate change reshapes the drivers of false spring risk across European trees}} 
+\textbf{\LARGE{New Phytologist Supporting Information: Climate change reshapes the drivers of false spring risk across European trees}} 
 %\\
 %OR \\
 %\textbf{\Large{Climate change increases the risk of false springs in European trees}} \\ % Lizzie votes for the first title! Reviewers can ask you to make it more narrow so I would start here and shift to Ben's if requested ... (goal 1: get paper out for review)
@@ -107,17 +107,21 @@
 
 
 \noindent Authors:\\
-C. J. Chamberlain $^{1,2}$, B. I. Cook $^{3}$, I. Morales-Castilla $^{4,5}$ \& E. M. Wolkovich $^{1,2,6}$
+Catherine J. Chamberlain, ORCID: 0000-0001-5495-3219 $^{1,2}$, Benjamin I. Cook $^{3}$, Ignacio Morales-Castilla, ORCID: 0000-0002-8570-9312 $^{4,5}$ \& Elizabeth M. Wolkovich $^{1,2,6}$
 \vspace{2ex}\\
 \emph{Author affiliations:}\\
-$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
-$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
-$^{3}$NASA Goddard Institute for Space Studies, New York, New York, USA; \\
-$^{4}$GloCEE - Global Change Ecology and Evolution Group, Department of Life Sciences, Universidad de Alcal\'{a}, Alcal\'{a} de Henares, 28805, Spain \\
-$^{5}$Department of Environmental Science and Policy, George Mason University, Fairfax, VA 22030; \\
-$^{6}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, 02131 USA; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, 02138 USA; \\
+$^{3}$NASA Goddard Institute for Space Studies, New York, New York, 10025 USA; \\
+$^{4}$GloCEE - Global Change Ecology and Evolution Group, Department of Life Sciences, Universidad de Alcal\'{a}, Alcal\'{a} de Henares, 28805 Spain \\
+$^{5}$Department of Environmental Science and Policy, George Mason University, Fairfax, Virginia, 22030 USA; \\
+$^{6}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4 Canada\\
 \vspace{2ex}
 $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
+
+\vspace{2ex}
+Article acceptance date: 22 July 2020
+
 
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -153,10 +157,10 @@ inverselogit(Intercept &+ (Model Estimate/(sd(Raw Data Predictor)*2))*mean(Raw D
 
 \newpage
 \nocite{NPN2019}
-\bibliography{..//..//bib/regionalrisk.bib}
+\bibliography{RegionalRisk.bib}
 
 \newpage
-\section*{Supplement: Tables and Figures}
+\section*{Supporting Information: Tables and Figures}
   
 \begin{center}
 \captionof{table}{Data collected from PEP725 for each species and the calculated number of false spring years} \label{tab:spp} 
@@ -179,80 +183,8 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 
 
 
-\begin{center}
-\captionof{table}{Mean day of budburst and standard deviation for each species for before (1951-1983) and after recent climate change (1984-2016).} \label{tab:bbspp}
-\begin{tabular}{l c c| c c}
-\cline{2-5}
-& \multicolumn{2}{ c| }{1951-1983}
-& \multicolumn{2}{ c }{1984-2016} \\ \cline{2-5}
-& mean & sd & mean & sd \\
-\hline
-\textit{Aesculus hippocastanum} & 102.2 & 12.44 & 95.35 & 12.09  \\
-\textit{Alnus glutinosa} & 102.8 & 14.81 & 94.90 & 14.71 \\
-\textit{Betula pendula} & 101.3 & 11.76 & 95.44 & 11.25 \\
-\textit{Fagus sylvatica} & 109.1 & 9.978 & 103.7 & 9.623 \\
-\textit{Fraxinus excelsior} & 119.4 & 11.79 & 113.5 & 11.53 \\
-\textit{Quercus robur} & 115.9 & 11.31 & 109.6 & 10.95 \\
-\hline
-\end{tabular}
-\end{center}
-
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:54:40 2020
-\begin{table}[H]
-\centering
-\caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.} 
-\label{tab:simptmin}
-\begin{tabular}{lrrr}
-  \hline
- & mean & 10\% & 90\% \\ 
-  \hline
-Intercept & 6.59 & 6.58 & 6.60 \\ 
-  Climate Change & 0.78 & 0.76 & 0.79 \\ 
-  \textit{Alnus glutinosa} & 2.01 & 2.00 & 2.03 \\ 
-  \textit{Betula pendula} & 0.34 & 0.32 & 0.35 \\ 
-  \textit{Fagus sylvatica} & 1.85 & 1.83 & 1.86 \\ 
-  \textit{Fraxinus excelsior} & 2.78 & 2.77 & 2.80 \\ 
-  \textit{Quercus robur} & 2.29 & 2.27 & 2.30 \\ 
-  Climate Change x \textit{Alnus glutinosa} & -0.27 & -0.29 & -0.24 \\ 
-  Climate Change x \textit{Betula pendula} & -0.04 & -0.06 & -0.02 \\ 
-  Climate Change x \textit{Fagus sylvatica} & -0.16 & -0.18 & -0.14 \\ 
-  Climate Change x \textit{Fraxinus excelsior} & -0.37 & -0.40 & -0.35 \\ 
-  Climate Change x \textit{Quercus robur} & -0.35 & -0.37 & -0.33 \\ 
-   \hline
-\end{tabular}
-\end{table}
-
-
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:54:41 2020
-\begin{table}[H]
-\centering
-\caption{Summary of simple linear regression model of the number of false springs before and after climate change across species.} 
-\label{tab:simpfs}
-\begin{tabular}{lrrr}
-  \hline
- & mean & 10\% & 90\% \\ 
-  \hline
-Intercept & 14.19 & 11.71 & 16.69 \\ 
-  Climate Change & 0.40 & -3.08 & 3.87 \\ 
-  \textit{Alnus glutinosa} & -2.19 & -5.99 & 1.51 \\ 
-  \textit{Betula pendula} & 0.29 & -3.21 & 3.86 \\ 
-  \textit{Fagus sylvatica} & -0.92 & -4.61 & 2.61 \\ 
-  \textit{Fraxinus excelsior} & -7.63 & -12.05 & -3.36 \\ 
-  \textit{Quercus robur} & -3.02 & -6.86 & 0.85 \\ 
-  Climate Change x \textit{Alnus glutinosa} & 2.59 & -2.42 & 7.68 \\ 
-  Climate Change x \textit{Betula pendula} & -0.31 & -5.24 & 4.74 \\ 
-  Climate Change x \textit{Fagus sylvatica} & -2.14 & -7.31 & 3.00 \\ 
-  Climate Change x \textit{Fraxinus excelsior} & 1.90 & -3.92 & 7.95 \\ 
-  Climate Change x \textit{Quercus robur} & -1.42 & -6.84 & 4.01 \\ 
-   \hline
-\end{tabular}
-\end{table}
-
-
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:54:42 2020
+% Mon Jul 27 12:14:42 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of budburst before and after climate change across species.} 
@@ -278,12 +210,84 @@ Intercept & 102.27 & 102.20 & 102.33 \\
 \end{table}
 
 
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Mon Jul 27 12:14:43 2020
+\begin{table}[H]
+\centering
+\caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.} 
+\label{tab:simptmin}
+\begin{tabular}{lrrr}
+  \hline
+ & mean & 10\% & 90\% \\ 
+  \hline
+Intercept & 6.59 & 6.58 & 6.60 \\ 
+  Climate Change & 0.78 & 0.76 & 0.79 \\ 
+  \textit{Alnus glutinosa} & 2.01 & 2.00 & 2.03 \\ 
+  \textit{Betula pendula} & 0.34 & 0.32 & 0.35 \\ 
+  \textit{Fagus sylvatica} & 1.85 & 1.83 & 1.86 \\ 
+  \textit{Fraxinus excelsior} & 2.78 & 2.77 & 2.80 \\ 
+  \textit{Quercus robur} & 2.29 & 2.27 & 2.30 \\ 
+  Climate Change x \textit{Alnus glutinosa} & -0.27 & -0.29 & -0.24 \\ 
+  Climate Change x \textit{Betula pendula} & -0.04 & -0.06 & -0.02 \\ 
+  Climate Change x \textit{Fagus sylvatica} & -0.16 & -0.18 & -0.14 \\ 
+  Climate Change x \textit{Fraxinus excelsior} & -0.37 & -0.40 & -0.35 \\ 
+  Climate Change x \textit{Quercus robur} & -0.35 & -0.37 & -0.33 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\begin{center}
+\captionof{table}{Mean day of budburst and standard deviation for each species for before (1951-1983) and after recent climate change (1984-2016).} \label{tab:bbspp}
+\begin{tabular}{l c c| c c}
+\cline{2-5}
+& \multicolumn{2}{ c| }{1951-1983}
+& \multicolumn{2}{ c }{1984-2016} \\ \cline{2-5}
+& mean & sd & mean & sd \\
+\hline
+\textit{Aesculus hippocastanum} & 102.2 & 12.44 & 95.35 & 12.09  \\
+\textit{Alnus glutinosa} & 102.8 & 14.81 & 94.90 & 14.71 \\
+\textit{Betula pendula} & 101.3 & 11.76 & 95.44 & 11.25 \\
+\textit{Fagus sylvatica} & 109.1 & 9.978 & 103.7 & 9.623 \\
+\textit{Fraxinus excelsior} & 119.4 & 11.79 & 113.5 & 11.53 \\
+\textit{Quercus robur} & 115.9 & 11.31 & 109.6 & 10.95 \\
+\hline
+\end{tabular}
+\end{center}
+
+% latex table generated in R 3.6.0 by xtable 1.8-4 package
+% Mon Jul 27 12:14:43 2020
+\begin{table}[H]
+\centering
+\caption{Summary of simple linear regression model of the number of false springs before and after climate change across species.} 
+\label{tab:simpfs}
+\begin{tabular}{lrrr}
+  \hline
+ & mean & 10\% & 90\% \\ 
+  \hline
+Intercept & 7.53 & 7.51 & 7.56 \\ 
+  Climate Change & 0.82 & 0.78 & 0.86 \\ 
+  \textit{Alnus glutinosa} & -1.76 & -1.81 & -1.72 \\ 
+  \textit{Betula pendula} & 0.20 & 0.17 & 0.24 \\ 
+  \textit{Fagus sylvatica} & -1.86 & -1.90 & -1.82 \\ 
+  \textit{Fraxinus excelsior} & -5.32 & -5.36 & -5.28 \\ 
+  \textit{Quercus robur} & -4.44 & -4.47 & -4.40 \\ 
+  Climate Change x \textit{Alnus glutinosa} & 1.63 & 1.57 & 1.70 \\ 
+  Climate Change x \textit{Betula pendula} & 0.11 & 0.06 & 0.17 \\ 
+  Climate Change x \textit{Fagus sylvatica} & -1.53 & -1.58 & -1.47 \\ 
+  Climate Change x \textit{Fraxinus excelsior} & -1.31 & -1.37 & -1.25 \\ 
+  Climate Change x \textit{Quercus robur} & -1.19 & -1.25 & -1.13 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:54:42 2020
+% Mon Jul 27 12:14:43 2020
 \begin{longtable}{lrrrrrrr}
-\caption{Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.} \\ 
+\caption{Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk. The North Atlantic Oscillation is labelled as `NAO Index'. } \\ 
   \hline
  & mean & 2\% & 10\% & 25\% & 75\% & 90\% & 98\% \\ 
   \hline \endhead  \hline
@@ -394,7 +398,7 @@ Coast x Climate Change & 0.00 & -0.03 & -0.02 & -0.01 & 0.01 & 0.03 & 0.03 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:54:42 2020
+% Mon Jul 27 12:14:43 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with different rates of leafout for each species.} \\ 
   \hline
@@ -507,7 +511,7 @@ Coast x Climate Change & 0.00 & -0.03 & -0.02 & -0.01 & 0.01 & 0.03 & 0.04 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:54:42 2020
+% Mon Jul 27 12:14:43 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.} \\ 
   \hline
@@ -620,7 +624,7 @@ Coast x Climate Change & 0.05 & -0.02 & 0.00 & 0.03 & 0.08 & 0.11 & 0.13 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:54:42 2020
+% Mon Jul 27 12:14:44 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with varying temperature thresholds for early- versus later-leafout species.} \\ 
   \hline
@@ -726,7 +730,7 @@ Coast x Climate Change & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.04 \\
 {\begin{figure} [H]
   -\begin{center}
   -\includegraphics[width=16cm]{..//..//analyses/figures/APC_allpred_allspp_baseR_long98.png}
-  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature, distance from the coast, elevation, and NAO index) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
+  -\caption{Average predictive comparisons for all climate change interactions with each of the main effects (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), and NAO index (\textbf{d})) for all species. Shading around the lines represent the 98\% uncertainty intervals. }\label{fig:suppapc}
   -\end{center}
   -\end{figure}}
   

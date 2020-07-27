@@ -7,9 +7,9 @@
 \usepackage{amssymb} % for math symbols
 \usepackage{amsmath} % for aligning equations
 \usepackage{mdframed}
-\usepackage{natbib}
-\bibliographystyle{..//..//bib/styles/gcb}
 \usepackage[hyphens]{url}
+\usepackage{natbib}
+\bibliographystyle{newphyto}
 \usepackage[small]{caption}
 \setlength{\captionmargin}{30pt}
 \setlength{\abovecaptionskip}{0pt}
@@ -23,7 +23,7 @@
 \parskip 7.2pt
 \renewcommand{\baselinestretch}{2}
 \parindent 0pt
-\usepackage{lineno}
+%\usepackage{lineno}
 %\linenumbers
 \usepackage{setspace}
 \doublespacing
@@ -326,7 +326,7 @@ simpfssd <- round(sd(simpfsdf$Estimate), digits=2)
 \textit{Keywords:} false spring, climate change, phenology, spring freeze, elevation, risk, leafout, temperate tree %\\contradictory
 
 \section*{Introduction} %(1008 words)  
-False springs---late spring freezing events after budburst that can cause damage to temperate tree and shrub species---may shift with climate change. With earlier springs due to warming \citep{Wolkovich2012,IPCC2014}, the growing season is lengthening across many regions in the Northern Hemisphere \citep{Chen2005,Liu2006, Kukal2018}. Longer growing seasons could translate to increased plant growth, assuming such increases are not offset by tissue losses due to false springs. Last spring freeze dates are not predicted to advance at the same rate as warming \citep{Inouye2008,Martin2010,Labe2016,Wypych2016a,Sgubin2018}, potentially amplifying the effects of false spring events in some regions. \R{Zbbrefbegin} In Germany, for example, the last freeze date has advanced by 2.6 days per decade since 1955 \citep{Zohner2016}, but budburst has advanced 4.3 days per decade across Central Europe \citep{Fu2014,Vitasse2018}\R{Zbbrefend}. To date, studies have variously found that spring freeze damage may increase \citep{Hannenin1991,Augspurger2013,Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994, Vitra2017} with climate change. When damage does occur, studies have found it can take 16-38 days for trees to refoliate after a freeze \citep{Gu2008,Augspurger2009, Augspurger2013, Menzel2015}, which can detrimentally affect crucial processes such as carbon uptake and nutrient cycling \citep{Hufkens2012,Richardson2013,Klosterman2018}.  
+False springs---late spring freezing events after budburst that can cause damage to temperate tree and shrub species---may shift with climate change. With earlier springs due to warming \citep{Wolkovich2012,IPCC2014}, the growing season is lengthening across many regions in the Northern Hemisphere \citep{Chen2005,Liu2006, Kukal2018}. Longer growing seasons could translate to increased plant growth, assuming such increases are not offset by tissue losses due to false springs. Last spring freeze dates are not predicted to advance at the same rate as warming \citep{Inouye2008,Martin2010,Labe2016,Wypych2016a,Sgubin2018}, potentially amplifying the effects of false spring events in some regions. In Germany, for example, the last freeze date has advanced by 2.6 days per decade since 1955 \citep{Zohner2016}, but budburst has advanced 4.3 days per decade across Central Europe \citep{Fu2014,Vitasse2018}. To date, studies have variously found that spring freeze damage may increase \citep{Hannenin1991,Augspurger2013,Labe2016}, remain the same \citep{Scheifinger2003} or even decrease \citep{Kramer1994, Vitra2017} with climate change. When damage does occur, studies have found it can take 16-38 days for trees to refoliate after a freeze \citep{Gu2008,Augspurger2009, Augspurger2013, Menzel2015}, which can detrimentally affect crucial processes such as carbon uptake and nutrient cycling \citep{Hufkens2012,Richardson2013,Klosterman2018}.  
 
 Spring freezes are one of the largest limiting factors to species ranges and have greatly shaped plant life history strategies \citep{Kollas2014}. Plants are generally the most freeze tolerant in the winter but this freeze tolerance greatly diminishes once individuals exit the dormancy phase (i.e. processes leading to budburst) through full leaf expansion \citep{Vitasse2014,Lenz2016}. Thus, most individuals that initiate budburst and have not fully leafed out before the last spring freeze are at risk of leaf tissue loss, damage to the xylem, and slowed canopy development \citep{Gu2008,Hufkens2012}. Plants have adapted to these early spring risks through various mechanisms with one common strategy being avoidance \citep{Vitasse2014}. Many temperate species minimize freeze risk and optimize growth by using a complex mix of cues to initiate budburst: low winter temperatures (i.e., chilling), warm spring temperatures (i.e., forcing), and increasing spring daylengths (i.e., photoperiod). With climate change advancing, the interaction of these cues may shift spring phenologies both across and within species and sites, making some species less---or more---vulnerable to false springs than before.
 
@@ -441,20 +441,20 @@ C.J.C. performed the analyses and produced all figures and tables. C.J.C., E.M.W
 \section*{Data, Code \& Model Output:}
 Phenological data is available at the Pan European Phenology network webpage (PEP725, www.pep725.eu). Data and code from the analyses will be available via KNB upon publication and are available to all reviewers upon request. Raw data, {Stan} model code and output are available on github at \url{https://github.com/cchambe12/regionalrisk} and provided upon request.
 
-\bibliography{..//..//bib/RegionalRisk.bib}
+\bibliography{RegionalRisk.bib}
 
 \newpage
 Table S1: Total number of observations, false springs, sites and years across species. \\
-Table S2:  Mean day of budburst and standard deviation for each species for before and after recent climate change. \\
-Table S3: Summary of linear regression of average minimum temperature between budburst and leafout before and after recent climate change across species. \\
-Table S4: Summary of linear regression of number false springs before and after recent climate change across species. \\
+Table S2: Summary of linear regression of average minimum temperature between budburst and leafout before and after recent climate change across species. \\
+Table S3: Summary of linear regression of number false springs before and after recent climate change across species. \\
+Table S4:  Mean day of budburst and standard deviation for each species for before and after recent climate change. \\
 Table S5: Summary of linear regression of day of budburst before and after recent climate change across species. \\
 Table S6: Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk. \\
 Table S7: Summary of Bernoulli model with different rates of leafout on false spring risk. \\
 Table S8: Summary of Bernoulli model with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. \\
 Table S9: Summary of Bernoulli model with varying temperature thresholds for defining a false spring. \\
 
-\vspace{2ex}\\
+\vspace{1ex}
 Figure S1: Model estimates of effects on false spring risk with different rates of leafout. \\
 Figure S2: Model estimates of effects on false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. \\
 Figure S3: Model estimates of effects on false spring risk with varying temperature thresholds for defining a false spring. \\
@@ -489,7 +489,7 @@ Figure S7: Model estimates of effects across species with varying temperature th
 {\begin{figure} [H]
   -\begin{center}
   %-\includegraphics[width=14cm]{..//..//analyses/figures/Boxplot_BBTminFS_noDots_modestslong.png}
-  -\caption{Day of budburst (\textbf{a}), minimum temperatures between budburst and leafout (\textbf{b}) and number of false springs (\textbf{c}) before and after 1983 across species for all sites. Box and whisker plots show the 25th and 75th percentiles (i.e., the interquartile range) with notches indicating 95\% uncertainty intervals. Dots and error bars overlaid on the box and whisker plots represent the model regression outputs (Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Error bars from the model regressions indicate 90\% uncertainty intervals but, given the number of observations, are quite small for \textbf{a} and \textbf{b} and thus not easily visible (see Tables \ref{tab:simbbmod}-\ref{tab:simpfs}). Uncertainty intervals are more apparent for \textbf{c} since we are counting the total number of false spring years for each species and site before and after climate change.  }\label{fig:boxfs}
+  -\caption{Day of budburst (\textbf{a}), minimum temperatures between budburst and leafout (\textbf{b}) and number of false springs (\textbf{c}) before and after 1983 across species for all sites. Box and whisker plots show the 25th and 75th percentiles (i.e., the interquartile range) with notches indicating 95\% uncertainty intervals. Dots and error bars overlaid on the box and whisker plots represent the model regression outputs (Tables \ref{tab:simbbmod}, \ref{tab:simptmin} and \ref{tab:simpfs}). Error bars from the model regressions indicate 90\% uncertainty intervals but, given the number of observations, are quite small for \textbf{a} and \textbf{b} and thus not easily visible (see Tables \ref{tab:simbbmod}, \ref{tab:simptmin} and \ref{tab:simpfs}). Uncertainty intervals are more apparent for \textbf{c} since we are counting the total number of false spring years for each species and site before and after climate change.  }\label{fig:boxfs}
   -\end{center}
   -\end{figure}}
 
