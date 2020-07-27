@@ -124,7 +124,12 @@ $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
 \renewcommand{\labelitemi}{$-$}
 \setkeys{Gin}{width=0.8\textwidth}
 
-\section*{Methods: Space predictor} %I'm not too sure about the 'space parameter' terminology, I'd rather use either spatial or geographic predictor or proxy. I'm using spatial predictor, but all our predictors are spatial, so please feel free to change.
+\section*{Supporting Information Methods S1: Species rate of budburst calculations}
+Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to use observations for both budburst and leafout to determine the durations of vegetative risk. Instead, we used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. We took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, we assessed data that were provided by the USA National Phenology Network and the many participants who contribute to its Nature's Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average number of days between budburst and leafout was approximately 12 days. Thus, we expanded our rate of budburst through full leaf expansion by subtracting 12 days from the first leaf to find budburst and adding 12 days to the first leaf to find full leafout. 
+
+Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
+
+\section*{Supporting Information Methods S2: Spatial parameter} %I'm not too sure about the 'space parameter' terminology, I'd rather use either spatial or geographic predictor or proxy. I'm using spatial predictor, but all our predictors are spatial, so please feel free to change.
 
 Spatial autocorrelation (SA) is a common issue in spatial ecology given that nearby spatial units tend to be more similar than units far apart, and thus, cannot be considered as independent units, which is a frequent assumption in statistical tests \citep{diniz2003spatial}. If model residuals are spatially autocorrelated, and thus, non-independent then model coefficients and errors may be biased in a hard-to-predict way \citep{mauricio2009coefficient}. On the contrary, if model residuals are not autocorrelated, then SA should not be of concern \citep{hawkins2012eight}.\\
 
@@ -136,15 +141,6 @@ y_i = \alpha_{[i]} +&  \beta_{NAO_{[i]}} + \beta_{MST_{[i]}} + \beta_{Elevation_
 +& \beta_{NAO \times ClimateChange_{[i]}} + \beta_{MST \times ClimateChange_{[i]}} 
 + \beta_{Elevation \times ClimateChange_{[i]}} \\ +& \beta_{DistanceCoast \times ClimateChange_{[i]}} + \sigma_{[i]} \tag{S1}
 \end{align*}
-
-
-\section*{Species rate of budburst calculations}
-Due to the paucity of data for BBCH 7 in the PEP725 dataset, we were unable to use observations for both budburst and leafout to determine the durations of vegetative risk. Instead, we used data from a growth chamber experiment \citep{Flynn2018} to determine the average number of days between budburst and leafout for our study species. We took the mean number of days between budburst and leafout for the entire experiment, which was 12 days. We compared this number to a field observation study \citep{Donnelly2017} that looked at the time between budburst and leafout across 10 species over 5 years. Finally, we assessed data that were provided by the USA National Phenology Network and the many participants who contribute to its Nature's Notebook program (USA-NPN,2019; www.usanpn.org/data/observational) for \textit{Aesculus flava} (Sol.), \textit{Aesculus glabra} (Willd.), \textit{Alnus incana} (Moench.), \textit{Betula nigra} (L.), \textit{Betula papyrifera} (Marshall), \textit{Fagus grandifolia} (Ehrh.), \textit{Fraxinus americana} (L.), \textit{Fraxinus nigra} (Marshall) and \textit{Quercus velutina} (Lam.) and took the mean number of days between budburst and leafout. Across all three approaches, the average number of days between budburst and leafout was approximately 12 days. Thus, we expanded our rate of budburst through full leaf expansion by subtracting 12 days from the first leaf to find budburst and adding 12 days to the first leaf to find full leafout. 
-
-Again, due to a lack of BBCH 7 data, we were unable to determine species-specific averages of number of days between budburst and leafout. We used a similar approach as above by using data from the growth chamber experiment \citep{Flynn2018} but instead of finding whole experiment means we determined species-specific averages. We used the rate of budburst of \textit{Acer saccharum} (Marshall) for \textit{Aesculus hippocastanum} \citep{Buerki2010}, \textit{Alnus incana} for \textit{Alnus glutinosa}, \textit{Betula papyrifera} for \textit{Betula pendula} \citep{Wang2016}, \textit{Fagus grandifolia} for \textit{Fagus sylvatica}, \textit{Fraxinus nigra} for \textit{Fraxinus excelsior} and \textit{Quercus alba} (L.) for \textit{Quercus robur} \citep{Hipp2017}.
-
-%NOT SURE WHERE TO PUT THIS!!
-%Most species had mean spring temperatures that ranged from -5$^{\circ}$C to 12$^{\circ}$C, but for \textit{Alnus glutinosa} and \textit{Fraxinus excelsior} temperatures rarely dropped below 0$^{\circ}$C, whereas \textit{Quercus robur} experienced some of the lowest spring temperatures (see Figure S1). 
 
 \iffalse
 \begin{align*}
@@ -202,7 +198,7 @@ Species & Num. of Observations & Num. of False Springs & Num. of Sites & Num. of
 \end{center}
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:36:25 2020
+% Fri Jul 24 10:54:40 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of average minimum temperature between budburst and leafout before and after climate change across species.} 
@@ -229,7 +225,7 @@ Intercept & 6.59 & 6.58 & 6.60 \\
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:36:26 2020
+% Fri Jul 24 10:54:41 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of the number of false springs before and after climate change across species.} 
@@ -238,25 +234,25 @@ Intercept & 6.59 & 6.58 & 6.60 \\
   \hline
  & mean & 10\% & 90\% \\ 
   \hline
-Intercept & 7.53 & 7.51 & 7.56 \\ 
-  Climate Change & 0.82 & 0.78 & 0.86 \\ 
-  \textit{Alnus glutinosa} & -1.76 & -1.81 & -1.72 \\ 
-  \textit{Betula pendula} & 0.20 & 0.17 & 0.24 \\ 
-  \textit{Fagus sylvatica} & -1.86 & -1.90 & -1.82 \\ 
-  \textit{Fraxinus excelsior} & -5.32 & -5.36 & -5.28 \\ 
-  \textit{Quercus robur} & -4.44 & -4.47 & -4.40 \\ 
-  Climate Change x \textit{Alnus glutinosa} & 1.63 & 1.57 & 1.70 \\ 
-  Climate Change x \textit{Betula pendula} & 0.11 & 0.06 & 0.17 \\ 
-  Climate Change x \textit{Fagus sylvatica} & -1.53 & -1.58 & -1.47 \\ 
-  Climate Change x \textit{Fraxinus excelsior} & -1.31 & -1.37 & -1.25 \\ 
-  Climate Change x \textit{Quercus robur} & -1.19 & -1.25 & -1.13 \\ 
+Intercept & 14.19 & 11.71 & 16.69 \\ 
+  Climate Change & 0.40 & -3.08 & 3.87 \\ 
+  \textit{Alnus glutinosa} & -2.19 & -5.99 & 1.51 \\ 
+  \textit{Betula pendula} & 0.29 & -3.21 & 3.86 \\ 
+  \textit{Fagus sylvatica} & -0.92 & -4.61 & 2.61 \\ 
+  \textit{Fraxinus excelsior} & -7.63 & -12.05 & -3.36 \\ 
+  \textit{Quercus robur} & -3.02 & -6.86 & 0.85 \\ 
+  Climate Change x \textit{Alnus glutinosa} & 2.59 & -2.42 & 7.68 \\ 
+  Climate Change x \textit{Betula pendula} & -0.31 & -5.24 & 4.74 \\ 
+  Climate Change x \textit{Fagus sylvatica} & -2.14 & -7.31 & 3.00 \\ 
+  Climate Change x \textit{Fraxinus excelsior} & 1.90 & -3.92 & 7.95 \\ 
+  Climate Change x \textit{Quercus robur} & -1.42 & -6.84 & 4.01 \\ 
    \hline
 \end{tabular}
 \end{table}
 
 
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:36:26 2020
+% Fri Jul 24 10:54:42 2020
 \begin{table}[H]
 \centering
 \caption{Summary of simple linear regression model of day of budburst before and after climate change across species.} 
@@ -285,7 +281,7 @@ Intercept & 102.27 & 102.20 & 102.33 \\
 
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:36:27 2020
+% Fri Jul 24 10:54:42 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.} \\ 
   \hline
@@ -398,7 +394,7 @@ Coast x Climate Change & 0.00 & -0.03 & -0.02 & -0.01 & 0.01 & 0.03 & 0.03 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:36:27 2020
+% Fri Jul 24 10:54:42 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with different rates of leafout for each species.} \\ 
   \hline
@@ -511,7 +507,7 @@ Coast x Climate Change & 0.00 & -0.03 & -0.02 & -0.01 & 0.01 & 0.03 & 0.04 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:36:27 2020
+% Fri Jul 24 10:54:42 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring.} \\ 
   \hline
@@ -624,7 +620,7 @@ Coast x Climate Change & 0.05 & -0.02 & 0.00 & 0.03 & 0.08 & 0.11 & 0.13 \\
   
 \newpage
 % latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Fri Jul 24 10:36:27 2020
+% Fri Jul 24 10:54:42 2020
 \begin{longtable}{lrrrrrrr}
 \caption{Summary of Bernoulli model of false spring risk with varying temperature thresholds for early- versus later-leafout species.} \\ 
   \hline
@@ -736,7 +732,7 @@ Coast x Climate Change & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.04 \\
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
   -\caption{Species-level under the varying rates of leafout model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppdvr}
   -\end{center}
   -\end{figure}}
@@ -744,7 +740,7 @@ Coast x Climate Change & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.04 \\
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
   -\caption{Species-level variation with a lower temperature threshold (-5$^{\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
   -\end{center}
   -\end{figure}}
@@ -752,7 +748,7 @@ Coast x Climate Change & -0.00 & -0.05 & -0.03 & -0.01 & 0.01 & 0.03 & 0.04 \\
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_longtemps.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/InteractionPlots/Species_longtemps.png}
   -\caption{Species-level variation under the varying temperature thresholds model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:spptemps}
   -\end{center}
   -\end{figure}}

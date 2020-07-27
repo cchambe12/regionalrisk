@@ -52,7 +52,7 @@ library(ggplot2)
 
 \begin{document}
 \noindent 
-\textbf{\LARGE{Supplemental Materials: Climate change reshapes the drivers of false spring risk across European trees}} 
+\textbf{\LARGE{New Phytologist Supporting Information: Climate change reshapes the drivers of false spring risk across European trees}} 
 %\\
 %OR \\
 %\textbf{\Large{Climate change increases the risk of false springs in European trees}} \\ % Lizzie votes for the first title! Reviewers can ask you to make it more narrow so I would start here and shift to Ben's if requested ... (goal 1: get paper out for review)
@@ -61,17 +61,21 @@ library(ggplot2)
 
 
 \noindent Authors:\\
-C. J. Chamberlain $^{1,2}$, B. I. Cook $^{3}$, I. Morales-Castilla $^{4,5}$ \& E. M. Wolkovich $^{1,2,6}$
+Catherine J. Chamberlain, ORCID: 0000-0001-5495-3219 $^{1,2}$, Benjamin I. Cook $^{3}$, Ignacio Morales-Castilla, ORCID: 0000-0002-8570-9312 $^{4,5}$ \& Elizabeth M. Wolkovich $^{1,2,6}$
 \vspace{2ex}\\
 \emph{Author affiliations:}\\
-$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, USA; \\
-$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, USA; \\
-$^{3}$NASA Goddard Institute for Space Studies, New York, New York, USA; \\
-$^{4}$GloCEE - Global Change Ecology and Evolution Group, Department of Life Sciences, Universidad de Alcal\'{a}, Alcal\'{a} de Henares, 28805, Spain \\
-$^{5}$Department of Environmental Science and Policy, George Mason University, Fairfax, VA 22030; \\
-$^{6}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4\\
+$^{1}$Arnold Arboretum of Harvard University, 1300 Centre Street, Boston, Massachusetts, 02131 USA; \\
+$^{2}$Organismic \& Evolutionary Biology, Harvard University, 26 Oxford Street, Cambridge, Massachusetts, 02138 USA; \\
+$^{3}$NASA Goddard Institute for Space Studies, New York, New York, 10025 USA; \\
+$^{4}$GloCEE - Global Change Ecology and Evolution Group, Department of Life Sciences, Universidad de Alcal\'{a}, Alcal\'{a} de Henares, 28805 Spain \\
+$^{5}$Department of Environmental Science and Policy, George Mason University, Fairfax, Virginia, 22030 USA; \\
+$^{6}$Forest \& Conservation Sciences, Faculty of Forestry, University of British Columbia, 2424 Main Mall, Vancouver, BC V6T 1Z4 Canada\\
 \vspace{2ex}
 $^*$Corresponding author: 248.953.0189; cchamberlain@g.harvard.edu\\
+
+\vspace{2ex}
+Article acceptance date: 22 July 2020
+
 
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -110,7 +114,7 @@ inverselogit(Intercept &+ (Model Estimate/(sd(Raw Data Predictor)*2))*mean(Raw D
 \bibliography{..//..//bib/regionalrisk.bib}
 
 \newpage
-\section*{Supplement: Tables and Figures}
+\section*{Supporting Information: Tables and Figures}
   
 \begin{center}
 \captionof{table}{Data collected from PEP725 for each species and the calculated number of false spring years} \label{tab:spp} 
@@ -264,7 +268,7 @@ modoutput$term <- gsub("speciesQUEROB", paste0("\\\\textit{","Quercus robur","}"
 colnames(modoutput) = c("", "mean", "2\\%", "10\\%", "25\\%", "75\\%", "90\\%", "98\\%")
 
 print(xtable(modoutput, 
-             caption = "Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk.", label="tab:suppmodlong",
+             caption = "Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk. The North Atlantic Oscillation is labelled as `NAO Index'. ", label="tab:suppmodlong",
              align = c("l", "l", "r", "r","r","r", "r","r", "r")), #>{\\textit}l
       include.rownames=F, 
       caption.placement = "top", 
@@ -449,7 +453,7 @@ print(xtable(modoutput,
   
   {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/InteractionPlots/Species_dvrlong.png}
   -\caption{Species-level under the varying rates of leafout model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppdvr}
   -\end{center}
   -\end{figure}}
@@ -457,7 +461,7 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/InteractionPlots/Species_fivelong.png}
   -\caption{Species-level variation with a lower temperature threshold (-5$^{\circ}$C) model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:sppfive}
   -\end{center}
   -\end{figure}}
@@ -465,7 +469,7 @@ print(xtable(modoutput,
 
 {\begin{figure} [H]
   -\begin{center}
-  -\includegraphics[width=12cm]{..//..//analyses/figures/InteractionPlots/Species_longtemps.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/InteractionPlots/Species_longtemps.png}
   -\caption{Species-level variation under the varying temperature thresholds model across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:spptemps}
   -\end{center}
   -\end{figure}}
