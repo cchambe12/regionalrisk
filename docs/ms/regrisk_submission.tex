@@ -269,10 +269,10 @@ Phenological data is available at the Pan European Phenology network webpage (PE
 
 \newpage
 Table S1: Total number of observations, false springs, sites and years across species. \\
-Table S2: Summary of linear regression of average minimum temperature between budburst and leafout before and after recent climate change across species. \\
-Table S3: Summary of linear regression of number false springs before and after recent climate change across species. \\
+Table S2: Summary of linear regression of day of budburst before and after recent climate change across species. \\
+Table S3: Summary of linear regression of average minimum temperature between budburst and leafout before and after recent climate change across species. \\
 Table S4:  Mean day of budburst and standard deviation for each species for before and after recent climate change. \\
-Table S5: Summary of linear regression of day of budburst before and after recent climate change across species. \\
+Table S5: Summary of linear regression of number false springs before and after recent climate change across species. \\
 Table S6: Summary of Bernoulli model with the effects of species, climatic and geographical predictors on false spring risk. \\
 Table S7: Summary of Bernoulli model with different rates of leafout on false spring risk. \\
 Table S8: Summary of Bernoulli model with a lower temperature threshold (-5$^{\circ}$C) for defining a false spring. \\
@@ -291,28 +291,28 @@ Figure S7: Model estimates of effects across species with varying temperature th
 
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=14cm]{..//..//analyses/figures/bb_base.png}
+  -\includegraphics[width=14cm]{..//..//analyses/figures/bb_base.png}
   -\caption{The average day of budburst mapped by site for each species (ordered by day of budburst starting with \textit{Betula pendula} as the earliest budburst date to \textit{Fraxinus excelsior}). }\label{fig:bbmap}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=12cm]{..//..//analyses/figures/model_output_98_long.png}
+  -\includegraphics[width=12cm]{..//..//analyses/figures/model_output_98_long.png}
   -\caption{Effects of species, climatic and geographical predictors on false spring risk. More positive values indicate an increased probability of a false spring whereas more negative values suggest a lower probability of a false spring. Dots and lines show means and 98\% uncertainty intervals. There were 536,993 zeros and 218,094 ones for false springs in the data. See Table \ref{tab:suppmodlong} for full model output.}\label{fig:maineffects}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=16cm]{..//..//analyses/figures/mstbb_byspp_lines.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/mstbb_byspp_lines.png}
   -\caption{Mean spring temperatures are plotted for each site and year (from 1951-2016) for each species. The purple line shows the trend in mean spring temperatures from March 1 to May 31 and the green line represents the trend of average day of budburst for each year for each species. Both lines are cyclic penalized cubic regression spline smooths with basis dimensions equal to the number of years in the study (i.e., 66). Species are ordered by average day of budburst, with the earliest being \textit{Betula pendula} and the latest being \textit{Fraxinus excelsior}. }\label{fig:mst}
   -\end{center}
   -\end{figure}}
   
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=14cm]{..//..//analyses/figures/Boxplot_BBTminFS_noDots_modestslong.png}
+  -\includegraphics[width=14cm]{..//..//analyses/figures/Boxplot_BBTminFS_noDots_modestslong.png}
   -\caption{Day of budburst (\textbf{a}), minimum temperatures between budburst and leafout (\textbf{b}) and number of false springs (\textbf{c}) before and after 1983 across species for all sites. Box and whisker plots show the 25th and 75th percentiles (i.e., the interquartile range) with notches indicating 95\% uncertainty intervals. Dots and error bars overlaid on the box and whisker plots represent the model regression outputs (Tables \ref{tab:simbbmod}, \ref{tab:simptmin} and \ref{tab:simpfs}). Error bars from the model regressions indicate 90\% uncertainty intervals but, given the number of observations, are quite small for \textbf{a} and \textbf{b} and thus not easily visible (see Tables \ref{tab:simbbmod}, \ref{tab:simptmin} and \ref{tab:simpfs}). Uncertainty intervals are more apparent for \textbf{c} since we are counting the total number of false spring years for each species and site before and after climate change.  }\label{fig:boxfs}
   -\end{center}
   -\end{figure}}
@@ -320,7 +320,7 @@ Figure S7: Model estimates of effects across species with varying temperature th
   
 {\begin{figure} [H]
   -\begin{center}
-  %-\includegraphics[width=16cm]{..//..//analyses/figures/Species_long.png}
+  -\includegraphics[width=16cm]{..//..//analyses/figures/Species_long.png}
   -\caption{Species-level variation across geographic and spatial predictors (i.e., mean spring temperature (\textbf{a}), distance from the coast (\textbf{b}), elevation (\textbf{c}), NAO index (\textbf{d})) and recent climate change (\textbf{e})). Lines and shading are the mean and 98\% uncertainty intervals for each species. To show results on the original scale of the data we converted model output. See Table \ref{tab:suppmodlong} for full model output. }\label{fig:spp}
   -\end{center}
   -\end{figure}}
