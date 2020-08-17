@@ -17,13 +17,6 @@ setwd("~/Documents/git/regionalrisk/analyses/")
 
 ########################
 #### get the data - must choose the dataframe for specific analyses
-#fs<-read.csv("output/fs_allspp_dvr.csv", header=TRUE)
-#fs<-read.csv("output/fs_allspp_five.csv", header=TRUE)
-#fs<-read.csv("output/fs_allspp_original.csv", header=TRUE)
-#fs<-read.csv("output/fs_allspp_fullleaf.csv", header=TRUE)
-#fs<-read.csv("output/fs_allspp_midleaf.csv", header=TRUE)
-#fs<-read.csv("output/fs_allspp_midleaf_temps.csv", header=TRUE)
-#fs<-read.csv("output/fs_allspp_origtemps.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_longtemps.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_dvrlong.csv", header=TRUE)
 #fs<-read.csv("output/fs_allspp_long.csv", header=TRUE)
@@ -71,12 +64,6 @@ dist<-dist%>%dplyr::rename(long=LONG)%>%dplyr::rename(lat=LAT)
 fspreds<-full_join(fspreds, dist)
 
 
-#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_dvr_allpred.csv", row.names = FALSE)
-#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_orig_allpred.csv", row.names = FALSE)
-#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_five_allpred.csv", row.names = FALSE)
-#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_fullleaf_allpred.csv", row.names = FALSE)
-#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_midleaf_allpred.csv", row.names = FALSE)
-#write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_midleaftemps_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_longtemps_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_dvrlong_allpred.csv", row.names = FALSE)
 #write.csv(fspreds, file="~/Documents/git/regionalrisk/analyses/output/fs_allspp_long_allpred.csv", row.names = FALSE)
